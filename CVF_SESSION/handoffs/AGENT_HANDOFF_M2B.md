@@ -4,10 +4,10 @@ Status: ACTIVE
 
 ## Current State
 
-- Current mode: WORK_ORDER
-- Active phase: WORK_ORDER
+- Current mode: BUILD
+- Active phase: BUILD
 - Active role: ORCHESTRATOR
-- Next allowed move: Dispatch bounded M2b sixcriteria after admissioncommit and BUILD acknowledgment; no M2c.
+- Next allowed move: Implement sixM2b criteria under d8627c0 admission; root independentreview before closure, no M2c.
 - Parked operator checkpoint: Measuredhold/16sourceenvelopes and business/operational acceptance pending; M2c-d/M3 separate.
 
 ## Authority and design
@@ -19,3 +19,7 @@ Reuse Plan/µmgeometry/validator/SQLite/viewer. New deterministicguillotine one-
 ## Continuation value and budget
 
 PIPE-LIST technicallyclosed; userexplicitlyopens nextmissingM2b, no reopen/reset oldbudget. Prior sourcevalidation/runtime proof reused; elapsed prep partlyUNKNOWN, doctor28checks andscan/preflight observed. Newceiling240min including180build/60review, no repairreset/successor. Manualplacement doesnot supplyautomatictrial; bounded stdlibheuristic fillsnecessarygap. Measuredhold/sourceuncertainty doesnot prevent experimental labelledBOXtrial; professional/operationalclaim held. Existinglive8765 session8774/PID41676 needs refresh afternewbackend, no testsnapshot inrealDB.
+
+## BUILD acknowledgment
+
+Canonical state/memory/handoff/truth/index re-read at transition, agree. Material-SHA marker: d8627c0. Root ORCHESTRATOR dispatches admitted Terra implementation/Solbrowser on allsixcriteria; pre-dispatch6/6 and pre-commit7/7 pass. No runtime edits before thisack; root remains independentreviewer. Core c4c8767ac8861854f40d466ba338ffd11eb9558e read-only, R2, no AIgovernanceclaims. Budget240min total unchanged.

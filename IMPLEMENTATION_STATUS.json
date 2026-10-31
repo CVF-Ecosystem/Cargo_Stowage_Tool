@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "M2B_ADMITTED_NOT_IMPLEMENTED",
-  "currentPhase": "WORK_ORDER",
+  "overallStatus": "M2B_IN_BUILD",
+  "currentPhase": "BUILD",
   "completedCapabilities": [],
   "activeWorkOrders": [
     "docs/work_orders/SCST_M2B.md"
