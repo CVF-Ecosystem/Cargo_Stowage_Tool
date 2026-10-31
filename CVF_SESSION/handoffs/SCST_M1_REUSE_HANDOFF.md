@@ -5,10 +5,10 @@ Status: ACTIVE
 ## Current State
 
 - Project: Cargo_Stowage_Tool
-- Current mode: WORK_ORDER
-- Active phase: WORK_ORDER
+- Current mode: BUILD
+- Active phase: BUILD
 - Active role: ORCHESTRATOR
-- Next allowed move: Validate and commit SCST_M1_REUSE dispatch, acknowledge material-SHA marker, then Terra worker implements M1-01 through M1-09; root reviews independently before closure.
+- Next allowed move: Terra worker implements all nine M1 criteria under SCST_M1_REUSE; root orchestrator reviews worker checkpoints and final evidence before committing implementation.
 - Parked operator checkpoint: Scope changes or risk above R2 return to owner; M2-M5 and operational use remain outside this work order.
 
 ## Authority and responsibilities
@@ -28,3 +28,9 @@ Status: ACTIVE
 
 - WORK_ORDER prepared from SPEC v0.2; root owns admission and evidence/commit decisions. Worker remains read-only until dispatch validation, commit and material-SHA acknowledgment.
 - Previous handoff/history: `CVF_SESSION/handoffs/AGENT_HANDOFF_V1_2026-10-31.md`; reference only, superseded by this active pointer and latest user authority.
+
+## BUILD acknowledgment
+
+- Material-SHA marker: dispatch commit 60f7cd3333b431ebb80e8a3be59eb424d8df7e55, pre-dispatch 6/6 and pre-commit 7/7 passed. Initial continuity gate caught two ACTIVE handoffs; historical handoff marked SUPERSEDED, rerun passed before dispatch commit.
+- Rehydrated current state/memory/handoff/implementation truth/index before entering BUILD. Root remains ORCHESTRATOR; worker transitions to IMPLEMENTATION_WORKER on dispatch message. Worker may edit only its allowed source/evidence paths; root controls authority and continuity. Source acceptance hash effb7d0b340f5e3e8313eb5f12df019c06e4f60ec1935f17c4ee9146202fa282.
+- Workspace-container preflight warning is recorded separately above. Project doctor and applicable project gates passed; no container/core repair required for this bounded project dispatch.

@@ -1,16 +1,16 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "M1_DISPATCH_PREPARED",
-  "currentPhase": "WORK_ORDER",
+  "overallStatus": "M1_IMPLEMENTATION_IN_PROGRESS",
+  "currentPhase": "BUILD",
   "completedCapabilities": [],
   "activeWorkOrders": [
     "docs/work_orders/SCST_M1_REUSE.md"
   ],
   "knownLimitations": [
-    "M1 reuse implementation authorized under SCST-D002 and SPEC v0.2; work order must pass dispatch before worker BUILD.",
-    "All nine criteria are selected; no new implementation evidence or accepted runtime capability yet.",
-    "M2-M5, real cargo use and AI/provider integration remain out of scope."
+    "M1 implementation dispatched to Terra 6.1 High under SCST-D002; root owns independent review and commit.",
+    "No new runtime criteria verified yet; historical source/evidence does not prove this build.",
+    "M2-M5, real cargo use, AI/provider calls and publication are outside scope."
   ],
   "evidence": [
     "docs/project/PROJECT_STATUS.md",
