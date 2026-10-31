@@ -5,10 +5,10 @@ Status: ACTIVE
 ## Current State
 
 - Project: Cargo_Stowage_Tool
-- Current mode: WORK_ORDER
-- Active phase: WORK_ORDER
-- Active role: WORK_ORDER_AUTHOR
-- Next allowed move: Pass pre-dispatch gate, commit dispatch and enter BUILD for SCST M1.
+- Current mode: BUILD
+- Active phase: BUILD
+- Active role: IMPLEMENTATION_WORKER
+- Next allowed move: Implement and verify the six M1 criteria under docs/work_orders/SCST_M1.md.
 - Parked operator checkpoint: none
 
 ## Seven-Step Control Chain
@@ -51,3 +51,5 @@ feature, test, release, deployment, or provider integration is complete.
 - SPEC / SPEC_AUTHOR: six criteria admitted in docs/specs/SCST_M1.md.
 - WORK_ORDER / WORK_ORDER_AUTHOR: bounded paths, cost and owners in docs/work_orders/SCST_M1.md.
 - Initial continuity bytes preserved by baseline commit f299497.
+
+- BUILD / IMPLEMENTATION_WORKER: pre-dispatch PASS; authority reacknowledged. Dispatch material-SHA marker: d039bc0. Initial app implementation, not governance behavior proof.
