@@ -5,13 +5,13 @@ Memory class: POINTER_RECORD
 ## Current Truth
 
 - Contract: cvf.downstreamContinuityContract@1.0.0
-- Current mode: WORK_ORDER
-- Active phase: WORK_ORDER
+- Current mode: BUILD
+- Active phase: BUILD
 - Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_M2A.md
 
 ## Current operator boundary
 
-Owner asks continue agreed roadmap. Next selected slice M2a: manual cargo/BOX, CSV validation/preview, local immutable SQLite save/open; SPEC/WO prepared before BUILD. Root orchestrates/reviews, Terra6.1High worker, Sol-Medium browser. Admit SCST_M2A work order then dispatch bounded manual/CSV/local persistence implementation; no M2b-d. Parked: Real manifest/hold measurement probe pending owner input; M2b-d/M3 and operational/business acceptance remain separate.
+Owner asks continue agreed roadmap. Next selected slice M2a: manual cargo/BOX, CSV validation/preview, local immutable SQLite save/open; SPEC/WO admitted; BUILD acknowledgment recorded. Root orchestrates/reviews, Terra6.1High worker, Sol-Medium browser. Terra implements only admitted M2a paths; Sol verifies browser; root independently reviews. No M2b-d. Parked: Real manifest/hold measurement probe pending owner input; M2b-d/M3 and operational/business acceptance remain separate.
 
 M1 and VINAFCO268 are technically verified at d13392e and prior commits; business acceptance remains separate. Read their existing reviews for proof, not permission to skip M2a gates. New source input remains local, no GitHub push in this slice. Existing demo session7103/PID9704 on8765 is pre-M2a, needs restart after changes. Runtime handle .cvf/runtime/vinafco-demo-session.json.
 

@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "WORK_ORDER",
-  "activePhase": "WORK_ORDER",
+  "currentMode": "BUILD",
+  "activePhase": "BUILD",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -14,7 +14,7 @@
     "FREEZE"
   ],
   "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_M2A.md",
-  "nextAllowedMove": "Admit SCST_M2A work order then dispatch bounded manual/CSV/local persistence implementation; no M2b-d.",
+  "nextAllowedMove": "Terra implements only admitted M2a paths; Sol verifies browser; root independently reviews. No M2b-d.",
   "parkedOperatorCheckpoint": "Real manifest/hold measurement probe pending owner input; M2b-d/M3 and operational/business acceptance remain separate.",
   "activeRole": "ORCHESTRATOR",
   "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",

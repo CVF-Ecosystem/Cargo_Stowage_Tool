@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "M2A_AUTHORIZED_AWAITING_DISPATCH",
-  "currentPhase": "WORK_ORDER",
+  "overallStatus": "M2A_IN_PROGRESS",
+  "currentPhase": "BUILD",
   "completedCapabilities": [],
   "activeWorkOrders": [
     "docs/work_orders/SCST_M2A.md"
