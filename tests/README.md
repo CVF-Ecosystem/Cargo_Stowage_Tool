@@ -12,4 +12,4 @@
 
 **Không thuộc thư mục này:** Không trình bày kết quả trên fixture giả lập như kết quả đã kiểm với hầm/chuyến thật.
 
-Hiện chỉ là khung thư mục theo [roadmap v0.2](../docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md); chưa có code. Nội dung được thêm theo SPEC và WORK_ORDER của từng mốc.
+Đã có kiểm M1 backend, browser, launcher/cold-start và guard offline chỉ dùng khi test. Xem docs/APP_GUIDE.md và docs/reviews/SCST_M1_REVIEW.md để chạy/đọc bằng chứng; chưa có dữ liệu thực.

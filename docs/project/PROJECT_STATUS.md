@@ -2,36 +2,24 @@
 
 Cập nhật: **31-10-2026**.
 
-## Chỉ đạo hiện hành
+## Chỉ đạo và phần đã làm
 
-Ngày 31-10-2026 owner đã **thống nhất hướng tổng thể (M0)**, ghi tại [quyết định SCST-D001](../decisions/SCST_D001_THONG_NHAT_HUONG_M0_2026-10-31.md). [Roadmap v0.2](../roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md) là căn cứ giữ hướng, đã áp dụng các góp ý của bản đánh giá.
+Owner thống nhất hướng M0 (SCST-D001), chọn tận dụng M1 có chọn lọc và chỉ đạo tiếp tục bằng root orchestrator/reviewer, Terra 6.1 High worker và Sol-Medium cho phần khó ([SCST-D002](../decisions/SCST_D002_M1_REUSE_EXECUTION.md)).
 
-Đã tạo **khung thư mục M1** theo treeview (11 thư mục, mỗi thư mục có README ghi trách nhiệm, chưa có code) theo [work order SCST_M1_SKELETON](../work_orders/SCST_M1_SKELETON.md), đã đóng. Thống nhất hướng và khung thư mục chưa phải nghiệm thu mốc app nào; chưa có quyền viết code app.
+Đã chuyển source theo [SPEC M1 v0.2](../specs/SCST_M1.md) và [WORK_ORDER M1](../work_orders/SCST_M1_REUSE.md). Root review khác hai worker của lượt này; [báo cáo M1](../reviews/SCST_M1_REVIEW.md) xác minh đủ 9 tiêu chí kỹ thuật. Owner chưa nghiệm thu nghiệp vụ; không mở M2.
 
-## Phần còn sử dụng
+## M1 hiện có
 
-- [Roadmap ban đầu](SCST_Roadmap_Ban_Dau_Tool_First.md): giữ nguyên bytes, là đầu vào thảo luận về mục tiêu tool-first và các mốc M1–M5.
-- [Nguồn tham khảo](../reference/README.md): thiết kế gốc v0.1, mô hình nghiệp vụ, vấn đề dữ liệu và ảnh quan sát.
-- Bộ CVF tại `.cvf/`, `AGENTS.md`, `CVF_SESSION/`, `scripts/` và catalog: tiếp tục dùng để quản lý công việc sau khi thống nhất kế hoạch.
+Demo synthetic BOX một lớp, bảng/3D/2D cùng dữ liệu, giới hạn chứng nhận/chuyến/onboard, kiểm tải/biên/va chạm/hàng bắt buộc, draft/STALE, sửa–kiểm lại–undo và fallback WebGL. Khởi chạy bằng `Start-SCST.cmd`; xem [APP_GUIDE](../APP_GUIDE.md). Không lưu bền; refresh mất thay đổi.
 
-## Phần chưa được chốt
+51 backend test, 5 browser test và 498 kiểm độc lập đạt. Cold setup/launcher, chạy với chặn truy cập ngoài loopback, schema/types regeneration và archive identity có evidence. Xem giới hạn kiểm và cảnh báo còn lại trong review; không sử dụng demo cho phương án thực.
 
-- [SPEC M1 v0.2](../specs/SCST_M1.md): đã hoàn tất soạn và recheck, vẫn là DRAFT chờ owner thống nhất danh mục tái sử dụng, tải/hầm mục tiêu trống và trạng thái/draft.
-- Phiên bản stack, endpoint, schema chi tiết và thuật toán; chốt trong SPEC của từng phần.
-- Tiêu chí nghiệm thu các mốc sau M1.
+## Source cũ và nguồn tham khảo
 
-Các lựa chọn từng được agent ghi trong SPEC/work order M1 chưa được xem là những quyết định đã chốt với owner.
+[Archive M1](../../archive/2026-10-31/paused-m1/README.md) giữ nguyên 50 file; chỉ lấy thành phần đã chọn và sửa trên cây mới. Test/log/ảnh cũ không được dùng làm nghiệm thu bản mới. [Đánh giá tái sử dụng](../reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md) lưu căn cứ và lịch sử recheck.
 
-## Bản M1 đã viết
-
-Đã chuyển nguyên source, contract, tests, hướng dẫn và bằng chứng chạy vào [archive/2026-10-31/paused-m1](../../archive/2026-10-31/paused-m1/README.md). Đây là bản thử bị tạm dừng, không phải bản M1 đã được nghiệm thu. Những kết quả test cũ chỉ phản ánh bản thử tại thời điểm chạy.
-
-Ở root hiện chỉ có khung thư mục M1 (README, chưa có code); không có server demo được khởi chạy. `IMPLEMENTATION_STATUS.json` không ghi nhận capability ứng dụng đã được chấp nhận.
+[Roadmap gốc](SCST_Roadmap_Ban_Dau_Tool_First.md), [roadmap tổng thể](../roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md) và [tài liệu tham khảo](../reference/README.md) tiếp tục làm nguồn định hướng. Lỗi authority work order khung đã sửa bằng snapshot revision dispatch; gate kiểm trực tiếp đạt.
 
 ## Bước tiếp theo
 
-Owner đã chọn tận dụng M1 cũ có chọn lọc. Claude đã recheck và cập nhật SPEC v0.2; Codex tiếp quản, kiểm lại và hoàn tất bàn giao. [Báo cáo nguồn → đích, mục 9](../reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md#9-kết-quả-recheck-và-tiếp-quản) ghi kết quả từng nhóm và phần còn lại. Chưa chuyển source.
-
-Lỗi hash nguồn tiêu chí của work order khung đã được sửa bằng snapshot của revision dispatch; kiểm trực tiếp work order hiện đạt. Đây là sửa hồ sơ lịch sử, không phải nghiệm thu M1.
-
-Owner chốt SPEC v0.2/phần được lấy; agent đăng ký acceptance và soạn WORK_ORDER M1. Chỉ tiếp tục triển khai khi được cho tiếp tục theo SPEC và WORK_ORDER phù hợp. Không dùng work order M1 trong archive để tự nối lại BUILD.
+Owner xem demo và phản hồi về hướng dùng. M2 nhập/import/lưu/xếp sơ bộ/export chỉ chi tiết hóa khi được chọn; nhiều tầng và case thực ở M3, AI tùy chọn M4, vận hành M5. Không tự suy diễn kiểm kỹ thuật M1 thành nghiệm thu nghiệp vụ hoặc quyền làm mốc tiếp theo.

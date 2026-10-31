@@ -121,7 +121,7 @@
       "family": "governed_artifact_family",
       "path": "docs/reviews",
       "status": "ACTIVE",
-      "description": "Reuse assessment and completed recheck/takeover results: docs/reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md section 9; awaiting owner SPEC agreement."
+      "description": "M1 selective reuse assessment, worker return, root technical review and new evidence."
     },
     {
       "id": "family-learnings",
@@ -156,7 +156,7 @@
       "family": "implementation_truth",
       "path": "docs/project/PROJECT_STATUS.md",
       "status": "ACTIVE",
-      "description": "Current SPEC/reuse checkpoint and completed takeover; application execution remains paused."
+      "description": "M1 technically verified demo, owner feedback pending; M2-M5 remain future."
     },
     {
       "id": "manifest-organization",

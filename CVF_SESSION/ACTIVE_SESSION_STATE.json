@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "BUILD",
-  "activePhase": "BUILD",
+  "currentMode": "REVIEW",
+  "activePhase": "REVIEW",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -14,9 +14,9 @@
     "FREEZE"
   ],
   "activeHandoff": "CVF_SESSION/handoffs/SCST_M1_REUSE_HANDOFF.md",
-  "nextAllowedMove": "Terra worker implements all nine M1 criteria under SCST_M1_REUSE; root orchestrator reviews worker checkpoints and final evidence before committing implementation.",
+  "nextAllowedMove": "Root reviews final M1 worker evidence and candidate identity, commits verified implementation, then closes the bounded work order and presents the demo to owner.",
   "parkedOperatorCheckpoint": "Scope changes or risk above R2 return to owner; M2-M5 and operational use remain outside this work order.",
-  "activeRole": "ORCHESTRATOR",
+  "activeRole": "COMMIT_STEWARD",
   "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",
   "updatedAt": "2026-10-31"
 }

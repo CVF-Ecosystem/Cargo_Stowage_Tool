@@ -1,0 +1,6 @@
+
+> scst-frontend@0.1.0 contract
+> openapi-typescript ../../contracts/openapi.json -o src/api/generated/api.ts
+
+✨ openapi-typescript 7.13.0
+🚀 ../../contracts/openapi.json → src/api/generated/api.ts [80ms]

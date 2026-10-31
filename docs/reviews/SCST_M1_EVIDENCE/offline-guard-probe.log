@@ -1,0 +1,2 @@
+SCST_OFFLINE_GUARD_ACTIVE: Python non-loopback outbound blocked
+EXPECTED BLOCK: offline test guard blocked DNS: example.com

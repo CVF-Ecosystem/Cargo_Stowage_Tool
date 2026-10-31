@@ -1,6 +1,6 @@
 # SCST M1 — Đánh giá và đề xuất tái sử dụng có chọn lọc
 
-Status: RECHECKED_PENDING_OWNER_SPEC
+Status: ADMITTED_FOR_M1
 
 **Ngày:** 31-10-2026. **Người lập ban đầu:** Codex, agent đã dựng bản thử M1; đánh giá ban đầu là tự đánh giá. **Người nhận:** owner SCST và Claude. Claude đã recheck và đưa kết quả vào SPEC v0.2 tại `0f307b6`; Codex tiếp quản, xác minh và hoàn tất bàn giao ở mục 9. SPEC và danh mục vẫn chờ owner thống nhất.
 
@@ -121,3 +121,9 @@ Các mục dưới đây là yêu cầu của lượt ban đầu; kết quả hi
 **Đối chiếu lúc tiếp quản:** 50/50 file archive khớp raw Git blob; cây app chỉ có README; phần tiêu chí snapshot trùng revision dispatch, giữ nguyên SHA-256 `560ba09fe9210eb31ab58f858f89c4a007a397014507192fc5d1ae22f35794bb`; đủ 9 acceptance ID. Doctor 28/28, gate review trên phần Claude đổi và gate trực tiếp work order cũ đều đạt. Đây là kiểm tài liệu/source identity, không là test runtime app. Kiểm sau chỉnh sửa và commit được ghi ở handoff.
 
 **Bước tiếp theo:** owner thống nhất SPEC v0.2 và danh mục tái sử dụng; sau đó agent đăng ký acceptance và soạn WORK_ORDER M1 có phạm vi nguồn/đích. Kết luận sản phẩm vẫn PENDING, completedCapabilities rỗng; chưa chuyển code. Không cần thêm một vòng recheck cùng nội dung nếu không phát sinh thay đổi hoặc bằng chứng mới.
+
+## 10. Tiếp tục theo authority mới và kết quả chuyển
+
+Owner chỉ đạo tiếp tục M1 với root orchestrator/reviewer, Terra 6.1 High worker và Sol-Medium cho phần khó; [SCST-D002](../decisions/SCST_D002_M1_REUSE_EXECUTION.md) và [WORK_ORDER M1](../work_orders/SCST_M1_REUSE.md) ghi authority/phạm vi. Source đã chuyển/sửa theo Phụ lục SPEC. Căn cứ và kết luận pending ở các mục trước là lịch sử, không ghi đè trạng thái mới này.
+
+[Review M1](SCST_M1_REVIEW.md) ghi đủ 9 tiêu chí kỹ thuật và bằng chứng mới; archive 50 file nguyên vẹn. M1 sẵn cho owner xem demo, chưa nghiệm thu nghiệp vụ hoặc mở M2.

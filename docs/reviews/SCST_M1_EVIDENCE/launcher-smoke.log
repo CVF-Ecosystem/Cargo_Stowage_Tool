@@ -1,0 +1,37 @@
+{
+  "launcher": [
+    "powershell",
+    "-NoProfile",
+    "-ExecutionPolicy",
+    "Bypass",
+    "-File",
+    "tooling/start-local.ps1",
+    "-Port",
+    "18765",
+    "-NoBrowser"
+  ],
+  "health": {
+    "status": "ok",
+    "version": "0.1.0",
+    "mode": "synthetic-demo",
+    "ai": "off"
+  },
+  "ui_html": "ok",
+  "demo_contract": "scst.m1.v1",
+  "result": "PASS"
+}
+Launcher output:
+SCST demo: http://127.0.0.1:18765 (Ctrl+C to stop). Changes are session-only.
+INFO:     Started server process [28380]
+
+INFO:     Waiting for application startup.
+
+INFO:     Application startup complete.
+
+INFO:     Uvicorn running on http://127.0.0.1:18765 (Press CTRL+C to quit)
+
+INFO:     127.0.0.1:64204 - "GET /api/health HTTP/1.1" 200 OK
+
+INFO:     127.0.0.1:64205 - "GET / HTTP/1.1" 200 OK
+
+INFO:     127.0.0.1:64206 - "GET /api/demo HTTP/1.1" 200 OK

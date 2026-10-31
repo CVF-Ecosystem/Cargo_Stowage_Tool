@@ -6,4 +6,4 @@
 
 **Không thuộc thư mục này:** Chỉ ghi contract đang dùng; không dựng sẵn schema cho mốc tương lai.
 
-Hiện chỉ là khung thư mục theo [roadmap v0.2](../docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md); chưa có code. Nội dung được thêm theo SPEC và WORK_ORDER của từng mốc.
+Đã có OpenAPI M1 sinh từ backend mới. Kiểu TS ở apps/frontend/src/api/generated/; chạy export_contract.py rồi npm run contract để tái sinh. Không sửa snapshot/types bằng tay.

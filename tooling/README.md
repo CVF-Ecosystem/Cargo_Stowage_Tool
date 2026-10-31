@@ -6,4 +6,4 @@
 
 **Không thuộc thư mục này:** Không chứa công cụ quản lý CVF; các script đó ở `scripts/`.
 
-Hiện chỉ là khung thư mục theo [roadmap v0.2](../docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md); chưa có code. Nội dung được thêm theo SPEC và WORK_ORDER của từng mốc.
+Đã có setup, launcher local và generator contract M1. Không đóng gói/cài đặt kiểu M5; sau sửa source cần build lại trước chạy demo.

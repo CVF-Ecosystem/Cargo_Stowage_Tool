@@ -2,6 +2,61 @@
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
   "updatedAt": "2026-10-31",
-  "claimBoundary": "No active or accepted application module. Paused M1 code and historical tests are retained under archive/2026-10-31/paused-m1/.",
-  "modules": []
+  "claimBoundary": "Source/test-verified M1 synthetic local components only; owner business acceptance remains pending. ENFORCED describes each listed component, not CVF live AI governance or operational cargo safety.",
+  "modules": [
+    {
+      "id": "scst-domain",
+      "name": "SCST M1 domain",
+      "path": "services/backend/app/domain",
+      "status": "ENFORCED",
+      "description": "Synthetic BOX/single-layer model, integer geometry and rules only; no operational approval.",
+      "evidence": "tests/backend/test_validation.py; docs/reviews/SCST_M1_EVIDENCE/reviewer-pytest.log (51 pass); reviewer-backend.json (498 checks)"
+    },
+    {
+      "id": "scst-api",
+      "name": "SCST local API",
+      "path": "services/backend/app/api",
+      "status": "ENFORCED",
+      "description": "Local health/demo/validate API calling domain; AI off.",
+      "evidence": "services/backend/app/api/routes.py; backend tests and launcher-smoke.log",
+      "dependencies": [
+        "scst-domain"
+      ]
+    },
+    {
+      "id": "scst-contract",
+      "name": "SCST generated API contract",
+      "path": "contracts/openapi.json",
+      "status": "CONTRACT_ONLY",
+      "description": "OpenAPI and derived frontend types for scst.m1.v1.",
+      "evidence": "tooling/export_contract.py; contract-hashes.txt and reviewer-source-manifest.json",
+      "dependencies": [
+        "scst-api"
+      ]
+    },
+    {
+      "id": "scst-frontend",
+      "name": "SCST M1 workspace and viewer",
+      "path": "apps/frontend/src",
+      "status": "ENFORCED",
+      "description": "Checked/draft workspace, table, Three/SVG projections and STALE/error recovery for synthetic M1.",
+      "evidence": "tests/browser/workspace.spec.ts; docs/reviews/SCST_M1_EVIDENCE/reviewer-browser.log (5 pass)",
+      "dependencies": [
+        "scst-api",
+        "scst-contract"
+      ]
+    },
+    {
+      "id": "scst-launcher",
+      "name": "SCST local launcher",
+      "path": "tooling",
+      "status": "ENFORCED",
+      "description": "Windows local setup, loopback server and contract generation.",
+      "evidence": "tests/launcher_smoke.py; tests/cold_start_smoke.py; launcher-smoke.log; cold-start.log",
+      "dependencies": [
+        "scst-api",
+        "scst-frontend"
+      ]
+    }
+  ]
 }

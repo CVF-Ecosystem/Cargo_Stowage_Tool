@@ -1,16 +1,17 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "M1_IMPLEMENTATION_IN_PROGRESS",
-  "currentPhase": "BUILD",
+  "overallStatus": "M1_TECHNICALLY_VERIFIED_PENDING_COMMIT",
+  "currentPhase": "REVIEW",
   "completedCapabilities": [],
   "activeWorkOrders": [
     "docs/work_orders/SCST_M1_REUSE.md"
   ],
   "knownLimitations": [
-    "M1 implementation dispatched to Terra 6.1 High under SCST-D002; root owns independent review and commit.",
-    "No new runtime criteria verified yet; historical source/evidence does not prove this build.",
-    "M2-M5, real cargo use, AI/provider calls and publication are outside scope."
+    "All nine M1 technical criteria verified on the new synthetic candidate; material commit and work-order closure checks pending.",
+    "Owner demo/business acceptance pending; completedCapabilities remains empty until accepted.",
+    "Session-only state; no planner/import/persistence/export/multi-layer/real cargo/AI integration.",
+    "Python test-client deprecation and Three.js chunk size warnings remain; parent-container maintenance condition is separate."
   ],
   "evidence": [
     "docs/project/PROJECT_STATUS.md",
@@ -26,5 +27,13 @@
     "docs/decisions/SCST_D002_M1_REUSE_EXECUTION.md",
     "docs/work_orders/SCST_M1_REUSE.md"
   ],
-  "updatedAt": "2026-10-31"
+  "updatedAt": "2026-10-31",
+  "x_verifiedMilestones": [
+    {
+      "id": "M1",
+      "technicalStatus": "VERIFIED",
+      "businessAcceptance": "PENDING",
+      "evidence": "docs/reviews/SCST_M1_REVIEW.md"
+    }
+  ]
 }

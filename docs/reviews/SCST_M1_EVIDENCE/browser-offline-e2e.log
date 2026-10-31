@@ -1,0 +1,21 @@
+
+> scst-frontend@0.1.0 test:e2e
+> playwright test
+
+[WebServer] SCST_OFFLINE_GUARD_ACTIVE: Python non-loopback outbound blocked
+[WebServer] INFO:     Started server process [12016]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8766 (Press CTRL+C to quit)
+
+Running 5 tests using 1 worker
+
+(node:22288) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 ..\..\tests\browser\workspace.spec.ts:14:5 › real API drives table, 2D and actual Three meshes through yaw and selection (3.1s)
+  ok 2 ..\..\tests\browser\workspace.spec.ts:119:5 › raw edit is immediately STALE; real API 422 and network loss preserve checked result and draft; retry and undo recover (1.9s)
+  ok 3 ..\..\tests\browser\workspace.spec.ts:181:5 › WebGL failure keeps accessible 2D, table selection and synthetic warning (775ms)
+  ok 4 ..\..\tests\browser\workspace.spec.ts:214:5 › an edit during pending validation keeps the newer raw draft STALE until separately checked (1.5s)
+  ok 5 ..\..\tests\browser\workspace.spec.ts:244:5 › after setup the browser runs locally with all non-loopback traffic blocked (1.6s)
+
+  5 passed (11.4s)

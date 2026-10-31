@@ -1,0 +1,57 @@
+{
+  "bundleSha256": "80edcd2e4b605f440b94df963ed304ffed0f803bfa057a951360e39f014efc2b",
+  "executionContext": "project-copy",
+  "exitCode": 0,
+  "head": "893d6ef7cea39a6d7629f50b3932e6254489f425",
+  "invokedAtUtc": "2026-10-31T14:06:11+00:00",
+  "phase": "worker-return",
+  "profileId": "cvf.downstreamGateProfile@1.2.0",
+  "profileSha256": "faaf9273ada3fd826e6372898d134fe7ad0157528f25b7720211c31cfc209bd5",
+  "range": "WORKTREE_SCOPE mode=WORKTREE_SCOPE base=None head=893d6ef7cea39a6d7629f50b3932e6254489f425 candidates=85 deleted=0",
+  "results": [
+    {
+      "controlId": "CVF-DG-INST-01",
+      "findingCount": 0,
+      "ok": true,
+      "outcome": "PASS"
+    },
+    {
+      "controlId": "CVF-DG-CONT-01",
+      "findingCount": 0,
+      "ok": true,
+      "outcome": "PASS"
+    },
+    {
+      "controlId": "CVF-DG-RANGE-01",
+      "findingCount": 0,
+      "ok": true,
+      "outcome": "PASS"
+    },
+    {
+      "controlId": "CVF-DG-APPL-01",
+      "findingCount": 0,
+      "ok": true,
+      "outcome": "PASS"
+    },
+    {
+      "controlId": "CVF-DG-ROLE-01",
+      "findingCount": 0,
+      "ok": true,
+      "outcome": "PASS"
+    },
+    {
+      "controlId": "CVF-DG-CLAIM-01",
+      "findingCount": 0,
+      "ok": true,
+      "outcome": "PASS"
+    },
+    {
+      "controlId": "CVF-DG-COV-01",
+      "findingCount": 0,
+      "ok": true,
+      "outcome": "PASS"
+    }
+  ],
+  "runnerSha256": "716544aa7a38251009867a4e0150be51b79b4304a8c5f6d7afddab4e7c5d9c07",
+  "schemaVersion": "cvf.downstreamGateReceipt@1.0.0"
+}

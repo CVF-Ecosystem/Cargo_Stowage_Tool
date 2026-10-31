@@ -6,4 +6,4 @@
 
 **Không thuộc thư mục này:** Không tự kiểm quy tắc tải/biên/va chạm; kết quả kiểm lấy từ backend. Không ghi trực tiếp database.
 
-Hiện chỉ là khung thư mục theo [roadmap v0.2](../../../../docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md); chưa có code. Nội dung được thêm theo SPEC và WORK_ORDER của từng mốc.
+Đã có workspace M1: checked result/draft tách riêng, STALE, bảng, editor và lịch sử trong tab. Các luồng nhập/import/lưu bền của M2 chưa hiện thực.

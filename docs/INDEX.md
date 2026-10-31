@@ -16,7 +16,7 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 - Standard-library catalog validation and rendering functions.: `scripts/lib/downstream_catalog/CvfDownstreamCatalogLib.ps1`
 - Executable catalog manager (--check / --write).: `scripts/manage_cvf_downstream_catalog.ps1`
 - Machine implementation-truth surface.: `IMPLEMENTATION_STATUS.json`
-- Current SPEC/reuse checkpoint and completed takeover; application execution remains paused.: `docs/project/PROJECT_STATUS.md`
+- M1 technically verified demo, owner feedback pending; M2-M5 remain future.: `docs/project/PROJECT_STATUS.md`
 - Generated documentation index.: `docs/INDEX.md`
 - Generated human module catalog.: `docs/catalog/MODULE_CATALOG.md`
 
@@ -27,7 +27,7 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 - Shared project learning, value-filtered parent intake and returned adoption.: `docs/reviews/learnings/`
 - Current status, original planning input and file organization.: `docs/project/`
 - Source material still used for planning; not final design authority.: `docs/reference/`
-- Reuse assessment and completed recheck/takeover results: docs/reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md section 9; awaiting owner SPEC agreement.: `docs/reviews/`
+- M1 selective reuse assessment, worker return, root technical review and new evidence.: `docs/reviews/`
 - Owner-agreed SCST roadmap v0.2 and architecture tree: docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md; next slice SPEC M1.: `docs/roadmaps/`
 - SPEC M1 v0.2 admitted for execution under SCST-D002; product acceptance separate.: `docs/specs/`
 - SCST_M1_REUSE active work order; historical skeleton packet remains closed.: `docs/work_orders/`

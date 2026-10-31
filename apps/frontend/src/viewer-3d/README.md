@@ -6,4 +6,4 @@
 
 **Không thuộc thư mục này:** Không đánh giá an toàn hàng hóa và không tự tính lại tọa độ; chỉ là hình chiếu của phương án.
 
-Hiện chỉ là khung thư mục theo [roadmap v0.2](../../../../docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md); chưa có code. Nội dung được thêm theo SPEC và WORK_ORDER của từng mốc.
+Đã có viewer Three.js và mặt bằng SVG M1, chọn đồng bộ, orbit/zoom/reset, WebGL fallback. Dữ liệu quan sát mesh chỉ đọc phục vụ kiểm; viewer không kiểm quy tắc hoặc phê duyệt.

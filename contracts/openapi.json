@@ -1,0 +1,533 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "SCST Demo API",
+    "description": "Synthetic BOX / single-layer planning demo; not operational approval.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_api_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object",
+                  "title": "Response Health Api Health Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/demo": {
+      "get": {
+        "summary": "Demo",
+        "operationId": "demo_api_demo_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Evaluation"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/validate": {
+      "post": {
+        "summary": "Validate",
+        "operationId": "validate_api_validate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Plan"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Evaluation"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CargoUnit": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Z0-9][A-Z0-9_-]{0,39}$",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Name"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "BAR_BUNDLE",
+              "PIPE_BUNDLE"
+            ],
+            "title": "Kind"
+          },
+          "requirement": {
+            "type": "string",
+            "enum": [
+              "required",
+              "optional",
+              "excluded"
+            ],
+            "title": "Requirement"
+          },
+          "length_mm": {
+            "type": "integer",
+            "maximum": 1000000.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Length Mm"
+          },
+          "width_mm": {
+            "type": "integer",
+            "maximum": 1000000.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Width Mm"
+          },
+          "height_mm": {
+            "type": "integer",
+            "maximum": 1000000.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Height Mm"
+          },
+          "mass_g": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Mass G"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "kind",
+          "requirement",
+          "length_mm",
+          "width_mm",
+          "height_mm",
+          "mass_g"
+        ],
+        "title": "CargoUnit"
+      },
+      "Evaluation": {
+        "properties": {
+          "plan": {
+            "$ref": "#/components/schemas/Plan"
+          },
+          "summary": {
+            "$ref": "#/components/schemas/Summary"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "DRAFT",
+              "GEOMETRY_FEASIBLE",
+              "RULES_CHECKED"
+            ],
+            "title": "Status"
+          },
+          "basic_checks_passed": {
+            "type": "boolean",
+            "title": "Basic Checks Passed"
+          },
+          "issues": {
+            "items": {
+              "$ref": "#/components/schemas/Issue"
+            },
+            "type": "array",
+            "title": "Issues"
+          },
+          "unchecked": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Unchecked"
+          },
+          "operational_eligible": {
+            "type": "boolean",
+            "const": false,
+            "title": "Operational Eligible",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "plan",
+          "summary",
+          "status",
+          "basic_checks_passed",
+          "issues",
+          "unchecked"
+        ],
+        "title": "Evaluation"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "Hold": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Z0-9][A-Z0-9_-]{0,39}$",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Name"
+          },
+          "length_mm": {
+            "type": "integer",
+            "maximum": 1000000.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Length Mm"
+          },
+          "width_mm": {
+            "type": "integer",
+            "maximum": 1000000.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Width Mm"
+          },
+          "height_mm": {
+            "type": "integer",
+            "maximum": 1000000.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Height Mm"
+          },
+          "shape": {
+            "type": "string",
+            "const": "BOX",
+            "title": "Shape",
+            "default": "BOX"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "length_mm",
+          "width_mm",
+          "height_mm"
+        ],
+        "title": "Hold"
+      },
+      "Issue": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "OVERWEIGHT",
+              "OUT_OF_BOUNDS",
+              "OVERLAP",
+              "LAYER_UNSUPPORTED",
+              "REQUIRED_UNPLACED"
+            ],
+            "title": "Code"
+          },
+          "unit_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Unit Ids"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "unit_ids",
+          "message"
+        ],
+        "title": "Issue"
+      },
+      "Limits": {
+        "properties": {
+          "certificate_cargo_limit_g": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Certificate Cargo Limit G"
+          },
+          "voyage_cargo_limit_g": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Voyage Cargo Limit G"
+          },
+          "cargo_onboard_g": {
+            "type": "integer",
+            "maximum": 1000000000000.0,
+            "minimum": 0.0,
+            "title": "Cargo Onboard G",
+            "default": 0
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "certificate_cargo_limit_g",
+          "voyage_cargo_limit_g"
+        ],
+        "title": "Limits"
+      },
+      "Placement": {
+        "properties": {
+          "unit_id": {
+            "type": "string",
+            "pattern": "^[A-Z0-9][A-Z0-9_-]{0,39}$",
+            "title": "Unit Id"
+          },
+          "x_mm": {
+            "type": "integer",
+            "maximum": 1000000.0,
+            "minimum": -1000000.0,
+            "title": "X Mm"
+          },
+          "y_mm": {
+            "type": "integer",
+            "maximum": 1000000.0,
+            "minimum": -1000000.0,
+            "title": "Y Mm"
+          },
+          "z_mm": {
+            "type": "integer",
+            "maximum": 1000000.0,
+            "minimum": -1000000.0,
+            "title": "Z Mm",
+            "default": 0
+          },
+          "layer": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Layer",
+            "default": 0
+          },
+          "supported_by": {
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Z0-9][A-Z0-9_-]{0,39}$"
+            },
+            "type": "array",
+            "maxItems": 200,
+            "title": "Supported By"
+          },
+          "yaw_deg": {
+            "type": "integer",
+            "multipleOf": 90.0,
+            "maximum": 270.0,
+            "minimum": 0.0,
+            "title": "Yaw Deg"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "unit_id",
+          "x_mm",
+          "y_mm",
+          "yaw_deg"
+        ],
+        "title": "Placement"
+      },
+      "Plan": {
+        "properties": {
+          "contract_version": {
+            "type": "string",
+            "const": "scst.m1.v1",
+            "title": "Contract Version",
+            "default": "scst.m1.v1"
+          },
+          "source": {
+            "type": "string",
+            "const": "SYNTHETIC",
+            "title": "Source",
+            "default": "SYNTHETIC"
+          },
+          "hold": {
+            "$ref": "#/components/schemas/Hold"
+          },
+          "limits": {
+            "$ref": "#/components/schemas/Limits"
+          },
+          "units": {
+            "items": {
+              "$ref": "#/components/schemas/CargoUnit"
+            },
+            "type": "array",
+            "maxItems": 200,
+            "minItems": 1,
+            "title": "Units"
+          },
+          "placements": {
+            "items": {
+              "$ref": "#/components/schemas/Placement"
+            },
+            "type": "array",
+            "maxItems": 200,
+            "title": "Placements"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "hold",
+          "limits",
+          "units",
+          "placements"
+        ],
+        "title": "Plan"
+      },
+      "Summary": {
+        "properties": {
+          "manifest_mass_g": {
+            "type": "integer",
+            "title": "Manifest Mass G"
+          },
+          "placed_mass_g": {
+            "type": "integer",
+            "title": "Placed Mass G"
+          },
+          "remaining_capacity_g": {
+            "type": "integer",
+            "title": "Remaining Capacity G"
+          },
+          "placed_count": {
+            "type": "integer",
+            "title": "Placed Count"
+          },
+          "unplaced_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Unplaced Ids"
+          },
+          "excluded_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Excluded Ids"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "manifest_mass_g",
+          "placed_mass_g",
+          "remaining_capacity_g",
+          "placed_count",
+          "unplaced_ids",
+          "excluded_ids"
+        ],
+        "title": "Summary"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

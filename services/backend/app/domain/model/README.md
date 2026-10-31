@@ -6,4 +6,4 @@
 
 **Không thuộc thư mục này:** Không phụ thuộc giao diện, database hay provider. Không chia tổng manifest để suy ra khối lượng từng bó.
 
-Hiện chỉ là khung thư mục theo [roadmap v0.2](../../../../../docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md); chưa có code. Nội dung được thêm theo SPEC và WORK_ORDER của từng mốc.
+Đã có strict models M1: integer mm/gram, identities, limits, trường dự trữ layer/support và evaluation. Phạm vi layer/support khác mặc định chỉ báo chưa hỗ trợ.

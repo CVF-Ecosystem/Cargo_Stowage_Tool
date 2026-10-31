@@ -6,4 +6,4 @@
 
 **Không thuộc thư mục này:** Không quyết định phương án; chỉ cung cấp phép tính hình học.
 
-Hiện chỉ là khung thư mục theo [roadmap v0.2](../../../../../docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md); chưa có code. Nội dung được thêm theo SPEC và WORK_ORDER của từng mốc.
+Đã có footprint theo yaw, bounds, containment BOX và kiểm giao thể tích dương. Chưa có hình học hầm khác BOX hoặc mô phỏng nhiều tầng.

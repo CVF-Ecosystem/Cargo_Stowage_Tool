@@ -1,11 +1,15 @@
 # Steel Cargo Stowage Tool — SCST
 
-Owner đã **thống nhất hướng tổng thể** ngày 31-10-2026 và chọn tận dụng M1 có chọn lọc. Đã hoàn tất recheck và [SPEC M1 v0.2](docs/specs/SCST_M1.md), đang chờ thống nhất danh mục/phạm vi. Việc triển khai app vẫn tạm dừng đến khi có work order được cho phép.
+**M1 đã chuyển có chọn lọc và đạt kiểm kỹ thuật**, sẵn để owner xem demo synthetic local. Có bảng/3D/2D, sửa–STALE–kiểm lại–undo và ba giới hạn tải theo SPEC v0.2. Chưa có planner, nhập manifest, lưu bền, export hoặc nhiều tầng.
+
+**Chạy:** nhấp đôi `Start-SCST.cmd`; xem [hướng dẫn](docs/APP_GUIDE.md). Sau khi sửa source, build lại theo hướng dẫn. Thay đổi chỉ giữ trong tab và mất khi refresh.
 
 ## Đọc từ đây
 
 | Tài liệu | Vai trò |
 |---|---|
+| [Hướng dẫn chạy M1](docs/APP_GUIDE.md) | Chạy local, thao tác và các giới hạn |
+| [Review M1](docs/reviews/SCST_M1_REVIEW.md) | Đối chiếu đủ M1-01…09 và bằng chứng mới |
 | [Trạng thái project](docs/project/PROJECT_STATUS.md) | Việc đã có, phần chưa chốt và thứ tự tiếp tục |
 | [Roadmap tổng thể + treeview đề xuất](docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md) | Roadmap v0.2 đã thống nhất: phạm vi, đầu ra từng mốc, rủi ro và treeview dự kiến |
 | [Đánh giá tái sử dụng M1 và kết quả recheck](docs/reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md) | Nguồn → đích, ánh xạ acceptance và kết quả tiếp quản ở mục 9; chưa chuyển code |
@@ -19,11 +23,11 @@ Owner đã **thống nhất hướng tổng thể** ngày 31-10-2026 và chọn 
 ```text
 Cargo_Stowage_Tool/
 ├── README.md                   # cửa vào project
-├── apps/frontend/src/          # giao diện (khung M1, chưa có code)
+├── apps/frontend/src/          # giao diện M1
 │   ├── features/               # nhập hàng/hầm, phương án, chỉnh/so sánh
 │   ├── viewer-3d/              # hiển thị cùng dữ liệu phương án
 │   └── api/                    # giao tiếp backend theo contract
-├── services/backend/app/       # backend (khung M1, chưa có code)
+├── services/backend/app/       # backend M1
 │   ├── api/                    # nhận thao tác, trả dữ liệu/kết quả kiểm
 │   ├── domain/
 │   │   ├── model/              # hàng, hầm, phương án, đơn vị tính
@@ -46,6 +50,6 @@ Cargo_Stowage_Tool/
 └── knowledge/                  # vùng knowledge của CVF
 ```
 
-Đây là cây **đang có trên đĩa**. Các thư mục app mới là khung M1 theo [treeview của roadmap](docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md), mỗi thư mục có README ghi trách nhiệm, chưa có code. `domain/planner/` và `runtime-data/` được tạo ở M2, phần đóng gói ở M5. Các tệp cấu hình CVF/Git ở root và thư mục ẩn được giữ nguyên chức năng.
+Đây là cây **đang có trên đĩa**. Source M1 đã được chuyển/sửa theo [SPEC v0.2](docs/specs/SCST_M1.md); các README module ghi phạm vi đang có. `domain/planner/` và `runtime-data/` được tạo ở M2, phần đóng gói ở M5. Các tệp cấu hình CVF/Git ở root và thư mục ẩn được giữ nguyên chức năng.
 
-Thứ tự tiếp tục: owner thống nhất SPEC M1 v0.2 và danh mục tái sử dụng → đăng ký acceptance → WORK_ORDER cho phép triển khai phần đó theo CVF. Nội dung cũ trong tài liệu nguồn hoặc archive không tự cấp quyền tiếp tục code.
+Thứ tự tiếp tục: owner xem demo M1 và phản hồi; chỉ chi tiết hóa phần M2 sắp làm khi được chọn. Không tự mở mốc kế tiếp từ kết quả test M1.

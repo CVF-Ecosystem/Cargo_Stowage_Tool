@@ -1,0 +1,6 @@
+SCST_OFFLINE_GUARD_ACTIVE: Python non-loopback outbound blocked
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "D:\UNG DUNG AI\TOOL AI 2026\CVF-Workspace\Cargo_Stowage_Tool\tests\offline_guard\sitecustomize.py", line 21, in _getaddrinfo
+    raise OSError('offline test guard blocked DNS: ' + str(host))
+OSError: offline test guard blocked DNS: example.com

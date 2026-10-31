@@ -5,13 +5,13 @@ Memory class: POINTER_RECORD
 ## Current Truth
 
 - Contract: cvf.downstreamContinuityContract@1.0.0
-- Current mode: BUILD
-- Active phase: BUILD
+- Current mode: REVIEW
+- Active phase: REVIEW
 - Active handoff: CVF_SESSION/handoffs/SCST_M1_REUSE_HANDOFF.md
 
 ## Current operator boundary
 
-Owner directed continued M1 execution with root orchestrator/reviewer, Terra 6.1 High worker and Sol-Medium for difficult parts. SCST-D002 admits SPEC v0.2 and selective reuse; work order `docs/work_orders/SCST_M1_REUSE.md` covers all M1-01..09. Dispatch commit 60f7cd3333b431ebb80e8a3be59eb424d8df7e55 validated; material-SHA acknowledged in the active handoff. Terra implements M1 in BUILD; root reviews and controls commits. Root controls review/commit and continuity. Archive stays unchanged; no M2-M5, live data or AI/provider calls. No application capability is yet accepted. Current handoff contains role, cost/stop and preflight results; parent-container repair findings are separate from this project's passing doctor.
+Owner directed continued M1 execution with root orchestrator/reviewer, Terra 6.1 High worker and Sol-Medium for difficult parts. SCST-D002 admits SPEC v0.2 and selective reuse; work order `docs/work_orders/SCST_M1_REUSE.md` covers all M1-01..09. Dispatch commit 60f7cd3333b431ebb80e8a3be59eb424d8df7e55 validated; material-SHA acknowledged in the active handoff. Terra and Sol returned M1; root is in REVIEW and controls commits. Root controls review/commit and continuity. Archive stays unchanged; no M2-M5, live data or AI/provider calls. No application capability is yet accepted. Current handoff contains role, cost/stop and preflight results; parent-container repair findings are separate from this project's passing doctor.
 
 ## Read next
 
