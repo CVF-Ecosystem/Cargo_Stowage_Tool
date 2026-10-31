@@ -5,10 +5,10 @@ Status: ACTIVE
 ## Current State
 
 - Project: Cargo_Stowage_Tool
-- Current mode: WORK_ORDER
-- Active phase: WORK_ORDER
+- Current mode: BUILD
+- Active phase: BUILD
 - Active role: ORCHESTRATOR
-- Next allowed move: Admit bounded VINAFCO268 integration under docs/work_orders/SCST_VINAFCO268.md; worker waits for dispatch marker. No full M2 dispatch.
+- Next allowed move: Terra worker implements only SCST_VINAFCO268 admitted paths; root reviews, Sol verifies browser; no full M2 dispatch.
 - Parked operator checkpoint: M1 business acceptance pending; real hold measurements and remaining M2-M5 functions remain separate.
 
 ## Authority and responsibilities
@@ -65,3 +65,7 @@ Status: ACTIVE
 - Root may stop owned demo via Ctrl+C in session54885. User can launch later with Start-SCST.cmd. Synthetic source and archive checks unchanged. Final continuity/coverage/catalog and commit checks follow; no application source changes in closure commit.
 
 - Final metadata commit stewardship: root rehydrated all five continuity surfaces; doctor28/28, pre-commit7/7, four admitted coverage packets and 51 source hashes passed. Root acts COMMIT_STEWARD for closure records, with SESSION_SYNC_STEWARD as continuation role. No source edits or additional tests needed for metadata closure.
+
+## VINAFCO268 BUILD acknowledgment
+
+Root rehydrated canonical records before BUILD; phase/role BUILD / ORCHESTRATOR. Material-SHA marker: dispatch 4ff5b05c2aa648814dff02be531b0e582305f99e. Pre-dispatch6/6, pre-commit7/7 passed. Initial catalog family/path registration and handoff-name closeability checks failed and were corrected before dispatch (registered existing artifact families, successor AGENT_HANDOFF_VINAFCO268); no gate edits. SPEC acceptance hash5b38911a2325311bdc140a101e823adacdad1e03ead651b63dabaaa692691143. Budget165minutes, no scope reset. Raw source excluded.

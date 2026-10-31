@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "VINAFCO268_INTEGRATION_AUTHORIZED",
-  "currentPhase": "WORK_ORDER",
+  "overallStatus": "VINAFCO268_INTEGRATION_IN_PROGRESS",
+  "currentPhase": "BUILD",
   "completedCapabilities": [],
   "activeWorkOrders": [
     "docs/work_orders/SCST_VINAFCO268.md"
