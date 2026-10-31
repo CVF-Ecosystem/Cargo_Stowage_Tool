@@ -1,0 +1,108 @@
+{
+  "auditKind": "R3_REPRODUCTION_OF_R2_CONTRACT_OBSERVATIONS",
+  "timestamp": "2026-10-31T07:17:44.385686+00:00",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/workspace/scratch/76105b566a46/r3_review_candidate_extracted/Steel_Cargo_Stowage_Tool_v0.3_Review_Baseline/probes/replay_r2_contract_probes.py",
+    "--package-root",
+    "/workspace/scratch/76105b566a46/r3_final_replay/frozen_v02/Steel_Cargo_Stowage_Tool_v0.2_Local_Agent_Package",
+    "--output",
+    "/workspace/scratch/76105b566a46/r3_final_replay/probes"
+  ],
+  "runtime": {
+    "python": "3.12.14",
+    "jsonschema": "4.26.0"
+  },
+  "expectedObservationsReproduced": true,
+  "probes": [
+    {
+      "id": "R2-02-MANIFEST",
+      "scope": "JSON_SCHEMA_ONLY",
+      "schemaAccepted": true,
+      "errors": [],
+      "meaning": "testOnly=false with VERIFIED, SYNTHETIC source and SYNTHETIC unit masses fits schema; no operational admission is being exercised",
+      "operationalPermissionTested": false
+    },
+    {
+      "id": "R2-02-VESSEL",
+      "scope": "JSON_SCHEMA_ONLY",
+      "schemaAccepted": true,
+      "errors": [],
+      "meaning": "testOnly=false with synthetic cargo-limit evidence fits schema; no source registry is being queried",
+      "operationalPermissionTested": false
+    },
+    {
+      "id": "R2-08-NO-FIELD-LINK",
+      "scope": "JSON_SCHEMA_ONLY",
+      "schemaAccepted": true,
+      "errors": [],
+      "meaning": "A sourceLineId is free text; changing a value and total cannot be checked against source/draft/confirmation by this schema. Relabeling a synthetic fixture is a deliberately invalid domain input, not a real document.",
+      "operationalPermissionTested": false
+    },
+    {
+      "id": "R2-04-FRACTIONAL-KG",
+      "scope": "JSON_SCHEMA_ONLY",
+      "schemaAccepted": false,
+      "errors": [
+        "declaredTotalMassKg: 4000.5 is not of type 'integer'",
+        "cargoUnits/0/massKg: 2000.5 is not of type 'integer'"
+      ],
+      "meaning": "Fractional kg is correctly rejected by v0.2 integer-kg schema; this says nothing about precision of actual user manifests",
+      "operationalPermissionTested": false
+    },
+    {
+      "id": "REFERENCE-NO-OPERATIONAL-PATH",
+      "scope": "REFERENCE_CONTRACT_ONLY",
+      "contractChecksPass": false,
+      "operationalEligible": false,
+      "issues": [
+        {
+          "code": "REFERENCE_NOT_OPERATIONAL",
+          "subject": "bundle",
+          "message": "This reference harness does not grant operational eligibility"
+        }
+      ],
+      "meaning": "Production mode does not exist; default invocation keeps eligibility false"
+    }
+  ],
+  "inputFileSha256": {
+    "contracts/schemas/common.schema.json": "3a49116e3eb4fba390d1fe391c460ae1698a926e6fc990933ec262171e665c1a",
+    "contracts/schemas/decision_receipt.schema.json": "11d62f64bb75f4db52315a203ea0bacf8ac58c359ffa5d49443fabe50fd77c06",
+    "contracts/schemas/fixture_bundle.schema.json": "7bd955e75066d3dab9855f9032265dcf48ded2434c5e268a6a7b95c8516e561e",
+    "contracts/schemas/hold_profile.schema.json": "b2698b834718da2b6f5624063d00cec84af7bf1490ea9c8521e553547a911baf",
+    "contracts/schemas/intake_draft.schema.json": "0252752ecd1e5e179da62bbbe62e83656fd69ac564c1774ca70ccfd16e063a00",
+    "contracts/schemas/lifecycle_event.schema.json": "8f460b8ef4cb5e55002ac2a9f8edb45350714de4ef43bff48afd678767c51576",
+    "contracts/schemas/loading_case.schema.json": "e3178f49dfffc70ecd14dd34fe715b3ba0be9068d0fd7190781de1a5e9165e41",
+    "contracts/schemas/manifest.schema.json": "ff05e3bacc3457204ef85108dd7a68631ce697c0e51a5703f7a7913749bfb864",
+    "contracts/schemas/optimization_run.schema.json": "c4c33e108aa63475f11336e6cf0fc8ae4ca6c85f04c9036f1aaff2f110698ddd",
+    "contracts/schemas/plan_content.schema.json": "c2130bdf83a922d6039b21e1ecd3d6feddf0f4a238242345d5f2d69443f75aae",
+    "contracts/schemas/rule_set.schema.json": "987170099c57f5d57d8a145401d3834db04df3e50e100b4fa0c1bfaad26be1c6",
+    "contracts/schemas/support_profile.schema.json": "7954a0ac08b8906ce516e0e3dd4dfbf4a2ebb5bb38774989d51ecb752ddf6c06",
+    "contracts/schemas/validation_receipt.schema.json": "6b9c9b54f0c94f45dbbffbedab9056359b23334a0e54e6a3a03166f56b04dff2",
+    "contracts/schemas/vessel_profile.schema.json": "91716dd2975e5179411cf71499c00f5aa18fbe52f4931ef9fc76f6474af5f09f",
+    "reference/README.md": "d6907a49b34b58b058d00559a69ea64c4c3378f0fed64fa50e4de051862a2b04",
+    "reference/__init__.py": "6c48d067d03cbd4cd044f250762baf8bb7f1f4a095015ed8aae44c55c5b12ad9",
+    "reference/canonical.py": "e90e90bf62d5ef49b60414eaf65c6d66e824e08233a2cda3691322ab8e8c4394",
+    "reference/hash_test_vectors.json": "417d7955b398654626b310319b9c88e9d683b470372d6fcb9b5fc7de1d506487",
+    "reference/validator.py": "32a70b37335832db8dd22515ac7b6d68210d71ee892e53ef01a2e1f14e40b497",
+    "tests/fixtures/decision_receipt.json": "cdfe4f1133d1691dbacb38c58cd7e36253ade7d1f0ab860b835b5916e90ab359",
+    "tests/fixtures/hold_profile.json": "eed768eb334d7d6c9093a2b07d76b701c83fb6a5f659e87a8c83b1a9f45fff11",
+    "tests/fixtures/intake_draft.json": "fd99f25a73358f2a79874f17babe1a5637e072ab57ea76236d064db2bb4d11bf",
+    "tests/fixtures/lifecycle_event.json": "66cd42529d0dc29d293f4c07549e56b941bd5acd4144f36b5383d1b2070448f1",
+    "tests/fixtures/loading_case.json": "7c76a3425e036cdab0e6eb60cca4d615e17bccc7e2045051196fe45c4c104906",
+    "tests/fixtures/manifest.json": "1e57e8945c3467116ae0b3a0fb51246d4e93f73c9c1c243ca1c1c98f1c96c6d9",
+    "tests/fixtures/optimization_run.json": "827eeea2742a65ae41ef888ac0c5ee69ea7569a71a64141e1c285fea348576f6",
+    "tests/fixtures/plan_content.json": "eeaae4c072bc416178b912b53bfdfb441ccf7985f09d2f41701ad9c01ead5728",
+    "tests/fixtures/rule_set.json": "580d6efe7057451cb6d6c28fe3b927ee6346cf80414ddc442d646fb7226cabee",
+    "tests/fixtures/support_profile.json": "ef996746a930f46c84a3b80f33a91da3e46e908e2c46b1a312557816b404ecb7",
+    "tests/fixtures/synthetic_source.txt": "d96eef322ec72b3d6b0c27cb4378b5e1043018cf5d838adce263db72fb8cc157",
+    "tests/fixtures/valid_bundle.json": "be57b7ffe46c33f674686c9349d4ba2b3a8e4e4cc32be09562e1fcde1589b360",
+    "tests/fixtures/validation_receipt.json": "17b06259df945e9666c9bc9733dc7c3a481b6e6f2e9232bead26920bab7bf9bf",
+    "tests/fixtures/vessel_profile.json": "d6227760f7a465fc9f3e2aa243602fb3d2a9523de20386c7538c13257d0b55be"
+  },
+  "limitations": [
+    "No production backend exists in this package",
+    "Schema acceptance is not an authorization bypass",
+    "Source authenticity, real identity and persistence are not tested"
+  ]
+}

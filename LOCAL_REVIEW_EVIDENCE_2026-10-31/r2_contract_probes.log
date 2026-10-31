@@ -1,0 +1,12 @@
+{
+  "observationsReproduced": true,
+  "probeCount": 5,
+  "schemaAcceptance": [
+    true,
+    true,
+    true,
+    false
+  ],
+  "operationalEligible": false,
+  "receipt": "C:\\Users\\DELL\\AppData\\Local\\Temp\\SCST-local-review-20261031-160717\\replay\\probes\\r2_contract_probe_receipt.json"
+}

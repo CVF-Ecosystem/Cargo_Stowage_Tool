@@ -1,0 +1,63 @@
+{
+  "receiptKind": "REVIEW_REFERENCE_REPLAY_ONLY",
+  "startedAt": "2026-10-31T07:17:42.794124+00:00",
+  "finishedAt": "2026-10-31T07:17:44.403723+00:00",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "tooling/replay_review_checks.py",
+    "--output",
+    "/workspace/scratch/76105b566a46/r3_final_replay"
+  ],
+  "frozenV02Sha256": "6f587938f48b24daef5eaf0ba3fcab7532ec0397c3d2f7a39ca2caf686da44df",
+  "replayScriptSha256": "92fa523531f6bbcd1aa2280fea292b898a46b1a75db5dc79de7ab80d0e9c292d",
+  "probeScriptSha256": "c0bab2d3a3c1f19476bf980b6c33b67046fdf788bc5ea3fee503ccfa0487fc7d",
+  "steps": [
+    {
+      "step": "v02_checksum",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/76105b566a46/r3_final_replay/frozen_v02/Steel_Cargo_Stowage_Tool_v0.2_Local_Agent_Package/tooling/verify_package.py"
+      ],
+      "cwd": "/workspace/scratch/76105b566a46/r3_final_replay/frozen_v02/Steel_Cargo_Stowage_Tool_v0.2_Local_Agent_Package",
+      "exitCode": 0,
+      "log": "/workspace/scratch/76105b566a46/r3_final_replay/v02_checksum.log",
+      "logSha256": "4890f32b6062576dd2477784812f7f8b83eba6a9c08f2099b64f3a8ad628f2b8"
+    },
+    {
+      "step": "v02_reference_tests",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/76105b566a46/r3_final_replay/frozen_v02/Steel_Cargo_Stowage_Tool_v0.2_Local_Agent_Package/tests/run_all.py",
+        "--output",
+        "/workspace/scratch/76105b566a46/r3_final_replay/reference"
+      ],
+      "cwd": "/workspace/scratch/76105b566a46/r3_final_replay/frozen_v02/Steel_Cargo_Stowage_Tool_v0.2_Local_Agent_Package",
+      "exitCode": 0,
+      "log": "/workspace/scratch/76105b566a46/r3_final_replay/v02_reference_tests.log",
+      "logSha256": "a2427fca53227b626e91438fa56a940da4b383d02a83b912f87f0ba244c16fc4"
+    },
+    {
+      "step": "r2_contract_probes",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/76105b566a46/r3_review_candidate_extracted/Steel_Cargo_Stowage_Tool_v0.3_Review_Baseline/probes/replay_r2_contract_probes.py",
+        "--package-root",
+        "/workspace/scratch/76105b566a46/r3_final_replay/frozen_v02/Steel_Cargo_Stowage_Tool_v0.2_Local_Agent_Package",
+        "--output",
+        "/workspace/scratch/76105b566a46/r3_final_replay/probes"
+      ],
+      "cwd": "/workspace/scratch/76105b566a46/r3_final_replay/frozen_v02/Steel_Cargo_Stowage_Tool_v0.2_Local_Agent_Package",
+      "exitCode": 0,
+      "log": "/workspace/scratch/76105b566a46/r3_final_replay/r2_contract_probes.log",
+      "logSha256": "e76bcc5121a0c93ac2249d31a9dca146c555efee4163c465bbf7578614fc8276"
+    }
+  ],
+  "completed": true,
+  "operationalEligible": false,
+  "notEvaluated": [
+    "Application backend and authenticated identity",
+    "Production solver and UI",
+    "CVF source/runtime integration",
+    "Real cargo, hold, support and field approval"
+  ]
+}

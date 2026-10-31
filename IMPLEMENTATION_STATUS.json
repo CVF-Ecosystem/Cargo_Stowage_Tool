@@ -1,0 +1,19 @@
+﻿{
+    "schemaVersion":  "1.0",
+    "projectName":  "Cargo_Stowage_Tool",
+    "overallStatus":  "BOOTSTRAPPED",
+    "currentPhase":  "INTAKE",
+    "completedCapabilities":  [
+
+                              ],
+    "activeWorkOrders":  [
+
+                         ],
+    "knownLimitations":  [
+                             "Project implementation status has not yet been assessed."
+                         ],
+    "evidence":  [
+
+                 ],
+    "updatedAt":  "2026-10-31"
+}

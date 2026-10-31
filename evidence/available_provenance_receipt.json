@@ -1,0 +1,50 @@
+{
+  "auditScope": "Accessible bytes in this workspace only; the separate R1 file described by R2 is not attached here.",
+  "r1Copies": [
+    {
+      "location": "deliverables/CVF_Steel_Cargo_Independent_Review_R1.docx",
+      "bytes": 59296,
+      "sha256": "adf11a5682ea541d01a5b3ed348c6274938532a45ced23c49e91fa6ea6a08d8f"
+    },
+    {
+      "location": "deliverables/local_handoff/CVF_Steel_Cargo_Independent_Review_R1.docx",
+      "bytes": 59296,
+      "sha256": "adf11a5682ea541d01a5b3ed348c6274938532a45ced23c49e91fa6ea6a08d8f"
+    },
+    {
+      "location": "package_v02/Steel_Cargo_Stowage_Tool_v0.2_Local_Agent_Package/history/CVF_Steel_Cargo_Independent_Review_R1.docx",
+      "bytes": 59296,
+      "sha256": "adf11a5682ea541d01a5b3ed348c6274938532a45ced23c49e91fa6ea6a08d8f"
+    },
+    {
+      "location": "release_portability_v02/Steel_Cargo_Stowage_Tool_v0.2_Local_Agent_Package/history/CVF_Steel_Cargo_Independent_Review_R1.docx",
+      "bytes": 59296,
+      "sha256": "adf11a5682ea541d01a5b3ed348c6274938532a45ced23c49e91fa6ea6a08d8f"
+    },
+    {
+      "location": "deliverables/CVF_Steel_Cargo_Review_R1_Local_Handoff.zip::CVF_Steel_Cargo_Review_R1/CVF_Steel_Cargo_Independent_Review_R1.docx",
+      "bytes": 59296,
+      "sha256": "adf11a5682ea541d01a5b3ed348c6274938532a45ced23c49e91fa6ea6a08d8f"
+    },
+    {
+      "location": "deliverables/Steel_Cargo_Stowage_Tool_v0.2_Official_Local_Agent_Package.zip::Steel_Cargo_Stowage_Tool_v0.2_Local_Agent_Package/history/CVF_Steel_Cargo_Independent_Review_R1.docx",
+      "bytes": 59296,
+      "sha256": "adf11a5682ea541d01a5b3ed348c6274938532a45ced23c49e91fa6ea6a08d8f"
+    },
+    {
+      "location": "deliverables/Steel_Cargo_Stowage_Tool_v0.2_Official_Local_Agent_Package.zip::Steel_Cargo_Stowage_Tool_v0.2_Local_Agent_Package/history/CVF_Steel_Cargo_Review_R1_Local_Handoff.zip::CVF_Steel_Cargo_Review_R1/CVF_Steel_Cargo_Independent_Review_R1.docx",
+      "bytes": 59296,
+      "sha256": "adf11a5682ea541d01a5b3ed348c6274938532a45ced23c49e91fa6ea6a08d8f"
+    }
+  ],
+  "allAccessibleR1CopiesIdentical": true,
+  "originalBaselineSha256": "511bd790a07b880c734df5d8e730c3a5a71c00f1affc64c01a92159a76ceda9e",
+  "baselineNestedInV02MatchesUploaded": true,
+  "v02ArchiveSha256": "6f587938f48b24daef5eaf0ba3fcab7532ec0397c3d2f7a39ca2caf686da44df",
+  "r2InputSha256": "a64c1f3cc228bda0349fbf5bf3e143bd7aaad12e802d495aeaa7dd6ed3f1463a",
+  "unknown": [
+    "Bytes and SHA-256 of the separately uploaded R1 DOCX seen by R2",
+    "Whether an export/re-save transformation occurred",
+    "Which source path was used for that other upload"
+  ]
+}

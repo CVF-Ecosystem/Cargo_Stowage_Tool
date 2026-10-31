@@ -1,0 +1,25 @@
+Tôi giao bạn phản biện và xác minh Steel Cargo Stowage Tool theo package
+SCST-REVIEW-0.3. Vòng này là REVIEW_ONLY trước khi chúng tôi chốt Final Baseline,
+roadmap và treeview dự kiến.
+
+Đọc README.md, START_HERE_LOCAL_REVIEW.md, MASTER_BASELINE_V0.3.md,
+REVIEW_R3_RESPONSE.md, DECISION_LOG_R2_R3.md và toàn bộ docs/. Xem ảnh gốc và
+báo cáo R2 trong inputs/. Package v0.2 trong history giữ nguyên để chạy lại và
+đối chiếu; chỉ dẫn cho phép triển khai trong v0.2 không áp dụng ở vòng này.
+
+Được khảo sát môi trường/repo/CVF, kiểm checksum, chạy kiểm và probe cô lập,
+tạo báo cáo/log. Chưa tạo skeleton ứng dụng, migration, UI hoặc solver production;
+chưa sửa CVF core hay bật Agent mutation. Chưa chốt roadmap/treeview.
+
+Phản biện cụ thể việc tách Technical Proof và MVP nghiệp vụ; mô hình hầm, đơn vị
+hàng, nhiều tầng/phối hợp; profile kê đỡ; nguồn/confirmation từng trường; đề nghị
+integer grams; operator local và review chuyên môn bên ngoài. Không suy kích
+thước, tải đỡ, danh tính nguồn hoặc an toàn từ ảnh. Không ép ống đơn/cuộn vào
+enum bó hàng để làm schema hợp lệ.
+
+Chạy lại kiểm có sẵn, ghi exact commands và actual output. Trả các báo cáo theo
+START_HERE và template, nêu rõ điểm giữ/sửa/hoãn, evidence và quyết định còn cần
+owner/chuyên môn. Khi thiếu một đầu vào, tiếp tục các phần review độc lập.
+
+Kết thúc vòng bằng kết quả phản biện và đề nghị có căn cứ. Chờ kết quả được xử lý
+trước khi chuyển sang xây roadmap/treeview và triển khai.

@@ -1,0 +1,75 @@
+{
+  "packageId": "SCST-REVIEW-0.3",
+  "releaseDate": "2026-10-31",
+  "language": "vi-VN",
+  "status": "REVIEW_BASELINE_FOR_LOCAL_VERIFICATION",
+  "isFinalBaseline": false,
+  "implementationFreezeGranted": false,
+  "nextAction": "LOCAL_REVIEW_ONLY",
+  "entryPoint": "START_HERE_LOCAL_REVIEW.md",
+  "master": "MASTER_BASELINE_V0.3.md",
+  "reviewResponse": "REVIEW_R3_RESPONSE.md",
+  "decisionLog": "DECISION_LOG_R2_R3.md",
+  "normativeAtReviewLevel": [
+    "README.md",
+    "MASTER_BASELINE_V0.3.md",
+    "DECISION_LOG_R2_R3.md",
+    "docs/"
+  ],
+  "legacyReference": {
+    "archive": "history/Steel_Cargo_Stowage_Tool_v0.2_Official_Local_Agent_Package.zip",
+    "sha256": "6f587938f48b24daef5eaf0ba3fcab7532ec0397c3d2f7a39ca2caf686da44df",
+    "unchangedBytes": true,
+    "schemasVersion": "0.2",
+    "referenceOperationalEligible": false,
+    "implementationPermissionOverriddenByReviewOnly": true
+  },
+  "operationalContract": {
+    "requirementsStatus": "SPECIFIED_FOR_REVIEW",
+    "newOperationalSchemasIncluded": false,
+    "productionBackendIncluded": false,
+    "productionSolverIncluded": false,
+    "massPrecisionProposal": "PROPOSED_INTEGER_GRAMS",
+    "roleModelProposal": "LOCAL_OPERATOR_WITH_EXTERNALLY_REVIEWED_EVIDENCE",
+    "scopeOwnerAcceptance": "PENDING_LOCAL_AND_OWNER_REVIEW"
+  },
+  "milestones": {
+    "technicalProofApplication": "NOT_EVALUATED",
+    "businessMVP": "NOT_EVALUATED",
+    "fieldPlanApproval": "NOT_GRANTED"
+  },
+  "evidence": {
+    "report": "evidence/R3_VERIFICATION_REPORT.md",
+    "replayReceipt": "evidence/review_replay_receipt.json",
+    "referenceTests": 86,
+    "referenceFailures": 0,
+    "referenceErrors": 0,
+    "referenceSkipped": 0,
+    "probeObservations": 5,
+    "schemaProbes": 4,
+    "schemaAcceptance": [
+      true,
+      true,
+      true,
+      false
+    ],
+    "newProductionTests": 0,
+    "sourceRegister": "evidence/SOURCE_REGISTER.json",
+    "r1VariantStatus": "PENDING_ALTERNATE_SOURCE_BYTES_OR_SHA"
+  },
+  "futureAcceptance": {
+    "MB": 14,
+    "ADM": 12,
+    "ER": 9,
+    "legacyLAT": 25,
+    "countedAsExecutedTests": false
+  },
+  "integrity": {
+    "algorithm": "SHA-256",
+    "manifest": "FILE_CHECKSUMS.sha256",
+    "excludeSelf": true,
+    "verificationCommand": "python tooling/verify_package.py",
+    "authorSignature": false
+  },
+  "roadmapAndImplementationTreeview": "DEFERRED_UNTIL_LOCAL_REVIEW_RESOLVED"
+}

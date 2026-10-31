@@ -1,0 +1,12 @@
+{
+  "observationsReproduced": true,
+  "probeCount": 5,
+  "schemaAcceptance": [
+    true,
+    true,
+    true,
+    false
+  ],
+  "operationalEligible": false,
+  "receipt": "/workspace/scratch/76105b566a46/r3_final_replay/probes/r2_contract_probe_receipt.json"
+}

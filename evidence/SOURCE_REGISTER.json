@@ -1,0 +1,43 @@
+{
+  "packageId": "SCST-REVIEW-0.3",
+  "registeredDate": "2026-10-31",
+  "items": [
+    {
+      "path": "inputs/SCST_v0.2_INDEPENDENT_R2_AUDIT.md",
+      "bytes": 6618,
+      "sha256": "a64c1f3cc228bda0349fbf5bf3e143bd7aaad12e802d495aeaa7dd6ed3f1463a",
+      "copiedWithoutTransformation": true,
+      "role": "USER_SUPPLIED_REVIEW_INPUT"
+    },
+    {
+      "path": "inputs/photos/1.jpg",
+      "bytes": 722963,
+      "sha256": "2a2ea8afd1400763efbfbcda88eaa0f9712a597f95450814212144f3801104e2",
+      "copiedWithoutTransformation": true,
+      "role": "USER_SUPPLIED_REVIEW_INPUT"
+    },
+    {
+      "path": "inputs/photos/2.jpg",
+      "bytes": 592494,
+      "sha256": "213b5b73bed6ecee4570032c9352adafb0196f01d59e6b4dd9aeed6f6dd150e9",
+      "copiedWithoutTransformation": true,
+      "role": "USER_SUPPLIED_REVIEW_INPUT"
+    },
+    {
+      "path": "inputs/photos/3.jpg",
+      "bytes": 520175,
+      "sha256": "ebc10f4eee3f2b5a6a20898f4ef065830b8aaa3eded8fde0921f01c448254922",
+      "copiedWithoutTransformation": true,
+      "role": "USER_SUPPLIED_REVIEW_INPUT"
+    },
+    {
+      "path": "history/Steel_Cargo_Stowage_Tool_v0.2_Official_Local_Agent_Package.zip",
+      "bytes": 328257,
+      "sha256": "6f587938f48b24daef5eaf0ba3fcab7532ec0397c3d2f7a39ca2caf686da44df",
+      "copiedWithoutTransformation": true,
+      "role": "HISTORICAL_TECHNICAL_REFERENCE"
+    }
+  ],
+  "photoInterpretation": "Business reference only; no dimensions, masses, safe capacities, source dates or voyage identity inferred from photographs",
+  "alternateR1Variant": "PENDING_ALTERNATE_SOURCE_BYTES_OR_SHA"
+}

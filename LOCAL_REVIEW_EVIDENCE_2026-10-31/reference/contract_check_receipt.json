@@ -1,0 +1,422 @@
+{
+  "schemaVersion": "0.2",
+  "receiptKind": "CONTRACT_CHECKS_ONLY",
+  "testOnly": true,
+  "operationalEligible": false,
+  "timestamp": "2026-10-31T09:07:26.886599+00:00",
+  "command": [
+    "C:\\Users\\DELL\\AppData\\Local\\Temp\\SCST-local-review-20261031-160717\\env\\Scripts\\python.exe",
+    "C:\\Users\\DELL\\AppData\\Local\\Temp\\SCST-local-review-20261031-160717\\replay\\frozen_v02\\Steel_Cargo_Stowage_Tool_v0.2_Local_Agent_Package\\tests\\run_all.py",
+    "--output",
+    "C:\\Users\\DELL\\AppData\\Local\\Temp\\SCST-local-review-20261031-160717\\replay\\reference"
+  ],
+  "runtime": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "jsonschema": "4.26.0"
+  },
+  "summary": {
+    "testsRun": 86,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "successful": true
+  },
+  "cases": [
+    {
+      "testCaseId": "test_canonical.CanonicalTests.test_array_order_is_semantic",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_canonical.CanonicalTests.test_exact_integer_boundary",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_canonical.CanonicalTests.test_float_and_nonfinite_are_rejected",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_canonical.CanonicalTests.test_key_order_has_same_hash",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_canonical.CanonicalTests.test_non_ascii_key_is_rejected",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_canonical.CanonicalTests.test_one_kilogram_changes_hash",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_canonical.CanonicalTests.test_one_millimetre_changes_hash",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_canonical.CanonicalTests.test_published_vectors",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_canonical.CanonicalTests.test_unicode_values_are_preserved_as_utf8",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_canonical.CanonicalTests.test_unpaired_surrogate_is_rejected",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R01_mass_exact_limit_passes_arithmetic",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R01_one_kg_over_limit_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R01_voyage_limit_cannot_exceed_certificate",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R02_existing_cargo_inside_target_scope_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R02_target_hold_not_confirmed_empty_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R03_lower_profile_height_applies_to_upper_descendants",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R03_no_layered_gate_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R03_partial_support_footprint_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R03_profile_outside_region_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R03_revoked_profile_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R03_single_layer_lower_profile_cannot_support_upper_cargo",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R03_support_cycle_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R03_support_descendant_mass_limit_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R03_supported_mass_includes_every_upper_tier",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R03_synthetic_two_tier_full_base_math",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R03_two_versions_of_same_profile_are_ambiguous",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R03_wrong_profile_cargo_type_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R04_false_hard_pass_aggregate_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R04_false_not_applicable_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R04_field_review_must_cover_engineering_checks",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R04_handoff_event_cannot_reuse_rejected_selection",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R04_mandatory_rule_cannot_be_disabled",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R04_omitted_rule_outcome_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R04_unknown_hard_cannot_be_selected",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R05_actual_overlap_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R05_box_boundary_one_mm_out_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R05_box_exact_boundary_passes",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R05_clearance_cannot_remove_whole_hold",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R05_excluded_zone_intersection_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R05_lateral_gap_exact_boundary_passes",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R05_lateral_gap_one_mm_short_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R05_yaw_90_changes_occupied_dimensions",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R05_yaw_must_be_permitted_by_profile",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R06_duplicate_record_identity_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R06_evidence_hash_is_checked_against_bytes",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R06_manual_edit_has_new_plan_and_preserves_original_run",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R06_manual_parent_cannot_be_from_different_case",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R06_manual_validation_cannot_reuse_origin_run_binding",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R06_old_receipt_cannot_attach_to_new_plan_version",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R06_stale_top_level_ref_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R06_tampered_content_without_rehash_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R07_base_dunnage_elevation_is_not_ignored",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R07_dunnage_can_make_height_infeasible",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R07_partial_plan_keeps_new_dunnage_reserve",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R08_candidate_contradicts_proven_infeasible",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R08_partial_all_or_none_group_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R08_timeout_cannot_claim_infeasible",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R08_timeout_with_candidate_is_not_proof",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R08_unvalidated_candidate_cannot_be_marked_validated",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R08_wrong_required_fulfillment_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R09_duplicate_cargo_ids_fail",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R09_no_silent_missing_cargo",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R09_placed_and_unplaced_cannot_overlap",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R09_unknown_placed_cargo_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R09_wrong_declared_manifest_total_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R09_wrong_receipt_mass_fails",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R11_certificate_end_date_is_inclusive",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R11_certificate_must_cover_end_of_case",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R11_restored_old_certificate_cannot_cover_new_case",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R12_reference_cannot_fabricate_runtime_pass",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_R13_future_rule_does_not_become_active",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_evidence_path_cannot_escape_fixture_directory",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_reference_fixture_is_mathematically_consistent_but_not_operational",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.DomainTests.test_reference_mode_is_never_a_production_authorizer",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.SchemaTests.test_R01_mixed_gross_tonnage_kg_field_rejected",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.SchemaTests.test_R03_support_capacity_basis_is_required",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.SchemaTests.test_R05_trapezoid_is_not_silently_enabled",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.SchemaTests.test_R06_loading_case_version_is_representable",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.SchemaTests.test_R06_plan_cannot_contain_its_own_hash_or_lifecycle_status",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.SchemaTests.test_R09_fractional_kg_cannot_be_truncated_by_schema",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.SchemaTests.test_R10_incomplete_intake_draft_is_representable",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.SchemaTests.test_R11_invalid_date_format_is_rejected",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.SchemaTests.test_R11_safety_certificate_without_expiry_is_rejected",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.SchemaTests.test_R11_timestamp_format_is_checked_without_optional_packages",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.SchemaTests.test_all_definitions_compile",
+      "verdict": "PASS"
+    },
+    {
+      "testCaseId": "test_contracts.SchemaTests.test_bundle_and_all_content_fixtures",
+      "verdict": "PASS"
+    }
+  ],
+  "inputFileSha256": {
+    "contracts/schemas/common.schema.json": "3a49116e3eb4fba390d1fe391c460ae1698a926e6fc990933ec262171e665c1a",
+    "contracts/schemas/decision_receipt.schema.json": "11d62f64bb75f4db52315a203ea0bacf8ac58c359ffa5d49443fabe50fd77c06",
+    "contracts/schemas/fixture_bundle.schema.json": "7bd955e75066d3dab9855f9032265dcf48ded2434c5e268a6a7b95c8516e561e",
+    "contracts/schemas/hold_profile.schema.json": "b2698b834718da2b6f5624063d00cec84af7bf1490ea9c8521e553547a911baf",
+    "contracts/schemas/intake_draft.schema.json": "0252752ecd1e5e179da62bbbe62e83656fd69ac564c1774ca70ccfd16e063a00",
+    "contracts/schemas/lifecycle_event.schema.json": "8f460b8ef4cb5e55002ac2a9f8edb45350714de4ef43bff48afd678767c51576",
+    "contracts/schemas/loading_case.schema.json": "e3178f49dfffc70ecd14dd34fe715b3ba0be9068d0fd7190781de1a5e9165e41",
+    "contracts/schemas/manifest.schema.json": "ff05e3bacc3457204ef85108dd7a68631ce697c0e51a5703f7a7913749bfb864",
+    "contracts/schemas/optimization_run.schema.json": "c4c33e108aa63475f11336e6cf0fc8ae4ca6c85f04c9036f1aaff2f110698ddd",
+    "contracts/schemas/plan_content.schema.json": "c2130bdf83a922d6039b21e1ecd3d6feddf0f4a238242345d5f2d69443f75aae",
+    "contracts/schemas/rule_set.schema.json": "987170099c57f5d57d8a145401d3834db04df3e50e100b4fa0c1bfaad26be1c6",
+    "contracts/schemas/support_profile.schema.json": "7954a0ac08b8906ce516e0e3dd4dfbf4a2ebb5bb38774989d51ecb752ddf6c06",
+    "contracts/schemas/validation_receipt.schema.json": "6b9c9b54f0c94f45dbbffbedab9056359b23334a0e54e6a3a03166f56b04dff2",
+    "contracts/schemas/vessel_profile.schema.json": "91716dd2975e5179411cf71499c00f5aa18fbe52f4931ef9fc76f6474af5f09f",
+    "tests/fixtures/decision_receipt.json": "cdfe4f1133d1691dbacb38c58cd7e36253ade7d1f0ab860b835b5916e90ab359",
+    "tests/fixtures/hold_profile.json": "eed768eb334d7d6c9093a2b07d76b701c83fb6a5f659e87a8c83b1a9f45fff11",
+    "tests/fixtures/intake_draft.json": "fd99f25a73358f2a79874f17babe1a5637e072ab57ea76236d064db2bb4d11bf",
+    "tests/fixtures/lifecycle_event.json": "66cd42529d0dc29d293f4c07549e56b941bd5acd4144f36b5383d1b2070448f1",
+    "tests/fixtures/loading_case.json": "7c76a3425e036cdab0e6eb60cca4d615e17bccc7e2045051196fe45c4c104906",
+    "tests/fixtures/manifest.json": "1e57e8945c3467116ae0b3a0fb51246d4e93f73c9c1c243ca1c1c98f1c96c6d9",
+    "tests/fixtures/optimization_run.json": "827eeea2742a65ae41ef888ac0c5ee69ea7569a71a64141e1c285fea348576f6",
+    "tests/fixtures/plan_content.json": "eeaae4c072bc416178b912b53bfdfb441ccf7985f09d2f41701ad9c01ead5728",
+    "tests/fixtures/rule_set.json": "580d6efe7057451cb6d6c28fe3b927ee6346cf80414ddc442d646fb7226cabee",
+    "tests/fixtures/support_profile.json": "ef996746a930f46c84a3b80f33a91da3e46e908e2c46b1a312557816b404ecb7",
+    "tests/fixtures/valid_bundle.json": "be57b7ffe46c33f674686c9349d4ba2b3a8e4e4cc32be09562e1fcde1589b360",
+    "tests/fixtures/validation_receipt.json": "17b06259df945e9666c9bc9733dc7c3a481b6e6f2e9232bead26920bab7bf9bf",
+    "tests/fixtures/vessel_profile.json": "d6227760f7a465fc9f3e2aa243602fb3d2a9523de20386c7538c13257d0b55be",
+    "reference/__init__.py": "6c48d067d03cbd4cd044f250762baf8bb7f1f4a095015ed8aae44c55c5b12ad9",
+    "reference/canonical.py": "e90e90bf62d5ef49b60414eaf65c6d66e824e08233a2cda3691322ab8e8c4394",
+    "reference/hash_test_vectors.json": "417d7955b398654626b310319b9c88e9d683b470372d6fcb9b5fc7de1d506487",
+    "reference/README.md": "d6907a49b34b58b058d00559a69ea64c4c3378f0fed64fa50e4de051862a2b04",
+    "reference/validator.py": "32a70b37335832db8dd22515ac7b6d68210d71ee892e53ef01a2e1f14e40b497",
+    "tests/helpers.py": "0ac34611c56f9940f4d9a9170253c3489f132b9c8b91a6692be275d88a425bf1",
+    "tests/run_all.py": "ab80da394c4b5ee2523eb0ca5f612d653a57c27ff447585ace9627bab21066b5",
+    "tests/test_canonical.py": "bf7df62b91007f078f1e8927fbd767b9298e70d80cdbe7af83d002a4ebef2af0",
+    "tests/test_contracts.py": "03a625c98bc0ce7d5ecedc40388a9a60745a97f085e5b780bfd958625fd9ffd0"
+  },
+  "notEvaluated": [
+    "Production backend authentication and authorization",
+    "CVF source compatibility and running bridge",
+    "Packing solver correctness or optimality",
+    "Real vessel data, support engineering, stability, hull and local loads",
+    "Field approval, crane access, operational loading sequence",
+    "Database crash recovery, backup and restore runtime"
+  ],
+  "limitations": [
+    "Synthetic fixtures only",
+    "A reference arithmetic/hash check cannot authenticate actor statements",
+    "Passing tests do not mark any production gate as PASS"
+  ]
+}

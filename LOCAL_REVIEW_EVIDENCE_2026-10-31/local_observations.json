@@ -1,0 +1,329 @@
+{
+  "kind": "LOCAL_READ_ONLY_REVIEW_OBSERVATIONS",
+  "capturedAt": "2026-10-31T16:15:24.173087+07:00",
+  "commands": [
+    {
+      "checkedAt": "2026-10-31T16:15:23.920837+07:00",
+      "cwd": "D:\\UNG DUNG AI\\TOOL AI 2026\\CVF-Workspace\\Cargo_Stowage_Tool",
+      "command": [
+        "C:\\Users\\DELL\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "tooling/verify_package.py"
+      ],
+      "exitCode": 0,
+      "stdout": "PASS: 35 listed release files match their SHA-256 checksums.\nChecksum integrity is not proof of author identity, runtime correctness, or operational eligibility.\n",
+      "stderr": ""
+    },
+    {
+      "checkedAt": "2026-10-31T16:15:23.956958+07:00",
+      "cwd": "D:\\UNG DUNG AI\\TOOL AI 2026\\CVF-Workspace\\Cargo_Stowage_Tool",
+      "command": [
+        "git",
+        "rev-parse",
+        "--show-toplevel"
+      ],
+      "exitCode": 128,
+      "stdout": "",
+      "stderr": "fatal: not a git repository (or any of the parent directories): .git\n"
+    },
+    {
+      "checkedAt": "2026-10-31T16:15:23.994389+07:00",
+      "cwd": "D:\\UNG DUNG AI\\TOOL AI 2026\\CVF-Workspace\\.Controlled-Vibe-Framework-CVF",
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exitCode": 0,
+      "stdout": "15e39450853184eb65dbde73398c69c3171a6241\n",
+      "stderr": ""
+    },
+    {
+      "checkedAt": "2026-10-31T16:15:24.073259+07:00",
+      "cwd": "D:\\UNG DUNG AI\\TOOL AI 2026\\CVF-Workspace\\.Controlled-Vibe-Framework-CVF",
+      "command": [
+        "git",
+        "status",
+        "--porcelain"
+      ],
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "checkedAt": "2026-10-31T16:15:24.114345+07:00",
+      "cwd": "D:\\UNG DUNG AI\\TOOL AI 2026\\CVF-Workspace\\.Controlled-Vibe-Framework-CVF",
+      "command": [
+        "git",
+        "remote",
+        "get-url",
+        "origin"
+      ],
+      "exitCode": 0,
+      "stdout": "https://github.com/Blackbird081/Controlled-Vibe-Framework-CVF.git\n",
+      "stderr": ""
+    },
+    {
+      "checkedAt": "2026-10-31T16:15:24.164171+07:00",
+      "cwd": "D:\\UNG DUNG AI\\TOOL AI 2026\\CVF-Workspace\\.Controlled-Vibe-Framework-CVF",
+      "command": [
+        "git",
+        "cat-file",
+        "-t",
+        "ebf31b9f5c42e4de58f40a434409c3441a5d8383"
+      ],
+      "exitCode": 128,
+      "stdout": "",
+      "stderr": "fatal: git cat-file: could not get object info\n"
+    }
+  ],
+  "releaseFiles": [
+    {
+      "path": "DECISION_LOG_R2_R3.md",
+      "bytes": 5725,
+      "expectedSha256": "516a5fefc4dbc9a179a052ec121bf05071207f4f66c5e8ad4966e8fa149438e1",
+      "actualSha256": "516a5fefc4dbc9a179a052ec121bf05071207f4f66c5e8ad4966e8fa149438e1"
+    },
+    {
+      "path": "MASTER_BASELINE_V0.3.md",
+      "bytes": 14030,
+      "expectedSha256": "59060697dde74e4cc21f30d4d3ccb245505e617d1367e111bc909366678ae2be",
+      "actualSha256": "59060697dde74e4cc21f30d4d3ccb245505e617d1367e111bc909366678ae2be"
+    },
+    {
+      "path": "PACKAGE_MANIFEST.json",
+      "bytes": 2383,
+      "expectedSha256": "b529096158acf0348323571dbe529beb33880f42c7b47de90df30f9eaba87ef0",
+      "actualSha256": "b529096158acf0348323571dbe529beb33880f42c7b47de90df30f9eaba87ef0"
+    },
+    {
+      "path": "PROMPT_LOCAL_REVIEW.txt",
+      "bytes": 1756,
+      "expectedSha256": "ebf9007b2c3bb86e1f798c4c52a365f36a7c34e3c5d1e04e4c0a745a94b151a8",
+      "actualSha256": "ebf9007b2c3bb86e1f798c4c52a365f36a7c34e3c5d1e04e4c0a745a94b151a8"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3840,
+      "expectedSha256": "de18f3c2b2eddfda451ef2f52d937ddb73a08dc7037a702cb3facb46e2c89daf",
+      "actualSha256": "de18f3c2b2eddfda451ef2f52d937ddb73a08dc7037a702cb3facb46e2c89daf"
+    },
+    {
+      "path": "REVIEW_R3_RESPONSE.md",
+      "bytes": 14281,
+      "expectedSha256": "185a976b1811c0e290e24e62e2e07dddf711becee0198cd0379aa3ca2f8efb43",
+      "actualSha256": "185a976b1811c0e290e24e62e2e07dddf711becee0198cd0379aa3ca2f8efb43"
+    },
+    {
+      "path": "START_HERE_LOCAL_REVIEW.md",
+      "bytes": 4103,
+      "expectedSha256": "12ded81569970227967ec599b21d804b1291be6dbb73dfd4bfb4e3c1246d4051",
+      "actualSha256": "12ded81569970227967ec599b21d804b1291be6dbb73dfd4bfb4e3c1246d4051"
+    },
+    {
+      "path": "docs/01_MILESTONES_AND_ACCEPTANCE.md",
+      "bytes": 9220,
+      "expectedSha256": "722bd5a56a498f29251cd80c7e2c190b7a527ed50649b9d988b7f3e072ab1b57",
+      "actualSha256": "722bd5a56a498f29251cd80c7e2c190b7a527ed50649b9d988b7f3e072ab1b57"
+    },
+    {
+      "path": "docs/02_OPERATIONAL_MODEL.md",
+      "bytes": 16005,
+      "expectedSha256": "2febd50cb4713ef26ec09e49497b9ca646f8e17ac7de746511d9265fea4f75cb",
+      "actualSha256": "2febd50cb4713ef26ec09e49497b9ca646f8e17ac7de746511d9265fea4f75cb"
+    },
+    {
+      "path": "docs/03_OPERATIONAL_DATA_AND_PROVENANCE.md",
+      "bytes": 15363,
+      "expectedSha256": "2f6158e0da4c404628d34d53a8c3f7d452bb62ea54ac541e5e23322545dbe8f0",
+      "actualSha256": "2f6158e0da4c404628d34d53a8c3f7d452bb62ea54ac541e5e23322545dbe8f0"
+    },
+    {
+      "path": "docs/04_ROLES_AND_EXTERNAL_REVIEW.md",
+      "bytes": 11512,
+      "expectedSha256": "bd72f6177b6300dcfca2bd33317b44a98cade36c5c442dd488e5e2b39cf66653",
+      "actualSha256": "bd72f6177b6300dcfca2bd33317b44a98cade36c5c442dd488e5e2b39cf66653"
+    },
+    {
+      "path": "docs/05_PHOTO_OBSERVATIONS.md",
+      "bytes": 8636,
+      "expectedSha256": "9ec758f248777b738b4cfe6f4c9e2b81528e5a00cadb5a026036615816f306da",
+      "actualSha256": "9ec758f248777b738b4cfe6f4c9e2b81528e5a00cadb5a026036615816f306da"
+    },
+    {
+      "path": "docs/06_SOURCE_PROVENANCE.md",
+      "bytes": 5539,
+      "expectedSha256": "ec7fdb530bf6c7a309265959e6c8670f08484232ff33966725f1f8dae24b3c1a",
+      "actualSha256": "ec7fdb530bf6c7a309265959e6c8670f08484232ff33966725f1f8dae24b3c1a"
+    },
+    {
+      "path": "docs/07_SOURCES_AND_APPLICABILITY.md",
+      "bytes": 4189,
+      "expectedSha256": "8592daf5d7ac3c3f74b9e2cf1eec80e01cbece381dfe8add6feeb1fb5ddf0e19",
+      "actualSha256": "8592daf5d7ac3c3f74b9e2cf1eec80e01cbece381dfe8add6feeb1fb5ddf0e19"
+    },
+    {
+      "path": "evidence/R3_VERIFICATION_REPORT.md",
+      "bytes": 5307,
+      "expectedSha256": "93c2f7287456ed59ea7a4889e89e67221efe1b0bd7a0beb8f42cf6a45938dcb5",
+      "actualSha256": "93c2f7287456ed59ea7a4889e89e67221efe1b0bd7a0beb8f42cf6a45938dcb5"
+    },
+    {
+      "path": "evidence/SOURCE_REGISTER.json",
+      "bytes": 1593,
+      "expectedSha256": "15388293be5284ceca7d95c1951f31580d9fe95cd257862bbdc355c6860a03b1",
+      "actualSha256": "15388293be5284ceca7d95c1951f31580d9fe95cd257862bbdc355c6860a03b1"
+    },
+    {
+      "path": "evidence/available_provenance_receipt.json",
+      "bytes": 2597,
+      "expectedSha256": "844a903393b746f3cb8de4e4a6cf141d789776da7d3c0830e7d65323cf2068d6",
+      "actualSha256": "844a903393b746f3cb8de4e4a6cf141d789776da7d3c0830e7d65323cf2068d6"
+    },
+    {
+      "path": "evidence/r2_contract_probe_receipt.json",
+      "bytes": 6583,
+      "expectedSha256": "739d7b4b7721598aa7c0eabd3df150768e8c6910c1b2d4aa5167574555979941",
+      "actualSha256": "739d7b4b7721598aa7c0eabd3df150768e8c6910c1b2d4aa5167574555979941"
+    },
+    {
+      "path": "evidence/r2_contract_probes.log",
+      "bytes": 259,
+      "expectedSha256": "e76bcc5121a0c93ac2249d31a9dca146c555efee4163c465bbf7578614fc8276",
+      "actualSha256": "e76bcc5121a0c93ac2249d31a9dca146c555efee4163c465bbf7578614fc8276"
+    },
+    {
+      "path": "evidence/review_replay_receipt.json",
+      "bytes": 3096,
+      "expectedSha256": "a7988f08bc7b3d79bd21125f652457f350a9a13dfa983a9e1141d31c47d617b3",
+      "actualSha256": "a7988f08bc7b3d79bd21125f652457f350a9a13dfa983a9e1141d31c47d617b3"
+    },
+    {
+      "path": "evidence/v02_checksum.log",
+      "bytes": 162,
+      "expectedSha256": "4890f32b6062576dd2477784812f7f8b83eba6a9c08f2099b64f3a8ad628f2b8",
+      "actualSha256": "4890f32b6062576dd2477784812f7f8b83eba6a9c08f2099b64f3a8ad628f2b8"
+    },
+    {
+      "path": "evidence/v02_contract_check_receipt.json",
+      "bytes": 16573,
+      "expectedSha256": "4116e2e53c7e994f1327873ab07947c28d3011c29c68ceb90d2301bd0219ead1",
+      "actualSha256": "4116e2e53c7e994f1327873ab07947c28d3011c29c68ceb90d2301bd0219ead1"
+    },
+    {
+      "path": "evidence/v02_contract_checks.log",
+      "bytes": 10725,
+      "expectedSha256": "3f9a664e0d1912c8550b69783c79c5ee96c72b4935f5b90f26942966e7614e59",
+      "actualSha256": "3f9a664e0d1912c8550b69783c79c5ee96c72b4935f5b90f26942966e7614e59"
+    },
+    {
+      "path": "evidence/v02_reference_tests.log",
+      "bytes": 10890,
+      "expectedSha256": "a2427fca53227b626e91438fa56a940da4b383d02a83b912f87f0ba244c16fc4",
+      "actualSha256": "a2427fca53227b626e91438fa56a940da4b383d02a83b912f87f0ba244c16fc4"
+    },
+    {
+      "path": "history/Steel_Cargo_Stowage_Tool_v0.2_Official_Local_Agent_Package.zip",
+      "bytes": 328257,
+      "expectedSha256": "6f587938f48b24daef5eaf0ba3fcab7532ec0397c3d2f7a39ca2caf686da44df",
+      "actualSha256": "6f587938f48b24daef5eaf0ba3fcab7532ec0397c3d2f7a39ca2caf686da44df"
+    },
+    {
+      "path": "inputs/SCST_v0.2_INDEPENDENT_R2_AUDIT.md",
+      "bytes": 6618,
+      "expectedSha256": "a64c1f3cc228bda0349fbf5bf3e143bd7aaad12e802d495aeaa7dd6ed3f1463a",
+      "actualSha256": "a64c1f3cc228bda0349fbf5bf3e143bd7aaad12e802d495aeaa7dd6ed3f1463a"
+    },
+    {
+      "path": "inputs/photos/1.jpg",
+      "bytes": 722963,
+      "expectedSha256": "2a2ea8afd1400763efbfbcda88eaa0f9712a597f95450814212144f3801104e2",
+      "actualSha256": "2a2ea8afd1400763efbfbcda88eaa0f9712a597f95450814212144f3801104e2"
+    },
+    {
+      "path": "inputs/photos/2.jpg",
+      "bytes": 592494,
+      "expectedSha256": "213b5b73bed6ecee4570032c9352adafb0196f01d59e6b4dd9aeed6f6dd150e9",
+      "actualSha256": "213b5b73bed6ecee4570032c9352adafb0196f01d59e6b4dd9aeed6f6dd150e9"
+    },
+    {
+      "path": "inputs/photos/3.jpg",
+      "bytes": 520175,
+      "expectedSha256": "ebc10f4eee3f2b5a6a20898f4ef065830b8aaa3eded8fde0921f01c448254922",
+      "actualSha256": "ebc10f4eee3f2b5a6a20898f4ef065830b8aaa3eded8fde0921f01c448254922"
+    },
+    {
+      "path": "probes/replay_r2_contract_probes.py",
+      "bytes": 4930,
+      "expectedSha256": "c0bab2d3a3c1f19476bf980b6c33b67046fdf788bc5ea3fee503ccfa0487fc7d",
+      "actualSha256": "c0bab2d3a3c1f19476bf980b6c33b67046fdf788bc5ea3fee503ccfa0487fc7d"
+    },
+    {
+      "path": "requirements_review.txt",
+      "bytes": 19,
+      "expectedSha256": "756cc9e506ae4ee1a6f6c0507088b5cfc0dc8ba350fb2d2d46f1ffa72033adb6",
+      "actualSha256": "756cc9e506ae4ee1a6f6c0507088b5cfc0dc8ba350fb2d2d46f1ffa72033adb6"
+    },
+    {
+      "path": "templates/CASE_INTAKE.md",
+      "bytes": 2851,
+      "expectedSha256": "ded2d0dc49f49fc0684f41c77fc8fc2bb0460b795a49c2d00bfb82726022dcdd",
+      "actualSha256": "ded2d0dc49f49fc0684f41c77fc8fc2bb0460b795a49c2d00bfb82726022dcdd"
+    },
+    {
+      "path": "templates/LOCAL_REVIEW_RESPONSE.md",
+      "bytes": 2669,
+      "expectedSha256": "6e4b80925ca8bcbbde93aa6dfd6d7dfcdb374d74c73855d1d8ca481971557a76",
+      "actualSha256": "6e4b80925ca8bcbbde93aa6dfd6d7dfcdb374d74c73855d1d8ca481971557a76"
+    },
+    {
+      "path": "tooling/replay_review_checks.py",
+      "bytes": 4099,
+      "expectedSha256": "92fa523531f6bbcd1aa2280fea292b898a46b1a75db5dc79de7ab80d0e9c292d",
+      "actualSha256": "92fa523531f6bbcd1aa2280fea292b898a46b1a75db5dc79de7ab80d0e9c292d"
+    },
+    {
+      "path": "tooling/verify_package.py",
+      "bytes": 1509,
+      "expectedSha256": "03eb032ec166575fda2b445e8d15fbcd1a4105d2b631c9839b448dc5c349a683",
+      "actualSha256": "03eb032ec166575fda2b445e8d15fbcd1a4105d2b631c9839b448dc5c349a683"
+    }
+  ],
+  "releaseChecksumManifestSha256": "e5e1fd362aeb52510cc0ba7a020d51edecdda14b320d05868e18ec557c970559",
+  "historicalHashes": [
+    {
+      "location": "Steel_Cargo_Stowage_Tool_v0.2_Local_Agent_Package/history/CVF_Steel_Cargo_Independent_Review_R1.docx",
+      "bytes": 59296,
+      "sha256": "adf11a5682ea541d01a5b3ed348c6274938532a45ced23c49e91fa6ea6a08d8f"
+    },
+    {
+      "location": "Steel_Cargo_Stowage_Tool_v0.2_Local_Agent_Package/history/Steel_Cargo_Stowage_Tool_MVP_v0.1_Design_Baseline.zip",
+      "bytes": 43219,
+      "sha256": "511bd790a07b880c734df5d8e730c3a5a71c00f1affc64c01a92159a76ceda9e"
+    },
+    {
+      "location": "Steel_Cargo_Stowage_Tool_v0.2_Local_Agent_Package/history/CVF_Steel_Cargo_Review_R1_Local_Handoff.zip :: CVF_Steel_Cargo_Review_R1/CVF_Steel_Cargo_Independent_Review_R1.docx",
+      "bytes": 59296,
+      "sha256": "adf11a5682ea541d01a5b3ed348c6274938532a45ced23c49e91fa6ea6a08d8f"
+    }
+  ],
+  "publicCoreLicenseText": "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International\n(CC BY-NC-ND 4.0)\n\nCopyright (c) 2026 Blackbird081 — CVF (Controlled Vibe Framework)\n\nYou are free to:\n  - Share — copy and redistribute the material in any medium or format\n\nUnder the following terms:\n  - Attribution — You must give appropriate credit, provide a link to the\n    license, and indicate if changes were made.\n  - NonCommercial — You may not use the material for commercial purposes.\n  - NoDerivatives — If you remix, transform, or build upon the material,\n    you may not distribute the modified material.\n  - No additional restrictions — You may not apply legal terms or\n    technological measures that legally restrict others from doing anything\n    the license permits.\n\nFull license text:\nhttps://creativecommons.org/licenses/by-nc-nd/4.0/legalcode\n\nDISCLAIMER:\nTHE MATERIAL IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR\nANY CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM THE USE OF THIS MATERIAL.\n\n---\n\nThis license applies to the entire repository, including all versions\n(v1.0, v1.1, v1.2+), EXTENSIONS/, docs/, governance/, and tools/.\n",
+  "publicCoreRootPackage": {
+    "devDependencies": {
+      "@types/node": "^25.3.0"
+    }
+  },
+  "evidenceCopy": {
+    "originalReplayDirectory": "C:\\Users\\DELL\\AppData\\Local\\Temp\\SCST-local-review-20261031-160717\\replay",
+    "copiedBytesUnchanged": true,
+    "originalAbsolutePathsInReceiptsPreserved": true
+  },
+  "limitations": [
+    "No production backend, solver, UI, DB or CVF integration executed",
+    "Pinned Provenance source unavailable in the inspected public clone",
+    "Public checkout license and root package do not establish pinned-source compatibility",
+    "New review artifacts are additions outside the frozen release checksum list"
+  ]
+}
