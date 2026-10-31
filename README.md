@@ -18,6 +18,20 @@ Owner đã **thống nhất hướng tổng thể** ngày 31-10-2026. Phần ti�
 ```text
 Cargo_Stowage_Tool/
 ├── README.md                   # cửa vào project
+├── apps/frontend/src/          # giao diện (khung M1, chưa có code)
+│   ├── features/               # nhập hàng/hầm, phương án, chỉnh/so sánh
+│   ├── viewer-3d/              # hiển thị cùng dữ liệu phương án
+│   └── api/                    # giao tiếp backend theo contract
+├── services/backend/app/       # backend (khung M1, chưa có code)
+│   ├── api/                    # nhận thao tác, trả dữ liệu/kết quả kiểm
+│   ├── domain/
+│   │   ├── model/              # hàng, hầm, phương án, đơn vị tính
+│   │   ├── geometry/           # biên, va chạm, tọa độ
+│   │   └── rules/              # bộ kiểm tra, độc lập với bộ xếp
+│   └── adapters/               # lưu local, import/export (dùng từ M2)
+├── contracts/                  # dữ liệu/API, đơn vị tính, phiên bản
+├── tests/                      # kiểm nghiệp vụ, tích hợp, luồng dùng
+├── tooling/                    # lệnh chạy local
 ├── docs/
 │   ├── project/                # trạng thái và đầu vào định hướng
 │   ├── reference/              # nguồn còn dùng để tham khảo
@@ -31,6 +45,6 @@ Cargo_Stowage_Tool/
 └── knowledge/                  # vùng knowledge của CVF
 ```
 
-Đây là cây **hồ sơ đang có**, chưa phải treeview kiến trúc app tương lai. Các tệp cấu hình CVF/Git ở root và thư mục ẩn được giữ nguyên chức năng.
+Đây là cây **đang có trên đĩa**. Các thư mục app mới là khung M1 theo [treeview của roadmap](docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md), mỗi thư mục có README ghi trách nhiệm, chưa có code. `domain/planner/` và `runtime-data/` được tạo ở M2, phần đóng gói ở M5. Các tệp cấu hình CVF/Git ở root và thư mục ẩn được giữ nguyên chức năng.
 
 Thứ tự tiếp tục: soạn SPEC M1 → owner thống nhất SPEC → WORK_ORDER cho phép triển khai phần đó theo CVF. Nội dung cũ trong tài liệu nguồn hoặc archive không tự cấp quyền tiếp tục code.

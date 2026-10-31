@@ -5,13 +5,19 @@ Status: ACTIVE
 ## Current State
 
 - Project: Cargo_Stowage_Tool
-- Current mode: BUILD
-- Active phase: BUILD
-- Active role: IMPLEMENTATION_WORKER
-- Next allowed move: BUILD only the M1 folder skeleton under docs/work_orders/SCST_M1_SKELETON.md (folders + README, no code); then REVIEW, close the work order and return to SPEC M1.
+- Current mode: SPEC
+- Active phase: SPEC
+- Active role: SESSION_SYNC_STEWARD
+- Next allowed move: Owner reviews the M1 folder skeleton (work order SCST_M1_SKELETON closed). Then prepare SPEC M1, starting from a gap assessment of the archived trial. Application code stays paused until a further bounded work order.
 - Parked operator checkpoint: Owner review of the skeleton, then owner agreement on SPEC M1 and a separate bounded WORK_ORDER before any application code.
 
-## Tranche SCST-M1-SKELETON dispatch acknowledgment (latest)
+## Tranche SCST-M1-SKELETON result (latest)
+
+- IMPLEMENTATION_WORKER created 11 folders, each with a README, and updated the root README tree. REVIEWER (same agent, R1, not independent) verified criteria 1-3 by script; reviewer-local wording fix in `domain/rules` README. Worker-return, reviewer-fast and pre-commit run before the material commit.
+- Work order closed: `Status: CLOSED (self-reviewed R1, owner checkpoint pending)`; activeWorkOrders cleared. Not done: no code, dependencies, schema, tests, planner/runtime-data, or SPEC M1. M1 row stays NOT_STARTED.
+- Next: owner reviews the skeleton; then SPEC M1 starting from the archived-trial gap assessment.
+
+## Tranche SCST-M1-SKELETON dispatch acknowledgment
 
 - 31-10-2026: owner chose option 1 (create the M1 folder skeleton now, before SPEC M1). Authority: that choice plus agreed roadmap v0.2 / SCST-D001. Risk R1; no provider, credential, network, real data or app code.
 - Rehydrated state, memory, handoff, implementation truth and index before material work; core c4c8767ac8861854f40d466ba338ffd11eb9558e.

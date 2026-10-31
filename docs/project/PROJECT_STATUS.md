@@ -6,7 +6,7 @@ Cập nhật: **31-10-2026**.
 
 Ngày 31-10-2026 owner đã **thống nhất hướng tổng thể (M0)**, ghi tại [quyết định SCST-D001](../decisions/SCST_D001_THONG_NHAT_HUONG_M0_2026-10-31.md). [Roadmap v0.2](../roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md) là căn cứ giữ hướng, đã áp dụng các góp ý của bản đánh giá.
 
-Thống nhất hướng chưa phải nghiệm thu mốc app nào và chưa cấp quyền tiếp tục xây app.
+Đã tạo **khung thư mục M1** theo treeview (11 thư mục, mỗi thư mục có README ghi trách nhiệm, chưa có code) theo [work order SCST_M1_SKELETON](../work_orders/SCST_M1_SKELETON.md), đã đóng. Thống nhất hướng và khung thư mục chưa phải nghiệm thu mốc app nào; chưa có quyền viết code app.
 
 ## Phần còn sử dụng
 
@@ -26,8 +26,8 @@ Các lựa chọn từng được agent ghi trong SPEC/work order M1 chưa đư�
 
 Đã chuyển nguyên source, contract, tests, hướng dẫn và bằng chứng chạy vào [archive/2026-10-31/paused-m1](../../archive/2026-10-31/paused-m1/README.md). Đây là bản thử bị tạm dừng, không phải bản M1 đã được nghiệm thu. Những kết quả test cũ chỉ phản ánh bản thử tại thời điểm chạy.
 
-Không có cây app đang hoạt động ở root và không có server demo được khởi chạy trong lượt dọn dẹp. `IMPLEMENTATION_STATUS.json` không ghi nhận capability ứng dụng đã được chấp nhận.
+Ở root hiện chỉ có khung thư mục M1 (README, chưa có code); không có server demo được khởi chạy. `IMPLEMENTATION_STATUS.json` không ghi nhận capability ứng dụng đã được chấp nhận.
 
 ## Bước tiếp theo
 
-Soạn SPEC M1 để owner xem. Chỉ tiếp tục triển khai khi được cho tiếp tục theo SPEC và WORK_ORDER phù hợp. Không dùng work order M1 trong archive để tự nối lại BUILD.
+Owner xem khung thư mục; sau đó soạn SPEC M1 để owner xem. Chỉ tiếp tục triển khai khi được cho tiếp tục theo SPEC và WORK_ORDER phù hợp. Không dùng work order M1 trong archive để tự nối lại BUILD.

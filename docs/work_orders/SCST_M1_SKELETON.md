@@ -1,6 +1,6 @@
 # SCST M1 — Khung thư mục theo treeview
 
-Status: READY_FOR_DISPATCH
+Status: CLOSED (self-reviewed R1, owner checkpoint pending)
 dispatchKind: INITIAL
 
 Owner: local-development
@@ -153,7 +153,7 @@ Nguồn tiêu chí là bảng mốc của roadmap đã thống nhất. Lát cắ
   "supportingWork": [],
   "conclusions": {
     "tranche": "PENDING",
-    "trancheSummary": "Skeleton slice dispatched",
+    "trancheSummary": "Skeleton created and self-reviewed (R1); owner checkpoint pending; M1 not achieved",
     "trancheEvidence": [],
     "product": "PENDING",
     "productSummary": "No accepted application capability; M1-M5 remain",
@@ -162,3 +162,18 @@ Nguồn tiêu chí là bảng mốc của roadmap đã thống nhất. Lát cắ
   }
 }
 ```
+
+## Kết quả và review
+
+31-10-2026, cùng một local agent (không phải review độc lập, mức R1):
+
+- Dispatch: `f2b688e`, sửa continuity `54f5082` trước BUILD.
+- IMPLEMENTATION_WORKER tạo 11 thư mục, mỗi thư mục một `README.md`, và cập nhật cây trong `README.md` root.
+- REVIEWER kiểm bằng script:
+  - tiêu chí 1: đủ 11 README, không có file khác;
+  - tiêu chí 2: không có thư mục ngoài danh sách, `planner/` và `runtime-data/` không tồn tại;
+  - tiêu chí 3: cây root khớp với thư mục thật, link không hỏng.
+  
+  Tất cả đạt. Reviewer sửa tại chỗ câu chữ README của `domain/rules` (không đổi phạm vi).
+- Tiêu chí 4: catalog hợp lệ; worker-return, reviewer-fast và pre-commit đạt trước commit material.
+- Không có code, dependency hay dữ liệu. M1 vẫn chưa đạt; bước tiếp theo là owner xem khung, rồi SPEC M1.

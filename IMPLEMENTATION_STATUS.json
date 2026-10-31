@@ -1,23 +1,22 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "M1_SKELETON_DISPATCHED",
-  "currentPhase": "BUILD",
+  "overallStatus": "M1_SKELETON_CREATED_SPEC_M1_PENDING",
+  "currentPhase": "SPEC",
   "completedCapabilities": [],
-  "activeWorkOrders": [
-    "docs/work_orders/SCST_M1_SKELETON.md"
-  ],
+  "activeWorkOrders": [],
   "knownLimitations": [
     "Owner agreed overall direction on 31-10-2026 (SCST-D001); roadmap v0.2 is active planning authority, not milestone acceptance.",
     "Application implementation is paused. Previous M1 source and evidence are archived, not accepted capabilities.",
-    "Active work order creates only the M1 folder skeleton (README files, no code). SPEC M1 is still pending."
+    "M1 folder skeleton exists (README files only, no code); it is not an application capability. SPEC M1 is pending; no active work order."
   ],
   "evidence": [
     "docs/project/PROJECT_STATUS.md",
     "archive/2026-10-31/ORGANIZATION_MANIFEST.json",
     "docs/project/ORGANIZATION_VERIFICATION.json",
     "docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md",
-    "docs/decisions/SCST_D001_THONG_NHAT_HUONG_M0_2026-10-31.md"
+    "docs/decisions/SCST_D001_THONG_NHAT_HUONG_M0_2026-10-31.md",
+    "docs/work_orders/SCST_M1_SKELETON.md"
   ],
   "updatedAt": "2026-10-31"
 }

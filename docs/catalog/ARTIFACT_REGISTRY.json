@@ -114,7 +114,7 @@
       "family": "governed_artifact_family",
       "path": "docs/work_orders",
       "status": "ACTIVE",
-      "description": "Work orders."
+      "description": "Work orders; SCST_M1_SKELETON (closed) created the M1 folder skeleton."
     },
     {
       "id": "family-reviews",

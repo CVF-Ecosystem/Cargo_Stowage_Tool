@@ -29,7 +29,7 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 - Reviews and evidence.: `docs/reviews/`
 - Owner-agreed SCST roadmap v0.2 and architecture tree: docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md; next slice SPEC M1.: `docs/roadmaps/`
 - Specifications.: `docs/specs/`
-- Work orders.: `docs/work_orders/`
+- Work orders; SCST_M1_SKELETON (closed) created the M1 folder skeleton.: `docs/work_orders/`
 
 Plans describe intended work. `IMPLEMENTATION_STATUS.json`, source, tests, and
 review evidence determine what is actually implemented.
