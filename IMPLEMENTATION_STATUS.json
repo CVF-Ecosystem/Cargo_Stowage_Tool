@@ -1,14 +1,16 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "ROADMAP_AGREED_SPEC_M1_PENDING",
-  "currentPhase": "DESIGN",
+  "overallStatus": "M1_SKELETON_DISPATCHED",
+  "currentPhase": "BUILD",
   "completedCapabilities": [],
-  "activeWorkOrders": [],
+  "activeWorkOrders": [
+    "docs/work_orders/SCST_M1_SKELETON.md"
+  ],
   "knownLimitations": [
     "Owner agreed overall direction on 31-10-2026 (SCST-D001); roadmap v0.2 is active planning authority, not milestone acceptance.",
     "Application implementation is paused. Previous M1 source and evidence are archived, not accepted capabilities.",
-    "Next slice is SPEC M1; no milestone criteria registry and no active application work order yet."
+    "Active work order creates only the M1 folder skeleton (README files, no code). SPEC M1 is still pending."
   ],
   "evidence": [
     "docs/project/PROJECT_STATUS.md",

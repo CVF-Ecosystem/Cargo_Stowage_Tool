@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "DESIGN",
-  "activePhase": "DESIGN",
+  "currentMode": "BUILD",
+  "activePhase": "BUILD",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -14,9 +14,9 @@
     "FREEZE"
   ],
   "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_V1_2026-10-31.md",
-  "nextAllowedMove": "Owner agreed overall direction (M0, decision SCST-D001); roadmap v0.2 is active. Prepare SPEC M1 as the next slice. Application BUILD remains paused until a bounded work order is authorized.",
-  "parkedOperatorCheckpoint": "Owner agreement on SPEC M1 and separate bounded WORK_ORDER authorization before application BUILD.",
-  "activeRole": "SESSION_SYNC_STEWARD",
+  "nextAllowedMove": "BUILD only the M1 folder skeleton under docs/work_orders/SCST_M1_SKELETON.md (folders + README, no code); then REVIEW, close the work order and return to SPEC M1.",
+  "parkedOperatorCheckpoint": "Owner review of the skeleton, then owner agreement on SPEC M1 and a separate bounded WORK_ORDER before any application code.",
+  "activeRole": "IMPLEMENTATION_WORKER",
   "roleRoute": "SINGLE_AGENT_MULTI_ROLE_ALLOWED",
   "updatedAt": "2026-10-31"
 }

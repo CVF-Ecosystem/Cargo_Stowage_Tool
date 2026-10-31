@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "cvf.milestoneAuthority@1.0.0",
+  "milestones": {
+    "SCST-ROADMAP": {
+      "path": "docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md",
+      "heading": "## Phạm vi và đầu ra từng mốc"
+    }
+  }
+}

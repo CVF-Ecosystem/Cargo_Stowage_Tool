@@ -5,11 +5,19 @@ Status: ACTIVE
 ## Current State
 
 - Project: Cargo_Stowage_Tool
-- Current mode: DESIGN
-- Active phase: DESIGN
-- Active role: SESSION_SYNC_STEWARD
-- Next allowed move: Owner agreed overall direction (M0, decision SCST-D001); roadmap v0.2 is active. Prepare SPEC M1 as the next slice. Application BUILD remains paused until a bounded work order is authorized.
-- Parked operator checkpoint: Owner agreement on SPEC M1 and separate bounded WORK_ORDER authorization before application BUILD.
+- Current mode: BUILD
+- Active phase: BUILD
+- Active role: IMPLEMENTATION_WORKER
+- Next allowed move: BUILD only the M1 folder skeleton under `docs/work_orders/SCST_M1_SKELETON.md` (folders + README, no code); then REVIEW, close the work order and return to SPEC M1.
+- Parked operator checkpoint: Owner review of the skeleton, then owner agreement on SPEC M1 and a separate bounded WORK_ORDER before any application code.
+
+## Tranche SCST-M1-SKELETON dispatch acknowledgment (latest)
+
+- 31-10-2026: owner chose option 1 (create the M1 folder skeleton now, before SPEC M1). Authority: that choice plus agreed roadmap v0.2 / SCST-D001. Risk R1; no provider, credential, network, real data or app code.
+- Rehydrated state, memory, handoff, implementation truth and index before material work; core c4c8767ac8861854f40d466ba338ffd11eb9558e.
+- ORCHESTRATOR bounded the request; WORK_ORDER_AUTHOR wrote `docs/work_orders/SCST_M1_SKELETON.md` (Status READY_FOR_DISPATCH, 11 folders, 30-minute budget) and created `docs/milestone-coverage-authority.json` binding `SCST-ROADMAP` to the roadmap section "## Phạm vi và đầu ra từng mốc". This supersedes the earlier note that the registry waits for SPEC M1.
+- Pre-dispatch gate: first run failed on my own format error (dispatch_continuity surface lacked the "material-SHA marker" wording), fixed in place; rerun PASS 6/6.
+- Material-SHA marker: dispatch commit recorded by COMMIT_STEWARD after this acknowledgment; BUILD begins only after that commit. Next role: IMPLEMENTATION_WORKER.
 
 ## M0 agreement record (latest)
 
