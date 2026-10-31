@@ -17,8 +17,10 @@ export const massLabel = (g: number) =>
     : g > 0 && g < 1_000_000
       ? `${fmt(g / 1000)} kg`
       : `${tonnes(g)} tấn`;
-export const footprint = (u: Unit, p: Placement) =>
-  p.yaw_deg % 180 ? [u.width_mm, u.length_mm] : [u.length_mm, u.width_mm];
+export const dimensions = (u: Unit) => u.dimensions_um ? u.dimensions_um.map(n=>n/1000) : [u.length_mm,u.width_mm,u.height_mm];
+export const footprint = (u: Unit, p: Placement) => {
+  const [length,width]=dimensions(u); return p.yaw_deg % 180 ? [width,length] : [length,width];
+};
 export const kgInput = (grams: number) =>
   `${Math.floor(grams / 1000)}${
     grams % 1000

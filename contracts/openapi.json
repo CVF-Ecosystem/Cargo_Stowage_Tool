@@ -286,6 +286,62 @@
           }
         }
       }
+    },
+    "/api/pipe-list": {
+      "get": {
+        "summary": "Pipe List",
+        "operationId": "pipe_list_api_pipe_list_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PipeLibrary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/pipe-list/preview": {
+      "post": {
+        "summary": "Pipe List Preview",
+        "operationId": "pipe_list_preview_api_pipe_list_preview_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Plan"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Evaluation"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -343,6 +399,40 @@
             "maximum": 1000000000000.0,
             "exclusiveMinimum": 0.0,
             "title": "Mass G"
+          },
+          "dimensions_um": {
+            "anyOf": [
+              {
+                "prefixItems": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "integer"
+                  }
+                ],
+                "type": "array",
+                "maxItems": 3,
+                "minItems": 3
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dimensions Um"
+          },
+          "source_ref": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PipeSourceRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "additionalProperties": false,
@@ -504,6 +594,42 @@
             "const": false,
             "title": "Operational Eligible",
             "default": false
+          },
+          "total_issues": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Issues"
+          },
+          "issues_truncated": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Issues Truncated"
+          },
+          "affected_unit_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Affected Unit Ids"
           }
         },
         "additionalProperties": false,
@@ -682,6 +808,206 @@
         ],
         "title": "OperatingCase"
       },
+      "PipeGroup": {
+        "properties": {
+          "group_id": {
+            "type": "string",
+            "title": "Group Id"
+          },
+          "source_row": {
+            "type": "integer",
+            "title": "Source Row"
+          },
+          "bundle_count": {
+            "type": "integer",
+            "title": "Bundle Count"
+          },
+          "pieces_per_bundle": {
+            "type": "integer",
+            "title": "Pieces Per Bundle"
+          },
+          "dimensions_um": {
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "type": "array",
+            "maxItems": 3,
+            "minItems": 3,
+            "title": "Dimensions Um"
+          },
+          "mass_g": {
+            "type": "integer",
+            "title": "Mass G"
+          },
+          "source_line_t": {
+            "type": "string",
+            "title": "Source Line T"
+          },
+          "source_cbm_m3": {
+            "type": "string",
+            "title": "Source Cbm M3"
+          },
+          "envelope_cbm_m3": {
+            "type": "string",
+            "title": "Envelope Cbm M3"
+          },
+          "dimension_warning": {
+            "type": "boolean",
+            "title": "Dimension Warning"
+          },
+          "issue_codes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Issue Codes"
+          },
+          "outside_diameter_mm": {
+            "type": "string",
+            "title": "Outside Diameter Mm"
+          },
+          "wall_thickness_mm": {
+            "type": "string",
+            "title": "Wall Thickness Mm"
+          }
+        },
+        "type": "object",
+        "required": [
+          "group_id",
+          "source_row",
+          "bundle_count",
+          "pieces_per_bundle",
+          "dimensions_um",
+          "mass_g",
+          "source_line_t",
+          "source_cbm_m3",
+          "envelope_cbm_m3",
+          "dimension_warning",
+          "issue_codes",
+          "outside_diameter_mm",
+          "wall_thickness_mm"
+        ],
+        "title": "PipeGroup"
+      },
+      "PipeLibrary": {
+        "properties": {
+          "dataset_id": {
+            "type": "string",
+            "title": "Dataset Id"
+          },
+          "workbook_sha256": {
+            "type": "string",
+            "title": "Workbook Sha256"
+          },
+          "sheet": {
+            "type": "string",
+            "title": "Sheet"
+          },
+          "assigned_vessel": {
+            "type": "null",
+            "title": "Assigned Vessel"
+          },
+          "mass_basis": {
+            "type": "string",
+            "title": "Mass Basis"
+          },
+          "groups": {
+            "items": {
+              "$ref": "#/components/schemas/PipeGroup"
+            },
+            "type": "array",
+            "title": "Groups"
+          },
+          "source_mass_t": {
+            "type": "string",
+            "title": "Source Mass T"
+          },
+          "calculated_mass_t": {
+            "type": "string",
+            "title": "Calculated Mass T"
+          },
+          "source_cbm_m3": {
+            "type": "string",
+            "title": "Source Cbm M3"
+          },
+          "envelope_cbm_m3": {
+            "type": "string",
+            "title": "Envelope Cbm M3"
+          }
+        },
+        "type": "object",
+        "required": [
+          "dataset_id",
+          "workbook_sha256",
+          "sheet",
+          "assigned_vessel",
+          "mass_basis",
+          "groups",
+          "source_mass_t",
+          "calculated_mass_t",
+          "source_cbm_m3",
+          "envelope_cbm_m3"
+        ],
+        "title": "PipeLibrary"
+      },
+      "PipeSourceRef": {
+        "properties": {
+          "dataset_id": {
+            "type": "string",
+            "const": "BALTIMORE-PIPE-V1-1",
+            "title": "Dataset Id"
+          },
+          "workbook_sha256": {
+            "type": "string",
+            "title": "Workbook Sha256"
+          },
+          "sheet": {
+            "type": "string",
+            "title": "Sheet"
+          },
+          "group_id": {
+            "type": "string",
+            "title": "Group Id"
+          },
+          "source_row": {
+            "type": "integer",
+            "title": "Source Row"
+          },
+          "bundle_index": {
+            "type": "integer",
+            "title": "Bundle Index"
+          },
+          "pieces": {
+            "type": "integer",
+            "title": "Pieces"
+          },
+          "dimension_warning": {
+            "type": "boolean",
+            "title": "Dimension Warning"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "dataset_id",
+          "workbook_sha256",
+          "sheet",
+          "group_id",
+          "source_row",
+          "bundle_index",
+          "pieces",
+          "dimension_warning"
+        ],
+        "title": "PipeSourceRef"
+      },
       "Placement": {
         "properties": {
           "unit_id": {
@@ -747,7 +1073,8 @@
             "type": "string",
             "enum": [
               "scst.m1.v1",
-              "scst.m2a.v1"
+              "scst.m2a.v1",
+              "scst.pipe-list.v1"
             ],
             "title": "Contract Version",
             "default": "scst.m1.v1"
@@ -768,7 +1095,8 @@
                 "type": "string",
                 "enum": [
                   "SYNTHETIC",
-                  "USER_ENTERED"
+                  "USER_ENTERED",
+                  "DOCUMENT_CALCULATED"
                 ]
               },
               {
@@ -787,6 +1115,18 @@
               }
             ]
           },
+          "cargo_dataset": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "BALTIMORE-PIPE-V1-1"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cargo Dataset"
+          },
           "hold": {
             "$ref": "#/components/schemas/Hold"
           },
@@ -798,7 +1138,7 @@
               "$ref": "#/components/schemas/CargoUnit"
             },
             "type": "array",
-            "maxItems": 200,
+            "maxItems": 1076,
             "title": "Units"
           },
           "placements": {
@@ -806,7 +1146,7 @@
               "$ref": "#/components/schemas/Placement"
             },
             "type": "array",
-            "maxItems": 200,
+            "maxItems": 1076,
             "title": "Placements"
           }
         },

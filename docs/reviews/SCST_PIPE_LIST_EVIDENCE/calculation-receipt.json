@@ -1,0 +1,402 @@
+{
+  "status": "PASS",
+  "scope": "Focused quantity, mass, dimensions and CBM calculation verification; not full spreadsheet audit",
+  "manifest_files_verified": 22,
+  "normalized_rebuild_matches_supplied": true,
+  "source_workbook_sha256": "66e51b53b07ea4be550e5705230de060829ff5cff92c8f4b89e36c4069757824",
+  "supported_formula_checks": 174,
+  "formula_mismatches": 0,
+  "groups": 31,
+  "bundles": 1076,
+  "pipes": 21226,
+  "calculated_bundle_basis": "K kg/pipe * L pipes/bundle, exact integer grams; no O/M allocation",
+  "calculated_mass_g": 1125551030,
+  "source_line_mass_t": "1125.5200000000000",
+  "difference_g": 31030,
+  "source_cbm_m3": "1130.969647331560000",
+  "computed_envelope_cbm_m3": "1157.543181057970000000000000000000000000",
+  "cbm_difference_m3": "26.573533726410000000000000000000000000",
+  "exact_micrometre_dimensions": 93,
+  "fractional_millimetre_dimensions": 55,
+  "dimension_review_rows": [
+    22,
+    31,
+    32
+  ],
+  "dimension_review_bundles": 16,
+  "hull_glb_byte_identical": true,
+  "rows": [
+    {
+      "row": 2,
+      "bundles": 160,
+      "pipes_per_bundle": 42,
+      "bundle_mass_g": 911400,
+      "dimensions_um": [
+        6401000,
+        337600,
+        295400
+      ],
+      "source_line_t": "145.82"
+    },
+    {
+      "row": 3,
+      "bundles": 20,
+      "pipes_per_bundle": 42,
+      "bundle_mass_g": 1041600,
+      "dimensions_um": [
+        7315000,
+        337600,
+        295400
+      ],
+      "source_line_t": "20.83"
+    },
+    {
+      "row": 4,
+      "bundles": 46,
+      "pipes_per_bundle": 36,
+      "bundle_mass_g": 933120,
+      "dimensions_um": [
+        6401000,
+        386400,
+        289800
+      ],
+      "source_line_t": "42.92"
+    },
+    {
+      "row": 5,
+      "bundles": 15,
+      "pipes_per_bundle": 26,
+      "bundle_mass_g": 474240,
+      "dimensions_um": [
+        3353000,
+        361800,
+        361800
+      ],
+      "source_line_t": "7.11"
+    },
+    {
+      "row": 6,
+      "bundles": 22,
+      "pipes_per_bundle": 26,
+      "bundle_mass_g": 862160,
+      "dimensions_um": [
+        6096000,
+        361800,
+        361800
+      ],
+      "source_line_t": "18.97"
+    },
+    {
+      "row": 7,
+      "bundles": 96,
+      "pipes_per_bundle": 26,
+      "bundle_mass_g": 905320,
+      "dimensions_um": [
+        6401000,
+        361800,
+        361800
+      ],
+      "source_line_t": "86.91"
+    },
+    {
+      "row": 8,
+      "bundles": 44,
+      "pipes_per_bundle": 26,
+      "bundle_mass_g": 948480,
+      "dimensions_um": [
+        6706000,
+        361800,
+        361800
+      ],
+      "source_line_t": "41.73"
+    },
+    {
+      "row": 9,
+      "bundles": 38,
+      "pipes_per_bundle": 26,
+      "bundle_mass_g": 1034540,
+      "dimensions_um": [
+        7315000,
+        361800,
+        361800
+      ],
+      "source_line_t": "39.31"
+    },
+    {
+      "row": 10,
+      "bundles": 15,
+      "pipes_per_bundle": 18,
+      "bundle_mass_g": 520920,
+      "dimensions_um": [
+        3353000,
+        365000,
+        365000
+      ],
+      "source_line_t": "7.81"
+    },
+    {
+      "row": 11,
+      "bundles": 60,
+      "pipes_per_bundle": 18,
+      "bundle_mass_g": 994320,
+      "dimensions_um": [
+        6401000,
+        365000,
+        365000
+      ],
+      "source_line_t": "59.66"
+    },
+    {
+      "row": 12,
+      "bundles": 38,
+      "pipes_per_bundle": 18,
+      "bundle_mass_g": 1136340,
+      "dimensions_um": [
+        7315000,
+        365000,
+        365000
+      ],
+      "source_line_t": "43.18"
+    },
+    {
+      "row": 13,
+      "bundles": 12,
+      "pipes_per_bundle": 12,
+      "bundle_mass_g": 694800,
+      "dimensions_um": [
+        4267000,
+        406400,
+        406400
+      ],
+      "source_line_t": "8.34"
+    },
+    {
+      "row": 14,
+      "bundles": 6,
+      "pipes_per_bundle": 12,
+      "bundle_mass_g": 794160,
+      "dimensions_um": [
+        4877000,
+        406400,
+        406400
+      ],
+      "source_line_t": "4.76"
+    },
+    {
+      "row": 15,
+      "bundles": 78,
+      "pipes_per_bundle": 12,
+      "bundle_mass_g": 1042320,
+      "dimensions_um": [
+        6401000,
+        406400,
+        406400
+      ],
+      "source_line_t": "81.3"
+    },
+    {
+      "row": 16,
+      "bundles": 55,
+      "pipes_per_bundle": 12,
+      "bundle_mass_g": 1191120,
+      "dimensions_um": [
+        7315000,
+        406400,
+        406400
+      ],
+      "source_line_t": "65.5100000000000"
+    },
+    {
+      "row": 17,
+      "bundles": 3,
+      "pipes_per_bundle": 10,
+      "bundle_mass_g": 1028600,
+      "dimensions_um": [
+        6401000,
+        457200,
+        343000
+      ],
+      "source_line_t": "3.09"
+    },
+    {
+      "row": 18,
+      "bundles": 25,
+      "pipes_per_bundle": 7,
+      "bundle_mass_g": 422170,
+      "dimensions_um": [
+        2134000,
+        504900,
+        504900
+      ],
+      "source_line_t": "10.55"
+    },
+    {
+      "row": 19,
+      "bundles": 33,
+      "pipes_per_bundle": 7,
+      "bundle_mass_g": 1085210,
+      "dimensions_um": [
+        5486000,
+        504900,
+        504900
+      ],
+      "source_line_t": "35.81"
+    },
+    {
+      "row": 20,
+      "bundles": 142,
+      "pipes_per_bundle": 7,
+      "bundle_mass_g": 1266230,
+      "dimensions_um": [
+        6401000,
+        504900,
+        504900
+      ],
+      "source_line_t": "179.8"
+    },
+    {
+      "row": 21,
+      "bundles": 71,
+      "pipes_per_bundle": 7,
+      "bundle_mass_g": 1447040,
+      "dimensions_um": [
+        7315000,
+        504900,
+        504900
+      ],
+      "source_line_t": "102.74"
+    },
+    {
+      "row": 22,
+      "bundles": 12,
+      "pipes_per_bundle": 5,
+      "bundle_mass_g": 1556250,
+      "dimensions_um": [
+        7315000,
+        438200,
+        438200
+      ],
+      "source_line_t": "18.68"
+    },
+    {
+      "row": 23,
+      "bundles": 4,
+      "pipes_per_bundle": 7,
+      "bundle_mass_g": 361830,
+      "dimensions_um": [
+        1829000,
+        504900,
+        504900
+      ],
+      "source_line_t": "1.45"
+    },
+    {
+      "row": 24,
+      "bundles": 4,
+      "pipes_per_bundle": 7,
+      "bundle_mass_g": 542640,
+      "dimensions_um": [
+        2743000,
+        504900,
+        504900
+      ],
+      "source_line_t": "2.17"
+    },
+    {
+      "row": 25,
+      "bundles": 6,
+      "pipes_per_bundle": 7,
+      "bundle_mass_g": 1266230,
+      "dimensions_um": [
+        6401000,
+        504900,
+        504900
+      ],
+      "source_line_t": "7.6"
+    },
+    {
+      "row": 26,
+      "bundles": 9,
+      "pipes_per_bundle": 7,
+      "bundle_mass_g": 1447040,
+      "dimensions_um": [
+        7315000,
+        504900,
+        504900
+      ],
+      "source_line_t": "13.02"
+    },
+    {
+      "row": 27,
+      "bundles": 5,
+      "pipes_per_bundle": 7,
+      "bundle_mass_g": 482300,
+      "dimensions_um": [
+        2438000,
+        504900,
+        504900
+      ],
+      "source_line_t": "2.41"
+    },
+    {
+      "row": 28,
+      "bundles": 4,
+      "pipes_per_bundle": 7,
+      "bundle_mass_g": 542640,
+      "dimensions_um": [
+        2743000,
+        504900,
+        504900
+      ],
+      "source_line_t": "2.17"
+    },
+    {
+      "row": 29,
+      "bundles": 28,
+      "pipes_per_bundle": 7,
+      "bundle_mass_g": 1266230,
+      "dimensions_um": [
+        6401000,
+        504900,
+        504900
+      ],
+      "source_line_t": "35.4500000000000"
+    },
+    {
+      "row": 30,
+      "bundles": 21,
+      "pipes_per_bundle": 7,
+      "bundle_mass_g": 1447040,
+      "dimensions_um": [
+        7315000,
+        504900,
+        504900
+      ],
+      "source_line_t": "30.39"
+    },
+    {
+      "row": 31,
+      "bundles": 1,
+      "pipes_per_bundle": 5,
+      "bundle_mass_g": 1361800,
+      "dimensions_um": [
+        6401000,
+        438200,
+        438200
+      ],
+      "source_line_t": "1.36"
+    },
+    {
+      "row": 32,
+      "bundles": 3,
+      "pipes_per_bundle": 5,
+      "bundle_mass_g": 1556250,
+      "dimensions_um": [
+        7315000,
+        438200,
+        438200
+      ],
+      "source_line_t": "4.67"
+    }
+  ]
+}

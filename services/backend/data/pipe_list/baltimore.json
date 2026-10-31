@@ -1,0 +1,640 @@
+{
+  "dataset_id": "BALTIMORE-PIPE-V1-1",
+  "workbook_sha256": "66e51b53b07ea4be550e5705230de060829ff5cff92c8f4b89e36c4069757824",
+  "sheet": "Sheet1",
+  "assigned_vessel": null,
+  "mass_basis": "K(kg/pipe) × L(pipes/bundle); calculated, not weighed",
+  "groups": [
+    {
+      "group_id": "Sheet1-R002",
+      "source_row": 2,
+      "bundle_count": 160,
+      "pieces_per_bundle": 42,
+      "dimensions_um": [
+        6401000,
+        337600,
+        295400
+      ],
+      "mass_g": 911400,
+      "source_line_t": "145.82",
+      "source_cbm_m3": "102.1364452864",
+      "envelope_cbm_m3": "102.136445286400000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [
+        "diameter_label_unit_pair_mismatch"
+      ],
+      "outside_diameter_mm": "42.2",
+      "wall_thickness_mm": "3.56"
+    },
+    {
+      "group_id": "Sheet1-R003",
+      "source_row": 3,
+      "bundle_count": 20,
+      "pieces_per_bundle": 42,
+      "dimensions_um": [
+        7315000,
+        337600,
+        295400
+      ],
+      "mass_g": 1041600,
+      "source_line_t": "20.83",
+      "source_cbm_m3": "14.5900659520000",
+      "envelope_cbm_m3": "14.590065952000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [
+        "diameter_label_unit_pair_mismatch"
+      ],
+      "outside_diameter_mm": "42.2",
+      "wall_thickness_mm": "3.56"
+    },
+    {
+      "group_id": "Sheet1-R004",
+      "source_row": 4,
+      "bundle_count": 46,
+      "pieces_per_bundle": 36,
+      "dimensions_um": [
+        6401000,
+        386400,
+        289800
+      ],
+      "mass_g": 933120,
+      "source_line_t": "42.92",
+      "source_cbm_m3": "32.97168618912",
+      "envelope_cbm_m3": "32.971686189120000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [
+        "diameter_label_unit_pair_mismatch"
+      ],
+      "outside_diameter_mm": "48.3",
+      "wall_thickness_mm": "3.68"
+    },
+    {
+      "group_id": "Sheet1-R005",
+      "source_row": 5,
+      "bundle_count": 15,
+      "pieces_per_bundle": 26,
+      "dimensions_um": [
+        3353000,
+        361800,
+        361800
+      ],
+      "mass_g": 474240,
+      "source_line_t": "7.11",
+      "source_cbm_m3": "6.58357727580000",
+      "envelope_cbm_m3": "6.583577275800000000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [],
+      "outside_diameter_mm": "60.3",
+      "wall_thickness_mm": "3.91"
+    },
+    {
+      "group_id": "Sheet1-R006",
+      "source_row": 6,
+      "bundle_count": 22,
+      "pieces_per_bundle": 26,
+      "dimensions_um": [
+        6096000,
+        361800,
+        361800
+      ],
+      "mass_g": 862160,
+      "source_line_t": "18.97",
+      "source_cbm_m3": "17.55515887488",
+      "envelope_cbm_m3": "17.55515887488000000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [],
+      "outside_diameter_mm": "60.3",
+      "wall_thickness_mm": "3.91"
+    },
+    {
+      "group_id": "Sheet1-R007",
+      "source_row": 7,
+      "bundle_count": 96,
+      "pieces_per_bundle": 26,
+      "dimensions_um": [
+        6401000,
+        361800,
+        361800
+      ],
+      "mass_g": 905320,
+      "source_line_t": "86.91",
+      "source_cbm_m3": "80.4370593830400",
+      "envelope_cbm_m3": "80.43705938304000000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [],
+      "outside_diameter_mm": "60.3",
+      "wall_thickness_mm": "3.91"
+    },
+    {
+      "group_id": "Sheet1-R008",
+      "source_row": 8,
+      "bundle_count": 44,
+      "pieces_per_bundle": 26,
+      "dimensions_um": [
+        6706000,
+        361800,
+        361800
+      ],
+      "mass_g": 948480,
+      "source_line_t": "41.73",
+      "source_cbm_m3": "38.6236533513600",
+      "envelope_cbm_m3": "38.62365335136000000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [],
+      "outside_diameter_mm": "60.3",
+      "wall_thickness_mm": "3.91"
+    },
+    {
+      "group_id": "Sheet1-R009",
+      "source_row": 9,
+      "bundle_count": 38,
+      "pieces_per_bundle": 26,
+      "dimensions_um": [
+        7315000,
+        361800,
+        361800
+      ],
+      "mass_g": 1034540,
+      "source_line_t": "39.31",
+      "source_cbm_m3": "36.3860617428000",
+      "envelope_cbm_m3": "36.38606174280000000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [],
+      "outside_diameter_mm": "60.3",
+      "wall_thickness_mm": "3.91"
+    },
+    {
+      "group_id": "Sheet1-R010",
+      "source_row": 10,
+      "bundle_count": 15,
+      "pieces_per_bundle": 18,
+      "dimensions_um": [
+        3353000,
+        365000,
+        365000
+      ],
+      "mass_g": 520920,
+      "source_line_t": "7.81",
+      "source_cbm_m3": "6.70055137500000",
+      "envelope_cbm_m3": "6.700551375000000000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [],
+      "outside_diameter_mm": "73",
+      "wall_thickness_mm": "5.16"
+    },
+    {
+      "group_id": "Sheet1-R011",
+      "source_row": 11,
+      "bundle_count": 60,
+      "pieces_per_bundle": 18,
+      "dimensions_um": [
+        6401000,
+        365000,
+        365000
+      ],
+      "mass_g": 994320,
+      "source_line_t": "59.66",
+      "source_cbm_m3": "51.1663935000000",
+      "envelope_cbm_m3": "51.16639350000000000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [],
+      "outside_diameter_mm": "73",
+      "wall_thickness_mm": "5.16"
+    },
+    {
+      "group_id": "Sheet1-R012",
+      "source_row": 12,
+      "bundle_count": 38,
+      "pieces_per_bundle": 18,
+      "dimensions_um": [
+        7315000,
+        365000,
+        365000
+      ],
+      "mass_g": 1136340,
+      "source_line_t": "43.18",
+      "source_cbm_m3": "37.0325532500000",
+      "envelope_cbm_m3": "37.03255325000000000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [],
+      "outside_diameter_mm": "73",
+      "wall_thickness_mm": "5.16"
+    },
+    {
+      "group_id": "Sheet1-R013",
+      "source_row": 13,
+      "bundle_count": 12,
+      "pieces_per_bundle": 12,
+      "dimensions_um": [
+        4267000,
+        406400,
+        406400
+      ],
+      "mass_g": 694800,
+      "source_line_t": "8.34",
+      "source_cbm_m3": "8.45690179584000",
+      "envelope_cbm_m3": "8.456901795840000000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [],
+      "outside_diameter_mm": "101.6",
+      "wall_thickness_mm": "5.74"
+    },
+    {
+      "group_id": "Sheet1-R014",
+      "source_row": 14,
+      "bundle_count": 6,
+      "pieces_per_bundle": 12,
+      "dimensions_um": [
+        4877000,
+        406400,
+        406400
+      ],
+      "mass_g": 794160,
+      "source_line_t": "4.76",
+      "source_cbm_m3": "4.83294001152000",
+      "envelope_cbm_m3": "4.832940011520000000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [],
+      "outside_diameter_mm": "101.6",
+      "wall_thickness_mm": "5.74"
+    },
+    {
+      "group_id": "Sheet1-R015",
+      "source_row": 15,
+      "bundle_count": 78,
+      "pieces_per_bundle": 12,
+      "dimensions_um": [
+        6401000,
+        406400,
+        406400
+      ],
+      "mass_g": 1042320,
+      "source_line_t": "81.3",
+      "source_cbm_m3": "82.4612337868800",
+      "envelope_cbm_m3": "82.46123378688000000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [],
+      "outside_diameter_mm": "101.6",
+      "wall_thickness_mm": "5.74"
+    },
+    {
+      "group_id": "Sheet1-R016",
+      "source_row": 16,
+      "bundle_count": 55,
+      "pieces_per_bundle": 12,
+      "dimensions_um": [
+        7315000,
+        406400,
+        406400
+      ],
+      "mass_g": 1191120,
+      "source_line_t": "65.5100000000000",
+      "source_cbm_m3": "66.4483832320000",
+      "envelope_cbm_m3": "66.44838323200000000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [],
+      "outside_diameter_mm": "101.6",
+      "wall_thickness_mm": "5.74"
+    },
+    {
+      "group_id": "Sheet1-R017",
+      "source_row": 17,
+      "bundle_count": 3,
+      "pieces_per_bundle": 10,
+      "dimensions_um": [
+        6401000,
+        457200,
+        343000
+      ],
+      "mass_g": 1028600,
+      "source_line_t": "3.09",
+      "source_cbm_m3": "3.01140677880000",
+      "envelope_cbm_m3": "3.011406778800000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [
+        "manual_kg_per_m_difference"
+      ],
+      "outside_diameter_mm": "114.3",
+      "wall_thickness_mm": "6.02"
+    },
+    {
+      "group_id": "Sheet1-R018",
+      "source_row": 18,
+      "bundle_count": 25,
+      "pieces_per_bundle": 7,
+      "dimensions_um": [
+        2134000,
+        504900,
+        504900
+      ],
+      "mass_g": 422170,
+      "source_line_t": "10.55",
+      "source_cbm_m3": "13.6001959335",
+      "envelope_cbm_m3": "13.60019593350000000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [],
+      "outside_diameter_mm": "168.3",
+      "wall_thickness_mm": "7.11"
+    },
+    {
+      "group_id": "Sheet1-R019",
+      "source_row": 19,
+      "bundle_count": 33,
+      "pieces_per_bundle": 7,
+      "dimensions_um": [
+        5486000,
+        504900,
+        504900
+      ],
+      "mass_g": 1085210,
+      "source_line_t": "35.81",
+      "source_cbm_m3": "46.1509329223800",
+      "envelope_cbm_m3": "46.15093292238000000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [],
+      "outside_diameter_mm": "168.3",
+      "wall_thickness_mm": "7.11"
+    },
+    {
+      "group_id": "Sheet1-R020",
+      "source_row": 20,
+      "bundle_count": 142,
+      "pieces_per_bundle": 7,
+      "dimensions_um": [
+        6401000,
+        504900,
+        504900
+      ],
+      "mass_g": 1266230,
+      "source_line_t": "179.8",
+      "source_cbm_m3": "231.711139497420",
+      "envelope_cbm_m3": "231.7111394974200000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [],
+      "outside_diameter_mm": "168.3",
+      "wall_thickness_mm": "7.11"
+    },
+    {
+      "group_id": "Sheet1-R021",
+      "source_row": 21,
+      "bundle_count": 71,
+      "pieces_per_bundle": 7,
+      "dimensions_um": [
+        7315000,
+        504900,
+        504900
+      ],
+      "mass_g": 1447040,
+      "source_line_t": "102.74",
+      "source_cbm_m3": "132.398608453650",
+      "envelope_cbm_m3": "132.3986084536500000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [],
+      "outside_diameter_mm": "168.3",
+      "wall_thickness_mm": "7.11"
+    },
+    {
+      "group_id": "Sheet1-R022",
+      "source_row": 22,
+      "bundle_count": 12,
+      "pieces_per_bundle": 5,
+      "dimensions_um": [
+        7315000,
+        438200,
+        438200
+      ],
+      "mass_g": 1556250,
+      "source_line_t": "18.68",
+      "source_cbm_m3": "16.8554488872000",
+      "envelope_cbm_m3": "16.85544888720000000000000000000000000000",
+      "dimension_warning": true,
+      "issue_codes": [
+        "packaging_envelope_conflict",
+        "duplicate_source_serial"
+      ],
+      "outside_diameter_mm": "219.1",
+      "wall_thickness_mm": "8.18"
+    },
+    {
+      "group_id": "Sheet1-R023",
+      "source_row": 23,
+      "bundle_count": 4,
+      "pieces_per_bundle": 7,
+      "dimensions_um": [
+        1829000,
+        504900,
+        504900
+      ],
+      "mass_g": 361830,
+      "source_line_t": "1.45",
+      "source_cbm_m3": "0.466256014290000",
+      "envelope_cbm_m3": "1.865024057160000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [
+        "cbm_is_one_bundle",
+        "optional_size_labels_missing",
+        "duplicate_source_serial"
+      ],
+      "outside_diameter_mm": "168.3",
+      "wall_thickness_mm": "7.11"
+    },
+    {
+      "group_id": "Sheet1-R024",
+      "source_row": 24,
+      "bundle_count": 4,
+      "pieces_per_bundle": 7,
+      "dimensions_um": [
+        2743000,
+        504900,
+        504900
+      ],
+      "mass_g": 542640,
+      "source_line_t": "2.17",
+      "source_cbm_m3": "0.699256559430000",
+      "envelope_cbm_m3": "2.797026237720000000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [
+        "cbm_is_one_bundle",
+        "optional_size_labels_missing"
+      ],
+      "outside_diameter_mm": "168.3",
+      "wall_thickness_mm": "7.11"
+    },
+    {
+      "group_id": "Sheet1-R025",
+      "source_row": 25,
+      "bundle_count": 6,
+      "pieces_per_bundle": 7,
+      "dimensions_um": [
+        6401000,
+        504900,
+        504900
+      ],
+      "mass_g": 1266230,
+      "source_line_t": "7.6",
+      "source_cbm_m3": "1.63176858801000",
+      "envelope_cbm_m3": "9.790611528060000000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [
+        "cbm_is_one_bundle",
+        "optional_size_labels_missing"
+      ],
+      "outside_diameter_mm": "168.3",
+      "wall_thickness_mm": "7.11"
+    },
+    {
+      "group_id": "Sheet1-R026",
+      "source_row": 26,
+      "bundle_count": 9,
+      "pieces_per_bundle": 7,
+      "dimensions_um": [
+        7315000,
+        504900,
+        504900
+      ],
+      "mass_g": 1447040,
+      "source_line_t": "13.02",
+      "source_cbm_m3": "1.86476913315000",
+      "envelope_cbm_m3": "16.78292219835000000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [
+        "cbm_is_one_bundle",
+        "optional_size_labels_missing"
+      ],
+      "outside_diameter_mm": "168.3",
+      "wall_thickness_mm": "7.11"
+    },
+    {
+      "group_id": "Sheet1-R027",
+      "source_row": 27,
+      "bundle_count": 5,
+      "pieces_per_bundle": 7,
+      "dimensions_um": [
+        2438000,
+        504900,
+        504900
+      ],
+      "mass_g": 482300,
+      "source_line_t": "2.41",
+      "source_cbm_m3": "3.10752368190000",
+      "envelope_cbm_m3": "3.107523681900000000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [
+        "optional_size_labels_missing"
+      ],
+      "outside_diameter_mm": "168.3",
+      "wall_thickness_mm": "7.11"
+    },
+    {
+      "group_id": "Sheet1-R028",
+      "source_row": 28,
+      "bundle_count": 4,
+      "pieces_per_bundle": 7,
+      "dimensions_um": [
+        2743000,
+        504900,
+        504900
+      ],
+      "mass_g": 542640,
+      "source_line_t": "2.17",
+      "source_cbm_m3": "2.79702623772000",
+      "envelope_cbm_m3": "2.797026237720000000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [
+        "optional_size_labels_missing"
+      ],
+      "outside_diameter_mm": "168.3",
+      "wall_thickness_mm": "7.11"
+    },
+    {
+      "group_id": "Sheet1-R029",
+      "source_row": 29,
+      "bundle_count": 28,
+      "pieces_per_bundle": 7,
+      "dimensions_um": [
+        6401000,
+        504900,
+        504900
+      ],
+      "mass_g": 1266230,
+      "source_line_t": "35.4500000000000",
+      "source_cbm_m3": "45.6895204642800",
+      "envelope_cbm_m3": "45.68952046428000000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [
+        "optional_size_labels_missing"
+      ],
+      "outside_diameter_mm": "168.3",
+      "wall_thickness_mm": "7.11"
+    },
+    {
+      "group_id": "Sheet1-R030",
+      "source_row": 30,
+      "bundle_count": 21,
+      "pieces_per_bundle": 7,
+      "dimensions_um": [
+        7315000,
+        504900,
+        504900
+      ],
+      "mass_g": 1447040,
+      "source_line_t": "30.39",
+      "source_cbm_m3": "39.1601517961500",
+      "envelope_cbm_m3": "39.16015179615000000000000000000000000000",
+      "dimension_warning": false,
+      "issue_codes": [
+        "optional_size_labels_missing"
+      ],
+      "outside_diameter_mm": "168.3",
+      "wall_thickness_mm": "7.11"
+    },
+    {
+      "group_id": "Sheet1-R031",
+      "source_row": 31,
+      "bundle_count": 1,
+      "pieces_per_bundle": 5,
+      "dimensions_um": [
+        6401000,
+        438200,
+        438200
+      ],
+      "mass_g": 1361800,
+      "source_line_t": "1.36",
+      "source_cbm_m3": "1.22911515524000",
+      "envelope_cbm_m3": "1.229115155240000000000000000000000000000",
+      "dimension_warning": true,
+      "issue_codes": [
+        "optional_size_labels_missing",
+        "packaging_envelope_conflict"
+      ],
+      "outside_diameter_mm": "219.1",
+      "wall_thickness_mm": "8.18"
+    },
+    {
+      "group_id": "Sheet1-R032",
+      "source_row": 32,
+      "bundle_count": 3,
+      "pieces_per_bundle": 5,
+      "dimensions_um": [
+        7315000,
+        438200,
+        438200
+      ],
+      "mass_g": 1556250,
+      "source_line_t": "4.67",
+      "source_cbm_m3": "4.21386222180000",
+      "envelope_cbm_m3": "4.213862221800000000000000000000000000000",
+      "dimension_warning": true,
+      "issue_codes": [
+        "optional_size_labels_missing",
+        "packaging_envelope_conflict"
+      ],
+      "outside_diameter_mm": "219.1",
+      "wall_thickness_mm": "8.18"
+    }
+  ],
+  "source_mass_t": "1125.52",
+  "calculated_mass_t": "1125.55103",
+  "source_cbm_m3": "1130.96964733156",
+  "envelope_cbm_m3": "1157.54318105797"
+}

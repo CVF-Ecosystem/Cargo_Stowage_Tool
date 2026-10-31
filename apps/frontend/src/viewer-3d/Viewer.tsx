@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import type { VesselProfile } from "../api/client";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { footprint, fmt, type Plan } from "../features/model";
+import { dimensions, footprint, fmt, type Plan } from "../features/model";
 
 type Props = {
   plan: Plan;
@@ -140,7 +140,7 @@ function Scene({
     for (const p of plan.placements) {
       const u = units.get(p.unit_id)!;
       const [dx, dy] = footprint(u, p).map((n) => n / 1000);
-      const dz = u.height_mm / 1000;
+      const dz = dimensions(u)[2] / 1000;
       const mesh = new THREE.Mesh(
         new THREE.BoxGeometry(dx, dz, dy),
         new THREE.MeshStandardMaterial({
@@ -298,6 +298,7 @@ export default function Viewer(props: Props) {
   });
   const { plan, selected, onSelect, issueIds } = props;
   const margin = 1100;
+  const unitMap = new Map(plan.units.map(u => [u.id,u]));
   return (
     <section className="viewer-card" aria-label="Mô hình chất xếp">
       <div className="panel-heading">
@@ -362,7 +363,7 @@ export default function Viewer(props: Props) {
               strokeWidth="50"
             />
             {plan.placements.map((p) => {
-              const u = plan.units.find((u) => u.id === p.unit_id)!;
+              const u = unitMap.get(p.unit_id)!;
               const [w, h] = footprint(u, p);
               return (
                 <g

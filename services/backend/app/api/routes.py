@@ -143,3 +143,43 @@ def get_snapshot(snapshot_id: str):
         return open_snapshot(snapshot_id)
     except (sqlite3.Error, OSError, ValueError, LookupError, TypeError, OverflowError):
         raise HTTPException(400, "Không thể mở phương án; ID, dữ liệu hoặc phiên bản không hợp lệ.")
+
+
+from ..adapters.pipe_registry import REGISTRY as PIPE_REGISTRY, DATASET as PIPE_DATASET, units as pipe_units
+
+class PipeGroup(BaseModel):
+    group_id: str
+    source_row: int
+    bundle_count: int
+    pieces_per_bundle: int
+    dimensions_um: tuple[int,int,int]
+    mass_g: int
+    source_line_t: str
+    source_cbm_m3: str
+    envelope_cbm_m3: str
+    dimension_warning: bool
+    issue_codes: list[str]
+    outside_diameter_mm: str
+    wall_thickness_mm: str
+
+class PipeLibrary(BaseModel):
+    dataset_id: str
+    workbook_sha256: str
+    sheet: str
+    assigned_vessel: None
+    mass_basis: str
+    groups: list[PipeGroup]
+    source_mass_t: str
+    calculated_mass_t: str
+    source_cbm_m3: str
+    envelope_cbm_m3: str
+
+@router.get("/pipe-list", response_model=PipeLibrary)
+def pipe_list():
+    return PIPE_REGISTRY
+
+@router.post("/pipe-list/preview", response_model=Evaluation)
+def pipe_list_preview(plan: Plan):
+    candidate=plan.model_dump(mode="json")
+    candidate.update(contract_version="scst.pipe-list.v1",cargo_dataset=PIPE_DATASET,cargo_source="DOCUMENT_CALCULATED",units=pipe_units(),placements=[])
+    return evaluate(Plan.model_validate(candidate))

@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "assertions": 222,
+  "random_layouts": 30,
+  "random_placed_per_layout": 18,
+  "oracle": "Independent raw source receipt and integer-micrometre rectangle comparison, not app helpers",
+  "all_overlap_pairs": 578350,
+  "stress_seconds": 1.699,
+  "stress_response_bytes": 639672,
+  "issues_returned": 200,
+  "all_affected_units": 1076,
+  "isolated_snapshot_roundtrip": true,
+  "tamper_validation_and_db_unchanged": true,
+  "scope": "Current backend source at receipt time; final source manifest/review establishes version boundary"
+}

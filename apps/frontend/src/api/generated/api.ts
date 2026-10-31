@@ -158,6 +158,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/pipe-list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Pipe List */
+        get: operations["pipe_list_api_pipe_list_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/pipe-list/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Pipe List Preview */
+        post: operations["pipe_list_preview_api_pipe_list_preview_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -186,6 +220,13 @@ export interface components {
             height_mm: number;
             /** Mass G */
             mass_g: number;
+            /** Dimensions Um */
+            dimensions_um?: [
+                number,
+                number,
+                number
+            ] | null;
+            source_ref?: components["schemas"]["PipeSourceRef"] | null;
         };
         /** CsvError */
         CsvError: {
@@ -244,6 +285,12 @@ export interface components {
              * @constant
              */
             operational_eligible: false;
+            /** Total Issues */
+            total_issues?: number | null;
+            /** Issues Truncated */
+            issues_truncated?: boolean | null;
+            /** Affected Unit Ids */
+            affected_unit_ids?: string[] | null;
         };
         /** HTTPValidationError */
         HTTPValidationError: {
@@ -309,6 +356,84 @@ export interface components {
             /** Freeboard Mm */
             freeboard_mm: number;
         };
+        /** PipeGroup */
+        PipeGroup: {
+            /** Group Id */
+            group_id: string;
+            /** Source Row */
+            source_row: number;
+            /** Bundle Count */
+            bundle_count: number;
+            /** Pieces Per Bundle */
+            pieces_per_bundle: number;
+            /** Dimensions Um */
+            dimensions_um: [
+                number,
+                number,
+                number
+            ];
+            /** Mass G */
+            mass_g: number;
+            /** Source Line T */
+            source_line_t: string;
+            /** Source Cbm M3 */
+            source_cbm_m3: string;
+            /** Envelope Cbm M3 */
+            envelope_cbm_m3: string;
+            /** Dimension Warning */
+            dimension_warning: boolean;
+            /** Issue Codes */
+            issue_codes: string[];
+            /** Outside Diameter Mm */
+            outside_diameter_mm: string;
+            /** Wall Thickness Mm */
+            wall_thickness_mm: string;
+        };
+        /** PipeLibrary */
+        PipeLibrary: {
+            /** Dataset Id */
+            dataset_id: string;
+            /** Workbook Sha256 */
+            workbook_sha256: string;
+            /** Sheet */
+            sheet: string;
+            /** Assigned Vessel */
+            assigned_vessel: null;
+            /** Mass Basis */
+            mass_basis: string;
+            /** Groups */
+            groups: components["schemas"]["PipeGroup"][];
+            /** Source Mass T */
+            source_mass_t: string;
+            /** Calculated Mass T */
+            calculated_mass_t: string;
+            /** Source Cbm M3 */
+            source_cbm_m3: string;
+            /** Envelope Cbm M3 */
+            envelope_cbm_m3: string;
+        };
+        /** PipeSourceRef */
+        PipeSourceRef: {
+            /**
+             * Dataset Id
+             * @constant
+             */
+            dataset_id: "BALTIMORE-PIPE-V1-1";
+            /** Workbook Sha256 */
+            workbook_sha256: string;
+            /** Sheet */
+            sheet: string;
+            /** Group Id */
+            group_id: string;
+            /** Source Row */
+            source_row: number;
+            /** Bundle Index */
+            bundle_index: number;
+            /** Pieces */
+            pieces: number;
+            /** Dimension Warning */
+            dimension_warning: boolean;
+        };
         /** Placement */
         Placement: {
             /** Unit Id */
@@ -339,7 +464,7 @@ export interface components {
              * @default scst.m1.v1
              * @enum {string}
              */
-            contract_version: "scst.m1.v1" | "scst.m2a.v1";
+            contract_version: "scst.m1.v1" | "scst.m2a.v1" | "scst.pipe-list.v1";
             /**
              * Source
              * @default SYNTHETIC
@@ -347,8 +472,10 @@ export interface components {
              */
             source: "SYNTHETIC" | "MIXED_REFERENCE" | "USER_ENTERED";
             /** Cargo Source */
-            cargo_source?: ("SYNTHETIC" | "USER_ENTERED") | null;
+            cargo_source?: ("SYNTHETIC" | "USER_ENTERED" | "DOCUMENT_CALCULATED") | null;
             vessel?: components["schemas"]["VesselReference"] | null;
+            /** Cargo Dataset */
+            cargo_dataset?: "BALTIMORE-PIPE-V1-1" | null;
             hold: components["schemas"]["Hold"];
             limits: components["schemas"]["Limits"];
             /** Units */
@@ -747,6 +874,59 @@ export interface operations {
             cookie?: never;
         };
         requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Evaluation"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    pipe_list_api_pipe_list_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PipeLibrary"];
+                };
+            };
+        };
+    };
+    pipe_list_preview_api_pipe_list_preview_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["Plan"];
+            };
+        };
         responses: {
             /** @description Successful Response */
             200: {

@@ -1,0 +1,57 @@
+[
+  {
+    "path": "docs/reviews/SCST_M1_EVIDENCE/browser-2d-stale.png",
+    "prior_sha256": "6a3671cb846c23821befbe04e1c2f781a75a9308865ff8863e2c6eaebccb34ba",
+    "fresh_regression_sha256": "2edf0a7e78cdbb388f488d2cdc55302d823de5e265e6404cc83e70c6cd8f4475"
+  },
+  {
+    "path": "docs/reviews/SCST_M1_EVIDENCE/browser-3d-yaw.png",
+    "prior_sha256": "ad0a19e51edad0c3eaf393f33abc1874405a4dfa5948b00018fab1e84f35d17d",
+    "fresh_regression_sha256": "16c0bf563e7f3766590eefe2c10850faae4d9d0ef9728383c7867d55b5133385"
+  },
+  {
+    "path": "docs/reviews/SCST_M1_EVIDENCE/browser-mobile-fallback.png",
+    "prior_sha256": "7e9bba015e0ce851bd6801d083764c912dc48783f8133f7763dffc85957d912d",
+    "fresh_regression_sha256": "b4dd60e1b1babfc9b8c643a2ffc1241645e81f84b7e07581f82cb23352ae7320"
+  },
+  {
+    "path": "docs/reviews/SCST_M1_EVIDENCE/browser-mobile-table-scrolled.png",
+    "prior_sha256": "5e2333f92d34a71cdf19ffb585a3b7625a8792e055a801e856bdf91bae0b95f0",
+    "fresh_regression_sha256": "ee39a90b539b66293e071b7b910bd618d0be6a04dad261a49fccfad17f58ea59"
+  },
+  {
+    "path": "docs/reviews/SCST_M2A_EVIDENCE/browser-csv-import.png",
+    "prior_sha256": "5e37ea125f7043f8009b3bbc78d18c60d2ed6b11832ecfe4ca06badd917ee6fc",
+    "fresh_regression_sha256": "64cece7c06de0171e409fa94a5fa1988bb85b39981fa140451b8a2e6614e9343"
+  },
+  {
+    "path": "docs/reviews/SCST_M2A_EVIDENCE/browser-manual-saved.png",
+    "prior_sha256": "3f41505ee6f11c59ba1e7e891c6aa40798c651957beb0a7942467eee6d17687a",
+    "fresh_regression_sha256": "5d63cb8462ecd655793216e4dc6584898be3f57de3efda4fba6313a485fdbe0f"
+  },
+  {
+    "path": "docs/reviews/SCST_M2A_EVIDENCE/browser-mobile-reference-fallback.png",
+    "prior_sha256": "a252245e7a57a4e24d77b44944618d64e5e013009e9646ff4af2dccafb949152",
+    "fresh_regression_sha256": "c0887d6ed24d0f541222c641c70a720e624ed46902f14385836954404e3e3db5"
+  },
+  {
+    "path": "docs/reviews/SCST_VINAFCO268_EVIDENCE/browser-vessel-3d.png",
+    "prior_sha256": "19016c2879d12564713c01e57bb37a54500bfd9da5c0540eeaede05191ff8c0a",
+    "fresh_regression_sha256": "bba00b19496c451778cbfba16afde513dbd1f895e93853b7a334a962eef0ce3a"
+  },
+  {
+    "path": "docs/reviews/SCST_VINAFCO268_EVIDENCE/browser-vessel-mobile-fallback.png",
+    "prior_sha256": "92fb88b4260f64987d9d27cfbbcd7c91f930fbb9b317e426005be6a52e2578c8",
+    "fresh_regression_sha256": "597a1890f71af692e7896885f70b877c96e77ef3767a923e55a9065a21e369c1"
+  },
+  {
+    "path": "docs/reviews/SCST_VINAFCO268_EVIDENCE/browser-vessel-model-failure.png",
+    "prior_sha256": "ca19c8a8b67ddfa6e6a6e454246cfb075fdd2035a47fc83fa5c5945f81dc8ed1",
+    "fresh_regression_sha256": "87365de75014b37704b250afa5ae2eea7c1559eab7e3e982bf0723a43d9a252a"
+  },
+  {
+    "path": "docs/reviews/SCST_VINAFCO268_EVIDENCE/browser-vessel-si.png",
+    "prior_sha256": "b49981a46eab4525bc594c9610a7115cb74a69acd9c38350dfcf8bb000f1d44e",
+    "fresh_regression_sha256": "cc2695bce6a99c562d318c65520332d3fb509849f91c9a1dc7ff767852ca1a9c"
+  }
+]

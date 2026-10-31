@@ -1,0 +1,212 @@
+import { expect, test } from "../../apps/frontend/node_modules/@playwright/test";
+import type { Page } from "../../apps/frontend/node_modules/@playwright/test";
+
+type Group = { group_id: string; source_row: number; bundle_count: number; pieces_per_bundle: number; mass_g: number; dimensions_um: [number, number, number]; dimension_warning: boolean };
+type Library = { dataset_id: string; assigned_vessel: null; workbook_sha256: string; groups: Group[]; source_mass_t: string; calculated_mass_t: string; source_cbm_m3: string; envelope_cbm_m3: string };
+type Unit = { id: string; requirement: string; mass_g: number; dimensions_um: [number, number, number]; source_ref: { group_id: string; source_row: number; bundle_index: number; pieces: number; dimension_warning: boolean; workbook_sha256: string } };
+type Plan = { contract_version: string; cargo_source: string; cargo_dataset: string | null; source: string; vessel: { case_id: string } | null; hold: { length_mm: number; width_mm: number }; units: Unit[]; placements: { unit_id: string; x_mm: number; y_mm: number; yaw_deg: number }[] };
+type Evaluation = { plan: Plan; status: string; summary: { manifest_mass_g: number; placed_mass_g: number; placed_count: number }; total_issues: number; affected_unit_ids: string[] };
+type Mesh = { id: string; position: number[]; dimensions: number[]; worldMatrix: number[] };
+type Saved = { id: string; schema_version: string };
+const close = (actual: number, expected: number) => expect(actual).toBeCloseTo(expected, 6);
+
+async function postResult<T>(page: Page, path: string, action: () => Promise<void>): Promise<T> {
+  const pending = page.waitForResponse((response) => response.url().endsWith(path) && response.request().method() === "POST");
+  await action();
+  const response = await pending;
+  expect(response.ok()).toBe(true);
+  return await response.json() as T;
+}
+
+async function loadPipeList(page: Page): Promise<Evaluation> {
+  const before = await page.getByTestId("manifest-mass").textContent();
+  const preview = await postResult<Evaluation>(page, "/api/pipe-list/preview", () => page.getByRole("button", { name: "Xem trước list ống" }).click());
+  expect(preview.plan.units).toHaveLength(1076);
+  expect(preview.plan.placements).toHaveLength(0);
+  await expect(page.getByTestId("manifest-mass")).toHaveText(before!);
+  await expect(page.getByRole("button", { name: "Nạp list vào phương án hiện tại" })).toBeVisible();
+  const loaded = await postResult<Evaluation>(page, "/api/validate", () => page.getByRole("button", { name: "Nạp list vào phương án hiện tại" }).click());
+  expect(loaded.plan.contract_version).toBe("scst.pipe-list.v1");
+  return loaded;
+}
+
+test("source preview and explicit load preserve 31 groups, 1076 optional bundles, exact mass and 50-row pagination", async ({ page, request }) => {
+  const libraryResponse = await request.get("/api/pipe-list");
+  expect(libraryResponse.ok()).toBe(true);
+  const library = (await libraryResponse.json()) as Library;
+  expect(library.dataset_id).toBe("BALTIMORE-PIPE-V1-1");
+  expect(library.assigned_vessel).toBeNull();
+  expect(library.groups).toHaveLength(31);
+  expect(library.groups.reduce((n, g) => n + g.bundle_count, 0)).toBe(1076);
+  expect(library.groups.reduce((n, g) => n + g.bundle_count * g.pieces_per_bundle, 0)).toBe(21226);
+  expect(library.source_mass_t).toBe("1125.52");
+  expect(library.calculated_mass_t).toBe("1125.55103");
+  expect(library.source_cbm_m3).toBe("1130.96964733156");
+  expect(library.envelope_cbm_m3).toBe("1157.54318105797");
+  expect(library.groups.filter((g) => g.dimension_warning).reduce((n, g) => n + g.bundle_count, 0)).toBe(16);
+
+  await page.goto("/");
+  const section = page.getByRole("region", { name: "Thư viện list ống" });
+  await expect(section).toContainText("1.076 bó");
+  await expect(section).toContainText("21.226 ống");
+  await expect(section).toContainText("1.125,55103 t");
+  await expect(section).toContainText("chênh lệch 31,03 kg");
+  await expect(section).toContainText("16 bó");
+  const loaded = await loadPipeList(page);
+  expect(loaded.plan.cargo_dataset).toBe(library.dataset_id);
+  expect(loaded.plan.cargo_source).toBe("DOCUMENT_CALCULATED");
+  expect(loaded.plan.units).toHaveLength(1076);
+  expect(new Set(loaded.plan.units.map((u) => u.id)).size).toBe(1076);
+  expect(loaded.plan.units.every((u) => u.requirement === "optional")).toBe(true);
+  expect(loaded.plan.units.every((u) => u.source_ref.workbook_sha256 === library.workbook_sha256)).toBe(true);
+  expect(loaded.summary.manifest_mass_g).toBe(1_125_551_030);
+  expect(loaded.summary.placed_mass_g).toBe(0);
+  expect(loaded.plan.placements).toHaveLength(0);
+  expect(loaded.plan.units[0]).toMatchObject({ id: "PIPE-R002-B0001", mass_g: 911400, dimensions_um: [6401000, 337600, 295400] });
+  await expect(page.locator(".topbar")).toContainText("HÀNG THEO LIST NGUỒN");
+  await section.locator("details summary").click();
+  await expect(section).toContainText("Khối bao không phù hợp với số ống");
+  await expect(page.getByTestId("pipe-total")).toContainText("1076 bó · 21226 ống");
+  await expect(page.getByTestId("pipe-total")).toContainText("đã xếp 0 bó");
+  await expect(page.getByTestId("pipe-page")).toContainText("Trang 1/22");
+  expect(await page.locator("#cargo tbody tr").count()).toBe(50);
+  await expect(page.getByTestId("unit-PIPE-R002-B0001")).toContainText("337,6");
+  await page.getByRole("button", { name: "Trang sau" }).click();
+  await expect(page.getByTestId("pipe-page")).toContainText("Trang 2/22");
+  await expect(page.getByTestId("unit-PIPE-R002-B0051")).toBeVisible();
+  await expect(page.getByTestId("unit-PIPE-R002-B0001")).toHaveCount(0);
+  await page.getByLabel("Nhóm nguồn").selectOption("Sheet1-R022");
+  await expect(page.getByTestId("pipe-page")).toContainText("Trang 1/1");
+  await expect(page.getByTestId("pipe-group")).toContainText("12 bó");
+  expect(await page.locator("#cargo tbody tr").count()).toBe(12);
+  await page.getByTestId("unit-PIPE-R022-B0001").getByRole("button").click();
+  await expect(page.getByRole("heading", { name: "PIPE-R022-B0001" })).toBeVisible();
+  await expect(page.getByText("Kích thước cần xác minh")).toBeVisible();
+  await page.screenshot({ path: "../../docs/reviews/SCST_PIPE_LIST_EVIDENCE/browser/pipe-list-desktop.png", fullPage: true });
+});
+
+test("manual placement, rotation and unplace use exact µm dimensions and update whole-list/group counters", async ({ page }) => {
+  await page.goto("/");
+  const loaded = await loadPipeList(page);
+  const unit = loaded.plan.units[0];
+  await page.getByTestId(`unit-${unit.id}`).getByRole("button").click();
+  await expect(page.getByLabel("Khối lượng bó (kg)")).toHaveJSProperty("readOnly", true);
+  await expect(page.getByLabel("ID bó")).toHaveCount(0);
+  const placed = await postResult<Evaluation>(page, "/api/validate", () => page.getByRole("button", { name: "Đặt bó" }).click());
+  expect(placed.plan.placements).toMatchObject([{ unit_id: unit.id, x_mm: 0, y_mm: 0, yaw_deg: 0 }]);
+  expect(placed.summary.placed_mass_g).toBe(unit.mass_g);
+  await expect(page.getByTestId("pipe-total")).toContainText("đã xếp 1 bó · 42 ống");
+  await page.getByLabel("Nhóm nguồn").selectOption("Sheet1-R002");
+  await expect(page.getByTestId("pipe-group")).toContainText("160 bó · 6720 ống");
+  await expect(page.getByTestId("pipe-group")).toContainText("đã xếp 1 bó · 42 ống");
+  const canvas = page.getByTestId("three-canvas");
+  await expect.poll(() => canvas.getAttribute("data-meshes")).not.toBeNull();
+  let meshes = JSON.parse((await canvas.getAttribute("data-meshes"))!) as Mesh[];
+  expect(meshes).toHaveLength(1);
+  [6.401, 0.2954, 0.3376].forEach((expected, i) => close(meshes[0].dimensions[i], expected));
+  const expectedAtOrigin = [6.401 / 2 - loaded.plan.hold.length_mm / 2000, 0.2954 / 2, 0.3376 / 2 - loaded.plan.hold.width_mm / 2000];
+  expectedAtOrigin.forEach((expected, i) => { close(meshes[0].position[i], expected); close(meshes[0].worldMatrix[12 + i], expected); });
+  await page.getByLabel("Góc xoay").selectOption("90");
+  await expect(page.getByTestId("status")).toHaveText("STALE");
+  const rotated = await postResult<Evaluation>(page, "/api/validate", () => page.getByRole("button", { name: "Áp dụng & kiểm lại" }).click());
+  expect(rotated.plan.placements[0].yaw_deg).toBe(90);
+  await expect.poll(async () => (JSON.parse((await canvas.getAttribute("data-meshes"))!) as Mesh[])[0].dimensions[0]).toBeCloseTo(0.3376, 6);
+  meshes = JSON.parse((await canvas.getAttribute("data-meshes"))!) as Mesh[];
+  [0.3376, 0.2954, 6.401].forEach((expected, i) => close(meshes[0].dimensions[i], expected));
+  const expectedRotated = [0.3376 / 2 - loaded.plan.hold.length_mm / 2000, 0.2954 / 2, 6.401 / 2 - loaded.plan.hold.width_mm / 2000];
+  expectedRotated.forEach((expected, i) => { close(meshes[0].position[i], expected); close(meshes[0].worldMatrix[12 + i], expected); });
+  const unplaced = await postResult<Evaluation>(page, "/api/validate", () => page.getByRole("button", { name: "Bỏ vị trí" }).click());
+  expect(unplaced.summary.placed_mass_g).toBe(0);
+  expect(unplaced.plan.placements).toHaveLength(0);
+  await expect(page.getByTestId("pipe-total")).toContainText("đã xếp 0 bó · 0 ống");
+  await expect(page.getByTestId(`unit-${unit.id}`)).toContainText("Tùy chọn chưa xếp");
+});
+
+test("pipe provenance survives save/reload/case/undo; stale edit and delayed preview cannot replace it", async ({ page, request }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Xem VINAFCO 268" }).click();
+  await expect(page.getByRole("region", { name: "Thông số VINAFCO 268" })).toBeVisible();
+  const loaded = await loadPipeList(page);
+  expect(loaded.plan.source).toBe("MIXED_REFERENCE");
+  expect(loaded.plan.vessel?.case_id).toBe("VR-SII");
+  await page.getByLabel("Nhóm nguồn").selectOption("Sheet1-R002");
+  await page.getByTestId("unit-PIPE-R002-B0001").getByRole("button").click();
+  await page.getByLabel("Yêu cầu").selectOption("required");
+  await expect(page.getByTestId("status")).toHaveText("STALE");
+  await page.getByRole("button", { name: "Xem trước list ống" }).click();
+  await expect(page.getByRole("alert")).toContainText("bản nháp");
+  await expect(page.getByTestId("unit-PIPE-R002-B0001")).toContainText("Tùy chọn");
+  await postResult<Evaluation>(page, "/api/validate", () => page.getByRole("button", { name: "Áp dụng & kiểm lại" }).click());
+  await expect(page.getByTestId("unit-PIPE-R002-B0001")).toContainText("Bắt buộc");
+  await page.getByLabel("Tên phương án lưu").fill(`Pipe browser ${Date.now()}`);
+  const saved = await postResult<Saved>(page, "/api/snapshots", () => page.getByRole("button", { name: "Lưu phương án" }).click());
+  const savedPlan = (await (await request.get(`/api/snapshots/${saved.id}`)).json()) as Evaluation;
+  expect(savedPlan.plan.contract_version).toBe("scst.pipe-list.v1");
+  expect(savedPlan.plan.units[0].source_ref.workbook_sha256).toBe(loaded.plan.units[0].source_ref.workbook_sha256);
+  await page.reload();
+  await expect(page.getByLabel("Phương án đã lưu").locator(`option[value="${saved.id}"]`)).toHaveCount(1);
+  await page.getByLabel("Phương án đã lưu").selectOption(saved.id);
+  await page.getByRole("button", { name: "Mở phương án" }).click();
+  await expect(page.getByTestId("pipe-total")).toContainText("1076 bó · 21226 ống");
+  await expect(page.getByRole("region", { name: "Thông số VINAFCO 268" })).toBeVisible();
+  await page.getByLabel("Cấp tham chiếu").selectOption("VR-SI");
+  await expect(page.getByLabel("Cấp tham chiếu")).toHaveValue("VR-SI");
+  await expect(page.getByTestId("pipe-total")).toContainText("1076 bó · 21226 ống");
+  await page.getByRole("button", { name: "Bản trước" }).click();
+  await expect(page.getByLabel("Cấp tham chiếu")).toHaveValue("VR-SII");
+  await expect(page.getByTestId("pipe-total")).toContainText("1076 bó · 21226 ống");
+  const detached = await postResult<Evaluation>(page, "/api/validate", () => page.getByRole("button", { name: "Dùng hầm tự nhập" }).click());
+  expect(detached.plan.contract_version).toBe("scst.pipe-list.v1");
+  expect(detached.plan.source).toBe("USER_ENTERED");
+  expect(detached.plan.cargo_source).toBe("DOCUMENT_CALCULATED");
+  await expect(page.locator(".topbar")).toContainText("HÀNG THEO LIST NGUỒN");
+  await page.getByLabel("Hầm holdLength (mm)").fill("60000");
+  const custom = await postResult<Evaluation>(page, "/api/validate", () => page.getByRole("button", { name: "Áp dụng & kiểm lại" }).click());
+  expect(custom.plan.hold.length_mm).toBe(60000);
+  expect(custom.plan.contract_version).toBe("scst.pipe-list.v1");
+  expect(custom.plan.units).toHaveLength(1076);
+  await expect(page.getByTestId("pipe-total")).toContainText("1076 bó · 21226 ống");
+
+  let release: () => void = () => {};
+  const gate = new Promise<void>((resolve) => { release = resolve; });
+  let received = false;
+  await page.route("**/api/pipe-list/preview", async (route) => {
+    const backend = await route.fetch();
+    received = true;
+    await gate;
+    await route.fulfill({ response: backend });
+  });
+  await page.getByRole("button", { name: "Xem trước list ống" }).click();
+  await expect.poll(() => received).toBe(true);
+  await page.getByLabel("Nhóm nguồn").selectOption("Sheet1-R002");
+  await page.getByTestId("unit-PIPE-R002-B0001").getByRole("button").click();
+  await page.getByLabel("Giới hạn chuyến (kg)").fill("31999");
+  release();
+  await expect(page.getByRole("alert")).toContainText("Dữ liệu đổi trong lúc xem trước");
+  await expect(page.getByTestId("status")).toHaveText("STALE");
+  await expect(page.getByRole("button", { name: "Nạp list vào phương án hiện tại" })).toHaveCount(0);
+  await expect(page.getByTestId("pipe-total")).toContainText("1076 bó · 21226 ống");
+});
+
+test("mobile WebGL fallback keeps the paginated pipe library usable without page overflow", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.addInitScript(() => {
+    const original = HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext = function (this: HTMLCanvasElement, type: string, ...args: unknown[]) {
+      if (type.includes("webgl")) return null;
+      return Reflect.apply(original, this, [type, ...args]);
+    } as typeof original;
+  });
+  await page.goto("/");
+  await loadPipeList(page);
+  await expect(page.getByText("WebGL không khả dụng · đang dùng mặt bằng 2D")).toBeVisible();
+  await expect(page.getByRole("img", { name: "Mặt bằng hầm và ID từng bó" })).toBeVisible();
+  await expect(page.getByTestId("pipe-page")).toContainText("Trang 1/22");
+  await page.getByRole("button", { name: "Trang sau" }).click();
+  await expect(page.getByTestId("pipe-page")).toContainText("Trang 2/22");
+  await page.getByLabel("Nhóm nguồn").selectOption("Sheet1-R031");
+  await expect(page.getByTestId("pipe-group")).toContainText("1 bó");
+  await expect(page.getByTestId("unit-PIPE-R031-B0001")).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(false);
+  await page.screenshot({ path: "../../docs/reviews/SCST_PIPE_LIST_EVIDENCE/browser/pipe-list-mobile-fallback.png", fullPage: true });
+});

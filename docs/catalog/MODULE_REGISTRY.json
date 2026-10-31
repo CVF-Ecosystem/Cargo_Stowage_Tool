@@ -1,24 +1,27 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "updatedAt": "2026-10-31",
-  "claimBoundary": "Source/test-verified local M1, VINAFCO268 and M2a components; real-data/business acceptance separate, not CVF live governance or operational safety.",
+  "updatedAt": "2026-11-01",
+  "claimBoundary": "Source/test-verified M1/VINAFCO/M2a and PIPE-LIST localcomponents; sourcegeometry provisional, business/operational acceptance separate.",
   "modules": [
     {
       "id": "scst-domain",
       "name": "SCST M1 domain",
       "path": "services/backend/app/domain",
       "status": "ENFORCED",
-      "description": "Versioned v1/v2 BOX/single-layer model, empty drafts, exact mm/g and reference-bound mixed plans.",
-      "evidence": "tests/backend/test_validation.py; docs/reviews/SCST_M1_EVIDENCE/reviewer-pytest.log (51 pass); reviewer-backend.json (498 checks); tests/backend/test_vinafco.py; docs/reviews/SCST_VINAFCO268_REVIEW.md; tests/backend/test_m2a.py; docs/reviews/SCST_M2A_REVIEW.md"
+      "description": "Versioned v1/v2≤200 and fixedsource1076 BOX/single-layer model, registrybindings, exactµm/mm/g, fullcount bounded diagnostics.",
+      "evidence": "tests/backend/test_validation.py; docs/reviews/SCST_M1_EVIDENCE/reviewer-pytest.log (51 pass); reviewer-backend.json (498 checks); tests/backend/test_vinafco.py; docs/reviews/SCST_VINAFCO268_REVIEW.md; tests/backend/test_m2a.py; docs/reviews/SCST_M2A_REVIEW.md; docs/reviews/SCST_PIPE_LIST_REVIEW.md",
+      "dependencies": [
+        "scst-pipe-source"
+      ]
     },
     {
       "id": "scst-api",
       "name": "SCST local API",
       "path": "services/backend/app/api",
       "status": "ENFORCED",
-      "description": "Local validate/demo/reference APIs plus CSV preview and immutable snapshot save/list/re-evaluated open.",
-      "evidence": "services/backend/app/api/routes.py; backend tests and launcher-smoke.log",
+      "description": "Local validate/demo/reference APIs plus CSV preview and immutable snapshot save/list/re-evaluated open. Pipe-source library and explicit preview preservecurrentcontext.",
+      "evidence": "services/backend/app/api/routes.py; backend tests and launcher-smoke.log; docs/reviews/SCST_PIPE_LIST_REVIEW.md",
       "dependencies": [
         "scst-domain"
       ]
@@ -28,8 +31,8 @@
       "name": "SCST generated API contract",
       "path": "contracts/openapi.json",
       "status": "CONTRACT_ONLY",
-      "description": "OpenAPI/types accepting scst.m1.v1 and scst.m2a.v1; backend conditional invariants retained.",
-      "evidence": "tooling/export_contract.py; contract-hashes.txt and reviewer-source-manifest.json",
+      "description": "OpenAPI/types for M1/M2a/pipe-list versions; conditional backendsourcebindings and limits.",
+      "evidence": "tooling/export_contract.py; contract-hashes.txt and reviewer-source-manifest.json; docs/reviews/SCST_PIPE_LIST_REVIEW.md",
       "dependencies": [
         "scst-api"
       ]
@@ -39,8 +42,8 @@
       "name": "SCST M1 workspace and viewer",
       "path": "apps/frontend/src",
       "status": "ENFORCED",
-      "description": "Checked/draft manual/CSV/save-open workspace, Three/SVG/reference modes and async error recovery.",
-      "evidence": "tests/browser/workspace.spec.ts; docs/reviews/SCST_M1_EVIDENCE/reviewer-browser.log (5 pass); tests/browser/vinafco.spec.ts; docs/reviews/SCST_VINAFCO268_EVIDENCE/reviewer-browser.log; tests/browser/m2a.spec.ts; docs/reviews/SCST_M2A_EVIDENCE/reviewer-browser.log",
+      "description": "Checked/draft manual/CSV/save-open workspace, Three/SVG/reference modes and async error recovery. Sourcegroupfilter/50rowpagination and source/counter/exactgeometry support.",
+      "evidence": "tests/browser/workspace.spec.ts; docs/reviews/SCST_M1_EVIDENCE/reviewer-browser.log (5 pass); tests/browser/vinafco.spec.ts; docs/reviews/SCST_VINAFCO268_EVIDENCE/reviewer-browser.log; tests/browser/m2a.spec.ts; docs/reviews/SCST_M2A_EVIDENCE/reviewer-browser.log; docs/reviews/SCST_PIPE_LIST_REVIEW.md",
       "dependencies": [
         "scst-api",
         "scst-contract"
@@ -64,7 +67,7 @@
       "path": "services/backend/data/vessels/vinafco268",
       "status": "CONTRACT_ONLY",
       "description": "Sanitized technical profile with provenance/estimates/nulls and illustrative GLB; source PDF remains local.",
-      "evidence": "docs/reviews/SCST_VINAFCO268_ASSESSMENT.md; docs/reviews/SCST_VINAFCO268_EVIDENCE/source-asset-validation.json",
+      "evidence": "docs/reviews/SCST_VINAFCO268_ASSESSMENT.md; docs/reviews/SCST_VINAFCO268_EVIDENCE/source-asset-validation.json; docs/reviews/SCST_PIPE_LIST_REVIEW.md",
       "dependencies": [
         "scst-api"
       ]
@@ -74,11 +77,19 @@
       "name": "SCST CSV and SQLite adapters",
       "path": "services/backend/app/adapters",
       "status": "ENFORCED",
-      "description": "Atomic strict CSV preview and immutable local SQLite snapshot/re-evaluation; no operational approval.",
-      "evidence": "tests/backend/test_m2a.py; tests/m2a_restart_smoke.py; docs/reviews/SCST_M2A_REVIEW.md",
+      "description": "Atomic strict CSV preview and immutable local SQLite snapshot/re-evaluation; no operational approval. Fixedhashpipe registry reused by model/preview; genericCSV still200.",
+      "evidence": "tests/backend/test_m2a.py; tests/m2a_restart_smoke.py; docs/reviews/SCST_M2A_REVIEW.md; docs/reviews/SCST_PIPE_LIST_REVIEW.md",
       "dependencies": [
         "scst-domain"
       ]
+    },
+    {
+      "id": "scst-pipe-source",
+      "name": "Pipe list V1.1 technical derivative",
+      "path": "services/backend/data/pipe_list",
+      "status": "CONTRACT_ONLY",
+      "description": "31groups/1076bundles, exactµm/K×Lgrams, sourcehash/row/warnings; no measuredgeometry or operationalapproval.",
+      "evidence": "docs/reviews/SCST_PIPE_LIST_ASSESSMENT.md; tests/backend/test_pipe_list.py"
     }
   ]
 }

@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "url": "http://127.0.0.1:8765",
+  "scenario": "VINAFCO268 + pipe list; first source bundle manually placed at1000/1000mm; no snapshot saved",
+  "meshes": [
+    {
+      "id": "PIPE-R002-B0001",
+      "position": [
+        -24.002000000000002,
+        0.1477,
+        -4.0027
+      ],
+      "dimensions": [
+        6.401,
+        0.2954,
+        0.3376
+      ],
+      "worldMatrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        -24.002000000000002,
+        0.1477,
+        -4.0027,
+        1
+      ],
+      "boxMin": [
+        -27.202500011444094,
+        -0.007500004577636721,
+        -4.179000004124641
+      ],
+      "boxMax": [
+        -20.80149998855591,
+        0.3029000045776367,
+        -3.8263999958753585
+      ]
+    }
+  ],
+  "pipe_total": "Toàn list: 1076 bó · 21226 ống · 1.125,55103 tấn; đã xếp 1 bó · 42 ống · 0,9114 tấn; còn lại (gồm bó loại trừ) 1075 bó · 21184 ống · 1.124,63963 tấn.",
+  "screenshot": "browser/root-vinafco-pipe-placed.png"
+}

@@ -1,6 +1,6 @@
 # SCST — Pipe list source integration
 
-Status: APPROVED_FOR_EXECUTION
+Status: CLOSED
 dispatchKind: INITIAL
 Owner: project-orchestrator
 Risk: R2
@@ -60,9 +60,9 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "decision": "Review technical usability, repair within scope, hold unresolved boundary; no automatic M2b"
     }
   },
-  "phase": "DISPATCH",
+  "phase": "REVIEW",
   "action": {
-    "kind": "IMPLEMENT",
+    "kind": "REVIEW",
     "selected": [
       "PIPE-01",
       "PIPE-02",
@@ -71,69 +71,104 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "PIPE-05",
       "PIPE-06"
     ],
-    "owner": "Terra implementation; Sol browser; root review",
+    "owner": "Root independent reviewer",
     "output": "Local app plus docs/reviews/SCST_PIPE_LIST_REVIEW.md",
     "budgetMinutes": 240,
-    "stop": "Six criteria proof or scope/budget boundary",
-    "next": "Independent review then owner product feedback; M2b not dispatched"
+    "stop": "Six technical criteria verified; no automatic M2b or business/operational acceptance",
+    "next": "Owner reviews delivered PIPE-LIST workflow; next roadmap work is bounded SPEC M2b after checkpoint, not dispatched automatically."
   },
   "rows": [
     {
       "id": "PIPE-01",
-      "state": "NOT_STARTED",
-      "gap": "New list source adapter and focused proof not yet implemented",
-      "owner": "Terra/Sol then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technicalcriterion verified; business/measuredhold acceptance remains separate",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_PIPE_LIST_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_PIPE_LIST_REVIEW.md",
+          "sha256": "6263a0585bf5f162e03f7766aa6f3ced424098608a9ba1a98d5d3978f6055ebd"
+        }
+      ]
     },
     {
       "id": "PIPE-02",
-      "state": "NOT_STARTED",
-      "gap": "New list source adapter and focused proof not yet implemented",
-      "owner": "Terra/Sol then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technicalcriterion verified; business/measuredhold acceptance remains separate",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_PIPE_LIST_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_PIPE_LIST_REVIEW.md",
+          "sha256": "6263a0585bf5f162e03f7766aa6f3ced424098608a9ba1a98d5d3978f6055ebd"
+        }
+      ]
     },
     {
       "id": "PIPE-03",
-      "state": "NOT_STARTED",
-      "gap": "New list source adapter and focused proof not yet implemented",
-      "owner": "Terra/Sol then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technicalcriterion verified; business/measuredhold acceptance remains separate",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_PIPE_LIST_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_PIPE_LIST_REVIEW.md",
+          "sha256": "6263a0585bf5f162e03f7766aa6f3ced424098608a9ba1a98d5d3978f6055ebd"
+        }
+      ]
     },
     {
       "id": "PIPE-04",
-      "state": "NOT_STARTED",
-      "gap": "New list source adapter and focused proof not yet implemented",
-      "owner": "Terra/Sol then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technicalcriterion verified; business/measuredhold acceptance remains separate",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_PIPE_LIST_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_PIPE_LIST_REVIEW.md",
+          "sha256": "6263a0585bf5f162e03f7766aa6f3ced424098608a9ba1a98d5d3978f6055ebd"
+        }
+      ]
     },
     {
       "id": "PIPE-05",
-      "state": "NOT_STARTED",
-      "gap": "New list source adapter and focused proof not yet implemented",
-      "owner": "Terra/Sol then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technicalcriterion verified; business/measuredhold acceptance remains separate",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_PIPE_LIST_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_PIPE_LIST_REVIEW.md",
+          "sha256": "6263a0585bf5f162e03f7766aa6f3ced424098608a9ba1a98d5d3978f6055ebd"
+        }
+      ]
     },
     {
       "id": "PIPE-06",
-      "state": "NOT_STARTED",
-      "gap": "New list source adapter and focused proof not yet implemented",
-      "owner": "Terra/Sol then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technicalcriterion verified; business/measuredhold acceptance remains separate",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_PIPE_LIST_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_PIPE_LIST_REVIEW.md",
+          "sha256": "6263a0585bf5f162e03f7766aa6f3ced424098608a9ba1a98d5d3978f6055ebd"
+        }
+      ]
     }
   ],
   "supportingWork": [],
   "conclusions": {
-    "tranche": "PENDING",
-    "trancheSummary": "Admitted local source integration only",
-    "trancheEvidence": [],
+    "tranche": "COMPLETE",
+    "trancheSummary": "All six technicalcriteria verified; actualsource integration delivered locally",
+    "trancheEvidence": [
+      {
+        "path": "docs/reviews/SCST_PIPE_LIST_REVIEW.md",
+        "sha256": "6263a0585bf5f162e03f7766aa6f3ced424098608a9ba1a98d5d3978f6055ebd"
+      }
+    ],
     "product": "PENDING",
-    "productSummary": "Measuredhold/business acceptance and M2b-d/M3 separate",
+    "productSummary": "Ownerbusinessacceptance,16envelopes/measuredhold and M2b-d/M3 separate",
     "acceptance": [],
     "owner": "Project owner"
   }

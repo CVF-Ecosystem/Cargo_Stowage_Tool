@@ -1,16 +1,14 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "PIPE_LIST_IN_BUILD",
-  "currentPhase": "BUILD",
+  "overallStatus": "PIPE_LIST_TECHNICALLY_VERIFIED_AWAITING_OWNER_FEEDBACK",
+  "currentPhase": "REVIEW",
   "completedCapabilities": [],
-  "activeWorkOrders": [
-    "docs/work_orders/SCST_PIPE_LIST.md"
-  ],
+  "activeWorkOrders": [],
   "knownLimitations": [
-    "M2a technically verified on labelled fixtures. Actual V1.1 source list now supplied; source adapter admitted, not implemented. Measuredhold/business/operational acceptance pending.",
+    "PIPE-LIST actual31group/1076bundle source integration technically verified; source mass/dimensions calculated/provisional.16bundles need envelope verification; measuredhold/business/operational acceptance pending.",
     "Raw drafts/history remain in browser session until explicit immutable SQLite snapshot save. Latest100 snapshots listed; no overwrite/delete/backup/restore UI.",
-    "CSV UTF8 only, max200units/1MiB; no XLSX/PDF import, automatic planner, full version comparison, report export, multilayer or AI.",
+    "GenericCSV max200units/1MiB; fixedsource PIPE-LIST adapter1076units. No generalXLSX/PDF import, automaticplanner, fullversioncomparison, export, multilayer orAI.",
     "BOX/single-layer; VINAFCO hull dimensions sourced, hold/cabin/lines estimated. Onboard cargo outside target hold. No stability/strength/floor-load verification.",
     "Malformed stored timestamps make list unavailable until repaired; app reports error, never silently skips/resets DB. Good records remain accessible by ID.",
     "TestClient/httpx deprecation and Three.js chunk warning remain; separate parent-container maintenance condition unchanged."
@@ -41,9 +39,12 @@
     "docs/reviews/SCST_M2A_REVIEW.md",
     "docs/reviews/SCST_M2A_EVIDENCE/reviewed-source-manifest.json",
     "docs/specs/SCST_PIPE_LIST.md",
-    "docs/work_orders/SCST_PIPE_LIST.md"
+    "docs/work_orders/SCST_PIPE_LIST.md",
+    "docs/reviews/SCST_PIPE_LIST_ASSESSMENT.md",
+    "docs/reviews/SCST_PIPE_LIST_REVIEW.md",
+    "docs/reviews/SCST_PIPE_LIST_EVIDENCE/reviewed-source-manifest.json"
   ],
-  "updatedAt": "2026-10-31",
+  "updatedAt": "2026-11-01",
   "x_verifiedMilestones": [
     {
       "id": "M1",
@@ -62,6 +63,12 @@
       "technicalStatus": "VERIFIED",
       "businessAcceptance": "PENDING",
       "evidence": "docs/reviews/SCST_M2A_REVIEW.md"
+    },
+    {
+      "id": "PIPE-LIST",
+      "technicalStatus": "VERIFIED",
+      "businessAcceptance": "PENDING",
+      "evidence": "docs/reviews/SCST_PIPE_LIST_REVIEW.md"
     }
   ]
 }

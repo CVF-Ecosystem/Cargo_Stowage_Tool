@@ -1,8 +1,12 @@
 # Trạng thái project
 
-Cập nhật: **31-10-2026**.
+Cập nhật: **01-11-2026**.
 
-## Hiện tại — M2a đạt kiểm kỹ thuật
+## Hiện tại — list ống V1.1 đạt kiểm kỹ thuật
+
+Owner cung cấp list thực đã chuẩn hóa, yêu cầu kiểm cách tính và giữ mô hình sà lan. Slice riêng theo [SPEC](../specs/SCST_PIPE_LIST.md) và [work order](../work_orders/SCST_PIPE_LIST.md):31 nhóm,1.076 bó,21.226 ống, ban đầu chưa bố trí; chọn/đặt/bỏ/xoay thủ công, đối soát khối lượng/số bó/ống toàn bộ và từng nhóm, lưu/mở giữ provenance. Không mở planner. [Đánh giá nguồn](../reviews/SCST_PIPE_LIST_ASSESSMENT.md) ghi31,03kg chênh giữa tổng nguồn với K×L và CBM cần đối chiếu. 16bó khối bao cần xác minh, hầm vẫn ước tính. [Review độc lập](../reviews/SCST_PIPE_LIST_REVIEW.md) xác minh92backend/17browser (57,1s), build/contracts/restart và222kiểm độc lập. Sáu tiêu chí kỹ thuật đạt; chưa nghiệm thu nghiệp vụ hoặc vận hành. Demo8765 đã cập nhật, dữ liệu chỉ commit local.
+
+## M2a — đạt kiểm kỹ thuật ở lượt trước
 
 Owner yêu cầu tiếp tục roadmap và xác nhận **“Chưa có, tiếp tục với mẫu có nhãn”** đối với manifest/số đo hầm thực. Đã làm M2a theo [SPEC](../specs/SCST_M2A.md): tạo phương án rỗng; nhập/sửa/xóa từng bó và hầm BOX; đặt/bỏ vị trí; CSV UTF-8 có preview/lỗi dòng-trường; lưu snapshot SQLite immutable và mở lại sau reload/restart. Mẫu M1/VINAFCO được giữ.
 
@@ -36,4 +40,4 @@ Demo synthetic BOX một lớp, bảng/3D/2D cùng dữ liệu, giới hạn ch�
 
 Owner đồng ý bổ sung hình tàu minh họa vào roadmap v0.3; sau đó cho phép tích hợp VINAFCO268 có chọn lọc. Lớp này đã có, backend vẫn kiểm theo hầm BOX ước tính; hiệu chỉnh theo số đo hầm/tuyến hình thực vẫn thuộc M3.
 
-Owner xem bản M2a và phản hồi về hướng dùng. **Phần kế tiếp là SPEC M2b** cho heuristic xếp sơ bộ, hàng chưa xếp và lý do; chưa dispatch trong lượt M2a. M2c chỉnh/so sánh đầy đủ, M2d export, nhiều tầng/case thực M3, AI tùy chọn M4 và vận hành M5 giữ checkpoint riêng. Không suy diễn kiểm kỹ thuật thành nghiệm thu nghiệp vụ hoặc sử dụng phương án thực.
+Owner xem bản M2a và phản hồi về hướng dùng. Sau review nguồn list V1.1 bổ sung M2a, **phần kế tiếp là SPEC M2b** cho heuristic xếp sơ bộ, hàng chưa xếp và lý do; chưa dispatch trong lượt M2a. M2c chỉnh/so sánh đầy đủ, M2d export, nhiều tầng/case thực M3, AI tùy chọn M4 và vận hành M5 giữ checkpoint riêng. Không suy diễn kiểm kỹ thuật thành nghiệm thu nghiệp vụ hoặc sử dụng phương án thực.

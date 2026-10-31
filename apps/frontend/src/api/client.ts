@@ -20,7 +20,7 @@ export async function requestEvaluation(plan?: Plan): Promise<Evaluation> {
   }
   const data = (await response.json()) as Evaluation;
   if (
-    !["scst.m1.v1", "scst.m2a.v1"].includes(data.plan?.contract_version) ||
+    !["scst.m1.v1", "scst.m2a.v1", "scst.pipe-list.v1"].includes(data.plan?.contract_version) ||
     !["SYNTHETIC", "MIXED_REFERENCE", "USER_ENTERED"].includes(data.plan.source)
   )
     throw new Error("Phiên bản dữ liệu API không tương thích.");
@@ -52,3 +52,7 @@ export const previewCsv = (plan: Plan, csv_text: string) => jsonRequest<CsvPrevi
 export const saveSnapshot = (plan: Plan, name: string) => jsonRequest<SavedSummary>("/api/snapshots", {plan,name});
 export const listSnapshots = () => jsonRequest<SavedSummary[]>("/api/snapshots");
 export const openSnapshot = (id: string) => jsonRequest<Evaluation>(`/api/snapshots/${encodeURIComponent(id)}`);
+
+export type PipeLibrary = components["schemas"]["PipeLibrary"];
+export const getPipeLibrary = () => jsonRequest<PipeLibrary>("/api/pipe-list");
+export const previewPipeList = (plan: Plan) => jsonRequest<Evaluation>("/api/pipe-list/preview",plan);

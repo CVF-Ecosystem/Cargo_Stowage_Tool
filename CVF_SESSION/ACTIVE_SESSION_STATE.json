@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "BUILD",
-  "activePhase": "BUILD",
+  "currentMode": "REVIEW",
+  "activePhase": "REVIEW",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -14,9 +14,9 @@
     "FREEZE"
   ],
   "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_PIPE_LIST.md",
-  "nextAllowedMove": "Implement PIPE-LIST six criteria under admitted order64dd3b8; root independent review before closure.",
-  "parkedOperatorCheckpoint": "Actual cargo list supplied; measured hold and16bundle envelope verification, business/operational acceptance remain pending. M2b-d/M3 separate.",
-  "activeRole": "ORCHESTRATOR",
+  "nextAllowedMove": "Owner reviews delivered PIPE-LIST workflow; next roadmap work is bounded SPEC M2b after checkpoint, not dispatched automatically.",
+  "parkedOperatorCheckpoint": "Actual list integrated; measured hold and16bundle envelope verification, business/operational acceptance pending. M2b-d/M3 remain separate.",
+  "activeRole": "SESSION_SYNC_STEWARD",
   "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",
-  "updatedAt": "2026-10-31"
+  "updatedAt": "2026-11-01"
 }

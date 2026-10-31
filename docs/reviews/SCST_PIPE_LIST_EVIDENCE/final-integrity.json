@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "reviewed_source_files": 17,
+  "raw_package_manifest_files": 22,
+  "historical_pngs_restored": 11,
+  "immutable_vessel_archive_and_inherited_tests_unchanged": true,
+  "roadmap_criterion_section_unchanged": true,
+  "new_document_local_links_checked": 80,
+  "canonical_continuity_agrees": true,
+  "no_raw_package_in_git": true
+}

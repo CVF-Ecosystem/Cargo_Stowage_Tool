@@ -4,6 +4,7 @@ from typing import Annotated, Literal
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, model_validator
 
 from ...vessel import PROFILE, CASES
+from ...adapters.pipe_registry import DATASET, EXPECTED
 
 Dimension = Annotated[StrictInt, Field(gt=0, le=1_000_000)]
 Mass = Annotated[StrictInt, Field(gt=0, le=1_000_000_000_000)]
@@ -24,6 +25,17 @@ class Hold(Model):
     shape: Literal["BOX"] = "BOX"
 
 
+class PipeSourceRef(Model):
+    dataset_id: Literal["BALTIMORE-PIPE-V1-1"]
+    workbook_sha256: str
+    sheet: str
+    group_id: str
+    source_row: StrictInt
+    bundle_index: StrictInt
+    pieces: StrictInt
+    dimension_warning: bool
+
+
 class CargoUnit(Model):
     id: Identifier
     name: str = Field(min_length=1, max_length=100)
@@ -33,6 +45,8 @@ class CargoUnit(Model):
     width_mm: Dimension
     height_mm: Dimension
     mass_g: Mass
+    dimensions_um: tuple[StrictInt, StrictInt, StrictInt] | None = None
+    source_ref: PipeSourceRef | None = None
 
 
 class Placement(Model):
@@ -65,17 +79,32 @@ class VesselReference(Model):
 
 
 class Plan(Model):
-    contract_version: Literal["scst.m1.v1", "scst.m2a.v1"] = "scst.m1.v1"
+    contract_version: Literal["scst.m1.v1", "scst.m2a.v1", "scst.pipe-list.v1"] = "scst.m1.v1"
     source: Literal["SYNTHETIC", "MIXED_REFERENCE", "USER_ENTERED"] = "SYNTHETIC"
-    cargo_source: Literal["SYNTHETIC", "USER_ENTERED"] | None = None
+    cargo_source: Literal["SYNTHETIC", "USER_ENTERED", "DOCUMENT_CALCULATED"] | None = None
     vessel: VesselReference | None = None
+    cargo_dataset: Literal["BALTIMORE-PIPE-V1-1"] | None = None
     hold: Hold
     limits: Limits
-    units: list[CargoUnit] = Field(max_length=200)
-    placements: list[Placement] = Field(max_length=200)
+    units: list[CargoUnit] = Field(max_length=1076)
+    placements: list[Placement] = Field(max_length=1076)
 
     @model_validator(mode="after")
     def identities(self):
+        pipe = self.contract_version == "scst.pipe-list.v1"
+        if pipe:
+            if self.cargo_dataset != DATASET or self.cargo_source != "DOCUMENT_CALCULATED" or len(self.units) != len(EXPECTED):
+                raise ValueError("Pipe dataset and complete manifest required")
+            for unit in self.units:
+                expected = EXPECTED.get(unit.id)
+                actual = unit.model_dump(mode="json")
+                if expected is None or any(actual[k] != expected[k] for k in expected if k != "requirement"):
+                    raise ValueError("Pipe source data does not match registry")
+        else:
+            if self.cargo_dataset is not None or self.cargo_source == "DOCUMENT_CALCULATED" or len(self.units)>200 or len(self.placements)>200:
+                raise ValueError("Legacy plan cannot carry pipe dataset")
+            if any(u.dimensions_um is not None or u.source_ref is not None for u in self.units):
+                raise ValueError("Legacy plan cannot carry pipe source fields")
         if self.contract_version == "scst.m1.v1":
             if not self.units or self.source == "USER_ENTERED" or self.cargo_source is not None:
                 raise ValueError("M1 requires cargo and synthetic or reference source")
@@ -128,3 +157,6 @@ class Evaluation(Model):
     issues: list[Issue]
     unchecked: list[str]
     operational_eligible: Literal[False] = False
+    total_issues: int | None = None
+    issues_truncated: bool | None = None
+    affected_unit_ids: list[str] | None = None

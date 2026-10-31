@@ -1,6 +1,6 @@
 # SCST — Hướng dẫn chạy và kiểm
 
-SCST M1 là bản demo synthetic trên máy cá nhân. Hầm BOX mục tiêu luôn trống; hàng đã có trên tàu nằm ngoài hầm và chỉ trừ vào giới hạn chuyến. Không sử dụng kết quả này để lập hoặc phê duyệt phương án thực. Không có AI, dịch vụ ngoài hoặc dữ liệu thật.
+SCST chạy local với mẫu synthetic, chế độ tham chiếu VINAFCO, nhập tay/CSV và nguồn list ống thép chuẩn hóa. Hầm BOX mục tiêu luôn trống; hàng đã có trên tàu nằm ngoài hầm và chỉ trừ vào giới hạn chuyến. Không sử dụng kết quả này để lập hoặc phê duyệt phương án thực. Không có AI hoặc dịch vụ ngoài; dữ liệu list thực vẫn có thông số chưa xác minh.
 
 ## Chạy trên Windows
 
@@ -22,7 +22,7 @@ Chọn **Xem VINAFCO 268**. Thân dùng kích thước theo hồ sơ 77,8 × 13,
 
 Giới hạn chuyến cũ được giữ hoặc hạ theo mức mới, không tự nâng từ32t của mẫu lên mức hàng tham chiếu. Có thể chỉnh giới hạn chuyến bằng kg; mức hàng theo hồ sơ chỉ đọc. Khi có STALE, áp dụng và kiểm lại trước khi đổi cấp, khôi phục mẫu hoặc undo. Hàng đã có vẫn được tính ngoài hầm mục tiêu; nếu vượt mức cấp mới thì không chuyển cấp và giữ dữ liệu.
 
-Hầm nguồn rộng10,34375m; kiểm integer-mm dùng10,343m và lùi0,375mm mỗi mạn. Đây là chuyển đơn vị bảo thủ trên hầm ước tính. Mạn khô nguồn612/362mm giữ riêng D−d600/350mm; chênh lệch12mm chưa giải thích. Tải sàn và khối lượng tàu không chưa có dữ liệu. Chưa hỗ trợ container (giấy có điều kiện mớn riêng4,17m), ổn định/sức bền hoặc empty manifest. Lỗi tải GLB vẫn dùng được bảng/hầm/kiểm; WebGL lỗi chuyển2D.
+Hầm nguồn rộng10,34375m; kiểm integer-mm dùng10,343m và lùi0,375mm mỗi mạn. Đây là chuyển đơn vị bảo thủ trên hầm ước tính. Mạn khô nguồn612/362mm giữ riêng D−d600/350mm; chênh lệch12mm chưa giải thích. Tải sàn và khối lượng tàu không chưa có dữ liệu. Chưa hỗ trợ container (giấy có điều kiện mớn riêng4,17m) hoặc ổn định/sức bền. M2a đã hỗ trợ manifest rỗng. Lỗi tải GLB vẫn dùng được bảng/hầm/kiểm; WebGL lỗi chuyển2D.
 
 Tài liệu nguồn local trong `VINAFCO268_LOCAL_HANDOFF/`, bị loại khỏi Git; app chỉ đọc profile kỹ thuật chọn lọc và GLB trong `services/backend/data/vessels/vinafco268/`. Không cần gói gốc để chạy app sau khi đã tích hợp. Xem [review](reviews/SCST_VINAFCO268_REVIEW.md).
 
@@ -42,7 +42,20 @@ Loại `BAR_BUNDLE`/`PIPE_BUNDLE`; yêu cầu `required`/`optional`/`excluded`. 
 
 SQLite mặc định: `runtime-data/scst.sqlite3`, ngoài Git. Giữ thư mục này nếu muốn giữ các bản lưu; không xóa để xử lý lỗi. `SCST_DATA_DIR` dành cho cấu hình server và test cô lập, không nhận qua API. File/record/phiên bản/timestamp lỗi được báo, không reset DB; bản đang mở giữ nguyên. Nếu một record timestamp hỏng, danh sách chưa dùng được cho tới khi sửa dữ liệu; record tốt vẫn còn, không bị bỏ hoặc sửa ngầm. Backup/restore tự động thuộc M5.
 
-Owner chưa có manifest/số đo hầm thực và đã chọn tiếp tục với mẫu có nhãn. Hàng/hầm tự nhập là dữ liệu khai báo chưa xác minh; GLB VINAFCO và các giới hạn sử dụng ở trên vẫn áp dụng. Xem [SPEC](specs/SCST_M2A.md) và [review](reviews/SCST_M2A_REVIEW.md).
+Ở lượt M2a, owner chưa có manifest/số đo hầm thực và chọn mẫu có nhãn. Sau đó owner cung cấp list ống V1.1 bên dưới; số đo hầm vẫn chưa có. Hàng/hầm tự nhập là dữ liệu khai báo chưa xác minh; GLB VINAFCO và các giới hạn sử dụng ở trên vẫn áp dụng. Xem [SPEC](specs/SCST_M2A.md) và [review](reviews/SCST_M2A_REVIEW.md).
+
+## Nguồn list ống V1.1
+
+1. Chọn hầm/phương án muốn dùng. **Xem VINAFCO 268** mở hầm tham chiếu ước tính; nạp list không tự đổi phương tiện hoặc nâng giới hạn chuyến. Mặc định giới hạn chuyến 32t từ mẫu vẫn được giữ, bạn khai báo giới hạn phù hợp rồi kiểm lại.
+2. **Xem trước list ống** để xem nguồn: 31 nhóm, 1.076 bó, 21.226 ống. **Nạp list vào phương án hiện tại** thay manifest và xóa các placement cũ; có thể quay về **Bản trước**. Mọi bó ban đầu chưa xếp, yêu cầu mặc định **Tùy chọn**, vì nguồn chưa xác nhận toàn bộ list bắt buộc cho một chuyến.
+3. Trong **Danh sách hàng**, lọc **Nhóm nguồn** theo dòng Excel (`Sheet1-R002` là dòng 2) và dùng **Trang trước/Trang sau**, tối đa 50 bó/trang. ID `PIPE-R002-B0001` là bó thứ nhất ở dòng 2, không dùng STT nguồn làm khóa.
+4. Chọn bó → **Đặt bó** tại gốc hầm, sửa X/Y/góc → **Áp dụng & kiểm lại**. Đặt tiếp tại cùng gốc sẽ báo giao nhau; app không tự tìm vị trí. **Bỏ vị trí** đưa bó về chưa xếp. Số bó/ống/khối lượng đã xếp và còn lại có cho toàn list lẫn nhóm đang lọc. Bó **Loại trừ** vẫn thuộc tồn hàng nguồn nhưng không được đặt; số liệu còn lại bao gồm các bó này.
+5. Các trường khối lượng/kích thước/ID nguồn cố định. Có thể đổi yêu cầu và vị trí; muốn thay danh sách bằng dữ liệu tự nhập dùng **Phương án mới** hoặc CSV. **Dùng hầm tự nhập** giữ list và bỏ liên kết tàu, cho sửa hầm BOX chưa xác minh. Đổi VR-SI/VR-SII và lưu/mở giữ provenance/placement của list.
+6. Lưu snapshot như phần M2a. Reload → mở bản đã lưu; rawdraft vẫn không tự lưu. Sửa nháp phải kiểm lại trước khi nạp list/đổi phương án; phản hồi đến muộn không ghi đè thay đổi mới.
+
+Khối lượng bó = K (kg/ống) × L (ống/bó), lưu gram nguyên. Tổng tính **1.125,55103t**, tổng O nguồn **1.125,52t**, lệch **31,03kg**; không phải dữ liệu cân từng bó. CBM nguồn **1.130,96964733156m³**, khối bao tính lại **1.157,54318105797m³** (R23:R26 nguồn chưa nhân số bó). Thể tích khối bao có khoảng rỗng, không chứng minh khả năng xếp vừa. Kích thước nguồn giữ chính xác µm, giao diện mm có phần lẻ; tọa độ đặt dùng mm nguyên.
+
+16 bó ở dòng 22/31/32 có khối bao cần xác minh; app giữ cảnh báo và không tự sửa kích thước hoặc vẽ từng ống. Chỉ các bó đã đặt mới có mesh trong hầm. Nếu có quá nhiều lỗi, danh sách chỉ hiện 200 lỗi nhưng tổng đếm và các bó bị ảnh hưởng vẫn đầy đủ. Ship GLB/profile không đổi. Workbook/gói nguồn V1.1 giữ local ngoài Git; runtime dùng derivative có hash, không cần mở Excel. [Đánh giá cách tính](reviews/SCST_PIPE_LIST_ASSESSMENT.md), [SPEC](specs/SCST_PIPE_LIST.md).
 
 ## Kiểm nhà phát triển
 

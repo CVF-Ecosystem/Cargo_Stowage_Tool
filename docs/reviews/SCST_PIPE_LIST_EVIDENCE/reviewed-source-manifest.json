@@ -1,0 +1,22 @@
+{
+  "textNormalization": "CRLF to LF",
+  "files": {
+    "apps/frontend/src/api/client.ts": "a74c1a5ba3822130ad329320c73bf57bf1db217fc6bcd5090dd10e35af1564a0",
+    "apps/frontend/src/api/generated/api.ts": "16208bbf1152e3dc9eb4d81591ee3e71505d1ed7fe358a21c05b5da646c37bfd",
+    "apps/frontend/src/features/Workspace.tsx": "5c451876dfb3d624def76cad6415dd20d1c01e8d81132ae56b7f27e1232f587a",
+    "apps/frontend/src/features/model.ts": "e399add15e81efe557f1da447ddd8a78f26e00aef9aa5dd1647d6356fd3e1abc",
+    "apps/frontend/src/viewer-3d/Viewer.tsx": "649f983f35f96fc95c1ed23df1ec4f6ff57df05b30393a54e3ae3fa6fcc2124e",
+    "contracts/openapi.json": "daf6f6dc30efdcf52acd0949950fe3616d876f333d03a0bb5fdf2ee0617aa7d5",
+    "services/backend/app/adapters/csv_import.py": "86f6c38ff54f40945a47c3ded24c7f293e3c7aa18b865dcfdebd5f88a361a94c",
+    "services/backend/app/adapters/pipe_registry.py": "c00953b904567af71c496c61d5d6a8085f960150b086a0bb9a479f114bdafe00",
+    "services/backend/app/api/routes.py": "772629237adf9c8bca7caeee68742347be4597f71dd5c5e9be8cb56e28ef0e21",
+    "services/backend/app/domain/geometry/__init__.py": "eeb5625a1701689f2a97bcafb9ba841f804171ff1e6eb3451bc10eec0ce4e0be",
+    "services/backend/app/domain/model/__init__.py": "455d2b759cc91b5c11838f917486aebf4ff47d75bdb26fd7ae2d2e71c287908d",
+    "services/backend/app/domain/rules/__init__.py": "56c551a0d3caa30ffc7b7d29ebddbc686f556ef9b42a3c2d3f6a539bf3e89120",
+    "services/backend/data/pipe_list/baltimore.json": "429acdeb430d7bc6c2a1798a51d66fe523d62dd10469a8b50c7dd398d6d20330",
+    "tests/backend/test_pipe_list.py": "5b2f97e17e717f8087b4cf4f70599b7ddcc73df5029fab0fddc8e712ec6e8538",
+    "tests/browser/pipe-list.spec.ts": "8c090a7fcbd86d778615eb0a05106fe24928a83394726499b5da992c2f7f435d",
+    "tests/pipe_list_restart_smoke.py": "cf6a0db516efa1b80a65cef635aab1e231b861babcd14d368e7da33e6e0edad0",
+    "tooling/import_pipe_list.py": "e70e8ae597597d2742b2412ff2fabde5c254c07fa620e2d784cf897e92e1bcb9"
+  }
+}
