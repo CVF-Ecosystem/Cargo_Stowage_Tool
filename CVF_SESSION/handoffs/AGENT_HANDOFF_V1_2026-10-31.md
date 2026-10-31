@@ -8,10 +8,17 @@ Status: ACTIVE
 - Current mode: SPEC
 - Active phase: SPEC
 - Active role: SESSION_SYNC_STEWARD
-- Next allowed move: Claude rechecks the selective M1 reuse assessment; owner settles the exact selection and SPEC M1, then register acceptance and author a bounded WORK_ORDER. No source transfer or BUILD until authorized.
+- Next allowed move: Owner reviews SPEC M1 v0.2 (docs/specs/SCST_M1.md) and confirms D1, D2 (incl. empty target hold), D4 and D7. After agreement: register the M1 acceptance section, then author WORK_ORDER M1. No BUILD until that work order is authorized.
 - Parked operator checkpoint: Claude recheck and owner settlement of reuse selection/SPEC M1; separate bounded WORK_ORDER before source transfer or application BUILD.
 
-## Selective M1 reuse assessment (latest)
+## SPEC M1 v0.2 and coverage snapshot repair (latest)
+
+- 31-10-2026: owner approved applying the recheck and the 3 owner review points ("Ok. vậy sửa luôn, ra Spec mới"). Same agent as REVIEWER (recheck of Codex reuse assessment), SPEC_AUTHOR, REPAIR_WORKER, SESSION_SYNC_STEWARD. R1 documentation; no code, archive unchanged.
+- Recheck of `docs/reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md`: pins (roadmap/SPEC hashes, archive tree e4004e2) verified; parseKg rejects 0, types-only generation, form/boolean state and limited browser assertions confirmed in source. Not verifiable here: the claim that the owner already chose selective reuse (kept as owner confirmation item 1).
+- SPEC v0.2: empty target hold (onboard cargo outside target hold), integer domain and relations for load limits with negative/zero/non-integer/over-cap/relation test cases, D7 draft/STALE, types-only generation wording, 3D mesh-vs-API check in M1-06, reuse appendix.
+- COV_AUTHORITY_STALE on closed `SCST_M1_SKELETON` (caused by my 2f29a1a edit): froze roadmap at f2b688e as `docs/roadmaps/snapshots/SCST_ROADMAP_v0.2_at_f2b688e.md` (section hash 560ba09f unchanged), registered `SCST-ROADMAP-AT-F2B688E`, repointed only milestone.id/authority.path in the closed work order with a disclosed note. Direct validation clean. Learning `docs/reviews/learnings/SCST_L001_CLOSED_PACKET_AUTHORITY_DRIFT.md`; intake `docs/learning_intake/SCST-L001.intake.json` generated (not parent acceptance).
+
+## Selective M1 reuse assessment
 
 - 31-10-2026: owner explicitly wants selective reuse of existing M1 aligned with the new roadmap/SPEC, and requested a clear assessment/proposal for Claude recheck. Reuse is the chosen direction; do not ask again whether to reuse versus rewrite wholesale. Exact selection and implementation remain unapproved.
 - Rehydrated manifest/policy/state/memory/handoff/status/index. REVIEWER (original M1 author, disclosed self-assessment) inspected source and authored `docs/reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md`, Status DRAFT_FOR_RECHECK. Risk R1 documentation within ceiling R2; project stays SPEC. Next responsibility is SESSION_SYNC_STEWARD for navigation/continuity, COMMIT_STEWARD for documentation commit, then SESSION_SYNC_STEWARD continuation; no app work order or BUILD.
@@ -21,7 +28,7 @@ Status: ACTIVE
 - Documentation verification: 23 local links valid; acceptance map contains M1-01 through M1-09 once each; all 50 archived files match their raw Git blob identities. Catalog, pre-dispatch, worker-return and reviewer-fast passed on this documentation scope. INVOKED controls only; coverage/role admission not applicable to this advisory report, no execution/acceptance grant. Existing historical work-order failure remains separate and disclosed.
 - Re-read current memory/state/handoff/status/index at COMMIT_STEWARD transition. Commit contains the report and navigation/continuity only; application source, SPEC, roadmap, archive and core remain unchanged. Continuation is SESSION_SYNC_STEWARD in SPEC awaiting Claude/owner.
 
-## SPEC M1 draft (latest)
+## SPEC M1 draft
 
 - 31-10-2026: owner asked to write SPEC M1 without building ("soạn spec M1, không thi công"), which also closes the skeleton review checkpoint. Rehydrated state/memory/handoff/status/index first. Role: SPEC_AUTHOR, then SESSION_SYNC_STEWARD. R1 documentation; no code, no archive change.
 - Gap assessment of the archived trial (SPEC, APP_GUIDE, domain/API source, test list). Reusable: launcher, stack, integer units, basic checks, table/3D/2D, edit/undo. Gaps: flat domain vs `model/geometry/rules`, single load limit, missing layer/support fields, missing status labels, stale guide/evidence.
@@ -51,7 +58,7 @@ Status: ACTIVE
 - Pre-dispatch gate: first run failed on my own format error (dispatch_continuity surface lacked the "material-SHA marker" wording), fixed in place; rerun PASS 6/6.
 - Material-SHA marker: dispatch commit f2b688e. It was committed while CONT-01 reported a surface mismatch (backticks in the handoff next-move line) because the gate and commit ran in one command; corrected in the follow-up continuity commit before BUILD, gate rerun PASS 6/6. Local git has no pre-commit gate hook installed (only prepare-commit-msg). Next role: IMPLEMENTATION_WORKER.
 
-## M0 agreement record (latest)
+## M0 agreement record
 
 - 31-10-2026: after the REVIEWER assessment of draft v0.1, owner replied "Đồng ý, thống nhất". Recorded in `docs/decisions/SCST_D001_THONG_NHAT_HUONG_M0_2026-10-31.md`: overall direction agreed, and the review points are applied.
 - Rehydrated manifest, policy, active state, memory, handoff, implementation truth and index before material work; core pinned at c4c8767ac8861854f40d466ba338ffd11eb9558e.

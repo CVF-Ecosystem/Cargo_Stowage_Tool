@@ -34,7 +34,7 @@ Machine intake stays at docs/learning_intake/<findingId>.intake.json via the pin
 
 ## Record Index
 
-No reusable finding recorded yet. Replace this sentence with linked source records when available.
+- [SCST-L001](SCST_L001_CLOSED_PACKET_AUTHORITY_DRIFT.md): closed work order coverage authority goes stale after the live roadmap section is edited; local snapshot repair applied, parent assessment pending.
 
 ## Claim Boundary
 

@@ -1,0 +1,43 @@
+{
+  "acceptance": "NOT_ACCEPTED_GENERATION_ONLY",
+  "candidateControl": "Allow authority references to carry a commit/blob revision or snapshot path, and warn when a changed authority section is still bound by other packets.",
+  "chainJoins": [
+    {
+      "earliestControlPoint": "pre-commit check when a registered authority section changes",
+      "gap": "no revision pin or snapshot reference; closed unchanged packets are not re-checked by phase gates",
+      "join": "authority section edit -> closed packet bound to it"
+    }
+  ],
+  "claimLimits": "One project, one closed packet; local snapshot repair validated directly; no parent acceptance or hosted CI claim.",
+  "contentSha256": "f864c821e3baa5a3d244c4534c85eaeed930fc927f7b5f4ef8167a196ac14f5b",
+  "dedupCandidates": [
+    "CVF-DG-COV-01",
+    "docs/reference/downstream_gate_profile/CVF_MILESTONE_COVERAGE_MACHINE_CONTRACT.md"
+  ],
+  "defectClass": "MACHINE_GATE_GAP",
+  "expected": "A closed packet remains verifiable against the criteria revision it was dispatched with, without rewriting its coverage block.",
+  "findingId": "SCST-L001",
+  "learningLane": "GOVERNANCE_CONTROL_PLANE",
+  "negativeEvidence": [
+    {
+      "description": "validate_file returned ['COV_AUTHORITY_STALE']",
+      "locator": "docs/work_orders/SCST_M1_SKELETON.md (before repair)"
+    }
+  ],
+  "observed": "Direct coverage validation of a closed work order returned COV_AUTHORITY_STALE after the bound roadmap section was edited post-closure; the registry allows one path per milestone ID and the validator reads only the current file.",
+  "parentDisposition": "PENDING_PARENT_ADMISSION",
+  "parentLinks": {
+    "admissionRecord": null,
+    "checker": null,
+    "goldenProof": null,
+    "workOrder": null
+  },
+  "parentOwner": "docs/reference/CVF_FINDING_TO_GOVERNANCE_LEARNING_TRIGGER_STANDARD.md",
+  "profileId": "cvf.downstreamGateProfile@1.2.0",
+  "proposedDisposition": "DESIGN_REVIEW_REQUIRED",
+  "schemaVersion": "cvf.downstreamFindingIntake@1.0.0",
+  "sourceClaimStatus": "UNVERIFIED_UNTIL_PROJECT_EVIDENCE_IS_SEPARATELY_ADMITTED",
+  "sourceProject": "Cargo_Stowage_Tool",
+  "sourceSha": "2f29a1ae5f0d10a0318055c92a8aceefe3388e14",
+  "title": "Closed work order coverage authority goes stale when the live roadmap section is edited"
+}

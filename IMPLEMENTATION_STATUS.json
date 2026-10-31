@@ -8,7 +8,7 @@
   "knownLimitations": [
     "Owner agreed overall direction on 31-10-2026 (SCST-D001); roadmap v0.2 is active planning authority, not milestone acceptance.",
     "Application implementation is paused. Previous M1 source and evidence are archived, not accepted capabilities.",
-    "M1 folder skeleton exists (README files only). SPEC M1 is DRAFT awaiting owner; no active work order.",
+    "M1 folder skeleton exists (README files only). SPEC M1 v0.2 is DRAFT awaiting owner; no active work order.",
     "Owner selected selective M1 reuse; exact source-to-target proposal awaits Claude recheck and owner settlement. No code has been transferred."
   ],
   "evidence": [
@@ -19,7 +19,9 @@
     "docs/decisions/SCST_D001_THONG_NHAT_HUONG_M0_2026-10-31.md",
     "docs/work_orders/SCST_M1_SKELETON.md",
     "docs/specs/SCST_M1.md",
-    "docs/reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md"
+    "docs/reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md",
+    "docs/reviews/learnings/SCST_L001_CLOSED_PACKET_AUTHORITY_DRIFT.md",
+    "docs/roadmaps/snapshots/SCST_ROADMAP_v0.2_at_f2b688e.md"
   ],
   "updatedAt": "2026-10-31"
 }

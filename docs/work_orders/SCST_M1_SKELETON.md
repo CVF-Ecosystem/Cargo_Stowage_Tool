@@ -74,12 +74,12 @@ Nguồn tiêu chí là bảng mốc của roadmap đã thống nhất. Lát cắ
 {
   "schemaVersion": "cvf.milestoneCoverage@1.0.0",
   "authority": {
-    "path": "docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md",
+    "path": "docs/roadmaps/snapshots/SCST_ROADMAP_v0.2_at_f2b688e.md",
     "heading": "## Phạm vi và đầu ra từng mốc",
     "sha256": "560ba09fe9210eb31ab58f858f89c4a007a397014507192fc5d1ae22f35794bb"
   },
   "milestone": {
-    "id": "SCST-ROADMAP",
+    "id": "SCST-ROADMAP-AT-F2B688E",
     "consumer": "Owner SCST",
     "outcome": "M1 folder skeleton matching the agreed treeview, one README per folder, no application code",
     "checkpoint": {
@@ -177,3 +177,7 @@ Nguồn tiêu chí là bảng mốc của roadmap đã thống nhất. Lát cắ
   Tất cả đạt. Reviewer sửa tại chỗ câu chữ README của `domain/rules` (không đổi phạm vi).
 - Tiêu chí 4: catalog hợp lệ; worker-return, reviewer-fast và pre-commit đạt trước commit material.
 - Không có code, dependency hay dữ liệu. M1 vẫn chưa đạt; bước tiếp theo là owner xem khung, rồi SPEC M1.
+
+## Ghi chú sửa nguồn tiêu chí sau khi đóng
+
+31-10-2026: roadmap hiện hành đổi mục bảng mốc ở commit `2f29a1a`, làm kiểm trực tiếp work order này báo `COV_AUTHORITY_STALE`. Bộ kiểm chỉ đọc file hiện tại và mỗi mã chỉ trỏ một file, nên không giữ được nguồn lúc dispatch nếu không sửa block. Đã sửa tối thiểu: `milestone.id` → `SCST-ROADMAP-AT-F2B688E`, `authority.path` → bản chụp `docs/roadmaps/snapshots/SCST_ROADMAP_v0.2_at_f2b688e.md` lấy từ commit dispatch `f2b688e`. **Hash nguồn giữ nguyên** (`560ba09f…`); rows, kết luận và phần còn lại không đổi. Mã `SCST-ROADMAP` vẫn trỏ roadmap hiện hành cho work order mới. Ghi nhận: [learning SCST-L001](../reviews/learnings/SCST_L001_CLOSED_PACKET_AUTHORITY_DRIFT.md).

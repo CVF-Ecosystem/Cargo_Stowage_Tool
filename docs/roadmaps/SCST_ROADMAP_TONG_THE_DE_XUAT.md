@@ -97,7 +97,7 @@ Owner đã thống nhất hướng; chưa có mốc app nào được nghiệm t
 <details>
 <summary>Metadata CVF cho lượt đối chiếu và đề xuất</summary>
 
-Bản đồ tiêu chí `docs/milestone-coverage-authority.json` đã có từ 31-10-2026, trỏ mã `SCST-ROADMAP` tới mục "Phạm vi và đầu ra từng mốc". Khi mục đó thay đổi, work order mới phải tính lại hash; work order đã đóng giữ hash tại thời điểm dispatch. Metadata dưới đây chỉ ghi lượt soạn và sửa roadmap, không cấp quyền BUILD.
+Bản đồ tiêu chí `docs/milestone-coverage-authority.json` đã có từ 31-10-2026, trỏ mã `SCST-ROADMAP` tới mục "Phạm vi và đầu ra từng mốc". Trước khi sửa mục đó, liệt kê các work order đang trỏ tới; work order đã đóng được chuyển sang bản chụp lúc dispatch (ví dụ `docs/roadmaps/snapshots/SCST_ROADMAP_v0.2_at_f2b688e.md`, mã `SCST-ROADMAP-AT-F2B688E`), giữ nguyên hash; work order mới tính hash theo bản hiện hành. Metadata dưới đây chỉ ghi lượt soạn và sửa roadmap, không cấp quyền BUILD.
 
 ```cvf-milestone-coverage-json
 {
