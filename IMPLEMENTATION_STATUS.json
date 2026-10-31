@@ -1,17 +1,15 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "M1_TECHNICALLY_VERIFIED_PENDING_COMMIT",
+  "overallStatus": "M1_TECHNICALLY_VERIFIED_AWAITING_OWNER_DEMO",
   "currentPhase": "REVIEW",
   "completedCapabilities": [],
-  "activeWorkOrders": [
-    "docs/work_orders/SCST_M1_REUSE.md"
-  ],
+  "activeWorkOrders": [],
   "knownLimitations": [
-    "All nine M1 technical criteria verified on the new synthetic candidate; material commit and work-order closure checks pending.",
-    "Owner demo/business acceptance pending; completedCapabilities remains empty until accepted.",
-    "Session-only state; no planner/import/persistence/export/multi-layer/real cargo/AI integration.",
-    "Python test-client deprecation and Three.js chunk size warnings remain; parent-container maintenance condition is separate."
+    "All nine M1 technical criteria verified and implementation work order closed; owner demo/business acceptance pending.",
+    "Session-only state: refresh loses changes; no planner/import/persistence/export/multi-layer/real cargo/AI integration.",
+    "Synthetic BOX/single-layer only; onboard cargo is outside the empty target hold. Not operational approval.",
+    "Python test-client deprecation and Three.js chunk size warnings remain; parent-container maintenance condition was recorded separately."
   ],
   "evidence": [
     "docs/project/PROJECT_STATUS.md",
@@ -25,7 +23,10 @@
     "docs/reviews/learnings/SCST_L001_CLOSED_PACKET_AUTHORITY_DRIFT.md",
     "docs/roadmaps/snapshots/SCST_ROADMAP_v0.2_at_f2b688e.md",
     "docs/decisions/SCST_D002_M1_REUSE_EXECUTION.md",
-    "docs/work_orders/SCST_M1_REUSE.md"
+    "docs/work_orders/SCST_M1_REUSE.md",
+    "docs/reviews/SCST_M1_WORKER_RETURN.md",
+    "docs/reviews/SCST_M1_REVIEW.md",
+    "docs/reviews/SCST_M1_EVIDENCE/reviewer-source-manifest.json"
   ],
   "updatedAt": "2026-10-31",
   "x_verifiedMilestones": [

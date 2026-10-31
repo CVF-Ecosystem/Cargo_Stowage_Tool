@@ -30,7 +30,7 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 - M1 selective reuse assessment, worker return, root technical review and new evidence.: `docs/reviews/`
 - Owner-agreed SCST roadmap v0.2 and architecture tree: docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md; next slice SPEC M1.: `docs/roadmaps/`
 - SPEC M1 v0.2 admitted for execution under SCST-D002; product acceptance separate.: `docs/specs/`
-- SCST_M1_REUSE active work order; historical skeleton packet remains closed.: `docs/work_orders/`
+- M1 reuse implementation closed after technical review; owner demo feedback pending. Skeleton packet remains historical.: `docs/work_orders/`
 
 Plans describe intended work. `IMPLEMENTATION_STATUS.json`, source, tests, and
 review evidence determine what is actually implemented.

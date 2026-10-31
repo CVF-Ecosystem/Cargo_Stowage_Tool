@@ -114,7 +114,7 @@
       "family": "governed_artifact_family",
       "path": "docs/work_orders",
       "status": "ACTIVE",
-      "description": "SCST_M1_REUSE active work order; historical skeleton packet remains closed."
+      "description": "M1 reuse implementation closed after technical review; owner demo feedback pending. Skeleton packet remains historical."
     },
     {
       "id": "family-reviews",

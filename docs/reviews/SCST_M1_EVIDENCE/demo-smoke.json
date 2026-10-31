@@ -1,0 +1,17 @@
+{
+  "url": "http://127.0.0.1:8765",
+  "health": {
+    "status": "ok",
+    "version": "0.1.0",
+    "mode": "synthetic-demo",
+    "ai": "off"
+  },
+  "contract": "scst.m1.v1",
+  "status": "RULES_CHECKED",
+  "units": 13,
+  "placements": 12,
+  "uiHTML": "PASS",
+  "materialCommit": "e81506ad79e3a7f84affa78c7f3ead47b0480c33",
+  "runMode": "managed foreground PTY session 54885",
+  "result": "PASS"
+}

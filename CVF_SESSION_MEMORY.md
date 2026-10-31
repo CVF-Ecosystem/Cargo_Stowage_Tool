@@ -11,7 +11,7 @@ Memory class: POINTER_RECORD
 
 ## Current operator boundary
 
-Owner directed continued M1 execution with root orchestrator/reviewer, Terra 6.1 High worker and Sol-Medium for difficult parts. SCST-D002 admits SPEC v0.2 and selective reuse; work order `docs/work_orders/SCST_M1_REUSE.md` covers all M1-01..09. Dispatch commit 60f7cd3333b431ebb80e8a3be59eb424d8df7e55 validated; material-SHA acknowledged in the active handoff. Terra and Sol returned M1; root is in REVIEW and controls commits. Root controls review/commit and continuity. Archive stays unchanged; no M2-M5, live data or AI/provider calls. No application capability is yet accepted. Current handoff contains role, cost/stop and preflight results; parent-container repair findings are separate from this project's passing doctor.
+M1 selective reuse executed under SCST-D002 / SPEC v0.2 by Terra 6.1 High and Sol-Medium workers, reviewed by root. Material commit e81506ad79e3a7f84affa78c7f3ead47b0480c33; all M1-01..09 technical criteria verified, work order closed after post-material checks. Project stays REVIEW for owner demo/business feedback; no M2 auto-dispatch. Read docs/reviews/SCST_M1_REVIEW.md and docs/APP_GUIDE.md. Completed capabilities are not marked owner-accepted; technical verification is explicit in implementation truth and module catalog. Archive 50/50 blobs unchanged. Managed demo terminal session 54885 (PID34168), URL http://127.0.0.1:8765; runtime handle recorded .cvf/runtime/m1-demo-session.json. No public deployment or provider calls.
 
 ## Read next
 

@@ -7,9 +7,9 @@ Status: ACTIVE
 - Project: Cargo_Stowage_Tool
 - Current mode: REVIEW
 - Active phase: REVIEW
-- Active role: COMMIT_STEWARD
-- Next allowed move: Root reviews final M1 worker evidence and candidate identity, commits verified implementation, then closes the bounded work order and presents the demo to owner.
-- Parked operator checkpoint: Scope changes or risk above R2 return to owner; M2-M5 and operational use remain outside this work order.
+- Active role: SESSION_SYNC_STEWARD
+- Next allowed move: Owner views the M1 synthetic demo and gives business feedback; no M2 work is dispatched. Technical M1 work order is closed with all nine criteria verified.
+- Parked operator checkpoint: Owner demo/business acceptance pending; M2-M5 and operational cargo use require their own scope decisions.
 
 ## Authority and responsibilities
 
@@ -50,3 +50,11 @@ Status: ACTIVE
 - Final rehydration acknowledged at COMMIT_STEWARD transition. Root reviewed the final candidate manifest, source/evidence and local navigation; material commit is bounded to M1 source/tests/tooling and related docs. No publication or M2 action.
 
 - Final diff hygiene: two source files and two text logs had surplus blank EOF lines; normalized to one trailing newline without changing substantive source/output. Candidate manifest refreshed; no runtime logic changed after final tests.
+
+## Post-material closure and demo
+
+- Implementation committed e81506ad79e3a7f84affa78c7f3ead47b0480c33. Explicit reviewer-fast on dispatch-to-material committed range passed; root reviewed then acts CLOSER for bounded technical work and SESSION_SYNC_STEWARD for handoff. WO CLOSED, phase REVIEW, all nine rows VERIFIED, tranche COMPLETE / product PENDING. No capability marked owner-accepted, no M2 dispatch.
+- Root's hidden Start-Process demo-launch command was rejected by automatic execution policy before execution (generic blocked-by-policy reason). Root used the safer tool-managed foreground terminal instead: session54885, PID34168, loopback8765, no-browser. Health/HTML/demo verified from the committed candidate; handle in ignored .cvf/runtime/m1-demo-session.json. No permission escalation or hidden orphan service.
+- Root may stop owned demo via Ctrl+C in session54885. User can launch later with Start-SCST.cmd. Synthetic source and archive checks unchanged. Final continuity/coverage/catalog and commit checks follow; no application source changes in closure commit.
+
+- Final metadata commit stewardship: root rehydrated all five continuity surfaces; doctor28/28, pre-commit7/7, four admitted coverage packets and 51 source hashes passed. Root acts COMMIT_STEWARD for closure records, with SESSION_SYNC_STEWARD as continuation role. No source edits or additional tests needed for metadata closure.

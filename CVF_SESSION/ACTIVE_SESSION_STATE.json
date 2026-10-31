@@ -14,9 +14,9 @@
     "FREEZE"
   ],
   "activeHandoff": "CVF_SESSION/handoffs/SCST_M1_REUSE_HANDOFF.md",
-  "nextAllowedMove": "Root reviews final M1 worker evidence and candidate identity, commits verified implementation, then closes the bounded work order and presents the demo to owner.",
-  "parkedOperatorCheckpoint": "Scope changes or risk above R2 return to owner; M2-M5 and operational use remain outside this work order.",
-  "activeRole": "COMMIT_STEWARD",
+  "nextAllowedMove": "Owner views the M1 synthetic demo and gives business feedback; no M2 work is dispatched. Technical M1 work order is closed with all nine criteria verified.",
+  "parkedOperatorCheckpoint": "Owner demo/business acceptance pending; M2-M5 and operational cargo use require their own scope decisions.",
+  "activeRole": "SESSION_SYNC_STEWARD",
   "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",
   "updatedAt": "2026-10-31"
 }

@@ -1,6 +1,6 @@
 # SCST M1 — Chuyển có chọn lọc và hoàn thiện theo SPEC v0.2
 
-Status: READY_FOR_DISPATCH
+Status: CLOSED
 dispatchKind: INITIAL
 
 Owner: project-orchestrator
@@ -86,9 +86,9 @@ Tiêu chí là toàn bộ mục `## M1 acceptance` của SPEC đã thống nhấ
       "decision": "Review technical readiness, repair within scope, or return unresolved scope to owner; no M2 implementation"
     }
   },
-  "phase": "DISPATCH",
+  "phase": "REVIEW",
   "action": {
-    "kind": "IMPLEMENT",
+    "kind": "REVIEW",
     "selected": [
       "M1-01",
       "M1-02",
@@ -100,84 +100,165 @@ Tiêu chí là toàn bộ mục `## M1 acceptance` của SPEC đã thống nhấ
       "M1-08",
       "M1-09"
     ],
-    "owner": "Terra 6.1 High worker under root orchestration",
-    "output": "M1 source, regenerated contracts, tests, launcher, guide and evidence with worker return",
+    "owner": "Root independent reviewer",
+    "output": "docs/reviews/SCST_M1_REVIEW.md and committed M1 source/evidence",
     "budgetMinutes": 165,
-    "stop": "Stop at scope/risk change, spent budget or third repair without a new cause; report root",
-    "next": "Independent root review and bounded repairs, then owner demo feedback"
+    "stop": "Technical work complete; no automatic M2 or business acceptance",
+    "next": "Owner views M1 synthetic demo and provides business feedback"
   },
   "rows": [
     {
       "id": "M1-01",
-      "state": "NOT_STARTED",
-      "gap": "Not yet implemented or verified on the new M1 tree; old source is a reuse candidate only",
-      "owner": "Terra worker for implementation; root reviewer for readiness",
-      "destination": "docs/reviews/SCST_M1_WORKER_RETURN.md and docs/reviews/SCST_M1_REVIEW.md",
-      "evidence": []
+      "state": "VERIFIED",
+      "gap": "Technical criterion verified; owner business feedback remains pending",
+      "owner": "Root reviewer",
+      "destination": "docs/reviews/SCST_M1_REVIEW.md; owner demo checkpoint",
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M1_REVIEW.md",
+          "sha256": "b2c0dce4524ebb49af9066ca4f5e181523b5a556c2f1ccc6365b5e2b70bbaf42"
+        },
+        {
+          "path": "docs/reviews/SCST_M1_EVIDENCE/reviewer-source-manifest.json",
+          "sha256": "69854b28fee235ca91a31810b58e0c949af1682eb360994d93347c052dec18a0"
+        }
+      ]
     },
     {
       "id": "M1-02",
-      "state": "NOT_STARTED",
-      "gap": "Not yet implemented or verified on the new M1 tree; old source is a reuse candidate only",
-      "owner": "Terra worker for implementation; root reviewer for readiness",
-      "destination": "docs/reviews/SCST_M1_WORKER_RETURN.md and docs/reviews/SCST_M1_REVIEW.md",
-      "evidence": []
+      "state": "VERIFIED",
+      "gap": "Technical criterion verified; owner business feedback remains pending",
+      "owner": "Root reviewer",
+      "destination": "docs/reviews/SCST_M1_REVIEW.md; owner demo checkpoint",
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M1_REVIEW.md",
+          "sha256": "b2c0dce4524ebb49af9066ca4f5e181523b5a556c2f1ccc6365b5e2b70bbaf42"
+        },
+        {
+          "path": "docs/reviews/SCST_M1_EVIDENCE/reviewer-source-manifest.json",
+          "sha256": "69854b28fee235ca91a31810b58e0c949af1682eb360994d93347c052dec18a0"
+        }
+      ]
     },
     {
       "id": "M1-03",
-      "state": "NOT_STARTED",
-      "gap": "Not yet implemented or verified on the new M1 tree; old source is a reuse candidate only",
-      "owner": "Terra worker for implementation; root reviewer for readiness",
-      "destination": "docs/reviews/SCST_M1_WORKER_RETURN.md and docs/reviews/SCST_M1_REVIEW.md",
-      "evidence": []
+      "state": "VERIFIED",
+      "gap": "Technical criterion verified; owner business feedback remains pending",
+      "owner": "Root reviewer",
+      "destination": "docs/reviews/SCST_M1_REVIEW.md; owner demo checkpoint",
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M1_REVIEW.md",
+          "sha256": "b2c0dce4524ebb49af9066ca4f5e181523b5a556c2f1ccc6365b5e2b70bbaf42"
+        },
+        {
+          "path": "docs/reviews/SCST_M1_EVIDENCE/reviewer-source-manifest.json",
+          "sha256": "69854b28fee235ca91a31810b58e0c949af1682eb360994d93347c052dec18a0"
+        }
+      ]
     },
     {
       "id": "M1-04",
-      "state": "NOT_STARTED",
-      "gap": "Not yet implemented or verified on the new M1 tree; old source is a reuse candidate only",
-      "owner": "Terra worker for implementation; root reviewer for readiness",
-      "destination": "docs/reviews/SCST_M1_WORKER_RETURN.md and docs/reviews/SCST_M1_REVIEW.md",
-      "evidence": []
+      "state": "VERIFIED",
+      "gap": "Technical criterion verified; owner business feedback remains pending",
+      "owner": "Root reviewer",
+      "destination": "docs/reviews/SCST_M1_REVIEW.md; owner demo checkpoint",
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M1_REVIEW.md",
+          "sha256": "b2c0dce4524ebb49af9066ca4f5e181523b5a556c2f1ccc6365b5e2b70bbaf42"
+        },
+        {
+          "path": "docs/reviews/SCST_M1_EVIDENCE/reviewer-source-manifest.json",
+          "sha256": "69854b28fee235ca91a31810b58e0c949af1682eb360994d93347c052dec18a0"
+        }
+      ]
     },
     {
       "id": "M1-05",
-      "state": "NOT_STARTED",
-      "gap": "Not yet implemented or verified on the new M1 tree; old source is a reuse candidate only",
-      "owner": "Terra worker for implementation; root reviewer for readiness",
-      "destination": "docs/reviews/SCST_M1_WORKER_RETURN.md and docs/reviews/SCST_M1_REVIEW.md",
-      "evidence": []
+      "state": "VERIFIED",
+      "gap": "Technical criterion verified; owner business feedback remains pending",
+      "owner": "Root reviewer",
+      "destination": "docs/reviews/SCST_M1_REVIEW.md; owner demo checkpoint",
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M1_REVIEW.md",
+          "sha256": "b2c0dce4524ebb49af9066ca4f5e181523b5a556c2f1ccc6365b5e2b70bbaf42"
+        },
+        {
+          "path": "docs/reviews/SCST_M1_EVIDENCE/reviewer-source-manifest.json",
+          "sha256": "69854b28fee235ca91a31810b58e0c949af1682eb360994d93347c052dec18a0"
+        }
+      ]
     },
     {
       "id": "M1-06",
-      "state": "NOT_STARTED",
-      "gap": "Not yet implemented or verified on the new M1 tree; old source is a reuse candidate only",
-      "owner": "Terra worker for implementation; root reviewer for readiness",
-      "destination": "docs/reviews/SCST_M1_WORKER_RETURN.md and docs/reviews/SCST_M1_REVIEW.md",
-      "evidence": []
+      "state": "VERIFIED",
+      "gap": "Technical criterion verified; owner business feedback remains pending",
+      "owner": "Root reviewer",
+      "destination": "docs/reviews/SCST_M1_REVIEW.md; owner demo checkpoint",
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M1_REVIEW.md",
+          "sha256": "b2c0dce4524ebb49af9066ca4f5e181523b5a556c2f1ccc6365b5e2b70bbaf42"
+        },
+        {
+          "path": "docs/reviews/SCST_M1_EVIDENCE/reviewer-source-manifest.json",
+          "sha256": "69854b28fee235ca91a31810b58e0c949af1682eb360994d93347c052dec18a0"
+        }
+      ]
     },
     {
       "id": "M1-07",
-      "state": "NOT_STARTED",
-      "gap": "Not yet implemented or verified on the new M1 tree; old source is a reuse candidate only",
-      "owner": "Terra worker for implementation; root reviewer for readiness",
-      "destination": "docs/reviews/SCST_M1_WORKER_RETURN.md and docs/reviews/SCST_M1_REVIEW.md",
-      "evidence": []
+      "state": "VERIFIED",
+      "gap": "Technical criterion verified; owner business feedback remains pending",
+      "owner": "Root reviewer",
+      "destination": "docs/reviews/SCST_M1_REVIEW.md; owner demo checkpoint",
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M1_REVIEW.md",
+          "sha256": "b2c0dce4524ebb49af9066ca4f5e181523b5a556c2f1ccc6365b5e2b70bbaf42"
+        },
+        {
+          "path": "docs/reviews/SCST_M1_EVIDENCE/reviewer-source-manifest.json",
+          "sha256": "69854b28fee235ca91a31810b58e0c949af1682eb360994d93347c052dec18a0"
+        }
+      ]
     },
     {
       "id": "M1-08",
-      "state": "NOT_STARTED",
-      "gap": "Not yet implemented or verified on the new M1 tree; old source is a reuse candidate only",
-      "owner": "Terra worker for implementation; root reviewer for readiness",
-      "destination": "docs/reviews/SCST_M1_WORKER_RETURN.md and docs/reviews/SCST_M1_REVIEW.md",
-      "evidence": []
+      "state": "VERIFIED",
+      "gap": "Technical criterion verified; owner business feedback remains pending",
+      "owner": "Root reviewer",
+      "destination": "docs/reviews/SCST_M1_REVIEW.md; owner demo checkpoint",
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M1_REVIEW.md",
+          "sha256": "b2c0dce4524ebb49af9066ca4f5e181523b5a556c2f1ccc6365b5e2b70bbaf42"
+        },
+        {
+          "path": "docs/reviews/SCST_M1_EVIDENCE/reviewer-source-manifest.json",
+          "sha256": "69854b28fee235ca91a31810b58e0c949af1682eb360994d93347c052dec18a0"
+        }
+      ]
     },
     {
       "id": "M1-09",
-      "state": "NOT_STARTED",
-      "gap": "Not yet implemented or verified on the new M1 tree; old source is a reuse candidate only",
-      "owner": "Terra worker for implementation; root reviewer for readiness",
-      "destination": "docs/reviews/SCST_M1_WORKER_RETURN.md and docs/reviews/SCST_M1_REVIEW.md",
-      "evidence": []
+      "state": "VERIFIED",
+      "gap": "Technical criterion verified; owner business feedback remains pending",
+      "owner": "Root reviewer",
+      "destination": "docs/reviews/SCST_M1_REVIEW.md; owner demo checkpoint",
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M1_REVIEW.md",
+          "sha256": "b2c0dce4524ebb49af9066ca4f5e181523b5a556c2f1ccc6365b5e2b70bbaf42"
+        },
+        {
+          "path": "docs/reviews/SCST_M1_EVIDENCE/reviewer-source-manifest.json",
+          "sha256": "69854b28fee235ca91a31810b58e0c949af1682eb360994d93347c052dec18a0"
+        }
+      ]
     }
   ],
   "supportingWork": [
@@ -194,13 +275,30 @@ Tiêu chí là toàn bộ mục `## M1 acceptance` của SPEC đã thống nhấ
     }
   ],
   "conclusions": {
-    "tranche": "PENDING",
-    "trancheSummary": "All nine criteria admitted for implementation; no worker evidence yet",
-    "trancheEvidence": [],
+    "tranche": "COMPLETE",
+    "trancheSummary": "M1 implementation and independent technical review complete at material commit e81506ad79e3a7f84affa78c7f3ead47b0480c33; post-material committed-range checks passed",
+    "trancheEvidence": [
+      {
+        "path": "docs/reviews/SCST_M1_REVIEW.md",
+        "sha256": "b2c0dce4524ebb49af9066ca4f5e181523b5a556c2f1ccc6365b5e2b70bbaf42"
+      },
+      {
+        "path": "docs/reviews/SCST_M1_EVIDENCE/reviewer-source-manifest.json",
+        "sha256": "69854b28fee235ca91a31810b58e0c949af1682eb360994d93347c052dec18a0"
+      },
+      {
+        "path": "docs/reviews/SCST_M1_EVIDENCE/demo-smoke.json",
+        "sha256": "80bcda9ffc76e258d92043536de5c7d778c7b9a46359dea1da8b015c20b3f48d"
+      }
+    ],
     "product": "PENDING",
-    "productSummary": "M1 not yet implemented/accepted; M2-M5 out of scope",
+    "productSummary": "M1 technically ready; owner business/demo acceptance pending, M2-M5 remain out of scope",
     "acceptance": [],
-    "owner": "Root reviewer for internal readiness; project owner for business acceptance"
+    "owner": "Project owner for business acceptance; root for technical tranche closure"
   }
 }
 ```
+
+## Post-material closure
+
+Material commit: e81506ad79e3a7f84affa78c7f3ead47b0480c33. Root reviewed worker return plus independent source/oracle/API/browser checks, then committed M1 and passed the committed-range review. All nine technical criteria verified; bounded implementation work is closed. Owner demo/business feedback remains pending and no M2 is dispatched. Root manages a foreground demo session at http://127.0.0.1:8765; it is not a published service. The original dispatch coverage state is preserved in commit 60f7cd3; the block above is current REVIEW reconciliation.
