@@ -8,7 +8,7 @@ Status: ACTIVE
 - Current mode: BUILD
 - Active phase: BUILD
 - Active role: IMPLEMENTATION_WORKER
-- Next allowed move: BUILD only the M1 folder skeleton under `docs/work_orders/SCST_M1_SKELETON.md` (folders + README, no code); then REVIEW, close the work order and return to SPEC M1.
+- Next allowed move: BUILD only the M1 folder skeleton under docs/work_orders/SCST_M1_SKELETON.md (folders + README, no code); then REVIEW, close the work order and return to SPEC M1.
 - Parked operator checkpoint: Owner review of the skeleton, then owner agreement on SPEC M1 and a separate bounded WORK_ORDER before any application code.
 
 ## Tranche SCST-M1-SKELETON dispatch acknowledgment (latest)
@@ -17,7 +17,7 @@ Status: ACTIVE
 - Rehydrated state, memory, handoff, implementation truth and index before material work; core c4c8767ac8861854f40d466ba338ffd11eb9558e.
 - ORCHESTRATOR bounded the request; WORK_ORDER_AUTHOR wrote `docs/work_orders/SCST_M1_SKELETON.md` (Status READY_FOR_DISPATCH, 11 folders, 30-minute budget) and created `docs/milestone-coverage-authority.json` binding `SCST-ROADMAP` to the roadmap section "## Phạm vi và đầu ra từng mốc". This supersedes the earlier note that the registry waits for SPEC M1.
 - Pre-dispatch gate: first run failed on my own format error (dispatch_continuity surface lacked the "material-SHA marker" wording), fixed in place; rerun PASS 6/6.
-- Material-SHA marker: dispatch commit recorded by COMMIT_STEWARD after this acknowledgment; BUILD begins only after that commit. Next role: IMPLEMENTATION_WORKER.
+- Material-SHA marker: dispatch commit f2b688e. It was committed while CONT-01 reported a surface mismatch (backticks in the handoff next-move line) because the gate and commit ran in one command; corrected in the follow-up continuity commit before BUILD, gate rerun PASS 6/6. Local git has no pre-commit gate hook installed (only prepare-commit-msg). Next role: IMPLEMENTATION_WORKER.
 
 ## M0 agreement record (latest)
 
