@@ -15,6 +15,8 @@ M1 selective reuse executed under SCST-D002 / SPEC v0.2 by Terra 6.1 High and So
 
 ## Read next
 
+Owner agreed illustrative ship visualization on 31-10-2026: roadmap v0.3 records a viewer layer at M2c (hull/deck/bow-stern/hold location, toggle/transparency), refinement with real data at M3. Documentation-only agreement; ship layer is unimplemented, M1 business acceptance remains pending and no M2 work is dispatched.
+
 1. `.cvf/manifest.json` and `.cvf/policy.json`.
 2. `CVF_SESSION/ACTIVE_SESSION_STATE.json` and its active handoff.
 3. `IMPLEMENTATION_STATUS.json`, `README.md`, `docs/INDEX.md` and `docs/project/PROJECT_STATUS.md`.

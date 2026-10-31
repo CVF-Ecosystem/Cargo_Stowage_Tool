@@ -22,4 +22,6 @@ Demo synthetic BOX một lớp, bảng/3D/2D cùng dữ liệu, giới hạn ch�
 
 ## Bước tiếp theo
 
+Owner đồng ý bổ sung hình tàu minh họa vào roadmap v0.3: lớp vỏ/boong, mũi–đuôi và vị trí hầm ở viewer M2c; hiệu chỉnh theo dữ liệu thực ở M3. Có bật/tắt hoặc làm mờ vỏ, ghi rõ phần giả lập. Chưa triển khai tính năng; backend vẫn kiểm theo geometry hầm, M1 chưa được nghiệm thu nghiệp vụ và M2 chưa được giao thi công.
+
 Owner xem demo và phản hồi về hướng dùng. M2 nhập/import/lưu/xếp sơ bộ/export chỉ chi tiết hóa khi được chọn; nhiều tầng và case thực ở M3, AI tùy chọn M4, vận hành M5. Không tự suy diễn kiểm kỹ thuật M1 thành nghiệm thu nghiệp vụ hoặc quyền làm mốc tiếp theo.

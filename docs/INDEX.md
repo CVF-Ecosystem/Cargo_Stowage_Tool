@@ -8,7 +8,7 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 - Active M1 selective-reuse dispatch and worker/reviewer handoff.: `CVF_SESSION/handoffs/SCST_M1_REUSE_HANDOFF.md`
 - Project continuity front door.: `CVF_SESSION_MEMORY.md`
 - CVF enforcement manifest.: `.cvf/manifest.json`
-- Milestone source bindings: live roadmap and frozen dispatch-time snapshot for the closed skeleton packet; no M1 implementation admission.: `docs/milestone-coverage-authority.json`
+- Milestone source bindings: live roadmap, frozen skeleton dispatch snapshot and SPEC M1 acceptance; M1 reuse order technically closed.: `docs/milestone-coverage-authority.json`
 - Original and destination paths with SHA-256 for organization only.: `archive/2026-10-31/ORGANIZATION_MANIFEST.json`
 - CVF governance policy.: `.cvf/policy.json`
 - Closed schema reference for the Artifact Registry.: `docs/catalog/schemas/ARTIFACT_REGISTRY.schema.json`
@@ -28,7 +28,7 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 - Current status, original planning input and file organization.: `docs/project/`
 - Source material still used for planning; not final design authority.: `docs/reference/`
 - M1 selective reuse assessment, worker return, root technical review and new evidence.: `docs/reviews/`
-- Owner-agreed SCST roadmap v0.2 and architecture tree: docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md; next slice SPEC M1.: `docs/roadmaps/`
+- Owner-agreed SCST roadmap v0.3 and architecture tree; illustrative ship viewer planned at M2c, real-data refinement at M3; no M2 dispatch.: `docs/roadmaps/`
 - SPEC M1 v0.2 admitted for execution under SCST-D002; product acceptance separate.: `docs/specs/`
 - M1 reuse implementation closed after technical review; owner demo feedback pending. Skeleton packet remains historical.: `docs/work_orders/`
 

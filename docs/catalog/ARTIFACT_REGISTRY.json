@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
   "updatedAt": "2026-10-31",
-  "claimBoundary": "Current project records and reference/archive navigation only. Application implementation remains paused; no product acceptance is granted.",
+  "claimBoundary": "Current project records and reference/archive navigation. M1 technically verified, owner acceptance pending; roadmap additions do not dispatch M2.",
   "artifacts": [
     {
       "id": "schema-artifact-registry",
@@ -100,7 +100,7 @@
       "family": "governed_artifact_family",
       "path": "docs/roadmaps",
       "status": "ACTIVE",
-      "description": "Owner-agreed SCST roadmap v0.2 and architecture tree: docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md; next slice SPEC M1."
+      "description": "Owner-agreed SCST roadmap v0.3 and architecture tree; illustrative ship viewer planned at M2c, real-data refinement at M3; no M2 dispatch."
     },
     {
       "id": "family-specs",
@@ -170,7 +170,7 @@
       "family": "manifest",
       "path": "docs/milestone-coverage-authority.json",
       "status": "ACTIVE",
-      "description": "Milestone source bindings: live roadmap and frozen dispatch-time snapshot for the closed skeleton packet; no M1 implementation admission."
+      "description": "Milestone source bindings: live roadmap, frozen skeleton dispatch snapshot and SPEC M1 acceptance; M1 reuse order technically closed."
     }
   ]
 }

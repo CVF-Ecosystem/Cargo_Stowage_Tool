@@ -2,7 +2,7 @@
 
 Status: ACTIVE
 
-**Bản v0.2 · 31-10-2026 · Owner đã thống nhất hướng (M0).** Bản này là căn cứ giữ hướng. Phần tiếp theo được chi tiết hóa là SPEC M1; BUILD chỉ bắt đầu khi có WORK_ORDER được cho phép.
+**Bản v0.3 · 31-10-2026 · Owner đã thống nhất hướng (M0) và bổ sung hình tàu minh họa.** M1 đã được kiểm kỹ thuật, đang chờ owner xem demo/phản hồi nghiệp vụ. Bản này giữ hướng cho các mốc sau; bổ sung roadmap không cấp quyền BUILD M2.
 
 ## Mục tiêu và phạm vi
 
@@ -27,6 +27,19 @@ M1 chỉ chứng minh khung và luồng dữ liệu; **M3 mới xử lý nhu c�
 
 Mỗi mốc có một checkpoint khi đủ đầu ra hoặc phát hiện thay đổi ảnh hưởng phạm vi: agent cung cấp bản chạy/bằng chứng, kết quả kiểm và phần còn thiếu; owner quyết định tiếp tục, điều chỉnh hướng hoặc tạm dừng. Lỗi kỹ thuật trong phạm vi được giao do agent tự sửa và kiểm lại trước khi xin phản hồi nghiệp vụ.
 
+## Hình tàu minh họa — hướng đã thống nhất
+
+Owner đồng ý ngày 31-10-2026 bổ sung lớp hình tàu để nhìn vị trí hầm và hàng trong bối cảnh toàn tàu. Đây là phần hiển thị của M2, được tinh chỉnh ở M3; M1 hiện chỉ có hầm BOX và hàng synthetic.
+
+| Mốc | Phạm vi bổ sung | Đầu ra dự kiến |
+|---|---|---|
+| M2 — viewer, gắn với M2c | Vỏ tàu, boong, hướng mũi/đuôi và vị trí hầm mang tính minh họa; bật/tắt hoặc làm mờ vỏ để xem hàng | Nhìn được bối cảnh tàu mà vẫn chọn/xem hầm và hàng; bảng/3D giữ cùng ID, kích thước và tọa độ backend; hiện nhãn hình tàu giả lập |
+| M3 — đối chiếu dữ liệu thực | Hiệu chỉnh hình tàu và vị trí hầm theo số đo/tài liệu được cung cấp, trong mức cần cho công việc đại diện | Phân biệt phần đã đối chiếu và phần còn minh họa; geometry hầm dùng để kiểm được xác minh riêng theo case thực |
+
+`viewer-3d` sở hữu lớp hình tàu minh họa; backend `geometry` sở hữu hình học dùng để kiểm. Mô hình tàu không tự trở thành biên xếp hàng hoặc bằng chứng phương án hợp lệ. Trước khi có dữ liệu vị trí hầm trên tàu, vị trí hiển thị cũng phải ghi là giả lập. Chưa đưa CAD đóng tàu, thủy tĩnh/ổn định tàu hoặc mô phỏng động lực vào phạm vi này.
+
+Orchestrator đưa phần M2 vào SPEC M2c khi đến lượt; agent chứng minh hiển thị/chọn hàng và đối chiếu số liệu trước checkpoint owner. M3 phụ thuộc dữ liệu tàu/hầm do owner cung cấp. Hiện chỉ chốt phạm vi/đầu ra; chưa chọn mesh, thư viện bổ sung hoặc danh sách file triển khai.
+
 ## Rủi ro chính
 
 | Rủi ro | Cách xử lý |
@@ -39,13 +52,13 @@ Mỗi mốc có một checkpoint khi đủ đầu ra hoặc phát hiện thay đ
 
 ## Treeview kiến trúc dự kiến
 
-Một repository, một tool chạy local; frontend và backend tách trách nhiệm qua API. **Khung thư mục M1 đã được tạo ngày 31-10-2026** (work order [SCST_M1_SKELETON](../work_orders/SCST_M1_SKELETON.md)): mỗi thư mục chỉ có README ghi trách nhiệm, chưa có code. `domain/planner/`, `runtime-data/` và phần đóng gói chưa tạo; mỗi phần chỉ tạo khi mốc tương ứng được triển khai.
+Một repository, một tool chạy local; frontend và backend tách trách nhiệm qua API. **M1 đã có code và được kiểm kỹ thuật** theo [review M1](../reviews/SCST_M1_REVIEW.md); nghiệm thu nghiệp vụ còn chờ owner. Cây dưới mô tả trách nhiệm tổng thể, gồm cả phần tương lai. `domain/planner/`, `runtime-data/` và lớp hình tàu chưa triển khai; mỗi phần chỉ tạo khi mốc tương ứng được giao.
 
 ```text
 Cargo_Stowage_Tool/
 ├── apps/frontend/src/              # giao diện React/TypeScript dự kiến
 │   ├── features/                   # nhập hàng/hầm, phương án, chỉnh/so sánh [M1–M3]
-│   ├── viewer-3d/                  # hiển thị cùng dữ liệu phương án [M1+]
+│   ├── viewer-3d/                  # hầm/hàng theo backend [M1]; lớp tàu minh họa [M2c], hiệu chỉnh [M3]
 │   └── api/                        # giao tiếp backend theo contract [M1+]
 ├── services/backend/app/
 │   ├── api/                        # nhận thao tác, trả dữ liệu/kết quả kiểm [M1+]
@@ -67,7 +80,7 @@ Cargo_Stowage_Tool/
 
 **Luồng trách nhiệm:** giao diện → API → nghiệp vụ/kiểm tra → adapter lưu trữ hoặc xuất. `planner` tạo đề xuất rồi `rules` kiểm lại; bảng, viewer và báo cáo cùng đọc một phương án có ID/phiên bản. Frontend không ghi trực tiếp database; AI tùy chọn cũng đi qua API và quyền backend.
 
-**Stack đề xuất kế thừa tài liệu gốc:** React/TypeScript; Python/FastAPI; Three.js/R3F; SQLite khi cần lưu bền. Đây là lựa chọn sơ bộ, chưa chốt phiên bản hoặc thư viện phụ. Domain tách khỏi giao diện, database và provider để có thể kiểm độc lập.
+**Stack hiện có ở M1:** React/TypeScript; Python/FastAPI; Three.js. SQLite là dự kiến khi cần lưu bền; thư viện bổ sung được chốt khi tới SPEC tương ứng. Domain tách khỏi giao diện, database và provider để có thể kiểm độc lập.
 
 ## Nguyên tắc xuyên suốt
 
@@ -81,7 +94,7 @@ Cargo_Stowage_Tool/
 
 **M0 đã xong.** Owner thống nhất ngày 31-10-2026 ba điểm: (1) local-first, một người dùng và ranh giới nghiệp vụ; (2) đầu ra/thứ tự M1–M5, AI tùy chọn; (3) một repository với FE/BE và các lớp trách nhiệm như cây dự kiến.
 
-**Tiếp theo: SPEC M1** (hành vi, phạm vi, tiêu chí đạt, kết quả đối chiếu bản thử trong archive), rồi WORK_ORDER giới hạn việc được thi công. BUILD chỉ bắt đầu khi được cho tiếp tục; agent kiểm và REVIEW kết quả trước khi bàn giao, FREEZE phần đã được chấp nhận. Lặp lại với phần kế tiếp, giữ những mốc xa ở mức bảng phía trên. Endpoint, schema chi tiết, thuật toán cụ thể và danh sách file được chốt trong SPEC của từng phần.
+**Hiện tại: REVIEW M1**, chờ owner xem demo/phản hồi nghiệp vụ. SPEC M1 v0.2 đã được thực thi trong work order tái sử dụng và kiểm đủ chín tiêu chí kỹ thuật. Khi chọn phần tiếp theo, mới soạn SPEC rồi WORK_ORDER giới hạn việc được thi công; bổ sung hình tàu trong roadmap không tự mở M2. Agent kiểm và REVIEW trước bàn giao, FREEZE phần đã được chấp nhận. Endpoint, schema chi tiết, thuật toán và danh sách file được chốt trong SPEC của từng phần.
 
 Bản M1 trong archive là nguồn tham khảo; kết quả test cũ không tự trở thành nghiệm thu cho hướng mới.
 
@@ -92,10 +105,10 @@ Bản M1 trong archive là nguồn tham khảo; kết quả test cũ không tự
 - [Mô hình nghiệp vụ](../reference/domain/02_OPERATIONAL_MODEL.md): căn cứ cho rủi ro hầm BOX và nhu cầu nhiều tầng.
 - [Trạng thái project](../project/PROJECT_STATUS.md): chưa có capability app được owner chấp nhận hoặc work order app đang hoạt động.
 
-Owner đã thống nhất hướng; chưa có mốc app nào được nghiệm thu. Bảng mốc ở trên đã được đăng ký làm nguồn tiêu chí trong `docs/milestone-coverage-authority.json` (mã `SCST-ROADMAP`). Tiêu chí đo được của M1 sẽ được bổ sung khi SPEC M1 được thống nhất.
+Owner đã thống nhất hướng; M1 đạt kiểm kỹ thuật, chưa được nghiệm thu nghiệp vụ. Bảng mốc ở trên được đăng ký trong `docs/milestone-coverage-authority.json` (mã `SCST-ROADMAP`); tiêu chí đo được của M1 nằm trong [SPEC M1 v0.2](../specs/SCST_M1.md), mã `SCST-M1`. Bản v0.3 bổ sung mục hình tàu và đồng bộ trạng thái; giữ nguyên mục bảng mốc đã đăng ký, SPEC và snapshot dispatch M1.
 
 <details>
-<summary>Metadata CVF cho lượt đối chiếu và đề xuất</summary>
+<summary>Metadata CVF lịch sử cho lượt đối chiếu v0.2</summary>
 
 Bản đồ tiêu chí `docs/milestone-coverage-authority.json` đã có từ 31-10-2026, trỏ mã `SCST-ROADMAP` tới mục "Phạm vi và đầu ra từng mốc". Trước khi sửa mục đó, liệt kê các work order đang trỏ tới; work order đã đóng được chuyển sang bản chụp lúc dispatch (ví dụ `docs/roadmaps/snapshots/SCST_ROADMAP_v0.2_at_f2b688e.md`, mã `SCST-ROADMAP-AT-F2B688E`), giữ nguyên hash; work order mới tính hash theo bản hiện hành. Metadata dưới đây chỉ ghi lượt soạn và sửa roadmap, không cấp quyền BUILD.
 
