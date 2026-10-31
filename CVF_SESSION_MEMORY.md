@@ -11,7 +11,7 @@ Memory class: POINTER_RECORD
 
 ## Current operator boundary
 
-Owner agreed the overall direction on 31-10-2026 (M0, `docs/decisions/SCST_D001_THONG_NHAT_HUONG_M0_2026-10-31.md`). Active roadmap v0.2: `docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md`. M1 folder skeleton exists (README files, no code). Latest authority selects selective reuse of archived M1 and requests an assessment/proposal for Claude to recheck. Report: `docs/reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md`. No source has been transferred; exact selection and SPEC M1 draft remain pending recheck/owner settlement. Application code stays paused until a bounded WORK_ORDER M1. Original input remains unchanged at `docs/project/SCST_Roadmap_Ban_Dau_Tool_First.md`.
+Owner agreed the overall direction on 31-10-2026 (M0, `docs/decisions/SCST_D001_THONG_NHAT_HUONG_M0_2026-10-31.md`). Active roadmap v0.2: `docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md`. M1 folder skeleton exists (README files, no code). Owner direction selects selective reuse of archived M1; the reuse assessment (`docs/reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md`) was rechecked and folded into SPEC M1 v0.2 (`docs/specs/SCST_M1.md`, DRAFT, awaiting owner agreement). No source has been transferred. Learning SCST-L001: before editing a registered authority section, list bound work orders and snapshot closed ones. Application code stays paused until a bounded WORK_ORDER M1. Original input remains unchanged at `docs/project/SCST_Roadmap_Ban_Dau_Tool_First.md`.
 
 ## Read next
 
