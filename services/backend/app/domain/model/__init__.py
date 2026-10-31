@@ -65,17 +65,23 @@ class VesselReference(Model):
 
 
 class Plan(Model):
-    contract_version: Literal["scst.m1.v1"] = "scst.m1.v1"
-    source: Literal["SYNTHETIC", "MIXED_REFERENCE"] = "SYNTHETIC"
+    contract_version: Literal["scst.m1.v1", "scst.m2a.v1"] = "scst.m1.v1"
+    source: Literal["SYNTHETIC", "MIXED_REFERENCE", "USER_ENTERED"] = "SYNTHETIC"
+    cargo_source: Literal["SYNTHETIC", "USER_ENTERED"] | None = None
     vessel: VesselReference | None = None
     hold: Hold
     limits: Limits
-    units: list[CargoUnit] = Field(min_length=1, max_length=200)
+    units: list[CargoUnit] = Field(max_length=200)
     placements: list[Placement] = Field(max_length=200)
 
     @model_validator(mode="after")
     def identities(self):
-        if self.source == "SYNTHETIC":
+        if self.contract_version == "scst.m1.v1":
+            if not self.units or self.source == "USER_ENTERED" or self.cargo_source is not None:
+                raise ValueError("M1 requires cargo and synthetic or reference source")
+        elif self.cargo_source is None:
+            self.cargo_source = "SYNTHETIC"
+        if self.source != "MIXED_REFERENCE":
             if self.vessel is not None:
                 raise ValueError("Synthetic plan must not claim a vessel")
         else:
@@ -100,7 +106,7 @@ class Plan(Model):
 
 
 class Issue(Model):
-    code: Literal["OVERWEIGHT", "OUT_OF_BOUNDS", "OVERLAP", "LAYER_UNSUPPORTED", "REQUIRED_UNPLACED"]
+    code: Literal["OVERWEIGHT", "OUT_OF_BOUNDS", "OVERLAP", "LAYER_UNSUPPORTED", "REQUIRED_UNPLACED", "EMPTY_MANIFEST"]
     unit_ids: list[str]
     message: str
 

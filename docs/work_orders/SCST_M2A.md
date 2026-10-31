@@ -1,6 +1,6 @@
 # SCST M2a — Nhập liệu/import/lưu-mở
 
-Status: DISPATCH_READY
+Status: CLOSED
 dispatchKind: INITIAL
 Owner: project-orchestrator
 Risk: R2
@@ -60,9 +60,9 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "decision": "Review readiness, repair within scope, or return unresolved boundary; no automatic M2b"
     }
   },
-  "phase": "DISPATCH",
+  "phase": "REVIEW",
   "action": {
-    "kind": "IMPLEMENT",
+    "kind": "REVIEW",
     "selected": [
       "M2A-01",
       "M2A-02",
@@ -72,75 +72,115 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "M2A-06",
       "M2A-07"
     ],
-    "owner": "Terra6.1High implementation / root independent review",
+    "owner": "Root independent reviewer",
     "output": "M2a app and docs/reviews/SCST_M2A_REVIEW.md",
     "budgetMinutes": 240,
-    "stop": "Technical criteria verified or budget/scope boundary",
-    "next": "Root review and owner feedback; M2b remains separate"
+    "stop": "Seven technical criteria verified; no automatic M2b or operational acceptance",
+    "next": "Prepare bounded SPEC M2b for heuristic placement and unplaced reasons after owner feedback/checkpoint; M2b not dispatched in this tranche."
   },
   "rows": [
     {
       "id": "M2A-01",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version evidence pending",
-      "owner": "Terra worker then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion verified; business/real-data acceptance separate",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_M2A_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2A_REVIEW.md",
+          "sha256": "4a1db0958dda75dbd48f4a81b4950d426a5cf4058960dd54679238b54f604358"
+        }
+      ]
     },
     {
       "id": "M2A-02",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version evidence pending",
-      "owner": "Terra worker then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion verified; business/real-data acceptance separate",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_M2A_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2A_REVIEW.md",
+          "sha256": "4a1db0958dda75dbd48f4a81b4950d426a5cf4058960dd54679238b54f604358"
+        }
+      ]
     },
     {
       "id": "M2A-03",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version evidence pending",
-      "owner": "Terra worker then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion verified; business/real-data acceptance separate",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_M2A_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2A_REVIEW.md",
+          "sha256": "4a1db0958dda75dbd48f4a81b4950d426a5cf4058960dd54679238b54f604358"
+        }
+      ]
     },
     {
       "id": "M2A-04",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version evidence pending",
-      "owner": "Terra worker then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion verified; business/real-data acceptance separate",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_M2A_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2A_REVIEW.md",
+          "sha256": "4a1db0958dda75dbd48f4a81b4950d426a5cf4058960dd54679238b54f604358"
+        }
+      ]
     },
     {
       "id": "M2A-05",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version evidence pending",
-      "owner": "Terra worker then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion verified; business/real-data acceptance separate",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_M2A_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2A_REVIEW.md",
+          "sha256": "4a1db0958dda75dbd48f4a81b4950d426a5cf4058960dd54679238b54f604358"
+        }
+      ]
     },
     {
       "id": "M2A-06",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version evidence pending",
-      "owner": "Terra worker then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion verified; business/real-data acceptance separate",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_M2A_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2A_REVIEW.md",
+          "sha256": "4a1db0958dda75dbd48f4a81b4950d426a5cf4058960dd54679238b54f604358"
+        }
+      ]
     },
     {
       "id": "M2A-07",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version evidence pending",
-      "owner": "Terra worker then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion verified; business/real-data acceptance separate",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_M2A_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2A_REVIEW.md",
+          "sha256": "4a1db0958dda75dbd48f4a81b4950d426a5cf4058960dd54679238b54f604358"
+        }
+      ]
     }
   ],
   "supportingWork": [],
   "conclusions": {
-    "tranche": "PENDING",
-    "trancheSummary": "Owner-authorized next roadmap slice M2a; real-data probe unavailable but independent of declared input schema/storage",
-    "trancheEvidence": [],
+    "tranche": "COMPLETE",
+    "trancheSummary": "All seven M2a technical criteria verified; owner selected labelled fixtures, no M2b dispatch",
+    "trancheEvidence": [
+      {
+        "path": "docs/reviews/SCST_M2A_REVIEW.md",
+        "sha256": "4a1db0958dda75dbd48f4a81b4950d426a5cf4058960dd54679238b54f604358"
+      }
+    ],
     "product": "PENDING",
     "productSummary": "Remaining M2b-d/M3 and business acceptance separate",
     "acceptance": [],

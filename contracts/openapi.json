@@ -151,6 +151,141 @@
           }
         }
       }
+    },
+    "/api/import/csv/preview": {
+      "post": {
+        "summary": "Csv Preview",
+        "operationId": "csv_preview_api_import_csv_preview_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CsvRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CsvPreview"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/snapshots": {
+      "get": {
+        "summary": "List Snapshots",
+        "operationId": "list_snapshots_api_snapshots_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/SavedSummary"
+                  },
+                  "type": "array",
+                  "title": "Response List Snapshots Api Snapshots Get"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Save Snapshot",
+        "operationId": "save_snapshot_api_snapshots_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SavedSummary"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/snapshots/{snapshot_id}": {
+      "get": {
+        "summary": "Get Snapshot",
+        "operationId": "get_snapshot_api_snapshots__snapshot_id__get",
+        "parameters": [
+          {
+            "name": "snapshot_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Snapshot Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Evaluation"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -223,6 +358,88 @@
           "mass_g"
         ],
         "title": "CargoUnit"
+      },
+      "CsvError": {
+        "properties": {
+          "row": {
+            "type": "integer",
+            "title": "Row"
+          },
+          "field": {
+            "type": "string",
+            "title": "Field"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "row",
+          "field",
+          "message"
+        ],
+        "title": "CsvError"
+      },
+      "CsvPreview": {
+        "properties": {
+          "valid": {
+            "type": "boolean",
+            "title": "Valid"
+          },
+          "errors": {
+            "items": {
+              "$ref": "#/components/schemas/CsvError"
+            },
+            "type": "array",
+            "title": "Errors"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count"
+          },
+          "total_mass_g": {
+            "type": "integer",
+            "title": "Total Mass G"
+          },
+          "candidate": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Plan"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "valid",
+          "errors",
+          "count",
+          "total_mass_g",
+          "candidate"
+        ],
+        "title": "CsvPreview"
+      },
+      "CsvRequest": {
+        "properties": {
+          "plan": {
+            "$ref": "#/components/schemas/Plan"
+          },
+          "csv_text": {
+            "type": "string",
+            "title": "Csv Text"
+          }
+        },
+        "type": "object",
+        "required": [
+          "plan",
+          "csv_text"
+        ],
+        "title": "CsvRequest"
       },
       "Dimensions": {
         "properties": {
@@ -372,7 +589,8 @@
               "OUT_OF_BOUNDS",
               "OVERLAP",
               "LAYER_UNSUPPORTED",
-              "REQUIRED_UNPLACED"
+              "REQUIRED_UNPLACED",
+              "EMPTY_MANIFEST"
             ],
             "title": "Code"
           },
@@ -527,7 +745,10 @@
         "properties": {
           "contract_version": {
             "type": "string",
-            "const": "scst.m1.v1",
+            "enum": [
+              "scst.m1.v1",
+              "scst.m2a.v1"
+            ],
             "title": "Contract Version",
             "default": "scst.m1.v1"
           },
@@ -535,10 +756,26 @@
             "type": "string",
             "enum": [
               "SYNTHETIC",
-              "MIXED_REFERENCE"
+              "MIXED_REFERENCE",
+              "USER_ENTERED"
             ],
             "title": "Source",
             "default": "SYNTHETIC"
+          },
+          "cargo_source": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "SYNTHETIC",
+                  "USER_ENTERED"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cargo Source"
           },
           "vessel": {
             "anyOf": [
@@ -562,7 +799,6 @@
             },
             "type": "array",
             "maxItems": 200,
-            "minItems": 1,
             "title": "Units"
           },
           "placements": {
@@ -719,6 +955,53 @@
           "status"
         ],
         "title": "ReferenceHold"
+      },
+      "SaveRequest": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Name"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/Plan"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "plan"
+        ],
+        "title": "SaveRequest"
+      },
+      "SavedSummary": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "created_utc": {
+            "type": "string",
+            "title": "Created Utc"
+          },
+          "schema_version": {
+            "type": "string",
+            "title": "Schema Version"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "created_utc",
+          "schema_version"
+        ],
+        "title": "SavedSummary"
       },
       "Summary": {
         "properties": {

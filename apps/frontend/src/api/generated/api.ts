@@ -106,6 +106,58 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/import/csv/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Csv Preview */
+        post: operations["csv_preview_api_import_csv_preview_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/snapshots": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Snapshots */
+        get: operations["list_snapshots_api_snapshots_get"];
+        put?: never;
+        /** Save Snapshot */
+        post: operations["save_snapshot_api_snapshots_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/snapshots/{snapshot_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Snapshot */
+        get: operations["get_snapshot_api_snapshots__snapshot_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -134,6 +186,33 @@ export interface components {
             height_mm: number;
             /** Mass G */
             mass_g: number;
+        };
+        /** CsvError */
+        CsvError: {
+            /** Row */
+            row: number;
+            /** Field */
+            field: string;
+            /** Message */
+            message: string;
+        };
+        /** CsvPreview */
+        CsvPreview: {
+            /** Valid */
+            valid: boolean;
+            /** Errors */
+            errors: components["schemas"]["CsvError"][];
+            /** Count */
+            count: number;
+            /** Total Mass G */
+            total_mass_g: number;
+            candidate: components["schemas"]["Plan"] | null;
+        };
+        /** CsvRequest */
+        CsvRequest: {
+            plan: components["schemas"]["Plan"];
+            /** Csv Text */
+            csv_text: string;
         };
         /** Dimensions */
         Dimensions: {
@@ -196,7 +275,7 @@ export interface components {
              * Code
              * @enum {string}
              */
-            code: "OVERWEIGHT" | "OUT_OF_BOUNDS" | "OVERLAP" | "LAYER_UNSUPPORTED" | "REQUIRED_UNPLACED";
+            code: "OVERWEIGHT" | "OUT_OF_BOUNDS" | "OVERLAP" | "LAYER_UNSUPPORTED" | "REQUIRED_UNPLACED" | "EMPTY_MANIFEST";
             /** Unit Ids */
             unit_ids: string[];
             /** Message */
@@ -258,15 +337,17 @@ export interface components {
             /**
              * Contract Version
              * @default scst.m1.v1
-             * @constant
+             * @enum {string}
              */
-            contract_version: "scst.m1.v1";
+            contract_version: "scst.m1.v1" | "scst.m2a.v1";
             /**
              * Source
              * @default SYNTHETIC
              * @enum {string}
              */
-            source: "SYNTHETIC" | "MIXED_REFERENCE";
+            source: "SYNTHETIC" | "MIXED_REFERENCE" | "USER_ENTERED";
+            /** Cargo Source */
+            cargo_source?: ("SYNTHETIC" | "USER_ENTERED") | null;
             vessel?: components["schemas"]["VesselReference"] | null;
             hold: components["schemas"]["Hold"];
             limits: components["schemas"]["Limits"];
@@ -328,6 +409,23 @@ export interface components {
              * @constant
              */
             status: "ESTIMATED";
+        };
+        /** SaveRequest */
+        SaveRequest: {
+            /** Name */
+            name: string;
+            plan: components["schemas"]["Plan"];
+        };
+        /** SavedSummary */
+        SavedSummary: {
+            /** Id */
+            id: string;
+            /** Name */
+            name: string;
+            /** Created Utc */
+            created_utc: string;
+            /** Schema Version */
+            schema_version: string;
         };
         /** Summary */
         Summary: {
@@ -528,6 +626,123 @@ export interface operations {
             header?: never;
             path: {
                 case_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Evaluation"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    csv_preview_api_import_csv_preview_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CsvRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CsvPreview"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_snapshots_api_snapshots_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SavedSummary"][];
+                };
+            };
+        };
+    };
+    save_snapshot_api_snapshots_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SaveRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SavedSummary"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_snapshot_api_snapshots__snapshot_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                snapshot_id: string;
             };
             cookie?: never;
         };

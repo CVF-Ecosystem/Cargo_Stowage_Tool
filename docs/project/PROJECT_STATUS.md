@@ -2,6 +2,12 @@
 
 Cập nhật: **31-10-2026**.
 
+## Hiện tại — M2a đạt kiểm kỹ thuật
+
+Owner yêu cầu tiếp tục roadmap và xác nhận **“Chưa có, tiếp tục với mẫu có nhãn”** đối với manifest/số đo hầm thực. Đã làm M2a theo [SPEC](../specs/SCST_M2A.md): tạo phương án rỗng; nhập/sửa/xóa từng bó và hầm BOX; đặt/bỏ vị trí; CSV UTF-8 có preview/lỗi dòng-trường; lưu snapshot SQLite immutable và mở lại sau reload/restart. Mẫu M1/VINAFCO được giữ.
+
+[Review M2a](../reviews/SCST_M2A_REVIEW.md):79 backend test,13 browser test và kiểm qua hai tiến trình server đạt. Dữ liệu SQLite tại `runtime-data/scst.sqlite3` ngoài Git; rawdraft chưa lưu vẫn có thể mất khi đóng trang. Source chỉ commit local, chưa push dữ liệu mới. Chưa xác minh manifest/hầm thật hoặc cấp điều kiện vận hành.
+
 ## VINAFCO 268 — lát cắt bổ sung đã kiểm kỹ thuật
 
 Owner cung cấp gói đăng kiểm/mô hình và yêu cầu đánh giá, dùng được thì tích hợp. Đã thêm chế độ **Xem VINAFCO 268**: thân theo hồ sơ77,8 ×13,24 ×5,2m, hầm/cabin/tuyến hình ước tính, hàng synthetic. Có GLB mờ/ẩn-hiện, chọn VR-SI/VR-SII, marker mớn và profile do backend ràng buộc. Mẫu M1 vẫn mặc định; giới hạn chuyến đang có được giữ khi chuyển chế độ.
@@ -30,4 +36,4 @@ Demo synthetic BOX một lớp, bảng/3D/2D cùng dữ liệu, giới hạn ch�
 
 Owner đồng ý bổ sung hình tàu minh họa vào roadmap v0.3; sau đó cho phép tích hợp VINAFCO268 có chọn lọc. Lớp này đã có, backend vẫn kiểm theo hầm BOX ước tính; hiệu chỉnh theo số đo hầm/tuyến hình thực vẫn thuộc M3.
 
-Owner xem demo và phản hồi về hướng dùng. M2 nhập/import/lưu/xếp sơ bộ/export chỉ chi tiết hóa khi được chọn; nhiều tầng và case thực ở M3, AI tùy chọn M4, vận hành M5. Không tự suy diễn kiểm kỹ thuật M1 thành nghiệm thu nghiệp vụ hoặc quyền làm mốc tiếp theo.
+Owner xem bản M2a và phản hồi về hướng dùng. **Phần kế tiếp là SPEC M2b** cho heuristic xếp sơ bộ, hàng chưa xếp và lý do; chưa dispatch trong lượt M2a. M2c chỉnh/so sánh đầy đủ, M2d export, nhiều tầng/case thực M3, AI tùy chọn M4 và vận hành M5 giữ checkpoint riêng. Không suy diễn kiểm kỹ thuật thành nghiệm thu nghiệp vụ hoặc sử dụng phương án thực.

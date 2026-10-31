@@ -5,15 +5,15 @@ Memory class: POINTER_RECORD
 ## Current Truth
 
 - Contract: cvf.downstreamContinuityContract@1.0.0
-- Current mode: BUILD
-- Active phase: BUILD
+- Current mode: REVIEW
+- Active phase: REVIEW
 - Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_M2A.md
 
 ## Current operator boundary
 
-Owner asks continue agreed roadmap. Next selected slice M2a: manual cargo/BOX, CSV validation/preview, local immutable SQLite save/open; SPEC/WO admitted; BUILD acknowledgment recorded. Root orchestrates/reviews, Terra6.1High worker, Sol-Medium browser. Terra implements only admitted M2a paths; Sol verifies browser; root independently reviews. No M2b-d. Parked: Real manifest/hold measurement probe pending owner input; M2b-d/M3 and operational/business acceptance remain separate.
+M2a manual entry/CSV/SQLite snapshot save-open technically verified under docs/specs/SCST_M2A.md and docs/work_orders/SCST_M2A.md. Root independently reviewed Terra/Sol source and reran79backend/13browser/two-process restart, plus190 earlier independent checks and7 post-timestamp-repair checks. See docs/reviews/SCST_M2A_REVIEW.md. Technical work order closed; no product/operational acceptance inferred. Current REVIEW / SESSION_SYNC_STEWARD. Next: Prepare bounded SPEC M2b for heuristic placement and unplaced reasons after owner feedback/checkpoint; M2b not dispatched in this tranche. Parked: Owner chose labelled fixtures; real manifest/hold validation and business/operational acceptance remain pending. M2b-d/M3 have separate scope.
 
-M1 and VINAFCO268 are technically verified at d13392e and prior commits; business acceptance remains separate. Read their existing reviews for proof, not permission to skip M2a gates. New source input remains local, no GitHub push in this slice. Existing demo session7103/PID9704 on8765 is pre-M2a, needs restart after changes. Runtime handle .cvf/runtime/vinafco-demo-session.json.
+Owner answered “Chưa có, tiếp tục với mẫu có nhãn”. M1/VINAFCO remain available and their historical evidence unchanged; source/asset/registration originals preserved. No GitHub push of new data. Local demo session99663/PID26620 on8765 refreshed for M2a; old session7103 stopped. Handle .cvf/runtime/m2a-demo-session.json. SQLite defaults runtime-data/scst.sqlite3, ignored; no test fixture saved into user DB.
 
 ## Read next
 

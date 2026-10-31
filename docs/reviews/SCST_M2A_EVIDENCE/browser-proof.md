@@ -1,0 +1,11 @@
+# M2a browser proof
+
+Candidate: local M2a BUILD tree, 2026-10-31. Playwright launched the current FastAPI app on `127.0.0.1:8766` with `SCST_DATA_DIR` set to a temporary browser-test directory. The full command from `apps/frontend` was `.\node_modules\.bin\playwright.cmd test`. [Exact run log](browser-playwright.log): **13/13 passed in 25.9 s**, comprising four new M2a, four VINAFCO268 and five M1 cases. These tests use real local API responses and local SQLite; simulated transport/WebGL failures are recovery checks, not CVF governance evidence.
+
+The [manual workflow](browser-manual-saved.png) created a v2 zero-unit DRAFT with `EMPTY_MANIFEST`, edited the custom BOX hold, added a 1,250.125 kg unit, explicitly placed and moved it, then saved two distinct immutable IDs. The first saved plan was read through the API and reopened through the UI after reload with matching hold, cargo and placement. Unplace, delete and undo retained coherent empty/selection/history state. This is a single-process browser reload; the separate server-restart SQLite proof is owned by the backend worker.
+
+The [CSV workflow](browser-csv-import.png) returned row/field errors for excess mass precision and duplicate ID without altering the current manifest. A UTF-8 BOM CSV with a quoted comma in a name then previewed two units totaling exactly 1,259,568 g. Changing the CSV invalidated the preview; a fresh preview and explicit apply replaced cargo as one checked plan and cleared all placements. The browser also verified that a late preview response cannot override a newer raw edit.
+
+A VINAFCO reference snapshot reopened after reload with its vessel case, locked reference cargo limit, profile note and GLB. Explicit detachment exposed custom hold inputs and undo restored the reference profile. A failed validation kept the raw STALE edit. Delayed save persisted the earlier checked snapshot while a later edit remained STALE; delayed open after a selection change retained the newer selection and current checked plan. The [390 px WebGL fallback](browser-mobile-reference-fallback.png) retained the saved reference plan and 2D map without page-level horizontal overflow.
+
+The test fixture is synthetic/user-entered data. No real manifest, measured hold, naval safety or operating approval is claimed. No provider call or CVF AI-governance claim was made.

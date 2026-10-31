@@ -15,6 +15,7 @@ export default defineConfig({
   webServer: {
     command:
       "..\\..\\.venv\\Scripts\\python.exe -m uvicorn app.main:app --app-dir ../../services/backend --host 127.0.0.1 --port 8766",
+    env: { ...process.env, SCST_DATA_DIR: `${process.env.TEMP || "."}/scst-playwright-${process.pid}` },
     url: "http://127.0.0.1:8766/api/health",
     reuseExistingServer: false,
     timeout: 30000,

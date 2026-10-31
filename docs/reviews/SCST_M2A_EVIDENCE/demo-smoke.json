@@ -1,0 +1,8 @@
+{
+  "url": "http://127.0.0.1:8765",
+  "session_id": 99663,
+  "pid": 26620,
+  "mode": "M2a manual/CSV/SQLite plus existing synthetic/reference modes",
+  "smoke": "HTML, snapshot list and new OpenAPI routes verified; no fixture saved into user database",
+  "old_owned_session_7103": "stopped normally by Ctrl+C"
+}

@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
   "updatedAt": "2026-10-31",
-  "claimBoundary": "M1 and VINAFCO268 reference slice technically verified; business acceptance pending and remaining M2 undispatched.",
+  "claimBoundary": "M1, VINAFCO268 and M2a technically verified; owner-authorized labelled fixtures, business/real-data acceptance separate. M2b not dispatched.",
   "artifacts": [
     {
       "id": "schema-artifact-registry",
@@ -72,7 +72,7 @@
       "family": "implementation_truth",
       "path": "IMPLEMENTATION_STATUS.json",
       "status": "ACTIVE",
-      "description": "M1 and VINAFCO268 technical verification truth, business acceptance separate."
+      "description": "M1/VINAFCO268/M2a technical truth with business/real-data acceptance distinct."
     },
     {
       "id": "view-docs-index",
@@ -100,7 +100,7 @@
       "family": "governed_artifact_family",
       "path": "docs/roadmaps",
       "status": "ACTIVE",
-      "description": "Owner-agreed SCST roadmap v0.3 and architecture tree; illustrative ship viewer planned at M2c, real-data refinement at M3; no M2 dispatch."
+      "description": "Overall agreed roadmap; M2a technically verified, VINAFCO viewer slice available; next SPEC M2b."
     },
     {
       "id": "family-specs",
@@ -114,14 +114,14 @@
       "family": "governed_artifact_family",
       "path": "docs/work_orders",
       "status": "ACTIVE",
-      "description": "Active M2a order; M1 and VINAFCO268 technical orders closed."
+      "description": "M1, VINAFCO268 and M2a technical orders closed; next M2b requires its own SPEC/order."
     },
     {
       "id": "family-reviews",
       "family": "governed_artifact_family",
       "path": "docs/reviews",
       "status": "ACTIVE",
-      "description": "M1 and VINAFCO268 source assessments, worker returns, independent review and versioned evidence."
+      "description": "M1, VINAFCO268 and M2a assessments, returns, independent reviews and exact-version evidence."
     },
     {
       "id": "family-learnings",
@@ -156,7 +156,7 @@
       "family": "implementation_truth",
       "path": "docs/project/PROJECT_STATUS.md",
       "status": "ACTIVE",
-      "description": "M1 technically verified demo, owner feedback pending; M2-M5 remain future."
+      "description": "Current M2a technical readiness, labelled-fixture boundary and next roadmap slice."
     },
     {
       "id": "manifest-organization",

@@ -1,0 +1,3 @@
+﻿id,name,kind,requirement,length_mm,width_mm,height_mm,mass_kg
+SAMPLE-001,"Bó thép mẫu, giả lập",BAR_BUNDLE,required,6000,900,650,2500.001
+SAMPLE-002,Bó ống mẫu giả lập,PIPE_BUNDLE,optional,6000,850,600,1850.125

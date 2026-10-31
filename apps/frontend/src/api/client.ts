@@ -20,8 +20,8 @@ export async function requestEvaluation(plan?: Plan): Promise<Evaluation> {
   }
   const data = (await response.json()) as Evaluation;
   if (
-    data.plan?.contract_version !== "scst.m1.v1" ||
-    !["SYNTHETIC", "MIXED_REFERENCE"].includes(data.plan.source)
+    !["scst.m1.v1", "scst.m2a.v1"].includes(data.plan?.contract_version) ||
+    !["SYNTHETIC", "MIXED_REFERENCE", "USER_ENTERED"].includes(data.plan.source)
   )
     throw new Error("Phiên bản dữ liệu API không tương thích.");
   return data;
@@ -38,3 +38,17 @@ export async function requestVesselPlan(caseId: string): Promise<Evaluation> {
   if (!response.ok) throw new Error("Không tải được trạng thái phương tiện.");
   return await response.json() as Evaluation;
 }
+
+export type CsvPreview = components["schemas"]["CsvPreview"];
+export type SavedSummary = components["schemas"]["SavedSummary"];
+async function jsonRequest<T>(path: string, body?: unknown): Promise<T> {
+  try {
+    const response = await fetch(path, {method: body === undefined ? "GET" : "POST", headers: body === undefined ? undefined : {"Content-Type":"application/json"}, body: body === undefined ? undefined : JSON.stringify(body), signal: AbortSignal.timeout(15000)});
+    if (!response.ok) throw new Error();
+    return await response.json() as T;
+  } catch { throw new Error("Không thể xử lý dữ liệu local; phương án đang mở được giữ nguyên."); }
+}
+export const previewCsv = (plan: Plan, csv_text: string) => jsonRequest<CsvPreview>("/api/import/csv/preview", {plan,csv_text});
+export const saveSnapshot = (plan: Plan, name: string) => jsonRequest<SavedSummary>("/api/snapshots", {plan,name});
+export const listSnapshots = () => jsonRequest<SavedSummary[]>("/api/snapshots");
+export const openSnapshot = (id: string) => jsonRequest<Evaluation>(`/api/snapshots/${encodeURIComponent(id)}`);

@@ -2,7 +2,7 @@
 
 Công cụ hỗ trợ lập phương án xếp hàng thép trong hầm tàu, chạy local với giao diện tiếng Việt. SCST hướng tới luồng **nhập hàng và hầm → đề xuất xếp → xem 3D → chỉnh và kiểm lại → lưu, so sánh, xuất báo cáo**.
 
-**Hiện tại: demo M1 và chế độ tham chiếu VINAFCO 268 đã được kiểm kỹ thuật, đang chờ phản hồi nghiệp vụ.** Hàng vẫn là dữ liệu giả lập, hầm dạng hộp (BOX) và một lớp. Nhập manifest, xếp tự động, lưu/mở và xuất báo cáo thuộc các mốc tiếp theo.
+**Hiện tại: đã có nhập liệu, import CSV và lưu/mở local của M2a**, bên cạnh mẫu M1 và chế độ tham chiếu VINAFCO 268. Hầm vẫn dạng hộp (BOX), hàng một lớp; dữ liệu tự nhập chưa được xác minh. Xếp tự động và xuất báo cáo thuộc các phần tiếp theo.
 
 ## Bản hiện tại làm được gì?
 
@@ -12,8 +12,11 @@ Công cụ hỗ trợ lập phương án xếp hàng thép trong hầm tàu, ch�
 - Kiểm tải, vượt biên hầm, giao nhau giữa các bó và hàng bắt buộc chưa xếp.
 - Đánh dấu dữ liệu đã sửa là `STALE`, giữ kết quả đã kiểm trước và quay lại bản trước.
 - Chuyển sang bảng/2D khi trình duyệt không hỗ trợ WebGL.
+- Tạo phương án rỗng, thêm/sửa/xóa bó và chỉnh hầm BOX tự nhập; đặt/bỏ vị trí từng bó.
+- Import CSV UTF-8 có xem trước số bó, tổng khối lượng và lỗi theo dòng/trường; áp dụng toàn bộ khi hợp lệ.
+- Lưu các bản phương án riêng bằng SQLite local và mở lại sau tải trang hoặc khởi động lại server.
 
-> M1 dùng để xem và đánh giá luồng thao tác. Thay đổi mất khi tải lại hoặc đóng tab. Kết quả kiểm chưa bao gồm nhiều tầng, kê/chèn/chằng, ổn định tàu hoặc tải cục bộ; không dùng demo để lập hay phê duyệt phương án thực.
+> Nhấn **Lưu phương án** để giữ bản đã kiểm; nháp chưa lưu mất khi tải lại/đóng tab. Kết quả kiểm chưa bao gồm nhiều tầng, kê/chèn/chằng, ổn định tàu hoặc tải cục bộ. Dữ liệu mẫu và hình học chưa xác minh chưa dùng cho phương án thực.
 
 ## Chạy trên Windows
 
@@ -64,6 +67,15 @@ Giới hạn chuyến đang có được giữ khi chuyển từ mẫu M1 (mặc
 
 Xem [đánh giá nguồn](docs/reviews/SCST_VINAFCO268_ASSESSMENT.md) và [review tích hợp](docs/reviews/SCST_VINAFCO268_REVIEW.md). PDF đăng kiểm gốc được giữ local, không nằm trong source app hoặc API.
 
+## Nhập hàng và lưu phương án
+
+1. Chọn **Phương án mới** để bắt đầu với hầm BOX và danh sách hàng rỗng, hoặc giữ chế độ VINAFCO hiện có.
+2. Nhập từng bó ở **Thêm bó hàng**, hoặc chọn [CSV mẫu giả lập](docs/examples/manifest_m2a_synthetic.csv) trong **Nhập CSV UTF-8** → **Kiểm CSV** → xem trước → **Áp dụng CSV**. Import thay toàn bộ manifest và bỏ các vị trí xếp cũ; các bó mới ở trạng thái chưa xếp.
+3. Chọn bó → **Đặt bó** → sửa vị trí → **Áp dụng & kiểm lại**. M2a chưa tự xếp hàng.
+4. Điền tên → **Lưu phương án**. Sau reload, chọn bản trong **Phương án đã lưu** → **Mở phương án**; backend kiểm lại trước khi hiển thị.
+
+CSV gồm một dòng cho mỗi bó, tối đa 200 bó/1 MiB; kích thước bằng mm, khối lượng kg dùng dấu chấm thập phân với tối đa 3 số lẻ. Chưa nhận XLSX/PDF. Mỗi lần lưu tạo một bản mới, không ghi đè; dữ liệu nằm tại `runtime-data/scst.sqlite3` ngoài Git, danh sách hiện 100 bản gần nhất.
+
 ## Kiến trúc
 
 Frontend dùng **React, TypeScript và Three.js**. Backend dùng **Python/FastAPI**, quản lý dữ liệu và kiểm quy tắc. Bản chạy local phục vụ frontend đã build và API trên cùng một cổng.
@@ -82,7 +94,7 @@ Cargo_Stowage_Tool/
 │   │   ├── model/                  # Mô hình dữ liệu và đơn vị tính
 │   │   ├── geometry/               # Biên hầm, tọa độ và giao nhau
 │   │   └── rules/                  # Kiểm quy tắc nghiệp vụ
-│   └── adapters/                   # Dự kiến lưu/import/export; chưa triển khai
+│   └── adapters/                   # Import CSV và lưu snapshot SQLite
 ├── contracts/                      # OpenAPI contract
 ├── tests/                          # Backend, browser và kiểm khởi chạy
 ├── tooling/                        # Cài đặt, build, chạy local, sinh contract
@@ -90,7 +102,7 @@ Cargo_Stowage_Tool/
 └── archive/                        # Tài liệu lịch sử và bản thử cũ
 ```
 
-Frontend hiển thị kết quả từ backend; chỉnh sửa cần được kiểm lại. M1 chưa có bộ xếp tự động, database hoặc tích hợp AI. Cây kiến trúc tương lai nằm trong [roadmap tổng thể](docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md).
+Frontend hiển thị kết quả từ backend; chỉnh sửa cần được kiểm lại. Backend dùng SQLite cho snapshot local, chưa có bộ xếp tự động hoặc tích hợp AI. Cây kiến trúc tương lai nằm trong [roadmap tổng thể](docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md).
 
 ## Lộ trình phát triển
 
@@ -98,7 +110,7 @@ Frontend hiển thị kết quả từ backend; chỉnh sửa cần được ki�
 |---|---|---|
 | M0 — Thống nhất hướng | Phạm vi, thứ tự phát triển và kiến trúc tổng thể | Đã thống nhất |
 | M1 — Demo chạy được | Hầm BOX, hàng giả lập, bảng/3D, sửa và kiểm cơ bản | Đạt kiểm kỹ thuật; chờ phản hồi nghiệp vụ |
-| M2 — Tool trọn luồng | Nhập/import, lưu/mở, xếp sơ bộ, chỉnh/so sánh, xuất PDF/XLSX; hình tàu minh họa ở M2c | Đã có lát cắt viewer VINAFCO 268; các phần còn lại chưa triển khai |
+| M2 — Tool trọn luồng | Nhập/import, lưu/mở, xếp sơ bộ, chỉnh/so sánh, xuất PDF/XLSX; hình tàu minh họa ở M2c | M2a đã có; viewer VINAFCO 268 đã có. M2b–M2d chưa triển khai |
 | M3 — Case thực | Hình học phù hợp dữ liệu thực, nhiều tầng, profile kê/chồng; hiệu chỉnh hình tàu | Chưa triển khai |
 | M4 — AI hỗ trợ | Hỗ trợ tác vụ có nhu cầu rõ; core vẫn chạy khi tắt AI | Nhánh tùy chọn |
 | M5 — Sử dụng ổn định | Đóng gói, lưu trữ bền, backup/restore và hiệu năng | Chưa triển khai |
@@ -131,6 +143,8 @@ npm.cmd --prefix apps/frontend run test:e2e
 Bản M1 đã được kiểm với 51 backend test, 5 browser test và 498 kiểm độc lập. Phạm vi bằng chứng, điều kiện chạy và giới hạn nằm trong [review M1](docs/reviews/SCST_M1_REVIEW.md); các kết quả này thuộc phiên bản được review.
 
 Sau tích hợp VINAFCO 268, bộ kiểm hiện tại đạt **63 backend test, 9 browser test và 109 kiểm độc lập bổ sung**; xem [review VINAFCO 268](docs/reviews/SCST_VINAFCO268_REVIEW.md).
+
+Sau M2a, bộ kiểm đạt **79 backend test, 13 browser test và kiểm lưu/mở qua hai lần chạy server riêng biệt**. Xem [review M2a](docs/reviews/SCST_M2A_REVIEW.md) và [SPEC M2a](docs/specs/SCST_M2A.md).
 
 ## Tài liệu
 

@@ -109,3 +109,37 @@ def vessel_plan(case_id: str):
     payload['limits']['certificate_cargo_limit_g'] = CASES[case_id]['cargo_mass_g']
     payload['limits']['voyage_cargo_limit_g'] = CASES[case_id]['cargo_mass_g']
     return evaluate(Plan.model_validate(payload))
+
+
+from ..adapters.csv_import import CsvRequest, CsvPreview, preview
+from ..adapters.storage import SaveRequest, SavedSummary, save, listing, open_snapshot
+import sqlite3
+
+
+@router.post("/import/csv/preview", response_model=CsvPreview)
+def csv_preview(payload: CsvRequest):
+    return preview(payload)
+
+
+@router.post("/snapshots", response_model=SavedSummary)
+def save_snapshot(payload: SaveRequest):
+    try:
+        return save(payload)
+    except (sqlite3.Error, OSError, ValueError, TypeError, OverflowError):
+        raise HTTPException(400, "Không thể lưu phương án local; kiểm tra tên và dữ liệu lưu trữ.")
+
+
+@router.get("/snapshots", response_model=list[SavedSummary])
+def list_snapshots():
+    try:
+        return listing()
+    except (sqlite3.Error, OSError, ValueError, TypeError, OverflowError):
+        raise HTTPException(400, "Không thể đọc danh sách phương án local.")
+
+
+@router.get("/snapshots/{snapshot_id}", response_model=Evaluation)
+def get_snapshot(snapshot_id: str):
+    try:
+        return open_snapshot(snapshot_id)
+    except (sqlite3.Error, OSError, ValueError, LookupError, TypeError, OverflowError):
+        raise HTTPException(400, "Không thể mở phương án; ID, dữ liệu hoặc phiên bản không hợp lệ.")

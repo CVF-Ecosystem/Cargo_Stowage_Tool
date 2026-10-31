@@ -15,8 +15,8 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 - Closed schema reference for the Module Registry.: `docs/catalog/schemas/MODULE_REGISTRY.schema.json`
 - Standard-library catalog validation and rendering functions.: `scripts/lib/downstream_catalog/CvfDownstreamCatalogLib.ps1`
 - Executable catalog manager (--check / --write).: `scripts/manage_cvf_downstream_catalog.ps1`
-- M1 and VINAFCO268 technical verification truth, business acceptance separate.: `IMPLEMENTATION_STATUS.json`
-- M1 technically verified demo, owner feedback pending; M2-M5 remain future.: `docs/project/PROJECT_STATUS.md`
+- M1/VINAFCO268/M2a technical truth with business/real-data acceptance distinct.: `IMPLEMENTATION_STATUS.json`
+- Current M2a technical readiness, labelled-fixture boundary and next roadmap slice.: `docs/project/PROJECT_STATUS.md`
 - Generated documentation index.: `docs/INDEX.md`
 - Generated human module catalog.: `docs/catalog/MODULE_CATALOG.md`
 
@@ -27,10 +27,10 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 - Shared project learning, value-filtered parent intake and returned adoption.: `docs/reviews/learnings/`
 - Current status, original planning input and file organization.: `docs/project/`
 - Source material still used for planning; not final design authority.: `docs/reference/`
-- M1 and VINAFCO268 source assessments, worker returns, independent review and versioned evidence.: `docs/reviews/`
-- Owner-agreed SCST roadmap v0.3 and architecture tree; illustrative ship viewer planned at M2c, real-data refinement at M3; no M2 dispatch.: `docs/roadmaps/`
+- M1, VINAFCO268 and M2a assessments, returns, independent reviews and exact-version evidence.: `docs/reviews/`
+- Overall agreed roadmap; M2a technically verified, VINAFCO viewer slice available; next SPEC M2b.: `docs/roadmaps/`
 - M1, VINAFCO268 and admitted next-slice M2a specifications.: `docs/specs/`
-- Active M2a order; M1 and VINAFCO268 technical orders closed.: `docs/work_orders/`
+- M1, VINAFCO268 and M2a technical orders closed; next M2b requires its own SPEC/order.: `docs/work_orders/`
 
 Plans describe intended work. `IMPLEMENTATION_STATUS.json`, source, tests, and
 review evidence determine what is actually implemented.

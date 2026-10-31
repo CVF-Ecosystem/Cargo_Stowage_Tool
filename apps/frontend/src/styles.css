@@ -1243,3 +1243,10 @@ tbody tr:hover {
   .stats-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .stats-row .stat:last-child { grid-column: 1 / -1; }
 }
+
+.m2a-card { padding: 20px; margin-top: 20px; min-width: 0; }
+.m2a-card label { margin: 10px 0; }
+.m2a-card button { margin: 8px 8px 0 0; }
+.m2a-card pre { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 100%; }
+.m2a-card textarea { width: 100%; min-height: 120px; box-sizing: border-box; }
+.vessel-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }

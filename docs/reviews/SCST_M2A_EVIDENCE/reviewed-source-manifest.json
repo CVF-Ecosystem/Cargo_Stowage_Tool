@@ -1,0 +1,19 @@
+{
+  "textNormalization": "CRLF to LF",
+  "files": {
+    "apps/frontend/playwright.config.ts": "75ffbbef53d981dddf43ddda37daeae713b26f84c9ef19819c0bf8e0428c9256",
+    "apps/frontend/src/api/client.ts": "66003d3a31f63bd2a13b23888fe97ca8567a508fbba36b47020627d7ad7df060",
+    "apps/frontend/src/api/generated/api.ts": "341d6b38ad312b88ef69ff7e24b1f4482577a9208336878a388e15edbbf865c4",
+    "apps/frontend/src/features/Workspace.tsx": "da285e86cc1241bc955586426a2378464f1dd5d06f3aacfd286e86df1870eaea",
+    "apps/frontend/src/styles.css": "6c450cda55d0bcc78127ebdd871d18ebe9383ed4b322dc3615f2a8c7025b2bf5",
+    "contracts/openapi.json": "14aff86caa9745e324e60107ae85c6aeb1342a32f73389d256b8fc13b8efa2d0",
+    "services/backend/app/api/routes.py": "eb91adb5c9114961b0d357a3635cbd5325f1b79a7dbed2dcf58fa4878bef9408",
+    "services/backend/app/domain/model/__init__.py": "48652fe4fcdec4838975f228f747c138e13559387c8e1c0ccded9eae9c60840c",
+    "services/backend/app/domain/rules/__init__.py": "f5c1a3e2aef537b7022f3fccf04e0c87e61df40af314b621f5bf2a5307cc1916",
+    "services/backend/app/adapters/csv_import.py": "6ec22bf23e58ce829089cb249eca50d3d46fdcfd945dcd12099ff94fab1cfe0a",
+    "services/backend/app/adapters/storage.py": "ec151057a96255d7ca44e4c212c06b1ce65febe1e846a4c17831c309a4bc519c",
+    "tests/backend/test_m2a.py": "7c0275862f45510c94f994fdc809399cb624c718d2d9842e068df14e9a56d9ea",
+    "tests/browser/m2a.spec.ts": "2784388e3d0aeebcf3a1e50bc18ffc235dd812a47b75eec3d592b8be97178930",
+    "tests/m2a_restart_smoke.py": "905e3c6d26f979ffdfb200196ff7bac25147cd6ca39eb1573179d8180c466347"
+  }
+}

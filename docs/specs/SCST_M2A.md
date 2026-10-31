@@ -20,7 +20,7 @@ Kết quả: tạo phương án riêng với hầm BOX và từng bó hàng, bi�
 
 ## Early real-data probe
 
-Đã tìm trong docs/reference, archive M1 và gói VINAFCO268: chưa có manifest hàng thực/CSV/XLSX; JSON gói nói hầm ước tính. Root hỏi owner vị trí dữ liệu qua câu hỏi text, không yêu cầu đo hoặc xử lý QA để chặn việc phát triển. Hiện dùng fixture có nhãn. Có dữ liệu thì đối chiếu format/đơn vị/BOX trước khi nói importer hỗ trợ manifest đó. Không có dữ liệu: owner chịu cung cấp khi có, orchestrator giữ checkpoint M3 và điều kiện dòngM2 của roadmap. Unknown này độc lập với nhập theo schema được khai báo và persistence, không cấp quyền dùng hầm thật.
+Đã tìm trong docs/reference, archive M1 và gói VINAFCO268: chưa có manifest hàng thực/CSV/XLSX; JSON gói nói hầm ước tính. Root hỏi owner vị trí dữ liệu qua câu hỏi text; owner trả lời **“Chưa có, tiếp tục với mẫu có nhãn”**. Hiện dùng fixture có nhãn theo chỉ đạo đó, không yêu cầu đo hoặc xử lý QA để chặn phát triển. Có dữ liệu thì đối chiếu format/đơn vị/BOX trước khi nói importer hỗ trợ manifest đó. Owner cung cấp khi có, orchestrator giữ checkpoint M3 và điều kiện dòngM2 của roadmap. Thiếu nguồn thực độc lập với nhập theo schema được khai báo và persistence, không cấp quyền dùng hầm thật.
 
 ## M2a acceptance
 

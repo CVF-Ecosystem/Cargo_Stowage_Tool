@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "checks": 190,
+  "scope": "Independent exact integer mass oracle, CSV atomicity/limits, versionguard, immutable storage/listcap/corruptrow/SQLparams/path/contract. Temporary isolated DB removed.",
+  "earlier_invocation": "Checks reached cleanup, but reviewer sqlite test helper left a connection open; first cleanup failed on Windows. Re-ran with contextlib.closing and removed original owned temp directory; app storage already closed its connections."
+}

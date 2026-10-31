@@ -9,6 +9,8 @@ def evaluate(plan: Plan) -> Evaluation:
     placed_ids = {p.unit_id for p in plan.placements}
     mass = sum(units[p.unit_id].mass_g for p in plan.placements)
     issues: list[Issue] = []
+    if not plan.units:
+        issues.append(Issue(code="EMPTY_MANIFEST", unit_ids=[], message="Chưa có bó hàng trong manifest."))
     hold = plan.hold
     capacity = plan.limits.voyage_cargo_limit_g - plan.limits.cargo_onboard_g
     if mass > capacity:
@@ -34,7 +36,7 @@ def evaluate(plan: Plan) -> Evaluation:
         summary=Summary(manifest_mass_g=sum(u.mass_g for u in plan.units), placed_mass_g=mass,
                         remaining_capacity_g=capacity - mass, placed_count=len(placed_ids),
                         unplaced_ids=unplaced, excluded_ids=[u.id for u in plan.units if u.requirement == "excluded"]),
-        status=("DRAFT" if any(i.code in {"OUT_OF_BOUNDS", "OVERLAP", "LAYER_UNSUPPORTED"} for i in issues) else "GEOMETRY_FEASIBLE" if issues else "RULES_CHECKED"),
+        status=("DRAFT" if any(i.code in {"OUT_OF_BOUNDS", "OVERLAP", "LAYER_UNSUPPORTED", "EMPTY_MANIFEST"} for i in issues) else "GEOMETRY_FEASIBLE" if issues else "RULES_CHECKED"),
         basic_checks_passed=not issues, issues=issues,
         unchecked=["Kê, chèn và chằng buộc", "Chất xếp nhiều tầng", "Ổn định phương tiện", "Tải cục bộ đáy hầm", "Hàng cũ trong hầm mục tiêu"],
     )

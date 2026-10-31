@@ -1,0 +1,5 @@
+{
+  "status": "PASS",
+  "checks": 7,
+  "scope": "Post-repair timestamp corruption nonfatal/preserved, good record opens, exact example CSV and final live OpenAPI identity."
+}

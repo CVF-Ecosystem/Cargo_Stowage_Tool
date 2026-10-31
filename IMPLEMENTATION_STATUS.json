@@ -1,19 +1,17 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "M2A_IN_PROGRESS",
-  "currentPhase": "BUILD",
+  "overallStatus": "M2A_TECHNICALLY_VERIFIED_AWAITING_OWNER_FEEDBACK",
+  "currentPhase": "REVIEW",
   "completedCapabilities": [],
-  "activeWorkOrders": [
-    "docs/work_orders/SCST_M2A.md"
-  ],
+  "activeWorkOrders": [],
   "knownLimitations": [
-    "M2a selected/authorized; manual entry, CSV importer and persistence not implemented yet. No real manifest or measured hold available in current sources.",
-    "VINAFCO268 reference mode technically verified, owner feedback pending. Hull dimensions from supplied source; hold/cabin/lines estimated, cargo synthetic; no operational approval.",
-    "All nine M1 technical criteria verified and implementation work order closed; owner demo/business acceptance pending.",
-    "Session-only state: refresh loses changes; no planner/import/persistence/export/multi-layer/real cargo/AI integration.",
-    "Synthetic BOX/single-layer only; onboard cargo is outside the empty target hold. Not operational approval.",
-    "Python test-client deprecation and Three.js chunk size warnings remain; parent-container maintenance condition was recorded separately."
+    "M2a technically verified using owner-authorized labelled fixtures; no real manifest/measured hold validation or operational/business acceptance.",
+    "Raw drafts/history remain in browser session until explicit immutable SQLite snapshot save. Latest100 snapshots listed; no overwrite/delete/backup/restore UI.",
+    "CSV UTF8 only, max200units/1MiB; no XLSX/PDF import, automatic planner, full version comparison, report export, multilayer or AI.",
+    "BOX/single-layer; VINAFCO hull dimensions sourced, hold/cabin/lines estimated. Onboard cargo outside target hold. No stability/strength/floor-load verification.",
+    "Malformed stored timestamps make list unavailable until repaired; app reports error, never silently skips/resets DB. Good records remain accessible by ID.",
+    "TestClient/httpx deprecation and Three.js chunk warning remain; separate parent-container maintenance condition unchanged."
   ],
   "evidence": [
     "docs/project/PROJECT_STATUS.md",
@@ -37,7 +35,9 @@
     "docs/reviews/SCST_VINAFCO268_REVIEW.md",
     "docs/reviews/SCST_VINAFCO268_EVIDENCE/reviewed-source-manifest.json",
     "docs/specs/SCST_M2A.md",
-    "docs/work_orders/SCST_M2A.md"
+    "docs/work_orders/SCST_M2A.md",
+    "docs/reviews/SCST_M2A_REVIEW.md",
+    "docs/reviews/SCST_M2A_EVIDENCE/reviewed-source-manifest.json"
   ],
   "updatedAt": "2026-10-31",
   "x_verifiedMilestones": [
@@ -52,6 +52,12 @@
       "technicalStatus": "VERIFIED",
       "businessAcceptance": "PENDING",
       "evidence": "docs/reviews/SCST_VINAFCO268_REVIEW.md"
+    },
+    {
+      "id": "M2a",
+      "technicalStatus": "VERIFIED",
+      "businessAcceptance": "PENDING",
+      "evidence": "docs/reviews/SCST_M2A_REVIEW.md"
     }
   ]
 }
