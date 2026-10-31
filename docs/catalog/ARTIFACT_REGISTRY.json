@@ -93,14 +93,14 @@
       "family": "governed_artifact_family",
       "path": "docs/decisions",
       "status": "ACTIVE",
-      "description": "Decisions."
+      "description": "Decisions; SCST-D001 records owner agreement on overall direction (M0)."
     },
     {
       "id": "family-roadmaps",
       "family": "governed_artifact_family",
       "path": "docs/roadmaps",
       "status": "ACTIVE",
-      "description": "Compact SCST roadmap and architecture proposal (DRAFT): docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md; awaiting owner agreement."
+      "description": "Owner-agreed SCST roadmap v0.2 and architecture tree: docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md; next slice SPEC M1."
     },
     {
       "id": "family-specs",
@@ -156,7 +156,7 @@
       "family": "implementation_truth",
       "path": "docs/project/PROJECT_STATUS.md",
       "status": "ACTIVE",
-      "description": "Planning authority, draft roadmap and owner checkpoint before further detail."
+      "description": "Planning authority, agreed roadmap and next-slice checkpoint."
     },
     {
       "id": "manifest-organization",

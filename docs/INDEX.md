@@ -15,19 +15,19 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 - Standard-library catalog validation and rendering functions.: `scripts/lib/downstream_catalog/CvfDownstreamCatalogLib.ps1`
 - Executable catalog manager (--check / --write).: `scripts/manage_cvf_downstream_catalog.ps1`
 - Machine implementation-truth surface.: `IMPLEMENTATION_STATUS.json`
-- Planning authority, draft roadmap and owner checkpoint before further detail.: `docs/project/PROJECT_STATUS.md`
+- Planning authority, agreed roadmap and next-slice checkpoint.: `docs/project/PROJECT_STATUS.md`
 - Generated documentation index.: `docs/INDEX.md`
 - Generated human module catalog.: `docs/catalog/MODULE_CATALOG.md`
 
 ## Governed Artifact Families
 
 - Historical review packages and paused M1; not execution authority.: `archive/`
-- Decisions.: `docs/decisions/`
+- Decisions; SCST-D001 records owner agreement on overall direction (M0).: `docs/decisions/`
 - Shared project learning, value-filtered parent intake and returned adoption.: `docs/reviews/learnings/`
 - Current status, original planning input and file organization.: `docs/project/`
 - Source material still used for planning; not final design authority.: `docs/reference/`
 - Reviews and evidence.: `docs/reviews/`
-- Compact SCST roadmap and architecture proposal (DRAFT): docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md; awaiting owner agreement.: `docs/roadmaps/`
+- Owner-agreed SCST roadmap v0.2 and architecture tree: docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md; next slice SPEC M1.: `docs/roadmaps/`
 - Specifications.: `docs/specs/`
 - Work orders.: `docs/work_orders/`
 

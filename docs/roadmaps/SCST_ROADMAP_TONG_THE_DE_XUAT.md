@@ -1,8 +1,8 @@
 # SCST — Roadmap tổng thể và kiến trúc dự kiến
 
-Status: DRAFT
+Status: ACTIVE
 
-**Bản đề xuất v0.1 · 31-10-2026 · Chờ owner thống nhất hướng.** Chỉ chi tiết hóa phần sắp làm sau khi thống nhất bản này; chưa cấp quyền triển khai.
+**Bản v0.2 · 31-10-2026 · Owner đã thống nhất hướng (M0).** Bản này là căn cứ giữ hướng. Phần tiếp theo được chi tiết hóa là SPEC M1; BUILD chỉ bắt đầu khi có WORK_ORDER được cho phép.
 
 ## Mục tiêu và phạm vi
 
@@ -16,16 +16,26 @@ Bắt đầu bằng bó thép thanh/bó thép ống có kích thước bao rõ, 
 
 | Mốc | Phạm vi | Đầu ra / điều kiện chuyển mốc | Phụ thuộc và thông tin cần đúng lúc |
 |---|---|---|---|
-| M0 — Thống nhất hướng | Chốt mục tiêu, ranh giới, thứ tự mốc và kiến trúc tổng thể trong bản này | Có bản hướng được owner đồng ý và phần tiếp theo được chọn để viết chi tiết | Owner quyết định hướng; agent ghi lại điểm thống nhất. Đây là bước kế hoạch, chưa dựng app |
-| M1 — Khung chạy được | FE/BE tối thiểu; hầm BOX và bó hàng synthetic; API nối bảng và 3D; thay một dữ liệu và kiểm cơ bản | Chạy local theo hướng dẫn; bảng/3D cùng unit ID, tọa độ và số liệu backend; thấy được một lỗi vượt tải hoặc vượt biên. Có bằng chứng chạy và giới hạn demo | Sau M0 mới viết SPEC/phạm vi thi công M1. Dùng dữ liệu demo có nhãn, chưa cần chuyến thật |
-| M2 — Tool cơ bản dùng trọn luồng | Nhập tay, import theo mẫu; kiểm khối lượng/hình học; xếp sơ bộ bằng heuristic; hàng chưa xếp và lý do; chỉnh/kiểm lại; lưu/mở/so sánh; PDF/XLSX | Người dùng hoàn tất luồng nhập → gợi ý → xem/chỉnh → lưu/mở lại → xuất. Mọi đơn vị hàng được đối soát; bản trước khi sửa được giữ; dữ liệu bảng, 3D và báo cáo khớp nhau | Khung M1 đạt yêu cầu; lấy mẫu import khi làm importer. Chia M2 thành các phần nhỏ khi đến mốc, chưa đặc tả tất cả ngay |
+| M0 — Thống nhất hướng | Chốt mục tiêu, ranh giới, thứ tự mốc và kiến trúc tổng thể trong bản này | **Đã đạt 31-10-2026:** owner thống nhất bản này; phần tiếp theo là SPEC M1 | Không dựng app trong M0 |
+| M1 — Khung chạy được | FE/BE tối thiểu; hầm BOX và bó hàng synthetic; API nối bảng và 3D; thay một dữ liệu và kiểm cơ bản. Contract dữ liệu có sẵn cao độ z, lớp và chỗ cho quan hệ đỡ, dù bộ xếp ban đầu chỉ làm một lớp | Chạy local theo hướng dẫn; bảng/3D cùng unit ID, tọa độ và số liệu backend; thấy được một lỗi vượt tải hoặc vượt biên. Có bằng chứng chạy và giới hạn demo | SPEC M1 bắt đầu bằng đối chiếu bản thử trong archive với tiêu chí M1, sửa phần thiếu thay vì viết lại từ đầu. Dùng dữ liệu demo có nhãn |
+| M2 — Tool cơ bản dùng trọn luồng | Làm theo thứ tự: **M2a** nhập tay/import, kiểm khối lượng/hình học, lưu/mở; **M2b** heuristic xếp sơ bộ, hàng chưa xếp và lý do; **M2c** chỉnh/kiểm lại, giữ bản trước, so sánh; **M2d** xuất PDF/XLSX | Người dùng hoàn tất luồng nhập → gợi ý → xem/chỉnh → lưu/mở lại → xuất. Mọi đơn vị hàng được đối soát; bản trước khi sửa được giữ; dữ liệu bảng, 3D và báo cáo khớp nhau | Khung M1 đạt yêu cầu. **Trong M2a, trước khi đầu tư M2b:** lấy một manifest mẫu và một bộ số đo hầm thật để kiểm importer và giả định BOX. Mỗi phần có SPEC riêng khi đến lượt |
 | M3 — Hoàn thiện tool với case thực | Case đại diện; nhiều tầng, nhóm kích thước khác nhau; profile kê/chồng, geometry cần thiết; cải thiện thao tác | Có case thực được đối chiếu, phạm vi sử dụng đã xác nhận và phần chưa hỗ trợ nêu rõ; người dùng thực hiện được công việc đại diện | Cần manifest, số đo hầm và profile phù hợp cho từng cấu hình; owner bố trí người hiểu nghiệp vụ đối chiếu. Agent chịu trách nhiệm kiểm kỹ thuật trước |
-| M4 — AI hỗ trợ, nếu có ích | Tác vụ cụ thể như trích xuất, hỏi bổ sung, giải thích hoặc đề xuất chỉnh; actions qua quyền backend và CVF | Giảm thao tác ở tác vụ đã chọn; người dùng xác nhận thay đổi; core vẫn chạy khi AI tắt. Có kiểm chứng tích hợp thật trong phạm vi được bật | Owner xác nhận nhu cầu/tác vụ trước; lúc đó mới chọn provider và cách tích hợp. Có thể hoãn hoặc bỏ nhánh này |
+| M4 — AI hỗ trợ, nếu có ích | Tác vụ cụ thể như trích xuất, hỏi bổ sung, giải thích hoặc đề xuất chỉnh; actions qua quyền backend và CVF | Giảm thao tác ở tác vụ đã chọn; người dùng xác nhận thay đổi; core vẫn chạy khi AI tắt. Có kiểm chứng tích hợp thật trong phạm vi được bật | Owner xác nhận nhu cầu/tác vụ trước; lúc đó mới chọn provider, cách tích hợp và xử lý license CVF. Có thể hoãn hoặc bỏ nhánh này |
 | M5 — Hoàn thiện để sử dụng ổn định | Bộ cài/khởi chạy, độ bền lưu trữ, backup/restore, hiệu năng; lịch sử/quyền/review theo nhu cầu đã xác nhận | Cài/chạy theo hướng dẫn, lưu dữ liệu bền, khôi phục được bản sao và vận hành ổn định trong phạm vi đã thử | Dựa trên tool đã được dùng thử ở M3; M4 không bắt buộc. Nhiều người dùng, cloud, tích hợp ngoài cần quyết định phạm vi riêng |
 
-M1 chỉ chứng minh khung và luồng dữ liệu; **M3 mới xử lý nhu cầu thực tế nhiều tầng**. Lưu/mở và giữ bản trước đã thuộc M2; M5 hoàn thiện độ tin cậy khi vận hành. Chưa yêu cầu thuật toán chứng minh tối ưu toàn cục.
+M1 chỉ chứng minh khung và luồng dữ liệu; **M3 mới xử lý nhu cầu thực tế nhiều tầng**, nhưng contract từ M1 đã chừa chỗ cho nhiều tầng để không phải làm lại. Lưu/mở và giữ bản trước đã thuộc M2; M5 hoàn thiện độ tin cậy khi vận hành. Chưa yêu cầu thuật toán chứng minh tối ưu toàn cục. Tiêu chí đo được của mỗi mốc chốt trong SPEC của mốc đó.
 
 Mỗi mốc có một checkpoint khi đủ đầu ra hoặc phát hiện thay đổi ảnh hưởng phạm vi: agent cung cấp bản chạy/bằng chứng, kết quả kiểm và phần còn thiếu; owner quyết định tiếp tục, điều chỉnh hướng hoặc tạm dừng. Lỗi kỹ thuật trong phạm vi được giao do agent tự sửa và kiểm lại trước khi xin phản hồi nghiệp vụ.
+
+## Rủi ro chính
+
+| Rủi ro | Cách xử lý |
+|---|---|
+| Hầm BOX bỏ mất không gian cần thiết của hầm thật | Kiểm bằng số đo hầm thật trong M2a; nếu không phù hợp thì đổi contract hình học trước M2b |
+| Không có dữ liệu thật đúng lúc | Tiếp tục bằng dữ liệu demo có nhãn; ghi rõ phần chưa kiểm và mốc bị ảnh hưởng |
+| Heuristic cho phương án nhìn hợp lý nhưng vi phạm điều kiện chưa được đưa vào kiểm tra | Bộ kiểm tra độc lập với bộ xếp; báo cáo ghi rõ điều kiện nào chưa kiểm |
+| Phải làm lại khi lên nhiều tầng | Contract có z, lớp và quan hệ đỡ từ M1 |
+| License CVF (CC BY-NC-ND 4.0 tại revision đã đọc) hạn chế tích hợp/phân phối | Không đưa CVF vào app trước M4; xử lý điều kiện license trước khi tích hợp ở M4 hoặc đóng gói ở M5 |
 
 ## Treeview kiến trúc dự kiến
 
@@ -39,7 +49,11 @@ Cargo_Stowage_Tool/
 │   └── api/                        # giao tiếp backend theo contract [M1+]
 ├── services/backend/app/
 │   ├── api/                        # nhận thao tác, trả dữ liệu/kết quả kiểm [M1+]
-│   ├── domain/                     # mô hình, quy tắc, geometry, lập phương án [M1–M3]
+│   ├── domain/
+│   │   ├── model/                  # hàng, hầm, phương án, đơn vị tính [M1+]
+│   │   ├── geometry/               # biên, va chạm, tọa độ [M1+]
+│   │   ├── rules/                  # bộ kiểm tra, độc lập với bộ xếp [M1+]
+│   │   └── planner/                # bộ xếp tạo đề xuất [M2–M3]
 │   └── adapters/                   # lưu local, import/export [M2]; AI/CVF nếu cần [M4]
 ├── contracts/                      # dữ liệu/API, đơn vị tính và phiên bản [M1+]
 ├── tests/                          # kiểm nghiệp vụ, tích hợp, luồng dùng theo từng mốc
@@ -51,35 +65,39 @@ Cargo_Stowage_Tool/
 └── .cvf/ + CVF_SESSION/             # cấu hình, trạng thái và bàn giao CVF hiện có
 ```
 
-**Luồng trách nhiệm:** giao diện → API → nghiệp vụ/kiểm tra → adapter lưu trữ hoặc xuất. Bộ xếp tạo đề xuất rồi lớp kiểm tra kiểm lại; bảng, viewer và báo cáo cùng đọc một phương án có ID/phiên bản. Frontend không ghi trực tiếp database; AI tùy chọn cũng đi qua API và quyền backend.
+**Luồng trách nhiệm:** giao diện → API → nghiệp vụ/kiểm tra → adapter lưu trữ hoặc xuất. `planner` tạo đề xuất rồi `rules` kiểm lại; bảng, viewer và báo cáo cùng đọc một phương án có ID/phiên bản. Frontend không ghi trực tiếp database; AI tùy chọn cũng đi qua API và quyền backend.
 
 **Stack đề xuất kế thừa tài liệu gốc:** React/TypeScript; Python/FastAPI; Three.js/R3F; SQLite khi cần lưu bền. Đây là lựa chọn sơ bộ, chưa chốt phiên bản hoặc thư viện phụ. Domain tách khỏi giao diện, database và provider để có thể kiểm độc lập.
 
 ## Nguyên tắc xuyên suốt
 
 - Mỗi bó có ID, kích thước và khối lượng rõ; không chia tổng manifest để suy ra khối lượng từng bó. Đơn vị đo nhất quán, không làm tròn xuống để lọt giới hạn.
-- Dùng đúng giới hạn hàng hóa; phân biệt required/optional/excluded và đối soát toàn bộ manifest. Hàng chưa xếp hoặc chưa hỗ trợ vẫn hiện cùng lý do.
+- Giới hạn tải tách rõ: giới hạn theo giấy chứng nhận, giới hạn theo chuyến và hàng đã có trên tàu; không dùng trọng tải toàn phần thay cho lượng hàng. Phân biệt required/optional/excluded và đối soát toàn bộ manifest. Hàng chưa xếp hoặc chưa hỗ trợ vẫn hiện cùng lý do.
 - Backend kiểm quy tắc trong phạm vi hỗ trợ: tải, biên, va chạm và điều kiện kê/chồng khi được bổ sung. Mọi chỉnh sửa cần kiểm lại, giữ bản trước.
+- Trạng thái phương án dùng nhãn không gây hiểu lầm như DRAFT, GEOMETRY_FEASIBLE, RULES_CHECKED, STALE; không dùng "SAFE" hay "đã duyệt" chỉ vì bộ xếp báo khả thi.
 - Dữ liệu demo có nhãn; thiếu dữ liệu hoặc chưa kiểm được phải hiện rõ. Phương án là kết quả tính sơ bộ; người dùng quyết định, AI không tự xác nhận thông số hoặc phê duyệt.
 
 ## Cách đi tiếp theo CVF
 
-**Hiện tại: DESIGN — trao đổi bản tổng thể này.** Sau khi thống nhất hướng, mới viết SPEC cho phần M1 sắp làm (hành vi, phạm vi, tiêu chí đạt), rồi WORK_ORDER giới hạn việc được thi công. BUILD chỉ bắt đầu khi được cho tiếp tục; agent kiểm và REVIEW kết quả trước khi bàn giao, FREEZE phần đã được chấp nhận. Lặp lại với phần kế tiếp, giữ những mốc xa ở mức bảng phía trên.
+**M0 đã xong.** Owner thống nhất ngày 31-10-2026 ba điểm: (1) local-first, một người dùng và ranh giới nghiệp vụ; (2) đầu ra/thứ tự M1–M5, AI tùy chọn; (3) một repository với FE/BE và các lớp trách nhiệm như cây dự kiến.
 
-Ba điểm cần thống nhất trong bản tổng thể: (1) local-first, một người dùng và ranh giới nghiệp vụ; (2) đầu ra/thứ tự M1–M5, AI tùy chọn; (3) một repository với FE/BE và các lớp trách nhiệm như cây dự kiến. Chưa cần chốt endpoint, schema chi tiết, thuật toán cụ thể hay danh sách file triển khai.
+**Tiếp theo: SPEC M1** (hành vi, phạm vi, tiêu chí đạt, kết quả đối chiếu bản thử trong archive), rồi WORK_ORDER giới hạn việc được thi công. BUILD chỉ bắt đầu khi được cho tiếp tục; agent kiểm và REVIEW kết quả trước khi bàn giao, FREEZE phần đã được chấp nhận. Lặp lại với phần kế tiếp, giữ những mốc xa ở mức bảng phía trên. Endpoint, schema chi tiết, thuật toán cụ thể và danh sách file được chốt trong SPEC của từng phần.
 
-Bản M1 trong archive là nguồn tham khảo. Sau khi có SPEC M1 được thống nhất mới đánh giá phần nào có thể tái sử dụng; kết quả test cũ không tự trở thành nghiệm thu cho hướng mới.
+Bản M1 trong archive là nguồn tham khảo; kết quả test cũ không tự trở thành nghiệm thu cho hướng mới.
 
 ## Nguồn và trạng thái
 
-- [Roadmap ban đầu — Tool First](../project/SCST_Roadmap_Ban_Dau_Tool_First.md): giữ nguyên mục tiêu và mốc; thứ tự triển khai tuân theo chỉ đạo mới của owner về việc thống nhất hướng trước.
-- [Kiến trúc tham khảo v0.1](../reference/design-v0.1/07_ARCHITECTURE_TREEVIEW.md) và [roadmap tham khảo v0.1](../reference/design-v0.1/06_ROADMAP_GATED.md): rút gọn trách nhiệm module, chưa nhận toàn bộ chi tiết làm thiết kế đã chốt.
-- [Trạng thái project](../project/PROJECT_STATUS.md): không có capability app đã được owner chấp nhận hoặc work order app đang hoạt động.
+- [Roadmap ban đầu — Tool First](../project/SCST_Roadmap_Ban_Dau_Tool_First.md): giữ nguyên mục tiêu và mốc; thứ tự triển khai tuân theo chỉ đạo của owner về việc thống nhất hướng trước.
+- [Kiến trúc tham khảo v0.1](../reference/design-v0.1/07_ARCHITECTURE_TREEVIEW.md), [roadmap tham khảo v0.1](../reference/design-v0.1/06_ROADMAP_GATED.md) và [phạm vi v0.1](../reference/design-v0.1/01_SCOPE_CONTRACT.md): rút gọn trách nhiệm module và nhãn trạng thái, chưa nhận toàn bộ chi tiết làm thiết kế đã chốt.
+- [Mô hình nghiệp vụ](../reference/domain/02_OPERATIONAL_MODEL.md): căn cứ cho rủi ro hầm BOX và nhu cầu nhiều tầng.
+- [Trạng thái project](../project/PROJECT_STATUS.md): chưa có capability app được owner chấp nhận hoặc work order app đang hoạt động.
 
-Các mốc/tiêu chí phía trên còn là đề xuất. Chỉ đăng ký nguồn tiêu chí được duyệt và coverage thực thi sau khi owner thống nhất; metadata dưới đây giới hạn lượt đối chiếu nguồn/soạn đề xuất, không cấp quyền BUILD. Trách nhiệm phần còn lại: owner quyết định M0; agent chuẩn bị từng phần M1–M5 khi được giao, lấy dữ liệu/phản hồi tại checkpoint tương ứng.
+Owner đã thống nhất hướng; chưa có mốc app nào được nghiệm thu. Tiêu chí nghiệm thu từng mốc được đăng ký khi SPEC của mốc đó được thống nhất.
 
 <details>
 <summary>Metadata CVF cho lượt đối chiếu và đề xuất</summary>
+
+Bản đồ tiêu chí (`docs/milestone-coverage-authority.json`) chưa được tạo; nó sẽ trỏ tới phần tiêu chí nghiệm thu của SPEC M1 khi SPEC đó được thống nhất. Metadata dưới đây chỉ ghi lượt soạn và sửa roadmap, không cấp quyền BUILD.
 
 ```cvf-milestone-coverage-json
 {
@@ -88,24 +106,24 @@ Các mốc/tiêu chí phía trên còn là đề xuất. Chỉ đăng ký nguồ
   "milestone": {
     "id": "SCST-PLAN-1",
     "consumer": "Owner SCST",
-    "outcome": "Compact proposed roadmap, architecture tree, scope and deliverables for owner discussion",
-    "checkpoint": {"trigger": "Proposal delivered or verification budget exhausted", "owner": "Project owner", "decision": "Agree direction, request adjustments or hold; detail only the next slice after agreement"}
+    "outcome": "Compact roadmap, architecture tree, scope and deliverables; owner agreed direction on 31-10-2026 and revision v0.2 applies the agreed review points",
+    "checkpoint": {"trigger": "Revision v0.2 delivered after owner agreement", "owner": "Project owner", "decision": "Proceed to SPEC M1 as the next slice, request further adjustment, or hold"}
   },
   "phase": "PLAN",
   "action": {
     "kind": "VERIFY", "selected": [], "owner": "Local agent / SPEC_AUTHOR",
-    "output": "docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md and synchronized navigation/continuity",
+    "output": "docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md v0.2 and synchronized navigation/continuity",
     "budgetMinutes": 30,
-    "question": "Which compact milestones and module responsibilities preserve tool-first intent under the owner's planning-only instruction?",
-    "sourceBoundary": "Original roadmap, retained v0.1 architecture and roadmap, current project state and latest owner instruction; no app execution",
-    "stop": "One source-aligned proposal and document checks, or budget exhausted; no automatic implementation or additional research tranche",
-    "next": "Owner discusses overall direction; only then detail the next authorized slice"
+    "question": "Does revision v0.2 apply the owner-agreed review points (M2 slicing, multi-layer-ready contract, early real-data probe, risk section, status labels, load limits, rules/planner split) without changing agreed scope?",
+    "sourceBoundary": "Draft v0.1, the review agreed by the owner, original roadmap, retained v0.1 references and domain model; no app execution",
+    "stop": "Revision v0.2 and document checks, or budget exhausted; no automatic SPEC or implementation",
+    "next": "Prepare SPEC M1 as the next slice; BUILD requires a separately authorized work order"
   },
   "rows": [],
   "supportingWork": [],
   "conclusions": {
-    "tranche": "PENDING", "trancheSummary": "Proposal available for discussion; agreed scope and milestone admission remain pending", "trancheEvidence": [],
-    "product": "PENDING", "productSummary": "Application work paused; no accepted application capability", "acceptance": [], "owner": "Project owner"
+    "tranche": "PENDING", "trancheSummary": "Owner agreed overall direction; revision v0.2 applied; milestone criteria registry deferred to SPEC M1", "trancheEvidence": [],
+    "product": "PENDING", "productSummary": "No accepted application capability", "acceptance": [], "owner": "Project owner"
   }
 }
 ```

@@ -8,10 +8,24 @@ Status: ACTIVE
 - Current mode: DESIGN
 - Active phase: DESIGN
 - Active role: SESSION_SYNC_STEWARD
-- Next allowed move: Await owner discussion of the compact roadmap and proposed architecture; detail only the next slice after direction is agreed. Application BUILD remains paused.
-- Parked operator checkpoint: Owner agreement on overall direction before next-slice detail; separate bounded authorization before application BUILD.
+- Next allowed move: Owner agreed overall direction (M0, decision SCST-D001); roadmap v0.2 is active. Prepare SPEC M1 as the next slice. Application BUILD remains paused until a bounded work order is authorized.
+- Parked operator checkpoint: Owner agreement on SPEC M1 and separate bounded WORK_ORDER authorization before application BUILD.
 
-## Latest authority
+## M0 agreement record (latest)
+
+- 31-10-2026: after the REVIEWER assessment of draft v0.1, owner replied "Đồng ý, thống nhất". Recorded in `docs/decisions/SCST_D001_THONG_NHAT_HUONG_M0_2026-10-31.md`: overall direction agreed, and the review points are applied.
+- Rehydrated manifest, policy, active state, memory, handoff, implementation truth and index before material work; core pinned at c4c8767ac8861854f40d466ba338ffd11eb9558e.
+- Role transitions by the same agent (R1 documentation): REVIEWER (assessment) → SPEC_AUTHOR (roadmap v0.2) → SESSION_SYNC_STEWARD (decision, state, memory, handoff, status, catalog/index) → COMMIT_STEWARD (local commit). No independent product acceptance claimed.
+- Roadmap v0.2 changes:
+  - M2 split into M2a–M2d;
+  - contract ready for z/layer/support from M1;
+  - real manifest and hold-measurement probe in M2a before M2b;
+  - risk section including the CVF license;
+  - SPEC M1 starts from a gap assessment of the archived trial;
+  - status labels and load-limit types added; `rules`/`planner` split; CVF wording moved into metadata.
+- Not done: no SPEC M1, no milestone criteria registry (`docs/milestone-coverage-authority.json` deferred to SPEC M1), no work order, no app source change. Coverage block stays null-authority finite VERIFY under PLAN with PENDING conclusions.
+
+## Latest authority (planning request, historical)
 
 31-10-2026: after pausing implementation and organizing the repository, owner requested a compact overall roadmap, proposed architecture tree, scope and deliverables per milestone. Detail only the next slice after overall agreement. This authorizes R1 proposal documentation, not application implementation or roadmap approval. CVF core remains read-only at c4c8767ac8861854f40d466ba338ffd11eb9558e.
 

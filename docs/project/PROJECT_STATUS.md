@@ -4,9 +4,9 @@ Cập nhật: **31-10-2026**.
 
 ## Chỉ đạo hiện hành
 
-Owner đã yêu cầu dừng triển khai để thống nhất thứ tự và kế hoạch. Chỉ đạo mới nhất cho phép soạn roadmap tổng thể gọn, treeview dự kiến, phạm vi và đầu ra từng mốc. Chỉ chi tiết hóa phần sắp làm sau khi thống nhất hướng đó.
+Ngày 31-10-2026 owner đã **thống nhất hướng tổng thể (M0)**, ghi tại [quyết định SCST-D001](../decisions/SCST_D001_THONG_NHAT_HUONG_M0_2026-10-31.md). [Roadmap v0.2](../roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md) là căn cứ giữ hướng, đã áp dụng các góp ý của bản đánh giá.
 
-Đã có [bản đề xuất v0.1](../roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md), trạng thái **DRAFT**, đang ở DESIGN. Đây chưa phải roadmap final hoặc quyền tiếp tục xây app.
+Thống nhất hướng chưa phải nghiệm thu mốc app nào và chưa cấp quyền tiếp tục xây app.
 
 ## Phần còn sử dụng
 
@@ -16,9 +16,9 @@ Owner đã yêu cầu dừng triển khai để thống nhất thứ tự và k�
 
 ## Phần chưa được chốt
 
-- Roadmap final, phạm vi và đầu ra được owner thống nhất cho từng mốc.
-- Treeview kiến trúc ứng dụng tương lai.
-- Quyết định thiết kế/stack và acceptance để giao triển khai.
+- SPEC M1: hành vi, phạm vi, tiêu chí đạt đo được và kết quả đối chiếu bản thử trong archive.
+- Phiên bản stack, endpoint, schema chi tiết và thuật toán; chốt trong SPEC của từng phần.
+- Tiêu chí nghiệm thu các mốc sau M1.
 
 Các lựa chọn từng được agent ghi trong SPEC/work order M1 chưa được xem là những quyết định đã chốt với owner.
 
@@ -30,4 +30,4 @@ Không có cây app đang hoạt động ở root và không có server demo đ�
 
 ## Bước tiếp theo
 
-Owner xem và điều chỉnh bản đề xuất; sau khi thống nhất hướng mới viết chi tiết cho phần M1 sắp làm. Chỉ tiếp tục triển khai khi được cho tiếp tục theo SPEC và WORK_ORDER phù hợp. Không dùng work order M1 trong archive để tự nối lại BUILD.
+Soạn SPEC M1 để owner xem. Chỉ tiếp tục triển khai khi được cho tiếp tục theo SPEC và WORK_ORDER phù hợp. Không dùng work order M1 trong archive để tự nối lại BUILD.

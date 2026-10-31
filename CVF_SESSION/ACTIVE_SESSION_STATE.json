@@ -14,8 +14,8 @@
     "FREEZE"
   ],
   "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_V1_2026-10-31.md",
-  "nextAllowedMove": "Await owner discussion of the compact roadmap and proposed architecture; detail only the next slice after direction is agreed. Application BUILD remains paused.",
-  "parkedOperatorCheckpoint": "Owner agreement on overall direction before next-slice detail; separate bounded authorization before application BUILD.",
+  "nextAllowedMove": "Owner agreed overall direction (M0, decision SCST-D001); roadmap v0.2 is active. Prepare SPEC M1 as the next slice. Application BUILD remains paused until a bounded work order is authorized.",
+  "parkedOperatorCheckpoint": "Owner agreement on SPEC M1 and separate bounded WORK_ORDER authorization before application BUILD.",
   "activeRole": "SESSION_SYNC_STEWARD",
   "roleRoute": "SINGLE_AGENT_MULTI_ROLE_ALLOWED",
   "updatedAt": "2026-10-31"

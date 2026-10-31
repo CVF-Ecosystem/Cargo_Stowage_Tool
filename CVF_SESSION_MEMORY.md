@@ -11,7 +11,7 @@ Memory class: POINTER_RECORD
 
 ## Current operator boundary
 
-Application implementation is paused by owner. Latest authority permits a compact overall roadmap, proposed architecture tree and milestone scope/deliverables. Draft: `docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md`. Owner agreement is pending; detail only the next slice after agreement, then obtain bounded implementation authority. Original roadmap input remains unchanged at `docs/project/SCST_Roadmap_Ban_Dau_Tool_First.md`.
+Owner agreed the overall direction on 31-10-2026 (M0, `docs/decisions/SCST_D001_THONG_NHAT_HUONG_M0_2026-10-31.md`). Active roadmap v0.2: `docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md`. Next slice is SPEC M1; application implementation stays paused until a bounded work order is authorized. Original roadmap input remains unchanged at `docs/project/SCST_Roadmap_Ban_Dau_Tool_First.md`.
 
 ## Read next
 
