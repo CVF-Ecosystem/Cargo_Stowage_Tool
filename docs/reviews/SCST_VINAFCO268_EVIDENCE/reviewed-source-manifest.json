@@ -7,7 +7,7 @@
     "apps/frontend/src/viewer-3d/Viewer.tsx": "12db8df7a75fd3e6697937fc1605176b58bb64ac4557c572bcc86e2675ae4cad",
     "services/backend/app/api/routes.py": "e89a0cf894b44d7634df4f7c0d438eea18247d7e54762d4289e133e4dd8dc3ef",
     "services/backend/app/domain/model/__init__.py": "dc46530fb7df3693a7b514d4127f6dc912169a4a27867d0c0c61f170181d6a66",
-    "services/backend/app/vessel.py": "b579383f913a3bb17208d84bc6481a7efe774e40e2248ed3e30741d8614ab2c8",
+    "services/backend/app/vessel.py": "caffbcca138db03b5de875301c4632e76587264684e1bd03783abeb287a1f9b5",
     "services/backend/data/vessels/vinafco268/profile.json": "88752b56a16b5152c095663a498a33535880b354e297d3558dd90ebd2f3aa8ba",
     "services/backend/data/vessels/vinafco268/model.glb": "684cb4d4c7351aaba50ff4c7d23b3766656cf1e7b2b652f36357b167d83b1a5d",
     "contracts/openapi.json": "173225313952c0d94d6e65c03e1b24ac603c7af47f9fc9e5d0ddaa30f2b839c6",
