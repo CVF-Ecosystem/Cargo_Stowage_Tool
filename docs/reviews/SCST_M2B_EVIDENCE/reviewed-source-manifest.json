@@ -1,0 +1,26 @@
+{
+  "textNormalization": "CRLF toLF",
+  "base": "a596298d9140f66a580d845144692fc3865b396c",
+  "files": {
+    "apps/frontend/src/api/client.ts": "e4e767e1f4dde127a75b7dd12c94d5eda3054b1ccbd4e7a6cdbd67f085745cb5",
+    "apps/frontend/src/api/generated/api.ts": "b7380761303b6cae9f7fb5eac19a6cbf93106d2eb317a01f5af5190267c68902",
+    "apps/frontend/src/features/Workspace.tsx": "0404938119e240bb99cfc65d51a10a33b6fa7c97db6486b3506985c70f524366",
+    "apps/frontend/src/features/model.ts": "adbe1ecc628cb8567944f03a3c2b125e1c11f0c2f0eecc3a0f44f3b576b73db2",
+    "apps/frontend/src/viewer-3d/Viewer.tsx": "ce3cd5c26528378b878f53386a79371a72cdd8a025886d701790ad8b7c736ad7",
+    "contracts/openapi.json": "f02f916da12b24813be33d60815c85e2c9dcde3cf2f0dc780b55665afba910af",
+    "services/backend/app/adapters/pipe_registry.py": "c00953b904567af71c496c61d5d6a8085f960150b086a0bb9a479f114bdafe00",
+    "services/backend/app/adapters/storage.py": "ec151057a96255d7ca44e4c212c06b1ce65febe1e846a4c17831c309a4bc519c",
+    "services/backend/app/api/routes.py": "a36049a8b7cf794ff8f657ca1b54124a6529acece2f03ffaf241772e675a1201",
+    "services/backend/app/domain/geometry/__init__.py": "eeb5625a1701689f2a97bcafb9ba841f804171ff1e6eb3451bc10eec0ce4e0be",
+    "services/backend/app/domain/model/__init__.py": "455d2b759cc91b5c11838f917486aebf4ff47d75bdb26fd7ae2d2e71c287908d",
+    "services/backend/app/domain/planner/__init__.py": "0b170dcbb352bbd64183ea1d7f4b0a76ce39a55a87bcab784f72535f07136ade",
+    "services/backend/app/domain/rules/__init__.py": "56c551a0d3caa30ffc7b7d29ebddbc686f556ef9b42a3c2d3f6a539bf3e89120",
+    "services/backend/data/pipe_list/baltimore.json": "429acdeb430d7bc6c2a1798a51d66fe523d62dd10469a8b50c7dd398d6d20330",
+    "tests/backend/test_m2b.py": "e0fc9c1a58abf30b31fa92c084ebd7dae81733c4029b5fb7ad34e87446059a45",
+    "tests/browser/m2b.spec.ts": "681aeff48af9a1b2d855accd8621dc50942062a58cda2367ea277c4b1eada929",
+    "tests/browser/pipe-list.spec.ts": "787f864a696eeff0ae5a54b88ea7265b6413e566f62882f3bcbb617ca7b01ae1",
+    "tests/browser/vinafco.spec.ts": "29926a5c8f124ca9bd335f8c9e0d067f937e79db86ac41a5af403f8b338ad618",
+    "tests/browser/workspace.spec.ts": "e8e0ca5b63be5bc99e319be41132a2791af8431ad7dd8dd6cfb37d6b0978e472",
+    "tests/m2b_restart_smoke.py": "b067043d6b88f675d7d62a446adaf426314ef199b2f5d5897753d82c6b8c671f"
+  }
+}

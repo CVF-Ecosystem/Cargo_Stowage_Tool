@@ -342,6 +342,44 @@
           }
         }
       }
+    },
+    "/api/planner/preview": {
+      "post": {
+        "summary": "Suggest Placement",
+        "operationId": "suggest_placement_api_planner_preview_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Plan"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlannerPreview"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1160,6 +1198,32 @@
         ],
         "title": "Plan"
       },
+      "PlannerPreview": {
+        "properties": {
+          "algorithm": {
+            "type": "string",
+            "const": "guillotine-single-layer-v1",
+            "title": "Algorithm",
+            "default": "guillotine-single-layer-v1"
+          },
+          "evaluation": {
+            "$ref": "#/components/schemas/Evaluation"
+          },
+          "unplaced": {
+            "items": {
+              "$ref": "#/components/schemas/UnplacedReason"
+            },
+            "type": "array",
+            "title": "Unplaced"
+          }
+        },
+        "type": "object",
+        "required": [
+          "evaluation",
+          "unplaced"
+        ],
+        "title": "PlannerPreview"
+      },
       "Provenance": {
         "properties": {
           "source_pdf_sha256": {
@@ -1387,6 +1451,36 @@
           "excluded_ids"
         ],
         "title": "Summary"
+      },
+      "UnplacedReason": {
+        "properties": {
+          "unit_id": {
+            "type": "string",
+            "title": "Unit Id"
+          },
+          "code": {
+            "type": "string",
+            "enum": [
+              "EXCLUDED",
+              "TOO_HIGH",
+              "FOOTPRINT_TOO_LARGE",
+              "MASS_LIMIT",
+              "HEURISTIC_NO_SPACE"
+            ],
+            "title": "Code"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "unit_id",
+          "code",
+          "message"
+        ],
+        "title": "UnplacedReason"
       },
       "ValidationError": {
         "properties": {

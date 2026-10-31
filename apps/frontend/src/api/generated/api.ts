@@ -192,6 +192,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/planner/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Suggest Placement */
+        post: operations["suggest_placement_api_planner_preview_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -483,6 +500,18 @@ export interface components {
             /** Placements */
             placements: components["schemas"]["Placement"][];
         };
+        /** PlannerPreview */
+        PlannerPreview: {
+            /**
+             * Algorithm
+             * @default guillotine-single-layer-v1
+             * @constant
+             */
+            algorithm: "guillotine-single-layer-v1";
+            evaluation: components["schemas"]["Evaluation"];
+            /** Unplaced */
+            unplaced: components["schemas"]["UnplacedReason"][];
+        };
         /** Provenance */
         Provenance: {
             /** Source Pdf Sha256 */
@@ -568,6 +597,18 @@ export interface components {
             unplaced_ids: string[];
             /** Excluded Ids */
             excluded_ids: string[];
+        };
+        /** UnplacedReason */
+        UnplacedReason: {
+            /** Unit Id */
+            unit_id: string;
+            /**
+             * Code
+             * @enum {string}
+             */
+            code: "EXCLUDED" | "TOO_HIGH" | "FOOTPRINT_TOO_LARGE" | "MASS_LIMIT" | "HEURISTIC_NO_SPACE";
+            /** Message */
+            message: string;
         };
         /** ValidationError */
         ValidationError: {
@@ -935,6 +976,39 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["Evaluation"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    suggest_placement_api_planner_preview_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["Plan"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlannerPreview"];
                 };
             };
             /** @description Validation Error */

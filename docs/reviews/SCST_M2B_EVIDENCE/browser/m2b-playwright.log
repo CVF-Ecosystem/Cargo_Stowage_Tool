@@ -1,0 +1,16 @@
+[WebServer] INFO:     Started server process [39372]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8766 (Press CTRL+C to quit)
+
+Running 5 tests using 1 worker
+
+(node:20380) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 ..\..\tests\browser\m2b.spec.ts:50:5 › demo planner previews replacement without mutation, then applies checked real meshes and undo (2.3s)
+  ok 2 ..\..\tests\browser\m2b.spec.ts:74:5 › VINAFCO source list planner puts actual bundles in the hold, reconciles all 1076 and survives save/reload (5.2s)
+  ok 3 ..\..\tests\browser\m2b.spec.ts:127:5 › a one-gram manual unit displays below 0.01 tonne while input and API retain exact grams (1.5s)
+  ok 4 ..\..\tests\browser\m2b.spec.ts:144:5 › STALE edits, delayed planner response and network failure leave the checked plan unchanged (1.9s)
+  ok 5 ..\..\tests\browser\m2b.spec.ts:179:5 › mobile WebGL fallback shows applied source cargo and paged reasons without page overflow (2.1s)
+
+  5 passed (17.0s)

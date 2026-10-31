@@ -49,7 +49,7 @@ test("source preview and explicit load preserve 31 groups, 1076 optional bundles
   const section = page.getByRole("region", { name: "Thư viện list ống" });
   await expect(section).toContainText("1.076 bó");
   await expect(section).toContainText("21.226 ống");
-  await expect(section).toContainText("1.125,55103 t");
+  await expect(section).toContainText("1.125,55 t");
   await expect(section).toContainText("chênh lệch 31,03 kg");
   await expect(section).toContainText("16 bó");
   const loaded = await loadPipeList(page);

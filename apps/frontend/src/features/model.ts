@@ -7,16 +7,12 @@ export type Placement = components["schemas"]["Placement"];
 
 const number = new Intl.NumberFormat("vi-VN", { maximumFractionDigits: 3 });
 export const fmt = (n: number) => number.format(n);
-const tonneNumber = new Intl.NumberFormat("vi-VN", {
-  maximumFractionDigits: 6,
-});
-export const tonnes = (g: number) => tonneNumber.format(g / 1_000_000);
-export const massLabel = (g: number) =>
-  g > 0 && g < 1000
-    ? `${fmt(g)} g`
-    : g > 0 && g < 1_000_000
-      ? `${fmt(g / 1000)} kg`
-      : `${tonnes(g)} tấn`;
+const tonneNumber = new Intl.NumberFormat("vi-VN", { maximumFractionDigits: 2 });
+export const tonnes = (g: number) => {
+  if (g !== 0 && Math.abs(g) < 10_000) return g < 0 ? "-<0,01" : "<0,01";
+  return tonneNumber.format(g / 1_000_000);
+};
+export const massLabel = (g: number) => `${tonnes(g)} tấn`;
 export const dimensions = (u: Unit) => u.dimensions_um ? u.dimensions_um.map(n=>n/1000) : [u.length_mm,u.width_mm,u.height_mm];
 export const footprint = (u: Unit, p: Placement) => {
   const [length,width]=dimensions(u); return p.yaw_deg % 180 ? [width,length] : [length,width];

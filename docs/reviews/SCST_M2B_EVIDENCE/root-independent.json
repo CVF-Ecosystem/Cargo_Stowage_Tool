@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "assertions": 8941,
+  "random_manifests": 40,
+  "runs_each": 3,
+  "oracle": "Independent integer-\u00b5m bounds/overlap/mass/identity/accounting, cause checks and fixed boundary cases; no optimality claim",
+  "source_bundles": 1076,
+  "source_placed": 167,
+  "source_unplaced": 909,
+  "source_placed_mass_g": 217741190,
+  "full_source_seconds": 0.102,
+  "mass_limit_32t_placed": 22,
+  "snapshot_roundtrip": true
+}

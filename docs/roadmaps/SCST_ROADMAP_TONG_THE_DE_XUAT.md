@@ -2,7 +2,7 @@
 
 Status: ACTIVE
 
-**Bản v0.3 · cập nhật tiến độ 01-11-2026.** Owner đã thống nhất hướng, bổ sung hình tàu, M2a và nguồn list ống V1.1. M1, lát cắt VINAFCO268 và M2a đạt kiểm kỹ thuật; nguồn list bổ sung M2a đạt kiểm kỹ thuật; nghiệm thu nghiệp vụ và điều kiện dùng thực vẫn tách riêng. Phạm vi từng phần được giới hạn trong SPEC/WORK_ORDER.
+**Bản v0.3 · cập nhật tiến độ 01-11-2026.** Owner đã thống nhất hướng, bổ sung hình tàu, M2a và nguồn list ống V1.1. M1, VINAFCO268, M2a, nguồn list ống và M2b đạt kiểm kỹ thuật; nghiệm thu nghiệp vụ và điều kiện dùng thực vẫn tách riêng. Phạm vi từng phần được giới hạn trong SPEC/WORK_ORDER.
 
 ## Mục tiêu và phạm vi
 
@@ -42,11 +42,13 @@ Owner đồng ý ngày 31-10-2026 bổ sung lớp hình tàu để nhìn vị tr
 
 Orchestrator đưa phần M2 vào SPEC M2c khi đến lượt; agent chứng minh hiển thị/chọn hàng và đối chiếu số liệu trước checkpoint owner. M3 phụ thuộc dữ liệu tàu/hầm do owner cung cấp. Hiện chỉ chốt phạm vi/đầu ra; chưa chọn mesh, thư viện bổ sung hoặc danh sách file triển khai.
 
-## Tiến độ phần đang làm — nguồn list ống bổ sung M2a
+## Tiến độ phần đang làm — M2b
 
-Theo chỉ đạo “tiếp tục roadmap”, M2a đã được dựng theo [SPEC M2a](../specs/SCST_M2A.md) và [review](../reviews/SCST_M2A_REVIEW.md): nhập/sửa hàng và hầm BOX, import CSV UTF-8 có preview/lỗi dòng-trường, lưu snapshot SQLite và mở lại sau restart. Tại lượt M2a chưa có manifest/số đo hầm thực; owner đã xác nhận **“Chưa có, tiếp tục với mẫu có nhãn”**. Vì vậy chưa nghiệm thu importer trên manifest thật hoặc geometry cho hầm thật.
+M2a và nguồn list ống đã có: nhập tay/CSV/lưu-mở,31nhóm/1076bó/21226ống, nguồn/provenance và khối bao chính xác được giữ. Xem [SPEC M2a](../specs/SCST_M2A.md), [review nguồn](../reviews/SCST_PIPE_LIST_REVIEW.md). Hầm vẫn ước tính,16bó nguồn cần xác minh khối bao; chưa nghiệm thu dùng thực.
 
-M2a đạt kiểm kỹ thuật với79 backend test,13 browser test và kiểm qua hai tiến trình server. Sau đó owner cung cấp `VINAFCO268_LOCAL_HANDOFF_V1_1`: nguồn31nhóm/1076bó/21226ống. [SPEC list ống](../specs/SCST_PIPE_LIST.md) và [kiểm cách tính](../reviews/SCST_PIPE_LIST_ASSESSMENT.md) mở slice nhập nguồn/đặt thủ công, giữ nguyên sà lan; [Review list](../reviews/SCST_PIPE_LIST_REVIEW.md) xác minh92backend/17browser,222kiểm độc lập và lưu/mở qua hai server. Số đo hầm và16bó có khối bao cần xác minh vẫn chờ dữ liệu. M2b chưa dispatch. **Bước kế tiếp là SPEC M2b** cho heuristic xếp sơ bộ, hàng chưa xếp và lý do; chưa dispatch M2b trong lượt M2a. M2c so sánh đầy đủ, M2d PDF/XLSX, M3 case thực giữ đúng thứ tự. Hình tàu VINAFCO268 đã làm riêng không thay các đầu ra còn lại.
+Owner phản hồi chưa thấy hàng trên tàu và yêu cầu làm tròn khối lượng, rồi chọn **bắt đầu xếp thử tự động M2b** ngày01-11-2026. [SPEC M2b](../specs/SCST_M2B.md) và [review](../reviews/SCST_M2B_REVIEW.md) xác minh heuristic một lớp, preview/apply rõ, hàng hiện trên thân tàu sau áp dụng, mọi bó còn lại có lý do, lưu/mở giữ placement. Displaytấn tối đa2số lẻ; tính/lưu không làm tròn.98backend/22browser,8941assertions độc lập và restart đạt.
+
+Bước tiếp theo là checkpoint owner và **SPEC M2c** cho chỉnh/so sánh đầy đủ; chưa dispatch tự động. M2d báo cáo và M3 nhiều tầng/case thực giữ thứ tự. M2b không chứng minh tối ưu, cảlist vừa hầm hoặc điều kiện vận hành; professionalverification và dữ liệu đo thực vẫn riêng.
 
 ## Rủi ro chính
 
@@ -60,7 +62,7 @@ M2a đạt kiểm kỹ thuật với79 backend test,13 browser test và kiểm q
 
 ## Treeview kiến trúc dự kiến
 
-Một repository, một tool chạy local; frontend và backend tách trách nhiệm qua API. M1, lớp VINAFCO268 và M2a đã có code/kiểm kỹ thuật; nghiệm thu nghiệp vụ tách riêng. Cây dưới gồm cả tương lai. Import/storage nằm trong `adapters/`; SQLite tạo tại `runtime-data/` ngoài Git. `domain/planner/` chưa triển khai.
+Một repository, một tool chạy local; frontend và backend tách trách nhiệm qua API. M1, lớp VINAFCO268 và M2a đã có code/kiểm kỹ thuật; nghiệm thu nghiệp vụ tách riêng. Cây dưới gồm cả tương lai. Import/storage nằm trong `adapters/`; SQLite tạo tại `runtime-data/` ngoài Git. `domain/planner/` đã có heuristic một lớp M2b.
 
 ```text
 Cargo_Stowage_Tool/
@@ -102,7 +104,7 @@ Cargo_Stowage_Tool/
 
 **M0 đã xong.** Owner thống nhất ngày 31-10-2026 ba điểm: (1) local-first, một người dùng và ranh giới nghiệp vụ; (2) đầu ra/thứ tự M1–M5, AI tùy chọn; (3) một repository với FE/BE và các lớp trách nhiệm như cây dự kiến.
 
-**Hiện tại: REVIEW nguồn list ống V1.1**, bổ sung đầu vào thực cho M2a theo chỉ đạo owner; các mốc trước có review riêng. Phần tiếp theo được chi tiết hóa là SPEC M2b, rồi WORK_ORDER giới hạn việc thi công. Agent kiểm và REVIEW trước bàn giao, FREEZE phần đã được chấp nhận. Endpoint, schema chi tiết, thuật toán và danh sách file chốt trong SPEC của từng phần; không tự mở toàn bộ mốc còn lại.
+**Hiện tại: REVIEW M2b** sau chỉ đạo xếp thử tự động và làm tròn hiển thị của owner; các mốc trước có review riêng. Phần tiếp theo được chi tiết hóa là SPEC M2c, rồi WORK_ORDER giới hạn việc thi công. Agent kiểm và REVIEW trước bàn giao, FREEZE phần đã được chấp nhận. Endpoint, schema chi tiết, thuật toán và danh sách file chốt trong SPEC của từng phần; không tự mở toàn bộ mốc còn lại.
 
 Bản M1 trong archive là nguồn tham khảo; kết quả test cũ không tự trở thành nghiệm thu cho hướng mới.
 

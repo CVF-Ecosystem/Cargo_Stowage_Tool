@@ -28,7 +28,7 @@ Tài liệu nguồn local trong `VINAFCO268_LOCAL_HANDOFF/`, bị loại khỏi 
 
 ## M2a — Nhập tay, CSV và lưu/mở
 
-**Nhập tay:** chọn **Phương án mới** (hầm BOX, chưa có hàng). Sửa tên/kích thước hầm và các giới hạn rồi **Áp dụng & kiểm lại**. Điền **Thêm bó hàng**, mỗi bó có ID riêng, tên, loại, yêu cầu, kích thước mm và khối lượng kg. Chọn bó để sửa, **Đặt bó** tại gốc hầm rồi đổi X/Y/góc, hoặc **Bỏ vị trí / Xóa bó**. Loại trừ bó sẽ bỏ placement của nó. Danh sách rỗng hiện DRAFT/EMPTY_MANIFEST; không tự sinh hàng hoặc xếp tự động. Với VINAFCO, hầm và mức nguồn khóa; **Dùng hầm tự nhập** bỏ liên kết phương tiện, giữ nhãn chưa xác minh.
+**Nhập tay:** chọn **Phương án mới** (hầm BOX, chưa có hàng). Sửa tên/kích thước hầm và các giới hạn rồi **Áp dụng & kiểm lại**. Điền **Thêm bó hàng**, mỗi bó có ID riêng, tên, loại, yêu cầu, kích thước mm và khối lượng kg. Chọn bó để sửa, **Đặt bó** tại gốc hầm rồi đổi X/Y/góc, hoặc **Bỏ vị trí / Xóa bó**. Loại trừ bó sẽ bỏ placement của nó. Danh sách rỗng hiện DRAFT/EMPTY_MANIFEST; không tự sinh hàng; dùng M2b bên dưới để xếp thử. Với VINAFCO, hầm và mức nguồn khóa; **Dùng hầm tự nhập** bỏ liên kết phương tiện, giữ nhãn chưa xác minh.
 
 **CSV:** dùng [mẫu giả lập](examples/manifest_m2a_synthetic.csv), UTF-8 có/không BOM, dấu phẩy phân cách, một dòng một bó. Header chính xác:
 
@@ -49,13 +49,25 @@ SQLite mặc định: `runtime-data/scst.sqlite3`, ngoài Git. Giữ thư mục 
 1. Chọn hầm/phương án muốn dùng. **Xem VINAFCO 268** mở hầm tham chiếu ước tính; nạp list không tự đổi phương tiện hoặc nâng giới hạn chuyến. Mặc định giới hạn chuyến 32t từ mẫu vẫn được giữ, bạn khai báo giới hạn phù hợp rồi kiểm lại.
 2. **Xem trước list ống** để xem nguồn: 31 nhóm, 1.076 bó, 21.226 ống. **Nạp list vào phương án hiện tại** thay manifest và xóa các placement cũ; có thể quay về **Bản trước**. Mọi bó ban đầu chưa xếp, yêu cầu mặc định **Tùy chọn**, vì nguồn chưa xác nhận toàn bộ list bắt buộc cho một chuyến.
 3. Trong **Danh sách hàng**, lọc **Nhóm nguồn** theo dòng Excel (`Sheet1-R002` là dòng 2) và dùng **Trang trước/Trang sau**, tối đa 50 bó/trang. ID `PIPE-R002-B0001` là bó thứ nhất ở dòng 2, không dùng STT nguồn làm khóa.
-4. Chọn bó → **Đặt bó** tại gốc hầm, sửa X/Y/góc → **Áp dụng & kiểm lại**. Đặt tiếp tại cùng gốc sẽ báo giao nhau; app không tự tìm vị trí. **Bỏ vị trí** đưa bó về chưa xếp. Số bó/ống/khối lượng đã xếp và còn lại có cho toàn list lẫn nhóm đang lọc. Bó **Loại trừ** vẫn thuộc tồn hàng nguồn nhưng không được đặt; số liệu còn lại bao gồm các bó này.
+4. Chọn bó → **Đặt bó** tại gốc hầm, sửa X/Y/góc → **Áp dụng & kiểm lại**. Đặt tiếp tại cùng gốc sẽ báo giao nhau; nút Đặt bó không tự tìm vị trí; dùng M2b bên dưới để xếp thử. **Bỏ vị trí** đưa bó về chưa xếp. Số bó/ống/khối lượng đã xếp và còn lại có cho toàn list lẫn nhóm đang lọc. Bó **Loại trừ** vẫn thuộc tồn hàng nguồn nhưng không được đặt; số liệu còn lại bao gồm các bó này.
 5. Các trường khối lượng/kích thước/ID nguồn cố định. Có thể đổi yêu cầu và vị trí; muốn thay danh sách bằng dữ liệu tự nhập dùng **Phương án mới** hoặc CSV. **Dùng hầm tự nhập** giữ list và bỏ liên kết tàu, cho sửa hầm BOX chưa xác minh. Đổi VR-SI/VR-SII và lưu/mở giữ provenance/placement của list.
 6. Lưu snapshot như phần M2a. Reload → mở bản đã lưu; rawdraft vẫn không tự lưu. Sửa nháp phải kiểm lại trước khi nạp list/đổi phương án; phản hồi đến muộn không ghi đè thay đổi mới.
 
 Khối lượng bó = K (kg/ống) × L (ống/bó), lưu gram nguyên. Tổng tính **1.125,55103t**, tổng O nguồn **1.125,52t**, lệch **31,03kg**; không phải dữ liệu cân từng bó. CBM nguồn **1.130,96964733156m³**, khối bao tính lại **1.157,54318105797m³** (R23:R26 nguồn chưa nhân số bó). Thể tích khối bao có khoảng rỗng, không chứng minh khả năng xếp vừa. Kích thước nguồn giữ chính xác µm, giao diện mm có phần lẻ; tọa độ đặt dùng mm nguyên.
 
 16 bó ở dòng 22/31/32 có khối bao cần xác minh; app giữ cảnh báo và không tự sửa kích thước hoặc vẽ từng ống. Chỉ các bó đã đặt mới có mesh trong hầm. Nếu có quá nhiều lỗi, danh sách chỉ hiện 200 lỗi nhưng tổng đếm và các bó bị ảnh hưởng vẫn đầy đủ. Ship GLB/profile không đổi. Workbook/gói nguồn V1.1 giữ local ngoài Git; runtime dùng derivative có hash, không cần mở Excel. [Đánh giá cách tính](reviews/SCST_PIPE_LIST_ASSESSMENT.md), [SPEC](specs/SCST_PIPE_LIST.md).
+
+## M2b — Xếp thử tự động một lớp
+
+1. Chọn hầm và nạp hàng; để xem trên thân tàu, chọn **Xem VINAFCO 268**. Áp dụng nháp trước nếu đang STALE. Chọn **Xếp thử tự động** gần khu vực thống kê/viewer.
+2. Xem số bó/tổng khối lượng được gợi ý, sức chở còn lại và lý do các bó chưa đặt. Workspace/mesh hiện tại chưa đổi. Lượt này dựng lại mọi vị trí cũ trong candidate, không khóa giữ từng bó đã đặt.
+3. **Áp dụng xếp thử** để đưa kết quả lên tàu/hầm 3D và mặt bằng. **Bản trước** khôi phục trước áp dụng. Chọn bó đã đặt để sửa X/Y/góc rồi kiểm lại; có thể bỏ vị trí hoặc đổi yêu cầu như trước.
+4. Phần lý do phân trang50bó, lọc theo loại. `Loại trừ`: requirement không cho đặt; `Vượt chiều cao`: bó cao hơn hầm; `Khối bao quá lớn`: cả2hướng không vừa hầm; `Giới hạn khối lượng`: không đủ tải còn lại; `Chưa tìm được chỗ`: heuristic chưa có vị trí, có thể có cách xếp khác. Hàng bắt buộc chưa đặt vẫn được rule báo, không tự đổi thành tùy chọn.
+5. Lưu/mở giữ placements và nguồn chính xác; lý do heuristic không lưu trong snapshot. Sau chỉnh hoặc mở phương án, chạy lại xếp thử để tính lý do mới. Lỗi mạng/preview đến muộn không ghi đè edit mới.
+
+Giới hạn đang có được giữ nguyên: chọn tàu từ mẫu có thể vẫn là **32t**; cần thay **Giới hạn chuyến (kg)** theo mức bạn khai báo rồi kiểm lại. App không tự tăng tải. Với list nguồn1076bó trên hầm tham chiếu và mức VR-SII đầy đủ, thuật toán hiện đặt167bó (217,74t), còn909bó; giới hạn32t cho22bó. Không khẳng định tối ưu hoặc cảlist vừa hầm. Chỉ một lớp, chưa tính kê/chèn/chằng, nhiều tầng, tải sàn, ổn định/sức bền. Bó cần xác minh và hầm ước tính vẫn giữ nhãn.
+
+Khối lượng ở bảng/thống kê hiển thị tối đa2số lẻ tấn: **1.125,55tấn** thay cho1.125,55103; số nhỏ khác0 hiện **<0,01tấn**. Tính/lưu bằng gram, ô nhập kg không làm tròn. Hai CBM hiển thị gọn1.130,97/1.157,54m³, số đầy đủ vẫn ở [đánh giá nguồn](reviews/SCST_PIPE_LIST_ASSESSMENT.md). Heuristic dùng lưới mm làm tròn lên để dự trữ khối bao, geometry kiểm/vẽ vẫn chính xác µm; khe lưới chưa phải khoảng kê/chèn nghiệp vụ.
 
 ## Kiểm nhà phát triển
 
@@ -69,4 +81,4 @@ npm.cmd --prefix apps/frontend run test:e2e
 
 Cây thực: `services/backend/app/domain/{model,geometry,rules}` chứa contract và kiểm; `services/backend/app/api` phục vụ API; `apps/frontend/src/{api,features,viewer-3d}` là giao diện; `contracts/openapi.json` và `apps/frontend/src/api/generated/api.ts` được sinh; `tests/backend`, `tests/browser` chứa kiểm; `tooling/` và `Start-SCST.cmd` khởi chạy.
 
-Ngoài phạm vi hiện tại: xếp tự động, import XLSX/PDF, xuất báo cáo, nhiều tầng, xác minh manifest/hầm đo thực và AI. M2a có nhập tay/CSV và lưu/mở local; VINAFCO 268 bổ sung thông số thân và trạng thái tham chiếu theo hồ sơ.
+Ngoài phạm vi hiện tại: xếp tối ưu/nhiều tầng, import XLSX/PDF tổng quát, xuất báo cáo, nhiều tầng, xác minh manifest/hầm đo thực và AI. M2a có nhập tay/CSV và lưu/mở local; VINAFCO 268 bổ sung thông số thân và trạng thái tham chiếu theo hồ sơ.

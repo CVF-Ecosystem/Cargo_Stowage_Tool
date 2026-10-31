@@ -2,7 +2,7 @@
 
 Công cụ hỗ trợ lập phương án xếp hàng thép trong hầm tàu, chạy local với giao diện tiếng Việt. SCST hướng tới luồng **nhập hàng và hầm → đề xuất xếp → xem 3D → chỉnh và kiểm lại → lưu, so sánh, xuất báo cáo**.
 
-**Hiện tại: M2a có nhập liệu, import CSV, lưu/mở local và nguồn list ống V1.1 (31 nhóm, 1.076 bó)**, bên cạnh mẫu M1 và chế độ tham chiếu VINAFCO 268. Hầm vẫn dạng hộp (BOX), hàng một lớp; dữ liệu tự nhập chưa được xác minh. Xếp tự động và xuất báo cáo thuộc các phần tiếp theo.
+**Hiện tại: có xếp thử tự động một lớp M2b, cùng nhập liệu, CSV, lưu/mở local và nguồn list ống V1.1 (31 nhóm, 1.076 bó)**, bên cạnh mẫu M1 và chế độ tham chiếu VINAFCO 268. Hầm vẫn dạng hộp (BOX), hàng một lớp; dữ liệu tự nhập chưa được xác minh. Bộ xếp thử là heuristic sơ bộ; so sánh đầy đủ và xuất báo cáo thuộc các phần tiếp theo.
 
 ## Bản hiện tại làm được gì?
 
@@ -71,18 +71,26 @@ Xem [đánh giá nguồn](docs/reviews/SCST_VINAFCO268_ASSESSMENT.md) và [revie
 
 1. Chọn **Phương án mới** để bắt đầu với hầm BOX và danh sách hàng rỗng, hoặc giữ chế độ VINAFCO hiện có.
 2. Nhập từng bó ở **Thêm bó hàng**, hoặc chọn [CSV mẫu giả lập](docs/examples/manifest_m2a_synthetic.csv) trong **Nhập CSV UTF-8** → **Kiểm CSV** → xem trước → **Áp dụng CSV**. Import thay toàn bộ manifest và bỏ các vị trí xếp cũ; các bó mới ở trạng thái chưa xếp.
-3. Chọn bó → **Đặt bó** → sửa vị trí → **Áp dụng & kiểm lại**. M2a chưa tự xếp hàng.
+3. Chọn bó → **Đặt bó** → sửa vị trí → **Áp dụng & kiểm lại**. Hoặc dùng Xếp thử tự động M2b ở phần dưới.
 4. Điền tên → **Lưu phương án**. Sau reload, chọn bản trong **Phương án đã lưu** → **Mở phương án**; backend kiểm lại trước khi hiển thị.
 
 CSV gồm một dòng cho mỗi bó, tối đa 200 bó/1 MiB; kích thước bằng mm, khối lượng kg dùng dấu chấm thập phân với tối đa 3 số lẻ. Chưa nhận XLSX/PDF. Mỗi lần lưu tạo một bản mới, không ghi đè; dữ liệu nằm tại `runtime-data/scst.sqlite3` ngoài Git, danh sách hiện 100 bản gần nhất.
 
 ## List ống thép Baltimore — nguồn V1.1
 
-Gói local bổ sung **31 nhóm, 1.076 bó, 21.226 ống**. Chọn **Xem VINAFCO 268** nếu muốn dùng hầm tham chiếu, rồi **Xem trước list ống** → **Nạp list vào phương án hiện tại**. Nạp thay danh sách hàng và bỏ vị trí cũ; tất cả bó bắt đầu chưa xếp. Lọc **Nhóm nguồn**, chọn bó → **Đặt bó**, chỉnh X/Y/góc rồi **Áp dụng & kiểm lại**. Có thể **Bỏ vị trí** và lưu/mở như phương án khác. Không có xếp tự động.
+Gói local bổ sung **31 nhóm, 1.076 bó, 21.226 ống**. Chọn **Xem VINAFCO 268** nếu muốn dùng hầm tham chiếu, rồi **Xem trước list ống** → **Nạp list vào phương án hiện tại**. Nạp thay danh sách hàng và bỏ vị trí cũ; tất cả bó bắt đầu chưa xếp. Lọc **Nhóm nguồn**, chọn bó → **Đặt bó**, chỉnh X/Y/góc rồi **Áp dụng & kiểm lại**. Có thể **Bỏ vị trí** và lưu/mở như phương án khác. Dùng Xếp thử tự động M2b ở phần dưới để bố trí thử.
 
-Khối lượng bó tính từ **kg/ống × số ống/bó**: tổng **1.125,55103 tấn**, so với tổng dòng nguồn **1.125,52 tấn**, chênh **31,03 kg**. App giữ cả hai để đối chiếu. Kích thước khối bao theo nguồn, không tự sửa; 16 bó có cảnh báo cần xác minh. Các trường vật lý nguồn cố định, yêu cầu và vị trí được chỉnh. List chưa gán sẵn tàu/chuyến, không khẳng định toàn bộ list vừa hầm. Giới hạn CSV phổ thông vẫn là 200 bó; đây là adapter riêng cho nguồn đã chuẩn hóa, chưa phải importer XLSX tổng quát.
+Khối lượng bó tính từ **kg/ống × số ống/bó**: tổng hiển thị **1.125,55 tấn** (giữ chính xác1.125,55103t khi tính/lưu), so với tổng dòng nguồn **1.125,52 tấn**, chênh **31,03 kg**. App giữ cả hai để đối chiếu. Kích thước khối bao theo nguồn, không tự sửa; 16 bó có cảnh báo cần xác minh. Các trường vật lý nguồn cố định, yêu cầu và vị trí được chỉnh. List chưa gán sẵn tàu/chuyến, không khẳng định toàn bộ list vừa hầm. Giới hạn CSV phổ thông vẫn là 200 bó; đây là adapter riêng cho nguồn đã chuẩn hóa, chưa phải importer XLSX tổng quát.
 
 Xem [kiểm cách tính và quyết định tích hợp](docs/reviews/SCST_PIPE_LIST_ASSESSMENT.md). Workbook/gói gốc giữ local ngoài Git, mô hình sà lan giữ nguyên.
+
+## Xếp thử tự động và xem hàng trên tàu
+
+Sau khi nạp hàng/chọn hầm, bấm **Xếp thử tự động** → xem số bó/khối lượng và lý do chưa xếp → **Áp dụng xếp thử**. Các bó được bố trí sẽ hiện trong hầm 3D/2D, có thể chọn/chỉnh tay và lưu/mở. Xem trước chưa đổi vị trí cũ; áp dụng giữ **Bản trước** để quay lại. Khi chưa có placement, viewer chỉ dẫn luồng này.
+
+Bộ xếp thử làm **một lớp**, xét xoay0/90°, ưu tiên hàng bắt buộc, tuân theo giới hạn chuyến trừ hàng đã có. Nó giữ giới hạn đang khai báo (mẫu mặc định32t), không tự nâng theo tàu. Với list1076bó và hầm VINAFCO, thuật toán hiện gợi ý167bó ở mức tải VR-SII đầy đủ, còn909bó; ở giới hạn32t gợi ý22bó. Đây là kết quả heuristic, không phải số lượng tối ưu hoặc chứng minh toàn bộlist xếp vừa. Lý do từng bó còn lại có lọc/phân trang; dữ liệu hầm và16khối bao vẫn chưa xác minh.
+
+Khối lượng **hiển thị tối đa2số lẻ**, ví dụ **1.125,55 tấn**; tính/lưu và ô nhập kg vẫn giữ chính xác. Lý do xếp thử chỉ ở lượt phân tích trong tab, sau mở/chỉnh phương án chạy lại để có lý do mới. [SPEC M2b](docs/specs/SCST_M2B.md) và [hướng dẫn](docs/APP_GUIDE.md).
 
 ## Kiến trúc
 
@@ -101,7 +109,8 @@ Cargo_Stowage_Tool/
 │   ├── domain/
 │   │   ├── model/                  # Mô hình dữ liệu và đơn vị tính
 │   │   ├── geometry/               # Biên hầm, tọa độ và giao nhau
-│   │   └── rules/                  # Kiểm quy tắc nghiệp vụ
+│   │   ├── rules/                  # Kiểm quy tắc nghiệp vụ
+│   │   └── planner/                # Heuristic xếp thử một lớp, lý do chưa xếp
 │   └── adapters/                   # Import CSV và lưu snapshot SQLite
 ├── contracts/                      # OpenAPI contract
 ├── tests/                          # Backend, browser và kiểm khởi chạy
@@ -110,7 +119,7 @@ Cargo_Stowage_Tool/
 └── archive/                        # Tài liệu lịch sử và bản thử cũ
 ```
 
-Frontend hiển thị kết quả từ backend; chỉnh sửa cần được kiểm lại. Backend dùng SQLite cho snapshot local, chưa có bộ xếp tự động hoặc tích hợp AI. Cây kiến trúc tương lai nằm trong [roadmap tổng thể](docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md).
+Frontend hiển thị kết quả từ backend; chỉnh sửa cần được kiểm lại. Backend dùng SQLite cho snapshot local, có heuristic xếp thử một lớp, chưa tích hợp AI. Cây kiến trúc tương lai nằm trong [roadmap tổng thể](docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md).
 
 ## Lộ trình phát triển
 
@@ -118,12 +127,12 @@ Frontend hiển thị kết quả từ backend; chỉnh sửa cần được ki�
 |---|---|---|
 | M0 — Thống nhất hướng | Phạm vi, thứ tự phát triển và kiến trúc tổng thể | Đã thống nhất |
 | M1 — Demo chạy được | Hầm BOX, hàng giả lập, bảng/3D, sửa và kiểm cơ bản | Đạt kiểm kỹ thuật; chờ phản hồi nghiệp vụ |
-| M2 — Tool trọn luồng | Nhập/import, lưu/mở, xếp sơ bộ, chỉnh/so sánh, xuất PDF/XLSX; hình tàu minh họa ở M2c | M2a và nguồn list ống đã có; viewer VINAFCO 268 đã có. M2b–M2d chưa triển khai |
+| M2 — Tool trọn luồng | Nhập/import, lưu/mở, xếp sơ bộ, chỉnh/so sánh, xuất PDF/XLSX; hình tàu minh họa ở M2c | M2a, nguồn list ống và M2b đã có; viewer VINAFCO 268 đã có. M2c–M2d chưa triển khai |
 | M3 — Case thực | Hình học phù hợp dữ liệu thực, nhiều tầng, profile kê/chồng; hiệu chỉnh hình tàu | Chưa triển khai |
 | M4 — AI hỗ trợ | Hỗ trợ tác vụ có nhu cầu rõ; core vẫn chạy khi tắt AI | Nhánh tùy chọn |
 | M5 — Sử dụng ổn định | Đóng gói, lưu trữ bền, backup/restore và hiệu năng | Chưa triển khai |
 
-Theo yêu cầu bổ sung của owner, lớp hình tàu VINAFCO 268 được tích hợp sớm thành một phần riêng của viewer; M2 tổng thể chưa được triển khai. Các mốc xa giữ ở mức tổng thể; chỉ chi tiết hóa phần sắp làm khi được chọn. Xem [phạm vi, đầu ra và phụ thuộc từng mốc](docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md).
+Theo yêu cầu bổ sung của owner, lớp hình tàu VINAFCO 268 được tích hợp sớm thành một phần riêng của viewer; M2 tổng thể chưa hoàn thành; M2c–M2d còn lại. Các mốc xa giữ ở mức tổng thể; chỉ chi tiết hóa phần sắp làm khi được chọn. Xem [phạm vi, đầu ra và phụ thuộc từng mốc](docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md).
 
 ## Phát triển và kiểm thử
 

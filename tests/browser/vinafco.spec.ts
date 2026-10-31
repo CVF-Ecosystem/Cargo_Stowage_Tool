@@ -78,6 +78,7 @@ test("real GLB and placed cargo share backend coordinates; camera, picking and h
     draftMarker: marker,
     cargoMeshes: meshes,
   }, null, 2) + "\n");
+  await canvas.scrollIntoViewIfNeeded();
   const firstCamera = await canvas.getAttribute("data-camera");
   const box = (await canvas.boundingBox())!;
   await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);

@@ -1,6 +1,6 @@
 # SCST M2b — Xếp thử tự động và hiển thị gọn
 
-Status: APPROVED_FOR_EXECUTION
+Status: CLOSED
 dispatchKind: INITIAL
 Owner: project-orchestrator
 Risk: R2
@@ -62,9 +62,9 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "decision": "Review usableflow, repair within scope or hold unresolvedboundary; no automaticM2c"
     }
   },
-  "phase": "DISPATCH",
+  "phase": "REVIEW",
   "action": {
-    "kind": "IMPLEMENT",
+    "kind": "REVIEW",
     "selected": [
       "M2B-01",
       "M2B-02",
@@ -73,69 +73,104 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "M2B-05",
       "M2B-06"
     ],
-    "owner": "Terra implementation; Solbrowser; rootindependentreview",
+    "owner": "Rootindependentreviewer",
     "output": "M2b app and docs/reviews/SCST_M2B_REVIEW.md",
     "budgetMinutes": 240,
-    "stop": "Sixcriteria proof or boundary, no M2c",
-    "next": "Independent source/oracle/browser review before ownerfeedback"
+    "stop": "Sixtechnicalcriteria verified; ownerbusinessacceptance separate, noautoM2c",
+    "next": "Owner reviews delivered M2b automatictrial/roundeddisplay; prepare bounded SPEC M2c at nextcheckpoint, not dispatched automatically."
   },
   "rows": [
     {
       "id": "M2B-01",
-      "state": "NOT_STARTED",
-      "gap": "M2b heuristic/transactions/reasons/display proof not implemented",
-      "owner": "Terra/Sol then rootreviewer",
+      "state": "VERIFIED",
+      "gap": "Technicalcriterionverified; measuredhold/business/operationalacceptance separate",
+      "owner": "Rootreviewer",
       "destination": "docs/reviews/SCST_M2B_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2B_REVIEW.md",
+          "sha256": "84f8448973aef9588c0448c6f567cfff020d0c2b628506dcbda670463fd067b9"
+        }
+      ]
     },
     {
       "id": "M2B-02",
-      "state": "NOT_STARTED",
-      "gap": "M2b heuristic/transactions/reasons/display proof not implemented",
-      "owner": "Terra/Sol then rootreviewer",
+      "state": "VERIFIED",
+      "gap": "Technicalcriterionverified; measuredhold/business/operationalacceptance separate",
+      "owner": "Rootreviewer",
       "destination": "docs/reviews/SCST_M2B_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2B_REVIEW.md",
+          "sha256": "84f8448973aef9588c0448c6f567cfff020d0c2b628506dcbda670463fd067b9"
+        }
+      ]
     },
     {
       "id": "M2B-03",
-      "state": "NOT_STARTED",
-      "gap": "M2b heuristic/transactions/reasons/display proof not implemented",
-      "owner": "Terra/Sol then rootreviewer",
+      "state": "VERIFIED",
+      "gap": "Technicalcriterionverified; measuredhold/business/operationalacceptance separate",
+      "owner": "Rootreviewer",
       "destination": "docs/reviews/SCST_M2B_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2B_REVIEW.md",
+          "sha256": "84f8448973aef9588c0448c6f567cfff020d0c2b628506dcbda670463fd067b9"
+        }
+      ]
     },
     {
       "id": "M2B-04",
-      "state": "NOT_STARTED",
-      "gap": "M2b heuristic/transactions/reasons/display proof not implemented",
-      "owner": "Terra/Sol then rootreviewer",
+      "state": "VERIFIED",
+      "gap": "Technicalcriterionverified; measuredhold/business/operationalacceptance separate",
+      "owner": "Rootreviewer",
       "destination": "docs/reviews/SCST_M2B_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2B_REVIEW.md",
+          "sha256": "84f8448973aef9588c0448c6f567cfff020d0c2b628506dcbda670463fd067b9"
+        }
+      ]
     },
     {
       "id": "M2B-05",
-      "state": "NOT_STARTED",
-      "gap": "M2b heuristic/transactions/reasons/display proof not implemented",
-      "owner": "Terra/Sol then rootreviewer",
+      "state": "VERIFIED",
+      "gap": "Technicalcriterionverified; measuredhold/business/operationalacceptance separate",
+      "owner": "Rootreviewer",
       "destination": "docs/reviews/SCST_M2B_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2B_REVIEW.md",
+          "sha256": "84f8448973aef9588c0448c6f567cfff020d0c2b628506dcbda670463fd067b9"
+        }
+      ]
     },
     {
       "id": "M2B-06",
-      "state": "NOT_STARTED",
-      "gap": "M2b heuristic/transactions/reasons/display proof not implemented",
-      "owner": "Terra/Sol then rootreviewer",
+      "state": "VERIFIED",
+      "gap": "Technicalcriterionverified; measuredhold/business/operationalacceptance separate",
+      "owner": "Rootreviewer",
       "destination": "docs/reviews/SCST_M2B_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2B_REVIEW.md",
+          "sha256": "84f8448973aef9588c0448c6f567cfff020d0c2b628506dcbda670463fd067b9"
+        }
+      ]
     }
   ],
   "supportingWork": [],
   "conclusions": {
-    "tranche": "PENDING",
-    "trancheSummary": "OwnerexplicitlyselectedM2b after PIPE-LIST feedback",
-    "trancheEvidence": [],
+    "tranche": "COMPLETE",
+    "trancheSummary": "Sixtechnicalcriteria and developer-ownedusableflow verified",
+    "trancheEvidence": [
+      {
+        "path": "docs/reviews/SCST_M2B_REVIEW.md",
+        "sha256": "84f8448973aef9588c0448c6f567cfff020d0c2b628506dcbda670463fd067b9"
+      }
+    ],
     "product": "PENDING",
-    "productSummary": "M2c-d/M3 andbusinessacceptance remainseparate",
+    "productSummary": "M2c-d/M3 andownerbusinessacceptance separate",
     "acceptance": [],
     "owner": "Projectowner"
   }

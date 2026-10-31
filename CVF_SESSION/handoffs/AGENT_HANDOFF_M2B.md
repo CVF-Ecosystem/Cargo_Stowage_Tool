@@ -4,11 +4,11 @@ Status: ACTIVE
 
 ## Current State
 
-- Current mode: BUILD
-- Active phase: BUILD
-- Active role: ORCHESTRATOR
-- Next allowed move: Implement sixM2b criteria under d8627c0 admission; root independentreview before closure, no M2c.
-- Parked operator checkpoint: Measuredhold/16sourceenvelopes and business/operational acceptance pending; M2c-d/M3 separate.
+- Current mode: REVIEW
+- Active phase: REVIEW
+- Active role: SESSION_SYNC_STEWARD
+- Next allowed move: Owner reviews delivered M2b automatictrial/roundeddisplay; prepare bounded SPEC M2c at nextcheckpoint, not dispatched automatically.
+- Parked operator checkpoint: Measuredhold/16sourceenvelopes, business/operational acceptance pending; M2c-d/M3 remain separate.
 
 ## Authority and design
 
@@ -23,3 +23,23 @@ PIPE-LIST technicallyclosed; userexplicitlyopens nextmissingM2b, no reopen/reset
 ## BUILD acknowledgment
 
 Canonical state/memory/handoff/truth/index re-read at transition, agree. Material-SHA marker: d8627c0. Root ORCHESTRATOR dispatches admitted Terra implementation/Solbrowser on allsixcriteria; pre-dispatch6/6 and pre-commit7/7 pass. No runtime edits before thisack; root remains independentreviewer. Core c4c8767ac8861854f40d466ba338ffd11eb9558e read-only, R2, no AIgovernanceclaims. Budget240min total unchanged.
+
+## REVIEW acknowledgment
+
+Root rehydrated canonicalsurfaces after Terra workerreturn and declares independentREVIEWER; no runtimeedits byroot. Backendfrozen;8941independent integerµm/mass/metadata/accountingchecks on40random manifests×3 plusboundary/fullsource/snapshot passed. Source1076→167placed909unplaced217741190g in~.102s atfullSIIlimit; default32t22placed. Solfocused3/4firstfailure causedtesthelperPOSTwaiting forGET, notapp; helperrepaired and5casefocusedrerun pending. Rootfinalfullsuite willfollow; failures/versions preserved.
+
+## Reviewer-local repair — viewer discovery and mouse test
+
+First full22browser run21pass/1fail: legacy VINAFCO drag test computed raw mousecoordinates while canvasbelowviewport after newpanel, so OrbitControls never receiveddrag. Root performs localizedreviewerrepair (same objective/design/paths/authority/effects/commitowner; evidence determines fix): scrollcanvasinto view beforemeasuring testcoordinates, preservingcamera/picking/assertions. One UIline after explicitplannerapply now scrolls to viewer on nextframe so owner immediately seescargo. This advances M2B-03 usableflow, no planningmath/source/API changes. Root runtimecontribution limited to thatscrollline; Sol asked independentread-onlyreview. Backend98/restart/8941oracle remainvalid; build/fullbrowser mustrerun afterrepair. No REWORKdispatch/scopeexpansion ornewcriteria.
+
+## Technical closure and continuation
+
+Root finishes independent REVIEW and transitions CLOSER / COMMIT_STEWARD / SESSION_SYNC_STEWARD after canonicalrehydration. All6criteria in docs/reviews/SCST_M2B_REVIEW.md verified; ownerbusiness/operational acceptance separate, noautomaticM2c. Root98backend4.72s/8941oraclechecks40random×3/restart/build/types+liveOpenAPI match. Sol5focused17s. Firstfull21/22failed offviewportmousedrag; rootlocalizedscrollrepair andone UIscrollstatement independentlyacceptedbySol, rootfinal22/22 passed46.7s. Final20sourcefile manifestpinscode; backendunchangedafterearlierproof. Rootlive8765fullSIIcase167meshes/909remaining217741190g,1125551030gdisplay1.125,55t, viewportvisible; no realDBtestsave. Simplehelperencodingerrorfixed/re-run, notcountedPASS.
+
+Ship/registry/workbook/archive/locks/storage untouched. Historical13PNGs restored, freshregression images separate; generatedknowledgeindex parkedignored. Newruntime21770/PID34300 serves8765, handle .cvf/runtime/m2b-demo-session.json; previous8774/PID41676 stoppednormally. UI now advises Xếp thử→Áp dụng androundedmass; limit32t preserved unlessowneredits (22placed); fullSIIlimit167placed. Nooptimum/multilayer/professionalclaim. Allnewsource/evidence localcommitonly; no push.
+
+## Final COMMIT_STEWARD acknowledgment
+
+Canonicalstate/memory/handoff/truth/index re-read andagree; CLOSER/COMMIT_STEWARD/SESSION_SYNC_STEWARD records localtechnicalclosure only. Finalintegrity verifies20sourcehashes,13historicalPNGs,22rawsourcehashes, immutable source/ship/storage/archive/backendtests, unchangedroadmapcriterion section andlocal links. No backendedits after98/restart/8941checks; final22browser46.7s onscrollrepaired UI. Root commits localmaterial/docs aftergates, then committedrange review; no push orautomaticM2c.
+
+Final reviewer-fast8controls and pre-commit7controls PASS in worktree scope. Closeability atclosure NOTchecked because orderCLOSED; initial activepre-dispatch6/6 checked contract. Receipts under docs/reviews/SCST_M2B_EVIDENCE/gates; not a hermetic/runtimegovernanceclaim.

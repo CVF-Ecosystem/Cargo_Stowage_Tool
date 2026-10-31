@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "reviewed_source_files": 20,
+  "historical_pngs_restored": 13,
+  "raw_package_hashes": 22,
+  "source_registry_vessel_storage_archive_backend_tests_unchanged": true,
+  "roadmap_criterion_section_unchanged": true,
+  "local_links_checked": 78,
+  "canonical_continuity_agrees": true
+}

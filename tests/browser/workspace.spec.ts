@@ -29,9 +29,7 @@ test("real API drives table, 2D and actual Three meshes through yaw and selectio
   for (const unit of plan.units) {
     const row = page.getByTestId(`unit-${unit.id}`);
     await expect(row).toContainText(`${unit.length_mm} × ${unit.width_mm} × ${unit.height_mm}`);
-    const mass = unit.mass_g < 1_000_000
-      ? `${new Intl.NumberFormat("vi-VN", { maximumFractionDigits: 3 }).format(unit.mass_g / 1000)} kg`
-      : `${new Intl.NumberFormat("vi-VN", { maximumFractionDigits: 6 }).format(unit.mass_g / 1_000_000)} tấn`;
+    const mass = `${new Intl.NumberFormat("vi-VN", { maximumFractionDigits: 2 }).format(unit.mass_g / 1_000_000)} tấn`;
     await expect(row).toContainText(mass);
     if (plan.placements.some((placement) => placement.unit_id === unit.id)) {
       const placement = plan.placements.find((p) => p.unit_id === unit.id)!;
@@ -233,7 +231,7 @@ test("an edit during pending validation keeps the newer raw draft STALE until se
   release();
   await expect(mass).toHaveValue("2500.002");
   await expect(page.getByTestId("status")).toHaveText("STALE");
-  await expect(row).toContainText("2,500001 tấn");
+  await expect(row).toContainText("2,5 tấn");
   await page.unroute("**/api/validate");
   const retry = page.waitForResponse((response) => response.url().endsWith("/api/validate") && response.request().method() === "POST");
   await page.getByRole("button", { name: "Áp dụng & kiểm lại" }).click();
@@ -273,7 +271,7 @@ test("after setup the browser runs locally with all non-loopback traffic blocked
   await page.getByRole("button", { name: "Áp dụng & kiểm lại" }).click();
   const checked = (await (await limitsResponse).json()) as Evaluation & { plan: Plan & { limits: { certificate_cargo_limit_g: number; voyage_cargo_limit_g: number; cargo_onboard_g: number } } };
   expect(checked.plan.limits).toEqual({ certificate_cargo_limit_g: 30_000_000, voyage_cargo_limit_g: 29_000_000, cargo_onboard_g: 1_000_000 });
-  const fmtTonnes = (grams: number) => new Intl.NumberFormat("vi-VN", { maximumFractionDigits: 6 }).format(grams / 1_000_000);
+  const fmtTonnes = (grams: number) => new Intl.NumberFormat("vi-VN", { maximumFractionDigits: 2 }).format(grams / 1_000_000);
   await expect(page.getByTestId("placed-mass")).toHaveText(`${fmtTonnes(checked.summary.placed_mass_g)} / ${fmtTonnes(checked.plan.limits.voyage_cargo_limit_g - checked.plan.limits.cargo_onboard_g)} tấn`);
   await expect(page.locator("#checks")).toContainText("Chứng nhận: 30 tấn · Chuyến: 29 tấn · Đã có ngoài hầm: 1 tấn");
   await expect(page.locator("#checks")).toContainText("Được xếp thêm: 28 tấn");

@@ -56,3 +56,6 @@ export const openSnapshot = (id: string) => jsonRequest<Evaluation>(`/api/snapsh
 export type PipeLibrary = components["schemas"]["PipeLibrary"];
 export const getPipeLibrary = () => jsonRequest<PipeLibrary>("/api/pipe-list");
 export const previewPipeList = (plan: Plan) => jsonRequest<Evaluation>("/api/pipe-list/preview",plan);
+
+export type PlannerPreview = components["schemas"]["PlannerPreview"];
+export const previewPlanner = (plan: Plan) => jsonRequest<PlannerPreview>("/api/planner/preview",plan);

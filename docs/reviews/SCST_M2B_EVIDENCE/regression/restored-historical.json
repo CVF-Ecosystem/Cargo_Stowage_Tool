@@ -1,0 +1,54 @@
+[
+  {
+    "path": "docs/reviews/SCST_M1_EVIDENCE/browser-2d-stale.png",
+    "sha256_restored": "6a3671cb846c23821befbe04e1c2f781a75a9308865ff8863e2c6eaebccb34ba"
+  },
+  {
+    "path": "docs/reviews/SCST_M1_EVIDENCE/browser-3d-yaw.png",
+    "sha256_restored": "ad0a19e51edad0c3eaf393f33abc1874405a4dfa5948b00018fab1e84f35d17d"
+  },
+  {
+    "path": "docs/reviews/SCST_M1_EVIDENCE/browser-mobile-fallback.png",
+    "sha256_restored": "7e9bba015e0ce851bd6801d083764c912dc48783f8133f7763dffc85957d912d"
+  },
+  {
+    "path": "docs/reviews/SCST_M1_EVIDENCE/browser-mobile-table-scrolled.png",
+    "sha256_restored": "5e2333f92d34a71cdf19ffb585a3b7625a8792e055a801e856bdf91bae0b95f0"
+  },
+  {
+    "path": "docs/reviews/SCST_M2A_EVIDENCE/browser-csv-import.png",
+    "sha256_restored": "5e37ea125f7043f8009b3bbc78d18c60d2ed6b11832ecfe4ca06badd917ee6fc"
+  },
+  {
+    "path": "docs/reviews/SCST_M2A_EVIDENCE/browser-manual-saved.png",
+    "sha256_restored": "3f41505ee6f11c59ba1e7e891c6aa40798c651957beb0a7942467eee6d17687a"
+  },
+  {
+    "path": "docs/reviews/SCST_M2A_EVIDENCE/browser-mobile-reference-fallback.png",
+    "sha256_restored": "a252245e7a57a4e24d77b44944618d64e5e013009e9646ff4af2dccafb949152"
+  },
+  {
+    "path": "docs/reviews/SCST_PIPE_LIST_EVIDENCE/browser/pipe-list-desktop.png",
+    "sha256_restored": "baf440d3f34f23d7d945dba3969cbafaf266d19963bd484fa0bedbaf6e94c64c"
+  },
+  {
+    "path": "docs/reviews/SCST_PIPE_LIST_EVIDENCE/browser/pipe-list-mobile-fallback.png",
+    "sha256_restored": "cd209695903ec8ed9c1919a4479e3d892e821f5749ededb142044cf7ae507108"
+  },
+  {
+    "path": "docs/reviews/SCST_VINAFCO268_EVIDENCE/browser-vessel-3d.png",
+    "sha256_restored": "19016c2879d12564713c01e57bb37a54500bfd9da5c0540eeaede05191ff8c0a"
+  },
+  {
+    "path": "docs/reviews/SCST_VINAFCO268_EVIDENCE/browser-vessel-mobile-fallback.png",
+    "sha256_restored": "92fb88b4260f64987d9d27cfbbcd7c91f930fbb9b317e426005be6a52e2578c8"
+  },
+  {
+    "path": "docs/reviews/SCST_VINAFCO268_EVIDENCE/browser-vessel-model-failure.png",
+    "sha256_restored": "ca19c8a8b67ddfa6e6a6e454246cfb075fdd2035a47fc83fa5c5945f81dc8ed1"
+  },
+  {
+    "path": "docs/reviews/SCST_VINAFCO268_EVIDENCE/browser-vessel-si.png",
+    "sha256_restored": "b49981a46eab4525bc594c9610a7115cb74a69acd9c38350dfcf8bb000f1d44e"
+  }
+]

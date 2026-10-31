@@ -183,3 +183,10 @@ def pipe_list_preview(plan: Plan):
     candidate=plan.model_dump(mode="json")
     candidate.update(contract_version="scst.pipe-list.v1",cargo_dataset=PIPE_DATASET,cargo_source="DOCUMENT_CALCULATED",units=pipe_units(),placements=[])
     return evaluate(Plan.model_validate(candidate))
+
+
+from ..domain.planner import PlannerPreview, preview as planner_preview
+
+@router.post("/planner/preview", response_model=PlannerPreview)
+def suggest_placement(plan: Plan):
+    return planner_preview(plan)

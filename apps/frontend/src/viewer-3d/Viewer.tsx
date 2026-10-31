@@ -444,6 +444,7 @@ export default function Viewer(props: Props) {
           )}
         </div>
       </div>
+      {plan.placements.length === 0 && <p className="scope-note" role="status">Chưa có bó nào được đặt. Chọn Xếp thử tự động → Áp dụng xếp thử, hoặc đặt từng bó bằng tay.</p>}
       {plan.source === "MIXED_REFERENCE" && <div className="scope-note"><button className="button secondary" onClick={() => setShipVisible(v => !v)} aria-pressed={shipVisible}>{shipVisible ? "Ẩn tàu" : "Hiện tàu"}</button><p role="status">{assetStatus} Màu thân GLB cố định theo mớn 4,85 m; khung xanh biểu thị mớn tham chiếu đã chọn.</p></div>}
       <div className="viewer-legend">
         <span>

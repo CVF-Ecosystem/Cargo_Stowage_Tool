@@ -2,7 +2,13 @@
 
 Cập nhật: **01-11-2026**.
 
-## Hiện tại — list ống V1.1 đạt kiểm kỹ thuật
+## Hiện tại — M2b xếp thử tự động đạt kiểm kỹ thuật
+
+Owner yêu cầu hiện hàng trên hình tàu/làm tròn khối lượng và chọn bắt đầu M2b. [SPEC](../specs/SCST_M2B.md) và [review độc lập](../reviews/SCST_M2B_REVIEW.md) xác minh đủ6tiêu chí: heuristic một lớp, preview/apply rõ, actualcargo meshes trên VINAFCO, mọiremainingunit có lý do, async/undo/lưu-mở giữ nguồn, massdisplay2decimals và exactgram calculations.98backend/22browser46,7s/8941independentassertions/build/contracts/restart đạt. Root UIscrollline đượcSol review độc lập, lỗiđầu vàsửa được ghi rõ.
+
+App8765 đã cập nhật: Xếp thử tự động → Áp dụng xếp thử. Giới hạn32t từ mẫu giữ nguyên,22bó được đặt; ở fullVR-SIIlimit,167bó/217,74t và909còn lại. Đây là heuristic một lớp, không tối ưu hoặc phương án vận hành; hầm/16khối bao nguồn còn cần xác minh. Khối lượng hiển thị1.125,55tấn, tính/lưu giữ1125551030g. Localcommitonly, chưa push dữ liệu mới.
+
+## Nguồn list ống V1.1 — đạt kiểm kỹ thuật
 
 Owner cung cấp list thực đã chuẩn hóa, yêu cầu kiểm cách tính và giữ mô hình sà lan. Slice riêng theo [SPEC](../specs/SCST_PIPE_LIST.md) và [work order](../work_orders/SCST_PIPE_LIST.md):31 nhóm,1.076 bó,21.226 ống, ban đầu chưa bố trí; chọn/đặt/bỏ/xoay thủ công, đối soát khối lượng/số bó/ống toàn bộ và từng nhóm, lưu/mở giữ provenance. Không mở planner. [Đánh giá nguồn](../reviews/SCST_PIPE_LIST_ASSESSMENT.md) ghi31,03kg chênh giữa tổng nguồn với K×L và CBM cần đối chiếu. 16bó khối bao cần xác minh, hầm vẫn ước tính. [Review độc lập](../reviews/SCST_PIPE_LIST_REVIEW.md) xác minh92backend/17browser (57,1s), build/contracts/restart và222kiểm độc lập. Sáu tiêu chí kỹ thuật đạt; chưa nghiệm thu nghiệp vụ hoặc vận hành. Demo8765 đã cập nhật, dữ liệu chỉ commit local.
 
@@ -38,6 +44,4 @@ Demo synthetic BOX một lớp, bảng/3D/2D cùng dữ liệu, giới hạn ch�
 
 ## Bước tiếp theo
 
-Owner đồng ý bổ sung hình tàu minh họa vào roadmap v0.3; sau đó cho phép tích hợp VINAFCO268 có chọn lọc. Lớp này đã có, backend vẫn kiểm theo hầm BOX ước tính; hiệu chỉnh theo số đo hầm/tuyến hình thực vẫn thuộc M3.
-
-Owner xem bản M2a và phản hồi về hướng dùng. Sau review nguồn list V1.1 bổ sung M2a, **phần kế tiếp là SPEC M2b** cho heuristic xếp sơ bộ, hàng chưa xếp và lý do; chưa dispatch trong lượt M2a. M2c chỉnh/so sánh đầy đủ, M2d export, nhiều tầng/case thực M3, AI tùy chọn M4 và vận hành M5 giữ checkpoint riêng. Không suy diễn kiểm kỹ thuật thành nghiệm thu nghiệp vụ hoặc sử dụng phương án thực.
+Owner xem luồng M2b đã được đội phát triển kiểm nội bộ. Phần kế tiếp là SPEC M2c cho chỉnh/so sánh đầy đủ sau checkpoint, chưa dispatch tự động. M2d export, M3 nhiều tầng/dữ liệu thực, M4 AI tùy chọn và M5 vận hành giữ riêng. Đo hầm,16source envelopes, stability/strength/floorload và business/operational acceptance còn chờ; không chuyển thành đã xác minh vì thử xếp đạt các kiểm hiện tại.
