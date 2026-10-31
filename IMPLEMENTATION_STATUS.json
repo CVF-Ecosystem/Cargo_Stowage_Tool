@@ -1,15 +1,16 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "SPEC_M1_V02_RECHECKED_AWAITING_OWNER",
-  "currentPhase": "SPEC",
+  "overallStatus": "M1_DISPATCH_PREPARED",
+  "currentPhase": "WORK_ORDER",
   "completedCapabilities": [],
-  "activeWorkOrders": [],
+  "activeWorkOrders": [
+    "docs/work_orders/SCST_M1_REUSE.md"
+  ],
   "knownLimitations": [
-    "Owner agreed overall direction (M0) and selected selective M1 reuse; exact selection and SPEC v0.2 still await owner agreement.",
-    "Claude recheck and takeover documentation are complete. No source transferred; app folders contain README only.",
-    "No application capability accepted and no active application work order; BUILD remains paused.",
-    "Historical authority drift for SCST_M1_SKELETON was repaired via dispatch-time snapshot and explicitly validated; no parent acceptance or runtime governance claim."
+    "M1 reuse implementation authorized under SCST-D002 and SPEC v0.2; work order must pass dispatch before worker BUILD.",
+    "All nine criteria are selected; no new implementation evidence or accepted runtime capability yet.",
+    "M2-M5, real cargo use and AI/provider integration remain out of scope."
   ],
   "evidence": [
     "docs/project/PROJECT_STATUS.md",
@@ -21,7 +22,9 @@
     "docs/specs/SCST_M1.md",
     "docs/reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md",
     "docs/reviews/learnings/SCST_L001_CLOSED_PACKET_AUTHORITY_DRIFT.md",
-    "docs/roadmaps/snapshots/SCST_ROADMAP_v0.2_at_f2b688e.md"
+    "docs/roadmaps/snapshots/SCST_ROADMAP_v0.2_at_f2b688e.md",
+    "docs/decisions/SCST_D002_M1_REUSE_EXECUTION.md",
+    "docs/work_orders/SCST_M1_REUSE.md"
   ],
   "updatedAt": "2026-10-31"
 }

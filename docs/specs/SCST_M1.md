@@ -1,10 +1,10 @@
 # SCST M1 — Khung chạy được
 
-Status: DRAFT
+Status: APPROVED_FOR_M1
 
-**Bản v0.2 · 31-10-2026 · Chờ owner thống nhất.** SPEC này chưa cấp quyền thi công; BUILD chỉ bắt đầu khi có WORK_ORDER riêng. Căn cứ: [roadmap v0.2](../roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md) (dòng M1, nguyên tắc xuyên suốt) và [quyết định SCST-D001](../decisions/SCST_D001_THONG_NHAT_HUONG_M0_2026-10-31.md).
+**Bản v0.2 · 31-10-2026 · Được tiếp tục theo chỉ đạo owner tại [SCST-D002](../decisions/SCST_D002_M1_REUSE_EXECUTION.md).** BUILD theo WORK_ORDER M1 riêng; SPEC không phải nghiệm thu sản phẩm. Căn cứ: [roadmap v0.2](../roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md) (dòng M1, nguyên tắc xuyên suốt) và [quyết định SCST-D001](../decisions/SCST_D001_THONG_NHAT_HUONG_M0_2026-10-31.md).
 
-**Tiếp quản/bàn giao:** Codex đã kiểm lại phần Claude cập nhật và hoàn tất hồ sơ ngày 31-10-2026; kết quả ở [báo cáo tái sử dụng, mục 9](../reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md#9-kết-quả-recheck-và-tiếp-quản). Hướng tận dụng M1 có chọn lọc đã được owner chỉ đạo; danh mục cụ thể và SPEC vẫn chờ thống nhất. Lượt hoàn tất này làm rõ hồ sơ/đường dẫn, không đổi M1-01…M1-09.
+**Tiếp quản/bàn giao:** Codex đã kiểm lại phần Claude cập nhật và hoàn tất hồ sơ ngày 31-10-2026; kết quả ở [báo cáo tái sử dụng, mục 9](../reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md#9-kết-quả-recheck-và-tiếp-quản). Sau đó owner chỉ đạo tiếp tục theo SCST-D002. Các tiêu chí M1-01…M1-09 giữ nguyên; việc chấp thuận thi công không đồng nghĩa nghiệm thu kết quả.
 
 **Thay đổi so với v0.1:**
 
@@ -49,7 +49,7 @@ Nguồn: [archive/2026-10-31/paused-m1](../../archive/2026-10-31/paused-m1/READM
 
 ## Quyết định thiết kế đề xuất
 
-Hướng tái sử dụng trong D1 đã được owner chỉ đạo. Danh mục lấy/sửa cụ thể và các quyết định thiết kế còn lại chờ owner thống nhất cùng SPEC. Chi tiết kỹ thuật thông thường (tên hàm, bố cục file con) do agent quyết trong BUILD.
+Hướng tái sử dụng D1, danh mục và các quyết định dưới đây là phạm vi tiếp tục M1 theo SCST-D002. Chi tiết kỹ thuật thông thường (tên hàm, bố cục file con) do worker quyết trong BUILD trong phạm vi này; root review thay đổi và bằng chứng.
 
 - **D1 — Dùng lại có chọn lọc.** Sao chép (không di chuyển) từng thành phần từ archive vào khung hiện tại theo Phụ lục. Archive giữ nguyên bytes. Không mang `.venv`, cache, log, PID, SPEC/work order hay authority cũ. Archive không được nạp lúc chạy.
 - **D2 — Giới hạn tải và hầm mục tiêu trống.**
@@ -157,19 +157,18 @@ Hướng tái sử dụng trong D1 đã được owner chỉ đạo. Danh mục 
 
 **Trước khi xin owner phản hồi**, nhóm phát triển tự chứng minh đủ M1-01 đến M1-09 trên đúng phiên bản bàn giao. Owner chỉ cần xem demo và quyết định nghiệp vụ, không phải kiểm kỹ thuật.
 
-## Điểm owner cần xác nhận
+## Nội dung chốt để tiếp tục M1 theo SCST-D002
 
-1. **Danh mục dùng lại có chọn lọc theo D1 và Phụ lục.** Owner đã chọn hướng tận dụng M1; phần cần thống nhất là danh mục và cách sửa cụ thể, không hỏi lại quyết định tái sử dụng.
-2. **Ba loại giới hạn tải và miền giá trị theo D2.** Có đúng cách đơn vị đang dùng không?
+1. **Danh mục dùng lại có chọn lọc theo D1 và Phụ lục.** Tiếp tục đúng danh mục và cách sửa đã recheck; không hỏi lại quyết định tái sử dụng.
+2. **Ba loại giới hạn tải và miền giá trị theo D2.** Là mô hình dùng cho M1 synthetic, chưa chứng minh phù hợp một chuyến thực.
 3. **Hầm mục tiêu trống.** Hàng đã có trên tàu được coi là nằm ngoài hầm mục tiêu.
 4. **Ba nhãn trạng thái theo D4 và STALE theo D7.**
 
 ## Bước tiếp theo
 
-1. Owner thống nhất SPEC.
-2. Đăng ký mục "M1 acceptance" vào `docs/milestone-coverage-authority.json`.
-3. Soạn WORK_ORDER M1, ghim nguồn archive bằng tree ở trên và nêu đường dẫn, ngân sách, điều kiện dừng.
-4. BUILD khi được cho phép, theo thứ tự: backend + contract trước, rồi frontend, launcher và bằng chứng.
+1. SPEC được tiếp tục theo SCST-D002; mục "M1 acceptance" đăng ký mã `SCST-M1`.
+2. Thực hiện [WORK_ORDER M1](../work_orders/SCST_M1_REUSE.md), ghim nguồn archive và có đường dẫn, ngân sách, điều kiện dừng.
+3. Worker BUILD theo thứ tự backend + contract trước, rồi frontend, launcher và bằng chứng; root REVIEW trước bàn giao.
 
 ## Phụ lục — nguồn → đích khi dùng lại
 

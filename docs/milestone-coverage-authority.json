@@ -3,11 +3,15 @@
   "milestones": {
     "SCST-ROADMAP": {
       "path": "docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md",
-      "heading": "## Phạm vi và đầu ra từng mốc"
+      "heading": "## Ph\u1ea1m vi v\u00e0 \u0111\u1ea7u ra t\u1eebng m\u1ed1c"
     },
     "SCST-ROADMAP-AT-F2B688E": {
       "path": "docs/roadmaps/snapshots/SCST_ROADMAP_v0.2_at_f2b688e.md",
-      "heading": "## Phạm vi và đầu ra từng mốc"
+      "heading": "## Ph\u1ea1m vi v\u00e0 \u0111\u1ea7u ra t\u1eebng m\u1ed1c"
+    },
+    "SCST-M1": {
+      "path": "docs/specs/SCST_M1.md",
+      "heading": "## M1 acceptance"
     }
   }
 }

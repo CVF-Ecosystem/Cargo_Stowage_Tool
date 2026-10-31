@@ -63,9 +63,9 @@
     {
       "id": "continuity-initial-handoff",
       "family": "continuity",
-      "path": "CVF_SESSION/handoffs/AGENT_HANDOFF_V1_2026-10-31.md",
+      "path": "CVF_SESSION/handoffs/SCST_M1_REUSE_HANDOFF.md",
       "status": "ACTIVE",
-      "description": "Initial agent handoff."
+      "description": "Active M1 selective-reuse dispatch and worker/reviewer handoff."
     },
     {
       "id": "truth-implementation-status",
@@ -107,14 +107,14 @@
       "family": "governed_artifact_family",
       "path": "docs/specs",
       "status": "ACTIVE",
-      "description": "SPEC M1 v0.2 drafted and rechecked; awaiting owner agreement before execution."
+      "description": "SPEC M1 v0.2 admitted for execution under SCST-D002; product acceptance separate."
     },
     {
       "id": "family-work-orders",
       "family": "governed_artifact_family",
       "path": "docs/work_orders",
       "status": "ACTIVE",
-      "description": "Work orders; SCST_M1_SKELETON (closed) created the M1 folder skeleton."
+      "description": "SCST_M1_REUSE active work order; historical skeleton packet remains closed."
     },
     {
       "id": "family-reviews",

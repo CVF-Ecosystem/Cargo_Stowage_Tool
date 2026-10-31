@@ -1,6 +1,8 @@
 # Agent Handoff V1 — current project continuation
 
-Status: ACTIVE
+Status: SUPERSEDED
+
+Current handoff: [SCST M1 reuse execution](SCST_M1_REUSE_HANDOFF.md). The state and checkpoints below are historical; the active session pointer and SCST-D002 govern continuation.
 
 ## Current State
 

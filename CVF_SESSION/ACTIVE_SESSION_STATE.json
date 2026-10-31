@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "SPEC",
-  "activePhase": "SPEC",
+  "currentMode": "WORK_ORDER",
+  "activePhase": "WORK_ORDER",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -13,10 +13,10 @@
     "REVIEW",
     "FREEZE"
   ],
-  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_V1_2026-10-31.md",
-  "nextAllowedMove": "Owner settles SPEC M1 v0.2 and the detailed reuse selection; recheck is complete. Then register the M1 acceptance section and author a bounded WORK_ORDER. No source transfer or BUILD until authorized.",
-  "parkedOperatorCheckpoint": "Owner agreement on SPEC M1 v0.2 and exact reuse selection, then a separate bounded WORK_ORDER before application BUILD; the principle of selective reuse is already directed.",
-  "activeRole": "SESSION_SYNC_STEWARD",
-  "roleRoute": "SINGLE_AGENT_MULTI_ROLE_ALLOWED",
+  "activeHandoff": "CVF_SESSION/handoffs/SCST_M1_REUSE_HANDOFF.md",
+  "nextAllowedMove": "Validate and commit SCST_M1_REUSE dispatch, acknowledge material-SHA marker, then Terra worker implements M1-01 through M1-09; root reviews independently before closure.",
+  "parkedOperatorCheckpoint": "Scope changes or risk above R2 return to owner; M2-M5 and operational use remain outside this work order.",
+  "activeRole": "ORCHESTRATOR",
+  "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",
   "updatedAt": "2026-10-31"
 }

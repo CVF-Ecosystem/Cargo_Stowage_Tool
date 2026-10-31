@@ -5,7 +5,7 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 ## Start Here
 
 - Active session/phase/role state.: `CVF_SESSION/ACTIVE_SESSION_STATE.json`
-- Initial agent handoff.: `CVF_SESSION/handoffs/AGENT_HANDOFF_V1_2026-10-31.md`
+- Active M1 selective-reuse dispatch and worker/reviewer handoff.: `CVF_SESSION/handoffs/SCST_M1_REUSE_HANDOFF.md`
 - Project continuity front door.: `CVF_SESSION_MEMORY.md`
 - CVF enforcement manifest.: `.cvf/manifest.json`
 - Milestone source bindings: live roadmap and frozen dispatch-time snapshot for the closed skeleton packet; no M1 implementation admission.: `docs/milestone-coverage-authority.json`
@@ -29,8 +29,8 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 - Source material still used for planning; not final design authority.: `docs/reference/`
 - Reuse assessment and completed recheck/takeover results: docs/reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md section 9; awaiting owner SPEC agreement.: `docs/reviews/`
 - Owner-agreed SCST roadmap v0.2 and architecture tree: docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md; next slice SPEC M1.: `docs/roadmaps/`
-- SPEC M1 v0.2 drafted and rechecked; awaiting owner agreement before execution.: `docs/specs/`
-- Work orders; SCST_M1_SKELETON (closed) created the M1 folder skeleton.: `docs/work_orders/`
+- SPEC M1 v0.2 admitted for execution under SCST-D002; product acceptance separate.: `docs/specs/`
+- SCST_M1_REUSE active work order; historical skeleton packet remains closed.: `docs/work_orders/`
 
 Plans describe intended work. `IMPLEMENTATION_STATUS.json`, source, tests, and
 review evidence determine what is actually implemented.

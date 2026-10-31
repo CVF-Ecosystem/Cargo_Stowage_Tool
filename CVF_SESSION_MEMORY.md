@@ -5,13 +5,13 @@ Memory class: POINTER_RECORD
 ## Current Truth
 
 - Contract: cvf.downstreamContinuityContract@1.0.0
-- Current mode: SPEC
-- Active phase: SPEC
-- Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_V1_2026-10-31.md
+- Current mode: WORK_ORDER
+- Active phase: WORK_ORDER
+- Active handoff: CVF_SESSION/handoffs/SCST_M1_REUSE_HANDOFF.md
 
 ## Current operator boundary
 
-Owner agreed overall direction (M0) and explicitly selected selective reuse. Claude committed SPEC M1 v0.2 and historical authority snapshot repair; Codex completed takeover/recheck and synchronized the unfinished handoff under the latest owner request. See `docs/reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md`, section 9, and `docs/specs/SCST_M1.md` (v0.2 DRAFT). Recheck is complete; owner settlement of exact selection/SPEC remains pending, followed by acceptance registration and a bounded WORK_ORDER M1. Do not ask again whether to reuse; do not infer BUILD authority. App folders contain README only; no source transferred. Snapshot and closed skeleton work-order validation passed, archive 50/50 raw blobs unchanged. Learning SCST-L001 remains a local repair, not parent acceptance. Original input remains at `docs/project/SCST_Roadmap_Ban_Dau_Tool_First.md`.
+Owner directed continued M1 execution with root orchestrator/reviewer, Terra 6.1 High worker and Sol-Medium for difficult parts. SCST-D002 admits SPEC v0.2 and selective reuse; work order `docs/work_orders/SCST_M1_REUSE.md` covers all M1-01..09. Dispatch is prepared; worker BUILD follows validated commit and material-SHA acknowledgment. Root controls review/commit and continuity. Archive stays unchanged; no M2-M5, live data or AI/provider calls. No application capability is yet accepted. Current handoff contains role, cost/stop and preflight results; parent-container repair findings are separate from this project's passing doctor.
 
 ## Read next
 
