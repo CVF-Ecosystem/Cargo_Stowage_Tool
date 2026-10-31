@@ -1,12 +1,14 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "M2A_TECHNICALLY_VERIFIED_AWAITING_OWNER_FEEDBACK",
-  "currentPhase": "REVIEW",
+  "overallStatus": "PIPE_LIST_ADMITTED_NOT_IMPLEMENTED",
+  "currentPhase": "WORK_ORDER",
   "completedCapabilities": [],
-  "activeWorkOrders": [],
+  "activeWorkOrders": [
+    "docs/work_orders/SCST_PIPE_LIST.md"
+  ],
   "knownLimitations": [
-    "M2a technically verified using owner-authorized labelled fixtures; no real manifest/measured hold validation or operational/business acceptance.",
+    "M2a technically verified on labelled fixtures. Actual V1.1 source list now supplied; source adapter admitted, not implemented. Measuredhold/business/operational acceptance pending.",
     "Raw drafts/history remain in browser session until explicit immutable SQLite snapshot save. Latest100 snapshots listed; no overwrite/delete/backup/restore UI.",
     "CSV UTF8 only, max200units/1MiB; no XLSX/PDF import, automatic planner, full version comparison, report export, multilayer or AI.",
     "BOX/single-layer; VINAFCO hull dimensions sourced, hold/cabin/lines estimated. Onboard cargo outside target hold. No stability/strength/floor-load verification.",
@@ -37,7 +39,9 @@
     "docs/specs/SCST_M2A.md",
     "docs/work_orders/SCST_M2A.md",
     "docs/reviews/SCST_M2A_REVIEW.md",
-    "docs/reviews/SCST_M2A_EVIDENCE/reviewed-source-manifest.json"
+    "docs/reviews/SCST_M2A_EVIDENCE/reviewed-source-manifest.json",
+    "docs/specs/SCST_PIPE_LIST.md",
+    "docs/work_orders/SCST_PIPE_LIST.md"
   ],
   "updatedAt": "2026-10-31",
   "x_verifiedMilestones": [

@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
   "updatedAt": "2026-10-31",
-  "claimBoundary": "M1, VINAFCO268 and M2a technically verified; owner-authorized labelled fixtures, business/real-data acceptance separate. M2b not dispatched.",
+  "claimBoundary": "M1/VINAFCO/M2a technically verified; actual pipe-list integration admitted not implemented, business acceptance separate.",
   "artifacts": [
     {
       "id": "schema-artifact-registry",
@@ -63,9 +63,9 @@
     {
       "id": "continuity-initial-handoff",
       "family": "continuity",
-      "path": "CVF_SESSION/handoffs/AGENT_HANDOFF_M2A.md",
+      "path": "CVF_SESSION/handoffs/AGENT_HANDOFF_PIPE_LIST.md",
       "status": "ACTIVE",
-      "description": "Active M2a input/import/persistence handoff; predecessor preserves M1/VINAFCO history."
+      "description": "Active actual pipe-list source integration handoff; predecessors preserve history."
     },
     {
       "id": "truth-implementation-status",
@@ -107,21 +107,21 @@
       "family": "governed_artifact_family",
       "path": "docs/specs",
       "status": "ACTIVE",
-      "description": "M1, VINAFCO268 and admitted next-slice M2a specifications."
+      "description": "M1, VINAFCO268 and admitted next-slice M2a specifications. PIPE-LIST source integration admitted."
     },
     {
       "id": "family-work-orders",
       "family": "governed_artifact_family",
       "path": "docs/work_orders",
       "status": "ACTIVE",
-      "description": "M1, VINAFCO268 and M2a technical orders closed; next M2b requires its own SPEC/order."
+      "description": "M1, VINAFCO268 and M2a technical orders closed; next M2b requires its own SPEC/order. PIPE-LIST source integration admitted."
     },
     {
       "id": "family-reviews",
       "family": "governed_artifact_family",
       "path": "docs/reviews",
       "status": "ACTIVE",
-      "description": "M1, VINAFCO268 and M2a assessments, returns, independent reviews and exact-version evidence."
+      "description": "M1, VINAFCO268 and M2a assessments, returns, independent reviews and exact-version evidence. PIPE-LIST source integration admitted."
     },
     {
       "id": "family-learnings",

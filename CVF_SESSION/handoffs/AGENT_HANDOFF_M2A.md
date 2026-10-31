@@ -1,6 +1,6 @@
 # SCST M2a — Active handoff
 
-Status: ACTIVE
+Status: SUPERSEDED
 
 ## Current State
 

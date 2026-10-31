@@ -3,11 +3,11 @@
   "milestones": {
     "SCST-ROADMAP": {
       "path": "docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md",
-      "heading": "## Phạm vi và đầu ra từng mốc"
+      "heading": "## Ph\u00e1\u00ba\u00a1m vi v\u00c3\u00a0 \u00c4\u2018\u00e1\u00ba\u00a7u ra t\u00e1\u00bb\u00abng m\u00e1\u00bb\u2018c"
     },
     "SCST-ROADMAP-AT-F2B688E": {
       "path": "docs/roadmaps/snapshots/SCST_ROADMAP_v0.2_at_f2b688e.md",
-      "heading": "## Phạm vi và đầu ra từng mốc"
+      "heading": "## Ph\u00e1\u00ba\u00a1m vi v\u00c3\u00a0 \u00c4\u2018\u00e1\u00ba\u00a7u ra t\u00e1\u00bb\u00abng m\u00e1\u00bb\u2018c"
     },
     "SCST-M1": {
       "path": "docs/specs/SCST_M1.md",
@@ -20,6 +20,10 @@
     "SCST-M2A": {
       "path": "docs/specs/SCST_M2A.md",
       "heading": "## M2a acceptance"
+    },
+    "SCST-PIPE-LIST": {
+      "path": "docs/specs/SCST_PIPE_LIST.md",
+      "heading": "## Pipe list acceptance"
     }
   }
 }

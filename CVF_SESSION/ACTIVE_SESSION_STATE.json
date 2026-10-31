@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "REVIEW",
-  "activePhase": "REVIEW",
+  "currentMode": "WORK_ORDER",
+  "activePhase": "WORK_ORDER",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -13,10 +13,10 @@
     "REVIEW",
     "FREEZE"
   ],
-  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_M2A.md",
-  "nextAllowedMove": "Prepare bounded SPEC M2b for heuristic placement and unplaced reasons after owner feedback/checkpoint; M2b not dispatched in this tranche.",
-  "parkedOperatorCheckpoint": "Owner chose labelled fixtures; real manifest/hold validation and business/operational acceptance remain pending. M2b-d/M3 have separate scope.",
-  "activeRole": "SESSION_SYNC_STEWARD",
+  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_PIPE_LIST.md",
+  "nextAllowedMove": "Implement bounded PIPE-LIST source adapter under docs/work_orders/SCST_PIPE_LIST.md after dispatch commit and BUILD acknowledgment; no M2b.",
+  "parkedOperatorCheckpoint": "Actual cargo list supplied; measured hold and16bundle envelope verification, business/operational acceptance remain pending. M2b-d/M3 separate.",
+  "activeRole": "ORCHESTRATOR",
   "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",
   "updatedAt": "2026-10-31"
 }
