@@ -11,7 +11,16 @@ Status: ACTIVE
 - Next allowed move: Owner reviews the M1 folder skeleton (work order SCST_M1_SKELETON closed). Then prepare SPEC M1, starting from a gap assessment of the archived trial. Application code stays paused until a further bounded work order.
 - Parked operator checkpoint: Owner review of the skeleton, then owner agreement on SPEC M1 and a separate bounded WORK_ORDER before any application code.
 
-## Tranche SCST-M1-SKELETON result (latest)
+## Review follow-up on roadmap and skeleton (latest)
+
+- 31-10-2026: owner forwarded a review with 3 findings plus one scope note. Same agent as REPAIR_WORKER, R1 documentation only, no code; objective, paths and authority unchanged.
+- [P2] Missing real data vs M2b: roadmap M2 row and risk table now state one rule. Without real data, M2b-M2d continue on labeled demo data, the planner reads the hold through `geometry` (not hard-wired to BOX), and results are marked "chưa xác minh hình học". Fixing the geometry contract, using plans on a real hold and accepting M2 for real holds wait for real measurements.
+- [P2] Test data: `tests/README.md` now separates synthetic fixtures (committed), owner-permitted/anonymized real cases (M3) and sensitive source documents (outside Git).
+- [P3] Stale facts: roadmap treeview intro now says the M1 skeleton exists; metadata note and status line now say the registry exists (SCST-ROADMAP). Editing the milestone section changes its hash; the closed work order keeps its dispatch-time hash and new work orders must recompute.
+- Scope note: M1 only reserves z/layer/support fields for extension; no multi-layer logic in M1 (roadmap M1 row, closing paragraph, risk row, `domain/model` README).
+- Next allowed move unchanged: owner reviews the skeleton, then SPEC M1.
+
+## Tranche SCST-M1-SKELETON result
 
 - IMPLEMENTATION_WORKER created 11 folders, each with a README, and updated the root README tree. REVIEWER (same agent, R1, not independent) verified criteria 1-3 by script; reviewer-local wording fix in `domain/rules` README. Worker-return, reviewer-fast and pre-commit run before the material commit.
 - Work order closed: `Status: CLOSED (self-reviewed R1, owner checkpoint pending)`; activeWorkOrders cleared. Not done: no code, dependencies, schema, tests, planner/runtime-data, or SPEC M1. M1 row stays NOT_STARTED.

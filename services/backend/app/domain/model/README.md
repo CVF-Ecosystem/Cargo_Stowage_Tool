@@ -1,6 +1,6 @@
 # Mô hình nghiệp vụ
 
-**Trách nhiệm:** Hàng (từng bó có ID, kích thước, khối lượng), hầm, phương án, đơn vị tính. Có sẵn cao độ z, lớp và chỗ cho quan hệ đỡ.
+**Trách nhiệm:** Hàng (từng bó có ID, kích thước, khối lượng), hầm, phương án, đơn vị tính. Chừa trường z, lớp và quan hệ đỡ để mở rộng; logic xếp/kiểm nhiều tầng làm ở M3.
 
 **Dùng từ mốc:** M1+.
 
