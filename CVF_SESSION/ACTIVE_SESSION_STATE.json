@@ -14,8 +14,8 @@
     "FREEZE"
   ],
   "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_V1_2026-10-31.md",
-  "nextAllowedMove": "Owner reviews the M1 folder skeleton (work order SCST_M1_SKELETON closed). Then prepare SPEC M1, starting from a gap assessment of the archived trial. Application code stays paused until a further bounded work order.",
-  "parkedOperatorCheckpoint": "Owner review of the skeleton, then owner agreement on SPEC M1 and a separate bounded WORK_ORDER before any application code.",
+  "nextAllowedMove": "Owner reviews SPEC M1 draft (docs/specs/SCST_M1.md) and confirms D1, D2 and D4. After agreement: register the M1 acceptance section, then author WORK_ORDER M1. No BUILD until that work order is authorized.",
+  "parkedOperatorCheckpoint": "Owner agreement on SPEC M1, then a separate bounded WORK_ORDER M1 before any application code.",
   "activeRole": "SESSION_SYNC_STEWARD",
   "roleRoute": "SINGLE_AGENT_MULTI_ROLE_ALLOWED",
   "updatedAt": "2026-10-31"

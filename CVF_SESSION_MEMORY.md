@@ -11,7 +11,7 @@ Memory class: POINTER_RECORD
 
 ## Current operator boundary
 
-Owner agreed the overall direction on 31-10-2026 (M0, `docs/decisions/SCST_D001_THONG_NHAT_HUONG_M0_2026-10-31.md`). Active roadmap v0.2: `docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md`. M1 folder skeleton created under the closed work order `docs/work_orders/SCST_M1_SKELETON.md` (README files, no code). Next: owner reviews the skeleton, then SPEC M1; application code stays paused until a further bounded work order. Original roadmap input remains unchanged at `docs/project/SCST_Roadmap_Ban_Dau_Tool_First.md`.
+Owner agreed the overall direction on 31-10-2026 (M0, `docs/decisions/SCST_D001_THONG_NHAT_HUONG_M0_2026-10-31.md`). Active roadmap v0.2: `docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md`. M1 folder skeleton created under the closed work order `docs/work_orders/SCST_M1_SKELETON.md` (README files, no code). SPEC M1 draft: `docs/specs/SCST_M1.md`, awaiting owner agreement; application code stays paused until a bounded WORK_ORDER M1. Original roadmap input remains unchanged at `docs/project/SCST_Roadmap_Ban_Dau_Tool_First.md`.
 
 ## Read next
 

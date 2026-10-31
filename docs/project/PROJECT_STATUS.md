@@ -16,7 +16,7 @@ Ngày 31-10-2026 owner đã **thống nhất hướng tổng thể (M0)**, ghi t
 
 ## Phần chưa được chốt
 
-- SPEC M1: hành vi, phạm vi, tiêu chí đạt đo được và kết quả đối chiếu bản thử trong archive.
+- [SPEC M1](../specs/SCST_M1.md): đã có bản DRAFT, chờ owner thống nhất (dùng lại bản thử, ba loại giới hạn tải, nhãn trạng thái).
 - Phiên bản stack, endpoint, schema chi tiết và thuật toán; chốt trong SPEC của từng phần.
 - Tiêu chí nghiệm thu các mốc sau M1.
 
@@ -30,4 +30,4 @@ Các lựa chọn từng được agent ghi trong SPEC/work order M1 chưa đư�
 
 ## Bước tiếp theo
 
-Owner xem khung thư mục; sau đó soạn SPEC M1 để owner xem. Chỉ tiếp tục triển khai khi được cho tiếp tục theo SPEC và WORK_ORDER phù hợp. Không dùng work order M1 trong archive để tự nối lại BUILD.
+Owner xem và thống nhất SPEC M1; sau đó soạn WORK_ORDER M1. Chỉ tiếp tục triển khai khi được cho tiếp tục theo SPEC và WORK_ORDER phù hợp. Không dùng work order M1 trong archive để tự nối lại BUILD.

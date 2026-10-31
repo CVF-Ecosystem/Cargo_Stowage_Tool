@@ -107,7 +107,7 @@
       "family": "governed_artifact_family",
       "path": "docs/specs",
       "status": "ACTIVE",
-      "description": "Specifications."
+      "description": "Specifications; SCST_M1.md is the M1 SPEC draft awaiting owner agreement."
     },
     {
       "id": "family-work-orders",

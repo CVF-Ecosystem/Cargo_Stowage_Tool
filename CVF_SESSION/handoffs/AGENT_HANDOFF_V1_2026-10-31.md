@@ -8,10 +8,17 @@ Status: ACTIVE
 - Current mode: SPEC
 - Active phase: SPEC
 - Active role: SESSION_SYNC_STEWARD
-- Next allowed move: Owner reviews the M1 folder skeleton (work order SCST_M1_SKELETON closed). Then prepare SPEC M1, starting from a gap assessment of the archived trial. Application code stays paused until a further bounded work order.
-- Parked operator checkpoint: Owner review of the skeleton, then owner agreement on SPEC M1 and a separate bounded WORK_ORDER before any application code.
+- Next allowed move: Owner reviews SPEC M1 draft (docs/specs/SCST_M1.md) and confirms D1, D2 and D4. After agreement: register the M1 acceptance section, then author WORK_ORDER M1. No BUILD until that work order is authorized.
+- Parked operator checkpoint: Owner agreement on SPEC M1, then a separate bounded WORK_ORDER M1 before any application code.
 
-## Review follow-up on roadmap and skeleton (latest)
+## SPEC M1 draft (latest)
+
+- 31-10-2026: owner asked to write SPEC M1 without building ("soạn spec M1, không thi công"), which also closes the skeleton review checkpoint. Rehydrated state/memory/handoff/status/index first. Role: SPEC_AUTHOR, then SESSION_SYNC_STEWARD. R1 documentation; no code, no archive change.
+- Gap assessment of the archived trial (SPEC, APP_GUIDE, domain/API source, test list). Reusable: launcher, stack, integer units, basic checks, table/3D/2D, edit/undo. Gaps: flat domain vs `model/geometry/rules`, single load limit, missing layer/support fields, missing status labels, stale guide/evidence.
+- Output: `docs/specs/SCST_M1.md` (Status DRAFT). Decisions D1-D6 (reuse by copy; three load-limit types; reserved multi-layer fields without logic; DRAFT/GEOMETRY_FEASIBLE/RULES_CHECKED/STALE; contract `scst.m1.v1`; no persistence). Acceptance M1-01..M1-09 under "## M1 acceptance".
+- Not done: no registry entry for M1 (added after owner agreement), no work order, no BUILD. Old test results stay historical.
+
+## Review follow-up on roadmap and skeleton
 
 - 31-10-2026: owner forwarded a review with 3 findings plus one scope note. Same agent as REPAIR_WORKER, R1 documentation only, no code; objective, paths and authority unchanged.
 - [P2] Missing real data vs M2b: roadmap M2 row and risk table now state one rule. Without real data, M2b-M2d continue on labeled demo data, the planner reads the hold through `geometry` (not hard-wired to BOX), and results are marked "chưa xác minh hình học". Fixing the geometry contract, using plans on a real hold and accepting M2 for real holds wait for real measurements.
