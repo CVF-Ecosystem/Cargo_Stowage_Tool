@@ -26,7 +26,7 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 - Shared project learning, value-filtered parent intake and returned adoption.: `docs/reviews/learnings/`
 - Current status, original planning input and file organization.: `docs/project/`
 - Source material still used for planning; not final design authority.: `docs/reference/`
-- Reviews and evidence.: `docs/reviews/`
+- Reviews and evidence; SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md is the selective reuse proposal awaiting Claude recheck.: `docs/reviews/`
 - Owner-agreed SCST roadmap v0.2 and architecture tree: docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md; next slice SPEC M1.: `docs/roadmaps/`
 - Specifications; SCST_M1.md is the M1 SPEC draft awaiting owner agreement.: `docs/specs/`
 - Work orders; SCST_M1_SKELETON (closed) created the M1 folder skeleton.: `docs/work_orders/`

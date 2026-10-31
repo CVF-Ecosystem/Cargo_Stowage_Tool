@@ -30,4 +30,6 @@ Các lựa chọn từng được agent ghi trong SPEC/work order M1 chưa đư�
 
 ## Bước tiếp theo
 
-Owner xem và thống nhất SPEC M1; sau đó soạn WORK_ORDER M1. Chỉ tiếp tục triển khai khi được cho tiếp tục theo SPEC và WORK_ORDER phù hợp. Không dùng work order M1 trong archive để tự nối lại BUILD.
+Owner đã chọn tận dụng M1 cũ có chọn lọc và yêu cầu đề xuất để Claude recheck. Đã có [báo cáo nguồn → đích và phạm vi tái sử dụng](../reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md); chưa chuyển source hoặc sửa SPEC.
+
+Claude recheck danh mục và những điểm SPEC còn thiếu; owner chốt SPEC/phần được lấy, sau đó soạn WORK_ORDER M1. Chỉ tiếp tục triển khai khi được cho tiếp tục theo SPEC và WORK_ORDER phù hợp. Không dùng work order M1 trong archive để tự nối lại BUILD.

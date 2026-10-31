@@ -8,8 +8,18 @@ Status: ACTIVE
 - Current mode: SPEC
 - Active phase: SPEC
 - Active role: SESSION_SYNC_STEWARD
-- Next allowed move: Owner reviews SPEC M1 draft (docs/specs/SCST_M1.md) and confirms D1, D2 and D4. After agreement: register the M1 acceptance section, then author WORK_ORDER M1. No BUILD until that work order is authorized.
-- Parked operator checkpoint: Owner agreement on SPEC M1, then a separate bounded WORK_ORDER M1 before any application code.
+- Next allowed move: Claude rechecks the selective M1 reuse assessment; owner settles the exact selection and SPEC M1, then register acceptance and author a bounded WORK_ORDER. No source transfer or BUILD until authorized.
+- Parked operator checkpoint: Claude recheck and owner settlement of reuse selection/SPEC M1; separate bounded WORK_ORDER before source transfer or application BUILD.
+
+## Selective M1 reuse assessment (latest)
+
+- 31-10-2026: owner explicitly wants selective reuse of existing M1 aligned with the new roadmap/SPEC, and requested a clear assessment/proposal for Claude recheck. Reuse is the chosen direction; do not ask again whether to reuse versus rewrite wholesale. Exact selection and implementation remain unapproved.
+- Rehydrated manifest/policy/state/memory/handoff/status/index. REVIEWER (original M1 author, disclosed self-assessment) inspected source and authored `docs/reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md`, Status DRAFT_FOR_RECHECK. Risk R1 documentation within ceiling R2; project stays SPEC. Next responsibility is SESSION_SYNC_STEWARD for navigation/continuity, COMMIT_STEWARD for documentation commit, then SESSION_SYNC_STEWARD continuation; no app work order or BUILD.
+- Source boundary: paused-m1 tree e4004e274fc28aa143ce0e300b6c060d1cb1e5a0 at commit 819565330fbac6476157cfe40c338cef4a96a5de; 50 files inventoried. Read implementation/test/tooling; parsed 11 Python files without imports/execution; NPM lock root dependency metadata matched. Runtime/dependency installation not revalidated. Original historical 27 backend/3 browser results are not acceptance of the new M1.
+- Proposal classifies source-to-target reuse/adaptation/regeneration/archive-only groups and maps all M1-01 through M1-09. SPEC points needing settlement: numeric domains including onboard zero, empty target hold versus onboard mass, draft/STALE and error preservation. Old skeleton packet has known COV_AUTHORITY_STALE on explicit recheck; this assessment does not repair it or claim all historical packets pass.
+- Finite question/output/owner/45-minute additional ceiling and stop are recorded in report section 8. Reuses prior source review; earlier cumulative effort unmeasured. Stop at report/document checks and return to Claude/owner; no code copy, dependency install, archive modification or successor implementation.
+- Documentation verification: 23 local links valid; acceptance map contains M1-01 through M1-09 once each; all 50 archived files match their raw Git blob identities. Catalog, pre-dispatch, worker-return and reviewer-fast passed on this documentation scope. INVOKED controls only; coverage/role admission not applicable to this advisory report, no execution/acceptance grant. Existing historical work-order failure remains separate and disclosed.
+- Re-read current memory/state/handoff/status/index at COMMIT_STEWARD transition. Commit contains the report and navigation/continuity only; application source, SPEC, roadmap, archive and core remain unchanged. Continuation is SESSION_SYNC_STEWARD in SPEC awaiting Claude/owner.
 
 ## SPEC M1 draft (latest)
 

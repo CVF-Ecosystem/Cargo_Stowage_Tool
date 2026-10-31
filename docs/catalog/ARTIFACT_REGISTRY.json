@@ -121,7 +121,7 @@
       "family": "governed_artifact_family",
       "path": "docs/reviews",
       "status": "ACTIVE",
-      "description": "Reviews and evidence."
+      "description": "Reviews and evidence; SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md is the selective reuse proposal awaiting Claude recheck."
     },
     {
       "id": "family-learnings",
