@@ -1,6 +1,6 @@
 # SCST Pipe list — Active handoff
 
-Status: ACTIVE
+Status: SUPERSEDED
 
 ## Current State
 

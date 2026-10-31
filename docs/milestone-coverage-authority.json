@@ -24,6 +24,10 @@
     "SCST-PIPE-LIST": {
       "path": "docs/specs/SCST_PIPE_LIST.md",
       "heading": "## Pipe list acceptance"
+    },
+    "SCST-M2B": {
+      "path": "docs/specs/SCST_M2B.md",
+      "heading": "## M2b acceptance"
     }
   }
 }

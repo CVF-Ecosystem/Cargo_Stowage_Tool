@@ -5,7 +5,7 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 ## Start Here
 
 - Active session/phase/role state.: `CVF_SESSION/ACTIVE_SESSION_STATE.json`
-- Active actual pipe-list source integration handoff; predecessors preserve history.: `CVF_SESSION/handoffs/AGENT_HANDOFF_PIPE_LIST.md`
+- Active M2b automatictrial/display handoff; predecessors preservehistory.: `CVF_SESSION/handoffs/AGENT_HANDOFF_M2B.md`
 - Project continuity front door.: `CVF_SESSION_MEMORY.md`
 - CVF enforcement manifest.: `.cvf/manifest.json`
 - Milestone source bindings: live roadmap, frozen skeleton dispatch snapshot and SPEC M1 acceptance; M1 reuse order technically closed.: `docs/milestone-coverage-authority.json`
@@ -27,10 +27,10 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 - Shared project learning, value-filtered parent intake and returned adoption.: `docs/reviews/learnings/`
 - Current status, original planning input and file organization.: `docs/project/`
 - Source material still used for planning; not final design authority.: `docs/reference/`
-- M1, VINAFCO268 and M2a assessments, returns, independent reviews and exact-version evidence. PIPE-LIST source integration technically reviewed and orderclosed; businessacceptance separate.: `docs/reviews/`
+- M1, VINAFCO268 and M2a assessments, returns, independent reviews and exact-version evidence. PIPE-LIST source integration technically reviewed and orderclosed; businessacceptance separate. M2b newlyadmitted, notimplemented.: `docs/reviews/`
 - Overallagreedroadmap; M2a plus actualpipe-source slice technicallyverified; M2b notdispatched.: `docs/roadmaps/`
-- M1, VINAFCO268 and admitted next-slice M2a specifications. PIPE-LIST source integration technically reviewed and orderclosed; businessacceptance separate.: `docs/specs/`
-- M1, VINAFCO268 and M2a technical orders closed; next M2b requires its own SPEC/order. PIPE-LIST source integration technically reviewed and orderclosed; businessacceptance separate.: `docs/work_orders/`
+- M1, VINAFCO268 and admitted next-slice M2a specifications. PIPE-LIST source integration technically reviewed and orderclosed; businessacceptance separate. M2b newlyadmitted, notimplemented.: `docs/specs/`
+- M1, VINAFCO268 and M2a technical orders closed; next M2b requires its own SPEC/order. PIPE-LIST source integration technically reviewed and orderclosed; businessacceptance separate. M2b newlyadmitted, notimplemented.: `docs/work_orders/`
 
 Plans describe intended work. `IMPLEMENTATION_STATUS.json`, source, tests, and
 review evidence determine what is actually implemented.
