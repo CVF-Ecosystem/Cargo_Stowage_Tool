@@ -1,19 +1,20 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "PLANNING_AWAITING_OWNER",
-  "currentPhase": "INTAKE",
+  "overallStatus": "ROADMAP_DRAFT_AWAITING_OWNER",
+  "currentPhase": "DESIGN",
   "completedCapabilities": [],
   "activeWorkOrders": [],
   "knownLimitations": [
-    "Final roadmap and future application architecture are not settled with owner.",
+    "Overall roadmap and architecture proposal are DRAFT, awaiting owner agreement.",
     "Application implementation is paused. Previous M1 source and evidence are archived, not accepted capabilities.",
-    "Current authorization covers organization only; no active application source tree or work order."
+    "Current authorization permits overall proposal only; detail the next slice after agreement. No active application work order."
   ],
   "evidence": [
     "docs/project/PROJECT_STATUS.md",
     "archive/2026-10-31/ORGANIZATION_MANIFEST.json",
-    "docs/project/ORGANIZATION_VERIFICATION.json"
+    "docs/project/ORGANIZATION_VERIFICATION.json",
+    "docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md"
   ],
   "updatedAt": "2026-10-31"
 }

@@ -15,7 +15,7 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 - Standard-library catalog validation and rendering functions.: `scripts/lib/downstream_catalog/CvfDownstreamCatalogLib.ps1`
 - Executable catalog manager (--check / --write).: `scripts/manage_cvf_downstream_catalog.ps1`
 - Machine implementation-truth surface.: `IMPLEMENTATION_STATUS.json`
-- Owner pause and prerequisites for returning to planning.: `docs/project/PROJECT_STATUS.md`
+- Planning authority, draft roadmap and owner checkpoint before further detail.: `docs/project/PROJECT_STATUS.md`
 - Generated documentation index.: `docs/INDEX.md`
 - Generated human module catalog.: `docs/catalog/MODULE_CATALOG.md`
 
@@ -27,7 +27,7 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 - Current status, original planning input and file organization.: `docs/project/`
 - Source material still used for planning; not final design authority.: `docs/reference/`
 - Reviews and evidence.: `docs/reviews/`
-- Roadmaps.: `docs/roadmaps/`
+- Compact SCST roadmap and architecture proposal (DRAFT): docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md; awaiting owner agreement.: `docs/roadmaps/`
 - Specifications.: `docs/specs/`
 - Work orders.: `docs/work_orders/`
 

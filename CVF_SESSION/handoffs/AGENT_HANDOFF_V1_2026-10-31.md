@@ -5,17 +5,31 @@ Status: ACTIVE
 ## Current State
 
 - Project: Cargo_Stowage_Tool
-- Current mode: INTAKE
-- Active phase: INTAKE
+- Current mode: DESIGN
+- Active phase: DESIGN
 - Active role: SESSION_SYNC_STEWARD
-- Next allowed move: Await owner discussion of intent, final roadmap and proposed architecture tree. Application BUILD remains paused; do not resume archived M1.
-- Parked operator checkpoint: owner discussion and explicit implementation resumption required
+- Next allowed move: Await owner discussion of the compact roadmap and proposed architecture; detail only the next slice after direction is agreed. Application BUILD remains paused.
+- Parked operator checkpoint: Owner agreement on overall direction before next-slice detail; separate bounded authorization before application BUILD.
 
 ## Latest authority
 
-31-10-2026: owner stopped premature implementation, then authorized project cleanup and classification. Cleanup is bounded R1 local maintenance; no app code changes, final-roadmap approval or new execution grant. CVF core remains read-only at c4c8767ac8861854f40d466ba338ffd11eb9558e.
+31-10-2026: after pausing implementation and organizing the repository, owner requested a compact overall roadmap, proposed architecture tree, scope and deliverables per milestone. Detail only the next slice after overall agreement. This authorizes R1 proposal documentation, not application implementation or roadmap approval. CVF core remains read-only at c4c8767ac8861854f40d466ba338ffd11eb9558e.
 
-## Maintenance record
+## Current planning record
+
+- Tranche SCST-PLAN-1: DRAFT / awaiting owner discussion; INTAKE to DESIGN acknowledged under the latest request. SPEC_AUTHOR prepared `docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md`; SESSION_SYNC_STEWARD synchronized navigation and continuity. No application SPEC/work order was authored.
+- Output: one compact proposal, M0 alignment plus original M1-M5 outcomes, module-level future tree, optional AI branch independent of M5. Original inputs and archived M1 remain untouched.
+- Finite source review and proposal ceiling: 30 minutes including documentation checks; earlier organization is reused. Prior discussion effort was not measured. Stop at delivery/checks or budget exhaustion, then owner discussion; no self-assigned successor.
+- Accepted milestone authority is unresolved. The draft uses null-authority finite VERIFY metadata under PLAN; no registry of approved criteria or implementation coverage is invented. Product acceptance remains pending.
+- Open decisions: owner agreement on scope, milestone outcomes/order and module responsibilities. After agreement, prepare only the next slice in SPEC; BUILD needs bounded authority. Archived M1 is advisory only.
+
+## Proposal verification and stewardship
+
+- Rehydrated current continuity before role transition. Same agent transitioned to REVIEWER for this R1 documentation change, then COMMIT_STEWARD for the local documentation commit; continuation remains SESSION_SYNC_STEWARD / DESIGN. No independent product acceptance is claimed.
+- Doctor passed 28/28. Draft coverage validator, 14 local links, catalog consistency, pre-dispatch, worker-return and reviewer-fast passed. Gate controls were INVOKED only; this is documentation validation, not runtime AI governance evidence. No application tests were run because no application source changed.
+- Source roadmap and archived material are unchanged. Proposal/continuity/navigation are the complete changed scope; implementation authority remains parked.
+
+## Previous organization record (historical)
 
 - Rehydrated manifest, policy, memory/state/handoff, implementation truth and index; doctor passed 28/28 before file operations.
 - ORCHESTRATOR: bounded the request to classification, reference selection and preservation. Product planning remains parked.

@@ -100,7 +100,7 @@
       "family": "governed_artifact_family",
       "path": "docs/roadmaps",
       "status": "ACTIVE",
-      "description": "Roadmaps."
+      "description": "Compact SCST roadmap and architecture proposal (DRAFT): docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md; awaiting owner agreement."
     },
     {
       "id": "family-specs",
@@ -156,7 +156,7 @@
       "family": "implementation_truth",
       "path": "docs/project/PROJECT_STATUS.md",
       "status": "ACTIVE",
-      "description": "Owner pause and prerequisites for returning to planning."
+      "description": "Planning authority, draft roadmap and owner checkpoint before further detail."
     },
     {
       "id": "manifest-organization",

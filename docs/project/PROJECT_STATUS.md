@@ -4,7 +4,9 @@ Cập nhật: **31-10-2026**.
 
 ## Chỉ đạo hiện hành
 
-Owner đã yêu cầu dừng triển khai để thống nhất thứ tự và kế hoạch. Lượt công việc hiện tại chỉ dọn dẹp, phân loại và lưu trữ hồ sơ. Không chốt thêm thiết kế hoặc tiếp tục xây app.
+Owner đã yêu cầu dừng triển khai để thống nhất thứ tự và kế hoạch. Chỉ đạo mới nhất cho phép soạn roadmap tổng thể gọn, treeview dự kiến, phạm vi và đầu ra từng mốc. Chỉ chi tiết hóa phần sắp làm sau khi thống nhất hướng đó.
+
+Đã có [bản đề xuất v0.1](../roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md), trạng thái **DRAFT**, đang ở DESIGN. Đây chưa phải roadmap final hoặc quyền tiếp tục xây app.
 
 ## Phần còn sử dụng
 
@@ -28,4 +30,4 @@ Không có cây app đang hoạt động ở root và không có server demo đ�
 
 ## Bước tiếp theo
 
-Chờ owner trao đổi về định hướng; sau đó mới đề xuất roadmap và treeview để owner xem. Chỉ tiếp tục triển khai khi owner cho tiếp tục. Không dùng work order M1 trong archive để tự nối lại BUILD.
+Owner xem và điều chỉnh bản đề xuất; sau khi thống nhất hướng mới viết chi tiết cho phần M1 sắp làm. Chỉ tiếp tục triển khai khi được cho tiếp tục theo SPEC và WORK_ORDER phù hợp. Không dùng work order M1 trong archive để tự nối lại BUILD.

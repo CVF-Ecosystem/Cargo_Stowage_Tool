@@ -5,13 +5,13 @@ Memory class: POINTER_RECORD
 ## Current Truth
 
 - Contract: cvf.downstreamContinuityContract@1.0.0
-- Current mode: INTAKE
-- Active phase: INTAKE
+- Current mode: DESIGN
+- Active phase: DESIGN
 - Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_V1_2026-10-31.md
 
 ## Current operator boundary
 
-Application implementation is paused by owner. Final roadmap and future application tree are not settled. The latest request authorizes cleanup/classification only; it does not resume BUILD. Original roadmap input is now `docs/project/SCST_Roadmap_Ban_Dau_Tool_First.md`.
+Application implementation is paused by owner. Latest authority permits a compact overall roadmap, proposed architecture tree and milestone scope/deliverables. Draft: `docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md`. Owner agreement is pending; detail only the next slice after agreement, then obtain bounded implementation authority. Original roadmap input remains unchanged at `docs/project/SCST_Roadmap_Ban_Dau_Tool_First.md`.
 
 ## Read next
 

@@ -7,6 +7,7 @@ Project đang ở bước **chuẩn bị và thống nhất kế hoạch**. Chư
 | Tài liệu | Vai trò |
 |---|---|
 | [Trạng thái project](docs/project/PROJECT_STATUS.md) | Việc đã có, phần chưa chốt và thứ tự tiếp tục |
+| [Roadmap tổng thể + treeview đề xuất](docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md) | Bản DRAFT để thống nhất hướng, phạm vi và đầu ra từng mốc |
 | [Roadmap ban đầu — Tool First](docs/project/SCST_Roadmap_Ban_Dau_Tool_First.md) | Thông tin gốc để thảo luận; chưa phải roadmap final |
 | [Tài liệu tham khảo](docs/reference/README.md) | Thiết kế v0.1, nghiệp vụ, dữ liệu và ảnh còn dùng |
 | [Bản đồ sắp xếp file](docs/project/FILE_ORGANIZATION.md) | Cấu trúc hiện tại và vị trí các tài liệu đã chuyển |
@@ -30,4 +31,4 @@ Cargo_Stowage_Tool/
 
 Đây là cây **hồ sơ đang có**, chưa phải treeview kiến trúc app tương lai. Các tệp cấu hình CVF/Git ở root và thư mục ẩn được giữ nguyên chức năng.
 
-Thứ tự tiếp tục: làm rõ ý định → đề xuất roadmap và treeview → owner xem, điều chỉnh và chốt → triển khai từng phần. Nội dung cũ trong tài liệu nguồn hoặc archive không tự cấp quyền tiếp tục code.
+Thứ tự tiếp tục: owner xem, điều chỉnh và thống nhất bản đề xuất → chi tiết hóa phần sắp làm → cho phép triển khai phần đó theo CVF. Nội dung cũ trong tài liệu nguồn hoặc archive không tự cấp quyền tiếp tục code.
