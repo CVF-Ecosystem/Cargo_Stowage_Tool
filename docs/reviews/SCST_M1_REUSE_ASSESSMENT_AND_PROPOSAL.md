@@ -1,14 +1,14 @@
 # SCST M1 — Đánh giá và đề xuất tái sử dụng có chọn lọc
 
-Status: DRAFT_FOR_RECHECK
+Status: RECHECKED_PENDING_OWNER_SPEC
 
-**Ngày:** 31-10-2026. **Người lập:** Codex, agent đã dựng bản thử M1; đây là tự đánh giá, chờ Claude recheck. **Người nhận:** owner SCST và Claude.
+**Ngày:** 31-10-2026. **Người lập ban đầu:** Codex, agent đã dựng bản thử M1; đánh giá ban đầu là tự đánh giá. **Người nhận:** owner SCST và Claude. Claude đã recheck và đưa kết quả vào SPEC v0.2 tại `0f307b6`; Codex tiếp quản, xác minh và hoàn tất bàn giao ở mục 9. SPEC và danh mục vẫn chờ owner thống nhất.
 
 ## 1. Kết luận đề xuất
 
 **Tái sử dụng nền tảng M1 cũ theo từng thành phần**, giữ các phép tính/luồng hiển thị phù hợp, sửa phần phụ thuộc contract và tổ chức lại theo kiến trúc mới. Phần thiếu tập trung ở mô hình tải, trạng thái phương án, cấu trúc module và bằng chứng nghiệm thu mới. Không có căn cứ để ước tính phần trăm tiết kiệm hoặc khẳng định source có thể chạy nguyên trạng sau khi chuyển.
 
-Chỉ đạo mới của owner đã chọn hướng tận dụng có chọn lọc. Câu hỏi còn lại là **chọn những phần nào và sửa ra sao**; không cần hỏi lại owner có muốn tái sử dụng hay viết lại toàn bộ. Báo cáo này đề xuất danh mục để Claude kiểm tra trước khi thống nhất SPEC/WORK_ORDER. Chưa chuyển source, cài dependency, chạy demo hoặc sửa SPEC trong lượt này.
+Chỉ đạo mới của owner đã chọn hướng tận dụng có chọn lọc. Câu hỏi còn lại là **chọn những phần nào và sửa ra sao**; không cần hỏi lại owner có muốn tái sử dụng hay viết lại toàn bộ. Mục 2–8 giữ căn cứ/lượt đánh giá ban đầu; mục 9 ghi kết quả recheck và phần hoàn tất sau đó. Chưa chuyển source, cài dependency hoặc chạy demo.
 
 ## 2. Căn cứ và giới hạn đánh giá
 
@@ -79,13 +79,15 @@ Không mở planner, import manifest, lưu bền, export, dữ liệu thật ho�
 
 ## 6. Trình tự chuyển có chọn lọc sau khi được phép
 
-1. **Chốt trước khi copy:** Claude recheck đề xuất; sửa/chốt những điểm SPEC còn thiếu (miền tải, hầm trống, draft/STALE); ghi lựa chọn nguồn/đích; đăng ký acceptance đã thống nhất và lập WORK_ORDER có phạm vi rõ. Giữ nguồn archive bất biến.
+1. **Chốt trước khi copy:** recheck đã hoàn tất và SPEC v0.2 đã tiếp nhận các điểm cần sửa (xem mục 9). Owner thống nhất danh mục nguồn/đích và SPEC; sau đó đăng ký acceptance đã thống nhất và lập WORK_ORDER có phạm vi rõ. Giữ nguồn archive bất biến.
 2. **Chuyển backend + contract trước:** model/geometry/rules, fixture và API; chuyển các ca test tương ứng, kiểm oracle; sinh OpenAPI/types mới. Frontend chỉ nối sau khi contract mới nhất quán. Đây là thứ tự công việc trong M1, không tự tạo thêm mốc hay giấy phép.
 3. **Chuyển UI + launcher + kiểm bàn giao:** viewer/feature/client/helper, trạng thái và tải mới; kiểm tích hợp, contract, browser, local/offline; viết hướng dẫn và evidence mới. Chỉ báo M1 đạt khi đủ M1-01…09; owner xem giá trị/nghiệp vụ sau khi development tự kiểm đủ.
 
 WORK_ORDER nên ràng buộc nguồn bằng commit/tree nêu trên; mỗi nhóm chuyển ghi nguồn → đích → phần sửa → test chứng minh. Phần sinh tự động có lệnh tái tạo; phần giữ archive không xuất hiện trong source runtime hoặc authority hiện hành.
 
-## 7. Những gì cần Claude recheck
+## 7. Checklist đã giao Claude recheck
+
+Các mục dưới đây là yêu cầu của lượt ban đầu; kết quả hiện hành nằm ở mục 9.
 
 - Kiểm lại bảng chọn lọc với source thật: có nhóm nào bị chọn nhầm/bỏ sót, đích có đúng cây đã thống nhất, hay có lý do tốt hơn để thay một thành phần. Chỉ đề nghị viết lại phần có khoảng thiếu cụ thể.
 - Đối chiếu từng M1-01…09 với phần tái sử dụng và bằng chứng mới cần thêm; phản hồi theo mục **đồng ý / cần sửa / chưa đủ bằng chứng**, kèm file/đoạn nguồn và đề xuất sửa.
@@ -98,4 +100,24 @@ WORK_ORDER nên ràng buộc nguồn bằng commit/tree nêu trên; mỗi nhóm 
 
 Ủy quyền hiện tại: đánh giá source cũ và viết đề xuất cho Claude; R1 tài liệu, phase SPEC, không có app work order đang hoạt động. Câu hỏi hữu hạn: thành phần nào phù hợp roadmap/SPEC mới và thiếu gì để tái sử dụng. Đầu ra: báo cáo này và liên kết/trạng thái tiếp tục. Agent chịu trách nhiệm; trần bổ sung 45 phút gồm đọc/ghi/kiểm tài liệu; dừng tại báo cáo và kiểm hoặc hết trần, không tự mở nghiên cứu/thi công tiếp. Tận dụng các lần review trước; chi phí trước đó không đo, không suy diễn thời lượng chạy lại app.
 
-Đã kiểm tĩnh source như mục 2; doctor đạt 28/28 trước khi viết. Các kiểm tra tài liệu/catalog/gate của lượt này được ghi ở handoff sau khi chạy. Kết quả cũ và lỗi authority của work order cũ giữ đúng phạm vi của chúng. Kết luận sản phẩm vẫn PENDING; đề xuất tái sử dụng vẫn chờ Claude recheck và owner chốt. Không tuyên bố live AI governance, test runtime mới hoặc acceptance M1 mới.
+Ở lượt ban đầu, đã kiểm tĩnh source như mục 2; doctor đạt 28/28 trước khi viết. Các kiểm tra được ghi ở handoff. Kết luận khi đó là chờ Claude recheck và owner chốt. Kết quả hiện hành cập nhật ở mục 9; không tuyên bố live AI governance, test runtime mới hoặc acceptance M1 mới.
+
+## 9. Kết quả recheck và tiếp quản
+
+**Nguồn tiếp quản:** hai commit Claude `0f307b6` (SPEC v0.2 + snapshot repair) và `6beeea4` (session memory). Worktree sạch khi tiếp quản, không có file đang sửa dở hoặc source app mới. Theo chỉ đạo owner "check phần nó làm dang dở để tiếp tục", Codex hoàn tất các phần bàn giao còn thiếu; không suy diễn thành owner đã nghiệm thu SPEC hoặc cho BUILD.
+
+| Nội dung được giao recheck | Kết quả hiện tại | Căn cứ / phần còn lại |
+|---|---|---|
+| Giữ geometry, viewer, luồng sửa/undo; tổ chức lại module | Đồng ý đưa vào danh mục chờ owner chốt | Phụ lục SPEC v0.2 giữ đúng nhóm nguồn/đích; các thuật toán không bị thay chỉ vì đổi folder |
+| Ba loại giới hạn tải, parser onboard=0, hầm mục tiêu trống | Góp ý đã được đưa vào SPEC | D2 quy định strict integer, miền, trần, quan hệ và nghĩa onboard nằm ngoài hầm; M1-02/04 có ca kiểm tương ứng. Chưa chạy test bản mới |
+| Draft/STALE, lỗi API/mạng | Góp ý đã được đưa vào SPEC | D4/D7 và M1-05/07 tách trạng thái backend với UI, giữ bản đã kiểm/draft. Hành vi vẫn cần hiện thực và chứng minh |
+| Types-only generation và test 3D còn thiếu | Góp ý đã được đưa vào SPEC | D5 và M1-06 yêu cầu sinh kiểu từ backend mới và đối chiếu mesh với API; không nhận ảnh cũ là bằng chứng mới |
+| Lock/dependency, generated files, hồ sơ/cache/log cũ | Phân loại tái sử dụng phù hợp | Phụ lục ghi lock là ứng viên, sinh lại contract/types và để hồ sơ cũ trong archive; tương thích cài đặt chưa được chứng minh |
+| Lỗi nguồn tiêu chí work order khung | Đã sửa và kiểm lại đạt | Snapshot tại f2b688e có nguyên phần tiêu chí/hash `560ba09f…`; registry/work order cùng trỏ nguồn frozen. Coverage của roadmap hiện hành, snapshot và work order đều đạt |
+| Quyết định owner chọn tái sử dụng | Đã có chỉ đạo, không cần hỏi lại | Tin nhắn owner "Tôi muốn tận dụng những gì bạn đã dựng trong M1… nhưng phải có chọn lọc theo roadmap và spec mới". Chỉ danh mục chi tiết/SPEC và quyền thi công còn chờ chốt |
+
+**Phần Codex hoàn tất:** bỏ câu hỏi lặp lại quyết định tận dụng; làm rõ đầy đủ đường dẫn nguồn trong phụ lục SPEC và đích `playwright.config.ts`; đồng bộ README/status/catalog/index/memory/state/handoff với việc recheck đã xong. Giữ nguyên phạm vi D2–D7 và các ID M1-01…M1-09; không mở thêm chức năng hoặc nhận thay owner quyết định nghiệp vụ.
+
+**Đối chiếu lúc tiếp quản:** 50/50 file archive khớp raw Git blob; cây app chỉ có README; phần tiêu chí snapshot trùng revision dispatch, giữ nguyên SHA-256 `560ba09fe9210eb31ab58f858f89c4a007a397014507192fc5d1ae22f35794bb`; đủ 9 acceptance ID. Doctor 28/28, gate review trên phần Claude đổi và gate trực tiếp work order cũ đều đạt. Đây là kiểm tài liệu/source identity, không là test runtime app. Kiểm sau chỉnh sửa và commit được ghi ở handoff.
+
+**Bước tiếp theo:** owner thống nhất SPEC v0.2 và danh mục tái sử dụng; sau đó agent đăng ký acceptance và soạn WORK_ORDER M1 có phạm vi nguồn/đích. Kết luận sản phẩm vẫn PENDING, completedCapabilities rỗng; chưa chuyển code. Không cần thêm một vòng recheck cùng nội dung nếu không phát sinh thay đổi hoặc bằng chứng mới.

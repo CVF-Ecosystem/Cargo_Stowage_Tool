@@ -16,7 +16,7 @@ Ngày 31-10-2026 owner đã **thống nhất hướng tổng thể (M0)**, ghi t
 
 ## Phần chưa được chốt
 
-- [SPEC M1](../specs/SCST_M1.md): đã có bản DRAFT, chờ owner thống nhất (dùng lại bản thử, ba loại giới hạn tải, nhãn trạng thái).
+- [SPEC M1 v0.2](../specs/SCST_M1.md): đã hoàn tất soạn và recheck, vẫn là DRAFT chờ owner thống nhất danh mục tái sử dụng, tải/hầm mục tiêu trống và trạng thái/draft.
 - Phiên bản stack, endpoint, schema chi tiết và thuật toán; chốt trong SPEC của từng phần.
 - Tiêu chí nghiệm thu các mốc sau M1.
 
@@ -30,6 +30,8 @@ Các lựa chọn từng được agent ghi trong SPEC/work order M1 chưa đư�
 
 ## Bước tiếp theo
 
-Owner đã chọn tận dụng M1 cũ có chọn lọc và yêu cầu đề xuất để Claude recheck. Đã có [báo cáo nguồn → đích và phạm vi tái sử dụng](../reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md); chưa chuyển source hoặc sửa SPEC.
+Owner đã chọn tận dụng M1 cũ có chọn lọc. Claude đã recheck và cập nhật SPEC v0.2; Codex tiếp quản, kiểm lại và hoàn tất bàn giao. [Báo cáo nguồn → đích, mục 9](../reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md#9-kết-quả-recheck-và-tiếp-quản) ghi kết quả từng nhóm và phần còn lại. Chưa chuyển source.
 
-Claude recheck danh mục và những điểm SPEC còn thiếu; owner chốt SPEC/phần được lấy, sau đó soạn WORK_ORDER M1. Chỉ tiếp tục triển khai khi được cho tiếp tục theo SPEC và WORK_ORDER phù hợp. Không dùng work order M1 trong archive để tự nối lại BUILD.
+Lỗi hash nguồn tiêu chí của work order khung đã được sửa bằng snapshot của revision dispatch; kiểm trực tiếp work order hiện đạt. Đây là sửa hồ sơ lịch sử, không phải nghiệm thu M1.
+
+Owner chốt SPEC v0.2/phần được lấy; agent đăng ký acceptance và soạn WORK_ORDER M1. Chỉ tiếp tục triển khai khi được cho tiếp tục theo SPEC và WORK_ORDER phù hợp. Không dùng work order M1 trong archive để tự nối lại BUILD.

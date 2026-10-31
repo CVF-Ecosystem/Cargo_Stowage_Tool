@@ -4,6 +4,8 @@ Status: DRAFT
 
 **Bản v0.2 · 31-10-2026 · Chờ owner thống nhất.** SPEC này chưa cấp quyền thi công; BUILD chỉ bắt đầu khi có WORK_ORDER riêng. Căn cứ: [roadmap v0.2](../roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md) (dòng M1, nguyên tắc xuyên suốt) và [quyết định SCST-D001](../decisions/SCST_D001_THONG_NHAT_HUONG_M0_2026-10-31.md).
 
+**Tiếp quản/bàn giao:** Codex đã kiểm lại phần Claude cập nhật và hoàn tất hồ sơ ngày 31-10-2026; kết quả ở [báo cáo tái sử dụng, mục 9](../reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md#9-kết-quả-recheck-và-tiếp-quản). Hướng tận dụng M1 có chọn lọc đã được owner chỉ đạo; danh mục cụ thể và SPEC vẫn chờ thống nhất. Lượt hoàn tất này làm rõ hồ sơ/đường dẫn, không đổi M1-01…M1-09.
+
 **Thay đổi so với v0.1:**
 
 - làm rõ hầm mục tiêu trống;
@@ -37,7 +39,7 @@ Nguồn: [archive/2026-10-31/paused-m1](../../archive/2026-10-31/paused-m1/READM
 | Cấu trúc domain | Ba file phẳng `models.py`, `validation.py`, `demo.py`; hình học và quy tắc trộn trong một hàm | **Lệch** cây mới (`model/`, `geometry/`, `rules/`) | Tách theo cây; không đổi kết quả kiểm |
 | Giới hạn tải | Một trường `cargo_limit_g` gắn với hầm | **Thiếu** ba loại giới hạn và miền giá trị | Mở rộng contract (D2) |
 | Chừa trường nhiều tầng | Có `z_mm`; `z ≠ 0` bị báo `LAYER_UNSUPPORTED` | **Thiếu** trường lớp và quan hệ đỡ | Thêm trường dự trữ, không thêm logic (D3) |
-| Nhãn trạng thái | `basic_checks_passed` + `operational_eligible=false` | **Thiếu** bốn nhãn | Thêm (D4) |
+| Nhãn trạng thái | `basic_checks_passed` + `operational_eligible=false` | **Thiếu** ba nhãn backend và STALE của UI | Thêm (D4, D7) |
 | Sửa và kiểm lại | Form giữ giá trị riêng; chỉ thay phương án khi API thành công; giữ 20 bản trước trong tab; lỗi mạng giữ bản đang xem | Khớp phần bảo toàn dữ liệu; **thiếu** STALE | Thêm bản nháp/STALE (D7) |
 | Kiểm cơ bản | Vượt tải (đúng tới 1 gram), vượt biên toàn khối (đúng tới 1 mm), va chạm thể tích dương, xoay 90°, required/optional/excluded | Khớp | Dùng lại, chuyển vào `rules/` + `geometry/` |
 | Bảng + 3D + 2D | Cùng ID từ API, chọn đồng bộ, orbit/zoom/reset, mặt bằng 2D khi không có WebGL, lọc/tìm. Test cũ chỉ đối chiếu ID/chữ trong bảng và một tọa độ 2D | Khớp hành vi; **thiếu** bằng chứng đối chiếu tọa độ/kích thước 3D | Dùng lại; thêm hiển thị trạng thái/tải và test đối chiếu 3D |
@@ -47,7 +49,7 @@ Nguồn: [archive/2026-10-31/paused-m1](../../archive/2026-10-31/paused-m1/READM
 
 ## Quyết định thiết kế đề xuất
 
-Các quyết định dưới đây chờ owner xác nhận cùng SPEC. Chi tiết kỹ thuật thông thường (tên hàm, bố cục file con) do agent quyết trong BUILD.
+Hướng tái sử dụng trong D1 đã được owner chỉ đạo. Danh mục lấy/sửa cụ thể và các quyết định thiết kế còn lại chờ owner thống nhất cùng SPEC. Chi tiết kỹ thuật thông thường (tên hàm, bố cục file con) do agent quyết trong BUILD.
 
 - **D1 — Dùng lại có chọn lọc.** Sao chép (không di chuyển) từng thành phần từ archive vào khung hiện tại theo Phụ lục. Archive giữ nguyên bytes. Không mang `.venv`, cache, log, PID, SPEC/work order hay authority cũ. Archive không được nạp lúc chạy.
 - **D2 — Giới hạn tải và hầm mục tiêu trống.**
@@ -157,7 +159,7 @@ Các quyết định dưới đây chờ owner xác nhận cùng SPEC. Chi tiế
 
 ## Điểm owner cần xác nhận
 
-1. **Dùng lại có chọn lọc theo D1 và Phụ lục.** Bản đánh giá tái sử dụng ghi owner đã chọn hướng này; nếu đúng, chỉ cần xác nhận danh mục.
+1. **Danh mục dùng lại có chọn lọc theo D1 và Phụ lục.** Owner đã chọn hướng tận dụng M1; phần cần thống nhất là danh mục và cách sửa cụ thể, không hỏi lại quyết định tái sử dụng.
 2. **Ba loại giới hạn tải và miền giá trị theo D2.** Có đúng cách đơn vị đang dùng không?
 3. **Hầm mục tiêu trống.** Hàng đã có trên tàu được coi là nằm ngoài hầm mục tiêu.
 4. **Ba nhãn trạng thái theo D4 và STALE theo D7.**
@@ -176,18 +178,18 @@ Nguồn tính từ `archive/2026-10-31/paused-m1/`; đích tính từ root proje
 | Nguồn | Xử lý | Đích |
 |---|---|---|
 | `services/backend/app/domain/models.py` | Sửa: giữ strict model, thêm `limits`, D3, D4, đổi version | `services/backend/app/domain/model/` |
-| `validation.py`: footprint, containment, overlap | Giữ thuật toán | `services/backend/app/domain/geometry/` |
-| `validation.py`: evaluate, tải, phân loại, summary | Sửa theo D2–D4 | `services/backend/app/domain/rules/` |
-| `domain/demo.py` | Sửa fixture: giữ 13 bó/12 vị trí, thêm `limits` | `services/backend/app/demo.py` (dữ liệu, không phải domain) |
-| `api/routes.py`, `main.py` | Sửa wiring, giữ health/demo/validate và phục vụ frontend | `services/backend/app/` |
+| `services/backend/app/domain/validation.py`: footprint, containment, overlap | Giữ thuật toán | `services/backend/app/domain/geometry/` |
+| `services/backend/app/domain/validation.py`: evaluate, tải, phân loại, summary | Sửa theo D2–D4 | `services/backend/app/domain/rules/` |
+| `services/backend/app/domain/demo.py` | Sửa fixture: giữ 13 bó/12 vị trí, thêm `limits` | `services/backend/app/demo.py` (dữ liệu, không phải domain) |
+| `services/backend/app/api/routes.py`, `services/backend/app/main.py` | Sửa wiring, giữ health/demo/validate và phục vụ frontend | `services/backend/app/` |
 | `apps/frontend/src/Viewer.tsx` | Giữ cơ chế render, sửa import | `apps/frontend/src/viewer-3d/` |
 | `apps/frontend/src/App.tsx` | Tách bảng/editor/lịch sử vào features, thêm D2/D4/D7 | `apps/frontend/src/features/` + `App.tsx` |
-| `model.ts`: định dạng, `parseKg`, `parseMm` | Giữ có sửa: cho phép 0 với hàng đã có | Helper trong features |
-| `model.ts`: `requestEvaluation` | Sửa version contract, giữ timeout/xử lý lỗi | `apps/frontend/src/api/` |
-| `styles.css`, `index.html`, `main.tsx`, cấu hình Vite/TS, `package*.json` | Giữ làm nền; kiểm lại override `minimatch` khi cài | `apps/frontend/` |
-| `requirements*.txt`, `pytest.ini` | Giữ làm ứng viên, kiểm khi cài | Vị trí tương ứng |
-| `contracts/openapi.json`, `src/generated/api.ts` | Sinh lại; bản cũ chỉ để so sánh | `contracts/`, `apps/frontend/src/api/generated/` |
+| `apps/frontend/src/model.ts`: định dạng, `parseKg`, `parseMm` | Giữ có sửa: cho phép 0 với hàng đã có | Helper trong features |
+| `apps/frontend/src/model.ts`: `requestEvaluation` | Sửa version contract, giữ timeout/xử lý lỗi | `apps/frontend/src/api/` |
+| `apps/frontend/src/styles.css`, `apps/frontend/index.html`, `apps/frontend/src/main.tsx`, cấu hình Vite/TS và `package*.json` trong `apps/frontend/` | Giữ làm nền; kiểm lại override `minimatch` khi cài | `apps/frontend/` |
+| `requirements-dev.txt`, `requirements-lock.txt`, `services/backend/requirements.txt`, `pytest.ini` | Giữ làm ứng viên, kiểm khi cài | Vị trí tương ứng |
+| `contracts/openapi.json`, `apps/frontend/src/generated/api.ts` | Sinh lại; bản cũ chỉ để so sánh | `contracts/`, `apps/frontend/src/api/generated/` |
 | `tooling/*`, `Start-SCST.cmd` | Giữ/sửa đường dẫn; kiểm chạy lần đầu và không mạng | `tooling/`, root |
-| `tests/backend/`, `tests/browser/`, `playwright.config.ts` | Giữ kịch bản, sửa payload; thêm ca D2/D3/D7 và đối chiếu 3D | `tests/backend/`, `tests/browser/` |
+| `tests/backend/`, `tests/browser/`, `apps/frontend/playwright.config.ts` | Giữ kịch bản, sửa payload; thêm ca D2/D3/D7 và đối chiếu 3D | `tests/backend/`, `tests/browser/`, `apps/frontend/playwright.config.ts` |
 | `docs/APP_GUIDE.md` | Viết lại | `docs/APP_GUIDE.md` |
 | README/SPEC/work order/authority cũ, evidence, `runtime-data/` | Để lại archive | — |

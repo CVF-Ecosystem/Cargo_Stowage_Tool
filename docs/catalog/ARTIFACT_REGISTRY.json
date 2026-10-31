@@ -107,7 +107,7 @@
       "family": "governed_artifact_family",
       "path": "docs/specs",
       "status": "ACTIVE",
-      "description": "Specifications; SCST_M1.md is the M1 SPEC draft awaiting owner agreement."
+      "description": "SPEC M1 v0.2 drafted and rechecked; awaiting owner agreement before execution."
     },
     {
       "id": "family-work-orders",
@@ -121,7 +121,7 @@
       "family": "governed_artifact_family",
       "path": "docs/reviews",
       "status": "ACTIVE",
-      "description": "Reviews and evidence; SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md is the selective reuse proposal awaiting Claude recheck."
+      "description": "Reuse assessment and completed recheck/takeover results: docs/reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md section 9; awaiting owner SPEC agreement."
     },
     {
       "id": "family-learnings",
@@ -156,7 +156,7 @@
       "family": "implementation_truth",
       "path": "docs/project/PROJECT_STATUS.md",
       "status": "ACTIVE",
-      "description": "Planning authority, agreed roadmap and next-slice checkpoint."
+      "description": "Current SPEC/reuse checkpoint and completed takeover; application execution remains paused."
     },
     {
       "id": "manifest-organization",
@@ -164,6 +164,13 @@
       "path": "archive/2026-10-31/ORGANIZATION_MANIFEST.json",
       "status": "ACTIVE",
       "description": "Original and destination paths with SHA-256 for organization only."
+    },
+    {
+      "id": "manifest-milestone-authority",
+      "family": "manifest",
+      "path": "docs/milestone-coverage-authority.json",
+      "status": "ACTIVE",
+      "description": "Milestone source bindings: live roadmap and frozen dispatch-time snapshot for the closed skeleton packet; no M1 implementation admission."
     }
   ]
 }

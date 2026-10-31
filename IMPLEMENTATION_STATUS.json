@@ -1,15 +1,15 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "M1_REUSE_PROPOSAL_AWAITING_RECHECK",
+  "overallStatus": "SPEC_M1_V02_RECHECKED_AWAITING_OWNER",
   "currentPhase": "SPEC",
   "completedCapabilities": [],
   "activeWorkOrders": [],
   "knownLimitations": [
-    "Owner agreed overall direction on 31-10-2026 (SCST-D001); roadmap v0.2 is active planning authority, not milestone acceptance.",
-    "Application implementation is paused. Previous M1 source and evidence are archived, not accepted capabilities.",
-    "M1 folder skeleton exists (README files only). SPEC M1 v0.2 is DRAFT awaiting owner; no active work order.",
-    "Owner selected selective M1 reuse; exact source-to-target proposal awaits Claude recheck and owner settlement. No code has been transferred."
+    "Owner agreed overall direction (M0) and selected selective M1 reuse; exact selection and SPEC v0.2 still await owner agreement.",
+    "Claude recheck and takeover documentation are complete. No source transferred; app folders contain README only.",
+    "No application capability accepted and no active application work order; BUILD remains paused.",
+    "Historical authority drift for SCST_M1_SKELETON was repaired via dispatch-time snapshot and explicitly validated; no parent acceptance or runtime governance claim."
   ],
   "evidence": [
     "docs/project/PROJECT_STATUS.md",

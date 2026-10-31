@@ -8,10 +8,20 @@ Status: ACTIVE
 - Current mode: SPEC
 - Active phase: SPEC
 - Active role: SESSION_SYNC_STEWARD
-- Next allowed move: Owner reviews SPEC M1 v0.2 (docs/specs/SCST_M1.md) and confirms D1, D2 (incl. empty target hold), D4 and D7. After agreement: register the M1 acceptance section, then author WORK_ORDER M1. No BUILD until that work order is authorized.
-- Parked operator checkpoint: Claude recheck and owner settlement of reuse selection/SPEC M1; separate bounded WORK_ORDER before source transfer or application BUILD.
+- Next allowed move: Owner settles SPEC M1 v0.2 and the detailed reuse selection; recheck is complete. Then register the M1 acceptance section and author a bounded WORK_ORDER. No source transfer or BUILD until authorized.
+- Parked operator checkpoint: Owner agreement on SPEC M1 v0.2 and exact reuse selection, then a separate bounded WORK_ORDER before application BUILD; the principle of selective reuse is already directed.
 
-## SPEC M1 v0.2 and coverage snapshot repair (latest)
+## Takeover completion (latest)
+
+- Latest owner request: "Claude lại lỗi, bạn check phần nó làm dang dở để tiếp tục". Rehydrated current manifest/policy/state/memory/handoff/status/index and matching learning SCST-L001. Clean worktree at 6beeea4, no app source transferred. Claude had committed SPEC v0.2 and snapshot repair; incomplete work was report/navigation/status synchronization and a redundant owner-reuse question, not a half-written application.
+- ORCHESTRATOR/REVIEWER checked the two Claude commits and all 9 acceptance IDs. REPAIR_WORKER completed same-scope documentation: retained Claude's D2-D7, clarified D1 authority from the visible owner instruction, corrected explicit source/config destinations in the SPEC appendix, recorded recheck outcomes in report section 9, and synchronized current navigation/truth. Then SESSION_SYNC_STEWARD. Project remains SPEC, risk R1 within ceiling R2; no application WORK_ORDER or execution grant.
+- Finite takeover contract: finish one review/spec handoff from the existing commits, within 30 additional minutes including document checks; reuse valid prior source review, no runtime installation or broad research. Earlier cumulative cost unmeasured. Stop at complete handoff/checks and owner SPEC decision; do not open BUILD or another repetitive review tranche.
+- Verified before editing: doctor 28/28; reviewer-fast on Claude's committed range passed; explicit closed skeleton packet gate passed. Snapshot criterion section equals f2b688e exactly (hash 560ba09fe9210eb31ab58f858f89c4a007a397014507192fc5d1ae22f35794bb); roadmap/snapshot/work-order coverage passed; all 50 archived files match raw Git blobs. No runtime app tests or live governance proof claimed.
+- Current remainder: owner settles the exact reuse selection/SPEC; local development then registers approved M1-01..09 and writes a bounded work order. Application capability acceptance remains pending. The historical statement below that reuse direction was unverifiable is superseded by the visible owner instruction and this record; it is not a new permission request.
+- Post-repair checks: D2-D7 and the full M1 acceptance section match Claude's v0.2 exactly; 30 local links and 23 explicit reuse source paths valid. Catalog, pre-dispatch, worker-return, reviewer-fast (including explicit skeleton packet) and diff whitespace checks passed. Gate controls INVOKED for this document scope only; no hosted/runtime governance enforcement claim.
+- Rehydrated current continuity at final role transition: same local agent acts as COMMIT_STEWARD for these documentation repairs, then SESSION_SYNC_STEWARD at SPEC. Changed paths are report/SPEC/navigation/catalog/continuity only; archive, app source, snapshot, work order, gate/core unchanged. This completes takeover documentation, not owner acceptance of M1 or authorization to code.
+
+## Claude SPEC M1 v0.2 and coverage snapshot repair (historical)
 
 - 31-10-2026: owner approved applying the recheck and the 3 owner review points ("Ok. vậy sửa luôn, ra Spec mới"). Same agent as REVIEWER (recheck of Codex reuse assessment), SPEC_AUTHOR, REPAIR_WORKER, SESSION_SYNC_STEWARD. R1 documentation; no code, archive unchanged.
 - Recheck of `docs/reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md`: pins (roadmap/SPEC hashes, archive tree e4004e2) verified; parseKg rejects 0, types-only generation, form/boolean state and limited browser assertions confirmed in source. Not verifiable here: the claim that the owner already chose selective reuse (kept as owner confirmation item 1).

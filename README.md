@@ -1,6 +1,6 @@
 # Steel Cargo Stowage Tool — SCST
 
-Owner đã **thống nhất hướng tổng thể** ngày 31-10-2026. Phần tiếp theo là SPEC M1. Việc triển khai app vẫn tạm dừng đến khi có work order được cho phép.
+Owner đã **thống nhất hướng tổng thể** ngày 31-10-2026 và chọn tận dụng M1 có chọn lọc. Đã hoàn tất recheck và [SPEC M1 v0.2](docs/specs/SCST_M1.md), đang chờ thống nhất danh mục/phạm vi. Việc triển khai app vẫn tạm dừng đến khi có work order được cho phép.
 
 ## Đọc từ đây
 
@@ -8,7 +8,7 @@ Owner đã **thống nhất hướng tổng thể** ngày 31-10-2026. Phần ti�
 |---|---|
 | [Trạng thái project](docs/project/PROJECT_STATUS.md) | Việc đã có, phần chưa chốt và thứ tự tiếp tục |
 | [Roadmap tổng thể + treeview đề xuất](docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md) | Roadmap v0.2 đã thống nhất: phạm vi, đầu ra từng mốc, rủi ro và treeview dự kiến |
-| [Đề xuất tái sử dụng M1 để Claude recheck](docs/reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md) | Thành phần giữ/sửa/sinh lại/để archive và ánh xạ acceptance M1; chưa chuyển code |
+| [Đánh giá tái sử dụng M1 và kết quả recheck](docs/reviews/SCST_M1_REUSE_ASSESSMENT_AND_PROPOSAL.md) | Nguồn → đích, ánh xạ acceptance và kết quả tiếp quản ở mục 9; chưa chuyển code |
 | [Roadmap ban đầu — Tool First](docs/project/SCST_Roadmap_Ban_Dau_Tool_First.md) | Thông tin gốc để thảo luận; chưa phải roadmap final |
 | [Tài liệu tham khảo](docs/reference/README.md) | Thiết kế v0.1, nghiệp vụ, dữ liệu và ảnh còn dùng |
 | [Bản đồ sắp xếp file](docs/project/FILE_ORGANIZATION.md) | Cấu trúc hiện tại và vị trí các tài liệu đã chuyển |
@@ -48,4 +48,4 @@ Cargo_Stowage_Tool/
 
 Đây là cây **đang có trên đĩa**. Các thư mục app mới là khung M1 theo [treeview của roadmap](docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md), mỗi thư mục có README ghi trách nhiệm, chưa có code. `domain/planner/` và `runtime-data/` được tạo ở M2, phần đóng gói ở M5. Các tệp cấu hình CVF/Git ở root và thư mục ẩn được giữ nguyên chức năng.
 
-Thứ tự tiếp tục: soạn SPEC M1 → owner thống nhất SPEC → WORK_ORDER cho phép triển khai phần đó theo CVF. Nội dung cũ trong tài liệu nguồn hoặc archive không tự cấp quyền tiếp tục code.
+Thứ tự tiếp tục: owner thống nhất SPEC M1 v0.2 và danh mục tái sử dụng → đăng ký acceptance → WORK_ORDER cho phép triển khai phần đó theo CVF. Nội dung cũ trong tài liệu nguồn hoặc archive không tự cấp quyền tiếp tục code.

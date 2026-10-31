@@ -14,8 +14,8 @@
     "FREEZE"
   ],
   "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_V1_2026-10-31.md",
-  "nextAllowedMove": "Owner reviews SPEC M1 v0.2 (docs/specs/SCST_M1.md) and confirms D1, D2 (incl. empty target hold), D4 and D7. After agreement: register the M1 acceptance section, then author WORK_ORDER M1. No BUILD until that work order is authorized.",
-  "parkedOperatorCheckpoint": "Claude recheck and owner settlement of reuse selection/SPEC M1; separate bounded WORK_ORDER before source transfer or application BUILD.",
+  "nextAllowedMove": "Owner settles SPEC M1 v0.2 and the detailed reuse selection; recheck is complete. Then register the M1 acceptance section and author a bounded WORK_ORDER. No source transfer or BUILD until authorized.",
+  "parkedOperatorCheckpoint": "Owner agreement on SPEC M1 v0.2 and exact reuse selection, then a separate bounded WORK_ORDER before application BUILD; the principle of selective reuse is already directed.",
   "activeRole": "SESSION_SYNC_STEWARD",
   "roleRoute": "SINGLE_AGENT_MULTI_ROLE_ALLOWED",
   "updatedAt": "2026-10-31"
