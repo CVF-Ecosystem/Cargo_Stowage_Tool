@@ -4,10 +4,10 @@ Status: ACTIVE
 
 ## Current State
 
-- Current mode: WORK_ORDER
-- Active phase: WORK_ORDER
+- Current mode: BUILD
+- Active phase: BUILD
 - Active role: ORCHESTRATOR
-- Next allowed move: Implement bounded PIPE-LIST source adapter under docs/work_orders/SCST_PIPE_LIST.md after dispatch commit and BUILD acknowledgment; no M2b.
+- Next allowed move: Implement PIPE-LIST six criteria under admitted order64dd3b8; root independent review before closure.
 - Parked operator checkpoint: Actual cargo list supplied; measured hold and16bundle envelope verification, business/operational acceptance remain pending. M2b-d/M3 separate.
 
 ## Authority and decisions
@@ -17,3 +17,7 @@ Owner current V1.1 request admits focused calculation check and31group/1076bundl
 ## Continuation value and budget
 
 Previous read-only calculation/design review completed; preceding elapsed/cost UNKNOWN. Bounded source adapter closes PIPE-01..06; genericCSV insufficient due200cap/sourceprecision. Additional ceiling240min including review, no successor reset. Reuse prior domain/ship/storage/workspace and unaffected evidence. BUILD awaits admitted material-SHA marker. Existing demo session99663/PID26620 on8765 must restart after implementation. No real data pushed.
+
+## BUILD acknowledgment
+
+Canonical state/memory/handoff/truth/index rehydrated. Material-SHA marker: 64dd3b8. Root ORCHESTRATOR dispatches Terra IMPLEMENTATION_WORKER and Sol browser under six bound criteria; pre-dispatch6/6 and pre-commit7/7 passed. Root remains independent reviewer, no app edits.240min ceiling unchanged. Admission commit had harmless trailing EOF blank flagged by diff-check; removed here before BUILD.
