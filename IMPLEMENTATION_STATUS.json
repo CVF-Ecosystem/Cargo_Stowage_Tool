@@ -1,11 +1,14 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "VINAFCO268_TECHNICALLY_VERIFIED_AWAITING_OWNER_DEMO",
-  "currentPhase": "REVIEW",
+  "overallStatus": "M2A_AUTHORIZED_AWAITING_DISPATCH",
+  "currentPhase": "WORK_ORDER",
   "completedCapabilities": [],
-  "activeWorkOrders": [],
+  "activeWorkOrders": [
+    "docs/work_orders/SCST_M2A.md"
+  ],
   "knownLimitations": [
+    "M2a selected/authorized; manual entry, CSV importer and persistence not implemented yet. No real manifest or measured hold available in current sources.",
     "VINAFCO268 reference mode technically verified, owner feedback pending. Hull dimensions from supplied source; hold/cabin/lines estimated, cargo synthetic; no operational approval.",
     "All nine M1 technical criteria verified and implementation work order closed; owner demo/business acceptance pending.",
     "Session-only state: refresh loses changes; no planner/import/persistence/export/multi-layer/real cargo/AI integration.",
@@ -32,7 +35,9 @@
     "docs/work_orders/SCST_VINAFCO268.md",
     "docs/reviews/SCST_VINAFCO268_ASSESSMENT.md",
     "docs/reviews/SCST_VINAFCO268_REVIEW.md",
-    "docs/reviews/SCST_VINAFCO268_EVIDENCE/reviewed-source-manifest.json"
+    "docs/reviews/SCST_VINAFCO268_EVIDENCE/reviewed-source-manifest.json",
+    "docs/specs/SCST_M2A.md",
+    "docs/work_orders/SCST_M2A.md"
   ],
   "updatedAt": "2026-10-31",
   "x_verifiedMilestones": [

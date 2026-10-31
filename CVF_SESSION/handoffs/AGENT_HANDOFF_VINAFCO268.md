@@ -1,6 +1,6 @@
 # SCST M1 â€” Selective reuse execution handoff
 
-Status: ACTIVE
+Status: SUPERSEDED
 
 ## Current State
 

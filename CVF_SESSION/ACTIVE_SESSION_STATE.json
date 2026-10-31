@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "REVIEW",
-  "activePhase": "REVIEW",
+  "currentMode": "WORK_ORDER",
+  "activePhase": "WORK_ORDER",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -13,10 +13,10 @@
     "REVIEW",
     "FREEZE"
   ],
-  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_VINAFCO268.md",
-  "nextAllowedMove": "Owner views local VINAFCO268 mode and supplies business feedback; no remaining M2 functionality is dispatched.",
-  "parkedOperatorCheckpoint": "M1 and VINAFCO268 business acceptance pending; real hold measurements, operational use and remaining M2-M5 scope require their own checkpoints.",
-  "activeRole": "SESSION_SYNC_STEWARD",
+  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_M2A.md",
+  "nextAllowedMove": "Admit SCST_M2A work order then dispatch bounded manual/CSV/local persistence implementation; no M2b-d.",
+  "parkedOperatorCheckpoint": "Real manifest/hold measurement probe pending owner input; M2b-d/M3 and operational/business acceptance remain separate.",
+  "activeRole": "ORCHESTRATOR",
   "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",
   "updatedAt": "2026-10-31"
 }

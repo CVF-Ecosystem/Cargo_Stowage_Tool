@@ -16,6 +16,10 @@
     "SCST-VINAFCO268": {
       "path": "docs/specs/SCST_VINAFCO268.md",
       "heading": "## VIN acceptance"
+    },
+    "SCST-M2A": {
+      "path": "docs/specs/SCST_M2A.md",
+      "heading": "## M2a acceptance"
     }
   }
 }

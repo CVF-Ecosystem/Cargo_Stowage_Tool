@@ -63,9 +63,9 @@
     {
       "id": "continuity-initial-handoff",
       "family": "continuity",
-      "path": "CVF_SESSION/handoffs/AGENT_HANDOFF_VINAFCO268.md",
+      "path": "CVF_SESSION/handoffs/AGENT_HANDOFF_M2A.md",
       "status": "ACTIVE",
-      "description": "Active VINAFCO268 integration handoff with preserved M1 history."
+      "description": "Active M2a input/import/persistence handoff; predecessor preserves M1/VINAFCO history."
     },
     {
       "id": "truth-implementation-status",
@@ -107,14 +107,14 @@
       "family": "governed_artifact_family",
       "path": "docs/specs",
       "status": "ACTIVE",
-      "description": "SPEC M1 v0.2 and bounded VINAFCO268 selective reference integration SPEC; business acceptance separate."
+      "description": "M1, VINAFCO268 and admitted next-slice M2a specifications."
     },
     {
       "id": "family-work-orders",
       "family": "governed_artifact_family",
       "path": "docs/work_orders",
       "status": "ACTIVE",
-      "description": "M1 reuse and VINAFCO268 technical orders closed; owner business feedback pending."
+      "description": "Active M2a order; M1 and VINAFCO268 technical orders closed."
     },
     {
       "id": "family-reviews",

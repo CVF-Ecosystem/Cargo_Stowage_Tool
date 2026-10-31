@@ -5,7 +5,7 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 ## Start Here
 
 - Active session/phase/role state.: `CVF_SESSION/ACTIVE_SESSION_STATE.json`
-- Active VINAFCO268 integration handoff with preserved M1 history.: `CVF_SESSION/handoffs/AGENT_HANDOFF_VINAFCO268.md`
+- Active M2a input/import/persistence handoff; predecessor preserves M1/VINAFCO history.: `CVF_SESSION/handoffs/AGENT_HANDOFF_M2A.md`
 - Project continuity front door.: `CVF_SESSION_MEMORY.md`
 - CVF enforcement manifest.: `.cvf/manifest.json`
 - Milestone source bindings: live roadmap, frozen skeleton dispatch snapshot and SPEC M1 acceptance; M1 reuse order technically closed.: `docs/milestone-coverage-authority.json`
@@ -29,8 +29,8 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 - Source material still used for planning; not final design authority.: `docs/reference/`
 - M1 and VINAFCO268 source assessments, worker returns, independent review and versioned evidence.: `docs/reviews/`
 - Owner-agreed SCST roadmap v0.3 and architecture tree; illustrative ship viewer planned at M2c, real-data refinement at M3; no M2 dispatch.: `docs/roadmaps/`
-- SPEC M1 v0.2 and bounded VINAFCO268 selective reference integration SPEC; business acceptance separate.: `docs/specs/`
-- M1 reuse and VINAFCO268 technical orders closed; owner business feedback pending.: `docs/work_orders/`
+- M1, VINAFCO268 and admitted next-slice M2a specifications.: `docs/specs/`
+- Active M2a order; M1 and VINAFCO268 technical orders closed.: `docs/work_orders/`
 
 Plans describe intended work. `IMPLEMENTATION_STATUS.json`, source, tests, and
 review evidence determine what is actually implemented.
