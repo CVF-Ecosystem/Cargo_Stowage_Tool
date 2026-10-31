@@ -1,22 +1,22 @@
-﻿{
-    "schemaVersion":  "1.0",
-    "continuityContract":  "cvf.downstreamContinuityContract@1.0.0",
-    "projectName":  "Cargo_Stowage_Tool",
-    "currentMode":  "INTAKE",
-    "activePhase":  "INTAKE",
-    "phaseModel":  [
-                       "INTAKE",
-                       "DESIGN",
-                       "SPEC",
-                       "WORK_ORDER",
-                       "BUILD",
-                       "REVIEW",
-                       "FREEZE"
-                   ],
-    "activeHandoff":  "CVF_SESSION/handoffs/AGENT_HANDOFF_V1_2026-10-31.md",
-    "nextAllowedMove":  "Complete INTAKE: record intent, context, constraints, risk, authority, and acceptance boundary.",
-    "parkedOperatorCheckpoint":  null,
-    "activeRole":  "ORCHESTRATOR",
-    "roleRoute":  "SINGLE_AGENT_MULTI_ROLE_ALLOWED",
-    "updatedAt":  "2026-10-31"
+{
+  "schemaVersion": "1.0",
+  "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
+  "projectName": "Cargo_Stowage_Tool",
+  "currentMode": "WORK_ORDER",
+  "activePhase": "WORK_ORDER",
+  "phaseModel": [
+    "INTAKE",
+    "DESIGN",
+    "SPEC",
+    "WORK_ORDER",
+    "BUILD",
+    "REVIEW",
+    "FREEZE"
+  ],
+  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_V1_2026-10-31.md",
+  "nextAllowedMove": "Pass pre-dispatch gate, commit dispatch and enter BUILD for SCST M1.",
+  "parkedOperatorCheckpoint": null,
+  "activeRole": "WORK_ORDER_AUTHOR",
+  "roleRoute": "SINGLE_AGENT_MULTI_ROLE_ALLOWED",
+  "updatedAt": "2026-10-31"
 }

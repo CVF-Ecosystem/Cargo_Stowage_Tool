@@ -5,10 +5,10 @@ Status: ACTIVE
 ## Current State
 
 - Project: Cargo_Stowage_Tool
-- Current mode: INTAKE
-- Active phase: INTAKE
-- Active role: ORCHESTRATOR
-- Next allowed move: Complete INTAKE: record intent, context, constraints, risk, authority, and acceptance boundary.
+- Current mode: WORK_ORDER
+- Active phase: WORK_ORDER
+- Active role: WORK_ORDER_AUTHOR
+- Next allowed move: Pass pre-dispatch gate, commit dispatch and enter BUILD for SCST M1.
 - Parked operator checkpoint: none
 
 ## Seven-Step Control Chain
@@ -42,3 +42,12 @@ independent reviewer.
 
 This handoff records initial project state only. It does not claim that any
 feature, test, release, deployment, or provider integration is complete.
+
+## M1 transition log
+
+- 31-10-2026: Rehydrated canonical files; BOOTSTRAP_MIGRATION_PENDING (nonblocking).
+- INTAKE / ORCHESTRATOR: owner authorized tool-first roadmap, M1 synthetic only, R1.
+- DESIGN / SPEC_AUTHOR: chose integer gram/mm, stateless API, one BOX layer, React/Three.js.
+- SPEC / SPEC_AUTHOR: six criteria admitted in docs/specs/SCST_M1.md.
+- WORK_ORDER / WORK_ORDER_AUTHOR: bounded paths, cost and owners in docs/work_orders/SCST_M1.md.
+- Initial continuity bytes preserved by baseline commit f299497.

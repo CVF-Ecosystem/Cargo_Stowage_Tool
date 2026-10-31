@@ -1,19 +1,15 @@
-﻿{
-    "schemaVersion":  "1.0",
-    "projectName":  "Cargo_Stowage_Tool",
-    "overallStatus":  "BOOTSTRAPPED",
-    "currentPhase":  "INTAKE",
-    "completedCapabilities":  [
-
-                              ],
-    "activeWorkOrders":  [
-
-                         ],
-    "knownLimitations":  [
-                             "Project implementation status has not yet been assessed."
-                         ],
-    "evidence":  [
-
-                 ],
-    "updatedAt":  "2026-10-31"
+{
+  "schemaVersion": "1.0",
+  "projectName": "Cargo_Stowage_Tool",
+  "overallStatus": "M1_AUTHORIZED_NOT_IMPLEMENTED",
+  "currentPhase": "WORK_ORDER",
+  "completedCapabilities": [],
+  "activeWorkOrders": [
+    "docs/work_orders/SCST_M1.md"
+  ],
+  "knownLimitations": [
+    "M1 build pending; M2-M5 not implemented."
+  ],
+  "evidence": [],
+  "updatedAt": "2026-10-31"
 }
