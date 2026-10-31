@@ -1,17 +1,19 @@
-# SCST M1 — Selective reuse execution handoff
+# SCST M1 â€” Selective reuse execution handoff
 
-Status: ACTIVE
+Status: SUPERSEDED
 
 ## Current State
 
 - Project: Cargo_Stowage_Tool
-- Current mode: REVIEW
-- Active phase: REVIEW
-- Active role: SESSION_SYNC_STEWARD
-- Next allowed move: Owner views the M1 synthetic demo and gives business feedback; no M2 work is dispatched. Technical M1 work order is closed with all nine criteria verified.
-- Parked operator checkpoint: Owner demo/business acceptance pending; M2-M5 and operational cargo use require their own scope decisions.
+- Current mode: WORK_ORDER
+- Active phase: WORK_ORDER
+- Active role: ORCHESTRATOR
+- Next allowed move: Admit bounded VINAFCO268 integration under docs/work_orders/SCST_VINAFCO268.md; worker waits for dispatch marker. No full M2 dispatch.
+- Parked operator checkpoint: M1 business acceptance pending; real hold measurements and remaining M2-M5 functions remain separate.
 
 ## Authority and responsibilities
+
+- VINAFCO268 intake: owner asks assess supplied real-source model then integrate if useful. Root PDF visual comparison pages1/4/5/6 and Terra read-only GLB/manifest review support illustrative reuse. Bounded SPEC/WO SCST_VINAFCO268 records design, six criteria, 165minute ceiling and worker paths. Root ORCHESTRATOR/SPEC_AUTHOR/WORK_ORDER_AUTHOR; R2, doctor28/28, core c4c8767. No source publication; raw package ignored/preserved. Missing bootstrap read model nonblocking. New authority supersedes earlier no-viewer-implementation boundary only for this slice; M1 business acceptance remains pending.
 
 - README refresh, 31-10-2026: owner requested a proper project README after GitHub publication. Root rehydrated current continuity and doctor28/28; bounded R1 documentation work under ceiling R2, root author/reviewer then COMMIT_STEWARD / SESSION_SYNC_STEWARD. README covers purpose, actual M1 features/limits, Windows clone/setup/run, backend architecture, roadmap v0.3, developer commands and documentation links. Source/launcher/contract and product acceptance unchanged; no M2 dispatch. Review uses source/guide comparison, local link checks, diff hygiene and applicable gates; no runtime retest needed. Stop after documentation checks and commit; budget 15 minutes.
 
@@ -26,7 +28,7 @@ Status: ACTIVE
 
 ## Read-only preflight
 
-- Terra confirmed Python 3.11.9, Node 22.17.0, npm 10.9.2 and cached Chromium. Proposed backend/contracts → frontend → launcher/test order. No source edits/install/runtime execution in preflight.
+- Terra confirmed Python 3.11.9, Node 22.17.0, npm 10.9.2 and cached Chromium. Proposed backend/contracts â†’ frontend â†’ launcher/test order. No source edits/install/runtime execution in preflight.
 - Terra additionally invoked the workspace-container `../Test-CVF-Workspace.ps1 -Json`, reporting REPAIR_REQUIRED for the sibling workspace installation/profile. Root inspected that wrapper: it hardcodes `-WorkspaceRoot` to the parent container and does not target this downstream project. This is a separate reported workspace-maintenance condition; no claim it is repaired. Project-specific pinned core identity, doctor and portable gates are the applicable dispatch checks here; do not modify the container/core to hide that result.
 
 ## Dispatch record

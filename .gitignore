@@ -1,4 +1,4 @@
-﻿.cvf/local-binding.json
+ï»¿.cvf/local-binding.json
 .cvf/runtime/
 .venv/
 **/__pycache__/
@@ -12,3 +12,6 @@ playwright-report/
 *.tsbuildinfo
 .env
 .env.*
+
+# User-supplied registration source remains local; app uses selected assets.
+/VINAFCO268_LOCAL_HANDOFF/

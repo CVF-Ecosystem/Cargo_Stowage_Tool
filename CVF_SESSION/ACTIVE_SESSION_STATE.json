@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "REVIEW",
-  "activePhase": "REVIEW",
+  "currentMode": "WORK_ORDER",
+  "activePhase": "WORK_ORDER",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -13,10 +13,10 @@
     "REVIEW",
     "FREEZE"
   ],
-  "activeHandoff": "CVF_SESSION/handoffs/SCST_M1_REUSE_HANDOFF.md",
-  "nextAllowedMove": "Owner views the M1 synthetic demo and gives business feedback; no M2 work is dispatched. Technical M1 work order is closed with all nine criteria verified.",
-  "parkedOperatorCheckpoint": "Owner demo/business acceptance pending; M2-M5 and operational cargo use require their own scope decisions.",
-  "activeRole": "SESSION_SYNC_STEWARD",
+  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_VINAFCO268.md",
+  "nextAllowedMove": "Admit bounded VINAFCO268 integration under docs/work_orders/SCST_VINAFCO268.md; worker waits for dispatch marker. No full M2 dispatch.",
+  "parkedOperatorCheckpoint": "M1 business acceptance pending; real hold measurements and remaining M2-M5 functions remain separate.",
+  "activeRole": "ORCHESTRATOR",
   "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",
   "updatedAt": "2026-10-31"
 }

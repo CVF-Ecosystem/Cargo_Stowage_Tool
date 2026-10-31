@@ -5,7 +5,7 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 ## Start Here
 
 - Active session/phase/role state.: `CVF_SESSION/ACTIVE_SESSION_STATE.json`
-- Active M1 selective-reuse dispatch and worker/reviewer handoff.: `CVF_SESSION/handoffs/SCST_M1_REUSE_HANDOFF.md`
+- Active VINAFCO268 integration handoff with preserved M1 history.: `CVF_SESSION/handoffs/AGENT_HANDOFF_VINAFCO268.md`
 - Project continuity front door.: `CVF_SESSION_MEMORY.md`
 - CVF enforcement manifest.: `.cvf/manifest.json`
 - Milestone source bindings: live roadmap, frozen skeleton dispatch snapshot and SPEC M1 acceptance; M1 reuse order technically closed.: `docs/milestone-coverage-authority.json`
@@ -29,8 +29,8 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 - Source material still used for planning; not final design authority.: `docs/reference/`
 - M1 selective reuse assessment, worker return, root technical review and new evidence.: `docs/reviews/`
 - Owner-agreed SCST roadmap v0.3 and architecture tree; illustrative ship viewer planned at M2c, real-data refinement at M3; no M2 dispatch.: `docs/roadmaps/`
-- SPEC M1 v0.2 admitted for execution under SCST-D002; product acceptance separate.: `docs/specs/`
-- M1 reuse implementation closed after technical review; owner demo feedback pending. Skeleton packet remains historical.: `docs/work_orders/`
+- SPEC M1 v0.2 and bounded VINAFCO268 selective reference integration SPEC; business acceptance separate.: `docs/specs/`
+- Active SCST_VINAFCO268 integration order; M1 technical order closed, business acceptance pending.: `docs/work_orders/`
 
 Plans describe intended work. `IMPLEMENTATION_STATUS.json`, source, tests, and
 review evidence determine what is actually implemented.
