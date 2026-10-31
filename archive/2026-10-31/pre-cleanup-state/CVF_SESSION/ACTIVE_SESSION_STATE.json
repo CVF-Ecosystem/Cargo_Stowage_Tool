@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0",
+  "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
+  "projectName": "Cargo_Stowage_Tool",
+  "currentMode": "REVIEW",
+  "activePhase": "REVIEW",
+  "phaseModel": [
+    "INTAKE",
+    "DESIGN",
+    "SPEC",
+    "WORK_ORDER",
+    "BUILD",
+    "REVIEW",
+    "FREEZE"
+  ],
+  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_V1_2026-10-31.md",
+  "nextAllowedMove": "Await owner direction on a final roadmap and architecture tree; implementation paused by owner. No further BUILD or M1 closure.",
+  "parkedOperatorCheckpoint": "Owner paused implementation: final roadmap has not been reviewed or settled.",
+  "activeRole": "ORCHESTRATOR",
+  "roleRoute": "SINGLE_AGENT_MULTI_ROLE_ALLOWED",
+  "updatedAt": "2026-10-31"
+}

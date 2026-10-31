@@ -1,0 +1,53 @@
+Requirement already satisfied: annotated-doc==0.0.5 in d:\ung dung ai\tool ai 2026\cvf-workspace\cargo_stowage_tool\.venv\lib\site-packages (from -r requirements-lock.txt (line 1)) (0.0.5)
+Requirement already satisfied: annotated-types==0.8.0 in d:\ung dung ai\tool ai 2026\cvf-workspace\cargo_stowage_tool\.venv\lib\site-packages (from -r requirements-lock.txt (line 2)) (0.8.0)
+Requirement already satisfied: anyio==4.15.1 in d:\ung dung ai\tool ai 2026\cvf-workspace\cargo_stowage_tool\.venv\lib\site-packages (from -r requirements-lock.txt (line 3)) (4.15.1)
+Requirement already satisfied: certifi==2026.10.23 in d:\ung dung ai\tool ai 2026\cvf-workspace\cargo_stowage_tool\.venv\lib\site-packages (from -r requirements-lock.txt (line 4)) (2026.10.23)
+Requirement already satisfied: click==8.5.0 in d:\ung dung ai\tool ai 2026\cvf-workspace\cargo_stowage_tool\.venv\lib\site-packages (from -r requirements-lock.txt (line 5)) (8.5.0)
+Requirement already satisfied: colorama==0.4.6 in d:\ung dung ai\tool ai 2026\cvf-workspace\cargo_stowage_tool\.venv\lib\site-packages (from -r requirements-lock.txt (line 6)) (0.4.6)
+Requirement already satisfied: fastapi==0.162.0 in d:\ung dung ai\tool ai 2026\cvf-workspace\cargo_stowage_tool\.venv\lib\site-packages (from -r requirements-lock.txt (line 7)) (0.162.0)
+Requirement already satisfied: h11==0.16.0 in d:\ung dung ai\tool ai 2026\cvf-workspace\cargo_stowage_tool\.venv\lib\site-packages (from -r requirements-lock.txt (line 8)) (0.16.0)
+Requirement already satisfied: httpcore==1.0.9 in d:\ung dung ai\tool ai 2026\cvf-workspace\cargo_stowage_tool\.venv\lib\site-packages (from -r requirements-lock.txt (line 9)) (1.0.9)
+Requirement already satisfied: httpx==0.28.1 in d:\ung dung ai\tool ai 2026\cvf-workspace\cargo_stowage_tool\.venv\lib\site-packages (from -r requirements-lock.txt (line 10)) (0.28.1)
+Requirement already satisfied: idna==3.20 in d:\ung dung ai\tool ai 2026\cvf-workspace\cargo_stowage_tool\.venv\lib\site-packages (from -r requirements-lock.txt (line 11)) (3.20)
+Requirement already satisfied: iniconfig==2.3.1 in d:\ung dung ai\tool ai 2026\cvf-workspace\cargo_stowage_tool\.venv\lib\site-packages (from -r requirements-lock.txt (line 12)) (2.3.1)
+Requirement already satisfied: opentelemetry-api==1.45.2 in d:\ung dung ai\tool ai 2026\cvf-workspace\cargo_stowage_tool\.venv\lib\site-packages (from -r requirements-lock.txt (line 13)) (1.45.2)
+Requirement already satisfied: packaging==26.3 in d:\ung dung ai\tool ai 2026\cvf-workspace\cargo_stowage_tool\.venv\lib\site-packages (from -r requirements-lock.txt (line 14)) (26.3)
+Requirement already satisfied: pluggy==1.7.0 in d:\ung dung ai\tool ai 2026\cvf-workspace\cargo_stowage_tool\.venv\lib\site-packages (from -r requirements-lock.txt (line 15)) (1.7.0)
+Requirement already satisfied: pydantic==2.14.2 in d:\ung dung ai\tool ai 2026\cvf-workspace\cargo_stowage_tool\.venv\lib\site-packages (from -r requirements-lock.txt (line 16)) (2.14.2)
+Requirement already satisfied: pydantic_core==2.50.2 in d:\ung dung ai\tool ai 2026\cvf-workspace\cargo_stowage_tool\.venv\lib\site-packages (from -r requirements-lock.txt (line 17)) (2.50.2)
+Requirement already satisfied: Pygments==2.21.0 in d:\ung dung ai\tool ai 2026\cvf-workspace\cargo_stowage_tool\.venv\lib\site-packages (from -r requirements-lock.txt (line 18)) (2.21.0)
+Requirement already satisfied: pytest==8.4.2 in d:\ung dung ai\tool ai 2026\cvf-workspace\cargo_stowage_tool\.venv\lib\site-packages (from -r requirements-lock.txt (line 19)) (8.4.2)
+Requirement already satisfied: starlette==1.10.0 in d:\ung dung ai\tool ai 2026\cvf-workspace\cargo_stowage_tool\.venv\lib\site-packages (from -r requirements-lock.txt (line 20)) (1.10.0)
+Requirement already satisfied: typing-inspection==0.4.4 in d:\ung dung ai\tool ai 2026\cvf-workspace\cargo_stowage_tool\.venv\lib\site-packages (from -r requirements-lock.txt (line 21)) (0.4.4)
+Requirement already satisfied: typing_extensions==4.16.0 in d:\ung dung ai\tool ai 2026\cvf-workspace\cargo_stowage_tool\.venv\lib\site-packages (from -r requirements-lock.txt (line 22)) (4.16.0)
+Requirement already satisfied: uvicorn==0.38.0 in d:\ung dung ai\tool ai 2026\cvf-workspace\cargo_stowage_tool\.venv\lib\site-packages (from -r requirements-lock.txt (line 23)) (0.38.0)
+
+[notice] A new release of pip is available: 24.0 -> 26.2.2
+[notice] To update, run: D:\UNG DUNG AI\TOOL AI 2026\CVF-Workspace\Cargo_Stowage_Tool\.venv\Scripts\python.exe -m pip install --upgrade pip
+
+added 108 packages, and audited 109 packages in 16s
+
+16 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+> scst-frontend@0.1.0 build
+> tsc --noEmit && vite build
+
+vite v6.4.5 building for production...
+transforming...
+✓ 34 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.50 kB │ gzip:   0.33 kB
+dist/assets/index-iBroXZlZ.css   15.43 kB │ gzip:   4.31 kB
+dist/assets/index-CDJ38gi4.js   268.14 kB │ gzip:  82.08 kB
+dist/assets/three-CJnWD2lL.js   527.74 kB │ gzip: 131.48 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 2.07s
+SCST ready. Run Start-SCST.cmd.

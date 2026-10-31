@@ -1,0 +1,13 @@
+[PASS] CVF-DG-INST-01 PASS
+[PASS] CVF-DG-CONT-01 PASS
+[PASS] CVF-DG-RANGE-01 PASS
+       note: WORKTREE_SCOPE mode=WORKTREE_SCOPE base=None head=06f72b5e61954ebb8893482c9de3f9fc4f90e05b candidates=42 deleted=0
+[PASS] CVF-DG-APPL-01 PASS
+       note: checked: docs/work_orders/SCST_M1.md
+[PASS] CVF-DG-ROLE-01 NOT_APPLICABLE_WITH_REASON - no role-bearing review artifact in scope
+[PASS] CVF-DG-CLAIM-01 PASS
+       note: 0 explicit claim line(s) and 1 document(s) scanned
+[PASS] CVF-DG-COV-01 PASS
+       note: checked: docs/work_orders/SCST_M1.md
+       note: mechanical joins only; Local owns semantic acceptance
+RESULT: PASS phase=worker-return mandatoryControls=7 failed=0

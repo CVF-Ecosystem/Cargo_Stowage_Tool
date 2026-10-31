@@ -1,9 +1,7 @@
-﻿{
-    "schemaVersion":  "1.0",
-    "projectName":  "Cargo_Stowage_Tool",
-    "updatedAt":  "2026-10-31",
-    "claimBoundary":  "Empty initial registry; add only source-verified modules with evidence. No status may represent plan-only intent.",
-    "modules":  [
-
-                ]
+{
+  "schemaVersion": "1.0",
+  "projectName": "Cargo_Stowage_Tool",
+  "updatedAt": "2026-10-31",
+  "claimBoundary": "No active or accepted application module. Paused M1 code and historical tests are retained under archive/2026-10-31/paused-m1/.",
+  "modules": []
 }

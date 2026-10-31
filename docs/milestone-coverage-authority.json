@@ -1,9 +1,0 @@
-{
-  "schemaVersion": "cvf.milestoneAuthority@1.0.0",
-  "milestones": {
-    "M1": {
-      "path": "docs/specs/SCST_M1.md",
-      "heading": "## M1 acceptance"
-    }
-  }
-}

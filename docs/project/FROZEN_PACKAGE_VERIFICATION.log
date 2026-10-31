@@ -1,0 +1,2 @@
+PASS: 35 listed release files match their SHA-256 checksums.
+Checksum integrity is not proof of author identity, runtime correctness, or operational eligibility.

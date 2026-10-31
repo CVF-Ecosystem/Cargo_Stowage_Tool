@@ -1,0 +1,12 @@
+{
+  "launcher": "tooling/start-local.ps1 -NoBrowser",
+  "url": "http://127.0.0.1:8765",
+  "health": {
+    "status": "ok",
+    "version": "0.1.0",
+    "mode": "synthetic-demo",
+    "ai": "off"
+  },
+  "htmlAppRoot": true,
+  "assetsLinked": true
+}

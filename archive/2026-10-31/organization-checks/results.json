@@ -1,0 +1,33 @@
+{
+  "scope": "Organization-only local checks; no hosted CI or live AI-governance claim",
+  "results": [
+    {
+      "check": "doctor",
+      "command": [
+        "powershell",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "../.Controlled-Vibe-Framework-CVF/scripts/check_cvf_workspace_agent_enforcement.ps1",
+        "-ProjectPath",
+        "D:\\UNG DUNG AI\\TOOL AI 2026\\CVF-Workspace\\Cargo_Stowage_Tool"
+      ],
+      "exitCode": 0,
+      "log": "archive/2026-10-31/organization-checks/doctor.log"
+    },
+    {
+      "check": "pre-commit",
+      "command": [
+        "python",
+        "-B",
+        "scripts/cvf_gates/cvf_downstream_gate_runner.py",
+        "run",
+        "--phase",
+        "pre-commit"
+      ],
+      "exitCode": 0,
+      "log": "archive/2026-10-31/organization-checks/pre-commit.log"
+    }
+  ]
+}

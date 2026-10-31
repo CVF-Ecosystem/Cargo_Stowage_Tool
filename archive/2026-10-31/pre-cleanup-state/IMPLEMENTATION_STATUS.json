@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0",
+  "projectName": "Cargo_Stowage_Tool",
+  "overallStatus": "M1_PAUSED_BY_OPERATOR",
+  "currentPhase": "REVIEW",
+  "completedCapabilities": [
+    "Synthetic API and strict integer contract",
+    "Single-layer BOX checks",
+    "React table and interactive 3D/2D workspace",
+    "Edit/recheck and in-session undo",
+    "Local setup and launcher"
+  ],
+  "activeWorkOrders": [],
+  "knownLimitations": [
+    "Synthetic demo only; no operational eligibility.",
+    "No durable save, importer, solver, exports or AI. M2-M5 remain.",
+    "Owner paused implementation; no final roadmap settled and no M1 acceptance or closure. App code is uncommitted."
+  ],
+  "evidence": [],
+  "updatedAt": "2026-10-31"
+}

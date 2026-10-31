@@ -1,46 +1,29 @@
-﻿# Project Session Memory
+# Project Session Memory
 
 Memory class: POINTER_RECORD
-
-This is the project continuity front door. It is CVF-governed project state,
-not provider-specific memory and not a chat transcript.
 
 ## Current Truth
 
 - Contract: cvf.downstreamContinuityContract@1.0.0
-- Current mode: BUILD
-- Active phase: BUILD
+- Current mode: INTAKE
+- Active phase: INTAKE
 - Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_V1_2026-10-31.md
 
-Update these four lines together with `CVF_SESSION/ACTIVE_SESSION_STATE.json`,
-the active handoff and `IMPLEMENTATION_STATUS.json`. The portable gate runner
-reports any disagreement with a field-specific locator.
+## Current operator boundary
 
-## Startup Order
+Application implementation is paused by owner. Final roadmap and future application tree are not settled. The latest request authorizes cleanup/classification only; it does not resume BUILD. Original roadmap input is now `docs/project/SCST_Roadmap_Ban_Dau_Tool_First.md`.
 
-1. Read `.cvf/manifest.json` and `.cvf/policy.json`.
-2. Read `CVF_SESSION/ACTIVE_SESSION_STATE.json`.
-3. Read the active handoff named by that state file.
-4. Read `IMPLEMENTATION_STATUS.json` and `docs/INDEX.md`.
-5. Read matching records from `docs/reviews/learnings/README.md` before similar work; the home indexes shared findings and parent feedback.
-6. State current mode, active handoff, next allowed move, parked checkpoint,
-   and active role before material work.
+## Read next
 
-## Mandatory Continuity Rehydration
+1. `.cvf/manifest.json` and `.cvf/policy.json`.
+2. `CVF_SESSION/ACTIVE_SESSION_STATE.json` and its active handoff.
+3. `IMPLEMENTATION_STATUS.json`, `README.md`, `docs/INDEX.md` and `docs/project/PROJECT_STATUS.md`.
+4. Matching learning records in `docs/reviews/learnings/README.md` when relevant.
 
-Repeat the startup order before material work at every new or resumed
-chat/session, after context loss or compaction, at the start of every new
-tranche or work order, and whenever responsibility or the active handoff
-changes. Read current files again; do not rely on chat history,
-provider-local memory, or a declaration from a previous session.
+Rehydrate these canonical files at session, role and work-order transitions; emit a fresh CVF Agent Declaration before material work. Stop on disagreement rather than choosing a provider-memory version.
 
-Emit a fresh `CVF Agent Declaration` before the first material action. At a
-tranche transition, also record the acknowledgment in the active handoff
-before BUILD. If continuity surfaces disagree, stop and report
-`BLOCKED_CONTINUITY_DRIFT`.
+## Historical material
 
-Active state: `CVF_SESSION/ACTIVE_SESSION_STATE.json`
+`archive/README.md` indexes the frozen review package and paused M1. Source/evidence there is historical and grants no execution authority. Previous memory/state/handoff bytes are preserved in `archive/2026-10-31/pre-cleanup-state/`. No application capability is owner-accepted.
 
-Initial active handoff: `CVF_SESSION/handoffs/AGENT_HANDOFF_V1_2026-10-31.md`
-
-Provider-local files may assist execution but are not project source authority.
+Missing `ACTIVE_SESSION_BOOTSTRAP_READ_MODEL.json`: BOOTSTRAP_MIGRATION_PENDING, nonblocking; resolve current facts from active state.

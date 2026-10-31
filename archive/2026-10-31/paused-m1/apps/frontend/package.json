@@ -1,0 +1,31 @@
+{
+  "name": "scst-frontend",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "contract": "openapi-typescript ../../contracts/openapi.json -o src/generated/api.ts",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "three": "0.187.0"
+  },
+  "overrides": {
+    "minimatch": "11.0.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@types/three": "^0.183.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "openapi-typescript": "^7.10.1",
+    "prettier": "3.7.4",
+    "typescript": "^5.9.3",
+    "vite": "6.4.5"
+  }
+}

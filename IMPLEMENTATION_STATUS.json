@@ -1,15 +1,19 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "M1_IN_PROGRESS",
-  "currentPhase": "BUILD",
+  "overallStatus": "PLANNING_AWAITING_OWNER",
+  "currentPhase": "INTAKE",
   "completedCapabilities": [],
-  "activeWorkOrders": [
-    "docs/work_orders/SCST_M1.md"
-  ],
+  "activeWorkOrders": [],
   "knownLimitations": [
-    "M1 build pending; M2-M5 not implemented."
+    "Final roadmap and future application architecture are not settled with owner.",
+    "Application implementation is paused. Previous M1 source and evidence are archived, not accepted capabilities.",
+    "Current authorization covers organization only; no active application source tree or work order."
   ],
-  "evidence": [],
+  "evidence": [
+    "docs/project/PROJECT_STATUS.md",
+    "archive/2026-10-31/ORGANIZATION_MANIFEST.json",
+    "docs/project/ORGANIZATION_VERIFICATION.json"
+  ],
   "updatedAt": "2026-10-31"
 }

@@ -1,55 +1,44 @@
-﻿# Agent Handoff V1
+# Agent Handoff V1 — current project continuation
 
 Status: ACTIVE
 
 ## Current State
 
 - Project: Cargo_Stowage_Tool
-- Current mode: BUILD
-- Active phase: BUILD
-- Active role: IMPLEMENTATION_WORKER
-- Next allowed move: Implement and verify the six M1 criteria under docs/work_orders/SCST_M1.md.
-- Parked operator checkpoint: none
+- Current mode: INTAKE
+- Active phase: INTAKE
+- Active role: SESSION_SYNC_STEWARD
+- Next allowed move: Await owner discussion of intent, final roadmap and proposed architecture tree. Application BUILD remains paused; do not resume archived M1.
+- Parked operator checkpoint: owner discussion and explicit implementation resumption required
 
-## Seven-Step Control Chain
+## Latest authority
 
-`INTAKE -> DESIGN -> SPEC -> WORK_ORDER -> BUILD -> REVIEW -> FREEZE`
+31-10-2026: owner stopped premature implementation, then authorized project cleanup and classification. Cleanup is bounded R1 local maintenance; no app code changes, final-roadmap approval or new execution grant. CVF core remains read-only at c4c8767ac8861854f40d466ba338ffd11eb9558e.
 
-This chain preserves seven governed decisions. A roadmap tranche may inherit
-accepted evidence and enter at the earliest still-open stage; it does not need
-to recreate all seven artifacts from zero. Record the inheritance and require
-evidence for each applicable transition. A transition gate is not necessarily
-a standalone independent-review artifact. `REVIEW` is the formal result
-evaluation before `FREEZE`.
+## Maintenance record
 
-## Role Assignment
+- Rehydrated manifest, policy, memory/state/handoff, implementation truth and index; doctor passed 28/28 before file operations.
+- ORCHESTRATOR: bounded the request to classification, reference selection and preservation. Product planning remains parked.
+- Compact scope/acceptance: preserve all source bytes; keep frozen review relative paths; archive paused M1; provide current navigation; maintain owner pause. Supporting work limited to organization and integrity checks; no product milestone is admitted.
+- File-operation responsibility: same local agent under the explicit cleanup request. Source/destination SHA-256 checked; no permanent deletion. Original details preserved in archive rather than silently rewritten.
+- SESSION_SYNC_STEWARD: refreshed current-state surfaces and catalog after classification. Application role has not resumed.
 
-Roles are responsibilities, not provider names. One agent may hold several
-roles only when each transition is recorded. Available roles are ORCHESTRATOR,
-SPEC_AUTHOR, WORK_ORDER_AUTHOR, IMPLEMENTATION_WORKER, REVIEWER, REPAIR_WORKER,
-CLOSER, COMMIT_STEWARD, and SESSION_SYNC_STEWARD. High-risk work requires an
-independent reviewer.
+## Locations
 
-## Completed
+- Current front door: README.md and docs/project/PROJECT_STATUS.md.
+- Original planning input: docs/project/SCST_Roadmap_Ban_Dau_Tool_First.md, unchanged bytes, not final.
+- Retained reference material: docs/reference/README.md.
+- Review history: archive/2026-10-31/review-v0.3/.
+- Paused application source, spec, work order and evidence: archive/2026-10-31/paused-m1/.
+- Previous continuity: archive/2026-10-31/pre-cleanup-state/.
+- Organization trace: archive/2026-10-31/ORGANIZATION_MANIFEST.json and docs/project/ORGANIZATION_VERIFICATION.json.
 
-- Project governance bootstrap created the initial continuity surfaces.
+## Claim boundary
 
-## Open Work
+No accepted app milestone, final roadmap, release or live AI-governance proof is asserted. Historical test results remain attached to the archived experiment. There is no active app work order. Do not restore archived M1 instructions as current authority.
 
-- Capture the first governed request through INTAKE.
+## Organization verification and commit stewardship
 
-## Claim Boundary
-
-This handoff records initial project state only. It does not claim that any
-feature, test, release, deployment, or provider integration is complete.
-
-## M1 transition log
-
-- 31-10-2026: Rehydrated canonical files; BOOTSTRAP_MIGRATION_PENDING (nonblocking).
-- INTAKE / ORCHESTRATOR: owner authorized tool-first roadmap, M1 synthetic only, R1.
-- DESIGN / SPEC_AUTHOR: chose integer gram/mm, stateless API, one BOX layer, React/Three.js.
-- SPEC / SPEC_AUTHOR: six criteria admitted in docs/specs/SCST_M1.md.
-- WORK_ORDER / WORK_ORDER_AUTHOR: bounded paths, cost and owners in docs/work_orders/SCST_M1.md.
-- Initial continuity bytes preserved by baseline commit f299497.
-
-- BUILD / IMPLEMENTATION_WORKER: pre-dispatch PASS; authority reacknowledged. Dispatch material-SHA marker: d039bc0. Initial app implementation, not governance behavior proof.
+- Verified 120 file records (107 initial operations, 10 reference copies/extracts, 3 runtime logs), 34 navigation links and 35/35 frozen release checksums. Catalog check, worker-return and reviewer-fast passed for organization scope.
+- Final responsibility transition: same local agent acts as COMMIT_STEWARD for the organization-only local commit, then SESSION_SYNC_STEWARD for current continuity. Re-read current state, memory, handoff, implementation truth and index at this transition. No app authority is resumed.
+- Permanent deletion was not used; source bytes, duplicate uploads and local generated caches remain preserved in their classified locations. Core/gate files were not modified.

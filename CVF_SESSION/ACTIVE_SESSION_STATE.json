@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "BUILD",
-  "activePhase": "BUILD",
+  "currentMode": "INTAKE",
+  "activePhase": "INTAKE",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -14,9 +14,9 @@
     "FREEZE"
   ],
   "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_V1_2026-10-31.md",
-  "nextAllowedMove": "Implement and verify the six M1 criteria under docs/work_orders/SCST_M1.md.",
-  "parkedOperatorCheckpoint": null,
-  "activeRole": "IMPLEMENTATION_WORKER",
+  "nextAllowedMove": "Await owner discussion of intent, final roadmap and proposed architecture tree. Application BUILD remains paused; do not resume archived M1.",
+  "parkedOperatorCheckpoint": "Owner must settle direction and explicitly resume implementation; current request authorizes organization only.",
+  "activeRole": "SESSION_SYNC_STEWARD",
   "roleRoute": "SINGLE_AGENT_MULTI_ROLE_ALLOWED",
   "updatedAt": "2026-10-31"
 }

@@ -1,0 +1,63 @@
+{
+  "receiptKind": "REVIEW_REFERENCE_REPLAY_ONLY",
+  "startedAt": "2026-10-31T09:07:24.739826+00:00",
+  "finishedAt": "2026-10-31T09:07:27.395279+00:00",
+  "command": [
+    "C:\\Users\\DELL\\AppData\\Local\\Temp\\SCST-local-review-20261031-160717\\env\\Scripts\\python.exe",
+    "tooling/replay_review_checks.py",
+    "--output",
+    "C:\\Users\\DELL\\AppData\\Local\\Temp\\SCST-local-review-20261031-160717\\replay"
+  ],
+  "frozenV02Sha256": "6f587938f48b24daef5eaf0ba3fcab7532ec0397c3d2f7a39ca2caf686da44df",
+  "replayScriptSha256": "92fa523531f6bbcd1aa2280fea292b898a46b1a75db5dc79de7ab80d0e9c292d",
+  "probeScriptSha256": "c0bab2d3a3c1f19476bf980b6c33b67046fdf788bc5ea3fee503ccfa0487fc7d",
+  "steps": [
+    {
+      "step": "v02_checksum",
+      "command": [
+        "C:\\Users\\DELL\\AppData\\Local\\Temp\\SCST-local-review-20261031-160717\\env\\Scripts\\python.exe",
+        "C:\\Users\\DELL\\AppData\\Local\\Temp\\SCST-local-review-20261031-160717\\replay\\frozen_v02\\Steel_Cargo_Stowage_Tool_v0.2_Local_Agent_Package\\tooling\\verify_package.py"
+      ],
+      "cwd": "C:\\Users\\DELL\\AppData\\Local\\Temp\\SCST-local-review-20261031-160717\\replay\\frozen_v02\\Steel_Cargo_Stowage_Tool_v0.2_Local_Agent_Package",
+      "exitCode": 0,
+      "log": "C:\\Users\\DELL\\AppData\\Local\\Temp\\SCST-local-review-20261031-160717\\replay\\v02_checksum.log",
+      "logSha256": "10933073d8e29b31f86f722537dc615a33d8df454f5bca26454816e8f0fdaa5d"
+    },
+    {
+      "step": "v02_reference_tests",
+      "command": [
+        "C:\\Users\\DELL\\AppData\\Local\\Temp\\SCST-local-review-20261031-160717\\env\\Scripts\\python.exe",
+        "C:\\Users\\DELL\\AppData\\Local\\Temp\\SCST-local-review-20261031-160717\\replay\\frozen_v02\\Steel_Cargo_Stowage_Tool_v0.2_Local_Agent_Package\\tests\\run_all.py",
+        "--output",
+        "C:\\Users\\DELL\\AppData\\Local\\Temp\\SCST-local-review-20261031-160717\\replay\\reference"
+      ],
+      "cwd": "C:\\Users\\DELL\\AppData\\Local\\Temp\\SCST-local-review-20261031-160717\\replay\\frozen_v02\\Steel_Cargo_Stowage_Tool_v0.2_Local_Agent_Package",
+      "exitCode": 0,
+      "log": "C:\\Users\\DELL\\AppData\\Local\\Temp\\SCST-local-review-20261031-160717\\replay\\v02_reference_tests.log",
+      "logSha256": "3667422a6f58fd9349d7842c9380fe26485d15b37cdc42eae4c6448a5653e441"
+    },
+    {
+      "step": "r2_contract_probes",
+      "command": [
+        "C:\\Users\\DELL\\AppData\\Local\\Temp\\SCST-local-review-20261031-160717\\env\\Scripts\\python.exe",
+        "D:\\UNG DUNG AI\\TOOL AI 2026\\CVF-Workspace\\Cargo_Stowage_Tool\\probes\\replay_r2_contract_probes.py",
+        "--package-root",
+        "C:\\Users\\DELL\\AppData\\Local\\Temp\\SCST-local-review-20261031-160717\\replay\\frozen_v02\\Steel_Cargo_Stowage_Tool_v0.2_Local_Agent_Package",
+        "--output",
+        "C:\\Users\\DELL\\AppData\\Local\\Temp\\SCST-local-review-20261031-160717\\replay\\probes"
+      ],
+      "cwd": "C:\\Users\\DELL\\AppData\\Local\\Temp\\SCST-local-review-20261031-160717\\replay\\frozen_v02\\Steel_Cargo_Stowage_Tool_v0.2_Local_Agent_Package",
+      "exitCode": 0,
+      "log": "C:\\Users\\DELL\\AppData\\Local\\Temp\\SCST-local-review-20261031-160717\\replay\\r2_contract_probes.log",
+      "logSha256": "5a8e84c748d0a94d6888ea81f261bcc7da4edb788d5354184a674668fec881f7"
+    }
+  ],
+  "completed": true,
+  "operationalEligible": false,
+  "notEvaluated": [
+    "Application backend and authenticated identity",
+    "Production solver and UI",
+    "CVF source/runtime integration",
+    "Real cargo, hold, support and field approval"
+  ]
+}

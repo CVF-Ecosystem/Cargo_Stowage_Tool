@@ -1,0 +1,65 @@
+[PASS] CVF-DG-INST-01 PASS
+[PASS] CVF-DG-CONT-01 PASS
+[PASS] CVF-DG-RANGE-01 PASS
+       note: WORKTREE_SCOPE mode=WORKTREE_SCOPE base=None head=06f72b5e61954ebb8893482c9de3f9fc4f90e05b candidates=136 deleted=55
+       note: deleted candidate not checked: CVF_Steel_Cargo_Independent_Review_R1.docx
+       note: deleted candidate not checked: DECISION_LOG_R2_R3.md
+       note: deleted candidate not checked: FILE_CHECKSUMS.sha256
+       note: deleted candidate not checked: LOCAL_REVIEW_EVIDENCE_2026-10-31/EVIDENCE_INDEX.json
+       note: deleted candidate not checked: LOCAL_REVIEW_EVIDENCE_2026-10-31/local_observations.json
+       note: deleted candidate not checked: LOCAL_REVIEW_EVIDENCE_2026-10-31/probes/r2_contract_probe_receipt.json
+       note: deleted candidate not checked: LOCAL_REVIEW_EVIDENCE_2026-10-31/r2_contract_probes.log
+       note: deleted candidate not checked: LOCAL_REVIEW_EVIDENCE_2026-10-31/reference/contract_check_receipt.json
+       note: deleted candidate not checked: LOCAL_REVIEW_EVIDENCE_2026-10-31/reference/contract_checks.log
+       note: deleted candidate not checked: LOCAL_REVIEW_EVIDENCE_2026-10-31/review_replay_receipt.json
+       note: deleted candidate not checked: LOCAL_REVIEW_EVIDENCE_2026-10-31/v02_checksum.log
+       note: deleted candidate not checked: LOCAL_REVIEW_EVIDENCE_2026-10-31/v02_reference_tests.log
+       note: deleted candidate not checked: LOCAL_REVIEW_REPORT.md
+       note: deleted candidate not checked: MASTER_BASELINE_V0.3.md
+       note: deleted candidate not checked: PACKAGE_MANIFEST.json
+       note: deleted candidate not checked: PROMPT_LOCAL_REVIEW.txt
+       note: deleted candidate not checked: REVIEW_R3_RESPONSE.md
+       note: deleted candidate not checked: SCST_Roadmap_Ban_Dau_Tool_First.md
+       note: deleted candidate not checked: SCST_Web_Response_Local_Review_R4.zip
+       note: deleted candidate not checked: SCST_v0.2_INDEPENDENT_R2_AUDIT.md
+       note: deleted candidate not checked: START_HERE_LOCAL_REVIEW.md
+       note: deleted candidate not checked: Steel_Cargo_Stowage_Tool_MVP_v0.1_Design_Baseline.zip
+       note: deleted candidate not checked: Steel_Cargo_Stowage_Tool_v0.2_Official_Local_Agent_Package.zip
+       note: deleted candidate not checked: Steel_Cargo_Stowage_Tool_v0.3_Review_Baseline.zip
+       note: deleted candidate not checked: docs/01_MILESTONES_AND_ACCEPTANCE.md
+       note: deleted candidate not checked: docs/02_OPERATIONAL_MODEL.md
+       note: deleted candidate not checked: docs/03_OPERATIONAL_DATA_AND_PROVENANCE.md
+       note: deleted candidate not checked: docs/04_ROLES_AND_EXTERNAL_REVIEW.md
+       note: deleted candidate not checked: docs/05_PHOTO_OBSERVATIONS.md
+       note: deleted candidate not checked: docs/06_SOURCE_PROVENANCE.md
+       note: deleted candidate not checked: docs/07_SOURCES_AND_APPLICABILITY.md
+       note: deleted candidate not checked: docs/milestone-coverage-authority.json
+       note: deleted candidate not checked: docs/specs/SCST_M1.md
+       note: deleted candidate not checked: docs/work_orders/SCST_M1.md
+       note: deleted candidate not checked: evidence/R3_VERIFICATION_REPORT.md
+       note: deleted candidate not checked: evidence/SOURCE_REGISTER.json
+       note: deleted candidate not checked: evidence/available_provenance_receipt.json
+       note: deleted candidate not checked: evidence/r2_contract_probe_receipt.json
+       note: deleted candidate not checked: evidence/r2_contract_probes.log
+       note: deleted candidate not checked: evidence/review_replay_receipt.json
+       note: deleted candidate not checked: evidence/v02_checksum.log
+       note: deleted candidate not checked: evidence/v02_contract_check_receipt.json
+       note: deleted candidate not checked: evidence/v02_contract_checks.log
+       note: deleted candidate not checked: evidence/v02_reference_tests.log
+       note: deleted candidate not checked: history/Steel_Cargo_Stowage_Tool_v0.2_Official_Local_Agent_Package.zip
+       note: deleted candidate not checked: inputs/SCST_v0.2_INDEPENDENT_R2_AUDIT.md
+       note: deleted candidate not checked: inputs/photos/1.jpg
+       note: deleted candidate not checked: inputs/photos/2.jpg
+       note: deleted candidate not checked: inputs/photos/3.jpg
+       note: deleted candidate not checked: probes/replay_r2_contract_probes.py
+       note: deleted candidate not checked: requirements_review.txt
+       note: deleted candidate not checked: templates/CASE_INTAKE.md
+       note: deleted candidate not checked: templates/LOCAL_REVIEW_RESPONSE.md
+       note: deleted candidate not checked: tooling/replay_review_checks.py
+       note: deleted candidate not checked: tooling/verify_package.py
+[PASS] CVF-DG-APPL-01 NOT_APPLICABLE_WITH_REASON - no candidate work-order packet in scope
+[PASS] CVF-DG-ROLE-01 NOT_APPLICABLE_WITH_REASON - no role-bearing review artifact in scope
+[PASS] CVF-DG-CLAIM-01 PASS
+       note: 0 explicit claim line(s) and 0 document(s) scanned
+[PASS] CVF-DG-COV-01 NOT_APPLICABLE_WITH_REASON - no current roadmap/executable order or declared coverage block; no coverage claim
+RESULT: PASS phase=pre-commit mandatoryControls=7 failed=0
