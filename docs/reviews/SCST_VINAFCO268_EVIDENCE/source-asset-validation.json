@@ -1,0 +1,107 @@
+{
+  "status": "passed",
+  "scope": "Data and visual geometry only; not naval stability, strength or operating approval",
+  "principal_dimensions_m": [
+    77.8,
+    13.24,
+    5.2
+  ],
+  "decoded_hull_bbox_source_xyz_m": [
+    [
+      0.0,
+      -6.619999885559082,
+      0.0
+    ],
+    [
+      77.80000305175781,
+      6.619999885559082,
+      5.199999809265137
+    ]
+  ],
+  "hold_floor_area_estimated_m2": 583.43921875,
+  "main_deck_overlap_with_hold_m2": 0.0,
+  "mesh_count": 31,
+  "triangle_count": 3506,
+  "equipment_counts": {
+    "single_bitts": 12,
+    "bow_anchors": 2,
+    "plate_rudders": 2,
+    "lifebuoys": 4
+  },
+  "axes_checked": "source X forward/Y port/Z up -> glTF X centred/Y up/Z starboard",
+  "cargo_vs_deadweight_checked": true,
+  "estimated_geometry_labels_checked": true,
+  "local_manifest_verified": [
+    {
+      "path": "HANDOFF.md",
+      "sha256": "c32d8320c57c5c9f03b64544a2786a30e99a6912daccbff6b6fcdb9488aeda2a"
+    },
+    {
+      "path": "README.md",
+      "sha256": "cbb1eb96b6346f6c2779fd3dca3f09bfd2331c4fe069f1c8ff4c6a92bd6c8268"
+    },
+    {
+      "path": "data/VINAFCO268_HN2642_3D.json",
+      "sha256": "5838840386fe80a4d624b8e30080c2b8d2f844cbc4043fb8ddfcd2ad10bab51f"
+    },
+    {
+      "path": "model/VINAFCO268_HN2642_3D.glb",
+      "sha256": "684cb4d4c7351aaba50ff4c7d23b3766656cf1e7b2b652f36357b167d83b1a5d"
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "698f29ac349491f0fd76d3c8afeb560c50471159ad377fefa215f1a9fd6a0254"
+    },
+    {
+      "path": "source/giay-dang-kiem_hn-2642_20260813-123948.pdf",
+      "sha256": "05481d288e3b3fc36df86876fee4ca5b202a8e537d8486dec96aae79fd9f4ab5"
+    },
+    {
+      "path": "tools/export_vinafco_mesh.py",
+      "sha256": "42f5277404420171a1b2e23a77938f6e21f9ff1164acf4e0f12af5c926fcff4f"
+    },
+    {
+      "path": "tools/preview.py",
+      "sha256": "71cac165c764c6986c535ce2c4d89d135b77d472ffa3f37ac5bf344b7b697a92"
+    },
+    {
+      "path": "tools/rebuild.py",
+      "sha256": "dfed8f0d73adbbbaf95cb2e18a17b56702d4488ff90a567940e108333dc31882"
+    },
+    {
+      "path": "tools/render_sheet.py",
+      "sha256": "288f2e60b035ba7a22dd6a22600781762a2f9b432c6f1c31008250298368ff02"
+    },
+    {
+      "path": "tools/validate_model.py",
+      "sha256": "6070c3b7574e7f2e1b9968a1113e90d6a428312cb1c33adf840f70419bd977d8"
+    },
+    {
+      "path": "validation/RELEASE_CHECK.md",
+      "sha256": "30ee1dad4612a50799bcc8d222d908233abab2e78e951841d1398f360d57c179"
+    },
+    {
+      "path": "validation/rebuild_smoke_report.json",
+      "sha256": "af62b16ae9768fc67b4f09fa3c1fe1253a560b72fd1dd6fe0a9910ed029614d7"
+    },
+    {
+      "path": "validation/validation_report.json",
+      "sha256": "e445d908460fd2c89dd0538bb416adb76ea50fc5e5d95d2fd70db3ccc6286820"
+    },
+    {
+      "path": "visuals/VINAFCO268_HN2642_PREVIEW.png",
+      "sha256": "2fe70edcfff4e84483fda463f42daba982df9bc4d73cf168b2e3b50404b282d6"
+    },
+    {
+      "path": "visuals/VINAFCO268_HN2642_SO_DO_3D.png",
+      "sha256": "297c42053210ba670239fd66a2e9c27ede08fb87aec86a45bec07c5d5599834e"
+    }
+  ],
+  "source_pdf_reviewed_pages": [
+    1,
+    4,
+    5,
+    6
+  ],
+  "source_pdf_review_method": "Root visually inspected rendered scans; dimensions/cargo pairs/drafts/freeboards checked, not current legal validity."
+}

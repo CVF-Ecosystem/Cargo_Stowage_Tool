@@ -16,6 +16,16 @@ Giới hạn chứng nhận và chuyến phải dương; hàng đã có trên t�
 
 `DRAFT` có lỗi hình học; `GEOMETRY_FEASIBLE` còn lỗi quy tắc; `RULES_CHECKED` chỉ nói các kiểm trong M1 đã chạy đạt. Danh sách chưa kiểm luôn có, bao gồm kê/chèn/chằng, nhiều tầng, ổn định, tải cục bộ và hàng cũ trong hầm. 3D hỗ trợ kéo xoay, cuộn zoom, chọn và đặt lại; khi WebGL không khả dụng giao diện chuyển sang 2D và bảng.
 
+## Chế độ tham chiếu VINAFCO 268
+
+Chọn **Xem VINAFCO 268**. Thân dùng kích thước theo hồ sơ 77,8 × 13,24 × 5,2m; hầm/cabin/tuyến hình ước tính, hàng synthetic. Chọn VR-SI/VR-SII để xem mức hàng 3282,5/3517,5t và mớn tham chiếu4,60/4,85m; TTTP3301/3536t hiển thị riêng. Chưa tính mớn theo tổng hàng. Màu thân GLB cố định tại4,85m; khung xanh là marker theo cấp đang chọn.
+
+Giới hạn chuyến cũ được giữ hoặc hạ theo mức mới, không tự nâng từ32t của mẫu lên mức hàng tham chiếu. Có thể chỉnh giới hạn chuyến bằng kg; mức hàng theo hồ sơ chỉ đọc. Khi có STALE, áp dụng và kiểm lại trước khi đổi cấp, khôi phục mẫu hoặc undo. Hàng đã có vẫn được tính ngoài hầm mục tiêu; nếu vượt mức cấp mới thì không chuyển cấp và giữ dữ liệu.
+
+Hầm nguồn rộng10,34375m; kiểm integer-mm dùng10,343m và lùi0,375mm mỗi mạn. Đây là chuyển đơn vị bảo thủ trên hầm ước tính. Mạn khô nguồn612/362mm giữ riêng D−d600/350mm; chênh lệch12mm chưa giải thích. Tải sàn và khối lượng tàu không chưa có dữ liệu. Chưa hỗ trợ container (giấy có điều kiện mớn riêng4,17m), ổn định/sức bền hoặc empty manifest. Lỗi tải GLB vẫn dùng được bảng/hầm/kiểm; WebGL lỗi chuyển2D.
+
+Tài liệu nguồn local trong `VINAFCO268_LOCAL_HANDOFF/`, bị loại khỏi Git; app chỉ đọc profile kỹ thuật chọn lọc và GLB trong `services/backend/data/vessels/vinafco268/`. Không cần gói gốc để chạy app sau khi đã tích hợp. Xem [review](reviews/SCST_VINAFCO268_REVIEW.md).
+
 ## Kiểm nhà phát triển
 
 ```powershell
@@ -28,4 +38,4 @@ npm.cmd --prefix apps/frontend run test:e2e
 
 Cây thực: `services/backend/app/domain/{model,geometry,rules}` chứa contract và kiểm; `services/backend/app/api` phục vụ API; `apps/frontend/src/{api,features,viewer-3d}` là giao diện; `contracts/openapi.json` và `apps/frontend/src/api/generated/api.ts` được sinh; `tests/backend`, `tests/browser` chứa kiểm; `tooling/` và `Start-SCST.cmd` khởi chạy.
 
-Ngoài phạm vi: xếp tự động, nhập manifest, lưu/mở, xuất báo cáo, nhiều tầng, dữ liệu thực và AI.
+Ngoài phạm vi: xếp tự động, nhập manifest, lưu/mở, xuất báo cáo, nhiều tầng, manifest/hầm đo thực và AI. VINAFCO 268 bổ sung thông số thân và trạng thái tham chiếu theo hồ sơ; không đổi các giới hạn đó.

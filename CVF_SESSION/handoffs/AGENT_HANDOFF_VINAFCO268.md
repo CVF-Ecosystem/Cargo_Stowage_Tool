@@ -5,11 +5,11 @@ Status: ACTIVE
 ## Current State
 
 - Project: Cargo_Stowage_Tool
-- Current mode: BUILD
-- Active phase: BUILD
-- Active role: ORCHESTRATOR
-- Next allowed move: Terra worker implements only SCST_VINAFCO268 admitted paths; root reviews, Sol verifies browser; no full M2 dispatch.
-- Parked operator checkpoint: M1 business acceptance pending; real hold measurements and remaining M2-M5 functions remain separate.
+- Current mode: REVIEW
+- Active phase: REVIEW
+- Active role: SESSION_SYNC_STEWARD
+- Next allowed move: Owner views local VINAFCO268 mode and supplies business feedback; no remaining M2 functionality is dispatched.
+- Parked operator checkpoint: M1 and VINAFCO268 business acceptance pending; real hold measurements, operational use and remaining M2-M5 scope require their own checkpoints.
 
 ## Authority and responsibilities
 
@@ -69,3 +69,9 @@ Status: ACTIVE
 ## VINAFCO268 BUILD acknowledgment
 
 Root rehydrated canonical records before BUILD; phase/role BUILD / ORCHESTRATOR. Material-SHA marker: dispatch 4ff5b05c2aa648814dff02be531b0e582305f99e. Pre-dispatch6/6, pre-commit7/7 passed. Initial catalog family/path registration and handoff-name closeability checks failed and were corrected before dispatch (registered existing artifact families, successor AGENT_HANDOFF_VINAFCO268); no gate edits. SPEC acceptance hash5b38911a2325311bdc140a101e823adacdad1e03ead651b63dabaaa692691143. Budget165minutes, no scope reset. Raw source excluded.
+
+## VINAFCO268 review and continuation
+
+Workers returned source and tests; root rehydrated canonical continuity then transitioned ORCHESTRATOR to independent REVIEWER. Root source/PDF/GLB review,109 independent checks,63 backend rerun and9 browser rerun17.0s passed; visually inspected desktop/mobile screenshots. Read exact browser assertions and actual Three loader/bounds/marker/cargo transforms. No root runtime code edits. Reviewer/worker claims remain local technical checks, not business acceptance or naval safety. Browser initial network language failure repaired; no tests hidden. Historical M1 screenshots restored byte-for-byte, new regression images preserved separately. Knowledge index preserved ignored runtime. Core/archive/input source bytes unchanged.
+
+Root transitions CLOSER / COMMIT_STEWARD then SESSION_SYNC_STEWARD for technical tranche closure. Source manifest binds12 runtime/contract/test files; WO closes six verified technical criteria, product PENDING. M1 remains awaiting business acceptance; remaining M2/M3 are not silently completed. Raw package/PDF/personalURLs excluded from Git/API; no source publication. New local demo session7103/PID9704 on8765 verified HTML/profile; old owned54885 stopped normally withCtrl+C (exit1 on interruption is not a failed app check). Current handles .cvf/runtime/vinafco-demo-session.json and evidence demo-smoke.json. Root owns local commits; no GitHub push for this real-source slice.

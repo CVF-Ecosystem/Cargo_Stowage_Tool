@@ -31,6 +31,8 @@ Mỗi mốc có một checkpoint khi đủ đầu ra hoặc phát hiện thay đ
 
 Owner đồng ý ngày 31-10-2026 bổ sung lớp hình tàu để nhìn vị trí hầm và hàng trong bối cảnh toàn tàu. Đây là phần hiển thị của M2, được tinh chỉnh ở M3; M1 hiện chỉ có hầm BOX và hàng synthetic.
 
+**Lát cắt triển khai sớm:** sau khi owner cung cấp `VINAFCO268_LOCAL_HANDOFF` và yêu cầu đánh giá/tích hợp nếu phù hợp, chế độ VINAFCO 268 đã được tích hợp riêng theo [SPEC VINAFCO268](../specs/SCST_VINAFCO268.md), có [review kỹ thuật](../reviews/SCST_VINAFCO268_REVIEW.md). Giữ mặc định M1; thêm profile theo hồ sơ, hình tàu mờ, marker SI/SII và hàng synthetic trong hầm ước tính. Phần hiển thị này không hoàn tất M2c hoặc xác minh geometry hầm thực ở M3; các phần M2 khác chưa được giao thi công.
+
 | Mốc | Phạm vi bổ sung | Đầu ra dự kiến |
 |---|---|---|
 | M2 — viewer, gắn với M2c | Vỏ tàu, boong, hướng mũi/đuôi và vị trí hầm mang tính minh họa; bật/tắt hoặc làm mờ vỏ để xem hàng | Nhìn được bối cảnh tàu mà vẫn chọn/xem hầm và hàng; bảng/3D giữ cùng ID, kích thước và tọa độ backend; hiện nhãn hình tàu giả lập |
@@ -52,7 +54,7 @@ Orchestrator đưa phần M2 vào SPEC M2c khi đến lượt; agent chứng min
 
 ## Treeview kiến trúc dự kiến
 
-Một repository, một tool chạy local; frontend và backend tách trách nhiệm qua API. **M1 đã có code và được kiểm kỹ thuật** theo [review M1](../reviews/SCST_M1_REVIEW.md); nghiệm thu nghiệp vụ còn chờ owner. Cây dưới mô tả trách nhiệm tổng thể, gồm cả phần tương lai. `domain/planner/`, `runtime-data/` và lớp hình tàu chưa triển khai; mỗi phần chỉ tạo khi mốc tương ứng được giao.
+Một repository, một tool chạy local; frontend và backend tách trách nhiệm qua API. **M1 đã có code và được kiểm kỹ thuật** theo [review M1](../reviews/SCST_M1_REVIEW.md); nghiệm thu nghiệp vụ còn chờ owner. Cây dưới mô tả trách nhiệm tổng thể, gồm cả phần tương lai. Lớp hình tàu VINAFCO 268 đã có trong lát cắt riêng phía trên; `domain/planner/` và `runtime-data/` chưa triển khai.
 
 ```text
 Cargo_Stowage_Tool/

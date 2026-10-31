@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "BUILD",
-  "activePhase": "BUILD",
+  "currentMode": "REVIEW",
+  "activePhase": "REVIEW",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -14,9 +14,9 @@
     "FREEZE"
   ],
   "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_VINAFCO268.md",
-  "nextAllowedMove": "Terra worker implements only SCST_VINAFCO268 admitted paths; root reviews, Sol verifies browser; no full M2 dispatch.",
-  "parkedOperatorCheckpoint": "M1 business acceptance pending; real hold measurements and remaining M2-M5 functions remain separate.",
-  "activeRole": "ORCHESTRATOR",
+  "nextAllowedMove": "Owner views local VINAFCO268 mode and supplies business feedback; no remaining M2 functionality is dispatched.",
+  "parkedOperatorCheckpoint": "M1 and VINAFCO268 business acceptance pending; real hold measurements, operational use and remaining M2-M5 scope require their own checkpoints.",
+  "activeRole": "SESSION_SYNC_STEWARD",
   "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",
   "updatedAt": "2026-10-31"
 }

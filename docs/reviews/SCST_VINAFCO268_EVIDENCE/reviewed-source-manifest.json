@@ -1,0 +1,17 @@
+{
+  "textNormalization": "CRLF to LF; binary GLB raw",
+  "files": {
+    "apps/frontend/src/api/client.ts": "1939eec443391c71ef9565356de1b4bf0324b38d54d1e3f733c4ffe55ce838c2",
+    "apps/frontend/src/api/generated/api.ts": "6eee6206f25b1b87dd62b42b1f6ee1da5980c4d9720dd3474e17d4158978181e",
+    "apps/frontend/src/features/Workspace.tsx": "3fc78a364099dc4ccffebbfb160247a435d8cd9ad72d41f9bd011a5a49751119",
+    "apps/frontend/src/viewer-3d/Viewer.tsx": "12db8df7a75fd3e6697937fc1605176b58bb64ac4557c572bcc86e2675ae4cad",
+    "services/backend/app/api/routes.py": "e89a0cf894b44d7634df4f7c0d438eea18247d7e54762d4289e133e4dd8dc3ef",
+    "services/backend/app/domain/model/__init__.py": "dc46530fb7df3693a7b514d4127f6dc912169a4a27867d0c0c61f170181d6a66",
+    "services/backend/app/vessel.py": "b579383f913a3bb17208d84bc6481a7efe774e40e2248ed3e30741d8614ab2c8",
+    "services/backend/data/vessels/vinafco268/profile.json": "88752b56a16b5152c095663a498a33535880b354e297d3558dd90ebd2f3aa8ba",
+    "services/backend/data/vessels/vinafco268/model.glb": "684cb4d4c7351aaba50ff4c7d23b3766656cf1e7b2b652f36357b167d83b1a5d",
+    "contracts/openapi.json": "173225313952c0d94d6e65c03e1b24ac603c7af47f9fc9e5d0ddaa30f2b839c6",
+    "tests/backend/test_vinafco.py": "e48c9dffea0be19944d146276efe70cb8b17a9ced7afc5d99dd5af313e054e06",
+    "tests/browser/vinafco.spec.ts": "ae0dbc0602a6dadf9b94375bb9d82c558e501764851837b039e1dbc3c38abc15"
+  }
+}

@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import type { VesselProfile } from "../api/client";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { footprint, fmt, type Plan } from "../features/model";
 
 type Props = {
   plan: Plan;
+  profile: VesselProfile | null;
   selected: string;
   onSelect: (id: string) => void;
   issueIds: Set<string>;
@@ -12,12 +15,15 @@ type Props = {
 
 function Scene({
   plan,
+  profile,
   selected,
   onSelect,
   issueIds,
   onFailure,
   reset,
-}: Props & { onFailure: () => void; reset: number }) {
+  shipVisible,
+  onAssetStatus,
+}: Props & { onFailure: () => void; reset: number; shipVisible: boolean; onAssetStatus: (status: string) => void }) {
   const host = useRef<HTMLDivElement>(null);
   const meshMap = useRef(new Map<string, THREE.Mesh>());
   const renderRef = useRef<() => void>(() => {});
@@ -43,7 +49,7 @@ function Scene({
     const L = plan.hold.length_mm / 1000,
       W = plan.hold.width_mm / 1000,
       H = plan.hold.height_mm / 1000;
-    const extent = Math.max(L, W, H);
+    const extent = plan.source === "MIXED_REFERENCE" ? 77.8 : Math.max(L, W, H);
     const camera = new THREE.PerspectiveCamera(38, 1, 0.05, extent * 30);
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = false;
@@ -63,6 +69,38 @@ function Scene({
     const sun = new THREE.DirectionalLight(0xffffff, 3);
     sun.position.set(-10, 20, 10);
     scene.add(sun);
+    let disposed = false;
+    const disposeObject = (root: THREE.Object3D) => root.traverse((object) => {
+      if (object instanceof THREE.Mesh || object instanceof THREE.LineSegments) {
+        object.geometry.dispose();
+        (Array.isArray(object.material) ? object.material : [object.material]).forEach((material: THREE.Material) => material.dispose());
+      }
+    });
+    if (plan.source === "MIXED_REFERENCE" && profile) {
+      onAssetStatus("Đang tải mô hình tàu…");
+      new GLTFLoader().load(profile.asset_url, (gltf) => {
+        if (disposed) { disposeObject(gltf.scene); return; }
+        gltf.scene.position.fromArray(profile.geometry.glb_to_hold_translation_m);
+        gltf.scene.visible = shipVisible;
+        gltf.scene.traverse((object) => {
+          if (object instanceof THREE.Mesh) {
+            const materials = Array.isArray(object.material) ? object.material : [object.material];
+            materials.forEach((material: THREE.Material) => { material.transparent = true; material.opacity = 0.32; material.depthWrite = false; });
+          }
+        });
+        scene.add(gltf.scene); gltf.scene.updateMatrixWorld(true);
+        const bbox = new THREE.Box3().setFromObject(gltf.scene);
+        renderer.domElement.dataset.vesselBounds = JSON.stringify({min:bbox.min.toArray(),max:bbox.max.toArray(),position:gltf.scene.position.toArray()});
+        onAssetStatus("Mô hình minh họa đã tải."); render();
+      }, undefined, () => { if (!disposed) onAssetStatus("Không tải được mô hình tàu; hầm và hàng vẫn dùng được."); });
+      const selectedCase = profile.cases.find(c => c.id === plan.vessel?.case_id);
+      if (selectedCase) {
+        const marker = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(77.8, 0.01, 13.24)), new THREE.LineBasicMaterial({color: 0x067ca0}));
+        marker.position.set(profile.geometry.glb_to_hold_translation_m[0], selectedCase.draft_m - profile.geometry.source_floor_z_m, 0);
+        scene.add(marker);
+        renderer.domElement.dataset.draftMarker = JSON.stringify({caseId:selectedCase.id, y:marker.position.y, draft:selectedCase.draft_m});
+      }
+    }
     const slab = new THREE.Mesh(
       new THREE.BoxGeometry(L, 0.13, W),
       new THREE.MeshStandardMaterial({ color: 0xd2ddd4, roughness: 0.9 }),
@@ -201,6 +239,7 @@ function Scene({
     resetRef.current();
     resize();
     return () => {
+      disposed = true;
       observer.disconnect();
       controls.dispose();
       renderer.domElement.removeEventListener("pointerdown", down);
@@ -224,7 +263,7 @@ function Scene({
       renderRef.current = () => {};
       resetRef.current = () => {};
     };
-  }, [plan, onSelect, onFailure]);
+  }, [plan, profile, shipVisible, onSelect, onFailure, onAssetStatus]);
   useEffect(() => {
     for (const [id, mesh] of meshMap.current) {
       const material = mesh.material as THREE.MeshStandardMaterial;
@@ -251,6 +290,8 @@ export default function Viewer(props: Props) {
   const [view, setView] = useState<"3d" | "2d">("3d");
   const [failed, setFailed] = useState(false);
   const [reset, setReset] = useState(0);
+  const [shipVisible, setShipVisible] = useState(true);
+  const [assetStatus, setAssetStatus] = useState("");
   const failureRef = useRef(() => {
     setFailed(true);
     setView("2d");
@@ -290,7 +331,7 @@ export default function Viewer(props: Props) {
           BOX · MỘT LỚP <span className="muted">/</span> {plan.hold.name}
         </div>
         {view === "3d" ? (
-          <Scene {...props} onFailure={failureRef.current} reset={reset} />
+          <Scene {...props} onFailure={failureRef.current} reset={reset} shipVisible={shipVisible} onAssetStatus={setAssetStatus} />
         ) : (
           <svg
             className="plan-svg"
@@ -402,6 +443,7 @@ export default function Viewer(props: Props) {
           )}
         </div>
       </div>
+      {plan.source === "MIXED_REFERENCE" && <div className="scope-note"><button className="button secondary" onClick={() => setShipVisible(v => !v)} aria-pressed={shipVisible}>{shipVisible ? "Ẩn tàu" : "Hiện tàu"}</button><p role="status">{assetStatus} Màu thân GLB cố định theo mớn 4,85 m; khung xanh biểu thị mớn tham chiếu đã chọn.</p></div>}
       <div className="viewer-legend">
         <span>
           <i className="swatch steel" />

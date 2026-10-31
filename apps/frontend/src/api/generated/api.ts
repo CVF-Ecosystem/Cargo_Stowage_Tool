@@ -55,6 +55,57 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/vessels/vinafco268": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Vessel Profile */
+        get: operations["vessel_profile_api_vessels_vinafco268_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/vessels/vinafco268/model": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Vessel Model */
+        get: operations["vessel_model_api_vessels_vinafco268_model_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/vessels/vinafco268/cases/{case_id}/plan": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Vessel Plan */
+        get: operations["vessel_plan_api_vessels_vinafco268_cases__case_id__plan_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -83,6 +134,15 @@ export interface components {
             height_mm: number;
             /** Mass G */
             mass_g: number;
+        };
+        /** Dimensions */
+        Dimensions: {
+            /** Length */
+            length: number;
+            /** Beam */
+            beam: number;
+            /** Depth */
+            depth: number;
         };
         /** Evaluation */
         Evaluation: {
@@ -154,6 +214,22 @@ export interface components {
              */
             cargo_onboard_g: number;
         };
+        /** OperatingCase */
+        OperatingCase: {
+            /**
+             * Id
+             * @enum {string}
+             */
+            id: "VR-SI" | "VR-SII";
+            /** Cargo Mass G */
+            cargo_mass_g: number;
+            /** Deadweight T */
+            deadweight_t: number;
+            /** Draft M */
+            draft_m: number;
+            /** Freeboard Mm */
+            freeboard_mm: number;
+        };
         /** Placement */
         Placement: {
             /** Unit Id */
@@ -188,15 +264,70 @@ export interface components {
             /**
              * Source
              * @default SYNTHETIC
-             * @constant
+             * @enum {string}
              */
-            source: "SYNTHETIC";
+            source: "SYNTHETIC" | "MIXED_REFERENCE";
+            vessel?: components["schemas"]["VesselReference"] | null;
             hold: components["schemas"]["Hold"];
             limits: components["schemas"]["Limits"];
             /** Units */
             units: components["schemas"]["CargoUnit"][];
             /** Placements */
             placements: components["schemas"]["Placement"][];
+        };
+        /** Provenance */
+        Provenance: {
+            /** Source Pdf Sha256 */
+            source_pdf_sha256: string;
+            /** Source Json Sha256 */
+            source_json_sha256: string;
+            /** Source Glb Sha256 */
+            source_glb_sha256: string;
+            /** Source Pages */
+            source_pages: number[];
+            /** Freeboard Note */
+            freeboard_note: string;
+        };
+        /** ReferenceGeometry */
+        ReferenceGeometry: {
+            /** Source Hold X Min M */
+            source_hold_x_min_m: number;
+            /** Source Hold X Max M */
+            source_hold_x_max_m: number;
+            /** Source Hold Y Min M */
+            source_hold_y_min_m: number;
+            /** Source Hold Y Max M */
+            source_hold_y_max_m: number;
+            /** Source Floor Z M */
+            source_floor_z_m: number;
+            /** Glb To Hold Translation M */
+            glb_to_hold_translation_m: number[];
+            /** Width Inset Each Side Mm */
+            width_inset_each_side_mm: number;
+            /** Axis Note */
+            axis_note: string;
+        };
+        /** ReferenceHold */
+        ReferenceHold: {
+            /** Id */
+            id: string;
+            /** Name */
+            name: string;
+            /** Length Mm */
+            length_mm: number;
+            /** Width Mm */
+            width_mm: number;
+            /** Height Mm */
+            height_mm: number;
+            /** Source Width M */
+            source_width_m: number;
+            /** Floor Z M */
+            floor_z_m: number;
+            /**
+             * Status
+             * @constant
+             */
+            status: "ESTIMATED";
         };
         /** Summary */
         Summary: {
@@ -225,6 +356,49 @@ export interface components {
             input?: unknown;
             /** Context */
             ctx?: Record<string, never>;
+        };
+        /** VesselProfile */
+        VesselProfile: {
+            /**
+             * Id
+             * @constant
+             */
+            id: "VINAFCO268";
+            /** Name */
+            name: string;
+            /** Registration */
+            registration: string;
+            dimensions_m: components["schemas"]["Dimensions"];
+            hold: components["schemas"]["ReferenceHold"];
+            /** Lightship Mass T */
+            lightship_mass_t: number | null;
+            /** Tanktop Load Limit T Per M2 */
+            tanktop_load_limit_t_per_m2: number | null;
+            /** Cases */
+            cases: components["schemas"]["OperatingCase"][];
+            /** Capacity Note */
+            capacity_note: string;
+            /** Container Note */
+            container_note: string;
+            /** Estimate Note */
+            estimate_note: string;
+            /** Asset Url */
+            asset_url: string;
+            provenance: components["schemas"]["Provenance"];
+            geometry: components["schemas"]["ReferenceGeometry"];
+        };
+        /** VesselReference */
+        VesselReference: {
+            /**
+             * Vessel Id
+             * @constant
+             */
+            vessel_id: "VINAFCO268";
+            /**
+             * Case Id
+             * @enum {string}
+             */
+            case_id: "VR-SI" | "VR-SII";
         };
     };
     responses: never;
@@ -289,6 +463,75 @@ export interface operations {
                 "application/json": components["schemas"]["Plan"];
             };
         };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Evaluation"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    vessel_profile_api_vessels_vinafco268_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["VesselProfile"];
+                };
+            };
+        };
+    };
+    vessel_model_api_vessels_vinafco268_model_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    vessel_plan_api_vessels_vinafco268_cases__case_id__plan_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                case_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
         responses: {
             /** @description Successful Response */
             200: {

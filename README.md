@@ -2,7 +2,7 @@
 
 Công cụ hỗ trợ lập phương án xếp hàng thép trong hầm tàu, chạy local với giao diện tiếng Việt. SCST hướng tới luồng **nhập hàng và hầm → đề xuất xếp → xem 3D → chỉnh và kiểm lại → lưu, so sánh, xuất báo cáo**.
 
-**Hiện tại: demo M1 đã đạt kiểm kỹ thuật, đang chờ phản hồi nghiệp vụ.** Bản đang có dùng dữ liệu giả lập, hầm dạng hộp (BOX) và hàng một lớp. Nhập manifest, xếp tự động, lưu/mở và xuất báo cáo thuộc các mốc tiếp theo.
+**Hiện tại: demo M1 và chế độ tham chiếu VINAFCO 268 đã được kiểm kỹ thuật, đang chờ phản hồi nghiệp vụ.** Hàng vẫn là dữ liệu giả lập, hầm dạng hộp (BOX) và một lớp. Nhập manifest, xếp tự động, lưu/mở và xuất báo cáo thuộc các mốc tiếp theo.
 
 ## Bản hiện tại làm được gì?
 
@@ -56,6 +56,14 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tooling/setup.ps1
 
 Xem cách thao tác, đơn vị nhập liệu và ý nghĩa trạng thái trong [hướng dẫn sử dụng](docs/APP_GUIDE.md).
 
+### Xem sà lan VINAFCO 268
+
+Trong app, chọn **Xem VINAFCO 268** để mở mô hình thân tàu, hầm và hàng. Có thể xoay, phóng to, ẩn/hiện hình tàu mờ và chọn cấp tham chiếu **VR-SI / VR-SII**. Kích thước thân theo hồ sơ: **77,8 × 13,24 × 5,2 m**; hầm, cabin và tuyến hình vẫn là ước tính có nhãn. Marker mớn theo cấp, không tính từ lượng hàng đang xếp.
+
+Giới hạn chuyến đang có được giữ khi chuyển từ mẫu M1 (mặc định 32 tấn); có thể chỉnh đến mức hàng tham chiếu của cấp đã chọn. Mức hàng này tách riêng với trọng tải toàn phần. Hãy áp dụng bản nháp trước khi đổi cấp hoặc quay lại bản trước.
+
+Xem [đánh giá nguồn](docs/reviews/SCST_VINAFCO268_ASSESSMENT.md) và [review tích hợp](docs/reviews/SCST_VINAFCO268_REVIEW.md). PDF đăng kiểm gốc được giữ local, không nằm trong source app hoặc API.
+
 ## Kiến trúc
 
 Frontend dùng **React, TypeScript và Three.js**. Backend dùng **Python/FastAPI**, quản lý dữ liệu và kiểm quy tắc. Bản chạy local phục vụ frontend đã build và API trên cùng một cổng.
@@ -90,12 +98,12 @@ Frontend hiển thị kết quả từ backend; chỉnh sửa cần được ki�
 |---|---|---|
 | M0 — Thống nhất hướng | Phạm vi, thứ tự phát triển và kiến trúc tổng thể | Đã thống nhất |
 | M1 — Demo chạy được | Hầm BOX, hàng giả lập, bảng/3D, sửa và kiểm cơ bản | Đạt kiểm kỹ thuật; chờ phản hồi nghiệp vụ |
-| M2 — Tool trọn luồng | Nhập/import, lưu/mở, xếp sơ bộ, chỉnh/so sánh, xuất PDF/XLSX; hình tàu minh họa ở M2c | Chưa triển khai |
+| M2 — Tool trọn luồng | Nhập/import, lưu/mở, xếp sơ bộ, chỉnh/so sánh, xuất PDF/XLSX; hình tàu minh họa ở M2c | Đã có lát cắt viewer VINAFCO 268; các phần còn lại chưa triển khai |
 | M3 — Case thực | Hình học phù hợp dữ liệu thực, nhiều tầng, profile kê/chồng; hiệu chỉnh hình tàu | Chưa triển khai |
 | M4 — AI hỗ trợ | Hỗ trợ tác vụ có nhu cầu rõ; core vẫn chạy khi tắt AI | Nhánh tùy chọn |
 | M5 — Sử dụng ổn định | Đóng gói, lưu trữ bền, backup/restore và hiệu năng | Chưa triển khai |
 
-Hình tàu minh họa đã được thống nhất trong roadmap v0.3; **chưa có trong demo M1**. Các mốc xa giữ ở mức tổng thể; chỉ chi tiết hóa phần sắp làm khi được chọn. Xem [phạm vi, đầu ra và phụ thuộc từng mốc](docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md).
+Theo yêu cầu bổ sung của owner, lớp hình tàu VINAFCO 268 được tích hợp sớm thành một phần riêng của viewer; M2 tổng thể chưa được triển khai. Các mốc xa giữ ở mức tổng thể; chỉ chi tiết hóa phần sắp làm khi được chọn. Xem [phạm vi, đầu ra và phụ thuộc từng mốc](docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md).
 
 ## Phát triển và kiểm thử
 
@@ -121,6 +129,8 @@ npm.cmd --prefix apps/frontend run test:e2e
 ```
 
 Bản M1 đã được kiểm với 51 backend test, 5 browser test và 498 kiểm độc lập. Phạm vi bằng chứng, điều kiện chạy và giới hạn nằm trong [review M1](docs/reviews/SCST_M1_REVIEW.md); các kết quả này thuộc phiên bản được review.
+
+Sau tích hợp VINAFCO 268, bộ kiểm hiện tại đạt **63 backend test, 9 browser test và 109 kiểm độc lập bổ sung**; xem [review VINAFCO 268](docs/reviews/SCST_VINAFCO268_REVIEW.md).
 
 ## Tài liệu
 

@@ -1,14 +1,12 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "VINAFCO268_INTEGRATION_IN_PROGRESS",
-  "currentPhase": "BUILD",
+  "overallStatus": "VINAFCO268_TECHNICALLY_VERIFIED_AWAITING_OWNER_DEMO",
+  "currentPhase": "REVIEW",
   "completedCapabilities": [],
-  "activeWorkOrders": [
-    "docs/work_orders/SCST_VINAFCO268.md"
-  ],
+  "activeWorkOrders": [],
   "knownLimitations": [
-    "VINAFCO268 selective reference integration authorized; not implemented yet. Other M2 functions remain undispatched.",
+    "VINAFCO268 reference mode technically verified, owner feedback pending. Hull dimensions from supplied source; hold/cabin/lines estimated, cargo synthetic; no operational approval.",
     "All nine M1 technical criteria verified and implementation work order closed; owner demo/business acceptance pending.",
     "Session-only state: refresh loses changes; no planner/import/persistence/export/multi-layer/real cargo/AI integration.",
     "Synthetic BOX/single-layer only; onboard cargo is outside the empty target hold. Not operational approval.",
@@ -31,7 +29,10 @@
     "docs/reviews/SCST_M1_REVIEW.md",
     "docs/reviews/SCST_M1_EVIDENCE/reviewer-source-manifest.json",
     "docs/specs/SCST_VINAFCO268.md",
-    "docs/work_orders/SCST_VINAFCO268.md"
+    "docs/work_orders/SCST_VINAFCO268.md",
+    "docs/reviews/SCST_VINAFCO268_ASSESSMENT.md",
+    "docs/reviews/SCST_VINAFCO268_REVIEW.md",
+    "docs/reviews/SCST_VINAFCO268_EVIDENCE/reviewed-source-manifest.json"
   ],
   "updatedAt": "2026-10-31",
   "x_verifiedMilestones": [
@@ -40,6 +41,12 @@
       "technicalStatus": "VERIFIED",
       "businessAcceptance": "PENDING",
       "evidence": "docs/reviews/SCST_M1_REVIEW.md"
+    },
+    {
+      "id": "VINAFCO268-SLICE",
+      "technicalStatus": "VERIFIED",
+      "businessAcceptance": "PENDING",
+      "evidence": "docs/reviews/SCST_VINAFCO268_REVIEW.md"
     }
   ]
 }

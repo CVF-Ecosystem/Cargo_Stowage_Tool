@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
   "updatedAt": "2026-10-31",
-  "claimBoundary": "Current project records and reference/archive navigation. M1 technically verified, owner acceptance pending; roadmap additions do not dispatch M2.",
+  "claimBoundary": "M1 and VINAFCO268 reference slice technically verified; business acceptance pending and remaining M2 undispatched.",
   "artifacts": [
     {
       "id": "schema-artifact-registry",
@@ -72,7 +72,7 @@
       "family": "implementation_truth",
       "path": "IMPLEMENTATION_STATUS.json",
       "status": "ACTIVE",
-      "description": "Machine implementation-truth surface."
+      "description": "M1 and VINAFCO268 technical verification truth, business acceptance separate."
     },
     {
       "id": "view-docs-index",
@@ -114,14 +114,14 @@
       "family": "governed_artifact_family",
       "path": "docs/work_orders",
       "status": "ACTIVE",
-      "description": "Active SCST_VINAFCO268 integration order; M1 technical order closed, business acceptance pending."
+      "description": "M1 reuse and VINAFCO268 technical orders closed; owner business feedback pending."
     },
     {
       "id": "family-reviews",
       "family": "governed_artifact_family",
       "path": "docs/reviews",
       "status": "ACTIVE",
-      "description": "M1 selective reuse assessment, worker return, root technical review and new evidence."
+      "description": "M1 and VINAFCO268 source assessments, worker returns, independent review and versioned evidence."
     },
     {
       "id": "family-learnings",

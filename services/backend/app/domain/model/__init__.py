@@ -3,6 +3,8 @@ from typing import Annotated, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, model_validator
 
+from ...vessel import PROFILE, CASES
+
 Dimension = Annotated[StrictInt, Field(gt=0, le=1_000_000)]
 Mass = Annotated[StrictInt, Field(gt=0, le=1_000_000_000_000)]
 Coordinate = Annotated[StrictInt, Field(ge=-1_000_000, le=1_000_000)]
@@ -57,9 +59,15 @@ class Limits(Model):
         return self
 
 
+class VesselReference(Model):
+    vessel_id: Literal["VINAFCO268"]
+    case_id: Literal["VR-SI", "VR-SII"]
+
+
 class Plan(Model):
     contract_version: Literal["scst.m1.v1"] = "scst.m1.v1"
-    source: Literal["SYNTHETIC"] = "SYNTHETIC"
+    source: Literal["SYNTHETIC", "MIXED_REFERENCE"] = "SYNTHETIC"
+    vessel: VesselReference | None = None
     hold: Hold
     limits: Limits
     units: list[CargoUnit] = Field(min_length=1, max_length=200)
@@ -67,6 +75,17 @@ class Plan(Model):
 
     @model_validator(mode="after")
     def identities(self):
+        if self.source == "SYNTHETIC":
+            if self.vessel is not None:
+                raise ValueError("Synthetic plan must not claim a vessel")
+        else:
+            if self.vessel is None:
+                raise ValueError("Reference vessel and case required")
+            hold = PROFILE["hold"]
+            expected = (hold["id"], hold["name"], hold["length_mm"], hold["width_mm"], hold["height_mm"], "BOX")
+            actual = (self.hold.id, self.hold.name, self.hold.length_mm, self.hold.width_mm, self.hold.height_mm, self.hold.shape)
+            if actual != expected or self.limits.certificate_cargo_limit_g != CASES[self.vessel.case_id]["cargo_mass_g"]:
+                raise ValueError("Reference hold or cargo limit does not match profile")
         units = {u.id: u for u in self.units}
         if len(units) != len(self.units):
             raise ValueError("Unit IDs must be unique")

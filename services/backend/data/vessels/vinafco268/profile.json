@@ -1,0 +1,68 @@
+{
+  "id": "VINAFCO268",
+  "name": "VINAFCO 268",
+  "registration": "HN-2642",
+  "dimensions_m": {
+    "length": 77.8,
+    "beam": 13.24,
+    "depth": 5.2
+  },
+  "hold": {
+    "id": "HOLD-01",
+    "name": "Hầm ước tính VINAFCO 268",
+    "length_mm": 56405,
+    "width_mm": 10343,
+    "height_mm": 5408,
+    "source_width_m": 10.34375,
+    "floor_z_m": 0.832,
+    "status": "ESTIMATED"
+  },
+  "lightship_mass_t": null,
+  "tanktop_load_limit_t_per_m2": null,
+  "cases": [
+    {
+      "id": "VR-SI",
+      "cargo_mass_g": 3282500000,
+      "deadweight_t": 3301,
+      "draft_m": 4.6,
+      "freeboard_mm": 612
+    },
+    {
+      "id": "VR-SII",
+      "cargo_mass_g": 3517500000,
+      "deadweight_t": 3536,
+      "draft_m": 4.85,
+      "freeboard_mm": 362
+    }
+  ],
+  "capacity_note": "Ghép lượng hàng với cấp SI/SII theo thứ tự trình bày trong hồ sơ; không phải bảng cột tải riêng.",
+  "container_note": "Hồ sơ trang 5 ghi điều kiện container mớn tối đa 4,17 m; công cụ này chưa hỗ trợ container.",
+  "estimate_note": "Hầm, cabin, tuyến hình và vị trí trang bị là ước tính; không phải kích thước đã đo.",
+  "asset_url": "/api/vessels/vinafco268/model",
+  "provenance": {
+    "source_pdf_sha256": "05481d288e3b3fc36df86876fee4ca5b202a8e537d8486dec96aae79fd9f4ab5",
+    "source_json_sha256": "5838840386fe80a4d624b8e30080c2b8d2f844cbc4043fb8ddfcd2ad10bab51f",
+    "source_glb_sha256": "684cb4d4c7351aaba50ff4c7d23b3766656cf1e7b2b652f36357b167d83b1a5d",
+    "source_pages": [
+      1,
+      4,
+      5,
+      6
+    ],
+    "freeboard_note": "Mạn khô hồ sơ 612/362 mm khác D−d hình học 600/350 mm; chưa đủ dữ liệu giải thích chênh lệch 12 mm."
+  },
+  "geometry": {
+    "source_hold_x_min_m": 11.67,
+    "source_hold_x_max_m": 68.075,
+    "source_hold_y_min_m": -5.171875,
+    "source_hold_y_max_m": 5.171875,
+    "source_floor_z_m": 0.832,
+    "glb_to_hold_translation_m": [
+      -0.9725,
+      -0.832,
+      0.0
+    ],
+    "width_inset_each_side_mm": 0.375,
+    "axis_note": "JSON X mũi, Y mạn trái, Z lên; GLB X=x−38,9, Y=z, Z=−y; Y cục bộ hầm về mạn phải."
+  }
+}

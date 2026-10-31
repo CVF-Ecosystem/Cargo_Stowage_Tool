@@ -1,4 +1,6 @@
 import type { Evaluation, Plan } from "../features/model";
+import type { components } from "./generated/api";
+export type VesselProfile = components["schemas"]["VesselProfile"];
 
 export async function requestEvaluation(plan?: Plan): Promise<Evaluation> {
   const response = await fetch(plan ? "/api/validate" : "/api/demo", {
@@ -19,8 +21,20 @@ export async function requestEvaluation(plan?: Plan): Promise<Evaluation> {
   const data = (await response.json()) as Evaluation;
   if (
     data.plan?.contract_version !== "scst.m1.v1" ||
-    data.plan.source !== "SYNTHETIC"
+    !["SYNTHETIC", "MIXED_REFERENCE"].includes(data.plan.source)
   )
     throw new Error("Phiên bản dữ liệu API không tương thích.");
   return data;
+}
+
+export async function requestVesselProfile(): Promise<VesselProfile> {
+  const response = await fetch("/api/vessels/vinafco268", { signal: AbortSignal.timeout(15000) }).catch(() => { throw new Error("Không tải được dữ liệu phương tiện."); });
+  if (!response.ok) throw new Error("Không tải được dữ liệu phương tiện.");
+  return await response.json() as VesselProfile;
+}
+
+export async function requestVesselPlan(caseId: string): Promise<Evaluation> {
+  const response = await fetch(`/api/vessels/vinafco268/cases/${encodeURIComponent(caseId)}/plan`, { signal: AbortSignal.timeout(15000) }).catch(() => { throw new Error("Không tải được trạng thái phương tiện."); });
+  if (!response.ok) throw new Error("Không tải được trạng thái phương tiện.");
+  return await response.json() as Evaluation;
 }

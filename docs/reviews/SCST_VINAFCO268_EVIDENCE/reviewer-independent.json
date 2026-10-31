@@ -1,0 +1,115 @@
+{
+  "checks": 109,
+  "status": "PASS",
+  "cases": [
+    {
+      "case": "VR-SI",
+      "onboard_g": 0,
+      "delta_g": -1,
+      "remaining_g": 1
+    },
+    {
+      "case": "VR-SI",
+      "onboard_g": 0,
+      "delta_g": 0,
+      "remaining_g": 0
+    },
+    {
+      "case": "VR-SI",
+      "onboard_g": 0,
+      "delta_g": 1,
+      "remaining_g": -1
+    },
+    {
+      "case": "VR-SI",
+      "onboard_g": 1,
+      "delta_g": -1,
+      "remaining_g": 1
+    },
+    {
+      "case": "VR-SI",
+      "onboard_g": 1,
+      "delta_g": 0,
+      "remaining_g": 0
+    },
+    {
+      "case": "VR-SI",
+      "onboard_g": 1,
+      "delta_g": 1,
+      "remaining_g": -1
+    },
+    {
+      "case": "VR-SI",
+      "onboard_g": 18500000,
+      "delta_g": -1,
+      "remaining_g": 1
+    },
+    {
+      "case": "VR-SI",
+      "onboard_g": 18500000,
+      "delta_g": 0,
+      "remaining_g": 0
+    },
+    {
+      "case": "VR-SI",
+      "onboard_g": 18500000,
+      "delta_g": 1,
+      "remaining_g": -1
+    },
+    {
+      "case": "VR-SII",
+      "onboard_g": 0,
+      "delta_g": -1,
+      "remaining_g": 1
+    },
+    {
+      "case": "VR-SII",
+      "onboard_g": 0,
+      "delta_g": 0,
+      "remaining_g": 0
+    },
+    {
+      "case": "VR-SII",
+      "onboard_g": 0,
+      "delta_g": 1,
+      "remaining_g": -1
+    },
+    {
+      "case": "VR-SII",
+      "onboard_g": 1,
+      "delta_g": -1,
+      "remaining_g": 1
+    },
+    {
+      "case": "VR-SII",
+      "onboard_g": 1,
+      "delta_g": 0,
+      "remaining_g": 0
+    },
+    {
+      "case": "VR-SII",
+      "onboard_g": 1,
+      "delta_g": 1,
+      "remaining_g": -1
+    },
+    {
+      "case": "VR-SII",
+      "onboard_g": 18500000,
+      "delta_g": -1,
+      "remaining_g": 1
+    },
+    {
+      "case": "VR-SII",
+      "onboard_g": 18500000,
+      "delta_g": 0,
+      "remaining_g": 0
+    },
+    {
+      "case": "VR-SII",
+      "onboard_g": 18500000,
+      "delta_g": 1,
+      "remaining_g": -1
+    }
+  ],
+  "scope": "Independent source hashes, integer budgets/onboard/one-gram, bindings, strictness, source exclusion and OpenAPI; not operational acceptance"
+}

@@ -1,0 +1,24 @@
+
+> scst-frontend@0.1.0 test:e2e
+> playwright test
+
+[WebServer] INFO:     Started server process [11944]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8766 (Press CTRL+C to quit)
+
+Running 9 tests using 1 worker
+
+(node:21092) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 ..\..\tests\browser\vinafco.spec.ts:30:5 › real GLB and placed cargo share backend coordinates; camera, picking and hull toggle work (3.3s)
+  ok 2 ..\..\tests\browser\vinafco.spec.ts:105:5 › SI/SII reference limits, labels, history and pending edits remain tied to the selected case (1.8s)
+  ok 3 ..\..\tests\browser\vinafco.spec.ts:152:5 › model failure and mobile WebGL fallback keep case data and editing usable (1.2s)
+  ok 4 ..\..\tests\browser\vinafco.spec.ts:183:5 › case request failure and a newer edit during a pending switch preserve the checked case (949ms)
+  ok 5 ..\..\tests\browser\workspace.spec.ts:14:5 › real API drives table, 2D and actual Three meshes through yaw and selection (2.3s)
+  ok 6 ..\..\tests\browser\workspace.spec.ts:119:5 › raw edit is immediately STALE; real API 422 and network loss preserve checked result and draft; retry and undo recover (1.0s)
+  ok 7 ..\..\tests\browser\workspace.spec.ts:181:5 › WebGL failure keeps accessible 2D, table selection and synthetic warning (561ms)
+  ok 8 ..\..\tests\browser\workspace.spec.ts:216:5 › an edit during pending validation keeps the newer raw draft STALE until separately checked (885ms)
+  ok 9 ..\..\tests\browser\workspace.spec.ts:246:5 › after setup the browser runs locally with all non-loopback traffic blocked (950ms)
+
+  9 passed (17.0s)

@@ -1,6 +1,6 @@
 # SCST — VINAFCO 268 selective integration
 
-Status: DISPATCH_READY
+Status: CLOSED
 dispatchKind: INITIAL
 Owner: project-orchestrator
 Risk: R2
@@ -59,9 +59,9 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "decision": "Review and repair within authority, or report remaining issue; no full M2 dispatch"
     }
   },
-  "phase": "DISPATCH",
+  "phase": "REVIEW",
   "action": {
-    "kind": "IMPLEMENT",
+    "kind": "REVIEW",
     "selected": [
       "VF-01",
       "VF-02",
@@ -70,67 +70,102 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "VF-05",
       "VF-06"
     ],
-    "owner": "Terra6.1High worker / root reviewer",
+    "owner": "Root independent reviewer",
     "output": "Selective vessel integration and docs/reviews/SCST_VINAFCO268_REVIEW.md",
     "budgetMinutes": 165,
-    "stop": "All selected technical criteria checked or budget/scope boundary",
-    "next": "Independent root review then owner views local vessel mode"
+    "stop": "Technical slice complete, no automatic remaining M2 or business acceptance",
+    "next": "Owner views local VINAFCO268 mode and supplies business feedback; no remaining M2 functionality is dispatched."
   },
   "rows": [
     {
       "id": "VF-01",
-      "state": "NOT_STARTED",
-      "gap": "Integration/evidence not yet implemented",
-      "owner": "Terra worker then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion verified; business acceptance pending",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_VINAFCO268_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_VINAFCO268_REVIEW.md",
+          "sha256": "8bcd37d394ddcd489ccc73b84a2353f8d9ea1692663a24db14a2de95e0f8d34b"
+        }
+      ]
     },
     {
       "id": "VF-02",
-      "state": "NOT_STARTED",
-      "gap": "Integration/evidence not yet implemented",
-      "owner": "Terra worker then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion verified; business acceptance pending",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_VINAFCO268_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_VINAFCO268_REVIEW.md",
+          "sha256": "8bcd37d394ddcd489ccc73b84a2353f8d9ea1692663a24db14a2de95e0f8d34b"
+        }
+      ]
     },
     {
       "id": "VF-03",
-      "state": "NOT_STARTED",
-      "gap": "Integration/evidence not yet implemented",
-      "owner": "Terra worker then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion verified; business acceptance pending",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_VINAFCO268_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_VINAFCO268_REVIEW.md",
+          "sha256": "8bcd37d394ddcd489ccc73b84a2353f8d9ea1692663a24db14a2de95e0f8d34b"
+        }
+      ]
     },
     {
       "id": "VF-04",
-      "state": "NOT_STARTED",
-      "gap": "Integration/evidence not yet implemented",
-      "owner": "Terra worker then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion verified; business acceptance pending",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_VINAFCO268_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_VINAFCO268_REVIEW.md",
+          "sha256": "8bcd37d394ddcd489ccc73b84a2353f8d9ea1692663a24db14a2de95e0f8d34b"
+        }
+      ]
     },
     {
       "id": "VF-05",
-      "state": "NOT_STARTED",
-      "gap": "Integration/evidence not yet implemented",
-      "owner": "Terra worker then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion verified; business acceptance pending",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_VINAFCO268_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_VINAFCO268_REVIEW.md",
+          "sha256": "8bcd37d394ddcd489ccc73b84a2353f8d9ea1692663a24db14a2de95e0f8d34b"
+        }
+      ]
     },
     {
       "id": "VF-06",
-      "state": "NOT_STARTED",
-      "gap": "Integration/evidence not yet implemented",
-      "owner": "Terra worker then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion verified; business acceptance pending",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_VINAFCO268_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_VINAFCO268_REVIEW.md",
+          "sha256": "8bcd37d394ddcd489ccc73b84a2353f8d9ea1692663a24db14a2de95e0f8d34b"
+        }
+      ]
     }
   ],
   "supportingWork": [],
   "conclusions": {
-    "tranche": "PENDING",
-    "trancheSummary": "Bounded owner-authorized integration",
-    "trancheEvidence": [],
+    "tranche": "COMPLETE",
+    "trancheSummary": "Six technical criteria verified on reviewed source; owner acceptance remains separate",
+    "trancheEvidence": [
+      {
+        "path": "docs/reviews/SCST_VINAFCO268_REVIEW.md",
+        "sha256": "8bcd37d394ddcd489ccc73b84a2353f8d9ea1692663a24db14a2de95e0f8d34b"
+      }
+    ],
     "product": "PENDING",
     "productSummary": "No owner business acceptance; remaining M2/M3 stay separate",
     "acceptance": [],

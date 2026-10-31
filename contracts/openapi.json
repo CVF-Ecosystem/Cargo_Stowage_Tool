@@ -83,6 +83,74 @@
           }
         }
       }
+    },
+    "/api/vessels/vinafco268": {
+      "get": {
+        "summary": "Vessel Profile",
+        "operationId": "vessel_profile_api_vessels_vinafco268_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VesselProfile"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/vessels/vinafco268/model": {
+      "get": {
+        "summary": "Vessel Model",
+        "operationId": "vessel_model_api_vessels_vinafco268_model_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          }
+        }
+      }
+    },
+    "/api/vessels/vinafco268/cases/{case_id}/plan": {
+      "get": {
+        "summary": "Vessel Plan",
+        "operationId": "vessel_plan_api_vessels_vinafco268_cases__case_id__plan_get",
+        "parameters": [
+          {
+            "name": "case_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Case Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Evaluation"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -155,6 +223,29 @@
           "mass_g"
         ],
         "title": "CargoUnit"
+      },
+      "Dimensions": {
+        "properties": {
+          "length": {
+            "type": "number",
+            "title": "Length"
+          },
+          "beam": {
+            "type": "number",
+            "title": "Beam"
+          },
+          "depth": {
+            "type": "number",
+            "title": "Depth"
+          }
+        },
+        "type": "object",
+        "required": [
+          "length",
+          "beam",
+          "depth"
+        ],
+        "title": "Dimensions"
       },
       "Evaluation": {
         "properties": {
@@ -336,6 +427,43 @@
         ],
         "title": "Limits"
       },
+      "OperatingCase": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "VR-SI",
+              "VR-SII"
+            ],
+            "title": "Id"
+          },
+          "cargo_mass_g": {
+            "type": "integer",
+            "title": "Cargo Mass G"
+          },
+          "deadweight_t": {
+            "type": "number",
+            "title": "Deadweight T"
+          },
+          "draft_m": {
+            "type": "number",
+            "title": "Draft M"
+          },
+          "freeboard_mm": {
+            "type": "integer",
+            "title": "Freeboard Mm"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "cargo_mass_g",
+          "deadweight_t",
+          "draft_m",
+          "freeboard_mm"
+        ],
+        "title": "OperatingCase"
+      },
       "Placement": {
         "properties": {
           "unit_id": {
@@ -405,9 +533,22 @@
           },
           "source": {
             "type": "string",
-            "const": "SYNTHETIC",
+            "enum": [
+              "SYNTHETIC",
+              "MIXED_REFERENCE"
+            ],
             "title": "Source",
             "default": "SYNTHETIC"
+          },
+          "vessel": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VesselReference"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "hold": {
             "$ref": "#/components/schemas/Hold"
@@ -442,6 +583,142 @@
           "placements"
         ],
         "title": "Plan"
+      },
+      "Provenance": {
+        "properties": {
+          "source_pdf_sha256": {
+            "type": "string",
+            "title": "Source Pdf Sha256"
+          },
+          "source_json_sha256": {
+            "type": "string",
+            "title": "Source Json Sha256"
+          },
+          "source_glb_sha256": {
+            "type": "string",
+            "title": "Source Glb Sha256"
+          },
+          "source_pages": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "title": "Source Pages"
+          },
+          "freeboard_note": {
+            "type": "string",
+            "title": "Freeboard Note"
+          }
+        },
+        "type": "object",
+        "required": [
+          "source_pdf_sha256",
+          "source_json_sha256",
+          "source_glb_sha256",
+          "source_pages",
+          "freeboard_note"
+        ],
+        "title": "Provenance"
+      },
+      "ReferenceGeometry": {
+        "properties": {
+          "source_hold_x_min_m": {
+            "type": "number",
+            "title": "Source Hold X Min M"
+          },
+          "source_hold_x_max_m": {
+            "type": "number",
+            "title": "Source Hold X Max M"
+          },
+          "source_hold_y_min_m": {
+            "type": "number",
+            "title": "Source Hold Y Min M"
+          },
+          "source_hold_y_max_m": {
+            "type": "number",
+            "title": "Source Hold Y Max M"
+          },
+          "source_floor_z_m": {
+            "type": "number",
+            "title": "Source Floor Z M"
+          },
+          "glb_to_hold_translation_m": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Glb To Hold Translation M"
+          },
+          "width_inset_each_side_mm": {
+            "type": "number",
+            "title": "Width Inset Each Side Mm"
+          },
+          "axis_note": {
+            "type": "string",
+            "title": "Axis Note"
+          }
+        },
+        "type": "object",
+        "required": [
+          "source_hold_x_min_m",
+          "source_hold_x_max_m",
+          "source_hold_y_min_m",
+          "source_hold_y_max_m",
+          "source_floor_z_m",
+          "glb_to_hold_translation_m",
+          "width_inset_each_side_mm",
+          "axis_note"
+        ],
+        "title": "ReferenceGeometry"
+      },
+      "ReferenceHold": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "length_mm": {
+            "type": "integer",
+            "title": "Length Mm"
+          },
+          "width_mm": {
+            "type": "integer",
+            "title": "Width Mm"
+          },
+          "height_mm": {
+            "type": "integer",
+            "title": "Height Mm"
+          },
+          "source_width_m": {
+            "type": "number",
+            "title": "Source Width M"
+          },
+          "floor_z_m": {
+            "type": "number",
+            "title": "Floor Z M"
+          },
+          "status": {
+            "type": "string",
+            "const": "ESTIMATED",
+            "title": "Status"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "length_mm",
+          "width_mm",
+          "height_mm",
+          "source_width_m",
+          "floor_z_m",
+          "status"
+        ],
+        "title": "ReferenceHold"
       },
       "Summary": {
         "properties": {
@@ -527,6 +804,122 @@
           "type"
         ],
         "title": "ValidationError"
+      },
+      "VesselProfile": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "const": "VINAFCO268",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "registration": {
+            "type": "string",
+            "title": "Registration"
+          },
+          "dimensions_m": {
+            "$ref": "#/components/schemas/Dimensions"
+          },
+          "hold": {
+            "$ref": "#/components/schemas/ReferenceHold"
+          },
+          "lightship_mass_t": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lightship Mass T"
+          },
+          "tanktop_load_limit_t_per_m2": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tanktop Load Limit T Per M2"
+          },
+          "cases": {
+            "items": {
+              "$ref": "#/components/schemas/OperatingCase"
+            },
+            "type": "array",
+            "title": "Cases"
+          },
+          "capacity_note": {
+            "type": "string",
+            "title": "Capacity Note"
+          },
+          "container_note": {
+            "type": "string",
+            "title": "Container Note"
+          },
+          "estimate_note": {
+            "type": "string",
+            "title": "Estimate Note"
+          },
+          "asset_url": {
+            "type": "string",
+            "title": "Asset Url"
+          },
+          "provenance": {
+            "$ref": "#/components/schemas/Provenance"
+          },
+          "geometry": {
+            "$ref": "#/components/schemas/ReferenceGeometry"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "registration",
+          "dimensions_m",
+          "hold",
+          "lightship_mass_t",
+          "tanktop_load_limit_t_per_m2",
+          "cases",
+          "capacity_note",
+          "container_note",
+          "estimate_note",
+          "asset_url",
+          "provenance",
+          "geometry"
+        ],
+        "title": "VesselProfile"
+      },
+      "VesselReference": {
+        "properties": {
+          "vessel_id": {
+            "type": "string",
+            "const": "VINAFCO268",
+            "title": "Vessel Id"
+          },
+          "case_id": {
+            "type": "string",
+            "enum": [
+              "VR-SI",
+              "VR-SII"
+            ],
+            "title": "Case Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "vessel_id",
+          "case_id"
+        ],
+        "title": "VesselReference"
       }
     }
   }
