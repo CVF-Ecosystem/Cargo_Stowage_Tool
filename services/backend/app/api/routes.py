@@ -190,3 +190,10 @@ from ..domain.planner import PlannerPreview, preview as planner_preview
 @router.post("/planner/preview", response_model=PlannerPreview)
 def suggest_placement(plan: Plan):
     return planner_preview(plan)
+
+
+from ..domain.comparison import CompareRequest, CompareResult, compare
+
+@router.post("/plans/compare", response_model=CompareResult)
+def compare_plans(payload: CompareRequest):
+    return compare(payload.before,payload.after)

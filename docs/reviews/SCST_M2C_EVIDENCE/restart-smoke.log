@@ -1,0 +1,1 @@
+PASS: two-process saved A/B comparison preserves exact 1g/1mm and SQLite bytes

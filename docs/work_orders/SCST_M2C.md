@@ -1,6 +1,6 @@
 # SCST M2c — Giữ gốc và so sánh phương án
 
-Status: APPROVED_FOR_EXECUTION
+Status: CLOSED
 dispatchKind: INITIAL
 Owner: project-orchestrator
 Risk: R2
@@ -62,9 +62,9 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "decision": "Review usableflow, repair within scope or return unresolved boundary; no automatic M2d"
     }
   },
-  "phase": "DISPATCH",
+  "phase": "REVIEW",
   "action": {
-    "kind": "IMPLEMENT",
+    "kind": "REVIEW",
     "selected": [
       "M2C-01",
       "M2C-02",
@@ -73,71 +73,110 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "M2C-05",
       "M2C-06"
     ],
-    "owner": "Terra implementation; Sol browser; root independent review",
+    "owner": "Root independent reviewer",
     "output": "M2c app and docs/reviews/SCST_M2C_REVIEW.md",
     "budgetMinutes": 240,
     "stop": "Six criteria proof or budget/scope boundary",
-    "next": "Independent review before owner feedback; no M2d"
+    "next": "Owner reviews technically delivered M2c; next roadmap slice M2d requires separate SPEC/WORK_ORDER when selected, no automatic implementation."
   },
   "rows": [
     {
       "id": "M2C-01",
-      "state": "NOT_STARTED",
-      "gap": "Baseline/full comparison/restore integration not implemented or proved",
-      "owner": "Terra/Sol then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and developer-owned usable flow verified; business/operational acceptance separate.",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_M2C_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2C_REVIEW.md",
+          "sha256": "849dc11dcb3f2036d3fc23ae53d53d1593eed5497f45c41ce9313ed70adcf97c"
+        }
+      ]
     },
     {
       "id": "M2C-02",
-      "state": "NOT_STARTED",
-      "gap": "Baseline/full comparison/restore integration not implemented or proved",
-      "owner": "Terra/Sol then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and developer-owned usable flow verified; business/operational acceptance separate.",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_M2C_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2C_REVIEW.md",
+          "sha256": "849dc11dcb3f2036d3fc23ae53d53d1593eed5497f45c41ce9313ed70adcf97c"
+        }
+      ]
     },
     {
       "id": "M2C-03",
-      "state": "NOT_STARTED",
-      "gap": "Baseline/full comparison/restore integration not implemented or proved",
-      "owner": "Terra/Sol then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and developer-owned usable flow verified; business/operational acceptance separate.",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_M2C_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2C_REVIEW.md",
+          "sha256": "849dc11dcb3f2036d3fc23ae53d53d1593eed5497f45c41ce9313ed70adcf97c"
+        }
+      ]
     },
     {
       "id": "M2C-04",
-      "state": "NOT_STARTED",
-      "gap": "Baseline/full comparison/restore integration not implemented or proved",
-      "owner": "Terra/Sol then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and developer-owned usable flow verified; business/operational acceptance separate.",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_M2C_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2C_REVIEW.md",
+          "sha256": "849dc11dcb3f2036d3fc23ae53d53d1593eed5497f45c41ce9313ed70adcf97c"
+        }
+      ]
     },
     {
       "id": "M2C-05",
-      "state": "NOT_STARTED",
-      "gap": "Baseline/full comparison/restore integration not implemented or proved",
-      "owner": "Terra/Sol then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and developer-owned usable flow verified; business/operational acceptance separate.",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_M2C_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2C_REVIEW.md",
+          "sha256": "849dc11dcb3f2036d3fc23ae53d53d1593eed5497f45c41ce9313ed70adcf97c"
+        }
+      ]
     },
     {
       "id": "M2C-06",
-      "state": "NOT_STARTED",
-      "gap": "Baseline/full comparison/restore integration not implemented or proved",
-      "owner": "Terra/Sol then root reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and developer-owned usable flow verified; business/operational acceptance separate.",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_M2C_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2C_REVIEW.md",
+          "sha256": "849dc11dcb3f2036d3fc23ae53d53d1593eed5497f45c41ce9313ed70adcf97c"
+        }
+      ]
     }
   ],
   "supportingWork": [],
   "conclusions": {
-    "tranche": "PENDING",
-    "trancheSummary": "M2c admitted under owner continuation",
-    "trancheEvidence": [],
+    "tranche": "COMPLETE",
+    "trancheSummary": "Six technical criteria and integrated usable flow independently verified.",
+    "trancheEvidence": [
+      {
+        "path": "docs/reviews/SCST_M2C_REVIEW.md",
+        "sha256": "849dc11dcb3f2036d3fc23ae53d53d1593eed5497f45c41ce9313ed70adcf97c"
+      }
+    ],
     "product": "PENDING",
-    "productSummary": "M2d/M3 and owner business/operational acceptance separate",
+    "productSummary": "M2d/M3 and business/operational acceptance pending; local delivery only.",
     "acceptance": [],
     "owner": "Project owner"
   }
 }
 ```
+
+## Technical disposition
+
+Six criteria verified by root independent REVIEW, 104 backend/28 browser/902 checks and packaged flow; see review and exact-version manifest. Technical order CLOSED, business/operational acceptance PENDING. No automatic M2d. Admission closeability checked before BUILD; final CLOSED packet skips that check as not applicable, never used to bypass initial dispatch. Local material commit required before closure claim.

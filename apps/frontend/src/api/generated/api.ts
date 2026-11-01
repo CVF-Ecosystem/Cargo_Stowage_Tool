@@ -209,6 +209,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/plans/compare": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Compare Plans */
+        post: operations["compare_plans_api_plans_compare_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -244,6 +261,87 @@ export interface components {
                 number
             ] | null;
             source_ref?: components["schemas"]["PipeSourceRef"] | null;
+        };
+        /** CompareDelta */
+        CompareDelta: {
+            /** Manifest Mass G */
+            manifest_mass_g: number;
+            /** Placed Mass G */
+            placed_mass_g: number;
+            /** Remaining Capacity G */
+            remaining_capacity_g: number;
+            /** Placed Count */
+            placed_count: number;
+            /** Unplaced Count */
+            unplaced_count: number;
+            /** Excluded Count */
+            excluded_count: number;
+            /** Issue Count */
+            issue_count: number;
+        };
+        /** CompareRequest */
+        CompareRequest: {
+            before: components["schemas"]["Plan"];
+            after: components["schemas"]["Plan"];
+        };
+        /** CompareResult */
+        CompareResult: {
+            before: components["schemas"]["CompareSummary"];
+            after: components["schemas"]["CompareSummary"];
+            delta: components["schemas"]["CompareDelta"];
+            /** Context Changes */
+            context_changes: components["schemas"]["FieldChange"][];
+            /** Counts */
+            counts: {
+                [key: string]: number;
+            };
+            /** Rows */
+            rows: components["schemas"]["CompareRow"][];
+        };
+        /** CompareRow */
+        CompareRow: {
+            /** Unit Id */
+            unit_id: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "ADDED" | "REMOVED" | "CHANGED" | "UNCHANGED";
+            /** Changes */
+            changes: components["schemas"]["FieldChange"][];
+            /** Source Identity Warning */
+            source_identity_warning: boolean;
+            /** In After */
+            in_after: boolean;
+        };
+        /** CompareSummary */
+        CompareSummary: {
+            /** Manifest Mass G */
+            manifest_mass_g: number;
+            /** Placed Mass G */
+            placed_mass_g: number;
+            /** Remaining Capacity G */
+            remaining_capacity_g: number;
+            /** Placed Count */
+            placed_count: number;
+            /** Unplaced Count */
+            unplaced_count: number;
+            /** Excluded Count */
+            excluded_count: number;
+            /** Issue Count */
+            issue_count: number;
+            /** Status */
+            status: string;
+            /** Basic Checks Passed */
+            basic_checks_passed: boolean;
+            /** Unchecked */
+            unchecked: string[];
+            /**
+             * Operational Eligible
+             * @default false
+             * @constant
+             */
+            operational_eligible: false;
         };
         /** CsvError */
         CsvError: {
@@ -308,6 +406,15 @@ export interface components {
             issues_truncated?: boolean | null;
             /** Affected Unit Ids */
             affected_unit_ids?: string[] | null;
+        };
+        /** FieldChange */
+        FieldChange: {
+            /** Field */
+            field: string;
+            /** Before */
+            before: unknown;
+            /** After */
+            after: unknown;
         };
         /** HTTPValidationError */
         HTTPValidationError: {
@@ -1009,6 +1116,39 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PlannerPreview"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    compare_plans_api_plans_compare_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CompareRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CompareResult"];
                 };
             };
             /** @description Validation Error */

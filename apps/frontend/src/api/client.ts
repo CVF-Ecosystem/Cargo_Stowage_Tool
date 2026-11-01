@@ -59,3 +59,6 @@ export const previewPipeList = (plan: Plan) => jsonRequest<Evaluation>("/api/pip
 
 export type PlannerPreview = components["schemas"]["PlannerPreview"];
 export const previewPlanner = (plan: Plan) => jsonRequest<PlannerPreview>("/api/planner/preview",plan);
+
+export type CompareResult = components["schemas"]["CompareResult"];
+export const comparePlans = (before: Plan, after: Plan) => jsonRequest<CompareResult>("/api/plans/compare",{before,after});

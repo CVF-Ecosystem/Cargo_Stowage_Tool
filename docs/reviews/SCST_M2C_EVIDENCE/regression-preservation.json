@@ -1,0 +1,73 @@
+{
+  "status": "PASS",
+  "fresh_copies_retained_original_bytes_restored": [
+    {
+      "historical": "docs/reviews/SCST_M1_EVIDENCE/browser-2d-stale.png",
+      "fresh": "docs/reviews/SCST_M2C_EVIDENCE/regression/SCST_M1_EVIDENCE/browser-2d-stale.png"
+    },
+    {
+      "historical": "docs/reviews/SCST_M1_EVIDENCE/browser-3d-yaw.png",
+      "fresh": "docs/reviews/SCST_M2C_EVIDENCE/regression/SCST_M1_EVIDENCE/browser-3d-yaw.png"
+    },
+    {
+      "historical": "docs/reviews/SCST_M1_EVIDENCE/browser-mobile-fallback.png",
+      "fresh": "docs/reviews/SCST_M2C_EVIDENCE/regression/SCST_M1_EVIDENCE/browser-mobile-fallback.png"
+    },
+    {
+      "historical": "docs/reviews/SCST_M1_EVIDENCE/browser-mobile-table-scrolled.png",
+      "fresh": "docs/reviews/SCST_M2C_EVIDENCE/regression/SCST_M1_EVIDENCE/browser-mobile-table-scrolled.png"
+    },
+    {
+      "historical": "docs/reviews/SCST_M2A_EVIDENCE/browser-csv-import.png",
+      "fresh": "docs/reviews/SCST_M2C_EVIDENCE/regression/SCST_M2A_EVIDENCE/browser-csv-import.png"
+    },
+    {
+      "historical": "docs/reviews/SCST_M2A_EVIDENCE/browser-manual-saved.png",
+      "fresh": "docs/reviews/SCST_M2C_EVIDENCE/regression/SCST_M2A_EVIDENCE/browser-manual-saved.png"
+    },
+    {
+      "historical": "docs/reviews/SCST_M2A_EVIDENCE/browser-mobile-reference-fallback.png",
+      "fresh": "docs/reviews/SCST_M2C_EVIDENCE/regression/SCST_M2A_EVIDENCE/browser-mobile-reference-fallback.png"
+    },
+    {
+      "historical": "docs/reviews/SCST_M2B_EVIDENCE/browser/planned-mobile-fallback.png",
+      "fresh": "docs/reviews/SCST_M2C_EVIDENCE/regression/SCST_M2B_EVIDENCE/browser/planned-mobile-fallback.png"
+    },
+    {
+      "historical": "docs/reviews/SCST_M2B_EVIDENCE/browser/planned-mobile-scene.png",
+      "fresh": "docs/reviews/SCST_M2C_EVIDENCE/regression/SCST_M2B_EVIDENCE/browser/planned-mobile-scene.png"
+    },
+    {
+      "historical": "docs/reviews/SCST_M2B_EVIDENCE/browser/vinafco-planned-desktop.png",
+      "fresh": "docs/reviews/SCST_M2C_EVIDENCE/regression/SCST_M2B_EVIDENCE/browser/vinafco-planned-desktop.png"
+    },
+    {
+      "historical": "docs/reviews/SCST_M2B_EVIDENCE/browser/vinafco-planned-scene.png",
+      "fresh": "docs/reviews/SCST_M2C_EVIDENCE/regression/SCST_M2B_EVIDENCE/browser/vinafco-planned-scene.png"
+    },
+    {
+      "historical": "docs/reviews/SCST_PIPE_LIST_EVIDENCE/browser/pipe-list-desktop.png",
+      "fresh": "docs/reviews/SCST_M2C_EVIDENCE/regression/SCST_PIPE_LIST_EVIDENCE/browser/pipe-list-desktop.png"
+    },
+    {
+      "historical": "docs/reviews/SCST_PIPE_LIST_EVIDENCE/browser/pipe-list-mobile-fallback.png",
+      "fresh": "docs/reviews/SCST_M2C_EVIDENCE/regression/SCST_PIPE_LIST_EVIDENCE/browser/pipe-list-mobile-fallback.png"
+    },
+    {
+      "historical": "docs/reviews/SCST_VINAFCO268_EVIDENCE/browser-vessel-3d.png",
+      "fresh": "docs/reviews/SCST_M2C_EVIDENCE/regression/SCST_VINAFCO268_EVIDENCE/browser-vessel-3d.png"
+    },
+    {
+      "historical": "docs/reviews/SCST_VINAFCO268_EVIDENCE/browser-vessel-mobile-fallback.png",
+      "fresh": "docs/reviews/SCST_M2C_EVIDENCE/regression/SCST_VINAFCO268_EVIDENCE/browser-vessel-mobile-fallback.png"
+    },
+    {
+      "historical": "docs/reviews/SCST_VINAFCO268_EVIDENCE/browser-vessel-model-failure.png",
+      "fresh": "docs/reviews/SCST_M2C_EVIDENCE/regression/SCST_VINAFCO268_EVIDENCE/browser-vessel-model-failure.png"
+    },
+    {
+      "historical": "docs/reviews/SCST_VINAFCO268_EVIDENCE/browser-vessel-si.png",
+      "fresh": "docs/reviews/SCST_M2C_EVIDENCE/regression/SCST_VINAFCO268_EVIDENCE/browser-vessel-si.png"
+    }
+  ]
+}

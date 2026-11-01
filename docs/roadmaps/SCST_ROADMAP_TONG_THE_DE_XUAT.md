@@ -2,7 +2,7 @@
 
 Status: ACTIVE
 
-**Bản v0.3 · cập nhật tiến độ 01-11-2026.** Owner đã thống nhất hướng, bổ sung hình tàu, M2a và nguồn list ống V1.1. M1, VINAFCO268, M2a, nguồn list ống và M2b đạt kiểm kỹ thuật; nghiệm thu nghiệp vụ và điều kiện dùng thực vẫn tách riêng. Phạm vi từng phần được giới hạn trong SPEC/WORK_ORDER.
+**Bản v0.3 · cập nhật tiến độ 01-11-2026.** Owner đã thống nhất hướng, bổ sung hình tàu, M2a và nguồn list ống V1.1. M1, VINAFCO268, M2a, nguồn list ống, M2b và M2c đạt kiểm kỹ thuật; nghiệm thu nghiệp vụ và điều kiện dùng thực vẫn tách riêng. Phạm vi từng phần được giới hạn trong SPEC/WORK_ORDER.
 
 ## Mục tiêu và phạm vi
 
@@ -90,7 +90,7 @@ Cargo_Stowage_Tool/
 
 **Luồng trách nhiệm:** giao diện → API → nghiệp vụ/kiểm tra → adapter lưu trữ hoặc xuất. `planner` tạo đề xuất rồi `rules` kiểm lại; bảng, viewer và báo cáo cùng đọc một phương án có ID/phiên bản. Frontend không ghi trực tiếp database; AI tùy chọn cũng đi qua API và quyền backend.
 
-**Stack hiện có ở M1:** React/TypeScript; Python/FastAPI; Three.js. SQLite là dự kiến khi cần lưu bền; thư viện bổ sung được chốt khi tới SPEC tương ứng. Domain tách khỏi giao diện, database và provider để có thể kiểm độc lập.
+**Stack hiện có ở M1:** React/TypeScript; Python/FastAPI; Three.js. SQLite đã dùng cho snapshot local từ M2a; thư viện bổ sung được chốt khi tới SPEC tương ứng. Domain tách khỏi giao diện, database và provider để có thể kiểm độc lập.
 
 ## Nguyên tắc xuyên suốt
 
@@ -104,7 +104,7 @@ Cargo_Stowage_Tool/
 
 **M0 đã xong.** Owner thống nhất ngày 31-10-2026 ba điểm: (1) local-first, một người dùng và ranh giới nghiệp vụ; (2) đầu ra/thứ tự M1–M5, AI tùy chọn; (3) một repository với FE/BE và các lớp trách nhiệm như cây dự kiến.
 
-**Hiện tại: REVIEW M2b** sau chỉ đạo xếp thử tự động và làm tròn hiển thị của owner; các mốc trước có review riêng. Phần tiếp theo được chi tiết hóa là SPEC M2c, rồi WORK_ORDER giới hạn việc thi công. Agent kiểm và REVIEW trước bàn giao, FREEZE phần đã được chấp nhận. Endpoint, schema chi tiết, thuật toán và danh sách file chốt trong SPEC của từng phần; không tự mở toàn bộ mốc còn lại.
+**Hiện tại: REVIEW kỹ thuật M2c đã đạt**, với giữ gốc, so sánh đầy đủ và khôi phục theo [SPEC M2c](../specs/SCST_M2C.md), [review](../reviews/SCST_M2C_REVIEW.md). Các mốc trước có review riêng; nghiệm thu nghiệp vụ tách riêng. Phần kế tiếp là M2d xuất PDF/XLSX, chỉ chi tiết hóa SPEC/WORK_ORDER khi được chọn; chưa tự mở BUILD. Endpoint, schema và danh sách file nằm trong SPEC của từng phần.
 
 Bản M1 trong archive là nguồn tham khảo; kết quả test cũ không tự trở thành nghiệm thu cho hướng mới.
 
@@ -113,7 +113,7 @@ Bản M1 trong archive là nguồn tham khảo; kết quả test cũ không tự
 - [Roadmap ban đầu — Tool First](../project/SCST_Roadmap_Ban_Dau_Tool_First.md): giữ nguyên mục tiêu và mốc; thứ tự triển khai tuân theo chỉ đạo của owner về việc thống nhất hướng trước.
 - [Kiến trúc tham khảo v0.1](../reference/design-v0.1/07_ARCHITECTURE_TREEVIEW.md), [roadmap tham khảo v0.1](../reference/design-v0.1/06_ROADMAP_GATED.md) và [phạm vi v0.1](../reference/design-v0.1/01_SCOPE_CONTRACT.md): rút gọn trách nhiệm module và nhãn trạng thái, chưa nhận toàn bộ chi tiết làm thiết kế đã chốt.
 - [Mô hình nghiệp vụ](../reference/domain/02_OPERATIONAL_MODEL.md): căn cứ cho rủi ro hầm BOX và nhu cầu nhiều tầng.
-- [Trạng thái project](../project/PROJECT_STATUS.md): chưa có capability app được owner chấp nhận hoặc work order app đang hoạt động.
+- [Trạng thái project](../project/PROJECT_STATUS.md): M2c đạt kiểm kỹ thuật; chưa có nghiệm thu nghiệp vụ hoặc vận hành, không có work order app đang thi công.
 
 Owner đã thống nhất hướng; M1 đạt kiểm kỹ thuật, chưa được nghiệm thu nghiệp vụ. Bảng mốc ở trên được đăng ký trong `docs/milestone-coverage-authority.json` (mã `SCST-ROADMAP`); tiêu chí đo được của M1 nằm trong [SPEC M1 v0.2](../specs/SCST_M1.md), mã `SCST-M1`. Bản v0.3 bổ sung mục hình tàu và đồng bộ trạng thái; giữ nguyên mục bảng mốc đã đăng ký, SPEC và snapshot dispatch M1.
 

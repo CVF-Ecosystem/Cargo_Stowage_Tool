@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "assertions": 902,
+  "random_plan_pairs": 40,
+  "order_shuffle_repeats": 40,
+  "oracle": "Separate dict/set and integer-\u00b5m geometry/mass/issue oracle; no application comparison/evaluate helpers",
+  "source_units": 1076,
+  "one_changed_unchanged": 1075,
+  "full_issue_count_not_truncated": 578351,
+  "stress_compare_seconds": 4.813,
+  "comparison_no_db_mutation": true,
+  "one_gram_delta_preserved": true
+}

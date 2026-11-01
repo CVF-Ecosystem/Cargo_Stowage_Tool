@@ -380,6 +380,44 @@
           }
         }
       }
+    },
+    "/api/plans/compare": {
+      "post": {
+        "summary": "Compare Plans",
+        "operationId": "compare_plans_api_plans_compare_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompareRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompareResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -486,6 +524,219 @@
           "mass_g"
         ],
         "title": "CargoUnit"
+      },
+      "CompareDelta": {
+        "properties": {
+          "manifest_mass_g": {
+            "type": "integer",
+            "title": "Manifest Mass G"
+          },
+          "placed_mass_g": {
+            "type": "integer",
+            "title": "Placed Mass G"
+          },
+          "remaining_capacity_g": {
+            "type": "integer",
+            "title": "Remaining Capacity G"
+          },
+          "placed_count": {
+            "type": "integer",
+            "title": "Placed Count"
+          },
+          "unplaced_count": {
+            "type": "integer",
+            "title": "Unplaced Count"
+          },
+          "excluded_count": {
+            "type": "integer",
+            "title": "Excluded Count"
+          },
+          "issue_count": {
+            "type": "integer",
+            "title": "Issue Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "manifest_mass_g",
+          "placed_mass_g",
+          "remaining_capacity_g",
+          "placed_count",
+          "unplaced_count",
+          "excluded_count",
+          "issue_count"
+        ],
+        "title": "CompareDelta"
+      },
+      "CompareRequest": {
+        "properties": {
+          "before": {
+            "$ref": "#/components/schemas/Plan"
+          },
+          "after": {
+            "$ref": "#/components/schemas/Plan"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "before",
+          "after"
+        ],
+        "title": "CompareRequest"
+      },
+      "CompareResult": {
+        "properties": {
+          "before": {
+            "$ref": "#/components/schemas/CompareSummary"
+          },
+          "after": {
+            "$ref": "#/components/schemas/CompareSummary"
+          },
+          "delta": {
+            "$ref": "#/components/schemas/CompareDelta"
+          },
+          "context_changes": {
+            "items": {
+              "$ref": "#/components/schemas/FieldChange"
+            },
+            "type": "array",
+            "title": "Context Changes"
+          },
+          "counts": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Counts"
+          },
+          "rows": {
+            "items": {
+              "$ref": "#/components/schemas/CompareRow"
+            },
+            "type": "array",
+            "title": "Rows"
+          }
+        },
+        "type": "object",
+        "required": [
+          "before",
+          "after",
+          "delta",
+          "context_changes",
+          "counts",
+          "rows"
+        ],
+        "title": "CompareResult"
+      },
+      "CompareRow": {
+        "properties": {
+          "unit_id": {
+            "type": "string",
+            "title": "Unit Id"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ADDED",
+              "REMOVED",
+              "CHANGED",
+              "UNCHANGED"
+            ],
+            "title": "Status"
+          },
+          "changes": {
+            "items": {
+              "$ref": "#/components/schemas/FieldChange"
+            },
+            "type": "array",
+            "title": "Changes"
+          },
+          "source_identity_warning": {
+            "type": "boolean",
+            "title": "Source Identity Warning"
+          },
+          "in_after": {
+            "type": "boolean",
+            "title": "In After"
+          }
+        },
+        "type": "object",
+        "required": [
+          "unit_id",
+          "status",
+          "changes",
+          "source_identity_warning",
+          "in_after"
+        ],
+        "title": "CompareRow"
+      },
+      "CompareSummary": {
+        "properties": {
+          "manifest_mass_g": {
+            "type": "integer",
+            "title": "Manifest Mass G"
+          },
+          "placed_mass_g": {
+            "type": "integer",
+            "title": "Placed Mass G"
+          },
+          "remaining_capacity_g": {
+            "type": "integer",
+            "title": "Remaining Capacity G"
+          },
+          "placed_count": {
+            "type": "integer",
+            "title": "Placed Count"
+          },
+          "unplaced_count": {
+            "type": "integer",
+            "title": "Unplaced Count"
+          },
+          "excluded_count": {
+            "type": "integer",
+            "title": "Excluded Count"
+          },
+          "issue_count": {
+            "type": "integer",
+            "title": "Issue Count"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "basic_checks_passed": {
+            "type": "boolean",
+            "title": "Basic Checks Passed"
+          },
+          "unchecked": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Unchecked"
+          },
+          "operational_eligible": {
+            "type": "boolean",
+            "const": false,
+            "title": "Operational Eligible",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "manifest_mass_g",
+          "placed_mass_g",
+          "remaining_capacity_g",
+          "placed_count",
+          "unplaced_count",
+          "excluded_count",
+          "issue_count",
+          "status",
+          "basic_checks_passed",
+          "unchecked"
+        ],
+        "title": "CompareSummary"
       },
       "CsvError": {
         "properties": {
@@ -681,6 +932,27 @@
           "unchecked"
         ],
         "title": "Evaluation"
+      },
+      "FieldChange": {
+        "properties": {
+          "field": {
+            "type": "string",
+            "title": "Field"
+          },
+          "before": {
+            "title": "Before"
+          },
+          "after": {
+            "title": "After"
+          }
+        },
+        "type": "object",
+        "required": [
+          "field",
+          "before",
+          "after"
+        ],
+        "title": "FieldChange"
       },
       "HTTPValidationError": {
         "properties": {

@@ -1250,3 +1250,5 @@ tbody tr:hover {
 .m2a-card pre { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 100%; }
 .m2a-card textarea { width: 100%; min-height: 120px; box-sizing: border-box; }
 .vessel-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+.comparison-panel { overflow-wrap: anywhere; }

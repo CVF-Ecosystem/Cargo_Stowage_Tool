@@ -2,7 +2,15 @@
 
 Cập nhật: **01-11-2026**.
 
-## Hiện tại — M2b xếp thử tự động đạt kiểm kỹ thuật
+## Hiện tại — M2c đạt kiểm kỹ thuật
+
+Theo chỉ đạo tiếp tục roadmap, đã bổ sung **giữ gốc A → chỉnh/kiểm B → so sánh → khôi phục**, trên editor, một viewer và SQLite hiện có. Chọn A từ bản hiện tại hoặc bản lưu không thay B. So sánh đủ context và mọi ID, lọc/tìm/phân trang 50 bó, chi tiết chính xác g/mm/µm; khôi phục giữ B trong Bản trước và snapshot cũ không bị ghi đè. Baseline bộ nhớ không tự lưu qua reload.
+
+[SPEC](../specs/SCST_M2C.md), [review độc lập](../reviews/SCST_M2C_REVIEW.md): 104 backend, 28 browser, 902 đối chiếu độc lập, build/contracts và hai tiến trình server đạt. Luồng đóng gói trên VINAFCO có 167 bó được kiểm giữ/sửa/so sánh/khôi phục/undo; SQLite người dùng không đổi. App ở http://127.0.0.1:8765; chỉ commit local, chưa push dữ liệu mới.
+
+M2c đóng phần kỹ thuật, chưa nghiệm thu nghiệp vụ hoặc vận hành. M2d xuất báo cáo chưa mở; hầm đo thực và 16 khối bao vẫn chờ xác minh. Không tự mở phần tiếp theo.
+
+## M2b — xếp thử tự động đạt kiểm kỹ thuật
 
 Owner yêu cầu hiện hàng trên hình tàu/làm tròn khối lượng và chọn bắt đầu M2b. [SPEC](../specs/SCST_M2B.md) và [review độc lập](../reviews/SCST_M2B_REVIEW.md) xác minh đủ6tiêu chí: heuristic một lớp, preview/apply rõ, actualcargo meshes trên VINAFCO, mọiremainingunit có lý do, async/undo/lưu-mở giữ nguồn, massdisplay2decimals và exactgram calculations.98backend/22browser46,7s/8941independentassertions/build/contracts/restart đạt. Root UIscrollline đượcSol review độc lập, lỗiđầu vàsửa được ghi rõ.
 
@@ -44,4 +52,4 @@ Demo synthetic BOX một lớp, bảng/3D/2D cùng dữ liệu, giới hạn ch�
 
 ## Bước tiếp theo
 
-Owner xem luồng M2b đã được đội phát triển kiểm nội bộ. Phần kế tiếp là SPEC M2c cho chỉnh/so sánh đầy đủ sau checkpoint, chưa dispatch tự động. M2d export, M3 nhiều tầng/dữ liệu thực, M4 AI tùy chọn và M5 vận hành giữ riêng. Đo hầm,16source envelopes, stability/strength/floorload và business/operational acceptance còn chờ; không chuyển thành đã xác minh vì thử xếp đạt các kiểm hiện tại.
+M2c đã được đội phát triển kiểm nội bộ và bàn giao bằng chứng. Phần kế tiếp theo roadmap là M2d xuất PDF/XLSX, cần SPEC/WORK_ORDER riêng khi owner chọn tiếp tục. M3 nhiều tầng/dữ liệu thực, M4 AI tùy chọn và M5 vận hành giữ riêng. Đo hầm, 16 source envelopes, stability/strength/floorload và business/operational acceptance còn chờ; không suy diễn từ kết quả kiểm hiện tại.

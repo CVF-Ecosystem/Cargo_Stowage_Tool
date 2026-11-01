@@ -15,8 +15,8 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 - Closed schema reference for the Module Registry.: `docs/catalog/schemas/MODULE_REGISTRY.schema.json`
 - Standard-library catalog validation and rendering functions.: `scripts/lib/downstream_catalog/CvfDownstreamCatalogLib.ps1`
 - Executable catalog manager (--check / --write).: `scripts/manage_cvf_downstream_catalog.ps1`
-- M1/VINAFCO/M2a/PIPE-LIST/M2b technicaltruth; business/measuredhold acceptance separate.: `IMPLEMENTATION_STATUS.json`
-- Current M2b automatictrial/readiness, roundeddisplay andnextcheckpoint.: `docs/project/PROJECT_STATUS.md`
+- M1/VINAFCO/M2a/PIPE-LIST/M2b/M2c technical truth; business/measured hold acceptance separate.: `IMPLEMENTATION_STATUS.json`
+- Delivered M2c baseline/comparison/restore, verified workflow and next checkpoint.: `docs/project/PROJECT_STATUS.md`
 - Generated documentation index.: `docs/INDEX.md`
 - Generated human module catalog.: `docs/catalog/MODULE_CATALOG.md`
 
@@ -27,10 +27,10 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 - Shared project learning, value-filtered parent intake and returned adoption.: `docs/reviews/learnings/`
 - Current status, original planning input and file organization.: `docs/project/`
 - Source material still used for planning; not final design authority.: `docs/reference/`
-- M1, VINAFCO268 and M2a assessments, returns, independent reviews and exact-version evidence. PIPE-LIST source integration technically reviewed and orderclosed; businessacceptance separate. M2b technicalorder closed afterindependentreview; businessacceptance separate. M2c admitted, notimplemented.: `docs/reviews/`
-- Overallagreedroadmap; M2b technicallyverified, M2c notdispatched.: `docs/roadmaps/`
-- M1, VINAFCO268 and admitted next-slice M2a specifications. PIPE-LIST source integration technically reviewed and orderclosed; businessacceptance separate. M2b technicalorder closed afterindependentreview; businessacceptance separate. M2c admitted, notimplemented.: `docs/specs/`
-- M1, VINAFCO268 and M2a technical orders closed; next M2b requires its own SPEC/order. PIPE-LIST source integration technically reviewed and orderclosed; businessacceptance separate. M2b technicalorder closed afterindependentreview; businessacceptance separate. M2c admitted, notimplemented.: `docs/work_orders/`
+- M1/VINAFCO/M2a/PIPE-LIST/M2b/M2c specifications, closed technical orders and independent exact-version reviews; business acceptance separate.: `docs/reviews/`
+- Agreed overall roadmap; M2c technically verified, M2d not opened.: `docs/roadmaps/`
+- M1/VINAFCO/M2a/PIPE-LIST/M2b/M2c specifications, closed technical orders and independent exact-version reviews; business acceptance separate.: `docs/specs/`
+- M1/VINAFCO/M2a/PIPE-LIST/M2b/M2c specifications, closed technical orders and independent exact-version reviews; business acceptance separate.: `docs/work_orders/`
 
 Plans describe intended work. `IMPLEMENTATION_STATUS.json`, source, tests, and
 review evidence determine what is actually implemented.

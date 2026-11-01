@@ -2,15 +2,15 @@
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
   "updatedAt": "2026-11-01",
-  "claimBoundary": "M1/VINAFCO/M2a/PIPE-LIST/M2b localcomponents source/test verified; heuristic andsourcegeometry provisional, nooperationalapproval.",
+  "claimBoundary": "M1 through M2c local components and usable workflow technically verified; provisional geometry, no operational approval.",
   "modules": [
     {
       "id": "scst-domain",
       "name": "SCST M1 domain",
       "path": "services/backend/app/domain",
       "status": "ENFORCED",
-      "description": "Versioned v1/v2\u2264200 and fixedsource1076 BOX/single-layer model, registrybindings, exact\u00b5m/mm/g, fullcount bounded diagnostics.",
-      "evidence": "tests/backend/test_validation.py; docs/reviews/SCST_M1_EVIDENCE/reviewer-pytest.log (51 pass); reviewer-backend.json (498 checks); tests/backend/test_vinafco.py; docs/reviews/SCST_VINAFCO268_REVIEW.md; tests/backend/test_m2a.py; docs/reviews/SCST_M2A_REVIEW.md; docs/reviews/SCST_PIPE_LIST_REVIEW.md; docs/reviews/SCST_M2B_REVIEW.md",
+      "description": "Versioned v1/v2≤200 and fixedsource1076 BOX/single-layer model, registrybindings, exactµm/mm/g, fullcount bounded diagnostics. M2c exact read-only A/B comparison and baseline/restore UI integration.",
+      "evidence": "tests/backend/test_validation.py; docs/reviews/SCST_M1_EVIDENCE/reviewer-pytest.log (51 pass); reviewer-backend.json (498 checks); tests/backend/test_vinafco.py; docs/reviews/SCST_VINAFCO268_REVIEW.md; tests/backend/test_m2a.py; docs/reviews/SCST_M2A_REVIEW.md; docs/reviews/SCST_PIPE_LIST_REVIEW.md; docs/reviews/SCST_M2B_REVIEW.md; docs/reviews/SCST_M2C_REVIEW.md",
       "dependencies": [
         "scst-pipe-source"
       ]
@@ -20,8 +20,8 @@
       "name": "SCST local API",
       "path": "services/backend/app/api",
       "status": "ENFORCED",
-      "description": "Local validate/demo/reference APIs plus CSV preview and immutable snapshot save/list/re-evaluated open. Pipe-source library and explicit preview preservecurrentcontext. ExplicitplannerpreviewAPI withindependentcandidate validation.",
-      "evidence": "services/backend/app/api/routes.py; backend tests and launcher-smoke.log; docs/reviews/SCST_PIPE_LIST_REVIEW.md; docs/reviews/SCST_M2B_REVIEW.md",
+      "description": "Local validate/demo/reference APIs plus CSV preview and immutable snapshot save/list/re-evaluated open. Pipe-source library and explicit preview preservecurrentcontext. ExplicitplannerpreviewAPI withindependentcandidate validation. M2c exact read-only A/B comparison and baseline/restore UI integration.",
+      "evidence": "services/backend/app/api/routes.py; backend tests and launcher-smoke.log; docs/reviews/SCST_PIPE_LIST_REVIEW.md; docs/reviews/SCST_M2B_REVIEW.md; docs/reviews/SCST_M2C_REVIEW.md",
       "dependencies": [
         "scst-domain"
       ]
@@ -31,8 +31,8 @@
       "name": "SCST generated API contract",
       "path": "contracts/openapi.json",
       "status": "CONTRACT_ONLY",
-      "description": "OpenAPI/types for M1/M2a/pipe-list versions; conditional backendsourcebindings and limits.",
-      "evidence": "tooling/export_contract.py; contract-hashes.txt and reviewer-source-manifest.json; docs/reviews/SCST_PIPE_LIST_REVIEW.md; docs/reviews/SCST_M2B_REVIEW.md",
+      "description": "OpenAPI/types for M1/M2a/pipe-list versions; conditional backendsourcebindings and limits. M2c exact read-only A/B comparison and baseline/restore UI integration.",
+      "evidence": "tooling/export_contract.py; contract-hashes.txt and reviewer-source-manifest.json; docs/reviews/SCST_PIPE_LIST_REVIEW.md; docs/reviews/SCST_M2B_REVIEW.md; docs/reviews/SCST_M2C_REVIEW.md",
       "dependencies": [
         "scst-api"
       ]
@@ -42,8 +42,8 @@
       "name": "SCST M1 workspace and viewer",
       "path": "apps/frontend/src",
       "status": "ENFORCED",
-      "description": "Checked/draft manual/CSV/save-open workspace, Three/SVG/reference modes and async error recovery. Sourcegroupfilter/50rowpagination and source/counter/exactgeometry support. M2bpreview/apply/reasons/roundedmass andimmediateviewercargo.",
-      "evidence": "tests/browser/workspace.spec.ts; docs/reviews/SCST_M1_EVIDENCE/reviewer-browser.log (5 pass); tests/browser/vinafco.spec.ts; docs/reviews/SCST_VINAFCO268_EVIDENCE/reviewer-browser.log; tests/browser/m2a.spec.ts; docs/reviews/SCST_M2A_EVIDENCE/reviewer-browser.log; docs/reviews/SCST_PIPE_LIST_REVIEW.md; docs/reviews/SCST_M2B_REVIEW.md",
+      "description": "Checked/draft manual/CSV/save-open workspace, Three/SVG/reference modes and async error recovery. Sourcegroupfilter/50rowpagination and source/counter/exactgeometry support. M2bpreview/apply/reasons/roundedmass andimmediateviewercargo. M2c exact read-only A/B comparison and baseline/restore UI integration.",
+      "evidence": "tests/browser/workspace.spec.ts; docs/reviews/SCST_M1_EVIDENCE/reviewer-browser.log (5 pass); tests/browser/vinafco.spec.ts; docs/reviews/SCST_VINAFCO268_EVIDENCE/reviewer-browser.log; tests/browser/m2a.spec.ts; docs/reviews/SCST_M2A_EVIDENCE/reviewer-browser.log; docs/reviews/SCST_PIPE_LIST_REVIEW.md; docs/reviews/SCST_M2B_REVIEW.md; docs/reviews/SCST_M2C_REVIEW.md",
       "dependencies": [
         "scst-api",
         "scst-contract"
@@ -88,7 +88,7 @@
       "name": "Pipe list V1.1 technical derivative",
       "path": "services/backend/data/pipe_list",
       "status": "CONTRACT_ONLY",
-      "description": "31groups/1076bundles, exact\u00b5m/K\u00d7Lgrams, sourcehash/row/warnings; no measuredgeometry or operationalapproval.",
+      "description": "31groups/1076bundles, exactµm/K×Lgrams, sourcehash/row/warnings; no measuredgeometry or operationalapproval.",
       "evidence": "docs/reviews/SCST_PIPE_LIST_ASSESSMENT.md; tests/backend/test_pipe_list.py; docs/reviews/SCST_M2B_REVIEW.md"
     },
     {
@@ -96,8 +96,19 @@
       "name": "Single-layer automatic trial",
       "path": "services/backend/app/domain/planner",
       "status": "ENFORCED",
-      "description": "Deterministic guillotinepreview/completeunplacedreasons; integergramcapacity, conservativegrid andexact\u00b5m validation; nooptimality/operationalclaim.",
+      "description": "Deterministic guillotinepreview/completeunplacedreasons; integergramcapacity, conservativegrid andexactµm validation; nooptimality/operationalclaim.",
       "evidence": "tests/backend/test_m2b.py; tests/browser/m2b.spec.ts; docs/reviews/SCST_M2B_REVIEW.md",
+      "dependencies": [
+        "scst-domain"
+      ]
+    },
+    {
+      "id": "scst-comparison",
+      "name": "Exact plan comparison",
+      "path": "services/backend/app/domain/comparison",
+      "status": "ENFORCED",
+      "description": "Independent A/B evaluation, complete ID/context/placement changes and integer deltas, no storage writes or ranking.",
+      "evidence": "tests/backend/test_m2c.py; tests/browser/m2c.spec.ts; docs/reviews/SCST_M2C_REVIEW.md",
       "dependencies": [
         "scst-domain"
       ]

@@ -1,0 +1,3 @@
+# M2c mechanical gate receipts
+
+Pre-dispatch6/6 and pre-commit7/7 passed before admission bc14dee; worker-return7/7 invoked on returned scope before closure. Final reviewer-fast/pre-commit receipts are stored here. Controls are INVOKED at their stated scope, never a claim of PROVEN_HERMETIC or hosted CI. Installation is checked separately by doctor28/28. Closed packet closeability is N/A after its initial dispatch check; this is not a live AI governance test. Postcommit range review is reported in the final return, using base e5a8b74..HEAD and --no-receipt to avoid a self-referential commit. No provider call or CVF Web governance claim in M2c.

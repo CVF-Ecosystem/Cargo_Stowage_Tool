@@ -5,15 +5,18 @@ Memory class: POINTER_RECORD
 ## Current Truth
 
 - Contract: cvf.downstreamContinuityContract@1.0.0
-- Current mode: BUILD
-- Active phase: BUILD
+- Current mode: REVIEW
+- Active phase: REVIEW
 - Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_M2C.md
 
 ## Current operator boundary
 
-Current BUILD / ORCHESTRATOR. Next: Implement six M2c criteria under bc14dee admission; root independent review before closure, no M2d. Parked: Measuredhold/16sourceenvelopes and business/operational acceptance pending; M2d/M3 separate.
-Owner “tiếp”afterM2b opens M2c baseline/compare/restore. SPEC/order SCST_M2C bind6criteria; no runtimeimplementationyet. Reuse editor/history20/SQLite/Plan/evaluate/oneviewer; full exactdiff and explicitbaseline/restore are missinggap. No source/ship/DBschema/planner changes orM2d. PriorM2b sourcee5a8b74 technicallyverified98backend/22browser/8941checks, businessacceptance separate. Localonly no push. Demo21770/PID34300 on8765 needsrefresh later; runtime-data/scst.sqlite3 outsideGit.
+Current REVIEW / SESSION_SYNC_STEWARD. Next: Owner reviews technically delivered M2c; next roadmap slice M2d requires separate SPEC/WORK_ORDER when selected, no automatic implementation. Parked: Measuredhold/16sourceenvelopes and business/operational acceptance pending; M2d/M3 separate.
+
+M2c technically verified and work order closed: pin/load A without changing B, exact full comparison, restore/undo and immutable saves. 104 backend, 28 browser, 902 independent assertions, build/types/OpenAPI and two-process restart PASS. Terra runtime, Sol browser, root independent reviewer; no root runtime repair. Admission bc14dee, BUILD ack92a00c9; source manifest and review bind delivered version. M2d not opened. All completedCapabilities remain unaccepted for business/operational use.
+
+Live demo http://127.0.0.1:8765 session99168/PID480, handle .cvf/runtime/m2c-demo-session.json. Packaged VINAFCO1076/167 edit/compare/restore/undo passed, user SQLite bytes unchanged. runtime-data/scst.sqlite3 stays outside Git; no push. Baseline is tab-only unless Plan saved and reselected; no comparison persistence. Hold estimated and 16 source envelopes unresolved. Prior source/ship/planner/storage/locks/archive and inherited tests unchanged; fresh regression screenshots parked in M2c evidence, historical bytes restored.
 
 ## Read next
 
-Manifest/policy/state/handoff/truth/index, docs/specs/SCST_M2C.md and docs/work_orders/SCST_M2C.md. BOOTSTRAP_MIGRATION_PENDING nonblocking. M2B handoffSUPERSEDED; priorcriteria/evidence immutable. Rehydrate atrole/tranchechange; no autoexport/nextmilestone.
+Manifest/policy/state/handoff/truth/index, docs/reviews/SCST_M2C_REVIEW.md, docs/APP_GUIDE.md, docs/specs/SCST_M2C.md and closed order docs/work_orders/SCST_M2C.md. BOOTSTRAP_MIGRATION_PENDING nonblocking. M2B handoff SUPERSEDED. Rehydrate on next role/tranche/session; no automatic M2d/export/next milestone. Local gates prove only their reported mechanical scope, no AI governance claim/provider call.

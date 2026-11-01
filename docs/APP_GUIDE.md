@@ -69,6 +69,16 @@ Giới hạn đang có được giữ nguyên: chọn tàu từ mẫu có thể 
 
 Khối lượng ở bảng/thống kê hiển thị tối đa2số lẻ tấn: **1.125,55tấn** thay cho1.125,55103; số nhỏ khác0 hiện **<0,01tấn**. Tính/lưu bằng gram, ô nhập kg không làm tròn. Hai CBM hiển thị gọn1.130,97/1.157,54m³, số đầy đủ vẫn ở [đánh giá nguồn](reviews/SCST_PIPE_LIST_ASSESSMENT.md). Heuristic dùng lưới mm làm tròn lên để dự trữ khối bao, geometry kiểm/vẽ vẫn chính xác µm; khe lưới chưa phải khoảng kê/chèn nghiệp vụ.
 
+## M2c — Giữ bản gốc và so sánh
+
+1. Khi bản nháp đã áp dụng, chọn **Giữ bản hiện tại làm gốc** để giữ A trong tab. Hoặc chọn một **Bản lưu làm gốc → Dùng bản lưu làm gốc**; thao tác này không thay B đang mở hoặc lựa chọn bó. Baseline không tự thay khi mở phương án khác hay chạy xếp thử.
+2. Chỉnh B bằng các ô đang có, rồi **Áp dụng & kiểm lại**. Bấm **So sánh với bản gốc**. Bảng đầu cho tổng khối lượng, đã xếp/còn tải, số bó và số lỗi kiểm riêng A/B; chênh lệch B−A bằng gram nguyên để thấy cả 1 gram. Tổng A/B vẫn làm tròn tối đa hai số lẻ tấn. Chi tiết giữ số mm/µm nguồn.
+3. Lọc **Chỉ thay đổi / Tất cả / Thêm / Đã bỏ / Thay đổi / Không đổi**, tìm ID và chuyển trang tối đa 50 bó. **Chi tiết thay đổi** ghi trước/sau từng trường; **Chọn bó trong B** đồng bộ editor/viewer hiện tại. Bó chỉ còn trong A không có nút chọn vào B. Hai bản khác nguồn/giới hạn/hầm có cảnh báo, không tự xếp hạng. ID trùng nhưng nguồn khác không xác nhận cùng bó vật lý.
+4. **Khôi phục bản gốc** kiểm lại A trước khi đổi workspace. B được giữ trong **Bản trước**, có thể quay lại rồi lưu riêng; snapshot A không bị ghi đè. Tên/thời gian/ID của baseline đã lưu tách biệt với bản đang mở.
+5. Baseline trong bộ nhớ chưa tự lưu và mất khi reload; để dùng lại, lưu A trước và chọn lại bản đã lưu. Không tự lưu nháp hoặc kết quả so sánh. STALE chặn chọn/so sánh/khôi phục cho tới khi áp dụng nháp; lỗi mạng hoặc phản hồi đến muộn giữ dữ liệu hiện có. Khi chỉnh dữ liệu, kết quả so sánh cũ không được trình bày như kết quả hiện hành.
+
+Luồng dùng một viewer của B, không có hai cảnh 3D song song. So sánh là đối chiếu dữ liệu và các kiểm hiện hành, chưa kiểm kê/chèn/chằng, nhiều tầng, ổn định hay tải sàn. Hầm ước tính và 16 khối bao cần xác minh vẫn giữ nguyên. [SPEC](specs/SCST_M2C.md), [review và bằng chứng](reviews/SCST_M2C_REVIEW.md).
+
 ## Kiểm nhà phát triển
 
 ```powershell
@@ -79,6 +89,6 @@ npm.cmd --prefix apps/frontend run build
 npm.cmd --prefix apps/frontend run test:e2e
 ```
 
-Cây thực: `services/backend/app/domain/{model,geometry,rules}` chứa contract và kiểm; `services/backend/app/api` phục vụ API; `apps/frontend/src/{api,features,viewer-3d}` là giao diện; `contracts/openapi.json` và `apps/frontend/src/api/generated/api.ts` được sinh; `tests/backend`, `tests/browser` chứa kiểm; `tooling/` và `Start-SCST.cmd` khởi chạy.
+Cây thực: `services/backend/app/domain/{model,geometry,rules,planner,comparison}` chứa contract và kiểm; `services/backend/app/api` phục vụ API; `apps/frontend/src/{api,features,viewer-3d}` là giao diện; `contracts/openapi.json` và `apps/frontend/src/api/generated/api.ts` được sinh; `tests/backend`, `tests/browser` chứa kiểm; `tooling/` và `Start-SCST.cmd` khởi chạy.
 
 Ngoài phạm vi hiện tại: xếp tối ưu/nhiều tầng, import XLSX/PDF tổng quát, xuất báo cáo, nhiều tầng, xác minh manifest/hầm đo thực và AI. M2a có nhập tay/CSV và lưu/mở local; VINAFCO 268 bổ sung thông số thân và trạng thái tham chiếu theo hồ sơ.

@@ -1,0 +1,43 @@
+
+> scst-frontend@0.1.0 test:e2e
+> playwright test
+
+[WebServer] INFO:     Started server process [10336]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8766 (Press CTRL+C to quit)
+
+Running 28 tests using 1 worker
+
+(node:39624) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 ..\..\tests\browser\m2a.spec.ts:16:5 › manual empty plan, cargo, hold and placement persist as immutable checked snapshots (9.6s)
+  ok  2 ..\..\tests\browser\m2a.spec.ts:76:5 › CSV preview reports row errors, preserves workspace, then atomically replaces cargo with exact grams (3.3s)
+  ok  3 ..\..\tests\browser\m2a.spec.ts:114:5 › saved reference plan reopens after reload; network failure and mobile WebGL fallback keep input (7.6s)
+  ok  4 ..\..\tests\browser\m2a.spec.ts:164:5 › delayed preview, save and open cannot overwrite newer edits or selection (4.0s)
+  ok  5 ..\..\tests\browser\m2b.spec.ts:50:5 › demo planner previews replacement without mutation, then applies checked real meshes and undo (2.5s)
+  ok  6 ..\..\tests\browser\m2b.spec.ts:75:5 › VINAFCO source list planner puts actual bundles in the hold, reconciles all 1076 and survives save/reload (10.9s)
+  ok  7 ..\..\tests\browser\m2b.spec.ts:128:5 › a one-gram manual unit displays below 0.01 tonne while input and API retain exact grams (2.4s)
+  ok  8 ..\..\tests\browser\m2b.spec.ts:145:5 › STALE edits, delayed planner response and network failure leave the checked plan unchanged (3.3s)
+  ok  9 ..\..\tests\browser\m2b.spec.ts:180:5 › mobile WebGL fallback shows applied source cargo and paged reasons without page overflow (3.3s)
+  ok 10 ..\..\tests\browser\m2c.spec.ts:34:5 › pin A, edit one gram and placement in checked B, compare exact details, restore and undo without overwriting snapshots (5.6s)
+  ok 11 ..\..\tests\browser\m2c.spec.ts:82:5 › saved baseline loads after reload without replacing checked B or selected cargo (3.3s)
+  ok 12 ..\..\tests\browser\m2c.spec.ts:100:5 › source list comparison accounts all 1076, filters and pages without a second viewer on mobile fallback (4.1s)
+  ok 13 ..\..\tests\browser\m2c.spec.ts:139:5 › replacing a manifest reports added, removed and changed IDs without selecting the A-only unit (3.7s)
+  ok 14 ..\..\tests\browser\m2c.spec.ts:159:5 › STALE and a late or failed compare leave B, selection and baseline intact (2.9s)
+  ok 15 ..\..\tests\browser\m2c.spec.ts:196:5 › late saved-baseline and restore responses cannot overwrite a newer selection or draft (5.4s)
+  ok 16 ..\..\tests\browser\pipe-list.spec.ts:33:5 › source preview and explicit load preserve 31 groups, 1076 optional bundles, exact mass and 50-row pagination (6.7s)
+  ok 17 ..\..\tests\browser\pipe-list.spec.ts:88:5 › manual placement, rotation and unplace use exact µm dimensions and update whole-list/group counters (5.6s)
+  ok 18 ..\..\tests\browser\pipe-list.spec.ts:125:5 › pipe provenance survives save/reload/case/undo; stale edit and delayed preview cannot replace it (13.3s)
+  ok 19 ..\..\tests\browser\pipe-list.spec.ts:191:5 › mobile WebGL fallback keeps the paginated pipe library usable without page overflow (1.9s)
+  ok 20 ..\..\tests\browser\vinafco.spec.ts:30:5 › real GLB and placed cargo share backend coordinates; camera, picking and hull toggle work (6.4s)
+  ok 21 ..\..\tests\browser\vinafco.spec.ts:106:5 › SI/SII reference limits, labels, history and pending edits remain tied to the selected case (6.5s)
+  ok 22 ..\..\tests\browser\vinafco.spec.ts:153:5 › model failure and mobile WebGL fallback keep case data and editing usable (4.0s)
+  ok 23 ..\..\tests\browser\vinafco.spec.ts:184:5 › case request failure and a newer edit during a pending switch preserve the checked case (2.5s)
+  ok 24 ..\..\tests\browser\workspace.spec.ts:14:5 › real API drives table, 2D and actual Three meshes through yaw and selection (8.2s)
+  ok 25 ..\..\tests\browser\workspace.spec.ts:117:5 › raw edit is immediately STALE; real API 422 and network loss preserve checked result and draft; retry and undo recover (2.9s)
+  ok 26 ..\..\tests\browser\workspace.spec.ts:179:5 › WebGL failure keeps accessible 2D, table selection and synthetic warning (1.8s)
+  ok 27 ..\..\tests\browser\workspace.spec.ts:214:5 › an edit during pending validation keeps the newer raw draft STALE until separately checked (2.2s)
+  ok 28 ..\..\tests\browser\workspace.spec.ts:244:5 › after setup the browser runs locally with all non-loopback traffic blocked (2.7s)
+
+  28 passed (2.4m)

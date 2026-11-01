@@ -1,0 +1,17 @@
+[WebServer] INFO:     Started server process [42060]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8766 (Press CTRL+C to quit)
+
+Running 6 tests using 1 worker
+
+(node:41632) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 ..\..\tests\browser\m2c.spec.ts:34:5 › pin A, edit one gram and placement in checked B, compare exact details, restore and undo without overwriting snapshots (7.4s)
+  ok 2 ..\..\tests\browser\m2c.spec.ts:82:5 › saved baseline loads after reload without replacing checked B or selected cargo (3.4s)
+  ok 3 ..\..\tests\browser\m2c.spec.ts:100:5 › source list comparison accounts all 1076, filters and pages without a second viewer on mobile fallback (3.9s)
+  ok 4 ..\..\tests\browser\m2c.spec.ts:139:5 › replacing a manifest reports added, removed and changed IDs without selecting the A-only unit (3.3s)
+  ok 5 ..\..\tests\browser\m2c.spec.ts:159:5 › STALE and a late or failed compare leave B, selection and baseline intact (3.2s)
+  ok 6 ..\..\tests\browser\m2c.spec.ts:196:5 › late saved-baseline and restore responses cannot overwrite a newer selection or draft (3.6s)
+
+  6 passed (32.0s)
