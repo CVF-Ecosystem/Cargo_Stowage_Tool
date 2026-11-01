@@ -2,9 +2,13 @@
 
 Cập nhật: **01-11-2026**.
 
-## Kế hoạch vừa chốt — chưa thi công
+## Ưu tiên CVF-DEV — DESIGN
 
-[Roadmap bổ sung](../roadmaps/SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md) chèn ba phần trước M2d: SUP-01 viewer rõ/mượt; SUP-02 dữ liệu hàng cập nhật theo revision và profile tàu/tọa độ; SUP-03 dựng packing/bó/ống chi tiết theo dữ liệu có thể bổ sung. [Review](../reviews/SCST_3D_SUPPLEMENT_ROADMAP_REVIEW.md) phân biệt kế hoạch với phần đang chạy. Bước kế tiếp khi được chọn là SPEC SUP-01, chưa có work order app active. Tọa độ VINAFCO đã kiểm đúng, không có lỗi translation còn chờ sửa.
+Theo chỉ đạo mới, [CVF-DEV](SCST_CVF_DEVELOPMENT_ADOPTION.md) đi trước SUP-01 và duy trì xuyên suốt: bản đồ reuse, vai trò, đường gọi kiểm, proof và learning. Có kit/receipt cục bộ; hook tự động local chưa cài theo kiểm tra hiện tại, hosted CI/live-provider chưa xác minh trong lượt này. Bước tiếp theo là đối chiếu hữu hạn rồi SPEC/WORK_ORDER cho khoảng trống có bằng chứng. Chưa sửa hook/gate/CI hoặc app.
+
+## Kế hoạch 3D đã chốt — chưa thi công
+
+[Roadmap bổ sung](../roadmaps/SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md) chèn ba phần trước M2d: SUP-01 viewer rõ/mượt; SUP-02 dữ liệu hàng cập nhật theo revision và profile tàu/tọa độ; SUP-03 dựng packing/bó/ống chi tiết theo dữ liệu có thể bổ sung. [Review](../reviews/SCST_3D_SUPPLEMENT_ROADMAP_REVIEW.md) phân biệt kế hoạch với phần đang chạy. SPEC SUP-01 đi sau checkpoint CVF-DEV; chưa có work order app active. Tọa độ VINAFCO đã kiểm đúng, không có lỗi translation còn chờ sửa.
 
 ## Hiện tại — đơn vị hiển thị kg/cm/m
 
@@ -62,4 +66,4 @@ Demo synthetic BOX một lớp, bảng/3D/2D cùng dữ liệu, giới hạn ch�
 
 ## Bước tiếp theo
 
-M2c và đơn vị hiển thị đã giao kỹ thuật. Theo chỉ đạo mới, chi tiết hóa SUP-01 trước, sau đó SUP-02/SUP-03 đúng lượt và checkpoint tích hợp rồi M2d. Chưa thi công phần bổ sung. M3 nhiều tầng/case thực, M4 AI tùy chọn và M5 vận hành giữ riêng; dữ liệu thiếu có đường bổ sung, nghiệm thu nghiệp vụ/vận hành vẫn chờ.
+M2c và đơn vị hiển thị đã giao kỹ thuật. Theo chỉ đạo mới nhất, ưu tiên CVF-DEV trước SPEC SUP-01; sau đó SUP-02/SUP-03 đúng lượt và checkpoint tích hợp rồi M2d. Chưa thi công phần bổ sung. M3 nhiều tầng/case thực, M4 AI tùy chọn và M5 vận hành giữ riêng; dữ liệu thiếu có đường bổ sung, nghiệm thu nghiệp vụ/vận hành vẫn chờ.

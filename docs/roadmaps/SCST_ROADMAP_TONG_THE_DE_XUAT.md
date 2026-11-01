@@ -6,6 +6,8 @@ Status: ACTIVE
 
 **Bổ sung đã chốt 01-11-2026:** [SUP-01 viewer → SUP-02 dữ liệu/profile → SUP-03 packing](SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md) được chèn trước M2d; chưa mở thi công. Bảng mốc đã đăng ký ở dưới giữ nguyên để bảo toàn các work order lịch sử.
 
+**Ưu tiên bổ sung CVF-DEV:** [áp dụng CVF trong quá trình dựng tool](../project/SCST_CVF_DEVELOPMENT_ADOPTION.md) trước SPEC SUP-01 và xuyên suốt các mốc: reuse, vai trò, điểm gọi kiểm, bằng chứng và learning. Đây là cập nhật DESIGN, chưa mở BUILD hoặc tuyên bố đã kiểm soát đầy đủ agent.
+
 ## Mục tiêu và phạm vi
 
 Tạo tool local cho một người dùng chính: **nhập hàng + hầm → lập phương án sơ bộ → xem bảng/3D → chỉnh và kiểm lại → lưu, so sánh, xuất PDF/Excel**. Core chạy được khi tắt AI. Giao diện và tooltip tiếng Việt, ngày dd-mm-yyyy.
@@ -106,7 +108,7 @@ Cargo_Stowage_Tool/
 
 **M0 đã xong.** Owner thống nhất ngày 31-10-2026 ba điểm: (1) local-first, một người dùng và ranh giới nghiệp vụ; (2) đầu ra/thứ tự M1–M5, AI tùy chọn; (3) một repository với FE/BE và các lớp trách nhiệm như cây dự kiến.
 
-**Hiện tại:** M2c và lượt sửa đơn vị kg/cm/m đã đạt kiểm kỹ thuật. Owner đã chốt [roadmap bổ sung 3D và dữ liệu](SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md) trước M2d. Bước tiếp theo khi được chọn là SPEC SUP-01 rồi WORK_ORDER có phạm vi; chưa mở BUILD. Các SUP sau chỉ ở mức tổng thể. Nghiệm thu nghiệp vụ/vận hành vẫn riêng.
+**Hiện tại:** M2c và lượt sửa đơn vị kg/cm/m đã đạt kiểm kỹ thuật. Owner đã chốt [roadmap bổ sung 3D và dữ liệu](SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md) trước M2d. Bước ưu tiên là đối chiếu CVF-DEV rồi SPEC/WORK_ORDER giới hạn cho gap đã xác minh; sau checkpoint mới SPEC SUP-01. Chưa mở BUILD. Các SUP sau chỉ ở mức tổng thể. Nghiệm thu nghiệp vụ/vận hành vẫn riêng.
 
 Bản M1 trong archive là nguồn tham khảo; kết quả test cũ không tự trở thành nghiệm thu cho hướng mới.
 

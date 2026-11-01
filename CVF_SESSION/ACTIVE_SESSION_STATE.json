@@ -13,9 +13,9 @@
     "REVIEW",
     "FREEZE"
   ],
-  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_3D_SUPPLEMENT_ROADMAP.md",
-  "nextAllowedMove": "Supplemental roadmap finalized for planning; prepare bounded SPEC SUP-01 when selected, then WORK_ORDER before BUILD. SUP-02/03 and M2d remain future work.",
-  "parkedOperatorCheckpoint": "App implementation, M2d export, M3 multilayer/domain acceptance and M4 AI remain separate; missing source fields may be supplemented per cargo revision.",
+  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_CVF_DEV_ADOPTION.md",
+  "nextAllowedMove": "Prioritize bounded CVF-DEV adoption reconciliation, then SPEC/WORK_ORDER for evidenced project-local gaps before SPEC SUP-01. No BUILD or provider call authorized.",
+  "parkedOperatorCheckpoint": "App SUP-01/02/03, M2d, M3 and M4 remain future work; live governance proof, hook/CI changes and full adoption claims need their own scoped authority and evidence.",
   "activeRole": "SESSION_SYNC_STEWARD",
   "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",
   "updatedAt": "2026-11-01"

@@ -133,6 +133,8 @@ Frontend hiển thị kết quả từ backend; chỉnh sửa cần được ki�
 
 ## Lộ trình phát triển
 
+Ưu tiên [CVF-DEV — áp dụng CVF tại project](docs/project/SCST_CVF_DEVELOPMENT_ADOPTION.md) trước SUP-01: vai trò, điểm gọi kiểm, bằng chứng và learning xuyên suốt. Checkpoint đang ở DESIGN, chưa nghiệm thu áp dụng đầy đủ.
+
 Hướng bổ sung vừa chốt: **SUP-01 viewer 3D → SUP-02 dữ liệu hàng/profile theo phiên bản → SUP-03 packing chi tiết → M2d xuất báo cáo**. Xem [roadmap bổ sung](docs/roadmaps/SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md); ba phần này chưa triển khai, chưa mở SPEC/WORK_ORDER thi công.
 
 | Mốc | Kết quả hướng tới | Trạng thái |
@@ -192,4 +194,4 @@ Lượt chỉnh đơn vị hiển thị đã đạt **31 browser test**; dữ li
 | [Mục lục tài liệu](docs/INDEX.md) | Điều hướng hồ sơ project |
 | [Kho lưu trữ](archive/README.md) | Lịch sử, tài liệu cũ và bản thử đã dừng |
 
-Project áp dụng CVF để quản lý quá trình phát triển. Agent và người tiếp quản đọc [AGENTS.md](AGENTS.md) cùng [session memory](CVF_SESSION_MEMORY.md) trước khi thay đổi project. Cấu hình CVF phục vụ quy trình phát triển; app M1 không tích hợp AI hoặc CVF runtime.
+Thiết kế [áp dụng CVF trong quá trình dựng tool](docs/project/SCST_CVF_DEVELOPMENT_ADOPTION.md) phân biệt bộ kit hiện có, điểm gọi đã có receipt và phần chưa được chứng minh. Agent và người tiếp quản đọc [AGENTS.md](AGENTS.md) cùng [session memory](CVF_SESSION_MEMORY.md) trước khi thay đổi project. Cấu hình CVF phục vụ quy trình phát triển; app hiện tại chưa tích hợp AI hoặc CVF runtime.

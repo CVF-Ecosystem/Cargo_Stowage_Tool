@@ -1,0 +1,27 @@
+{
+  "base": "57120832ae8445837d1f8cd2cbf8d53d38ae1411",
+  "scope": "Documentation/source integrity only; no behavioral governance proof",
+  "checks": {
+    "implementation_gate_policy_ci_core_untouched": true,
+    "historical_specs_orders_reviews_untouched": true,
+    "overall_authority_section_preserved": true,
+    "supplement_authority_section_preserved": true,
+    "old_authority_bindings_unchanged": true,
+    "only_one_additive_authority": true,
+    "adoption_coverage_valid": true,
+    "supplement_coverage_valid": true,
+    "design_not_verified_or_build_authority": true,
+    "no_future_spec_or_order_created": true,
+    "design_phase_agrees": true,
+    "active_handoff_indexed": true,
+    "next_parked_move_agree": true,
+    "no_build_or_full_adoption_claim_in_truth": true,
+    "existing_technical_and_business_status_preserved": true,
+    "changed_markdown_links_exist": true,
+    "user_package_excluded_from_stage": true,
+    "hook_config_query_known": true,
+    "documented_hook_baseline_matches": true
+  },
+  "passed": true,
+  "app_tests_rerun": false
+}

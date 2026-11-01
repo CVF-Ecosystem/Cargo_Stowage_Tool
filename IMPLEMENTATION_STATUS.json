@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "SUPPLEMENTAL_ROADMAP_FINALIZED_RUNTIME_UNCHANGED",
+  "overallStatus": "CVF_DEV_ADOPTION_DESIGN_PRIORITY_RUNTIME_UNCHANGED",
   "currentPhase": "DESIGN",
   "completedCapabilities": [],
   "activeWorkOrders": [],
@@ -13,7 +13,8 @@
     "Malformed stored timestamps make list unavailable until repaired; app reports error, never silently skips/resets DB. Good records remain accessible by ID.",
     "TestClient/httpx deprecation and Three.js chunk warning remain; separate parent-container maintenance condition unchanged.",
     "UI rounds detail to kg/cm and totals to tonnes2decimals; only explicitly edited fields change underlying exact data. Display rounding is not a geometry/mass tolerance. CSV exchange keeps header mm/kg.",
-    "SUP-01 viewer improvements, SUP-02 evolving cargo/profile revisions and SUP-03 detailed packing are planned only, NOT_STARTED. Current fixed PIPE-LIST source is unchanged until a bounded new contract is implemented."
+    "SUP-01 viewer improvements, SUP-02 evolving cargo/profile revisions and SUP-03 detailed packing are planned only, NOT_STARTED. Current fixed PIPE-LIST source is unchanged until a bounded new contract is implemented.",
+    "CVF development adoption is being prioritized at DESIGN: kit/local document receipts exist, automatic local pre-commit hook absent in current inspection; hosted CI and live agent-governance proof not established by this task. No full adoption claim."
   ],
   "evidence": [
     "docs/project/PROJECT_STATUS.md",
@@ -59,7 +60,9 @@
     "docs/reviews/SCST_DISPLAY_UNITS_EVIDENCE/reviewed-source-manifest.json",
     "docs/roadmaps/SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md",
     "docs/reviews/SCST_3D_SUPPLEMENT_ROADMAP_REVIEW.md",
-    "docs/reviews/SCST_3D_SUPPLEMENT_EVIDENCE/coordinate-check.json"
+    "docs/reviews/SCST_3D_SUPPLEMENT_EVIDENCE/coordinate-check.json",
+    "docs/project/SCST_CVF_DEVELOPMENT_ADOPTION.md",
+    "docs/reviews/SCST_CVF_DEV_DESIGN_REVIEW.md"
   ],
   "updatedAt": "2026-11-01",
   "x_verifiedMilestones": [
@@ -122,7 +125,29 @@
         "implementationStatus": "NOT_STARTED"
       }
     ],
-    "nextSpecification": "SUP-01",
+    "nextSpecification": "SUP-01 after CVF-DEV checkpoint",
     "buildAuthorized": false
+  },
+  "x_cvfDevelopmentAdoption": {
+    "design": "docs/project/SCST_CVF_DEVELOPMENT_ADOPTION.md",
+    "status": "DESIGN_ONLY",
+    "criteria": [
+      {
+        "id": "DEV-01",
+        "state": "IMPLEMENTED_UNPROVED"
+      },
+      {
+        "id": "DEV-02",
+        "state": "UNKNOWN"
+      },
+      {
+        "id": "DEV-03",
+        "state": "UNKNOWN"
+      }
+    ],
+    "liveGovernanceProof": "NOT_RUN",
+    "hostedCiObservedThisTask": false,
+    "buildAuthorized": false,
+    "nextSpecification": "CVF-DEV for evidenced gaps"
   }
 }

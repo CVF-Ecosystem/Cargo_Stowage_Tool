@@ -1,6 +1,6 @@
 # SCST — Supplemental 3D and evolving-data roadmap
 
-Status: ACTIVE
+Status: SUPERSEDED
 
 ## Current State
 

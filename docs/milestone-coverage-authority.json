@@ -40,6 +40,10 @@
     "SCST-3D-SUPPLEMENT": {
       "path": "docs/roadmaps/SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md",
       "heading": "## Phạm vi và đầu ra"
+    },
+    "SCST-CVF-DEV": {
+      "path": "docs/project/SCST_CVF_DEVELOPMENT_ADOPTION.md",
+      "heading": "## Đầu ra checkpoint CVF-DEV"
     }
   }
 }

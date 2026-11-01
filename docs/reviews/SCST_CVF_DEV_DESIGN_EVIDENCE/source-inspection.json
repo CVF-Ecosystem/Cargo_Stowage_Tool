@@ -1,0 +1,14 @@
+{
+  "base": "57120832ae8445837d1f8cd2cbf8d53d38ae1411",
+  "checked_at_utc": "2026-11-01T07:22:38.617194+00:00",
+  "scope": "Read-only source/configuration inspection; not governance behavior proof",
+  "profile": "cvf.downstreamGateProfile@1.2.0",
+  "core_hooksPath_configured": false,
+  "resolved_default_pre_commit_hook_present": false,
+  "hosted_ci_observed_this_task": false,
+  "live_governance_provider_call": "NOT_RUN",
+  "knowledge_files": [
+    "knowledge/README.md"
+  ],
+  "claim": "No automatic hook or hosted CI enforcement proven by this inspection"
+}

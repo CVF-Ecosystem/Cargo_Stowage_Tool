@@ -3,16 +3,20 @@
 Status: ACTIVE
 
 Ngày 01-11-2026 owner chốt **roadmap bổ sung trước khi triển khai**. Tài liệu này là kế hoạch,
-không phải SPEC, WORK_ORDER hay quyền BUILD. Chỉ lập SPEC chi tiết cho SUP-01 khi được chọn;
+không phải SPEC, WORK_ORDER hay quyền BUILD. Ưu tiên checkpoint CVF-DEV theo chỉ đạo bổ sung; sau đó mới lập SPEC SUP-01;
 SUP-02 và SUP-03 được mô tả ở mức kết quả, sẽ chốt contract và giới hạn khi đến lượt.
 
 Hệ tọa độ VINAFCO hiện hành đã được kiểm trước khi lập kế hoạch: 6 điểm mốc và 12 trường hợp
 hàng trong runtime; đây không phải lỗi mới cần sửa. Hai gói handoff có 23 file chung trùng byte;
 gói mới chỉ bổ sung tài liệu audit (file cache Python không thuộc nguồn đã bỏ). Audit là nguồn tham khảo, không tự thay đổi quyền triển khai.
 
+## CVF trong quá trình dựng tool
+
+Ưu tiên **CVF-DEV** theo [thiết kế áp dụng tại project](../project/SCST_CVF_DEVELOPMENT_ADOPTION.md) trước SUP-01. CVF áp dụng xuyên suốt: vai trò, SPEC/WORK_ORDER, điểm gọi kiểm, bằng chứng, continuity và learning. Core dùng chung vẫn read-only; project tái sử dụng kit và chỉ bổ sung kết nối thiếu đã xác minh. M4 riêng cho AI/CVF trong sản phẩm. Checkpoint CVF-DEV chưa được nghiệm thu; không suy ra agent governance từ doctor hoặc document PASS.
+
 ## Vị trí trong roadmap
 
-Bổ sung **SUP-01 → SUP-02 → SUP-03 → kiểm tra tích hợp** sau M2c và sửa đơn vị hiển thị,
+Ưu tiên **CVF-DEV**, rồi **SUP-01 → SUP-02 → SUP-03 → kiểm tra tích hợp** sau M2c và sửa đơn vị hiển thị,
 trước M2d xuất báo cáo. Sau đó tiếp tục M2d xuất PDF/XLSX → M3 case thực và nhiều tầng;
 M4 AI là tùy chọn, M5 hoàn thiện vận hành. M0–M5 và điều kiện của chúng giữ nguyên theo
 [roadmap tổng thể](SCST_ROADMAP_TONG_THE_DE_XUAT.md); tài liệu này bổ sung thứ tự, không sửa bảng cũ.
@@ -119,7 +123,7 @@ Kết quả checkpoint là quyết định tiếp tục M2d hoặc ghi nhận ph
     "output": "docs/roadmaps/SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md",
     "budgetMinutes": 45,
     "stop": "Supplemental roadmap reviewed and synchronized, or planning budget/scope boundary",
-    "next": "Only SUP-01 may be detailed next in SPEC and then WORK_ORDER when requested; no implementation now"
+    "next": "CVF-DEV adoption reconciliation and bounded SPEC/WORK_ORDER take priority; SUP-01 follows its checkpoint, no implementation now"
   },
   "rows": [
     {

@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
   "updatedAt": "2026-11-01",
-  "claimBoundary": "Supplemental roadmap finalized as planning only; SUP-01/02/03 unimplemented. Earlier runtime verification and business acceptance boundaries retained.",
+  "claimBoundary": "CVF-DEV adoption design prioritized before SUP-01; no new enforcement, live-governance or full adoption claim. Runtime and product acceptance unchanged.",
   "artifacts": [
     {
       "id": "schema-artifact-registry",
@@ -63,9 +63,9 @@
     {
       "id": "continuity-initial-handoff",
       "family": "continuity",
-      "path": "CVF_SESSION/handoffs/AGENT_HANDOFF_3D_SUPPLEMENT_ROADMAP.md",
+      "path": "CVF_SESSION/handoffs/AGENT_HANDOFF_CVF_DEV_ADOPTION.md",
       "status": "ACTIVE",
-      "description": "Active finalized supplemental roadmap handoff; next SPEC SUP-01, no implementation order."
+      "description": "Active CVF-DEV adoption DESIGN handoff; bounded reconciliation before SUP-01, no BUILD."
     },
     {
       "id": "truth-implementation-status",
@@ -100,7 +100,7 @@
       "family": "governed_artifact_family",
       "path": "docs/roadmaps",
       "status": "ACTIVE",
-      "description": "Overall M0-M5 roadmap plus finalized SUP-01 viewer/SUP-02 revisions and profiles/SUP-03 packing supplement before M2d; none implemented."
+      "description": "Overall and supplemental product roadmaps; CVF-DEV adoption checkpoint takes priority before SUP-01."
     },
     {
       "id": "family-specs",
@@ -156,7 +156,7 @@
       "family": "implementation_truth",
       "path": "docs/project/PROJECT_STATUS.md",
       "status": "ACTIVE",
-      "description": "Current runtime truth and finalized supplemental planning sequence; no new implementation."
+      "description": "Runtime truth and CVF-DEV design priority; app unchanged, no full adoption claim."
     },
     {
       "id": "manifest-organization",
@@ -170,7 +170,14 @@
       "family": "manifest",
       "path": "docs/milestone-coverage-authority.json",
       "status": "ACTIVE",
-      "description": "Milestone source bindings including additive SCST-3D-SUPPLEMENT; historical authority sections preserved."
+      "description": "Milestone source bindings including additive CVF-DEV authority; historical sections preserved."
+    },
+    {
+      "id": "design-cvf-development-adoption",
+      "family": "implementation_truth",
+      "path": "docs/project/SCST_CVF_DEVELOPMENT_ADOPTION.md",
+      "status": "ACTIVE",
+      "description": "CVF development adoption DESIGN and source matrix; DEV criteria unaccepted, evidence limits and owned remainder."
     }
   ]
 }
