@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
   "updatedAt": "2026-11-01",
-  "claimBoundary": "Practical kg/cm/m UI and M2c technically verified; business/operational acceptance pending, local only.",
+  "claimBoundary": "Supplemental roadmap finalized as planning only; SUP-01/02/03 unimplemented. Earlier runtime verification and business acceptance boundaries retained.",
   "artifacts": [
     {
       "id": "schema-artifact-registry",
@@ -63,16 +63,16 @@
     {
       "id": "continuity-initial-handoff",
       "family": "continuity",
-      "path": "CVF_SESSION/handoffs/AGENT_HANDOFF_DISPLAY_UNITS.md",
+      "path": "CVF_SESSION/handoffs/AGENT_HANDOFF_3D_SUPPLEMENT_ROADMAP.md",
       "status": "ACTIVE",
-      "description": "Active delivered practical display units repair handoff; predecessors preserved."
+      "description": "Active finalized supplemental roadmap handoff; next SPEC SUP-01, no implementation order."
     },
     {
       "id": "truth-implementation-status",
       "family": "implementation_truth",
       "path": "IMPLEMENTATION_STATUS.json",
       "status": "ACTIVE",
-      "description": "M1/VINAFCO/M2a/PIPE-LIST/M2b/M2c technical truth; business/measured hold acceptance separate."
+      "description": "Earlier verified runtime plus separate NOT_STARTED supplemental roadmap; business acceptance pending."
     },
     {
       "id": "view-docs-index",
@@ -100,7 +100,7 @@
       "family": "governed_artifact_family",
       "path": "docs/roadmaps",
       "status": "ACTIVE",
-      "description": "Agreed overall roadmap; M2c technically verified, M2d not opened."
+      "description": "Overall M0-M5 roadmap plus finalized SUP-01 viewer/SUP-02 revisions and profiles/SUP-03 packing supplement before M2d; none implemented."
     },
     {
       "id": "family-specs",
@@ -156,7 +156,7 @@
       "family": "implementation_truth",
       "path": "docs/project/PROJECT_STATUS.md",
       "status": "ACTIVE",
-      "description": "Delivered practical display kg/cm/m repair and M2c workflow; next checkpoint separate."
+      "description": "Current runtime truth and finalized supplemental planning sequence; no new implementation."
     },
     {
       "id": "manifest-organization",
@@ -170,7 +170,7 @@
       "family": "manifest",
       "path": "docs/milestone-coverage-authority.json",
       "status": "ACTIVE",
-      "description": "Milestone source bindings: live roadmap, frozen skeleton dispatch snapshot and SPEC M1 acceptance; M1 reuse order technically closed."
+      "description": "Milestone source bindings including additive SCST-3D-SUPPLEMENT; historical authority sections preserved."
     }
   ]
 }

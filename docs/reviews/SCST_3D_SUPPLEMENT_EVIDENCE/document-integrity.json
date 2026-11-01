@@ -1,0 +1,26 @@
+{
+  "base": "3b03aa61b49a73bdefde3ffa5cb3f83ac824916e",
+  "scope": "Documentation integrity only; no new application or AI governance proof",
+  "checks": {
+    "runtime_scripts_contracts_tests_archive_cvf_unchanged": true,
+    "closed_specs_orders_reviews_unchanged": true,
+    "roadmap_navigation_restored": true,
+    "historical_roadmap_authority_section_preserved": true,
+    "historical_authority_bindings_preserved": true,
+    "only_additive_supplement_authority": true,
+    "new_authority_hash_current": true,
+    "new_authority_binding_matches": true,
+    "three_future_rows_unimplemented": true,
+    "planning_only_no_build_claim": true,
+    "no_future_spec_created": true,
+    "canonical_design_continuity": true,
+    "next_move_and_parked_checkpoint_agree": true,
+    "no_active_build_order": true,
+    "changed_document_local_links_exist": true,
+    "source_identity_receipt_complete": true,
+    "local_audit_identity_retained": true,
+    "raw_user_package_not_staged": true
+  },
+  "passed": true,
+  "app_tests_rerun": false
+}

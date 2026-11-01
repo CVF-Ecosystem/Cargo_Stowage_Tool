@@ -4,6 +4,8 @@ Status: ACTIVE
 
 **Bản v0.3 · cập nhật tiến độ 01-11-2026.** Owner đã thống nhất hướng, bổ sung hình tàu, M2a và nguồn list ống V1.1. M1, VINAFCO268, M2a, nguồn list ống, M2b và M2c đạt kiểm kỹ thuật; nghiệm thu nghiệp vụ và điều kiện dùng thực vẫn tách riêng. Phạm vi từng phần được giới hạn trong SPEC/WORK_ORDER.
 
+**Bổ sung đã chốt 01-11-2026:** [SUP-01 viewer → SUP-02 dữ liệu/profile → SUP-03 packing](SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md) được chèn trước M2d; chưa mở thi công. Bảng mốc đã đăng ký ở dưới giữ nguyên để bảo toàn các work order lịch sử.
+
 ## Mục tiêu và phạm vi
 
 Tạo tool local cho một người dùng chính: **nhập hàng + hầm → lập phương án sơ bộ → xem bảng/3D → chỉnh và kiểm lại → lưu, so sánh, xuất PDF/Excel**. Core chạy được khi tắt AI. Giao diện và tooltip tiếng Việt, ngày dd-mm-yyyy.
@@ -42,7 +44,7 @@ Owner đồng ý ngày 31-10-2026 bổ sung lớp hình tàu để nhìn vị tr
 
 Orchestrator đưa phần M2 vào SPEC M2c khi đến lượt; agent chứng minh hiển thị/chọn hàng và đối chiếu số liệu trước checkpoint owner. M3 phụ thuộc dữ liệu tàu/hầm do owner cung cấp. Hiện chỉ chốt phạm vi/đầu ra; chưa chọn mesh, thư viện bổ sung hoặc danh sách file triển khai.
 
-## Tiến độ phần đang làm — M2b
+## Tiến độ đã đạt — M2b
 
 M2a và nguồn list ống đã có: nhập tay/CSV/lưu-mở,31nhóm/1076bó/21226ống, nguồn/provenance và khối bao chính xác được giữ. Xem [SPEC M2a](../specs/SCST_M2A.md), [review nguồn](../reviews/SCST_PIPE_LIST_REVIEW.md). Hầm vẫn ước tính,16bó nguồn cần xác minh khối bao; chưa nghiệm thu dùng thực.
 
@@ -104,7 +106,7 @@ Cargo_Stowage_Tool/
 
 **M0 đã xong.** Owner thống nhất ngày 31-10-2026 ba điểm: (1) local-first, một người dùng và ranh giới nghiệp vụ; (2) đầu ra/thứ tự M1–M5, AI tùy chọn; (3) một repository với FE/BE và các lớp trách nhiệm như cây dự kiến.
 
-**Hiện tại: REVIEW kỹ thuật M2c đã đạt**, với giữ gốc, so sánh đầy đủ và khôi phục theo [SPEC M2c](../specs/SCST_M2C.md), [review](../reviews/SCST_M2C_REVIEW.md). Các mốc trước có review riêng; nghiệm thu nghiệp vụ tách riêng. Phần kế tiếp là M2d xuất PDF/XLSX, chỉ chi tiết hóa SPEC/WORK_ORDER khi được chọn; chưa tự mở BUILD. Endpoint, schema và danh sách file nằm trong SPEC của từng phần.
+**Hiện tại:** M2c và lượt sửa đơn vị kg/cm/m đã đạt kiểm kỹ thuật. Owner đã chốt [roadmap bổ sung 3D và dữ liệu](SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md) trước M2d. Bước tiếp theo khi được chọn là SPEC SUP-01 rồi WORK_ORDER có phạm vi; chưa mở BUILD. Các SUP sau chỉ ở mức tổng thể. Nghiệm thu nghiệp vụ/vận hành vẫn riêng.
 
 Bản M1 trong archive là nguồn tham khảo; kết quả test cũ không tự trở thành nghiệm thu cho hướng mới.
 

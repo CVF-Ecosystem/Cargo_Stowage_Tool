@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "PRACTICAL_DISPLAY_TECHNICALLY_VERIFIED_BUSINESS_PENDING",
-  "currentPhase": "REVIEW",
+  "overallStatus": "SUPPLEMENTAL_ROADMAP_FINALIZED_RUNTIME_UNCHANGED",
+  "currentPhase": "DESIGN",
   "completedCapabilities": [],
   "activeWorkOrders": [],
   "knownLimitations": [
@@ -12,7 +12,8 @@
     "BOX/single-layer; VINAFCO hull dimensions sourced, hold/cabin/lines estimated. Onboard cargo outside target hold. No stability/strength/floor-load verification.",
     "Malformed stored timestamps make list unavailable until repaired; app reports error, never silently skips/resets DB. Good records remain accessible by ID.",
     "TestClient/httpx deprecation and Three.js chunk warning remain; separate parent-container maintenance condition unchanged.",
-    "UI rounds detail to kg/cm and totals to tonnes2decimals; only explicitly edited fields change underlying exact data. Display rounding is not a geometry/mass tolerance. CSV exchange keeps header mm/kg."
+    "UI rounds detail to kg/cm and totals to tonnes2decimals; only explicitly edited fields change underlying exact data. Display rounding is not a geometry/mass tolerance. CSV exchange keeps header mm/kg.",
+    "SUP-01 viewer improvements, SUP-02 evolving cargo/profile revisions and SUP-03 detailed packing are planned only, NOT_STARTED. Current fixed PIPE-LIST source is unchanged until a bounded new contract is implemented."
   ],
   "evidence": [
     "docs/project/PROJECT_STATUS.md",
@@ -55,7 +56,10 @@
     "docs/specs/SCST_DISPLAY_UNITS.md",
     "docs/work_orders/SCST_DISPLAY_UNITS.md",
     "docs/reviews/SCST_DISPLAY_UNITS_REVIEW.md",
-    "docs/reviews/SCST_DISPLAY_UNITS_EVIDENCE/reviewed-source-manifest.json"
+    "docs/reviews/SCST_DISPLAY_UNITS_EVIDENCE/reviewed-source-manifest.json",
+    "docs/roadmaps/SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md",
+    "docs/reviews/SCST_3D_SUPPLEMENT_ROADMAP_REVIEW.md",
+    "docs/reviews/SCST_3D_SUPPLEMENT_EVIDENCE/coordinate-check.json"
   ],
   "updatedAt": "2026-11-01",
   "x_verifiedMilestones": [
@@ -101,5 +105,24 @@
       "businessAcceptance": "PENDING",
       "evidence": "docs/reviews/SCST_DISPLAY_UNITS_REVIEW.md"
     }
-  ]
+  ],
+  "x_plannedSupplement": {
+    "roadmap": "docs/roadmaps/SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md",
+    "milestones": [
+      {
+        "id": "SUP-01",
+        "implementationStatus": "NOT_STARTED"
+      },
+      {
+        "id": "SUP-02",
+        "implementationStatus": "NOT_STARTED"
+      },
+      {
+        "id": "SUP-03",
+        "implementationStatus": "NOT_STARTED"
+      }
+    ],
+    "nextSpecification": "SUP-01",
+    "buildAuthorized": false
+  }
 }

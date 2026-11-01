@@ -2,6 +2,10 @@
 
 Cập nhật: **01-11-2026**.
 
+## Kế hoạch vừa chốt — chưa thi công
+
+[Roadmap bổ sung](../roadmaps/SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md) chèn ba phần trước M2d: SUP-01 viewer rõ/mượt; SUP-02 dữ liệu hàng cập nhật theo revision và profile tàu/tọa độ; SUP-03 dựng packing/bó/ống chi tiết theo dữ liệu có thể bổ sung. [Review](../reviews/SCST_3D_SUPPLEMENT_ROADMAP_REVIEW.md) phân biệt kế hoạch với phần đang chạy. Bước kế tiếp khi được chọn là SPEC SUP-01, chưa có work order app active. Tọa độ VINAFCO đã kiểm đúng, không có lỗi translation còn chờ sửa.
+
 ## Hiện tại — đơn vị hiển thị kg/cm/m
 
 Đã sửa theo góp ý owner: số tổng bằng tấn tối đa hai số lẻ, chi tiết bằng kg nguyên, kích thước/tọa độ bằng cm nguyên hoặc m hai số lẻ. Ô nhập hiển thị gọn nhưng chỉ trường thực sự sửa mới cập nhật số gốc; sửa góc/yêu cầu không làm tròn các dữ liệu khác. So sánh nhỏ hơn mức hiển thị có nhãn rõ, không bị coi bằng nhau. Không đổi dung sai hình học/khối lượng.
@@ -58,4 +62,4 @@ Demo synthetic BOX một lớp, bảng/3D/2D cùng dữ liệu, giới hạn ch�
 
 ## Bước tiếp theo
 
-M2c đã được đội phát triển kiểm nội bộ và bàn giao bằng chứng. Phần kế tiếp theo roadmap là M2d xuất PDF/XLSX, cần SPEC/WORK_ORDER riêng khi owner chọn tiếp tục. M3 nhiều tầng/dữ liệu thực, M4 AI tùy chọn và M5 vận hành giữ riêng. Đo hầm, 16 source envelopes, stability/strength/floorload và business/operational acceptance còn chờ; không suy diễn từ kết quả kiểm hiện tại.
+M2c và đơn vị hiển thị đã giao kỹ thuật. Theo chỉ đạo mới, chi tiết hóa SUP-01 trước, sau đó SUP-02/SUP-03 đúng lượt và checkpoint tích hợp rồi M2d. Chưa thi công phần bổ sung. M3 nhiều tầng/case thực, M4 AI tùy chọn và M5 vận hành giữ riêng; dữ liệu thiếu có đường bổ sung, nghiệm thu nghiệp vụ/vận hành vẫn chờ.

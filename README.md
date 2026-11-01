@@ -133,6 +133,8 @@ Frontend hiển thị kết quả từ backend; chỉnh sửa cần được ki�
 
 ## Lộ trình phát triển
 
+Hướng bổ sung vừa chốt: **SUP-01 viewer 3D → SUP-02 dữ liệu hàng/profile theo phiên bản → SUP-03 packing chi tiết → M2d xuất báo cáo**. Xem [roadmap bổ sung](docs/roadmaps/SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md); ba phần này chưa triển khai, chưa mở SPEC/WORK_ORDER thi công.
+
 | Mốc | Kết quả hướng tới | Trạng thái |
 |---|---|---|
 | M0 — Thống nhất hướng | Phạm vi, thứ tự phát triển và kiến trúc tổng thể | Đã thống nhất |

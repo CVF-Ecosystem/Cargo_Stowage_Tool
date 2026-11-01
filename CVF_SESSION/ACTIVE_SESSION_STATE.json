@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "REVIEW",
-  "activePhase": "REVIEW",
+  "currentMode": "DESIGN",
+  "activePhase": "DESIGN",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -13,9 +13,9 @@
     "REVIEW",
     "FREEZE"
   ],
-  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_DISPLAY_UNITS.md",
-  "nextAllowedMove": "Owner reviews practical kg/cm/m display repair; next roadmap slice M2d needs separate SPEC/WORK_ORDER when selected, no automatic implementation.",
-  "parkedOperatorCheckpoint": "Measuredhold/16sourceenvelopes and business/operational acceptance pending; M2d/M3 separate.",
+  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_3D_SUPPLEMENT_ROADMAP.md",
+  "nextAllowedMove": "Supplemental roadmap finalized for planning; prepare bounded SPEC SUP-01 when selected, then WORK_ORDER before BUILD. SUP-02/03 and M2d remain future work.",
+  "parkedOperatorCheckpoint": "App implementation, M2d export, M3 multilayer/domain acceptance and M4 AI remain separate; missing source fields may be supplemented per cargo revision.",
   "activeRole": "SESSION_SYNC_STEWARD",
   "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",
   "updatedAt": "2026-11-01"

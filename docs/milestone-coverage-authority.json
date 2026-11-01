@@ -36,6 +36,10 @@
     "SCST-DISPLAY-UNITS": {
       "path": "docs/specs/SCST_DISPLAY_UNITS.md",
       "heading": "## Display acceptance"
+    },
+    "SCST-3D-SUPPLEMENT": {
+      "path": "docs/roadmaps/SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md",
+      "heading": "## Phạm vi và đầu ra"
     }
   }
 }

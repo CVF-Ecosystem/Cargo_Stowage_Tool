@@ -1,6 +1,6 @@
 # SCST — Practical display units handoff
 
-Status: ACTIVE
+Status: SUPERSEDED
 
 ## Current State
 

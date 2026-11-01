@@ -1,0 +1,40 @@
+{
+  "scope": "Source identity for roadmap planning, not proof of new feature implementation",
+  "base": "3b03aa61b49a73bdefde3ffa5cb3f83ac824916e",
+  "identical_common_files": [
+    "CARGO_IMPORT.md",
+    "HANDOFF.md",
+    "MANIFEST.json",
+    "README.md",
+    "data/LIST_BALTIMORE_HOA_PHAT_NOV.normalized.json",
+    "data/VINAFCO268_HN2642_3D.json",
+    "model/VINAFCO268_HN2642_3D.glb",
+    "requirements.txt",
+    "source/LIST_BALTIMORE_HOA_PHAT_NOV.xlsx",
+    "source/giay-dang-kiem_hn-2642_20260813-123948.pdf",
+    "tools/export_vinafco_mesh.py",
+    "tools/import_cargo_list.py",
+    "tools/preview.py",
+    "tools/rebuild.py",
+    "tools/render_sheet.py",
+    "tools/validate_model.py",
+    "validation/RELEASE_CHECK.md",
+    "validation/cargo_import_report.json",
+    "validation/cargo_import_smoke_report.json",
+    "validation/rebuild_smoke_report.json",
+    "validation/validation_report.json",
+    "visuals/VINAFCO268_HN2642_PREVIEW.png",
+    "visuals/VINAFCO268_HN2642_SO_DO_3D.png"
+  ],
+  "changed_common_files": [],
+  "added": [
+    "CVF_STEEL_CARGO_3D_AUDIT_HANDOFF_V1_0.md"
+  ],
+  "removed_generated_cache": [
+    "tools/__pycache__/import_cargo_list.cpython-311.pyc"
+  ],
+  "manifest_entries_verified": 22,
+  "audit_sha256": "08dee0f2ee23772dff57845402488fe0934ea4af6d226bd078ed561d88fa82f9",
+  "glb_sha256": "684cb4d4c7351aaba50ff4c7d23b3766656cf1e7b2b652f36357b167d83b1a5d",
+  "glb_equals_current_runtime": true
+}

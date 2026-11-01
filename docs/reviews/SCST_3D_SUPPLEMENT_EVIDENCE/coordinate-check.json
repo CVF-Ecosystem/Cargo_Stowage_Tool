@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "scope": "Read-only coordinate verification before roadmap consolidation; no runtime repair required",
+  "runtime": "http://127.0.0.1:8765",
+  "json_to_glb_formula": [
+    "x-38.9",
+    "z",
+    "-y"
+  ],
+  "glb_to_actual_scene_translation_m": [
+    -0.9725,
+    -0.832,
+    0
+  ],
+  "source_point_m": [
+    40,
+    1,
+    2
+  ],
+  "glb_point_m": [
+    1.1,
+    2,
+    -1
+  ],
+  "actual_scene_point_m": [
+    0.1275,
+    1.168,
+    -1
+  ],
+  "anchor_points_checked": 6,
+  "cargo_meshes_checked": 12,
+  "source_hold_floor_center_maps_to_scene_origin": true,
+  "hold_boundary_axes_checked": true,
+  "source_width_inset_is_existing_conservative_conversion": true,
+  "user_database_unchanged": true
+}
