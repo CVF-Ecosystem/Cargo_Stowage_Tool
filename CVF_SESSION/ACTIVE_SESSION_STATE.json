@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "WORK_ORDER",
-  "activePhase": "WORK_ORDER",
+  "currentMode": "BUILD",
+  "activePhase": "BUILD",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -14,7 +14,7 @@
     "FREEZE"
   ],
   "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_DISPLAY_UNITS.md",
-  "nextAllowedMove": "Admit practical kg/cm/m display repair under its SPEC/order, then acknowledge BUILD before worker edits; no M2d.",
+  "nextAllowedMove": "Implement four practical display criteria under 0fc26e6 admission; root independent review before technical closure, no M2d.",
   "parkedOperatorCheckpoint": "Measuredhold/16sourceenvelopes and business/operational acceptance pending; M2d/M3 separate.",
   "activeRole": "ORCHESTRATOR",
   "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",

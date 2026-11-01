@@ -4,10 +4,10 @@ Status: ACTIVE
 
 ## Current State
 
-- Current mode: WORK_ORDER
-- Active phase: WORK_ORDER
+- Current mode: BUILD
+- Active phase: BUILD
 - Active role: ORCHESTRATOR
-- Next allowed move: Admit practical kg/cm/m display repair under its SPEC/order, then acknowledge BUILD before worker edits; no M2d.
+- Next allowed move: Implement four practical display criteria under 0fc26e6 admission; root independent review before technical closure, no M2d.
 - Parked operator checkpoint: Measuredhold/16sourceenvelopes and business/operational acceptance pending; M2d/M3 separate.
 
 ## Authority and continuity
@@ -17,3 +17,7 @@ Owner01-11-2026 feedback1gram/1mm not useful, use at least kg/cm and roomy prese
 ## Design/reuse/budget
 
 UI kg/cm/m rounded only, actual Plan/mesh/source/mm/g/µm unchanged. Editor must track explicit per-field edits: rounding draftFrom/applyDraft all fields would corrupt untouched data. Default input1kg/cm, precise representable fractions accepted. Compare subresolution labels retain exact ID state, no new tolerances. CSV contract remains explicit mm/kg. Native viewer/history/snapshot reused; no backend/schema/planner change or M2d.100min total preparation/build/review, elapsed/billing partiallyUNKNOWN, no reset. No worker implementation before admission+BUILDack. Existing live8765 session99168/PID480 can serve updated dist, no backendrestart needed; no test userDB writes.
+
+## BUILD acknowledgment
+
+Canonical state/memory/handoff/truth/index re-read and agree. Material-SHA marker: 0fc26e6. Pre-dispatch6/6 and pre-commit7/7 PASS; no runtime edits before ack. Root ORCHESTRATOR dispatches Terra IMPLEMENTATION_WORKER, Sol browser worker, root independent REVIEWER retained. Four criteria, R2/local UI only;100min ceiling unchanged, no automatic M2d.

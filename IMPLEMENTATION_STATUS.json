@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "DISPLAY_UNITS_ADMITTED",
-  "currentPhase": "WORK_ORDER",
+  "overallStatus": "DISPLAY_UNITS_IN_BUILD",
+  "currentPhase": "BUILD",
   "completedCapabilities": [],
   "activeWorkOrders": [
     "docs/work_orders/SCST_DISPLAY_UNITS.md"
