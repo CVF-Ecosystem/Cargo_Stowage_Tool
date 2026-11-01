@@ -1,6 +1,6 @@
 # SCST M2c — Active handoff
 
-Status: ACTIVE
+Status: SUPERSEDED
 
 ## Current State
 

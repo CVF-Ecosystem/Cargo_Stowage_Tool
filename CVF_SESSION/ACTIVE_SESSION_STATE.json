@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "REVIEW",
-  "activePhase": "REVIEW",
+  "currentMode": "WORK_ORDER",
+  "activePhase": "WORK_ORDER",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -13,10 +13,10 @@
     "REVIEW",
     "FREEZE"
   ],
-  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_M2C.md",
-  "nextAllowedMove": "Owner reviews technically delivered M2c; next roadmap slice M2d requires separate SPEC/WORK_ORDER when selected, no automatic implementation.",
+  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_DISPLAY_UNITS.md",
+  "nextAllowedMove": "Admit practical kg/cm/m display repair under its SPEC/order, then acknowledge BUILD before worker edits; no M2d.",
   "parkedOperatorCheckpoint": "Measuredhold/16sourceenvelopes and business/operational acceptance pending; M2d/M3 separate.",
-  "activeRole": "SESSION_SYNC_STEWARD",
+  "activeRole": "ORCHESTRATOR",
   "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",
   "updatedAt": "2026-11-01"
 }

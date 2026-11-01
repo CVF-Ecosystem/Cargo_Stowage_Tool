@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
   "updatedAt": "2026-11-01",
-  "claimBoundary": "M2c technical and developer-owned workflow verified; business/operational acceptance pending, no external publication.",
+  "claimBoundary": "M2c technical delivery verified; practical display repair admitted, not implemented; business acceptance pending.",
   "artifacts": [
     {
       "id": "schema-artifact-registry",
@@ -63,9 +63,9 @@
     {
       "id": "continuity-initial-handoff",
       "family": "continuity",
-      "path": "CVF_SESSION/handoffs/AGENT_HANDOFF_M2C.md",
+      "path": "CVF_SESSION/handoffs/AGENT_HANDOFF_DISPLAY_UNITS.md",
       "status": "ACTIVE",
-      "description": "Active M2c baseline/compare/restore handoff; predecessors preservehistory."
+      "description": "Active practical display units repair handoff; M2c preserved as history."
     },
     {
       "id": "truth-implementation-status",

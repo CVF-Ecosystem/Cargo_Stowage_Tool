@@ -5,7 +5,7 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 ## Start Here
 
 - Active session/phase/role state.: `CVF_SESSION/ACTIVE_SESSION_STATE.json`
-- Active M2c baseline/compare/restore handoff; predecessors preservehistory.: `CVF_SESSION/handoffs/AGENT_HANDOFF_M2C.md`
+- Active practical display units repair handoff; M2c preserved as history.: `CVF_SESSION/handoffs/AGENT_HANDOFF_DISPLAY_UNITS.md`
 - Project continuity front door.: `CVF_SESSION_MEMORY.md`
 - CVF enforcement manifest.: `.cvf/manifest.json`
 - Milestone source bindings: live roadmap, frozen skeleton dispatch snapshot and SPEC M1 acceptance; M1 reuse order technically closed.: `docs/milestone-coverage-authority.json`
