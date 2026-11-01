@@ -4,10 +4,10 @@ Status: ACTIVE
 
 ## Current State
 
-- Current mode: WORK_ORDER
-- Active phase: WORK_ORDER
+- Current mode: BUILD
+- Active phase: BUILD
 - Active role: ORCHESTRATOR
-- Next allowed move: Dispatch six M2c criteria after admission commit and BUILD acknowledgment; no M2d.
+- Next allowed move: Implement six M2c criteria under bc14dee admission; root independent review before closure, no M2d.
 - Parked operator checkpoint: Measuredhold/16sourceenvelopes and business/operational acceptance pending; M2d/M3 separate.
 
 ## Authority/design/reuse
@@ -19,3 +19,7 @@ Use immutableSQLite snapshots, Plan/evaluate, existing editor/draft/history/M2b/
 ## Budget/continuation
 
 M2b closed, owner authorizes nextmissingM2c; not a reset of earlier branch. Prep doctor28 and boundedscan/preflight observed, elapsed/billing partlyUNKNOWN. Additional240min including180build/60review, no repairreset orautomaticM2d. Reuse priorproof; newcapability better than no-change/history-only because it explains exactchanges and keeps namedbaseline. Missing measuredhold doesn't affect diff between validatedplans; no operational claim. Live8765 session21770/PID34300 needsrefresh afterbackendchange; no realDBtestwrites. Worker waits admission+BUILD marker.
+
+## BUILD acknowledgment
+
+Canonicalsurfaces re-read andagree. Material-SHA marker: bc14dee. Root ORCHESTRATOR dispatches Terra IMPLEMENTATION_WORKER/Solbrowser on6criteria; pre-dispatch6/6 and pre-commit7/7 passed. Core c4c8767ac8861854f40d466ba338ffd11eb9558e read-only, R2, liveevidence YES forgovernanceclaims, noneplanned. Root remains independreviewer.240min ceiling unchanged; no runtime edits beforeack.

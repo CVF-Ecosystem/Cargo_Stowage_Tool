@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "WORK_ORDER",
-  "activePhase": "WORK_ORDER",
+  "currentMode": "BUILD",
+  "activePhase": "BUILD",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -14,7 +14,7 @@
     "FREEZE"
   ],
   "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_M2C.md",
-  "nextAllowedMove": "Dispatch six M2c criteria after admission commit and BUILD acknowledgment; no M2d.",
+  "nextAllowedMove": "Implement six M2c criteria under bc14dee admission; root independent review before closure, no M2d.",
   "parkedOperatorCheckpoint": "Measuredhold/16sourceenvelopes and business/operational acceptance pending; M2d/M3 separate.",
   "activeRole": "ORCHESTRATOR",
   "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",
