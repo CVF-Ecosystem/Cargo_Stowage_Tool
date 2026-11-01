@@ -89,6 +89,13 @@ Luồng dùng một viewer của B, không có hai cảnh 3D song song. So sánh
 
 Xem [SPEC đơn vị hiển thị](specs/SCST_DISPLAY_UNITS.md).
 
+## SUP-01 — Quan sát 3D và giữ góc nhìn
+
+- **Vừa khung** hoặc nút **Đặt lại góc nhìn** căn hầm/hàng và phần tàu đang hiện vào khung. **Nhìn trên** và **Nhìn mạn** đổi hướng quan sát; **Tập trung bó** dùng cho bó đã chọn và đã đặt.
+- Khi chỉnh/kiểm lại hàng, đổi trạng thái tham chiếu hoặc ẩn/hiện tàu trong cùng hầm, góc nhìn đang dùng được giữ. Thay hầm/phương tiện sẽ căn khung theo cảnh mới.
+- Trên VINAFCO, **Vật liệu gốc / Thân mờ** đổi cách thấy vỏ và vách hầm; **Ẩn tàu / Hiện tàu** điều khiển lớp tàu riêng. Các nút quan sát không đổi số liệu hoặc phương án.
+- **Mặt bằng** và chọn ID vẫn dùng được khi WebGL hoặc asset tàu gặp lỗi. Khi asset lỗi, hầm và hàng còn hiển thị; khi WebGL lỗi, app chuyển sang mặt bằng.
+
 ## Kiểm nhà phát triển
 
 ```powershell

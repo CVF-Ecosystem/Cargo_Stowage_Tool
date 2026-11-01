@@ -2,15 +2,17 @@
 
 Cập nhật: **01-11-2026**.
 
-## Ưu tiên CVF-DEV — DESIGN
+## SUP-01 đã giao kỹ thuật
 
-Theo chỉ đạo mới, [CVF-DEV](SCST_CVF_DEVELOPMENT_ADOPTION.md) đi trước SUP-01 và duy trì xuyên suốt: bản đồ reuse, vai trò, đường gọi kiểm, proof và learning. Có kit/receipt cục bộ; hook tự động local chưa cài theo kiểm tra hiện tại, hosted CI/live-provider chưa xác minh trong lượt này. Bước tiếp theo là đối chiếu hữu hạn rồi SPEC/WORK_ORDER cho khoảng trống có bằng chứng. Chưa sửa hook/gate/CI hoặc app.
+[Review SUP-01](../reviews/SCST_SUP_01_REVIEW.md): giữ scene/camera/GLB qua cập nhật cùng hầm, fit/top/side/focus, ghost thân/vách chọn lọc và diagnostics mặc định tắt. Build index-D-_1-kxf.js,36/36 browser và5/5 focused đạt; hai focused kiểm lại nơi xuất artifact sau sửa đường dẫn. Nguồn1076 có167 đặt/909 chưa đặt trong flow tải thực đã kiểm. Backend/source/profile/GLB/API và SQLite người dùng được giữ. App đang chạy chỉ cần reload để nhận frontend mới; chỉ commit local.
+
+CVF-DEV đã đối chiếu nguồn/hash và reviewer cho continuation giới hạn, mapping DA01/04/05 nằm trong brief/test/review. Full adoption/live governance/hosted CI còn riêng. Lỗi xuất27 artifact ra ngoài project đã thu hồi và sửa helper, receipt/giới hạn nằm trong review. Bước kế tiếp khi được chọn: SPEC SUP-02; chưa tự mở phần sau.
 
 ## Kế hoạch 3D đã chốt — chưa thi công
 
-[Roadmap bổ sung](../roadmaps/SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md) chèn ba phần trước M2d: SUP-01 viewer rõ/mượt; SUP-02 dữ liệu hàng cập nhật theo revision và profile tàu/tọa độ; SUP-03 dựng packing/bó/ống chi tiết theo dữ liệu có thể bổ sung. [Review](../reviews/SCST_3D_SUPPLEMENT_ROADMAP_REVIEW.md) phân biệt kế hoạch với phần đang chạy. SPEC SUP-01 đi sau checkpoint CVF-DEV; chưa có work order app active. Tọa độ VINAFCO đã kiểm đúng, không có lỗi translation còn chờ sửa.
+[Roadmap bổ sung](../roadmaps/SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md) chèn ba phần trước M2d: SUP-01 viewer rõ/mượt; SUP-02 dữ liệu hàng cập nhật theo revision và profile tàu/tọa độ; SUP-03 dựng packing/bó/ống chi tiết theo dữ liệu có thể bổ sung. [Review](../reviews/SCST_3D_SUPPLEMENT_ROADMAP_REVIEW.md) phân biệt kế hoạch với phần đang chạy. SUP-01 đã giao kỹ thuật; work order đã đóng kỹ thuật, SPEC SUP-02 chỉ mở khi được chọn. Tọa độ VINAFCO đã kiểm đúng, không có lỗi translation còn chờ sửa.
 
-## Hiện tại — đơn vị hiển thị kg/cm/m
+## Đơn vị hiển thị kg/cm/m được giữ
 
 Đã sửa theo góp ý owner: số tổng bằng tấn tối đa hai số lẻ, chi tiết bằng kg nguyên, kích thước/tọa độ bằng cm nguyên hoặc m hai số lẻ. Ô nhập hiển thị gọn nhưng chỉ trường thực sự sửa mới cập nhật số gốc; sửa góc/yêu cầu không làm tròn các dữ liệu khác. So sánh nhỏ hơn mức hiển thị có nhãn rõ, không bị coi bằng nhau. Không đổi dung sai hình học/khối lượng.
 
@@ -66,4 +68,4 @@ Demo synthetic BOX một lớp, bảng/3D/2D cùng dữ liệu, giới hạn ch�
 
 ## Bước tiếp theo
 
-M2c và đơn vị hiển thị đã giao kỹ thuật. Theo chỉ đạo mới nhất, ưu tiên CVF-DEV trước SPEC SUP-01; sau đó SUP-02/SUP-03 đúng lượt và checkpoint tích hợp rồi M2d. Chưa thi công phần bổ sung. M3 nhiều tầng/case thực, M4 AI tùy chọn và M5 vận hành giữ riêng; dữ liệu thiếu có đường bổ sung, nghiệm thu nghiệp vụ/vận hành vẫn chờ.
+M2c và đơn vị hiển thị đã giao kỹ thuật. CVF-DEV đã cho continuation giới hạn và SUP-01 đã giao kỹ thuật. Tiếp theo khi được chọn là SPEC SUP-02, rồi SUP-03 và checkpoint tích hợp trước M2d. M3 nhiều tầng/case thực, M4 AI tùy chọn và M5 vận hành giữ riêng; dữ liệu thiếu có đường bổ sung, nghiệm thu nghiệp vụ/vận hành vẫn chờ.

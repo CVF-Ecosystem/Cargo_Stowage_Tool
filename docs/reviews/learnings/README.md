@@ -35,6 +35,7 @@ Machine intake stays at docs/learning_intake/<findingId>.intake.json via the pin
 ## Record Index
 
 - [SCST-L001](SCST_L001_CLOSED_PACKET_AUTHORITY_DRIFT.md): closed work order coverage authority goes stale after the live roadmap section is edited; local snapshot repair applied, parent assessment pending.
+- [SCST-L002](SCST_L002_TEST_ARTIFACT_CWD.md): test artifact paths depended on invoking cwd; local root-bound path repair and recovery, parent assessment pending; existing rule application error.
 
 ## Claim Boundary
 

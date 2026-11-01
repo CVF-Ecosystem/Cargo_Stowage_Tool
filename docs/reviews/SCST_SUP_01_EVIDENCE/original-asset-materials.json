@@ -1,0 +1,347 @@
+{
+  "asset_sha256": "684cb4d4c7351aaba50ff4c7d23b3766656cf1e7b2b652f36357b167d83b1a5d",
+  "meshes": [
+    {
+      "name": "Than_tau_duoi_duong_nuoc",
+      "materials": [
+        "than_duoi_nuoc"
+      ]
+    },
+    {
+      "name": "Than_tau_tren_duong_nuoc",
+      "materials": [
+        "than_tren_nuoc"
+      ]
+    },
+    {
+      "name": "Day_ngoai_than_tau",
+      "materials": [
+        "than_duoi_nuoc"
+      ]
+    },
+    {
+      "name": "Boong_co_lo_ham_hang",
+      "materials": [
+        "boong"
+      ]
+    },
+    {
+      "name": "San_ham_hang_uoc_tinh",
+      "materials": [
+        "san_ham"
+      ]
+    },
+    {
+      "name": "Vach_trong_ham_hang_uoc_tinh",
+      "materials": [
+        "vach_ham"
+      ]
+    },
+    {
+      "name": "Thanh_quay_ham_uoc_tinh",
+      "materials": [
+        "quay_ham"
+      ]
+    },
+    {
+      "name": "Cabin_uoc_tinh",
+      "materials": [
+        "cabin"
+      ]
+    },
+    {
+      "name": "Mai_cabin",
+      "materials": [
+        "mai_cabin"
+      ]
+    },
+    {
+      "name": "Cua_kinh_cabin",
+      "materials": [
+        "cua_kinh"
+      ]
+    },
+    {
+      "name": "Coc_bit_don_01",
+      "materials": [
+        "trang_bi"
+      ]
+    },
+    {
+      "name": "Coc_bit_don_02",
+      "materials": [
+        "trang_bi"
+      ]
+    },
+    {
+      "name": "Coc_bit_don_03",
+      "materials": [
+        "trang_bi"
+      ]
+    },
+    {
+      "name": "Coc_bit_don_04",
+      "materials": [
+        "trang_bi"
+      ]
+    },
+    {
+      "name": "Coc_bit_don_05",
+      "materials": [
+        "trang_bi"
+      ]
+    },
+    {
+      "name": "Coc_bit_don_06",
+      "materials": [
+        "trang_bi"
+      ]
+    },
+    {
+      "name": "Coc_bit_don_07",
+      "materials": [
+        "trang_bi"
+      ]
+    },
+    {
+      "name": "Coc_bit_don_08",
+      "materials": [
+        "trang_bi"
+      ]
+    },
+    {
+      "name": "Coc_bit_don_09",
+      "materials": [
+        "trang_bi"
+      ]
+    },
+    {
+      "name": "Coc_bit_don_10",
+      "materials": [
+        "trang_bi"
+      ]
+    },
+    {
+      "name": "Coc_bit_don_11",
+      "materials": [
+        "trang_bi"
+      ]
+    },
+    {
+      "name": "Coc_bit_don_12",
+      "materials": [
+        "trang_bi"
+      ]
+    },
+    {
+      "name": "Neo_Hall_mui_01",
+      "materials": [
+        "trang_bi"
+      ]
+    },
+    {
+      "name": "Neo_Hall_mui_02",
+      "materials": [
+        "trang_bi"
+      ]
+    },
+    {
+      "name": "Cum_toi_neo_mui_minh_hoa",
+      "materials": [
+        "trang_bi"
+      ]
+    },
+    {
+      "name": "Phao_tron_01",
+      "materials": [
+        "phao"
+      ]
+    },
+    {
+      "name": "Phao_tron_02",
+      "materials": [
+        "phao"
+      ]
+    },
+    {
+      "name": "Phao_tron_03",
+      "materials": [
+        "phao"
+      ]
+    },
+    {
+      "name": "Phao_tron_04",
+      "materials": [
+        "phao"
+      ]
+    },
+    {
+      "name": "Banh_lai_tam_01_uoc_tinh",
+      "materials": [
+        "trang_bi"
+      ]
+    },
+    {
+      "name": "Banh_lai_tam_02_uoc_tinh",
+      "materials": [
+        "trang_bi"
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "than_duoi_nuoc",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.6235294117647059,
+          0.30196078431372547,
+          0.23137254901960785,
+          1
+        ],
+        "metallicFactor": 0.08,
+        "roughnessFactor": 0.7
+      },
+      "doubleSided": true
+    },
+    {
+      "name": "than_tren_nuoc",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.09019607843137255,
+          0.21176470588235294,
+          0.29411764705882354,
+          1
+        ],
+        "metallicFactor": 0.08,
+        "roughnessFactor": 0.7
+      },
+      "doubleSided": true
+    },
+    {
+      "name": "boong",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.7254901960784313,
+          0.788235294117647,
+          0.8117647058823529,
+          1
+        ],
+        "metallicFactor": 0.08,
+        "roughnessFactor": 0.7
+      },
+      "doubleSided": true
+    },
+    {
+      "name": "san_ham",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.6196078431372549,
+          0.6862745098039216,
+          0.7137254901960784,
+          1
+        ],
+        "metallicFactor": 0.08,
+        "roughnessFactor": 0.7
+      },
+      "doubleSided": true
+    },
+    {
+      "name": "vach_ham",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.8627450980392157,
+          0.8980392156862745,
+          0.8941176470588236,
+          1
+        ],
+        "metallicFactor": 0.08,
+        "roughnessFactor": 0.7
+      },
+      "doubleSided": true
+    },
+    {
+      "name": "quay_ham",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.8509803921568627,
+          0.4196078431372549,
+          0.15294117647058825,
+          1
+        ],
+        "metallicFactor": 0.08,
+        "roughnessFactor": 0.7
+      },
+      "doubleSided": true
+    },
+    {
+      "name": "cabin",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.9450980392156862,
+          0.9450980392156862,
+          0.9137254901960784,
+          1
+        ],
+        "metallicFactor": 0.08,
+        "roughnessFactor": 0.7
+      },
+      "doubleSided": true
+    },
+    {
+      "name": "mai_cabin",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.09019607843137255,
+          0.21176470588235294,
+          0.29411764705882354,
+          1
+        ],
+        "metallicFactor": 0.08,
+        "roughnessFactor": 0.7
+      },
+      "doubleSided": true
+    },
+    {
+      "name": "cua_kinh",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.30980392156862746,
+          0.5215686274509804,
+          0.592156862745098,
+          1
+        ],
+        "metallicFactor": 0.08,
+        "roughnessFactor": 0.7
+      },
+      "doubleSided": true
+    },
+    {
+      "name": "trang_bi",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.21176470588235294,
+          0.2823529411764706,
+          0.32941176470588235,
+          1
+        ],
+        "metallicFactor": 0.08,
+        "roughnessFactor": 0.7
+      },
+      "doubleSided": true
+    },
+    {
+      "name": "phao",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.9333333333333333,
+          0.4549019607843137,
+          0.16862745098039217,
+          1
+        ],
+        "metallicFactor": 0.08,
+        "roughnessFactor": 0.7
+      },
+      "doubleSided": true
+    }
+  ]
+}

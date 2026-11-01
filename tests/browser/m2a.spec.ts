@@ -1,3 +1,4 @@
+import { evidencePath } from "./evidence";
 import { expect, test } from "../../apps/frontend/node_modules/@playwright/test";
 
 type Plan = { contract_version: string; source: string; vessel: { case_id: string } | null; cargo_source: string; hold: { name: string; length_mm: number; width_mm: number; height_mm: number }; units: { id: string; mass_g: number; requirement: string }[]; placements: { unit_id: string; x_mm: number; y_mm: number }[] };
@@ -62,7 +63,7 @@ test("manual empty plan, cargo, hold and placement persist as immutable checked 
   expect(reopened.plan).toEqual(original.plan);
   await expect(page.getByTestId("unit-MAN-001")).toContainText("100, 0");
   await expect(page.getByLabel("Tên hầm")).toHaveValue("Hầm kiểm thử tự nhập");
-  await page.screenshot({ path: "../../docs/reviews/SCST_M2A_EVIDENCE/browser-manual-saved.png", fullPage: true });
+  await page.screenshot({ path: evidencePath("m2a.spec-browser-manual-saved.png"), fullPage: true });
 
   await page.getByRole("button", { name: "Bỏ vị trí" }).click();
   await expect(page.getByTestId("unit-MAN-001")).toContainText("Bắt buộc chưa xếp");
@@ -108,11 +109,11 @@ test("CSV preview reports row errors, preserves workspace, then atomically repla
   expect(applied.plan.placements).toHaveLength(0);
   await expect(page.getByTestId("unit-ST-001")).toHaveCount(0);
   await expect(page.getByTestId("unit-CSV-001")).toContainText("Bó thép thanh");
-  await page.screenshot({ path: "../../docs/reviews/SCST_M2A_EVIDENCE/browser-csv-import.png", fullPage: true });
+  await page.screenshot({ path: evidencePath("m2a.spec-browser-csv-import.png"), fullPage: true });
 });
 
 test("saved reference plan reopens after reload; network failure and mobile WebGL fallback keep input", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?viewerDiagnostics=1");
   await page.getByRole("button", { name: "Xem VINAFCO 268" }).click();
   await expect(page.getByRole("region", { name: "Thông số VINAFCO 268" })).toBeVisible();
   await expect(page.getByLabel("Giới hạn chứng nhận (kg)")).toHaveJSProperty("readOnly", true);
@@ -158,7 +159,7 @@ test("saved reference plan reopens after reload; network failure and mobile WebG
   await expect(page.getByText("WebGL không khả dụng · đang dùng mặt bằng 2D")).toBeVisible();
   await expect(page.getByRole("img", { name: "Mặt bằng hầm và ID từng bó" })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(false);
-  await page.screenshot({ path: "../../docs/reviews/SCST_M2A_EVIDENCE/browser-mobile-reference-fallback.png", fullPage: true });
+  await page.screenshot({ path: evidencePath("m2a.spec-browser-mobile-reference-fallback.png"), fullPage: true });
 });
 
 test("delayed preview, save and open cannot overwrite newer edits or selection", async ({ page, request }) => {

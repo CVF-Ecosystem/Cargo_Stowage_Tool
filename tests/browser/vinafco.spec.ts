@@ -1,3 +1,4 @@
+import { evidencePath } from "./evidence";
 import { expect, test } from "../../apps/frontend/node_modules/@playwright/test";
 
 type Triple = [number, number, number];
@@ -21,8 +22,8 @@ type Profile = {
 type Mesh = { id: string; position: Triple; dimensions: Triple; worldMatrix: number[] };
 const near = (actual: number, expected: number) => expect(actual).toBeCloseTo(expected, 3);
 
-async function openVessel(page: import("../../apps/frontend/node_modules/@playwright/test").Page) {
-  await page.goto("/");
+async function openVessel(page: import("../../apps/frontend/node_modules/@playwright/test").Page, diagnostics = false) {
+  await page.goto(diagnostics ? "/?viewerDiagnostics=1" : "/");
   await page.getByRole("button", { name: "Xem VINAFCO 268" }).click();
   await expect(page.getByRole("region", { name: "Thông số VINAFCO 268" })).toBeVisible();
 }
@@ -34,7 +35,7 @@ test("real GLB and placed cargo share backend coordinates; camera, picking and h
   expect(model.headers()["content-type"]).toContain("model/gltf-binary");
   const modelBytes = await model.body();
   expect(modelBytes.subarray(0, 4).toString()).toBe("glTF");
-  await openVessel(page);
+  await openVessel(page, true);
   const canvas = page.getByTestId("three-canvas");
   await expect.poll(() => canvas.getAttribute("data-vessel-bounds")).not.toBeNull();
   const bounds = JSON.parse((await canvas.getAttribute("data-vessel-bounds"))!) as { min: Triple; max: Triple; position: Triple };
@@ -69,7 +70,7 @@ test("real GLB and placed cargo share backend coordinates; camera, picking and h
   near(marker.draft, 4.85);
   near(marker.y, 4.85 - 0.832);
   const { writeFileSync } = await import("node:fs");
-  writeFileSync("../../docs/reviews/SCST_VINAFCO268_EVIDENCE/browser-geometry.json", JSON.stringify({
+  writeFileSync(evidencePath("vinafco-geometry.json"), JSON.stringify({
     assetUrl: profile.asset_url,
     assetBytes: modelBytes.length,
     dimensionsFromApiM: profile.dimensions_m,
@@ -100,7 +101,7 @@ test("real GLB and placed cargo share backend coordinates; camera, picking and h
   await expect(page.getByRole("button", { name: "Hiện tàu" })).toBeVisible();
   await page.getByRole("button", { name: "Hiện tàu" }).click();
   await expect(page.getByRole("button", { name: "Ẩn tàu" })).toBeVisible();
-  await page.screenshot({ path: "../../docs/reviews/SCST_VINAFCO268_EVIDENCE/browser-vessel-3d.png", fullPage: true });
+  await page.screenshot({ path: evidencePath("vinafco.spec-browser-vessel-3d.png"), fullPage: true });
 });
 
 test("SI/SII reference limits, labels, history and pending edits remain tied to the selected case", async ({ page, request }) => {
@@ -120,7 +121,7 @@ test("SI/SII reference limits, labels, history and pending edits remain tied to 
     const rejected = await request.post("/api/validate", { data: altered });
     expect(rejected.status()).toBe(422);
   }
-  await openVessel(page);
+  await openVessel(page, true);
   const note = page.getByRole("region", { name: "Thông số VINAFCO 268" });
   await expect(note).toContainText("3.517,5 tấn");
   await expect(note).toContainText("TTTP 3.536 tấn");
@@ -147,7 +148,7 @@ test("SI/SII reference limits, labels, history and pending edits remain tied to 
   await page.getByRole("button", { name: "Bản trước" }).click();
   await expect(caseSelect).toHaveValue("VR-SII");
   await expect(mass).toHaveValue("2500");
-  await page.screenshot({ path: "../../docs/reviews/SCST_VINAFCO268_EVIDENCE/browser-vessel-si.png", fullPage: true });
+  await page.screenshot({ path: evidencePath("vinafco.spec-browser-vessel-si.png"), fullPage: true });
 });
 
 test("model failure and mobile WebGL fallback keep case data and editing usable", async ({ page }) => {
@@ -161,7 +162,7 @@ test("model failure and mobile WebGL fallback keep case data and editing usable"
   await page.getByRole("button", { name: "Áp dụng & kiểm lại" }).click();
   await expect(page.getByTestId("unit-ST-001")).toContainText("50, 55");
   expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(false);
-  await page.screenshot({ path: "../../docs/reviews/SCST_VINAFCO268_EVIDENCE/browser-vessel-model-failure.png", fullPage: true });
+  await page.screenshot({ path: evidencePath("vinafco.spec-browser-vessel-model-failure.png"), fullPage: true });
   await page.unroute("**/api/vessels/vinafco268/model");
 
   await page.addInitScript(() => {
@@ -178,7 +179,7 @@ test("model failure and mobile WebGL fallback keep case data and editing usable"
   await page.getByRole("button", { name: "Chọn PP-007" }).click();
   await expect(page.getByTestId("unit-PP-007")).toHaveAttribute("aria-selected", "true");
   expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(false);
-  await page.screenshot({ path: "../../docs/reviews/SCST_VINAFCO268_EVIDENCE/browser-vessel-mobile-fallback.png", fullPage: true });
+  await page.screenshot({ path: evidencePath("vinafco.spec-browser-vessel-mobile-fallback.png"), fullPage: true });
 });
 
 test("case request failure and a newer edit during a pending switch preserve the checked case", async ({ page }) => {

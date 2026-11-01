@@ -1,0 +1,5 @@
+{
+  "live_local_health_status": 200,
+  "final_frontend_served": true,
+  "scope": "Read-only local health/index; no user database writes or provider call"
+}

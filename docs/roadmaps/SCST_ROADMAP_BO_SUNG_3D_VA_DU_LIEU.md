@@ -3,7 +3,7 @@
 Status: ACTIVE
 
 Ngày 01-11-2026 owner chốt **roadmap bổ sung trước khi triển khai**. Tài liệu này là kế hoạch,
-không phải SPEC, WORK_ORDER hay quyền BUILD. Ưu tiên checkpoint CVF-DEV theo chỉ đạo bổ sung; sau đó mới lập SPEC SUP-01;
+không tự cấp quyền BUILD. Đối chiếu CVF-DEV đã cho continuation giới hạn; SUP-01 đã đạt kiểm kỹ thuật theo review riêng;
 SUP-02 và SUP-03 được mô tả ở mức kết quả, sẽ chốt contract và giới hạn khi đến lượt.
 
 Hệ tọa độ VINAFCO hiện hành đã được kiểm trước khi lập kế hoạch: 6 điểm mốc và 12 trường hợp
@@ -12,7 +12,11 @@ gói mới chỉ bổ sung tài liệu audit (file cache Python không thuộc n
 
 ## CVF trong quá trình dựng tool
 
-Ưu tiên **CVF-DEV** theo [thiết kế áp dụng tại project](../project/SCST_CVF_DEVELOPMENT_ADOPTION.md) trước SUP-01. CVF áp dụng xuyên suốt: vai trò, SPEC/WORK_ORDER, điểm gọi kiểm, bằng chứng, continuity và learning. Core dùng chung vẫn read-only; project tái sử dụng kit và chỉ bổ sung kết nối thiếu đã xác minh. M4 riêng cho AI/CVF trong sản phẩm. Checkpoint CVF-DEV chưa được nghiệm thu; không suy ra agent governance từ doctor hoặc document PASS.
+Ưu tiên **CVF-DEV** theo [thiết kế áp dụng tại project](../project/SCST_CVF_DEVELOPMENT_ADOPTION.md) trước SUP-01. CVF áp dụng xuyên suốt: vai trò, SPEC/WORK_ORDER, điểm gọi kiểm, bằng chứng, continuity và learning. Core dùng chung vẫn read-only; project tái sử dụng kit và chỉ bổ sung kết nối thiếu đã xác minh. M4 riêng cho AI/CVF trong sản phẩm. Full CVF-DEV chưa được nghiệm thu; [continuation đã review](../reviews/SCST_CVF_DEV_APPLICATION_RECONCILIATION.md) cho phép SUP-01 thuần viewer. Không suy ra agent governance từ doctor hoặc document PASS.
+
+## Tiến độ SUP-01
+
+[SUP-01 đã giao kỹ thuật](../reviews/SCST_SUP_01_REVIEW.md): scene/camera giữ qua cập nhật, các góc nhìn/focus, ghost chọn lọc và diagnostics opt-in; build và36/36 browser đạt. Còn SPEC SUP-02 khi được chọn; SUP-03 và M2d chưa mở. Nghiệm thu nghiệp vụ và full CVF adoption vẫn riêng.
 
 ## Vị trí trong roadmap
 
@@ -115,24 +119,31 @@ Kết quả checkpoint là quyết định tiếp tục M2d hoặc ghi nhận ph
       "decision": "Review evidence and remaining owned work, select next bounded SPEC; no automatic BUILD"
     }
   },
-  "phase": "PLAN",
+  "phase": "REVIEW",
   "action": {
-    "kind": "PLAN",
-    "selected": [],
-    "owner": "Root orchestrator/reviewer with Terra document worker",
-    "output": "docs/roadmaps/SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md",
-    "budgetMinutes": 45,
-    "stop": "Supplemental roadmap reviewed and synchronized, or planning budget/scope boundary",
-    "next": "CVF-DEV adoption reconciliation and bounded SPEC/WORK_ORDER take priority; SUP-01 follows its checkpoint, no implementation now"
+    "kind": "REVIEW",
+    "selected": [
+      "SUP-01"
+    ],
+    "owner": "Root independent implementation reviewer",
+    "output": "docs/reviews/SCST_SUP_01_REVIEW.md",
+    "budgetMinutes": 120,
+    "stop": "SUP-01 technical evidence reviewed or same tranche120minute boundary",
+    "next": "Bounded SPEC SUP-02 when selected; no automatic BUILD or M2d"
   },
   "rows": [
     {
       "id": "SUP-01",
-      "state": "NOT_STARTED",
-      "gap": "Existing viewer requires persistent lifecycle, framing/presets, materials and measured diagnostics work; no supplemental implementation yet",
-      "owner": "Root orchestrator, then implementation/review roles in future work order",
-      "destination": "docs/specs/SCST_SUP_01.md",
-      "evidence": []
+      "state": "VERIFIED",
+      "gap": "SUP-01 technical viewer and local consumer flow verified; business acceptance separate",
+      "owner": "Root independent implementation reviewer",
+      "destination": "docs/reviews/SCST_SUP_01_REVIEW.md",
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_SUP_01_REVIEW.md",
+          "sha256": "fa60de99293c7df20afa4d096fa188221db6e89793b2593115d0e68c77132234"
+        }
+      ]
     },
     {
       "id": "SUP-02",
@@ -153,11 +164,16 @@ Kết quả checkpoint là quyết định tiếp tục M2d hoặc ghi nhận ph
   ],
   "supportingWork": [],
   "conclusions": {
-    "tranche": "PENDING",
-    "trancheSummary": "Roadmap direction finalized as documentation; implementation tranches not opened",
-    "trancheEvidence": [],
+    "tranche": "COMPLETE",
+    "trancheSummary": "SUP-01 technical slice settled after scoped CVF application review",
+    "trancheEvidence": [
+      {
+        "path": "docs/reviews/SCST_SUP_01_REVIEW.md",
+        "sha256": "fa60de99293c7df20afa4d096fa188221db6e89793b2593115d0e68c77132234"
+      }
+    ],
     "product": "PENDING",
-    "productSummary": "Three SUP outcomes unimplemented; M2d/M3 and business/operational acceptance remain owned work",
+    "productSummary": "SUP-02/03 and full tool/domain/business acceptance remain owned work",
     "acceptance": [],
     "owner": "Project owner"
   }

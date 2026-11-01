@@ -1,3 +1,4 @@
+import { evidencePath } from "./evidence";
 import { expect, test } from "../../apps/frontend/node_modules/@playwright/test";
 import type { Page } from "../../apps/frontend/node_modules/@playwright/test";
 
@@ -100,12 +101,12 @@ test("comparison marks sub-resolution kg and cm changes while API retains exact 
   await expect(row).toContainText("dưới 1 kg");
   await expect(row).toContainText("dưới 1 cm");
   await expect(row).not.toContainText("1 g");
-  await page.screenshot({ path: "../../docs/reviews/SCST_DISPLAY_UNITS_EVIDENCE/browser/compare-small-delta.png", fullPage: true });
+  await page.screenshot({ path: evidencePath("display-units.spec-compare-small-delta.png"), fullPage: true });
 });
 
 test("source cargo uses practical labels while all 1076 precise units and actual model meshes survive mobile fallback", async ({ page }) => {
   test.setTimeout(90_000);
-  await page.goto("/");
+  await page.goto("/?viewerDiagnostics=1");
   await page.getByRole("button", { name: "Xem VINAFCO 268" }).click();
   await postResult<Evaluation>(page, "/api/pipe-list/preview", () => page.getByRole("button", { name: "Xem trước list ống" }).click());
   const loaded = await postResult<Evaluation>(page, "/api/validate", () => page.getByRole("button", { name: "Nạp list vào phương án hiện tại" }).click());
@@ -132,7 +133,7 @@ test("source cargo uses practical labels while all 1076 precise units and actual
   const [lengthUm, widthUm, heightUm] = unit.dimensions_um!;
   const [footLengthUm, footWidthUm] = placement.yaw_deg === 90 ? [widthUm, lengthUm] : [lengthUm, widthUm];
   expect(mesh.dimensions).toEqual(expect.arrayContaining([footLengthUm / 1_000_000, heightUm / 1_000_000, footWidthUm / 1_000_000]));
-  await page.getByRole("region", { name: "Mô hình chất xếp" }).screenshot({ path: "../../docs/reviews/SCST_DISPLAY_UNITS_EVIDENCE/browser/source-desktop-scene.png" });
+  await page.getByRole("region", { name: "Mô hình chất xếp" }).screenshot({ path: evidencePath("display-units.spec-source-desktop-scene.png") });
   await page.getByLabel("Tên phương án lưu").fill(`Display source ${Date.now()}`);
   const saved = await postResult<Saved>(page, "/api/snapshots", () => page.getByRole("button", { name: "Lưu phương án" }).click());
   await page.setViewportSize({ width: 390, height: 844 });
@@ -151,5 +152,5 @@ test("source cargo uses practical labels while all 1076 precise units and actual
   await expect(page.getByText("WebGL không khả dụng · đang dùng mặt bằng 2D")).toBeVisible();
   await expect(page.getByRole("img", { name: "Mặt bằng hầm và ID từng bó" })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(false);
-  await page.screenshot({ path: "../../docs/reviews/SCST_DISPLAY_UNITS_EVIDENCE/browser/source-mobile-fallback.png", fullPage: true });
+  await page.screenshot({ path: evidencePath("display-units.spec-source-mobile-fallback.png"), fullPage: true });
 });

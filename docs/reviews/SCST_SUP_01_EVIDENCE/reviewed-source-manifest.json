@@ -1,0 +1,20 @@
+{
+  "base": "17ee7e5f304e59e35a97dfd4c6c796a28411abbd",
+  "hashAlgorithm": "sha256-lf-normalized",
+  "files": {
+    "apps/frontend/src/styles.css": "d358add276d74d1f068e1f15daae20e2db3e363621b2cd419543310d3543a3cb",
+    "apps/frontend/src/viewer-3d/Scene.tsx": "a6f419ca1a251945e564a0dd18c33cda830adecf2b6312dcb87dfd37a0fe73ff",
+    "apps/frontend/src/viewer-3d/Viewer.tsx": "97177ea985f4129708bef53cb497dfa04ed13725b209a3064653561b3f5d22dd",
+    "tests/browser/display-units.spec.ts": "6fd0460d862a5d14235d18cd07645399111e6f91a0daef91ee1d89c78648caf3",
+    "tests/browser/evidence.ts": "cfbd541809ecee8214e3855b547b3d4816aecdb1c91a8379c2d4d93c3ff0280b",
+    "tests/browser/m2a.spec.ts": "368d4b361ee4c9ef3714d4f2a7d76af05d0a8ba899d6e156d7f1f904b85a2b6c",
+    "tests/browser/m2b.spec.ts": "44c555bb7037e615adfaa81733e060d2693d84f3dfa9aefae93843ba40ae4364",
+    "tests/browser/m2c.spec.ts": "669f6c87594c0908cb40a1b67edf9f7a736ba18d188ef7cefb5bcecbc0e2bda4",
+    "tests/browser/pipe-list.spec.ts": "260545a9cbb34f5071d1ec4a3a8de44f37c1f5e57fcd5282ad2d29d21e7bb36e",
+    "tests/browser/sup01.spec.ts": "4c426d353b4eae2ccf86983d2d47909670c4678c9df55b20ea05421035192e48",
+    "tests/browser/vinafco.spec.ts": "ce8ec9b7d0b80dc6ffad94428aad0dcffa26b233ce14209e51dbd61e01cf4b15",
+    "tests/browser/workspace.spec.ts": "90d5e18be7d5b8f9c1a5018adc596827d66cabef0f845dfa695b5cc4c0f91d14"
+  },
+  "protected_baseline_count": 181,
+  "changed_scope": "Viewer and browser test paths only; protected runtime and authority checks separate"
+}

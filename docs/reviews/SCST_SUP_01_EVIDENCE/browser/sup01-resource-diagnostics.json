@@ -1,0 +1,21 @@
+{
+  "scenario": "late obsolete GLB response, detach, reattach, then three material/visibility/case cycles",
+  "before": {
+    "loads": 2,
+    "renders": 20,
+    "assetIdentity": 1,
+    "geometries": 83,
+    "textures": 1,
+    "calls": 88,
+    "objects": 12
+  },
+  "after": {
+    "loads": 2,
+    "renders": 38,
+    "assetIdentity": 1,
+    "geometries": 83,
+    "textures": 1,
+    "calls": 88,
+    "objects": 12
+  }
+}

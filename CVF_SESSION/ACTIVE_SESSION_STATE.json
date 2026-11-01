@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "BUILD",
-  "activePhase": "BUILD",
+  "currentMode": "FREEZE",
+  "activePhase": "FREEZE",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -14,9 +14,9 @@
     "FREEZE"
   ],
   "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_SUP_01.md",
-  "nextAllowedMove": "Implement and verify SUP-01 S1-01..04 under docs/work_orders/SCST_SUP_01.md; workers own viewer/browser paths, root independent implementation review and local commit. No automatic SUP-02.",
+  "nextAllowedMove": "SUP-01 technical handoff only; next SUP-02 needs bounded SPEC/WORK_ORDER when selected. Business acceptance and live CVF governance proof remain separate.",
   "parkedOperatorCheckpoint": "SUP-02/03, M2d/M3/M4, hook/hosted-CI adoption and live-provider governance proof remain owned future work; measured hold and16source envelopes/business acceptance stay pending.",
-  "activeRole": "ORCHESTRATOR",
+  "activeRole": "SESSION_SYNC_STEWARD",
   "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",
   "updatedAt": "2026-11-01"
 }

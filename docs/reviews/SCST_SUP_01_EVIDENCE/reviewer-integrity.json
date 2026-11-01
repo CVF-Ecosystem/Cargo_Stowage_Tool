@@ -1,0 +1,21 @@
+{
+  "base": "17ee7e5f304e59e35a97dfd4c6c796a28411abbd",
+  "checks": {
+    "protected_runtime_contracts_kit_and_specs_preserved": true,
+    "authority_preserved_SCST_ROADMAP_TONG_THE_DE_XUAT": true,
+    "authority_preserved_SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU": true,
+    "source_changes_bounded_to_viewer": true,
+    "historical_review_evidence_not_overwritten": true,
+    "active_order_coverage_valid": true,
+    "supplement_coverage_valid": true,
+    "adoption_coverage_unchanged_valid": true,
+    "user_runtime_bytes_preserved_during_regression": true,
+    "source_hash_and_core_pin_admitted": true,
+    "canonical_phase_and_handoff_agree": true,
+    "next_and_parked_agree": true,
+    "new_order_single_status": true,
+    "raw_user_packages_not_staged": true
+  },
+  "passed": true,
+  "scope": "Source/document boundaries and integrity, not agent behavior proof"
+}

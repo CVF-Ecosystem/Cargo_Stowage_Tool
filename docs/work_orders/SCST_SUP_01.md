@@ -1,6 +1,6 @@
 # SCST — SUP-01 bounded viewer work order
 
-Status: ACTIVE
+Status: CLOSED
 dispatchKind: INITIAL
 Owner: project-orchestrator
 Risk: R2
@@ -65,64 +65,93 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "decision": "Accept scoped technical flow, repair within authority or preserve owned remainder; no automatic SUP-02"
     }
   },
-  "phase": "DISPATCH",
+  "phase": "REVIEW",
   "action": {
-    "kind": "IMPLEMENT",
+    "kind": "REVIEW",
     "selected": [
       "S1-01",
       "S1-02",
       "S1-03",
       "S1-04"
     ],
-    "owner": "Terra implementation and Sol browser workers; root review/commit",
-    "output": "SUP-01 viewer and docs/reviews/SCST_SUP_01_EVIDENCE/",
+    "owner": "Root independent implementation reviewer",
+    "output": "docs/reviews/SCST_SUP_01_REVIEW.md",
     "budgetMinutes": 120,
     "stop": "Four criteria evidenced or budget/scope boundary without reset",
-    "next": "Independent implementation review and usable local flow; SUP-02 requires its own SPEC/WORK_ORDER"
+    "next": "SUP-01 technical handoff; SUP-02 only after its bounded SPEC/WORK_ORDER, business acceptance separate"
   },
   "rows": [
     {
       "id": "S1-01",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for S1-01",
-      "owner": "Assigned workers and root independent implementation reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business/domain acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_SUP_01_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_SUP_01_REVIEW.md",
+          "sha256": "fa60de99293c7df20afa4d096fa188221db6e89793b2593115d0e68c77132234"
+        }
+      ]
     },
     {
       "id": "S1-02",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for S1-02",
-      "owner": "Assigned workers and root independent implementation reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business/domain acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_SUP_01_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_SUP_01_REVIEW.md",
+          "sha256": "fa60de99293c7df20afa4d096fa188221db6e89793b2593115d0e68c77132234"
+        }
+      ]
     },
     {
       "id": "S1-03",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for S1-03",
-      "owner": "Assigned workers and root independent implementation reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business/domain acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_SUP_01_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_SUP_01_REVIEW.md",
+          "sha256": "fa60de99293c7df20afa4d096fa188221db6e89793b2593115d0e68c77132234"
+        }
+      ]
     },
     {
       "id": "S1-04",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for S1-04",
-      "owner": "Assigned workers and root independent implementation reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business/domain acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_SUP_01_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_SUP_01_REVIEW.md",
+          "sha256": "fa60de99293c7df20afa4d096fa188221db6e89793b2593115d0e68c77132234"
+        }
+      ]
     }
   ],
   "supportingWork": [],
   "conclusions": {
-    "tranche": "PENDING",
-    "trancheSummary": "Four SUP-01 criteria admitted for bounded implementation only",
-    "trancheEvidence": [],
+    "tranche": "COMPLETE",
+    "trancheSummary": "SUP-01 four technical criteria and usable local flow reviewed",
+    "trancheEvidence": [
+      {
+        "path": "docs/reviews/SCST_SUP_01_REVIEW.md",
+        "sha256": "fa60de99293c7df20afa4d096fa188221db6e89793b2593115d0e68c77132234"
+      }
+    ],
     "product": "PENDING",
-    "productSummary": "SUP-02/03, M2d/M3, live governance proof and business acceptance remain separate owned work",
+    "productSummary": "Full tool, SUP-02/03/M2d/domain and business acceptance remain owned work",
     "acceptance": [],
     "owner": "Project owner"
   }
 }
 ```
+
+## Technical disposition
+
+Root independent implementation review accepts S1-01..04 and tested local flow on final build index-D-_1-kxf.js.36/36 browser,5/5 focused plus2 I/O recovery checks; source/authority and user DB protected. Artifact-path repair/limitations and owned remainder disclosed in review. No full CVF adoption, business acceptance, push or automatic SUP-02.

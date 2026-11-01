@@ -1252,3 +1252,5 @@ tbody tr:hover {
 .vessel-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 
 .comparison-panel { overflow-wrap: anywhere; }
+
+.viewer-controls { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.65rem; }

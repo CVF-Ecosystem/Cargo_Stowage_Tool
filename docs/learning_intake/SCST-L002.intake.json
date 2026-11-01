@@ -1,0 +1,44 @@
+{
+  "acceptance": "NOT_ACCEPTED_GENERATION_ONLY",
+  "candidateControl": "Reuse existing evidence-custody guidance with a cwd-independent root-bound output example; parent dedup/value decision required before any rule or checker change.",
+  "chainJoins": [
+    {
+      "earliestControlPoint": "Task brief and browser evidence-path setup before running tests",
+      "gap": "Frontend cwd assumption was not bound in the output path helper",
+      "join": "Playwright CLI cwd -> relative artifact path -> evidence destination"
+    }
+  ],
+  "claimLimits": "One project and one browser task. Local helper repair/receipt only, no parent acceptance or agent-governance behavior proof.",
+  "contentSha256": "0e581171c2e87da07504670fa0ed1a40a74afa3d0943ef0b0ff5b51d50941b38",
+  "dedupCandidates": [
+    "CVF_PROJECT_DEVELOPMENT_APPLICATION_STANDARD",
+    "CVF_PROJECT_LEARNING_LOOP_STANDARD",
+    "SCST-DA04"
+  ],
+  "defectClass": "WORKER_EXECUTION_ERROR",
+  "expected": "Evidence writes resolve within the declared project boundary independently of process cwd; test counts do not establish artifact custody.",
+  "findingId": "SCST-L002",
+  "learningLane": "DOCUMENTATION_ONLY_LEARNING",
+  "negativeEvidence": [
+    {
+      "description": "Wrong-base path and27-file final recovery inventory; pre/post move hashes not captured.",
+      "locator": "docs/reviews/SCST_SUP_01_EVIDENCE/browser/artifact-recovery.json"
+    }
+  ],
+  "observed": "36 browser assertions passed while27 screenshots/geometry files landed outside the project because relative paths assumed frontend cwd. Root review found the missing local artifacts.",
+  "parentDisposition": "PENDING_PARENT_ADMISSION",
+  "parentLinks": {
+    "admissionRecord": null,
+    "checker": null,
+    "goldenProof": null,
+    "workOrder": null
+  },
+  "parentOwner": "docs/reference/CVF_FINDING_TO_GOVERNANCE_LEARNING_TRIGGER_STANDARD.md",
+  "profileId": "cvf.downstreamGateProfile@1.2.0",
+  "proposedDisposition": "RULE_EXISTS",
+  "schemaVersion": "cvf.downstreamFindingIntake@1.0.0",
+  "sourceClaimStatus": "UNVERIFIED_UNTIL_PROJECT_EVIDENCE_IS_SEPARATELY_ADMITTED",
+  "sourceProject": "Cargo_Stowage_Tool",
+  "sourceSha": "17ee7e5f304e59e35a97dfd4c6c796a28411abbd",
+  "title": "Relative browser artifact paths escape the project when invocation cwd changes"
+}

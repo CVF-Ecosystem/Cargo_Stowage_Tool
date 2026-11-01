@@ -1,3 +1,4 @@
+import { evidencePath } from "./evidence";
 import { expect, test } from "../../apps/frontend/node_modules/@playwright/test";
 
 type Unit = { id: string; length_mm: number; width_mm: number; height_mm: number; mass_g: number };
@@ -18,7 +19,7 @@ test("real API drives table, 2D and actual Three meshes through yaw and selectio
   expect(response.ok()).toBe(true);
   const evaluated = (await response.json()) as Evaluation;
   const plan = evaluated.plan;
-  await page.goto("/");
+  await page.goto("/?viewerDiagnostics=1");
   await expect(page.getByTestId("status")).toHaveText(evaluated.status);
   await expect(page.getByText("SYNTHETIC", { exact: true }).first()).toBeVisible();
   const canvas = page.getByTestId("three-canvas");
@@ -110,7 +111,7 @@ test("real API drives table, 2D and actual Three meshes through yaw and selectio
   near(turnedMesh.dimensions[2], turnedY / 1000);
   near(turnedMesh.position[0], (turned.x_mm + turnedX / 2 - plan.hold.length_mm / 2) / 1000);
   near(turnedMesh.position[2], (turned.y_mm + turnedY / 2 - plan.hold.width_mm / 2) / 1000);
-  await page.screenshot({ path: "../../docs/reviews/SCST_M1_EVIDENCE/browser-3d-yaw.png", fullPage: true });
+  await page.screenshot({ path: evidencePath("workspace.spec-browser-3d-yaw.png"), fullPage: true });
   expect(errors).toEqual([]);
 });
 
@@ -150,7 +151,7 @@ test("raw edit is immediately STALE; real API 422 and network loss preserve chec
   await x.fill("50.1");
   await expect(page.getByTestId("status")).toHaveText("STALE");
   await page.getByRole("button", { name: "Mặt bằng", exact: true }).click();
-  await page.screenshot({ path: "../../docs/reviews/SCST_M1_EVIDENCE/browser-2d-stale.png", fullPage: true });
+  await page.screenshot({ path: evidencePath("workspace.spec-browser-2d-stale.png"), fullPage: true });
   await page.route("**/api/validate", (route) => route.abort("failed"));
   await page.getByRole("button", { name: "Áp dụng & kiểm lại" }).click();
   await expect(page.getByRole("alert")).toBeVisible();
@@ -197,7 +198,7 @@ test("WebGL failure keeps accessible 2D, table selection and synthetic warning",
   expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(false);
   const shellWidth = (await page.locator(".main-shell").boundingBox())!.width;
   expect(shellWidth).toBe(await page.evaluate(() => innerWidth));
-  await page.screenshot({ path: "../../docs/reviews/SCST_M1_EVIDENCE/browser-mobile-fallback.png", fullPage: true });
+  await page.screenshot({ path: evidencePath("workspace.spec-browser-mobile-fallback.png"), fullPage: true });
   const tableScroll = await page.locator(".table-wrap").evaluate((element) => {
     const table = element as HTMLElement;
     const overflowX = getComputedStyle(table).overflowX;
@@ -208,7 +209,7 @@ test("WebGL failure keeps accessible 2D, table selection and synthetic warning",
   expect(tableScroll.overflowX).toBe("auto");
   expect(tableScroll.extendsBeyondViewport).toBe(true);
   expect(tableScroll.scrollLeft).toBeGreaterThan(0);
-  await page.screenshot({ path: "../../docs/reviews/SCST_M1_EVIDENCE/browser-mobile-table-scrolled.png", fullPage: true });
+  await page.screenshot({ path: evidencePath("workspace.spec-browser-mobile-table-scrolled.png"), fullPage: true });
 });
 
 test("an edit during pending validation keeps the newer raw draft STALE until separately checked", async ({ page }) => {

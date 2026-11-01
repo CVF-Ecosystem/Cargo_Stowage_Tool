@@ -133,9 +133,9 @@ Frontend hiển thị kết quả từ backend; chỉnh sửa cần được ki�
 
 ## Lộ trình phát triển
 
-Ưu tiên [CVF-DEV — áp dụng CVF tại project](docs/project/SCST_CVF_DEVELOPMENT_ADOPTION.md) trước SUP-01: vai trò, điểm gọi kiểm, bằng chứng và learning xuyên suốt. Checkpoint đang ở DESIGN, chưa nghiệm thu áp dụng đầy đủ.
+Đã đối chiếu [CVF-DEV — áp dụng CVF tại project](docs/project/SCST_CVF_DEVELOPMENT_ADOPTION.md) và dùng mapping trong SPEC/WORK_ORDER, kiểm và review SUP-01. Full adoption và bằng chứng hành vi agent chưa được nghiệm thu.
 
-Hướng bổ sung vừa chốt: **SUP-01 viewer 3D → SUP-02 dữ liệu hàng/profile theo phiên bản → SUP-03 packing chi tiết → M2d xuất báo cáo**. Xem [roadmap bổ sung](docs/roadmaps/SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md); ba phần này chưa triển khai, chưa mở SPEC/WORK_ORDER thi công.
+Hướng bổ sung vừa chốt: **SUP-01 viewer 3D → SUP-02 dữ liệu hàng/profile theo phiên bản → SUP-03 packing chi tiết → M2d xuất báo cáo**. Xem [roadmap bổ sung](docs/roadmaps/SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md); **SUP-01 đã giao kỹ thuật**, SUP-02/03 chưa mở. [Review SUP-01](docs/reviews/SCST_SUP_01_REVIEW.md): build và36/36 browser, camera/scene giữ trạng thái, góc nhìn/focus và ghost chọn lọc.
 
 | Mốc | Kết quả hướng tới | Trạng thái |
 |---|---|---|

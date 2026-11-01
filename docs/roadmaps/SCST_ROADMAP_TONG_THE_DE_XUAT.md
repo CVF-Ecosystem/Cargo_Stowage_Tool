@@ -4,9 +4,9 @@ Status: ACTIVE
 
 **Bản v0.3 · cập nhật tiến độ 01-11-2026.** Owner đã thống nhất hướng, bổ sung hình tàu, M2a và nguồn list ống V1.1. M1, VINAFCO268, M2a, nguồn list ống, M2b và M2c đạt kiểm kỹ thuật; nghiệm thu nghiệp vụ và điều kiện dùng thực vẫn tách riêng. Phạm vi từng phần được giới hạn trong SPEC/WORK_ORDER.
 
-**Bổ sung đã chốt 01-11-2026:** [SUP-01 viewer → SUP-02 dữ liệu/profile → SUP-03 packing](SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md) được chèn trước M2d; chưa mở thi công. Bảng mốc đã đăng ký ở dưới giữ nguyên để bảo toàn các work order lịch sử.
+**Bổ sung đã chốt 01-11-2026:** [SUP-01 viewer → SUP-02 dữ liệu/profile → SUP-03 packing](SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md) được chèn trước M2d; SUP-01 đã giao kỹ thuật, SUP-02/03 chưa mở. Bảng mốc đã đăng ký ở dưới giữ nguyên để bảo toàn các work order lịch sử.
 
-**Ưu tiên bổ sung CVF-DEV:** [áp dụng CVF trong quá trình dựng tool](../project/SCST_CVF_DEVELOPMENT_ADOPTION.md) trước SPEC SUP-01 và xuyên suốt các mốc: reuse, vai trò, điểm gọi kiểm, bằng chứng và learning. Đây là cập nhật DESIGN, chưa mở BUILD hoặc tuyên bố đã kiểm soát đầy đủ agent.
+**CVF trong phát triển:** [áp dụng CVF trong quá trình dựng tool](../project/SCST_CVF_DEVELOPMENT_ADOPTION.md) được dùng trong brief/review SUP-01 và xuyên suốt các mốc: reuse, vai trò, điểm gọi kiểm, bằng chứng và learning. Continuation giới hạn đã review; full adoption và agent-governance proof chưa đóng.
 
 ## Mục tiêu và phạm vi
 
@@ -108,7 +108,7 @@ Cargo_Stowage_Tool/
 
 **M0 đã xong.** Owner thống nhất ngày 31-10-2026 ba điểm: (1) local-first, một người dùng và ranh giới nghiệp vụ; (2) đầu ra/thứ tự M1–M5, AI tùy chọn; (3) một repository với FE/BE và các lớp trách nhiệm như cây dự kiến.
 
-**Hiện tại:** M2c và lượt sửa đơn vị kg/cm/m đã đạt kiểm kỹ thuật. Owner đã chốt [roadmap bổ sung 3D và dữ liệu](SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md) trước M2d. Bước ưu tiên là đối chiếu CVF-DEV rồi SPEC/WORK_ORDER giới hạn cho gap đã xác minh; sau checkpoint mới SPEC SUP-01. Chưa mở BUILD. Các SUP sau chỉ ở mức tổng thể. Nghiệm thu nghiệp vụ/vận hành vẫn riêng.
+**Hiện tại:** M2c và lượt sửa đơn vị kg/cm/m đã đạt kiểm kỹ thuật. Owner đã chốt [roadmap bổ sung 3D và dữ liệu](SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md) trước M2d. SUP-01 đã đạt kiểm kỹ thuật theo [review](../reviews/SCST_SUP_01_REVIEW.md). Bước tiếp khi được chọn là SPEC SUP-02 rồi WORK_ORDER có phạm vi; chưa tự mở BUILD phần sau. Các SUP sau chỉ ở mức tổng thể. Nghiệm thu nghiệp vụ/vận hành vẫn riêng.
 
 Bản M1 trong archive là nguồn tham khảo; kết quả test cũ không tự trở thành nghiệm thu cho hướng mới.
 

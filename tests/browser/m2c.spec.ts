@@ -1,3 +1,4 @@
+import { evidencePath } from "./evidence";
 import { expect, test } from "../../apps/frontend/node_modules/@playwright/test";
 import type { Page } from "../../apps/frontend/node_modules/@playwright/test";
 
@@ -33,7 +34,7 @@ async function importCsv(page: Page, rows: string): Promise<Evaluation> {
 
 test("pin A, edit one gram and placement in checked B, compare exact details, restore and undo without overwriting snapshots", async ({ page, request }) => {
   const original = await (await request.get("/api/demo")).json() as Evaluation;
-  await page.goto("/");
+  await page.goto("/?viewerDiagnostics=1");
   await page.getByLabel("Tên phương án lưu").fill(`M2c A ${Date.now()}`);
   const savedA = await response<Saved>(page, "/api/snapshots", "POST", () => page.getByRole("button", { name: "Lưu phương án" }).click());
   await page.getByRole("button", { name: "Giữ bản hiện tại làm gốc" }).click();
@@ -65,7 +66,7 @@ test("pin A, edit one gram and placement in checked B, compare exact details, re
   await expect(page.getByTestId("comparison-row-ST-001")).toContainText("dưới 1 kg");
   await expect(page.getByLabel("Khối lượng bó (kg)")).toHaveValue("2500");
   expect(await page.getByTestId("three-canvas").getAttribute("data-meshes")).toBe(currentMeshes);
-  await page.screenshot({ path: "../../docs/reviews/SCST_M2C_EVIDENCE/browser/compare-desktop.png", fullPage: true });
+  await page.screenshot({ path: evidencePath("m2c.spec-compare-desktop.png"), fullPage: true });
   const restored = await response<Evaluation>(page, "/api/validate", "POST", () => page.getByRole("button", { name: "Khôi phục bản gốc" }).click());
   expect(restored.plan).toEqual(original.plan);
   const undone = await response<Evaluation>(page, "/api/validate", "POST", () => page.getByRole("button", { name: "Bản trước" }).click());
@@ -133,7 +134,7 @@ test("source list comparison accounts all 1076, filters and pages without a seco
   await expect(page.getByTestId("three-canvas")).toHaveCount(0);
   await expect(page.getByRole("img", { name: "Mặt bằng hầm và ID từng bó" })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(false);
-  await page.screenshot({ path: "../../docs/reviews/SCST_M2C_EVIDENCE/browser/compare-mobile-fallback.png", fullPage: true });
+  await page.screenshot({ path: evidencePath("m2c.spec-compare-mobile-fallback.png"), fullPage: true });
 });
 
 test("replacing a manifest reports added, removed and changed IDs without selecting the A-only unit", async ({ page }) => {

@@ -1,0 +1,3 @@
+# SUP-01 mechanical phase receipts
+
+Profile1.2/runner identity is pinned. Pre-dispatch invoked on the ACTIVE admission packet; worker-return invoked on source/evidence; final reviewer-fast/pre-commit invoked on the settled changed set. Closing the order makes active-dispatch closeability NOT_APPLICABLE_WITH_REASON at final gates; the earlier pre-dispatch receipt and admission commit17ee7e5 retain its actual check. Receipts prove only their source/hash/role/continuity/coverage joins, not semantic acceptance, PROVEN_HERMETIC, hosted CI or provider-backed agent governance. Independent implementation acceptance is in SCST_SUP_01_REVIEW.md. A postcommit range check uses --no-receipt to avoid a self-referential commit; final return reports it.

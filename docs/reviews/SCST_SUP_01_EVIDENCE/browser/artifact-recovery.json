@@ -1,0 +1,146 @@
+{
+  "initial_wrong_cwd_command": "apps\\frontend\\node_modules\\.bin\\playwright.cmd test --config apps/frontend/playwright.config.ts",
+  "wrong_output_base": "D:\\UNG DUNG AI\\TOOL AI 2026\\docs\\reviews\\SCST_SUP_01_EVIDENCE\\browser",
+  "intended_output_base": "D:\\UNG DUNG AI\\TOOL AI 2026\\CVF-Workspace\\Cargo_Stowage_Tool\\docs\\reviews\\SCST_SUP_01_EVIDENCE\\browser",
+  "recovery_operation": "exact-file Move-Item from verified wrong base; no recursive move/delete",
+  "recovered_files": 27,
+  "wrong_base_remaining_files": 0,
+  "post_recovery_path_fix": "tests/browser/evidence.ts resolves from __dirname; focused screenshot and resource diagnostic reruns from project root passed",
+  "files": [
+    {
+      "name": "display-units.spec-compare-small-delta.png",
+      "bytes": 354926,
+      "sha256": "61e27babe45106a982f85ce3fee7fc3ef70a710ee0f82d11b4fcc9a733e26156"
+    },
+    {
+      "name": "display-units.spec-source-desktop-scene.png",
+      "bytes": 64235,
+      "sha256": "f3ee4cb30265ed3fd8b0b78af45439dec5e76170921d60d19374c29a5a38f8bd"
+    },
+    {
+      "name": "display-units.spec-source-mobile-fallback.png",
+      "bytes": 351337,
+      "sha256": "365b88abb0031ffa51cdb805c7d160162a22f897ef5e0e6cdfa61360f5db06a9"
+    },
+    {
+      "name": "m2a.spec-browser-csv-import.png",
+      "bytes": 273287,
+      "sha256": "99f2062aee4920681c0a129aeaa5fa795271375eee6b5a680ffd07b3398f5d85"
+    },
+    {
+      "name": "m2a.spec-browser-manual-saved.png",
+      "bytes": 280711,
+      "sha256": "7d4e5c0f359b072d8b8e728b929ce451b14707b6f9a7da9cae669dfda002b0eb"
+    },
+    {
+      "name": "m2a.spec-browser-mobile-reference-fallback.png",
+      "bytes": 255940,
+      "sha256": "085816d4b80f2f764958db55e7eaee08650ef3e2bdababceefa8ec58587809fd"
+    },
+    {
+      "name": "m2b.spec-planned-mobile-fallback.png",
+      "bytes": 478113,
+      "sha256": "ade1369c20b932ec828c4ec0067b2301a56639ba77a64a53a985541442a6030c"
+    },
+    {
+      "name": "m2b.spec-planned-mobile-scene.png",
+      "bytes": 17193,
+      "sha256": "3eb5c2bc6d2ce8e92e7b69c6388be4e7050388d70986c9d3b636f0b2247d9137"
+    },
+    {
+      "name": "m2b.spec-vinafco-planned-desktop.png",
+      "bytes": 646386,
+      "sha256": "b1d0350743f7180541788e76e9787f5da73c3a1fd3e36065b3e8d66b20eda207"
+    },
+    {
+      "name": "m2b.spec-vinafco-planned-scene.png",
+      "bytes": 58404,
+      "sha256": "3e2dc8ade3b89aa904b8ff379f495a8c0c6162fcfac6f265f21b625a02896c59"
+    },
+    {
+      "name": "m2c.spec-compare-desktop.png",
+      "bytes": 368943,
+      "sha256": "66142ef43070410a8d36717b2d51006b391cdf293a20bc082f3c92b54c5f9d4b"
+    },
+    {
+      "name": "m2c.spec-compare-mobile-fallback.png",
+      "bytes": 363345,
+      "sha256": "f42fcc6ee243945d4f6b933e35fee43be1e56a62e0bebab8fbc24fea72fe615d"
+    },
+    {
+      "name": "pipe-list.spec-pipe-list-desktop.png",
+      "bytes": 396610,
+      "sha256": "2f114089f8252f1ab343101378c9775639a942de1eb3afa21fdfa46e6e08c069"
+    },
+    {
+      "name": "pipe-list.spec-pipe-list-mobile-fallback.png",
+      "bytes": 200010,
+      "sha256": "dac1574738f938344e5d29b7e2050662ebf99d3bbf069660f62513493196e2f5"
+    },
+    {
+      "name": "sup01-mobile-fallback.png",
+      "bytes": 225061,
+      "sha256": "814f2b753f164079b8184642b99a2052a61662018cb5a45b926dd3a760773f2c"
+    },
+    {
+      "name": "sup01-source-desktop.png",
+      "bytes": 643088,
+      "sha256": "a9b2570651a395d749132d662cf48b567edfb54293f3bf5fb3cde70ed9b6900c"
+    },
+    {
+      "name": "sup01-source-scene.png",
+      "bytes": 57072,
+      "sha256": "275ceb6e84858d91144605dc8541be0e5b267a1a8400c8f932cdb2cedbb957da"
+    },
+    {
+      "name": "sup01-synthetic-desktop.png",
+      "bytes": 294718,
+      "sha256": "8aa38e9c9101c9abc23ae0022fb072b9c5bdcabaf5771ed162ec83ad1ca70579"
+    },
+    {
+      "name": "vinafco-geometry.json",
+      "bytes": 8792,
+      "sha256": "620e976b1c7206950ca60b800ce168a1d9b0441750d496d98a17b5646705e998"
+    },
+    {
+      "name": "vinafco.spec-browser-vessel-3d.png",
+      "bytes": 331133,
+      "sha256": "3ad79a4772bf31930e5c5eb214b3169c39f56e8136664c6db566420aa5c5b173"
+    },
+    {
+      "name": "vinafco.spec-browser-vessel-mobile-fallback.png",
+      "bytes": 254881,
+      "sha256": "1f12508b3c2c2974138697aaf58f4f4e3d5c1fce65c14d14ac9f8155dd46c565"
+    },
+    {
+      "name": "vinafco.spec-browser-vessel-model-failure.png",
+      "bytes": 268115,
+      "sha256": "555850eea8da38823a70e91a18e84ee4dcbeee37cadd11ed5e33b5e318b4136b"
+    },
+    {
+      "name": "vinafco.spec-browser-vessel-si.png",
+      "bytes": 327580,
+      "sha256": "fc0bb4688bff10d6afb4ae44ec5aa585a7878c5f4d8005653a659dae83883f34"
+    },
+    {
+      "name": "workspace.spec-browser-2d-stale.png",
+      "bytes": 275565,
+      "sha256": "98bead15870b30693dcc891284ab5fcb408c71cac6af0b33c170e1f824054afa"
+    },
+    {
+      "name": "workspace.spec-browser-3d-yaw.png",
+      "bytes": 300557,
+      "sha256": "63b4fdca11908b7b8db1f48768d50070aefd04179015d7a1b31769fb2953e63b"
+    },
+    {
+      "name": "workspace.spec-browser-mobile-fallback.png",
+      "bytes": 225039,
+      "sha256": "df0b95cf4f47498cd7d7d5e43c773dd33d17acd0817cf6a5590e6bd4a89cacf3"
+    },
+    {
+      "name": "workspace.spec-browser-mobile-table-scrolled.png",
+      "bytes": 219526,
+      "sha256": "589b598e82e0afc70cf081b7a9b880154381b53fc1eb0e251c5b83d7441d136b"
+    }
+  ]
+}

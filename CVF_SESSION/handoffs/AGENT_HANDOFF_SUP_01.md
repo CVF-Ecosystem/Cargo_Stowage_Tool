@@ -4,10 +4,10 @@ Status: ACTIVE
 
 ## Current State
 
-- Current mode: BUILD
-- Active phase: BUILD
-- Active role: ORCHESTRATOR
-- Next allowed move: Implement and verify SUP-01 S1-01..04 under docs/work_orders/SCST_SUP_01.md; workers own viewer/browser paths, root independent implementation review and local commit. No automatic SUP-02.
+- Current mode: FREEZE
+- Active phase: FREEZE
+- Active role: SESSION_SYNC_STEWARD
+- Next allowed move: SUP-01 technical handoff only; next SUP-02 needs bounded SPEC/WORK_ORDER when selected. Business acceptance and live CVF governance proof remain separate.
 - Parked operator checkpoint: SUP-02/03, M2d/M3/M4, hook/hosted-CI adoption and live-provider governance proof remain owned future work; measured hold and16source envelopes/business acceptance stay pending.
 
 ## Intake, design and authority acknowledgment
@@ -25,5 +25,9 @@ BUILD admission acknowledgment: root re-read manifest/policy/state/memory/active
 Base6f8fa9f plus owner transfer4files and2local receipt files, no app changes at intake. Preserve raw VINAFCO268_LOCAL_HANDOFF_V1_1(1) untracked, user SQLite/live8765, backend/profile/GLB/source/contracts/dependencies/locks/gates/CI/core and historical authority sections. Baseline timing must precede new frontend build; isolate DB on8766. Existing exact geometry and practical kg/cm/m presentation retained. Runtime outputs into current evidence rather than overwrite historical artifacts.
 
 ## Remainder and return
+
+REVIEW→FREEZE acknowledgment: root re-read current canonical inputs in REVIEW, independently accepted S1-01..04 and tested internal flow. Source/typecheck/build,5focused/36full browser plus2corrected-output checks settled. No open runtime defect; artifact custody finding repaired and disclosed with27file recovery (no pre/post move hash claim), new cwd-independent helper, final inventory and SCST-L002 generation-only intake. Root transitions REVIEWER→CLOSER→SESSION_SYNC_STEWARD/COMMIT_STEWARD; local material commit owns source+evidence+continuity, no push.14independent integrity checks preserve protected source/authority and user DB bytes during regression. Live8765health200/index serves final index-D-_1-kxf.js. Source final immutable; no automatic successor.
+
+Technical tranche SUP-01 settled; full tool/business acceptance and full CVF adoption not settled. Active order closed technically; future SUP-02 requires its own SPEC/WO. Canonical state/memory/truth/index agree at FREEZE. Final mechanical reviewer-fast/pre-commit and postcommit range checks remain required before final return; their scope is artifact/role/hash joins, not agent-governance proof.120minute shared prep/work/review budget unchanged, no reset.
 
 SUP-01 only: persistent scene/cargo/assets/camera, fitting/presets/focus, selective ghost, diagnostics opt-in and measured evidence. No instancing/engine/provider/source revision/packing/export/multilayer expansion. SUP-02/03/M2d and domain proof stay in roadmap. CVF-DEV hook/CI/live proof go to docs/specs/SCST_CVF_DEV.md upon their scope trigger, not silently accepted. No self-review of worker results, no automatic successor.

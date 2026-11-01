@@ -1,3 +1,4 @@
+import { evidencePath } from "./evidence";
 import { expect, test } from "../../apps/frontend/node_modules/@playwright/test";
 import type { Page } from "../../apps/frontend/node_modules/@playwright/test";
 
@@ -49,7 +50,7 @@ function checkAccounting(preview: Preview, input: Plan): void {
 
 test("demo planner previews replacement without mutation, then applies checked real meshes and undo", async ({ page, request }) => {
   const original = await (await request.get("/api/demo")).json() as Evaluation;
-  await page.goto("/");
+  await page.goto("/?viewerDiagnostics=1");
   const beforeMass = await page.getByTestId("placed-mass").textContent();
   await expect.poll(() => page.getByTestId("three-canvas").getAttribute("data-meshes")).not.toBeNull();
   const beforeMeshes = await page.getByTestId("three-canvas").getAttribute("data-meshes");
@@ -74,7 +75,7 @@ test("demo planner previews replacement without mutation, then applies checked r
 
 test("VINAFCO source list planner puts actual bundles in the hold, reconciles all 1076 and survives save/reload", async ({ page, request }) => {
   test.setTimeout(60_000);
-  await page.goto("/");
+  await page.goto("/?viewerDiagnostics=1");
   await page.getByRole("button", { name: "Xem VINAFCO 268" }).click();
   const loaded = await loadPipeList(page);
   expect(loaded.plan.units).toHaveLength(1076);
@@ -111,8 +112,8 @@ test("VINAFCO source list planner puts actual bundles in the hold, reconciles al
   expect(mesh.dimensions[2]).toBeCloseTo(footWidthUm / 1_000_000, 6);
   expect(mesh.position[0]).toBeCloseTo((placement.x_mm + footLengthUm / 2000 - applied.plan.hold.length_mm / 2) / 1000, 6);
   expect(mesh.position[2]).toBeCloseTo((placement.y_mm + footWidthUm / 2000 - applied.plan.hold.width_mm / 2) / 1000, 6);
-  await page.getByRole("region", { name: "Mô hình chất xếp" }).screenshot({ path: "../../docs/reviews/SCST_M2B_EVIDENCE/browser/vinafco-planned-scene.png" });
-  await page.screenshot({ path: "../../docs/reviews/SCST_M2B_EVIDENCE/browser/vinafco-planned-desktop.png", fullPage: true });
+  await page.getByRole("region", { name: "Mô hình chất xếp" }).screenshot({ path: evidencePath("m2b.spec-vinafco-planned-scene.png") });
+  await page.screenshot({ path: evidencePath("m2b.spec-vinafco-planned-desktop.png"), fullPage: true });
   await page.getByLabel("Tên phương án lưu").fill(`M2b browser ${Date.now()}`);
   const saved = await postResult<Saved>(page, "/api/snapshots", () => page.getByRole("button", { name: "Lưu phương án" }).click());
   const snapshot = await (await request.get(`/api/snapshots/${saved.id}`)).json() as Evaluation;
@@ -196,6 +197,6 @@ test("mobile WebGL fallback shows applied source cargo and paged reasons without
   await expect(page.getByRole("img", { name: "Mặt bằng hầm và ID từng bó" })).toBeVisible();
   expect(await page.getByRole("button", { name: /^Chọn PIPE-/ }).count()).toBeGreaterThan(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(false);
-  await page.getByRole("region", { name: "Mô hình chất xếp" }).screenshot({ path: "../../docs/reviews/SCST_M2B_EVIDENCE/browser/planned-mobile-scene.png" });
-  await page.screenshot({ path: "../../docs/reviews/SCST_M2B_EVIDENCE/browser/planned-mobile-fallback.png", fullPage: true });
+  await page.getByRole("region", { name: "Mô hình chất xếp" }).screenshot({ path: evidencePath("m2b.spec-planned-mobile-scene.png") });
+  await page.screenshot({ path: evidencePath("m2b.spec-planned-mobile-fallback.png"), fullPage: true });
 });

@@ -7,6 +7,11 @@ và duy trì xuyên suốt các mốc. Người nhận là đội agent phát tr
 Kết quả cần đạt là mỗi phần việc có phạm vi, vai trò, công cụ kiểm, bằng chứng và phần còn lại rõ ràng.
 Đây là thiết kế áp dụng; chưa phải SPEC/WORK_ORDER hoặc kết luận CVF đã kiểm soát đầy đủ agent.
 
+Tiến độ áp dụng: [đối chiếu và continuation giới hạn](../reviews/SCST_CVF_DEV_APPLICATION_RECONCILIATION.md)
+đã cho SUP-01 thuần viewer đi tiếp; [SUP-01 đạt kiểm kỹ thuật](../reviews/SCST_SUP_01_REVIEW.md) với DA01/04/05
+trong brief/kiểm/review. DEV-01 vẫn IMPLEMENTED_UNPROVED, DEV-02/03 UNKNOWN; full adoption/live proof chưa đóng.
+Các đoạn DESIGN/lượt chuyển nguồn bên dưới giữ phạm vi riêng, không phủ nhận tiến độ runtime trong IMPLEMENTATION_STATUS.json.
+
 ## Vị trí và ranh giới
 
 **CVF-DEV → SUP-01 → SUP-02 → SUP-03 → kiểm tích hợp → M2d**.

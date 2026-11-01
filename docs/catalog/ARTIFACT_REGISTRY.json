@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
   "updatedAt": "2026-11-01",
-  "claimBoundary": "SUP-01 bounded BUILD under reviewed CVF application mapping; no full adoption or live-agent governance claim; product/business acceptance separate.",
+  "claimBoundary": "SUP-01 technically verified with internal local user flow; business acceptance and full CVF adoption/live governance remain separate. No automatic SUP-02 or external action.",
   "artifacts": [
     {
       "id": "schema-artifact-registry",
@@ -65,7 +65,7 @@
       "family": "continuity",
       "path": "CVF_SESSION/handoffs/AGENT_HANDOFF_SUP_01.md",
       "status": "ACTIVE",
-      "description": "Active SUP-01 BUILD handoff; bounded order, root implementation review, no automatic successor."
+      "description": "Active SUP-01 FREEZE handoff; bounded order, root implementation review, no automatic successor."
     },
     {
       "id": "truth-implementation-status",
@@ -156,7 +156,7 @@
       "family": "implementation_truth",
       "path": "docs/project/PROJECT_STATUS.md",
       "status": "ACTIVE",
-      "description": "Runtime truth and CVF-DEV design priority; app unchanged, no full adoption claim."
+      "description": "Current runtime truth: SUP-01 technically verified, next SPEC SUP-02 only when selected; business acceptance separate."
     },
     {
       "id": "manifest-organization",

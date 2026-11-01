@@ -1,3 +1,4 @@
+import { evidencePath } from "./evidence";
 import { expect, test } from "../../apps/frontend/node_modules/@playwright/test";
 import type { Page } from "../../apps/frontend/node_modules/@playwright/test";
 
@@ -82,11 +83,11 @@ test("source preview and explicit load preserve 31 groups, 1076 optional bundles
   await page.getByTestId("unit-PIPE-R022-B0001").getByRole("button").click();
   await expect(page.getByRole("heading", { name: "PIPE-R022-B0001" })).toBeVisible();
   await expect(page.getByText("Kích thước cần xác minh")).toBeVisible();
-  await page.screenshot({ path: "../../docs/reviews/SCST_PIPE_LIST_EVIDENCE/browser/pipe-list-desktop.png", fullPage: true });
+  await page.screenshot({ path: evidencePath("pipe-list.spec-pipe-list-desktop.png"), fullPage: true });
 });
 
 test("manual placement, rotation and unplace use exact µm dimensions and update whole-list/group counters", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?viewerDiagnostics=1");
   const loaded = await loadPipeList(page);
   const unit = loaded.plan.units[0];
   await page.getByTestId(`unit-${unit.id}`).getByRole("button").click();
@@ -208,5 +209,5 @@ test("mobile WebGL fallback keeps the paginated pipe library usable without page
   await expect(page.getByTestId("pipe-group")).toContainText("1 bó");
   await expect(page.getByTestId("unit-PIPE-R031-B0001")).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(false);
-  await page.screenshot({ path: "../../docs/reviews/SCST_PIPE_LIST_EVIDENCE/browser/pipe-list-mobile-fallback.png", fullPage: true });
+  await page.screenshot({ path: evidencePath("pipe-list.spec-pipe-list-mobile-fallback.png"), fullPage: true });
 });

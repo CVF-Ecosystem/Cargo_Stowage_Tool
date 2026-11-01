@@ -1,0 +1,104 @@
+{
+  "label": "baseline",
+  "asset": "index-Bgkupcoy.js",
+  "browser": "156.0.8078.4",
+  "platform": "win32",
+  "viewport": {
+    "width": 1440,
+    "height": 1100
+  },
+  "runs": [
+    {
+      "index": 1,
+      "synthetic": {
+        "openMs": 1805.35,
+        "orbitMs": 146.02,
+        "applyMs": 171.43,
+        "canvasRetainedApply": false,
+        "cameraRetainedApply": false,
+        "undoMs": 155.94,
+        "canvasRetainedUndo": false
+      },
+      "vessel": {
+        "openMs": 292.89,
+        "hideMs": 149.36,
+        "showMs": 177.17,
+        "canvasRetainedVisibility": false,
+        "modelRequestsVisibility": 2,
+        "modelRequestsTotal": 3
+      },
+      "source": {
+        "loadMs": 184.43,
+        "unitCount": 1076,
+        "previewMs": 310.93,
+        "applyMs": 107.7,
+        "placedCount": 167,
+        "unplacedCount": 909,
+        "orbitMs": 229.13
+      },
+      "errors": []
+    },
+    {
+      "index": 2,
+      "synthetic": {
+        "openMs": 326.25,
+        "orbitMs": 127.72,
+        "applyMs": 171.46,
+        "canvasRetainedApply": false,
+        "cameraRetainedApply": false,
+        "undoMs": 175.27,
+        "canvasRetainedUndo": false
+      },
+      "vessel": {
+        "openMs": 295.39,
+        "hideMs": 158.08,
+        "showMs": 191.69,
+        "canvasRetainedVisibility": false,
+        "modelRequestsVisibility": 2,
+        "modelRequestsTotal": 3
+      },
+      "source": {
+        "loadMs": 286.1,
+        "unitCount": 1076,
+        "previewMs": 471.48,
+        "applyMs": 177.61,
+        "placedCount": 167,
+        "unplacedCount": 909,
+        "orbitMs": 267.64
+      },
+      "errors": []
+    },
+    {
+      "index": 3,
+      "synthetic": {
+        "openMs": 456.94,
+        "orbitMs": 157.55,
+        "applyMs": 223.04,
+        "canvasRetainedApply": false,
+        "cameraRetainedApply": false,
+        "undoMs": 184.6,
+        "canvasRetainedUndo": false
+      },
+      "vessel": {
+        "openMs": 304.91,
+        "hideMs": 134.27,
+        "showMs": 145.14,
+        "canvasRetainedVisibility": false,
+        "modelRequestsVisibility": 2,
+        "modelRequestsTotal": 3
+      },
+      "source": {
+        "loadMs": 233.76,
+        "unitCount": 1076,
+        "previewMs": 352.79,
+        "applyMs": 107.05,
+        "placedCount": 167,
+        "unplacedCount": 909,
+        "orbitMs": 225.53
+      },
+      "errors": []
+    }
+  ],
+  "elapsedMs": 14831,
+  "isolatedDataDir": "C:\\Users\\DELL\\AppData\\Local\\Temp\\scst-sup01-baseline-TQUUEe"
+}

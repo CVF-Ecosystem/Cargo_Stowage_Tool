@@ -1,0 +1,104 @@
+{
+  "label": "candidate",
+  "asset": "index-C_o3IV12.js",
+  "browser": "156.0.8078.4",
+  "platform": "win32",
+  "viewport": {
+    "width": 1440,
+    "height": 1100
+  },
+  "runs": [
+    {
+      "index": 1,
+      "synthetic": {
+        "openMs": 1693.11,
+        "orbitMs": 137.4,
+        "applyMs": 60.03,
+        "canvasRetainedApply": true,
+        "cameraRetainedApply": true,
+        "undoMs": 44.44,
+        "canvasRetainedUndo": true
+      },
+      "vessel": {
+        "openMs": 246.25,
+        "hideMs": 30.11,
+        "showMs": 33.77,
+        "canvasRetainedVisibility": true,
+        "modelRequestsVisibility": 0,
+        "modelRequestsTotal": 1
+      },
+      "source": {
+        "loadMs": 173.03,
+        "unitCount": 1076,
+        "previewMs": 153.68,
+        "applyMs": 109.54,
+        "placedCount": 167,
+        "unplacedCount": 909,
+        "orbitMs": 222.2
+      },
+      "errors": []
+    },
+    {
+      "index": 2,
+      "synthetic": {
+        "openMs": 297.37,
+        "orbitMs": 125.86,
+        "applyMs": 60.73,
+        "canvasRetainedApply": true,
+        "cameraRetainedApply": true,
+        "undoMs": 46.25,
+        "canvasRetainedUndo": true
+      },
+      "vessel": {
+        "openMs": 220.59,
+        "hideMs": 39.5,
+        "showMs": 33.18,
+        "canvasRetainedVisibility": true,
+        "modelRequestsVisibility": 0,
+        "modelRequestsTotal": 1
+      },
+      "source": {
+        "loadMs": 201.52,
+        "unitCount": 1076,
+        "previewMs": 127.91,
+        "applyMs": 105.4,
+        "placedCount": 167,
+        "unplacedCount": 909,
+        "orbitMs": 227.76
+      },
+      "errors": []
+    },
+    {
+      "index": 3,
+      "synthetic": {
+        "openMs": 296.8,
+        "orbitMs": 147.36,
+        "applyMs": 60.48,
+        "canvasRetainedApply": true,
+        "cameraRetainedApply": true,
+        "undoMs": 47.17,
+        "canvasRetainedUndo": true
+      },
+      "vessel": {
+        "openMs": 210.01,
+        "hideMs": 32.9,
+        "showMs": 34.84,
+        "canvasRetainedVisibility": true,
+        "modelRequestsVisibility": 0,
+        "modelRequestsTotal": 1
+      },
+      "source": {
+        "loadMs": 165.84,
+        "unitCount": 1076,
+        "previewMs": 146.37,
+        "applyMs": 102.91,
+        "placedCount": 167,
+        "unplacedCount": 909,
+        "orbitMs": 223.64
+      },
+      "errors": []
+    }
+  ],
+  "elapsedMs": 9289,
+  "isolatedDataDir": "C:\\Users\\DELL\\AppData\\Local\\Temp\\scst-sup01-candidate-eagSWp"
+}

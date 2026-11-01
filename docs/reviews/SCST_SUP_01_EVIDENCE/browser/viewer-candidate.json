@@ -1,0 +1,104 @@
+{
+  "label": "candidate",
+  "asset": "index-D-_1-kxf.js",
+  "browser": "156.0.8078.4",
+  "platform": "win32",
+  "viewport": {
+    "width": 1440,
+    "height": 1100
+  },
+  "runs": [
+    {
+      "index": 1,
+      "synthetic": {
+        "openMs": 1651.14,
+        "orbitMs": 142.89,
+        "applyMs": 57.21,
+        "canvasRetainedApply": true,
+        "cameraRetainedApply": true,
+        "undoMs": 45.9,
+        "canvasRetainedUndo": true
+      },
+      "vessel": {
+        "openMs": 236.78,
+        "hideMs": 40.77,
+        "showMs": 32.18,
+        "canvasRetainedVisibility": true,
+        "modelRequestsVisibility": 0,
+        "modelRequestsTotal": 1
+      },
+      "source": {
+        "loadMs": 170.88,
+        "unitCount": 1076,
+        "previewMs": 150.59,
+        "applyMs": 103.78,
+        "placedCount": 167,
+        "unplacedCount": 909,
+        "orbitMs": 230.87
+      },
+      "errors": []
+    },
+    {
+      "index": 2,
+      "synthetic": {
+        "openMs": 316.25,
+        "orbitMs": 148.69,
+        "applyMs": 62.74,
+        "canvasRetainedApply": true,
+        "cameraRetainedApply": true,
+        "undoMs": 61.33,
+        "canvasRetainedUndo": true
+      },
+      "vessel": {
+        "openMs": 216.35,
+        "hideMs": 45.91,
+        "showMs": 32.9,
+        "canvasRetainedVisibility": true,
+        "modelRequestsVisibility": 0,
+        "modelRequestsTotal": 1
+      },
+      "source": {
+        "loadMs": 179.89,
+        "unitCount": 1076,
+        "previewMs": 148.66,
+        "applyMs": 101.38,
+        "placedCount": 167,
+        "unplacedCount": 909,
+        "orbitMs": 222.83
+      },
+      "errors": []
+    },
+    {
+      "index": 3,
+      "synthetic": {
+        "openMs": 314.69,
+        "orbitMs": 146.47,
+        "applyMs": 60.21,
+        "canvasRetainedApply": true,
+        "cameraRetainedApply": true,
+        "undoMs": 45.85,
+        "canvasRetainedUndo": true
+      },
+      "vessel": {
+        "openMs": 223.77,
+        "hideMs": 35.61,
+        "showMs": 33.31,
+        "canvasRetainedVisibility": true,
+        "modelRequestsVisibility": 0,
+        "modelRequestsTotal": 1
+      },
+      "source": {
+        "loadMs": 175.43,
+        "unitCount": 1076,
+        "previewMs": 161.81,
+        "applyMs": 121.44,
+        "placedCount": 167,
+        "unplacedCount": 909,
+        "orbitMs": 239.02
+      },
+      "errors": []
+    }
+  ],
+  "elapsedMs": 9305,
+  "isolatedDataDir": "C:\\Users\\DELL\\AppData\\Local\\Temp\\scst-sup01-candidate-ckxDM3"
+}

@@ -5,7 +5,7 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 ## Start Here
 
 - Active session/phase/role state.: `CVF_SESSION/ACTIVE_SESSION_STATE.json`
-- Active SUP-01 BUILD handoff; bounded order, root implementation review, no automatic successor.: `CVF_SESSION/handoffs/AGENT_HANDOFF_SUP_01.md`
+- Active SUP-01 FREEZE handoff; bounded order, root implementation review, no automatic successor.: `CVF_SESSION/handoffs/AGENT_HANDOFF_SUP_01.md`
 - Project continuity front door.: `CVF_SESSION_MEMORY.md`
 - CVF development adoption DESIGN and source matrix; DEV criteria unaccepted, evidence limits and owned remainder.: `docs/project/SCST_CVF_DEVELOPMENT_ADOPTION.md`
 - CVF enforcement manifest.: `.cvf/manifest.json`
@@ -17,7 +17,7 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 - Standard-library catalog validation and rendering functions.: `scripts/lib/downstream_catalog/CvfDownstreamCatalogLib.ps1`
 - Executable catalog manager (--check / --write).: `scripts/manage_cvf_downstream_catalog.ps1`
 - Exact current phase/order and prior verified runtime; business acceptance separate.: `IMPLEMENTATION_STATUS.json`
-- Runtime truth and CVF-DEV design priority; app unchanged, no full adoption claim.: `docs/project/PROJECT_STATUS.md`
+- Current runtime truth: SUP-01 technically verified, next SPEC SUP-02 only when selected; business acceptance separate.: `docs/project/PROJECT_STATUS.md`
 - Generated documentation index.: `docs/INDEX.md`
 - Generated human module catalog.: `docs/catalog/MODULE_CATALOG.md`
 
