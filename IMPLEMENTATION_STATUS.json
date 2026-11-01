@@ -1,10 +1,12 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "M2B_TECHNICALLY_VERIFIED_AWAITING_OWNER_FEEDBACK",
-  "currentPhase": "REVIEW",
+  "overallStatus": "M2C_ADMITTED_NOT_IMPLEMENTED",
+  "currentPhase": "WORK_ORDER",
   "completedCapabilities": [],
-  "activeWorkOrders": [],
+  "activeWorkOrders": [
+    "docs/work_orders/SCST_M2C.md"
+  ],
   "knownLimitations": [
     "PIPE-LIST actual31group/1076bundle source integration technically verified; source mass/dimensions calculated/provisional.16bundles need envelope verification; measuredhold/business/operational acceptance pending.",
     "Raw drafts/history remain in browser session until explicit immutable SQLite snapshot save. Latest100 snapshots listed; no overwrite/delete/backup/restore UI.",
@@ -46,7 +48,9 @@
     "docs/specs/SCST_M2B.md",
     "docs/work_orders/SCST_M2B.md",
     "docs/reviews/SCST_M2B_REVIEW.md",
-    "docs/reviews/SCST_M2B_EVIDENCE/reviewed-source-manifest.json"
+    "docs/reviews/SCST_M2B_EVIDENCE/reviewed-source-manifest.json",
+    "docs/specs/SCST_M2C.md",
+    "docs/work_orders/SCST_M2C.md"
   ],
   "updatedAt": "2026-11-01",
   "x_verifiedMilestones": [

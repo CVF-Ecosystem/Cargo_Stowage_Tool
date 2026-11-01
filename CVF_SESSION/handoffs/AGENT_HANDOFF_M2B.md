@@ -1,6 +1,6 @@
 # SCST M2b — Active handoff
 
-Status: ACTIVE
+Status: SUPERSEDED
 
 ## Current State
 

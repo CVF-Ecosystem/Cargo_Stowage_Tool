@@ -28,6 +28,10 @@
     "SCST-M2B": {
       "path": "docs/specs/SCST_M2B.md",
       "heading": "## M2b acceptance"
+    },
+    "SCST-M2C": {
+      "path": "docs/specs/SCST_M2C.md",
+      "heading": "## M2c acceptance"
     }
   }
 }

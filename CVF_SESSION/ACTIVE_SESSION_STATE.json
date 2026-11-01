@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "REVIEW",
-  "activePhase": "REVIEW",
+  "currentMode": "WORK_ORDER",
+  "activePhase": "WORK_ORDER",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -13,10 +13,10 @@
     "REVIEW",
     "FREEZE"
   ],
-  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_M2B.md",
-  "nextAllowedMove": "Owner reviews delivered M2b automatictrial/roundeddisplay; prepare bounded SPEC M2c at nextcheckpoint, not dispatched automatically.",
-  "parkedOperatorCheckpoint": "Measuredhold/16sourceenvelopes, business/operational acceptance pending; M2c-d/M3 remain separate.",
-  "activeRole": "SESSION_SYNC_STEWARD",
+  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_M2C.md",
+  "nextAllowedMove": "Dispatch six M2c criteria after admission commit and BUILD acknowledgment; no M2d.",
+  "parkedOperatorCheckpoint": "Measuredhold/16sourceenvelopes and business/operational acceptance pending; M2d/M3 separate.",
+  "activeRole": "ORCHESTRATOR",
   "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",
   "updatedAt": "2026-11-01"
 }

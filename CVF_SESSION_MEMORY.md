@@ -5,17 +5,15 @@ Memory class: POINTER_RECORD
 ## Current Truth
 
 - Contract: cvf.downstreamContinuityContract@1.0.0
-- Current mode: REVIEW
-- Active phase: REVIEW
-- Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_M2B.md
+- Current mode: WORK_ORDER
+- Active phase: WORK_ORDER
+- Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_M2C.md
 
 ## Current operator boundary
 
-Current REVIEW / SESSION_SYNC_STEWARD. Next: Owner reviews delivered M2b automatictrial/roundeddisplay; prepare bounded SPEC M2c at nextcheckpoint, not dispatched automatically. Parked: Measuredhold/16sourceenvelopes, business/operational acceptance pending; M2c-d/M3 remain separate.
-M2b6technicalcriteria verified under SPEC/order/review SCST_M2B. Ownerexplicitlychoseautomatictrial aftercargo-visibility/displayroundingfeedback. Deterministicone-layerpreview→explicitapply→actualshipcargo; everyunplacedreason,capacitypreserved,display2decimals,exactg/input unchanged. Source1076→167placed/909remaining217741190g atfullSIIlimit; default32t22placed. Nooptimum/multilayer/operationalapproval. Root98backend/22browser46.7s/8941independentassertions/restart/build/types/live; initial21/22offviewportdragfailed thenlocalizedrepair, Solindependentlyreviewed root's sole runtime UIscrollstatement. Source20filemanifest pinned, legacyproof/13PNGs preserved; backendunchanged afteroracle. Reviewer/source/exactversion details in docs/reviews/SCST_M2B_REVIEW.md.
-
-Manageddemo21770/PID34300 on8765, handle .cvf/runtime/m2b-demo-session.json; prior8774/PID41676 stoppednormally. No testsnapshot into userSQLite, runtime-data/scst.sqlite3 staysoutsideGit. Sourcepackages/registry/ship unchanged/localonly no push. Prior PIPE-LIST handoffSUPERSEDED, originalcriteria/evidence unchanged.
+Current WORK_ORDER / ORCHESTRATOR. Next: Dispatch six M2c criteria after admission commit and BUILD acknowledgment; no M2d. Parked: Measuredhold/16sourceenvelopes and business/operational acceptance pending; M2d/M3 separate.
+Owner “tiếp”afterM2b opens M2c baseline/compare/restore. SPEC/order SCST_M2C bind6criteria; no runtimeimplementationyet. Reuse editor/history20/SQLite/Plan/evaluate/oneviewer; full exactdiff and explicitbaseline/restore are missinggap. No source/ship/DBschema/planner changes orM2d. PriorM2b sourcee5a8b74 technicallyverified98backend/22browser/8941checks, businessacceptance separate. Localonly no push. Demo21770/PID34300 on8765 needsrefresh later; runtime-data/scst.sqlite3 outsideGit.
 
 ## Read next
 
-Manifest/policy/state/handoff/truth/index, docs/specs/SCST_M2B.md docs/work_orders/SCST_M2B.md docs/reviews/SCST_M2B_REVIEW.md. BOOTSTRAP_MIGRATION_PENDING nonblocking. Rehydrate atrole/tranchechanges; nextmilestone needsownSPEC/order, no auto-start.
+Manifest/policy/state/handoff/truth/index, docs/specs/SCST_M2C.md and docs/work_orders/SCST_M2C.md. BOOTSTRAP_MIGRATION_PENDING nonblocking. M2B handoffSUPERSEDED; priorcriteria/evidence immutable. Rehydrate atrole/tranchechange; no autoexport/nextmilestone.

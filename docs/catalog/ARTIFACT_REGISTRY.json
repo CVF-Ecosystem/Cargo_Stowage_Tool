@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
   "updatedAt": "2026-11-01",
-  "claimBoundary": "M1/VINAFCO/M2a/PIPE-LIST/M2b technicallyverified; developer-ownedusableflow exercised, business/operationalacceptance separate; noautomaticM2c.",
+  "claimBoundary": "PriorM2b technicallyverified; M2c admitted notimplemented, business/operationalacceptance separate.",
   "artifacts": [
     {
       "id": "schema-artifact-registry",
@@ -63,9 +63,9 @@
     {
       "id": "continuity-initial-handoff",
       "family": "continuity",
-      "path": "CVF_SESSION/handoffs/AGENT_HANDOFF_M2B.md",
+      "path": "CVF_SESSION/handoffs/AGENT_HANDOFF_M2C.md",
       "status": "ACTIVE",
-      "description": "Active M2b automatictrial/display handoff; predecessors preservehistory."
+      "description": "Active M2c baseline/compare/restore handoff; predecessors preservehistory."
     },
     {
       "id": "truth-implementation-status",
@@ -107,21 +107,21 @@
       "family": "governed_artifact_family",
       "path": "docs/specs",
       "status": "ACTIVE",
-      "description": "M1, VINAFCO268 and admitted next-slice M2a specifications. PIPE-LIST source integration technically reviewed and orderclosed; businessacceptance separate. M2b technicalorder closed afterindependentreview; businessacceptance separate."
+      "description": "M1, VINAFCO268 and admitted next-slice M2a specifications. PIPE-LIST source integration technically reviewed and orderclosed; businessacceptance separate. M2b technicalorder closed afterindependentreview; businessacceptance separate. M2c admitted, notimplemented."
     },
     {
       "id": "family-work-orders",
       "family": "governed_artifact_family",
       "path": "docs/work_orders",
       "status": "ACTIVE",
-      "description": "M1, VINAFCO268 and M2a technical orders closed; next M2b requires its own SPEC/order. PIPE-LIST source integration technically reviewed and orderclosed; businessacceptance separate. M2b technicalorder closed afterindependentreview; businessacceptance separate."
+      "description": "M1, VINAFCO268 and M2a technical orders closed; next M2b requires its own SPEC/order. PIPE-LIST source integration technically reviewed and orderclosed; businessacceptance separate. M2b technicalorder closed afterindependentreview; businessacceptance separate. M2c admitted, notimplemented."
     },
     {
       "id": "family-reviews",
       "family": "governed_artifact_family",
       "path": "docs/reviews",
       "status": "ACTIVE",
-      "description": "M1, VINAFCO268 and M2a assessments, returns, independent reviews and exact-version evidence. PIPE-LIST source integration technically reviewed and orderclosed; businessacceptance separate. M2b technicalorder closed afterindependentreview; businessacceptance separate."
+      "description": "M1, VINAFCO268 and M2a assessments, returns, independent reviews and exact-version evidence. PIPE-LIST source integration technically reviewed and orderclosed; businessacceptance separate. M2b technicalorder closed afterindependentreview; businessacceptance separate. M2c admitted, notimplemented."
     },
     {
       "id": "family-learnings",
