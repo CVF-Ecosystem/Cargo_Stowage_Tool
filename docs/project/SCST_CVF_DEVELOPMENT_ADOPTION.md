@@ -49,6 +49,33 @@ hoặc bằng chứng live-provider của đợt này.
 | Tri thức và learning | `knowledge/`, [learning home](../reviews/learnings/README.md) | Knowledge hiện mới có README; ingest không tạo tri thức nghiệp vụ mới. SCST-L001 đã sửa local, còn chờ parent assessment; chưa có cải tiến trả về. | Đọc theo trigger; ghi bài học có giá trị, giữ riêng local action/parent decision/returned adoption. |
 | Bằng chứng governance thật | Quy định trong AGENTS/policy và review evidence của tranche liên quan | Lượt này NOT_RUN đối với live-provider; doctor/các receipt tài liệu không chứng minh risk/approval/DLP/provider routing hoặc agent behavior. | Trước thử nghiệm live cần scope R2, credential/quyền gọi và reviewer độc lập; lưu request/response không bí mật, cả FAIL/SKIP/NOT RUN. |
 
+## Project Development Application — phần chung và riêng
+
+Áp dụng bổ sung theo yêu cầu owner 01-11-2026 về nâng nền CVF và thử trên hai project.
+Baseline Core pin `c4c8767ac8861854f40d466ba338ffd11eb9558e` giữ nguyên.
+Nguồn bổ sung: artifact `project-development-application-standard` trong manifest
+được `../CVF_RULE_PACKS/ACTIVE_RULE_PACK.json` trỏ tới; nguồn Core `docs/reference/downstream_gate_profile/CVF_PROJECT_DEVELOPMENT_APPLICATION_STANDARD.md`,
+SHA-256 `d06b62387e015160a77658f333882a2a316d54ffd0421071354cf63a3730dd7a`. Đây là bản local từ worktree Core, chưa public export.
+
+Phần chung: lifecycle/risk, phạm vi và owner, ưu tiên native/kit có sẵn, coverage,
+review độc lập khi governance-significant, nghiệm thu nội bộ và ghi phần còn lại.
+Bảng dưới cụ thể hóa việc phát triển SCST; không thêm quy tắc vận hành tàu.
+
+| ID / nguồn tiêu chí | Quy tắc chung | Kiểm soát riêng khi phát triển | Trigger / owner | Cách kiểm và tình trạng |
+|---|---|---|---|---|
+| SCST-DA01 / IMPLEMENTATION_STATUS.json: exact stored data, kg/cm UI; SUP-01 | Giữ tiêu chí, kiểm đầu ra người dùng | Khi sửa viewer/form, phân biệt làm tròn hiển thị với giá trị lưu và ngưỡng hình học; không round-trip từ nhãn về dữ liệu chính xác | Worker trước sửa UI/serialization; reviewer trước nhận | Ca đổi đơn vị, trường chưa sửa, save/reload; đối chiếu giá trị gốc. Hướng dẫn đã ghi, ca sản phẩm mới chưa chạy |
+| SCST-DA02 / IMPLEMENTATION_STATUS.json: SQLite snapshot, không reset DB lỗi | Scope/risk và bảo toàn dữ liệu | Dùng dữ liệu thử tách biệt; nêu phương án tương thích/phục hồi khi đổi schema/snapshot; không ghi vào SQLite user để chứng minh test | Worker khi đổi persistence; reviewer độc lập | Kiểm round-trip snapshot và lỗi không ghi đè/reset; dữ liệu user giữ nguyên. Chưa mở migration |
+| SCST-DA03 / IMPLEMENTATION_STATUS.json: dimensions sourced/estimated; SUP-02/03 | Bằng chứng nguồn và owned remainder | Phân biệt số đo có nguồn với ước lượng; đối chiếu profile/revision và fixture packing; không dùng test placement để suy nghiệm thu stability/strength | Spec author và reviewer khi đổi profile/packing | Kiểm nguồn/đơn vị/revision, ca biên xếp hàng theo SPEC được chốt. Điều kiện chưa rõ giữ UNKNOWN, không tự tạo dung sai |
+| SCST-DA04 / DEV-01/02/03 tại checkpoint này | Reuse, review và giới hạn claim | Dùng runner/kit hiện có, chỉ mở adapter cho điểm thiếu đã xác minh; mỗi task dẫn row áp dụng và bằng chứng thực gọi | Orchestrator trước dispatch, reviewer khi nhận | Đối chiếu contract/receipt với task; source/test/doctor không chứng minh agent behavior. DEV-01 IMPLEMENTED_UNPROVED; DEV-02/03 UNKNOWN giữ nguyên |
+| SCST-DA05 / luồng SUP-01 tới M2d | Nghiệm thu nội bộ do đội dev sở hữu | Kiểm luồng nhập/sửa/xem/lưu/đọc lại liên quan đến slice đã chọn trước khi nhờ owner phản hồi nghiệp vụ | Worker + reviewer trước giao bản dùng được | Nêu input, hành động, output quan sát và phần chưa đạt; test count không thay flow acceptance. Chưa nhận nghiệm thu sản phẩm |
+
+Khi agent mới nhận việc hoặc thay mục tiêu/rủi ro, chủ động kiểm bảng này với yêu cầu
+và roadmap hiện tại; chỉ bổ sung row còn thiếu trong hồ sơ này. Brief dẫn đúng row,
+tiêu chí đã chốt, phạm vi, owner và bằng chứng cần có. Thiếu điều kiện giữ phần phụ
+thuộc; không tự mở thêm vòng kiểm toàn nền. Thiết lập bảng không đóng CVF-DEV.
+Lượt hiện tại kiểm đường dẫn, nội dung, hash, catalog và gate tài liệu; live-provider
+NOT_RUN, không sửa app/DB/hook/CI hoặc giải phóng milestone sản phẩm.
+
 ## Luồng áp dụng xuyên suốt
 
 1. INTAKE/DESIGN: đọc continuity và nguồn; ghi kết quả cần đạt, rủi ro, reuse và phần thiếu.

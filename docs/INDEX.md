@@ -5,7 +5,7 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 ## Start Here
 
 - Active session/phase/role state.: `CVF_SESSION/ACTIVE_SESSION_STATE.json`
-- Active CVF-DEV adoption DESIGN handoff; bounded reconciliation before SUP-01, no BUILD.: `CVF_SESSION/handoffs/AGENT_HANDOFF_CVF_DEV_ADOPTION.md`
+- Active SUP-01 BUILD handoff; bounded order, root implementation review, no automatic successor.: `CVF_SESSION/handoffs/AGENT_HANDOFF_SUP_01.md`
 - Project continuity front door.: `CVF_SESSION_MEMORY.md`
 - CVF development adoption DESIGN and source matrix; DEV criteria unaccepted, evidence limits and owned remainder.: `docs/project/SCST_CVF_DEVELOPMENT_ADOPTION.md`
 - CVF enforcement manifest.: `.cvf/manifest.json`
@@ -16,7 +16,7 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 - Closed schema reference for the Module Registry.: `docs/catalog/schemas/MODULE_REGISTRY.schema.json`
 - Standard-library catalog validation and rendering functions.: `scripts/lib/downstream_catalog/CvfDownstreamCatalogLib.ps1`
 - Executable catalog manager (--check / --write).: `scripts/manage_cvf_downstream_catalog.ps1`
-- Earlier verified runtime plus separate NOT_STARTED supplemental roadmap; business acceptance pending.: `IMPLEMENTATION_STATUS.json`
+- Exact current phase/order and prior verified runtime; business acceptance separate.: `IMPLEMENTATION_STATUS.json`
 - Runtime truth and CVF-DEV design priority; app unchanged, no full adoption claim.: `docs/project/PROJECT_STATUS.md`
 - Generated documentation index.: `docs/INDEX.md`
 - Generated human module catalog.: `docs/catalog/MODULE_CATALOG.md`
@@ -29,7 +29,7 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 - Current status, original planning input and file organization.: `docs/project/`
 - Source material still used for planning; not final design authority.: `docs/reference/`
 - M1/VINAFCO/M2a/PIPE-LIST/M2b/M2c specifications, closed technical orders and independent exact-version reviews; business acceptance separate.: `docs/reviews/`
-- Overall and supplemental product roadmaps; CVF-DEV adoption checkpoint takes priority before SUP-01.: `docs/roadmaps/`
+- Overall and supplemental roadmaps; scoped CVF-DEV continuation permits SUP-01 only, SUP-02/03 remain future.: `docs/roadmaps/`
 - M1/VINAFCO/M2a/PIPE-LIST/M2b/M2c specifications, closed technical orders and independent exact-version reviews; business acceptance separate.: `docs/specs/`
 - M1/VINAFCO/M2a/PIPE-LIST/M2b/M2c specifications, closed technical orders and independent exact-version reviews; business acceptance separate.: `docs/work_orders/`
 

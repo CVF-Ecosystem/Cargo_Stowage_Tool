@@ -65,6 +65,14 @@ The development team proves usable product delivery before requesting feedback;
 noncoders supply business decisions, not technical QA. Follow its acceptance layers,
 five evidence questions and authority/claim limits in the existing project records.
 
+## Project Development Application
+
+Trước BUILD phụ thuộc, chủ động áp dụng bảng chung/riêng tại
+`docs/project/SCST_CVF_DEVELOPMENT_ADOPTION.md` (SCST-DA01..05); brief dẫn các row
+liên quan, nguồn tiêu chí và bằng chứng. Làm lại đối chiếu khi đổi yêu cầu/rủi ro,
+không sao chép toàn CVF hoặc bắt owner làm QA. Nguồn bổ sung có hash trong bảng;
+giữ pin Core và quyền hiện có. Đây là hướng dẫn phát triển, chưa phải proof agent.
+
 ## Provider-Neutral Role Contract
 
 Roles are responsibilities and must never be hardcoded to a specific provider. A single agent may hold multiple roles,

@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
   "updatedAt": "2026-11-01",
-  "claimBoundary": "CVF-DEV adoption design prioritized before SUP-01; no new enforcement, live-governance or full adoption claim. Runtime and product acceptance unchanged.",
+  "claimBoundary": "SUP-01 bounded BUILD under reviewed CVF application mapping; no full adoption or live-agent governance claim; product/business acceptance separate.",
   "artifacts": [
     {
       "id": "schema-artifact-registry",
@@ -63,16 +63,16 @@
     {
       "id": "continuity-initial-handoff",
       "family": "continuity",
-      "path": "CVF_SESSION/handoffs/AGENT_HANDOFF_CVF_DEV_ADOPTION.md",
+      "path": "CVF_SESSION/handoffs/AGENT_HANDOFF_SUP_01.md",
       "status": "ACTIVE",
-      "description": "Active CVF-DEV adoption DESIGN handoff; bounded reconciliation before SUP-01, no BUILD."
+      "description": "Active SUP-01 BUILD handoff; bounded order, root implementation review, no automatic successor."
     },
     {
       "id": "truth-implementation-status",
       "family": "implementation_truth",
       "path": "IMPLEMENTATION_STATUS.json",
       "status": "ACTIVE",
-      "description": "Earlier verified runtime plus separate NOT_STARTED supplemental roadmap; business acceptance pending."
+      "description": "Exact current phase/order and prior verified runtime; business acceptance separate."
     },
     {
       "id": "view-docs-index",
@@ -100,7 +100,7 @@
       "family": "governed_artifact_family",
       "path": "docs/roadmaps",
       "status": "ACTIVE",
-      "description": "Overall and supplemental product roadmaps; CVF-DEV adoption checkpoint takes priority before SUP-01."
+      "description": "Overall and supplemental roadmaps; scoped CVF-DEV continuation permits SUP-01 only, SUP-02/03 remain future."
     },
     {
       "id": "family-specs",

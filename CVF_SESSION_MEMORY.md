@@ -5,22 +5,24 @@ Memory class: POINTER_RECORD
 ## Current Truth
 
 - Contract: cvf.downstreamContinuityContract@1.0.0
-- Current mode: DESIGN
-- Active phase: DESIGN
-- Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_CVF_DEV_ADOPTION.md
+- Current mode: BUILD
+- Active phase: BUILD
+- Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_SUP_01.md
 
 ## Current operator boundary
 
-Current DESIGN / SESSION_SYNC_STEWARD. Next: Prioritize bounded CVF-DEV adoption reconciliation, then SPEC/WORK_ORDER for evidenced project-local gaps before SPEC SUP-01. No BUILD or provider call authorized. Parked: App SUP-01/02/03, M2d, M3 and M4 remain future work; live governance proof, hook/CI changes and full adoption claims need their own scoped authority and evidence.
+Current BUILD / ORCHESTRATOR. Next: Implement and verify SUP-01 S1-01..04 under docs/work_orders/SCST_SUP_01.md; workers own viewer/browser paths, root independent implementation review and local commit. No automatic SUP-02. Parked: SUP-02/03, M2d/M3/M4, hook/hosted-CI adoption and live-provider governance proof remain owned future work; measured hold and16source envelopes/business acceptance stay pending.
 
-Owner prioritizes CVF in development, not only optional M4 runtime integration. Read docs/project/SCST_CVF_DEVELOPMENT_ADOPTION.md first: project application matrix, lifecycle points, installed/invoked/proof limits and owned remaining work. CVF-DEV precedes SUP-01 and continues across all milestones. DEV-01 IMPLEMENTED_UNPROVED; DEV-02/03 UNKNOWN. No app work order active; no full adoption claim, hook installation, CI repair or API use authorized by this design task.
+Owner asks inspect transferred CVF guidance, apply and continue roadmap. Supplemental operator-local project-development-application standard SHA d06b62387e015160a77658f333882a2a316d54ffd0421071354cf63a3730dd7a verified; public Core pin c4c8767 unchanged/read-only. Incoming owner additions preserved in evidence/incoming-transfer.json. AGENTS routes SCST-DA01..05; active order selects DA01/04/05 and holds DA02/03 boundaries. Source delivery/document checks are not agent-governance proof.
 
-Independent review APPROVE DESIGN recorded in docs/reviews/SCST_CVF_DEV_DESIGN_REVIEW.md; transient index continuity drift resolved and rechecked before approval. Root transitioned to SESSION_SYNC_STEWARD/COMMIT_STEWARD for documentation sync/local commit only. Acceptance covers design, not CVF adoption or behavior proof.
+Bounded CVF-DEV continuation independently reviewed by Sol; see docs/reviews/SCST_CVF_DEV_APPLICATION_RECONCILIATION.md. DEV-01 IMPLEMENTED_UNPROVED, DEV-02/03 UNKNOWN remain; no full adoption/hosted CI/live-provider claim. Governance proof NOT_RUN, credentials/provider/hooks/CI outside selected scope. Native reuse/direct runner sufficient for current pure viewer; owned future gap destination docs/specs/SCST_CVF_DEV.md.
 
-Core ../.Controlled-Vibe-Framework-CVF at c4c8767ac8861854f40d466ba338ffd11eb9558e read-only; R2 ceiling/design, independent reviewer required, live governance evidence YES when behavior is claimed. Doctor configuration only. BOOTSTRAP_MIGRATION_PENDING fallback. Keep one 45-minute design/review budget without reset; future bounded reconciliation proposed 30 minutes.
+SPEC docs/specs/SCST_SUP_01.md and order docs/work_orders/SCST_SUP_01.md bind four criteria. Root orchestrates/specs/reviews worker implementation/local commit; Terra viewer/styles, Sol browser/config/evidence. Risk R2, independent review, live evidence YES for behavior claims, none planned. 120minute total prep/workers/review ceiling, no reset; baseline before first new build, one full browser regression after freeze, user DB/live8765 untouched. BOOTSTRAP_MIGRATION_PENDING nonblocking.
 
-Baseline 5712083 runtime unchanged; SUP-01/02/03 NOT_STARTED; kg/cm/m UI and exact stored data retained. VINAFCO coordinate mapping already verified in prior evidence; source package/GLB unchanged. Raw VINAFCO268_LOCAL_HANDOFF_V1_1(1) untracked; never bulk-add. Live 8765/user SQLite preserved.
+## Bổ sung áp dụng nền ngày 01-11-2026
+
+Owner transfer added common/project controls DA01..05 to adoption DESIGN and AGENTS using active local rule-pack; Core pin and checkpoint hashes preserved. Original mapping acceptance was ACCEPT_WITH_LIMITS for document/source scope, not app BUILD or agent behavior. Use concrete task controls and usable flow proof, not only test counts. Parent SCST-L001 assessment remains pending; no returned parent implementation claimed.
 
 ## Read next
 
-Manifest/policy/state/current handoff/truth/index, adoption design and relevant learning trigger SCST-L001. Preserve old registered roadmap tables and closed SPEC/WORK_ORDER/review evidence. Native kit reuse first, smallest evidenced connection only. Parent learning acceptance and returned project adoption remain separate.
+Manifest/policy/state/active handoff/truth/index, active SPEC/WO, adoption matrix and triggered SCST-L001 learning. Preserve original kg/cm presentation and exact stored/geometry data, source coordinate mapping, GLB and historical evidence. Raw VINAFCO268_LOCAL_HANDOFF_V1_1(1) stays local/untracked, never bulk-add. No automatic SUP-02/M2d.

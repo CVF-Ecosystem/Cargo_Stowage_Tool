@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "DESIGN",
-  "activePhase": "DESIGN",
+  "currentMode": "BUILD",
+  "activePhase": "BUILD",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -13,10 +13,10 @@
     "REVIEW",
     "FREEZE"
   ],
-  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_CVF_DEV_ADOPTION.md",
-  "nextAllowedMove": "Prioritize bounded CVF-DEV adoption reconciliation, then SPEC/WORK_ORDER for evidenced project-local gaps before SPEC SUP-01. No BUILD or provider call authorized.",
-  "parkedOperatorCheckpoint": "App SUP-01/02/03, M2d, M3 and M4 remain future work; live governance proof, hook/CI changes and full adoption claims need their own scoped authority and evidence.",
-  "activeRole": "SESSION_SYNC_STEWARD",
+  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_SUP_01.md",
+  "nextAllowedMove": "Implement and verify SUP-01 S1-01..04 under docs/work_orders/SCST_SUP_01.md; workers own viewer/browser paths, root independent implementation review and local commit. No automatic SUP-02.",
+  "parkedOperatorCheckpoint": "SUP-02/03, M2d/M3/M4, hook/hosted-CI adoption and live-provider governance proof remain owned future work; measured hold and16source envelopes/business acceptance stay pending.",
+  "activeRole": "ORCHESTRATOR",
   "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",
   "updatedAt": "2026-11-01"
 }

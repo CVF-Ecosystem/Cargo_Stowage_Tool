@@ -1,0 +1,19 @@
+{
+  "base": "6f8fa9fab1460772251b593a879353b2cea097ce",
+  "supplemental_artifact": "project-development-application-standard",
+  "source_sha256": "d06b62387e015160a77658f333882a2a316d54ffd0421071354cf63a3730dd7a",
+  "manifest_match": true,
+  "core_pin_unchanged": true,
+  "source_kind": "operator-local rule-pack supplement, not public Core pin upgrade",
+  "scope": "Source delivery/admission only, not agent behavior proof",
+  "selected_application_rows": [
+    "SCST-DA01",
+    "SCST-DA04",
+    "SCST-DA05"
+  ],
+  "conditional_rows": {
+    "SCST-DA02": "No persistence change; preserve isolated test DB",
+    "SCST-DA03": "No profile/source change; retain existing coordinate proof"
+  },
+  "live_governance": "NOT_RUN"
+}

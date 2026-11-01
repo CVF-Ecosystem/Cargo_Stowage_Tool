@@ -1,10 +1,12 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "CVF_DEV_ADOPTION_DESIGN_PRIORITY_RUNTIME_UNCHANGED",
-  "currentPhase": "DESIGN",
+  "overallStatus": "SUP_01_BUILD_IN_PROGRESS",
+  "currentPhase": "BUILD",
   "completedCapabilities": [],
-  "activeWorkOrders": [],
+  "activeWorkOrders": [
+    "docs/work_orders/SCST_SUP_01.md"
+  ],
   "knownLimitations": [
     "PIPE-LIST actual31group/1076bundle source integration technically verified; source mass/dimensions calculated/provisional.16bundles need envelope verification; measuredhold/business/operational acceptance pending.",
     "Raw drafts/history/baseline/comparison remain in browser tab until explicit immutable SQLite Plan snapshot save. Baseline/comparison do not persist through reload; select saved A again. Latest100 snapshots, no overwrite/delete/backup/restore UI.",
@@ -62,7 +64,10 @@
     "docs/reviews/SCST_3D_SUPPLEMENT_ROADMAP_REVIEW.md",
     "docs/reviews/SCST_3D_SUPPLEMENT_EVIDENCE/coordinate-check.json",
     "docs/project/SCST_CVF_DEVELOPMENT_ADOPTION.md",
-    "docs/reviews/SCST_CVF_DEV_DESIGN_REVIEW.md"
+    "docs/reviews/SCST_CVF_DEV_DESIGN_REVIEW.md",
+    "docs/specs/SCST_SUP_01.md",
+    "docs/work_orders/SCST_SUP_01.md",
+    "docs/reviews/SCST_CVF_DEV_APPLICATION_RECONCILIATION.md"
   ],
   "updatedAt": "2026-11-01",
   "x_verifiedMilestones": [
@@ -125,8 +130,8 @@
         "implementationStatus": "NOT_STARTED"
       }
     ],
-    "nextSpecification": "SUP-01 after CVF-DEV checkpoint",
-    "buildAuthorized": false
+    "nextSpecification": "SUP-01 active; SUP-02 after scoped review",
+    "buildAuthorized": true
   },
   "x_cvfDevelopmentAdoption": {
     "design": "docs/project/SCST_CVF_DEVELOPMENT_ADOPTION.md",

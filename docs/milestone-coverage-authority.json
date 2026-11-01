@@ -44,6 +44,10 @@
     "SCST-CVF-DEV": {
       "path": "docs/project/SCST_CVF_DEVELOPMENT_ADOPTION.md",
       "heading": "## Đầu ra checkpoint CVF-DEV"
+    },
+    "SCST-SUP-01": {
+      "path": "docs/specs/SCST_SUP_01.md",
+      "heading": "## SUP-01 acceptance"
     }
   }
 }

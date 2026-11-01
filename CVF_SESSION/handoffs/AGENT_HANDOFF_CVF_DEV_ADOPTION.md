@@ -1,6 +1,19 @@
 # SCST — CVF development adoption priority
 
-Status: ACTIVE
+Status: SUPERSEDED
+
+## Bổ sung áp dụng nền ngày 01-11-2026
+
+Owner đã giao nâng nền CVF, truyền vào workspace và kiểm phần chung/riêng tại project.
+Đã bổ sung hướng dẫn ở AGENTS và bảng SCST-DA01..05 trong adoption DESIGN từ rule-pack
+local; giữ Core pin, tiêu chí checkpoint có hash và trạng thái DEV-01/02/03. Phạm vi
+lần này là hướng dẫn và kiểm cấu trúc/tích hợp tài liệu; không app BUILD hay API.
+Tiếp theo dùng bảng cho brief CVF-DEV/SUP phù hợp, không coi giao file là đã nghiệm thu
+agent behavior. Kết quả phần bổ sung: reviewer độc lập ACCEPT_WITH_LIMITS cho mapping/authority;
+đã sửa hash theo chuẩn cuối. Catalog PASS, doctor 28/28, reviewer-fast 8/8 và
+pre-commit 7/7 ở phạm vi cấu trúc với N/A rõ cho packet không có. Kịch bản tài liệu:
+đổi đơn vị hiển thị phải dẫn DA01+DA05; chạm persistence thêm DA02; chỉ ghi “tests pass”
+chưa đủ nghiệm thu. Không API/live proof, không đóng DEV-02/03 hay milestone sản phẩm.
 
 ## Current State
 
