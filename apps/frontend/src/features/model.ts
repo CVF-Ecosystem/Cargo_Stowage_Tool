@@ -12,7 +12,25 @@ export const tonnes = (g: number) => {
   if (g !== 0 && Math.abs(g) < 10_000) return g < 0 ? "-<0,01" : "<0,01";
   return tonneNumber.format(g / 1_000_000);
 };
-export const massLabel = (g: number) => `${tonnes(g)} tấn`;
+export const massLabel = (g: number) => `${formatKg(g)} kg`;
+// Presentation helpers do not change the exact geometry or stored values.
+const roundedWhole = (n: number) => Math.sign(n) * Math.floor(Math.abs(n) + 0.5);
+const integerVi = new Intl.NumberFormat("vi-VN", { maximumFractionDigits: 0 });
+const metreVi = new Intl.NumberFormat("vi-VN", { maximumFractionDigits: 2 });
+export const displayKg = (g: number) => String(roundedWhole(g / 1000));
+export const displayCm = (mm: number) => String(roundedWhole(mm / 10));
+export const formatKg = (g: number) => g !== 0 && Math.abs(g) < 1000 ? (g < 0 ? "-<1" : "<1") : integerVi.format(roundedWhole(g / 1000));
+export const formatCm = (mm: number) => mm !== 0 && Math.abs(mm) < 10 ? (mm < 0 ? "-<1" : "<1") : integerVi.format(roundedWhole(mm / 10));
+export const formatMetres = (mm: number) => metreVi.format(mm / 1000);
+export function parseCm(text: string): number {
+  const value = text.trim().replace(",", ".");
+  if (!/^-?\d+(\.\d)?$/.test(value)) throw new Error("Kích thước hoặc tọa độ cần cm với tối đa một số lẻ.");
+  const negative = value.startsWith("-");
+  const [whole, fraction = ""] = (negative ? value.slice(1) : value).split(".");
+  const mm = (BigInt(whole)*10n + BigInt(fraction || "0")) * (negative ? -1n : 1n);
+  if (mm < -1_000_000n || mm > 1_000_000n) throw new Error("Kích thước hoặc tọa độ ngoài phạm vi cho phép.");
+  return Number(mm);
+}
 export const dimensions = (u: Unit) => u.dimensions_um ? u.dimensions_um.map(n=>n/1000) : [u.length_mm,u.width_mm,u.height_mm];
 export const footprint = (u: Unit, p: Placement) => {
   const [length,width]=dimensions(u); return p.yaw_deg % 180 ? [width,length] : [length,width];

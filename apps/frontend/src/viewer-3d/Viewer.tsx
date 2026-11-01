@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import type { VesselProfile } from "../api/client";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { dimensions, footprint, fmt, type Plan } from "../features/model";
+import { dimensions, footprint, formatMetres, type Plan } from "../features/model";
 
 type Props = {
   plan: Plan;
@@ -418,7 +418,7 @@ export default function Viewer(props: Props) {
               fontSize="300"
               fill="#587064"
             >
-              X · {fmt(plan.hold.length_mm / 1000)} m
+              X · {formatMetres(plan.hold.length_mm)} m
             </text>
             <text x="0" y="-400" fontSize="260" fill="#587064">
               Gốc (0, 0) · Y theo chiều rộng
@@ -459,7 +459,7 @@ export default function Viewer(props: Props) {
           <i className="swatch selected" />
           Đang chọn
         </span>
-        <span className="legend-end">Khối bao bó hàng · mm</span>
+        <span className="legend-end">Khối bao bó hàng · cm</span>
       </div>
     </section>
   );

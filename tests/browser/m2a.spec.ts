@@ -24,17 +24,17 @@ test("manual empty plan, cargo, hold and placement persist as immutable checked 
   await expect(page.getByTestId("manifest-mass")).toHaveText("0 tấn");
   await expect(page.getByRole("heading", { name: "Chưa chọn bó" })).toBeVisible();
   await page.getByLabel("Tên hầm").fill("Hầm kiểm thử tự nhập");
-  await page.getByLabel("Hầm holdLength (mm)").fill("20000");
-  await page.getByLabel("Hầm holdWidth (mm)").fill("8000");
-  await page.getByLabel("Hầm holdHeight (mm)").fill("5000");
+  await page.getByLabel("Hầm holdLength (cm)").fill("2000");
+  await page.getByLabel("Hầm holdWidth (cm)").fill("800");
+  await page.getByLabel("Hầm holdHeight (cm)").fill("500");
   const holdChecked = await responseJson<Evaluation>(page, "/api/validate", () => page.getByRole("button", { name: "Áp dụng & kiểm lại" }).click());
   expect(holdChecked.plan.hold).toMatchObject({ name: "Hầm kiểm thử tự nhập", length_mm: 20000, width_mm: 8000, height_mm: 5000 });
 
   await page.getByLabel("Bó mới id").fill("MAN-001");
   await page.getByLabel("Bó mới name").fill("Bó tự nhập");
-  await page.getByLabel("Bó mới length").fill("6000");
-  await page.getByLabel("Bó mới width").fill("900");
-  await page.getByLabel("Bó mới height").fill("650");
+  await page.getByLabel("Bó mới length").fill("600");
+  await page.getByLabel("Bó mới width").fill("90");
+  await page.getByLabel("Bó mới height").fill("65");
   await page.getByLabel("Bó mới mass").fill("1250.125");
   const added = await responseJson<Evaluation>(page, "/api/validate", () => page.getByRole("button", { name: "Thêm bó", exact: true }).click());
   expect(added.plan.units).toMatchObject([{ id: "MAN-001", mass_g: 1_250_125 }]);
@@ -42,7 +42,7 @@ test("manual empty plan, cargo, hold and placement persist as immutable checked 
   await expect(page.getByTestId("unit-MAN-001")).toContainText("Bắt buộc chưa xếp");
   const placed = await responseJson<Evaluation>(page, "/api/validate", () => page.getByRole("button", { name: "Đặt bó" }).click());
   expect(placed.plan.placements).toMatchObject([{ unit_id: "MAN-001", x_mm: 0, y_mm: 0 }]);
-  await page.getByLabel("Tọa độ X (mm)").fill("1000");
+  await page.getByLabel("Tọa độ X (cm)").fill("100");
   const checked = await responseJson<Evaluation>(page, "/api/validate", () => page.getByRole("button", { name: "Áp dụng & kiểm lại" }).click());
   expect(checked.plan.placements[0].x_mm).toBe(1000);
   await page.getByLabel("Tên phương án lưu").fill(`Browser manual ${Date.now()}`);
@@ -60,7 +60,7 @@ test("manual empty plan, cargo, hold and placement persist as immutable checked 
   await page.getByLabel("Phương án đã lưu").selectOption(first.id);
   const reopened = await responseJson<Evaluation>(page, `/api/snapshots/${first.id}`, () => page.getByRole("button", { name: "Mở phương án" }).click());
   expect(reopened.plan).toEqual(original.plan);
-  await expect(page.getByTestId("unit-MAN-001")).toContainText("1000, 0");
+  await expect(page.getByTestId("unit-MAN-001")).toContainText("100, 0");
   await expect(page.getByLabel("Tên hầm")).toHaveValue("Hầm kiểm thử tự nhập");
   await page.screenshot({ path: "../../docs/reviews/SCST_M2A_EVIDENCE/browser-manual-saved.png", fullPage: true });
 
@@ -185,7 +185,7 @@ test("delayed preview, save and open cannot overwrite newer edits or selection",
   await expect(page.getByRole("button", { name: "Áp dụng CSV" })).toBeDisabled();
   await expect(page.getByTestId("status")).toHaveText("STALE");
   await expect(mass).toHaveValue("2500.001");
-  await expect(row).toContainText("2,5 tấn");
+  await expect(row).toContainText("2.500 kg");
   await page.unroute("**/api/import/csv/preview");
   await mass.fill(original);
   await expect(page.getByTestId("status")).not.toHaveText("STALE");

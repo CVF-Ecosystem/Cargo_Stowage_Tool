@@ -1,0 +1,25 @@
+{
+  "textNormalization": "CRLF to LF",
+  "base": "232807d9568291c82f424900d83f2ae7ec24bb9c",
+  "files": {
+    "apps/frontend/src/features/ComparisonPanel.tsx": "34443b2c2d1a4d01a66c557afbdd83a583db72e51c7a364f6288ea9138ae461e",
+    "apps/frontend/src/features/Workspace.tsx": "a8c239271188e6cf8482c03aea5e559e33e09cec3063ded91988b6272514b107",
+    "apps/frontend/src/features/model.ts": "7b377cb262c4891ba5f355f8144c8fd1ca80b4ec8919c5897d2b3a4d6e481dda",
+    "apps/frontend/src/viewer-3d/Viewer.tsx": "5e5bf756363ee9d1f2d10b905dceef9aeadf1a7bcafc454b53da13a6a6a64b55",
+    "contracts/openapi.json": "2b7f9d1ee38f827e55cc756bb81a653de38d483613b24bab36d2e63af0f7bb7d",
+    "services/backend/app/adapters/storage.py": "ec151057a96255d7ca44e4c212c06b1ce65febe1e846a4c17831c309a4bc519c",
+    "services/backend/app/domain/comparison/__init__.py": "2c50fcfb1cc76b9dc7b51ec9934c962d59124b09c4425a6ed5401b0450b329cf",
+    "services/backend/app/domain/geometry/__init__.py": "eeb5625a1701689f2a97bcafb9ba841f804171ff1e6eb3451bc10eec0ce4e0be",
+    "services/backend/app/domain/model/__init__.py": "455d2b759cc91b5c11838f917486aebf4ff47d75bdb26fd7ae2d2e71c287908d",
+    "services/backend/app/domain/planner/__init__.py": "0b170dcbb352bbd64183ea1d7f4b0a76ce39a55a87bcab784f72535f07136ade",
+    "services/backend/app/domain/rules/__init__.py": "56c551a0d3caa30ffc7b7d29ebddbc686f556ef9b42a3c2d3f6a539bf3e89120",
+    "services/backend/data/pipe_list/baltimore.json": "429acdeb430d7bc6c2a1798a51d66fe523d62dd10469a8b50c7dd398d6d20330",
+    "tests/browser/display-units.spec.ts": "c51fcb3f902e1e4ad96f4fddc6a77f0766e2b3edb2eb51669c64c6c19ac83431",
+    "tests/browser/m2a.spec.ts": "b4d9def6d8e51bb4eb9d1f0f8d668afc9f62dd20ffc5e4f804e09dc27b15a575",
+    "tests/browser/m2b.spec.ts": "dab46fde767c61caa320817b0a02b657972f15a4d632c9814294d8fb3e32b544",
+    "tests/browser/m2c.spec.ts": "86922ed5608400df101b786db1e6ce94fdbc6bf2114a5f7c426bd907ce4eeec9",
+    "tests/browser/pipe-list.spec.ts": "feacfba4f66e7e2dfd8f10a28a463f5805cc2c8e4a0a1d37243b91a7fd353ab2",
+    "tests/browser/vinafco.spec.ts": "20d8807ac5584f211115c9c8ee852c43aac37a26c48c974ccfec3e4b5f4e49f3",
+    "tests/browser/workspace.spec.ts": "d2eddf5cb329209ed23517ad634c59db49fd8bc8a777c03f54f27945dc78bab6"
+  }
+}

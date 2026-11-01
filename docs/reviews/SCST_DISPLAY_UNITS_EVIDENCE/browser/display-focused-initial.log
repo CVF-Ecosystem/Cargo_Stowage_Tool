@@ -1,0 +1,14 @@
+[WebServer] INFO:     Started server process [10172]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8766 (Press CTRL+C to quit)
+
+Running 3 tests using 1 worker
+
+(node:21728) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 ..\..\tests\browser\display-units.spec.ts:28:5 › rounded practical inputs preserve untouched grams and millimetres through edit, save and reload (5.4s)
+  ok 2 ..\..\tests\browser\display-units.spec.ts:75:5 › comparison marks sub-resolution kg and cm changes while API retains exact deltas (2.0s)
+  ok 3 ..\..\tests\browser\display-units.spec.ts:97:5 › source cargo uses practical labels while all 1076 precise units and actual model meshes survive mobile fallback (6.0s)
+
+  3 passed (19.4s)

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { comparePlans, openSnapshot, type CompareResult, type SavedSummary } from "../api/client";
-import { fmt, tonnes, type Plan } from "./model";
+import { fmt, formatKg, formatCm, tonnes, type Plan } from "./model";
 
 type Props = {
   plan: Plan; stale: boolean; busy: boolean; lock: {current:boolean}; revision: {current:number};
@@ -13,10 +13,10 @@ type Change = CompareResult["rows"][number]["changes"][number];
 const labels: Record<string,string> = {
   contract_version:"Phiên bản phương án",source:"Nguồn hầm",cargo_source:"Nguồn hàng",cargo_dataset:"Bộ dữ liệu hàng",
   'vessel.vessel_id':"Phương tiện",'vessel.case_id':"Cấp tham chiếu",'hold.id':"ID hầm",'hold.name':"Tên hầm",'hold.shape':"Hình dạng hầm",
-  'hold.length_mm':"Chiều dài hầm (mm)",'hold.width_mm':"Chiều rộng hầm (mm)",'hold.height_mm':"Chiều cao hầm (mm)",
-  'limits.certificate_cargo_limit_g':"Mức chứng nhận/tham chiếu (g)",'limits.voyage_cargo_limit_g':"Giới hạn chuyến (g)",'limits.cargo_onboard_g':"Hàng đã có ngoài hầm (g)",
-  name:"Tên bó",kind:"Loại bó",requirement:"Yêu cầu",length_mm:"Chiều dài tương thích (mm)",width_mm:"Chiều rộng tương thích (mm)",height_mm:"Chiều cao tương thích (mm)",mass_g:"Khối lượng (g)",dimensions_um:"Kích thước nguồn dài × rộng × cao (µm)",
-  'placement.x_mm':"Vị trí X (mm)",'placement.y_mm':"Vị trí Y (mm)",'placement.z_mm':"Vị trí Z (mm)",'placement.yaw_deg':"Góc xoay (độ)",'placement.layer':"Tầng",'placement.supported_by':"Bó đỡ",
+  'hold.length_mm':"Chiều dài hầm (cm)",'hold.width_mm':"Chiều rộng hầm (cm)",'hold.height_mm':"Chiều cao hầm (cm)",
+  'limits.certificate_cargo_limit_g':"Mức chứng nhận/tham chiếu (kg)",'limits.voyage_cargo_limit_g':"Giới hạn chuyến (kg)",'limits.cargo_onboard_g':"Hàng đã có ngoài hầm (kg)",
+  name:"Tên bó",kind:"Loại bó",requirement:"Yêu cầu",length_mm:"Chiều dài tương thích (cm)",width_mm:"Chiều rộng tương thích (cm)",height_mm:"Chiều cao tương thích (cm)",mass_g:"Khối lượng (kg)",dimensions_um:"Kích thước nguồn dài × rộng × cao (cm)",
+  'placement.x_mm':"Vị trí X (cm)",'placement.y_mm':"Vị trí Y (cm)",'placement.z_mm':"Vị trí Z (cm)",'placement.yaw_deg':"Góc xoay (độ)",'placement.layer':"Tầng",'placement.supported_by':"Bó đỡ",
   'source_ref.dataset_id':"Bộ dữ liệu nguồn",'source_ref.workbook_sha256':"Mã SHA-256 nguồn",'source_ref.sheet':"Sheet nguồn",'source_ref.group_id':"Nhóm nguồn",'source_ref.source_row':"Dòng nguồn",'source_ref.bundle_index':"Thứ tự bó",'source_ref.pieces':"Số ống/bó",'source_ref.dimension_warning':"Cảnh báo kích thước",
 };
 const statusLabel: Record<string,string> = {ADDED:"Thêm",REMOVED:"Đã bỏ",CHANGED:"Thay đổi",UNCHANGED:"Không đổi"};
@@ -25,7 +25,20 @@ function valueText(value: unknown, field = ""): string {
   if(value === null || value === undefined) return "—";
   if(Array.isArray(value)) return value.length ? value.map(v=>valueText(v,field)).join(field === "dimensions_um" ? " × " : ", ") : "Không có";
   if(typeof value === "boolean") return value ? "Có" : "Không";
+  if(typeof value === "number") {
+    if(field.endsWith("_g")) return formatKg(value);
+    if(field.endsWith("_mm")) return formatCm(value);
+    if(field === "dimensions_um") return formatCm(value/1000);
+  }
   return typeof value === "string" ? valueLabels[value] ?? value : String(value);
+}
+function smallDifference(change: Change): string | null {
+  const threshold=change.field.endsWith("_g") ? 1000 : change.field.endsWith("_mm") ? 10 : change.field === "dimensions_um" ? 10000 : 0;
+  if(!threshold || change.before == null || change.after == null) return null;
+  const before=Array.isArray(change.before)?change.before:[change.before];
+  const after=Array.isArray(change.after)?change.after:[change.after];
+  const tiny=before.some((a,i)=>typeof a === "number" && typeof after[i] === "number" && Math.abs(after[i]-a)>0 && Math.abs(after[i]-a)<threshold);
+  return tiny ? `Chênh lệch dưới 1 ${change.field.endsWith("_g") ? "kg" : "cm"}; số hiển thị đã làm tròn.` : null;
 }
 function displayTime(value:string):string {
   const d=new Date(value);if(!Number.isFinite(d.getTime()))return "Thời gian không hợp lệ";
@@ -34,7 +47,7 @@ function displayTime(value:string):string {
   return `${get("day")}-${get("month")}-${get("year")} ${get("hour")}:${get("minute")}`;
 }
 function Detail({changes}:{changes:Change[]}) {
-  return <dl>{changes.map(c=><div key={c.field}><dt>{labels[c.field] ?? c.field}</dt><dd>Gốc A: {valueText(c.before,c.field)} → Hiện tại B: {valueText(c.after,c.field)}</dd></div>)}</dl>;
+  return <dl>{changes.map(c=><div key={c.field}><dt>{labels[c.field] ?? c.field}</dt><dd>Gốc A: {valueText(c.before,c.field)} → Hiện tại B: {valueText(c.after,c.field)}{smallDifference(c) && <span> · {smallDifference(c)}</span>}</dd></div>)}</dl>;
 }
 
 export default function ComparisonPanel({plan,stale,busy,lock,revision,setBusy,saved,select,restore}:Props) {
@@ -76,7 +89,7 @@ export default function ComparisonPanel({plan,stale,busy,lock,revision,setBusy,s
     {ready && <div data-testid="comparison-summary">
       <h3>Kết quả so sánh A → B</h3><p>Số bó: thêm {ready.counts.ADDED}, bỏ {ready.counts.REMOVED}, đổi {ready.counts.CHANGED}, không đổi {ready.counts.UNCHANGED}.</p>
       <div className="table-wrap"><table><thead><tr><th>Chỉ tiêu</th><th>Gốc A</th><th>Hiện tại B</th><th>Chênh lệch B−A</th></tr></thead><tbody>
-        {([['manifest_mass_g','Tổng hàng','mass'],['placed_mass_g','Đã xếp','mass'],['remaining_capacity_g','Sức chở còn lại','mass'],['placed_count','Số bó đã xếp','count'],['unplaced_count','Số bó chưa xếp','count'],['excluded_count','Số bó loại trừ','count'],['issue_count','Số lỗi kiểm','count']] as const).map(([field,label,kind])=><tr key={field}><td>{label}</td><td>{kind==='mass'?`${tonnes(ready.before[field])} tấn`:fmt(ready.before[field])}</td><td>{kind==='mass'?`${tonnes(ready.after[field])} tấn`:fmt(ready.after[field])}</td><td>{kind==='mass'?`${ready.delta[field]>=0?'+':''}${ready.delta[field]} g`:fmt(ready.delta[field])}</td></tr>)}
+        {([['manifest_mass_g','Tổng hàng','mass'],['placed_mass_g','Đã xếp','mass'],['remaining_capacity_g','Sức chở còn lại','mass'],['placed_count','Số bó đã xếp','count'],['unplaced_count','Số bó chưa xếp','count'],['excluded_count','Số bó loại trừ','count'],['issue_count','Số lỗi kiểm','count']] as const).map(([field,label,kind])=><tr key={field}><td>{label}</td><td>{kind==='mass'?`${tonnes(ready.before[field])} tấn`:fmt(ready.before[field])}</td><td>{kind==='mass'?`${tonnes(ready.after[field])} tấn`:fmt(ready.after[field])}</td><td>{kind==='mass' ? (ready.delta[field] !== 0 && Math.abs(ready.delta[field]) < 1000 ? 'Chênh lệch dưới 1 kg' : `${ready.delta[field]>0?'+':''}${formatKg(ready.delta[field])} kg`) : fmt(ready.delta[field])}</td></tr>)}
       </tbody></table></div><p>A: {ready.before.status} · B: {ready.after.status} · Chưa cấp điều kiện vận hành.</p>
       {ready.context_changes.length>0 && <div><strong>Điều kiện A và B khác nhau; không tự kết luận bản nào tốt hơn.</strong><Detail changes={ready.context_changes}/></div>}
       <p>Chưa kiểm A: {ready.before.unchecked.join(" · ")}<br/>Chưa kiểm B: {ready.after.unchecked.join(" · ")}</p>

@@ -4,10 +4,10 @@ Status: ACTIVE
 
 ## Current State
 
-- Current mode: BUILD
-- Active phase: BUILD
-- Active role: ORCHESTRATOR
-- Next allowed move: Implement four practical display criteria under 0fc26e6 admission; root independent review before technical closure, no M2d.
+- Current mode: REVIEW
+- Active phase: REVIEW
+- Active role: SESSION_SYNC_STEWARD
+- Next allowed move: Owner reviews practical kg/cm/m display repair; next roadmap slice M2d needs separate SPEC/WORK_ORDER when selected, no automatic implementation.
 - Parked operator checkpoint: Measuredhold/16sourceenvelopes and business/operational acceptance pending; M2d/M3 separate.
 
 ## Authority and continuity
@@ -21,3 +21,15 @@ UI kg/cm/m rounded only, actual Plan/mesh/source/mm/g/µm unchanged. Editor must
 ## BUILD acknowledgment
 
 Canonical state/memory/handoff/truth/index re-read and agree. Material-SHA marker: 0fc26e6. Pre-dispatch6/6 and pre-commit7/7 PASS; no runtime edits before ack. Root ORCHESTRATOR dispatches Terra IMPLEMENTATION_WORKER, Sol browser worker, root independent REVIEWER retained. Four criteria, R2/local UI only;100min ceiling unchanged, no automatic M2d.
+
+## REVIEW acknowledgment
+
+Canonical state/memory/handoff/truth/index re-read at worker return and agree. Root ORCHESTRATOR→independent REVIEWER, no runtime edits. Terra source frozen index-DXRJy6j_.js, worker-return7/7. Root numerical oracle6837checks PASS,120exactdrafts/source1076/rounding/exactconversions/inflightrebase/placementorder. Sol new3cases PASS; affected10/11 found test-only reverted ST002 to ST001fraction, corrected to actual2500kg with initialfailurelog retained, focusedrecheck pending. Final fullbrowser/build/liveflow pending; no backendchange so104priorbackend evidence reused. R2/corepin/liveevidenceYES unchanged, no provider/governanceclaim.
+
+## Technical disposition and role transition
+
+Four criteria verified, practical kg/cm/m UI and exact untouched fields preserved. Root6837checks/120drafts, full31browser1.2min, source167focused1/1 and finalwordingfocused1/1 PASS; finalbuild index-Bgkupcoy.js/live167source restore/undo/save-open in isolatedbrowserDB. Backend/source/GLB/Planprecision/mesh/schema/contracts/locks unchanged,104priorbackendproof reused. Root onlyruntimechange one staticeditorhelp textnode, independently reviewed by Sol; no handler/parser changes. Sol test-only ST002revert finding fixed, initial failure retained; no failing app check remains. Root focused invocation first had bad redirect path before testsran, corrected; worker helper filename failure disclosed, neither used as proof.
+
+Root independent REVIEWER→CLOSER for bounded technical repair, then SESSION_SYNC_STEWARD for canonical/catalog sync and COMMIT_STEWARD for authorized local commit. Same objective/design/paths/effects/commitowner; no M2d. Materialcommit must precede closure claim. Active handoff remains this pointer; no active app order. Business/operational acceptance PENDING, measuredhold/16envelopes parked. Corepin unchanged/liveevidenceYES only for governanceclaims, none made.100min ceiling unchanged, elapsed/billing partlyUNKNOWN. Existing8765 session99168/PID480 still serves backend/newdist; handle .cvf/runtime/display-demo-session.json. User SQLite bytes unchanged, no push.
+
+Final integrity/catalog/doctor checks:19sourcehashes,6backendtestfiles,22rawhandofffiles,86localdocslinks and protected historical authority/source/assets/archive PASS; actual Scene function unchanged after CRLF/LF normalization (first helper compared raw newline styles, not an app defect or proof). CatalogCheck/doctor28PASS; reviewer-fast8PASS. Final pre-commit and range check required before final return. Source changes only admitted frontend/tests/docs; independent Sol reviewed root static wording.

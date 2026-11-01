@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "assertions": 6837,
+  "randomized_exact_drafts": 120,
+  "source_units": 1076,
+  "method": "Independent BigInt round/conversion expectations and copied Plan field expectations; actual TS helpers extracted unchanged via TypeScript AST",
+  "backend_or_user_db_writes": false
+}

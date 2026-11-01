@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
   "updatedAt": "2026-11-01",
-  "claimBoundary": "M2c technical delivery verified; practical display repair admitted, not implemented; business acceptance pending.",
+  "claimBoundary": "Practical kg/cm/m UI and M2c technically verified; business/operational acceptance pending, local only.",
   "artifacts": [
     {
       "id": "schema-artifact-registry",
@@ -65,7 +65,7 @@
       "family": "continuity",
       "path": "CVF_SESSION/handoffs/AGENT_HANDOFF_DISPLAY_UNITS.md",
       "status": "ACTIVE",
-      "description": "Active practical display units repair handoff; M2c preserved as history."
+      "description": "Active delivered practical display units repair handoff; predecessors preserved."
     },
     {
       "id": "truth-implementation-status",
@@ -156,7 +156,7 @@
       "family": "implementation_truth",
       "path": "docs/project/PROJECT_STATUS.md",
       "status": "ACTIVE",
-      "description": "Delivered M2c baseline/comparison/restore, verified workflow and next checkpoint."
+      "description": "Delivered practical display kg/cm/m repair and M2c workflow; next checkpoint separate."
     },
     {
       "id": "manifest-organization",

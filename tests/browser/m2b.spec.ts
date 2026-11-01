@@ -81,7 +81,7 @@ test("VINAFCO source list planner puts actual bundles in the hold, reconciles al
   expect(loaded.summary.manifest_mass_g).toBe(1_125_551_030);
   await expect(page.getByTestId("manifest-mass")).toHaveText("1.125,55 tấn");
   await page.getByTestId("unit-PIPE-R002-B0001").getByRole("button").click();
-  await expect(page.getByLabel("Khối lượng bó (kg)")).toHaveValue("911.4");
+  await expect(page.getByLabel("Khối lượng bó (kg)")).toHaveValue("911");
   await expect(page.getByLabel("Khối lượng bó (kg)")).toHaveJSProperty("readOnly", true);
   const preview = await postResult<Preview>(page, "/api/planner/preview", () => page.getByRole("button", { name: "Xếp thử tự động" }).click());
   checkAccounting(preview, loaded.plan);
@@ -125,21 +125,21 @@ test("VINAFCO source list planner puts actual bundles in the hold, reconciles al
   await expect(page.getByTestId("pipe-total")).toContainText(`đã xếp ${applied.summary.placed_count} bó`);
 });
 
-test("a one-gram manual unit displays below 0.01 tonne while input and API retain exact grams", async ({ page }) => {
+test("a one-gram manual unit has practical rounded detail while API retains exact grams", async ({ page }) => {
   await page.goto("/");
   await postResult<Evaluation>(page, "/api/validate", () => page.getByRole("button", { name: "Phương án mới" }).click());
   await page.getByLabel("Bó mới id").fill("TINY-001");
   await page.getByLabel("Bó mới name").fill("Bó kiểm khối lượng nhỏ");
-  await page.getByLabel("Bó mới length").fill("1000");
-  await page.getByLabel("Bó mới width").fill("1000");
-  await page.getByLabel("Bó mới height").fill("1000");
+  await page.getByLabel("Bó mới length").fill("100");
+  await page.getByLabel("Bó mới width").fill("100");
+  await page.getByLabel("Bó mới height").fill("100");
   await page.getByLabel("Bó mới mass").fill("0.001");
   const added = await postResult<Evaluation>(page, "/api/validate", () => page.getByRole("button", { name: "Thêm bó", exact: true }).click());
   expect(added.plan.units).toMatchObject([{ id: "TINY-001", mass_g: 1 }]);
   expect(added.summary.manifest_mass_g).toBe(1);
   await expect(page.getByTestId("manifest-mass")).toHaveText("<0,01 tấn");
-  await expect(page.getByTestId("unit-TINY-001")).toContainText("<0,01 tấn");
-  await expect(page.getByLabel("Khối lượng bó (kg)")).toHaveValue("0.001");
+  await expect(page.getByTestId("unit-TINY-001")).toContainText("<1 kg");
+  await expect(page.getByLabel("Khối lượng bó (kg)")).toHaveValue("0");
 });
 
 test("STALE edits, delayed planner response and network failure leave the checked plan unchanged", async ({ page }) => {

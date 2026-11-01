@@ -95,9 +95,11 @@ Khối lượng **hiển thị tối đa2số lẻ**, ví dụ **1.125,55 tấn*
 
 ## Giữ gốc, so sánh và khôi phục
 
-Bấm **Giữ bản hiện tại làm gốc**, hoặc chọn **Bản lưu làm gốc → Dùng bản lưu làm gốc**. Việc chọn A giữ nguyên phương án B đang mở. Chỉnh B và **Áp dụng & kiểm lại**, rồi **So sánh với bản gốc** để xem bó thêm/bỏ/đổi/không đổi, khối lượng, số bó, số lỗi và điều kiện thay đổi. Có lọc, tìm ID, phân trang 50 bó và chi tiết trường; chênh lệch khối lượng hiện chính xác bằng gram, tổng A/B vẫn gọn hai số lẻ tấn.
+Bấm **Giữ bản hiện tại làm gốc**, hoặc chọn **Bản lưu làm gốc → Dùng bản lưu làm gốc**. Việc chọn A giữ nguyên phương án B đang mở. Chỉnh B và **Áp dụng & kiểm lại**, rồi **So sánh với bản gốc** để xem bó thêm/bỏ/đổi/không đổi, khối lượng, số bó, số lỗi và điều kiện thay đổi. Có lọc, tìm ID, phân trang 50 bó và chi tiết trường; chênh lệch khối lượng dùng kg, kích thước/vị trí dùng cm/m; tổng A/B vẫn gọn hai số lẻ tấn. Chênh dưới mức hiển thị có nhãn, dữ liệu gốc không bị làm tròn.
 
 **Khôi phục bản gốc** kiểm lại A rồi đưa vào workspace; B vẫn còn trong **Bản trước**. Mỗi lần lưu tạo bản mới. Baseline chỉ giữ trong tab và không tự lưu; muốn dùng sau reload, lưu phương án rồi chọn lại bản đã lưu. Chênh lệch giữa hai bản không tự chứng minh bản nào tốt hơn hoặc đủ điều kiện vận hành. Xem [SPEC M2c](docs/specs/SCST_M2C.md) và [review](docs/reviews/SCST_M2C_REVIEW.md).
+
+Số liệu trên mô hình/bảng dùng **kg, cm hoặc m**, làm tròn phù hợp thao tác thực tế. Dữ liệu chưa sửa giữ nguyên; làm tròn hiển thị không tạo dung sai vượt biên hoặc quá tải. Ô nhập dùng kg/cm; CSV vẫn theo đơn vị ghi trong header. Xem [quy ước](docs/APP_GUIDE.md).
 
 ## Kiến trúc
 
@@ -172,6 +174,8 @@ Sau tích hợp VINAFCO 268, bộ kiểm hiện tại đạt **63 backend test, 
 Sau M2a, bộ kiểm đạt **79 backend test, 13 browser test và kiểm lưu/mở qua hai lần chạy server riêng biệt**. Xem [review M2a](docs/reviews/SCST_M2A_REVIEW.md) và [SPEC M2a](docs/specs/SCST_M2A.md).
 
 Bản M2c đạt **104 backend test, 28 browser test và 902 đối chiếu độc lập**, cùng kiểm hai tiến trình server, build và contract. Xem [review M2c](docs/reviews/SCST_M2C_REVIEW.md); nghiệm thu nghiệp vụ vẫn riêng.
+
+Lượt chỉnh đơn vị hiển thị đã đạt **31 browser test**; dữ liệu tính và các phương án chưa sửa được giữ nguyên. Xem [review đơn vị hiển thị](docs/reviews/SCST_DISPLAY_UNITS_REVIEW.md).
 
 ## Tài liệu
 

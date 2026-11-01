@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "dimensions_footprint_helpers_unchanged": true,
+  "reviewed_source_hashes": 19,
+  "backend_test_files_unchanged": 6,
+  "protected_path_families_unchanged": [
+    "services/backend",
+    "contracts",
+    "services/backend/app/domain/model",
+    "services/backend/app/domain/geometry",
+    "services/backend/app/domain/rules",
+    "services/backend/app/domain/planner",
+    "services/backend/app/adapters",
+    "services/backend/data",
+    "archive",
+    "tooling",
+    "scripts",
+    ".cvf/gate-profile.lock.json",
+    "apps/frontend/package-lock.json",
+    "services/backend/requirements.txt"
+  ],
+  "roadmap_authority_section_unchanged": true,
+  "historical_specs_reviews_unchanged": true,
+  "raw_handoff_files_hash_and_size": 22,
+  "archive_tree": "e4004e274fc28aa143ce0e300b6c060d1cb1e5a0",
+  "canonical_continuity_agrees": true,
+  "four_verified_review_hashes_agree": true,
+  "changed_markdown_local_links_valid": 86
+}

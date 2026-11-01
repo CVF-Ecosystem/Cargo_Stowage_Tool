@@ -1,0 +1,62 @@
+[WebServer] INFO:     Started server process [33864]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8766 (Press CTRL+C to quit)
+
+Running 11 tests using 1 worker
+
+(node:18216) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 ..\..\tests\browser\m2c.spec.ts:34:5 › pin A, edit one gram and placement in checked B, compare exact details, restore and undo without overwriting snapshots (3.6s)
+  ok  2 ..\..\tests\browser\m2c.spec.ts:82:5 › saved baseline loads after reload without replacing checked B or selected cargo (1.8s)
+  ok  3 ..\..\tests\browser\m2c.spec.ts:100:5 › source list comparison accounts all 1076, filters and pages without a second viewer on mobile fallback (2.1s)
+  ok  4 ..\..\tests\browser\m2c.spec.ts:139:5 › replacing a manifest reports added, removed and changed IDs without selecting the A-only unit (2.0s)
+  ok  5 ..\..\tests\browser\m2c.spec.ts:159:5 › STALE and a late or failed compare leave B, selection and baseline intact (1.9s)
+  x   6 ..\..\tests\browser\m2c.spec.ts:196:5 › late saved-baseline and restore responses cannot overwrite a newer selection or draft (7.3s)
+(node:30728) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  7 ..\..\tests\browser\workspace.spec.ts:14:5 › real API drives table, 2D and actual Three meshes through yaw and selection (4.7s)
+  ok  8 ..\..\tests\browser\workspace.spec.ts:117:5 › raw edit is immediately STALE; real API 422 and network loss preserve checked result and draft; retry and undo recover (2.3s)
+  ok  9 ..\..\tests\browser\workspace.spec.ts:179:5 › WebGL failure keeps accessible 2D, table selection and synthetic warning (1.1s)
+  ok 10 ..\..\tests\browser\workspace.spec.ts:214:5 › an edit during pending validation keeps the newer raw draft STALE until separately checked (1.7s)
+  ok 11 ..\..\tests\browser\workspace.spec.ts:244:5 › after setup the browser runs locally with all non-loopback traffic blocked (1.6s)
+
+
+  1) ..\..\tests\browser\m2c.spec.ts:196:5 › late saved-baseline and restore responses cannot overwrite a newer selection or draft
+
+    Error: expect(locator).not.toHaveText(expected) failed
+
+    Locator:  getByTestId('status')
+    Expected: not "STALE"
+    Received: "STALE"
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "not toHaveText" getByTestId('status') with timeout 5000ms
+      - waiting for getByTestId('status')
+        14 × locator resolved to <strong data-testid="status">STALE</strong>
+           - unexpected value "STALE"
+
+
+      233 |   await page.unroute("**/api/validate");
+      234 |   await page.getByLabel("Khối lượng bó (kg)").fill("2500.001");
+    > 235 |   await expect(page.getByTestId("status")).not.toHaveText("STALE");
+          |                                                ^
+      236 |   await page.route("**/api/validate", (route) => route.abort("failed"));
+      237 |   await page.getByRole("button", { name: "Khôi phục bản gốc" }).click();
+      238 |   await expect(page.locator(".error-banner[role='alert']")).toBeVisible();
+        at D:\UNG DUNG AI\TOOL AI 2026\CVF-Workspace\Cargo_Stowage_Tool\tests\browser\m2c.spec.ts:235:48
+
+    Error Context: test-results\m2c-late-saved-baseline-an-c2e52--a-newer-selection-or-draft\error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\m2c-late-saved-baseline-an-c2e52--a-newer-selection-or-draft\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\m2c-late-saved-baseline-an-c2e52--a-newer-selection-or-draft\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    ..\..\tests\browser\m2c.spec.ts:196:5 › late saved-baseline and restore responses cannot overwrite a newer selection or draft
+  10 passed (37.1s)

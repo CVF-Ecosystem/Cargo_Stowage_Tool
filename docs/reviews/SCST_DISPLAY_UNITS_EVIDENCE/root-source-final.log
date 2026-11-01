@@ -1,0 +1,16 @@
+
+> scst-frontend@0.1.0 test:e2e
+> playwright test display-units.spec.ts -g source cargo uses practical labels
+
+[WebServer] INFO:     Started server process [43068]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8766 (Press CTRL+C to quit)
+
+Running 1 test using 1 worker
+
+(node:32252) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 ..\..\tests\browser\display-units.spec.ts:106:5 › source cargo uses practical labels while all 1076 precise units and actual model meshes survive mobile fallback (5.1s)
+
+  1 passed (8.3s)

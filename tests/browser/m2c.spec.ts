@@ -38,7 +38,7 @@ test("pin A, edit one gram and placement in checked B, compare exact details, re
   const savedA = await response<Saved>(page, "/api/snapshots", "POST", () => page.getByRole("button", { name: "Lưu phương án" }).click());
   await page.getByRole("button", { name: "Giữ bản hiện tại làm gốc" }).click();
   await page.getByLabel("Khối lượng bó (kg)").fill("2500.001");
-  await page.getByLabel("Tọa độ X (mm)").fill("501");
+  await page.getByLabel("Tọa độ X (cm)").fill("50.1");
   await page.getByLabel("Góc xoay").selectOption("90");
   await expect(page.getByTestId("status")).toHaveText("STALE");
   const checkedB = await response<Evaluation>(page, "/api/validate", "POST", () => page.getByRole("button", { name: "Áp dụng & kiểm lại" }).click());
@@ -62,8 +62,8 @@ test("pin A, edit one gram and placement in checked B, compare exact details, re
   await expect(page.getByTestId("comparison-summary")).toBeVisible();
   await expect(page.getByTestId("comparison-rows")).toContainText("ST-001");
   await page.getByTestId("comparison-row-ST-001").getByText("Chi tiết thay đổi").click();
-  await expect(page.getByTestId("comparison-row-ST-001")).toContainText("2500001");
-  await expect(page.getByLabel("Khối lượng bó (kg)")).toHaveValue("2500.001");
+  await expect(page.getByTestId("comparison-row-ST-001")).toContainText("dưới 1 kg");
+  await expect(page.getByLabel("Khối lượng bó (kg)")).toHaveValue("2500");
   expect(await page.getByTestId("three-canvas").getAttribute("data-meshes")).toBe(currentMeshes);
   await page.screenshot({ path: "../../docs/reviews/SCST_M2C_EVIDENCE/browser/compare-desktop.png", fullPage: true });
   const restored = await response<Evaluation>(page, "/api/validate", "POST", () => page.getByRole("button", { name: "Khôi phục bản gốc" }).click());
@@ -90,7 +90,7 @@ test("saved baseline loads after reload without replacing checked B or selected 
   await page.getByLabel("Bản lưu làm gốc").selectOption(savedA.id);
   await response<Evaluation>(page, `/api/snapshots/${savedA.id}`, "GET", () => page.getByRole("button", { name: "Dùng bản lưu làm gốc" }).click());
   await expect(page.getByTestId("unit-ST-002")).toHaveAttribute("aria-selected", "true");
-  await expect(page.getByLabel("Khối lượng bó (kg)")).toHaveValue("2500.001");
+  await expect(page.getByLabel("Khối lượng bó (kg)")).toHaveValue("2500");
   const compared = await response<Comparison>(page, "/api/plans/compare", "POST", () => page.getByRole("button", { name: "So sánh với bản gốc" }).click());
   expect(compared.delta.manifest_mass_g).toBe(1);
   expect(compared.rows.find((r) => r.unit_id === "ST-002")?.status).toBe("CHANGED");
@@ -231,6 +231,7 @@ test("late saved-baseline and restore responses cannot overwrite a newer selecti
   await expect(page.getByTestId("unit-ST-002")).toHaveAttribute("aria-selected", "true");
   await expect(page.getByTestId("placed-mass")).toContainText("26,1");
   await page.unroute("**/api/validate");
+  // The newer selection is ST-002, whose checked source value is exactly 2500 kg.
   await page.getByLabel("Khối lượng bó (kg)").fill("2500");
   await expect(page.getByTestId("status")).not.toHaveText("STALE");
   await page.route("**/api/validate", (route) => route.abort("failed"));

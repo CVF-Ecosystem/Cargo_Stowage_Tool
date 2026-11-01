@@ -5,7 +5,7 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 ## Start Here
 
 - Active session/phase/role state.: `CVF_SESSION/ACTIVE_SESSION_STATE.json`
-- Active practical display units repair handoff; M2c preserved as history.: `CVF_SESSION/handoffs/AGENT_HANDOFF_DISPLAY_UNITS.md`
+- Active delivered practical display units repair handoff; predecessors preserved.: `CVF_SESSION/handoffs/AGENT_HANDOFF_DISPLAY_UNITS.md`
 - Project continuity front door.: `CVF_SESSION_MEMORY.md`
 - CVF enforcement manifest.: `.cvf/manifest.json`
 - Milestone source bindings: live roadmap, frozen skeleton dispatch snapshot and SPEC M1 acceptance; M1 reuse order technically closed.: `docs/milestone-coverage-authority.json`
@@ -16,7 +16,7 @@ Machine-readable source: `docs/catalog/ARTIFACT_REGISTRY.json`
 - Standard-library catalog validation and rendering functions.: `scripts/lib/downstream_catalog/CvfDownstreamCatalogLib.ps1`
 - Executable catalog manager (--check / --write).: `scripts/manage_cvf_downstream_catalog.ps1`
 - M1/VINAFCO/M2a/PIPE-LIST/M2b/M2c technical truth; business/measured hold acceptance separate.: `IMPLEMENTATION_STATUS.json`
-- Delivered M2c baseline/comparison/restore, verified workflow and next checkpoint.: `docs/project/PROJECT_STATUS.md`
+- Delivered practical display kg/cm/m repair and M2c workflow; next checkpoint separate.: `docs/project/PROJECT_STATUS.md`
 - Generated documentation index.: `docs/INDEX.md`
 - Generated human module catalog.: `docs/catalog/MODULE_CATALOG.md`
 

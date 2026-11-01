@@ -42,8 +42,8 @@
       "name": "SCST M1 workspace and viewer",
       "path": "apps/frontend/src",
       "status": "ENFORCED",
-      "description": "Checked/draft manual/CSV/save-open workspace, Three/SVG/reference modes and async error recovery. Sourcegroupfilter/50rowpagination and source/counter/exactgeometry support. M2bpreview/apply/reasons/roundedmass andimmediateviewercargo. M2c exact read-only A/B comparison and baseline/restore UI integration.",
-      "evidence": "tests/browser/workspace.spec.ts; docs/reviews/SCST_M1_EVIDENCE/reviewer-browser.log (5 pass); tests/browser/vinafco.spec.ts; docs/reviews/SCST_VINAFCO268_EVIDENCE/reviewer-browser.log; tests/browser/m2a.spec.ts; docs/reviews/SCST_M2A_EVIDENCE/reviewer-browser.log; docs/reviews/SCST_PIPE_LIST_REVIEW.md; docs/reviews/SCST_M2B_REVIEW.md; docs/reviews/SCST_M2C_REVIEW.md",
+      "description": "Checked/draft manual/CSV/save-open workspace, Three/SVG/reference modes and async error recovery. Sourcegroupfilter/50rowpagination and source/counter/exactgeometry support. M2bpreview/apply/reasons/roundedmass andimmediateviewercargo. M2c exact read-only A/B comparison and baseline/restore UI integration. Practical kg/cm/m presentation and explicit-field edits preserve exact untouched data.",
+      "evidence": "tests/browser/workspace.spec.ts; docs/reviews/SCST_M1_EVIDENCE/reviewer-browser.log (5 pass); tests/browser/vinafco.spec.ts; docs/reviews/SCST_VINAFCO268_EVIDENCE/reviewer-browser.log; tests/browser/m2a.spec.ts; docs/reviews/SCST_M2A_EVIDENCE/reviewer-browser.log; docs/reviews/SCST_PIPE_LIST_REVIEW.md; docs/reviews/SCST_M2B_REVIEW.md; docs/reviews/SCST_M2C_REVIEW.md; docs/reviews/SCST_DISPLAY_UNITS_REVIEW.md",
       "dependencies": [
         "scst-api",
         "scst-contract"

@@ -143,10 +143,10 @@ test("SI/SII reference limits, labels, history and pending edits remain tied to 
   await expect(note).toContainText("3.282,5 tấn");
   await expect(note).toContainText("TTTP 3.301 tấn");
   await expect(page.getByTestId("three-canvas")).toHaveAttribute("data-draft-marker", /VR-SI/);
-  await expect(mass).toHaveValue("2500.001");
+  await expect(mass).toHaveValue("2500");
   await page.getByRole("button", { name: "Bản trước" }).click();
   await expect(caseSelect).toHaveValue("VR-SII");
-  await expect(mass).toHaveValue("2500.001");
+  await expect(mass).toHaveValue("2500");
   await page.screenshot({ path: "../../docs/reviews/SCST_VINAFCO268_EVIDENCE/browser-vessel-si.png", fullPage: true });
 });
 
@@ -156,10 +156,10 @@ test("model failure and mobile WebGL fallback keep case data and editing usable"
   await openVessel(page);
   await expect(page.getByText(/Không tải được mô hình tàu/)).toBeVisible();
   await expect(page.getByRole("region", { name: "Thông số VINAFCO 268" })).toContainText("3.517,5 tấn");
-  await page.getByLabel("Tọa độ X (mm)").fill("501");
+  await page.getByLabel("Tọa độ X (cm)").fill("50.1");
   await expect(page.getByTestId("status")).toHaveText("STALE");
   await page.getByRole("button", { name: "Áp dụng & kiểm lại" }).click();
-  await expect(page.getByTestId("unit-ST-001")).toContainText("501, 550");
+  await expect(page.getByTestId("unit-ST-001")).toContainText("50, 55");
   expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(false);
   await page.screenshot({ path: "../../docs/reviews/SCST_VINAFCO268_EVIDENCE/browser-vessel-model-failure.png", fullPage: true });
   await page.unroute("**/api/vessels/vinafco268/model");

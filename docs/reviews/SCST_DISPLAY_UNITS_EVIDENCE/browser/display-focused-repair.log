@@ -1,0 +1,13 @@
+[WebServer] INFO:     Started server process [30524]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:8766 (Press CTRL+C to quit)
+
+Running 2 tests using 1 worker
+
+(node:33500) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 ..\..\tests\browser\display-units.spec.ts:28:5 › rounded practical inputs preserve untouched grams and millimetres through edit, save and reload (5.2s)
+  ok 2 ..\..\tests\browser\m2c.spec.ts:196:5 › late saved-baseline and restore responses cannot overwrite a newer selection or draft (2.0s)
+
+  2 passed (11.3s)

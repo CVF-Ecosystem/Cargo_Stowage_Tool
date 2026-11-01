@@ -1,6 +1,6 @@
 # SCST — Practical display units repair
 
-Status: APPROVED_FOR_EXECUTION
+Status: CLOSED
 dispatchKind: INITIAL
 Owner: project-orchestrator
 Risk: R2
@@ -58,60 +58,85 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "decision": "Technical review and bounded repair; no M2d"
     }
   },
-  "phase": "DISPATCH",
+  "phase": "REVIEW",
   "action": {
-    "kind": "IMPLEMENT",
+    "kind": "REVIEW",
     "selected": [
       "DU-01",
       "DU-02",
       "DU-03",
       "DU-04"
     ],
-    "owner": "Terra worker; Sol browser; root independent reviewer",
+    "owner": "Root independent reviewer",
     "output": "Practical units UI and docs/reviews/SCST_DISPLAY_UNITS_REVIEW.md",
     "budgetMinutes": 100,
     "stop": "Four criteria proof or scope/time boundary",
-    "next": "Independent review before technical closure; no M2d"
+    "next": "Owner reviews practical kg/cm/m display repair; next roadmap slice M2d needs separate SPEC/WORK_ORDER when selected, no automatic implementation."
   },
   "rows": [
     {
       "id": "DU-01",
-      "state": "NOT_STARTED",
-      "gap": "Practical presentation and unchanged-field precision preservation not implemented/proved",
-      "owner": "Terra/Sol then root",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and usable flow verified; business/operational acceptance separate.",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_DISPLAY_UNITS_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_DISPLAY_UNITS_REVIEW.md",
+          "sha256": "de275460eb34dd2e8732f5a49b1373108dcf422aaf19ea575e53c8fac9a30cdc"
+        }
+      ]
     },
     {
       "id": "DU-02",
-      "state": "NOT_STARTED",
-      "gap": "Practical presentation and unchanged-field precision preservation not implemented/proved",
-      "owner": "Terra/Sol then root",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and usable flow verified; business/operational acceptance separate.",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_DISPLAY_UNITS_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_DISPLAY_UNITS_REVIEW.md",
+          "sha256": "de275460eb34dd2e8732f5a49b1373108dcf422aaf19ea575e53c8fac9a30cdc"
+        }
+      ]
     },
     {
       "id": "DU-03",
-      "state": "NOT_STARTED",
-      "gap": "Practical presentation and unchanged-field precision preservation not implemented/proved",
-      "owner": "Terra/Sol then root",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and usable flow verified; business/operational acceptance separate.",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_DISPLAY_UNITS_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_DISPLAY_UNITS_REVIEW.md",
+          "sha256": "de275460eb34dd2e8732f5a49b1373108dcf422aaf19ea575e53c8fac9a30cdc"
+        }
+      ]
     },
     {
       "id": "DU-04",
-      "state": "NOT_STARTED",
-      "gap": "Practical presentation and unchanged-field precision preservation not implemented/proved",
-      "owner": "Terra/Sol then root",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and usable flow verified; business/operational acceptance separate.",
+      "owner": "Root reviewer",
       "destination": "docs/reviews/SCST_DISPLAY_UNITS_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_DISPLAY_UNITS_REVIEW.md",
+          "sha256": "de275460eb34dd2e8732f5a49b1373108dcf422aaf19ea575e53c8fac9a30cdc"
+        }
+      ]
     }
   ],
   "supportingWork": [],
   "conclusions": {
-    "tranche": "PENDING",
-    "trancheSummary": "Owner display feedback admitted",
-    "trancheEvidence": [],
+    "tranche": "COMPLETE",
+    "trancheSummary": "Four practical display criteria and packaged user flow independently verified.",
+    "trancheEvidence": [
+      {
+        "path": "docs/reviews/SCST_DISPLAY_UNITS_REVIEW.md",
+        "sha256": "de275460eb34dd2e8732f5a49b1373108dcf422aaf19ea575e53c8fac9a30cdc"
+      }
+    ],
     "product": "PENDING",
     "productSummary": "Business/operational acceptance and M2d separate",
     "acceptance": [],
@@ -119,3 +144,7 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
   }
 }
 ```
+
+## Technical closure
+
+Four criteria verified; no active app order remains. Local material commit before closure claim. Product/business/operational acceptance pending. Closed applicability skips closeability; initial dispatch did check it, not bypassed. Default kg/cm means rounded display resolution, not new spinner/HTML step constraints.

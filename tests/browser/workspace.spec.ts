@@ -28,12 +28,12 @@ test("real API drives table, 2D and actual Three meshes through yaw and selectio
   expect(meshes).toHaveLength(plan.placements.length);
   for (const unit of plan.units) {
     const row = page.getByTestId(`unit-${unit.id}`);
-    await expect(row).toContainText(`${unit.length_mm} × ${unit.width_mm} × ${unit.height_mm}`);
-    const mass = `${new Intl.NumberFormat("vi-VN", { maximumFractionDigits: 2 }).format(unit.mass_g / 1_000_000)} tấn`;
+    await expect(row).toContainText(`${Math.round(unit.length_mm / 10)} × ${Math.round(unit.width_mm / 10)} × ${Math.round(unit.height_mm / 10)}`);
+    const mass = `${new Intl.NumberFormat("vi-VN", { maximumFractionDigits: 0 }).format(Math.round(unit.mass_g / 1000))} kg`;
     await expect(row).toContainText(mass);
     if (plan.placements.some((placement) => placement.unit_id === unit.id)) {
       const placement = plan.placements.find((p) => p.unit_id === unit.id)!;
-      await expect(row).toContainText(`${placement.x_mm}, ${placement.y_mm}, ${placement.z_mm ?? 0} · ${placement.yaw_deg}°`);
+      await expect(row).toContainText(`${Math.round(placement.x_mm / 10)}, ${Math.round(placement.y_mm / 10)}, ${Math.round((placement.z_mm ?? 0) / 10)} cm · ${placement.yaw_deg}°`);
       const mesh = meshes.find((item) => item.id === unit.id)!;
       expect(mesh).toBeDefined();
       const [dx, dy] = footprint(unit, placement);
@@ -122,7 +122,7 @@ test("raw edit is immediately STALE; real API 422 and network loss preserve chec
   const row = page.getByTestId("unit-ST-001");
   const originalRow = await row.textContent();
   const mass = page.getByLabel("Khối lượng bó (kg)", { exact: true });
-  const x = page.getByLabel("Tọa độ X (mm)", { exact: true });
+  const x = page.getByLabel("Tọa độ X (cm)", { exact: true });
   const originalMass = await mass.inputValue();
   const originalX = await x.inputValue();
   await mass.fill("2500.001");
@@ -147,7 +147,7 @@ test("raw edit is immediately STALE; real API 422 and network loss preserve chec
   await expect(row).toHaveText(originalRow!);
   await page.unroute("**/api/validate");
 
-  await x.fill("501");
+  await x.fill("50.1");
   await expect(page.getByTestId("status")).toHaveText("STALE");
   await page.getByRole("button", { name: "Mặt bằng", exact: true }).click();
   await page.screenshot({ path: "../../docs/reviews/SCST_M1_EVIDENCE/browser-2d-stale.png", fullPage: true });
@@ -155,7 +155,7 @@ test("raw edit is immediately STALE; real API 422 and network loss preserve chec
   await page.getByRole("button", { name: "Áp dụng & kiểm lại" }).click();
   await expect(page.getByRole("alert")).toBeVisible();
   await expect(mass).toHaveValue("2500.001");
-  await expect(x).toHaveValue("501");
+  await expect(x).toHaveValue("50.1");
   await expect(page.getByTestId("placed-mass")).toHaveText(originalPlaced!);
   await expect(row).toHaveText(originalRow!);
   await page.unroute("**/api/validate");
@@ -165,9 +165,9 @@ test("raw edit is immediately STALE; real API 422 and network loss preserve chec
   const checked = (await (await checkedResponse).json()) as Evaluation;
   expect(checked.summary.placed_mass_g).toBe(initial.summary.placed_mass_g + 1);
   await expect(page.getByTestId("status")).toHaveText(checked.status);
-  await expect(mass).toHaveValue("2500.001");
-  await expect(x).toHaveValue("501");
-  await expect(row).toContainText("501, 550");
+  await expect(mass).toHaveValue("2500");
+  await expect(x).toHaveValue("50");
+  await expect(row).toContainText("50, 55");
   await page.getByRole("button", { name: "Bản trước" }).click();
   await expect(page.getByTestId("status")).toHaveText(initial.status);
   await expect(mass).toHaveValue(originalMass);
@@ -231,14 +231,14 @@ test("an edit during pending validation keeps the newer raw draft STALE until se
   release();
   await expect(mass).toHaveValue("2500.002");
   await expect(page.getByTestId("status")).toHaveText("STALE");
-  await expect(row).toContainText("2,5 tấn");
+  await expect(row).toContainText("2.500 kg");
   await page.unroute("**/api/validate");
   const retry = page.waitForResponse((response) => response.url().endsWith("/api/validate") && response.request().method() === "POST");
   await page.getByRole("button", { name: "Áp dụng & kiểm lại" }).click();
   const checked = (await (await retry).json()) as Evaluation;
   expect(checked.plan.units.find((unit) => unit.id === "ST-001")?.mass_g).toBe(2_500_002);
   await expect(page.getByTestId("status")).toHaveText(checked.status);
-  await expect(mass).toHaveValue("2500.002");
+  await expect(mass).toHaveValue("2500");
 });
 
 test("after setup the browser runs locally with all non-loopback traffic blocked", async ({ page, request }) => {
@@ -259,10 +259,10 @@ test("after setup the browser runs locally with all non-loopback traffic blocked
   await page.goto("/");
   await expect(page.getByTestId("status")).toBeVisible();
   await page.getByTestId("unit-ST-001").getByRole("button").click();
-  await page.getByLabel("Tọa độ X (mm)").fill("501");
+  await page.getByLabel("Tọa độ X (cm)").fill("50.1");
   await expect(page.getByTestId("status")).toHaveText("STALE");
   await page.getByRole("button", { name: "Áp dụng & kiểm lại" }).click();
-  await expect(page.getByTestId("unit-ST-001")).toContainText("501, 550");
+  await expect(page.getByTestId("unit-ST-001")).toContainText("50, 55");
   await page.getByLabel("Giới hạn chứng nhận (kg)").fill("30000");
   await page.getByLabel("Giới hạn chuyến (kg)").fill("29000");
   await page.getByLabel("Hàng đã có trên tàu (kg)").fill("1000");

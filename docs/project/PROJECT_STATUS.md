@@ -2,7 +2,13 @@
 
 Cập nhật: **01-11-2026**.
 
-## Hiện tại — M2c đạt kiểm kỹ thuật
+## Hiện tại — đơn vị hiển thị kg/cm/m
+
+Đã sửa theo góp ý owner: số tổng bằng tấn tối đa hai số lẻ, chi tiết bằng kg nguyên, kích thước/tọa độ bằng cm nguyên hoặc m hai số lẻ. Ô nhập hiển thị gọn nhưng chỉ trường thực sự sửa mới cập nhật số gốc; sửa góc/yêu cầu không làm tròn các dữ liệu khác. So sánh nhỏ hơn mức hiển thị có nhãn rõ, không bị coi bằng nhau. Không đổi dung sai hình học/khối lượng.
+
+[Review đơn vị hiển thị](../reviews/SCST_DISPLAY_UNITS_REVIEW.md): 31 browser, 6.837 đối chiếu riêng, build và live VINAFCO 167 bó đạt; lưu/mở/undo/STALE/fallback giữ. Backend và dữ liệu nguồn không đổi, tái sử dụng 104 backend test đã có. App http://127.0.0.1:8765, reload để dùng bản mới; chỉ commit local. M2d chưa mở và nghiệm thu nghiệp vụ/vận hành còn chờ.
+
+## M2c đạt kiểm kỹ thuật
 
 Theo chỉ đạo tiếp tục roadmap, đã bổ sung **giữ gốc A → chỉnh/kiểm B → so sánh → khôi phục**, trên editor, một viewer và SQLite hiện có. Chọn A từ bản hiện tại hoặc bản lưu không thay B. So sánh đủ context và mọi ID, lọc/tìm/phân trang 50 bó, chi tiết chính xác g/mm/µm; khôi phục giữ B trong Bản trước và snapshot cũ không bị ghi đè. Baseline bộ nhớ không tự lưu qua reload.
 

@@ -70,7 +70,7 @@ test("source preview and explicit load preserve 31 groups, 1076 optional bundles
   await expect(page.getByTestId("pipe-total")).toContainText("đã xếp 0 bó");
   await expect(page.getByTestId("pipe-page")).toContainText("Trang 1/22");
   expect(await page.locator("#cargo tbody tr").count()).toBe(50);
-  await expect(page.getByTestId("unit-PIPE-R002-B0001")).toContainText("337,6");
+  await expect(page.getByTestId("unit-PIPE-R002-B0001")).toContainText("640 × 34 × 30");
   await page.getByRole("button", { name: "Trang sau" }).click();
   await expect(page.getByTestId("pipe-page")).toContainText("Trang 2/22");
   await expect(page.getByTestId("unit-PIPE-R002-B0051")).toBeVisible();
@@ -160,7 +160,7 @@ test("pipe provenance survives save/reload/case/undo; stale edit and delayed pre
   expect(detached.plan.source).toBe("USER_ENTERED");
   expect(detached.plan.cargo_source).toBe("DOCUMENT_CALCULATED");
   await expect(page.locator(".topbar")).toContainText("HÀNG THEO LIST NGUỒN");
-  await page.getByLabel("Hầm holdLength (mm)").fill("60000");
+  await page.getByLabel("Hầm holdLength (cm)").fill("6000");
   const custom = await postResult<Evaluation>(page, "/api/validate", () => page.getByRole("button", { name: "Áp dụng & kiểm lại" }).click());
   expect(custom.plan.hold.length_mm).toBe(60000);
   expect(custom.plan.contract_version).toBe("scst.pipe-list.v1");

@@ -12,7 +12,7 @@ Sau khi sửa source, chạy `powershell -ExecutionPolicy Bypass -File tooling/s
 
 Chọn bó trong bảng, 3D hoặc mặt bằng. Sửa khối lượng, X/Y, góc hoặc ba giới hạn; giao diện đánh dấu `STALE` ngay và tiếp tục hiện kết quả đã kiểm trước. Nhấn **Áp dụng & kiểm lại**: khi backend trả về, kết quả mới hiển thị. Nếu dữ liệu sai hoặc mất mạng, bản nháp và kết quả trước được giữ để sửa và thử lại. **Bản trước** quay lại kết quả đã kiểm trước đó. M2a bổ sung lưu/mở bên dưới; tải lại/đóng tab vẫn làm mất bản nháp chưa lưu.
 
-Giới hạn chứng nhận và chuyến phải dương; hàng đã có trên tàu có thể bằng 0. Giới hạn chuyến không vượt chứng nhận, hàng đã có không vượt giới hạn chuyến. Lượng xếp thêm bằng giới hạn chuyến trừ hàng đã có. Khối lượng nhập kg với tối đa 3 số thập phân, tọa độ mm là số nguyên.
+Giới hạn chứng nhận và chuyến phải dương; hàng đã có trên tàu có thể bằng 0. Giới hạn chuyến không vượt chứng nhận, hàng đã có không vượt giới hạn chuyến. Lượng xếp thêm bằng giới hạn chuyến trừ hàng đã có. Giao diện dùng kg và cm, hiển thị làm tròn để dễ thao tác; tổng khối lượng dùng tấn tối đa hai số lẻ. Mặc định hiển thị tròn đến kg/cm. Vẫn có thể nhập kg tối đa 3 số lẻ, cm tối đa 1 số lẻ khi cần giữ dữ liệu cũ chính xác. Ô chưa sửa giữ nguyên số gốc; số làm tròn chỉ được áp vào trường bạn thực sự nhập lại.
 
 `DRAFT` có lỗi hình học; `GEOMETRY_FEASIBLE` còn lỗi quy tắc; `RULES_CHECKED` chỉ nói các kiểm trong M1 đã chạy đạt. Danh sách chưa kiểm luôn có, bao gồm kê/chèn/chằng, nhiều tầng, ổn định, tải cục bộ và hàng cũ trong hầm. 3D hỗ trợ kéo xoay, cuộn zoom, chọn và đặt lại; khi WebGL không khả dụng giao diện chuyển sang 2D và bảng.
 
@@ -28,7 +28,7 @@ Tài liệu nguồn local trong `VINAFCO268_LOCAL_HANDOFF/`, bị loại khỏi 
 
 ## M2a — Nhập tay, CSV và lưu/mở
 
-**Nhập tay:** chọn **Phương án mới** (hầm BOX, chưa có hàng). Sửa tên/kích thước hầm và các giới hạn rồi **Áp dụng & kiểm lại**. Điền **Thêm bó hàng**, mỗi bó có ID riêng, tên, loại, yêu cầu, kích thước mm và khối lượng kg. Chọn bó để sửa, **Đặt bó** tại gốc hầm rồi đổi X/Y/góc, hoặc **Bỏ vị trí / Xóa bó**. Loại trừ bó sẽ bỏ placement của nó. Danh sách rỗng hiện DRAFT/EMPTY_MANIFEST; không tự sinh hàng; dùng M2b bên dưới để xếp thử. Với VINAFCO, hầm và mức nguồn khóa; **Dùng hầm tự nhập** bỏ liên kết phương tiện, giữ nhãn chưa xác minh.
+**Nhập tay:** chọn **Phương án mới** (hầm BOX, chưa có hàng). Sửa tên/kích thước hầm và các giới hạn rồi **Áp dụng & kiểm lại**. Điền **Thêm bó hàng**, mỗi bó có ID riêng, tên, loại, yêu cầu, kích thước cm và khối lượng kg. Chọn bó để sửa, **Đặt bó** tại gốc hầm rồi đổi X/Y/góc, hoặc **Bỏ vị trí / Xóa bó**. Loại trừ bó sẽ bỏ placement của nó. Danh sách rỗng hiện DRAFT/EMPTY_MANIFEST; không tự sinh hàng; dùng M2b bên dưới để xếp thử. Với VINAFCO, hầm và mức nguồn khóa; **Dùng hầm tự nhập** bỏ liên kết phương tiện, giữ nhãn chưa xác minh.
 
 **CSV:** dùng [mẫu giả lập](examples/manifest_m2a_synthetic.csv), UTF-8 có/không BOM, dấu phẩy phân cách, một dòng một bó. Header chính xác:
 
@@ -53,7 +53,7 @@ SQLite mặc định: `runtime-data/scst.sqlite3`, ngoài Git. Giữ thư mục 
 5. Các trường khối lượng/kích thước/ID nguồn cố định. Có thể đổi yêu cầu và vị trí; muốn thay danh sách bằng dữ liệu tự nhập dùng **Phương án mới** hoặc CSV. **Dùng hầm tự nhập** giữ list và bỏ liên kết tàu, cho sửa hầm BOX chưa xác minh. Đổi VR-SI/VR-SII và lưu/mở giữ provenance/placement của list.
 6. Lưu snapshot như phần M2a. Reload → mở bản đã lưu; rawdraft vẫn không tự lưu. Sửa nháp phải kiểm lại trước khi nạp list/đổi phương án; phản hồi đến muộn không ghi đè thay đổi mới.
 
-Khối lượng bó = K (kg/ống) × L (ống/bó), lưu gram nguyên. Tổng tính **1.125,55103t**, tổng O nguồn **1.125,52t**, lệch **31,03kg**; không phải dữ liệu cân từng bó. CBM nguồn **1.130,96964733156m³**, khối bao tính lại **1.157,54318105797m³** (R23:R26 nguồn chưa nhân số bó). Thể tích khối bao có khoảng rỗng, không chứng minh khả năng xếp vừa. Kích thước nguồn giữ chính xác µm, giao diện mm có phần lẻ; tọa độ đặt dùng mm nguyên.
+Khối lượng bó = K (kg/ống) × L (ống/bó), lưu gram nguyên. Tổng tính **1.125,55103t**, tổng O nguồn **1.125,52t**, lệch **31,03kg**; không phải dữ liệu cân từng bó. CBM nguồn **1.130,96964733156m³**, khối bao tính lại **1.157,54318105797m³** (R23:R26 nguồn chưa nhân số bó). Thể tích khối bao có khoảng rỗng, không chứng minh khả năng xếp vừa. Kích thước nguồn giữ chính xác trong dữ liệu; mô hình/bảng hiển thị cm nguyên hoặc m hai số lẻ, khối lượng chi tiết theo kg nguyên. Đây là làm tròn hiển thị; hình học kiểm và vị trí lưu không bị thay đổi.
 
 16 bó ở dòng 22/31/32 có khối bao cần xác minh; app giữ cảnh báo và không tự sửa kích thước hoặc vẽ từng ống. Chỉ các bó đã đặt mới có mesh trong hầm. Nếu có quá nhiều lỗi, danh sách chỉ hiện 200 lỗi nhưng tổng đếm và các bó bị ảnh hưởng vẫn đầy đủ. Ship GLB/profile không đổi. Workbook/gói nguồn V1.1 giữ local ngoài Git; runtime dùng derivative có hash, không cần mở Excel. [Đánh giá cách tính](reviews/SCST_PIPE_LIST_ASSESSMENT.md), [SPEC](specs/SCST_PIPE_LIST.md).
 
@@ -72,12 +72,22 @@ Khối lượng ở bảng/thống kê hiển thị tối đa2số lẻ tấn: *
 ## M2c — Giữ bản gốc và so sánh
 
 1. Khi bản nháp đã áp dụng, chọn **Giữ bản hiện tại làm gốc** để giữ A trong tab. Hoặc chọn một **Bản lưu làm gốc → Dùng bản lưu làm gốc**; thao tác này không thay B đang mở hoặc lựa chọn bó. Baseline không tự thay khi mở phương án khác hay chạy xếp thử.
-2. Chỉnh B bằng các ô đang có, rồi **Áp dụng & kiểm lại**. Bấm **So sánh với bản gốc**. Bảng đầu cho tổng khối lượng, đã xếp/còn tải, số bó và số lỗi kiểm riêng A/B; chênh lệch B−A bằng gram nguyên để thấy cả 1 gram. Tổng A/B vẫn làm tròn tối đa hai số lẻ tấn. Chi tiết giữ số mm/µm nguồn.
+2. Chỉnh B bằng các ô đang có, rồi **Áp dụng & kiểm lại**. Bấm **So sánh với bản gốc**. Bảng đầu cho tổng khối lượng, đã xếp/còn tải, số bó và số lỗi kiểm riêng A/B; chênh lệch B−A dùng kg, kích thước/vị trí dùng cm/m. Tổng A/B vẫn làm tròn tối đa hai số lẻ tấn. Chênh khác không nhưng dưới mức hiển thị có nhãn “dưới 1 kg” hoặc “dưới 1 cm”, không báo bằng 0. Dữ liệu so sánh vẫn giữ đầy đủ để không bỏ sót thay đổi.
 3. Lọc **Chỉ thay đổi / Tất cả / Thêm / Đã bỏ / Thay đổi / Không đổi**, tìm ID và chuyển trang tối đa 50 bó. **Chi tiết thay đổi** ghi trước/sau từng trường; **Chọn bó trong B** đồng bộ editor/viewer hiện tại. Bó chỉ còn trong A không có nút chọn vào B. Hai bản khác nguồn/giới hạn/hầm có cảnh báo, không tự xếp hạng. ID trùng nhưng nguồn khác không xác nhận cùng bó vật lý.
 4. **Khôi phục bản gốc** kiểm lại A trước khi đổi workspace. B được giữ trong **Bản trước**, có thể quay lại rồi lưu riêng; snapshot A không bị ghi đè. Tên/thời gian/ID của baseline đã lưu tách biệt với bản đang mở.
 5. Baseline trong bộ nhớ chưa tự lưu và mất khi reload; để dùng lại, lưu A trước và chọn lại bản đã lưu. Không tự lưu nháp hoặc kết quả so sánh. STALE chặn chọn/so sánh/khôi phục cho tới khi áp dụng nháp; lỗi mạng hoặc phản hồi đến muộn giữ dữ liệu hiện có. Khi chỉnh dữ liệu, kết quả so sánh cũ không được trình bày như kết quả hiện hành.
 
 Luồng dùng một viewer của B, không có hai cảnh 3D song song. So sánh là đối chiếu dữ liệu và các kiểm hiện hành, chưa kiểm kê/chèn/chằng, nhiều tầng, ổn định hay tải sàn. Hầm ước tính và 16 khối bao cần xác minh vẫn giữ nguyên. [SPEC](specs/SCST_M2C.md), [review và bằng chứng](reviews/SCST_M2C_REVIEW.md).
+
+## Đơn vị hiển thị theo thực tế
+
+- Chi tiết bó và chênh khối lượng: kg nguyên; thống kê tổng: tấn tối đa hai số lẻ.
+- Kích thước và tọa độ: cm nguyên; thông số tàu/hầm có thể dùng m tối đa hai số lẻ.
+- Các số đã làm tròn là xấp xỉ. Sửa góc/yêu cầu không làm thay đổi khối lượng hoặc vị trí chưa sửa; nhập lại một số làm tròn vào chính ô đó là thay đổi chủ động.
+- Đây không phải dung sai cho phép vượt hầm hoặc quá tải. Kiểm hình học, khối lượng và dữ liệu nguồn vẫn dùng số gốc.
+- CSV là định dạng trao đổi riêng: header vẫn ghi `length_mm,width_mm,height_mm,mass_kg`; dùng đúng đơn vị ghi trong file. Không đổi số trong CSV sang cm mà giữ header mm.
+
+Xem [SPEC đơn vị hiển thị](specs/SCST_DISPLAY_UNITS.md).
 
 ## Kiểm nhà phát triển
 

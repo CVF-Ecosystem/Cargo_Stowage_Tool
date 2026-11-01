@@ -1,19 +1,18 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "DISPLAY_UNITS_IN_BUILD",
-  "currentPhase": "BUILD",
+  "overallStatus": "PRACTICAL_DISPLAY_TECHNICALLY_VERIFIED_BUSINESS_PENDING",
+  "currentPhase": "REVIEW",
   "completedCapabilities": [],
-  "activeWorkOrders": [
-    "docs/work_orders/SCST_DISPLAY_UNITS.md"
-  ],
+  "activeWorkOrders": [],
   "knownLimitations": [
     "PIPE-LIST actual31group/1076bundle source integration technically verified; source mass/dimensions calculated/provisional.16bundles need envelope verification; measuredhold/business/operational acceptance pending.",
     "Raw drafts/history/baseline/comparison remain in browser tab until explicit immutable SQLite Plan snapshot save. Baseline/comparison do not persist through reload; select saved A again. Latest100 snapshots, no overwrite/delete/backup/restore UI.",
     "GenericCSV max200units/1MiB; PIPE-LIST1076. M2b deterministic one-layer trial is heuristic, notoptimal; reasons session-only, savedPlan retainsplacements. No generalXLSX/PDF import, export/multilayer/AI.",
     "BOX/single-layer; VINAFCO hull dimensions sourced, hold/cabin/lines estimated. Onboard cargo outside target hold. No stability/strength/floor-load verification.",
     "Malformed stored timestamps make list unavailable until repaired; app reports error, never silently skips/resets DB. Good records remain accessible by ID.",
-    "TestClient/httpx deprecation and Three.js chunk warning remain; separate parent-container maintenance condition unchanged."
+    "TestClient/httpx deprecation and Three.js chunk warning remain; separate parent-container maintenance condition unchanged.",
+    "UI rounds detail to kg/cm and totals to tonnes2decimals; only explicitly edited fields change underlying exact data. Display rounding is not a geometry/mass tolerance. CSV exchange keeps header mm/kg."
   ],
   "evidence": [
     "docs/project/PROJECT_STATUS.md",
@@ -54,7 +53,9 @@
     "docs/reviews/SCST_M2C_REVIEW.md",
     "docs/reviews/SCST_M2C_EVIDENCE/reviewed-source-manifest.json",
     "docs/specs/SCST_DISPLAY_UNITS.md",
-    "docs/work_orders/SCST_DISPLAY_UNITS.md"
+    "docs/work_orders/SCST_DISPLAY_UNITS.md",
+    "docs/reviews/SCST_DISPLAY_UNITS_REVIEW.md",
+    "docs/reviews/SCST_DISPLAY_UNITS_EVIDENCE/reviewed-source-manifest.json"
   ],
   "updatedAt": "2026-11-01",
   "x_verifiedMilestones": [
@@ -93,6 +94,12 @@
       "technicalStatus": "VERIFIED",
       "businessAcceptance": "PENDING",
       "evidence": "docs/reviews/SCST_M2C_REVIEW.md"
+    },
+    {
+      "id": "DISPLAY-UNITS",
+      "technicalStatus": "VERIFIED",
+      "businessAcceptance": "PENDING",
+      "evidence": "docs/reviews/SCST_DISPLAY_UNITS_REVIEW.md"
     }
   ]
 }
