@@ -1,7 +1,42 @@
 import { useRef, useState } from "react";
 import type { ProfileDetail } from "../api/client";
 import { footprint, formatMetres, type Plan } from "../features/model";
+import type { PackingIndex } from "../features/packing";
 import Scene from "./Scene";
+import {
+  isWarnUnit,
+  PIPE_BUDGET,
+  RING_BUDGET,
+  type CargoView,
+  type PackingInfo,
+} from "./packingMeshes";
+
+const count = new Intl.NumberFormat("vi-VN");
+const n = (v: number) => count.format(v);
+
+// Status line for the cargo view. Counts come from the scene's last build (derived geometry, not measurements).
+function packingStatus(
+  view: CargoView,
+  info: PackingInfo | null,
+  hasPacking: boolean,
+): string {
+  if (view === "ENVELOPE")
+    return "Khối bao: mỗi bó là một khối chữ nhật bao quanh; chưa hiện từng ống.";
+  if (!hasPacking)
+    return "Chưa có dữ liệu xếp ống dẫn xuất; đang hiện khối bao.";
+  if (!info || info.view !== view) return "Đang dựng cách nhìn hàng…";
+  const warn = info.envelopeOnlyBundles
+    ? ` · ${n(info.envelopeOnlyBundles)} bó chỉ khối bao (cảnh báo)`
+    : "";
+  if (view === "DETAILED") {
+    if (info.capped && info.detailedBundles < info.candidateBundles)
+      return `Vượt hạn mức ${n(PIPE_BUDGET)} ống: chỉ hiện chi tiết ${n(info.detailedBundles)} bó (bó đang chọn và bó trong khung nhìn); ${n(info.candidateBundles - info.detailedBundles)} bó còn lại giữ bó giản lược.${warn}`;
+    return `Chi tiết ống (dẫn xuất, không phải số đo): ${n(info.detailedBundles)}/${n(info.candidateBundles)} bó hiện chi tiết${warn}`;
+  }
+  if (info.capped)
+    return `Vượt hạn mức ${n(RING_BUDGET)} vòng đầu ống: chỉ hiện vòng ống cho ${n(info.simplifiedBundles)} bó; ${n(info.budgetBoxBundles)} bó còn lại giữ khối bao mờ.${warn}`;
+  return `Bó giản lược (dẫn xuất, không phải số đo): ${n(info.simplifiedBundles)}/${n(info.candidateBundles)} bó hiện vòng ống hai đầu${warn}`;
+}
 
 type Props = {
   plan: Plan;
@@ -9,6 +44,7 @@ type Props = {
   selected: string;
   onSelect: (id: string) => void;
   issueIds: Set<string>;
+  packing?: PackingIndex | null;
 };
 
 export default function Viewer(props: Props) {
@@ -21,11 +57,25 @@ export default function Viewer(props: Props) {
   const [ghost, setGhost] = useState(true);
   const [shipVisible, setShipVisible] = useState(true);
   const [assetStatus, setAssetStatus] = useState("");
+  const [cargoView, setCargoView] = useState<CargoView>("ENVELOPE");
+  const [packingInfo, setPackingInfo] = useState<PackingInfo | null>(null);
+  const packingInfoRef = useRef((info: PackingInfo) =>
+    setPackingInfo((prev) =>
+      prev && JSON.stringify({ ...prev, buildMs: 0 }) === JSON.stringify({ ...info, buildMs: 0 })
+        ? prev
+        : info,
+    ),
+  );
   const failureRef = useRef(() => {
     setFailed(true);
     setView("2d");
   });
   const { plan, selected, onSelect, issueIds } = props;
+  const packing = props.packing ?? null;
+  const pipePlan = plan.units.some((u) => u.source_ref?.group_id);
+  const warnIds = new Set(
+    plan.units.filter((u) => isWarnUnit(packing, u)).map((u) => u.id),
+  );
   const margin = 1100;
   const unitMap = new Map(plan.units.map((u) => [u.id, u]));
   return (
@@ -68,6 +118,9 @@ export default function Viewer(props: Props) {
             shipVisible={shipVisible}
             ghost={ghost}
             onAssetStatus={setAssetStatus}
+            cargoView={cargoView}
+            packing={packing}
+            onPackingInfo={packingInfoRef.current}
           />
         ) : (
           <svg
@@ -132,8 +185,15 @@ export default function Viewer(props: Props) {
                             ? "#388778"
                             : "#c69b56"
                     }
-                    stroke={selected === u.id ? "#173e31" : "#ffffff"}
-                    strokeWidth={selected === u.id ? 65 : 20}
+                    stroke={
+                      selected === u.id
+                        ? "#173e31"
+                        : warnIds.has(u.id)
+                          ? "#e07a1f"
+                          : "#ffffff"
+                    }
+                    strokeWidth={selected === u.id ? 65 : warnIds.has(u.id) ? 40 : 20}
+                    strokeDasharray={warnIds.has(u.id) ? "120 70" : undefined}
                   />
                   <text
                     x={p.x_mm + w / 2}
@@ -207,6 +267,30 @@ export default function Viewer(props: Props) {
           ))}
         </div>
       )}
+      {view === "3d" && (pipePlan || packing) && (
+        <div className="cargo-view">
+          <label className="cargo-view-label">
+            <span>Cách nhìn hàng</span>
+            <select
+              aria-label="Cách nhìn hàng"
+              value={cargoView}
+              disabled={!packing}
+              onChange={(e) => setCargoView(e.target.value as CargoView)}
+            >
+              <option value="ENVELOPE">Khối bao</option>
+              <option value="SIMPLIFIED">Bó giản lược</option>
+              <option value="DETAILED">Chi tiết ống</option>
+            </select>
+          </label>
+          <p
+            className="cargo-view-status"
+            data-testid="packing-view-status"
+            role="status"
+          >
+            {packingStatus(cargoView, packingInfo, !!packing)}
+          </p>
+        </div>
+      )}
       {plan.placements.length === 0 && (
         <p className="scope-note" role="status">
           Chưa có bó nào được đặt. Chọn Xếp thử tự động → Áp dụng xếp thử, hoặc
@@ -247,6 +331,18 @@ export default function Viewer(props: Props) {
           <i className="swatch selected" />
           Đang chọn
         </span>
+        {cargoView !== "ENVELOPE" && view === "3d" && packing && (
+          <span>
+            <i className="swatch derived-pipe" />
+            Ống dẫn xuất (không phải số đo)
+          </span>
+        )}
+        {warnIds.size > 0 && (
+          <span>
+            <i className="swatch warn-outline" />
+            Chỉ khối bao (cảnh báo)
+          </span>
+        )}
         <span className="legend-end">Khối bao bó hàng · cm</span>
       </div>
     </section>

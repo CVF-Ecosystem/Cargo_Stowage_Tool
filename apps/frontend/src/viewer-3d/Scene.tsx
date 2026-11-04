@@ -4,6 +4,22 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { profileBody, type ProfileDetail } from "../api/client";
 import { dimensions, footprint, type Plan } from "../features/model";
+import type { PackingIndex } from "../features/packing";
+import { packingFor } from "../features/packing";
+import {
+  buildPacking,
+  isWarnUnit,
+  ISSUE_COLOR,
+  PIPE_BUDGET,
+  PIPE_COLOR,
+  SELECTED_COLOR,
+  packingUsable,
+  type BoxMode,
+  type CargoView,
+  type PackBundle,
+  type PackRange,
+  type PackingInfo,
+} from "./packingMeshes";
 type Props = {
   plan: Plan;
   profile: ProfileDetail | null;
@@ -15,6 +31,9 @@ type Props = {
   shipVisible: boolean;
   ghost: boolean;
   onAssetStatus: (status: string) => void;
+  cargoView?: CargoView;
+  packing?: PackingIndex | null;
+  onPackingInfo?: (info: PackingInfo) => void;
 };
 type Item = { mesh: T.Mesh; signature: string };
 type State = {
@@ -25,6 +44,23 @@ type State = {
   hold: T.Group;
   cargo: T.Group;
   marker: T.Group;
+  pack: T.Group;
+  packMeshes: T.InstancedMesh[];
+  packRanges: PackRange[];
+  packProbes: { id: string; p: T.Vector3 }[];
+  packModes: Map<string, BoxMode>;
+  packInfo: PackingInfo | null;
+  packDeps: {
+    view: CargoView;
+    packing: PackingIndex | null;
+    units: Plan["units"];
+    placements: Plan["placements"];
+    hold: string;
+    selected: string;
+  } | null;
+  restyle: () => void;
+  tint: () => void;
+  disposePack: () => void;
   ship: T.Object3D | null;
   items: Map<string, Item>;
   originals: Map<T.Mesh, T.Material | T.Material[]>;
@@ -79,8 +115,9 @@ export default function Scene(props: Props) {
     scene.add(sun);
     const hold = new T.Group(),
       cargo = new T.Group(),
-      marker = new T.Group();
-    scene.add(hold, cargo, marker);
+      marker = new T.Group(),
+      pack = new T.Group();
+    scene.add(hold, cargo, marker, pack);
     const dispose = (root: T.Object3D) => {
       const geometries = new Set<T.BufferGeometry>(),
         materials = new Set<T.Material>(),
@@ -110,6 +147,16 @@ export default function Scene(props: Props) {
       hold,
       cargo,
       marker,
+      pack,
+      packMeshes: [],
+      packRanges: [],
+      packProbes: [],
+      packModes: new Map(),
+      packInfo: null,
+      packDeps: null,
+      restyle: () => {},
+      tint: () => {},
+      disposePack: () => {},
       ship: null,
       items: new Map(),
       originals: new Map(),
@@ -176,7 +223,26 @@ export default function Scene(props: Props) {
         textures: renderer.info.memory.textures,
         calls: renderer.info.render.calls,
         objects: s.items.size,
+        sceneUuid: scene.uuid,
       });
+      if (s.packInfo) {
+        canvas.dataset.packingView = JSON.stringify({
+          ...s.packInfo,
+          budget: PIPE_BUDGET,
+          sceneUuid: scene.uuid,
+          packUuid: pack.uuid,
+        });
+        canvas.dataset.packingProjected = JSON.stringify(
+          s.packProbes.map(({ id, p }) => {
+            const v = p.clone().project(camera);
+            return {
+              id,
+              x: ((v.x + 1) * canvas.clientWidth) / 2,
+              y: ((1 - v.y) * canvas.clientHeight) / 2,
+            };
+          }),
+        );
+      }
       const materialData: {
         name: string;
         ghost: boolean;
@@ -197,6 +263,47 @@ export default function Scene(props: Props) {
         }
       });
       canvas.dataset.materials = JSON.stringify(materialData);
+    };
+    s.disposePack = () => {
+      s.packMeshes.forEach((m) => m.dispose());
+      pack.children.forEach((c) => dispose(c));
+      pack.clear();
+      s.packMeshes = [];
+      s.packRanges = [];
+      s.packProbes = [];
+    };
+    // Box meshes stay in s.items for every view; only their material/bands change (and never their uuid).
+    s.restyle = () => {
+      const sel = latest.current.selected;
+      for (const [id, { mesh }] of s.items) {
+        const mode = s.packModes.get(id) ?? "solid",
+          solid = mode === "solid",
+          base = mode === "detailed" ? 0.12 : 0.3,
+          m = mesh.material as T.MeshStandardMaterial,
+          transparent = !solid;
+        if (m.transparent !== transparent) m.needsUpdate = true;
+        m.transparent = transparent;
+        m.opacity = solid ? 1 : id === sel ? Math.max(base, 0.45) : base;
+        m.depthWrite = solid;
+        for (const c of mesh.children) if (c.userData.band) c.visible = solid;
+      }
+    };
+    s.tint = () => {
+      const { selected, issueIds } = latest.current,
+        dirty = new Set<T.InstancedMesh>(),
+        c = new T.Color();
+      for (const r of s.packRanges) {
+        const color =
+          r.id === selected ? SELECTED_COLOR : issueIds.has(r.id) ? ISSUE_COLOR : PIPE_COLOR;
+        if (color === r.color || !r.mesh.instanceColor) continue;
+        r.color = color;
+        c.set(color);
+        for (let i = r.start; i < r.start + r.count; i++) r.mesh.setColorAt(i, c);
+        dirty.add(r.mesh);
+      }
+      dirty.forEach((m) => {
+        if (m.instanceColor) m.instanceColor.needsUpdate = true;
+      });
     };
     s.ghost = (on) => {
       for (const [mesh, orig] of s.originals) {
@@ -310,10 +417,17 @@ export default function Scene(props: Props) {
         camera,
       );
       const hit = ray.intersectObjects(
-        Array.from(s.items.values(), (v) => v.mesh),
+        [...Array.from(s.items.values(), (v) => v.mesh), ...s.packMeshes],
         false,
       )[0];
-      if (hit) latest.current.onSelect(hit.object.userData.id);
+      if (hit) {
+        // Pipe/ring instances map back to their bundle; boxes carry the bundle id directly.
+        const id =
+          hit.instanceId !== undefined
+            ? (hit.object.userData.owners as string[])[hit.instanceId]
+            : hit.object.userData.id;
+        if (id) latest.current.onSelect(id);
+      }
     };
     const lost = (ev: Event) => {
       ev.preventDefault();
@@ -341,6 +455,7 @@ export default function Scene(props: Props) {
       dispose(hold);
       dispose(cargo);
       dispose(marker);
+      s.disposePack();
       renderer.dispose();
       canvas.remove();
       state.current = null;
@@ -438,6 +553,7 @@ export default function Scene(props: Props) {
             ),
             new T.MeshStandardMaterial({ color: 0x314845, roughness: 0.6 }),
           );
+          band.userData.band = true;
           if (p.yaw_deg % 180) band.position.z = dy * f;
           else band.position.x = dx * f;
           mesh.add(band);
@@ -469,9 +585,77 @@ export default function Scene(props: Props) {
         s.dispose(item.mesh);
         s.items.delete(id);
       }
+    s.restyle();
+    s.tint();
     if (changedContext) s.fit("fit");
     else s.render();
   }, [props.plan, props.selected, props.issueIds]);
+  // Cargo view (D4): rebuilds only the s.pack group. Never touches the renderer, scene, GLB, camera or selection.
+  // It reruns for a new view / packing / plan units+placements, and for a new selection only while budget-capped.
+  useEffect(() => {
+    const s = state.current;
+    if (!s) return;
+    const view = props.cargoView ?? "ENVELOPE",
+      packing = props.packing ?? null,
+      { units, placements } = props.plan,
+      hold = `${props.plan.hold.length_mm}|${props.plan.hold.width_mm}`,
+      prev = s.packDeps;
+    if (
+      prev &&
+      prev.view === view &&
+      prev.packing === packing &&
+      prev.units === units &&
+      prev.placements === placements &&
+      prev.hold === hold &&
+      (!s.packInfo?.capped || prev.selected === props.selected)
+    )
+      return;
+    s.packDeps = { view, packing, units, placements, hold, selected: props.selected };
+    const { plan } = props,
+      unitMap = new Map(plan.units.map((u) => [u.id, u])),
+      bundles: PackBundle[] = [];
+    for (const p of plan.placements) {
+      const u = unitMap.get(p.unit_id),
+        item = u && s.items.get(u.id);
+      if (!u || !item) continue;
+      const g = (item.mesh.geometry as T.BoxGeometry).parameters,
+        size = new T.Vector3(g.width, g.height, g.depth),
+        core = packing ? packingFor(packing, u) : null;
+      bundles.push({
+        id: u.id,
+        core: packingUsable(core) ? core : null,
+        warn: isWarnUnit(packing, u),
+        min: item.mesh.position.clone().addScaledVector(size, -0.5),
+        size,
+        yaw: p.yaw_deg,
+      });
+    }
+    s.disposePack();
+    const build = buildPacking({
+      view,
+      bundles,
+      selected: props.selected,
+      issueIds: props.issueIds,
+      camera: s.camera,
+    });
+    build.objects.forEach((o) => s.pack.add(o));
+    s.packMeshes = build.meshes;
+    s.packRanges = build.ranges;
+    s.packProbes = build.probes;
+    s.packModes = build.modes;
+    s.packInfo = build.info;
+    s.restyle();
+    s.render();
+    latest.current.onPackingInfo?.(build.info);
+  }, [
+    props.cargoView,
+    props.packing,
+    props.plan.units,
+    props.plan.placements,
+    props.plan.hold.length_mm,
+    props.plan.hold.width_mm,
+    props.selected,
+  ]);
   useEffect(() => {
     const s = state.current;
     if (!s) return;

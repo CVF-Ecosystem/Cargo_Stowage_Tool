@@ -1291,3 +1291,18 @@ tbody tr:hover {
   .vessel-profile-row > label, .vessel-profile-row > .button { flex-basis: 100%; }
   .vessel-profile-row > .button { margin-top: 0; }
 }
+
+/* SPEC D4: cargo view selector (envelope / simplified / detailed pipes), derived-pipe and warning legend. Wraps at 390px. */
+.cargo-view { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; margin-top: 0.65rem; max-width: 100%; min-width: 0; }
+.cargo-view-label { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 12px; max-width: 100%; min-width: 0; }
+.cargo-view-label select { max-width: 100%; min-width: 0; }
+.cargo-view-status { flex: 1 1 16rem; min-width: 0; margin: 0; font-size: 11px; line-height: 1.45; overflow-wrap: anywhere; color: #587064; }
+.viewer-legend { flex-wrap: wrap; }
+.swatch.derived-pipe { background: #7f98a8; border-radius: 50%; }
+.swatch.warn-outline { background: transparent; border: 1px solid #e07a1f; }
+/* SUP-03 D5: derived packing in table, bundle panel and Dữ liệu hàng */
+.packing-info { margin: 8px 0; padding: 8px 10px; border-left: 4px solid #5f8f7c; background: #f2f7f4; overflow-wrap: anywhere; }
+.packing-info.packing-envelope_only, .packing-warn { border-left-color: #d9822b; background: #fff4e8; }
+td.packing-warn { border-left: 4px solid #d9822b; }
+.packing-reasons { margin: 4px 0 0; padding-left: 18px; }
+.revision-group-focus { outline: 2px solid #d9822b; outline-offset: 2px; }
