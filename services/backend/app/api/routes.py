@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import FileResponse, Response
+from fastapi.routing import APIRoute
 from pydantic import BaseModel
 from typing import Literal
 
@@ -305,6 +306,32 @@ async def _check_size(request: Request):
         raise HTTPException(400, {"message": "Dữ liệu gửi lên quá lớn.", "errors": cargo.check_payload_size(size)})
 
 
+async def _cargo_body(request: Request) -> bytes:
+    """H4 / O5: read the cargo body, refusing more than MAX_PAYLOAD_BYTES before FastAPI parses it (same shape as _upload_body)."""
+    limit = cargo.MAX_PAYLOAD_BYTES
+    declared = request.headers.get("content-length", "")
+    if declared.isdigit() and int(declared) > limit:
+        raise HTTPException(400, {"message": "Dữ liệu gửi lên quá lớn.", "errors": cargo.check_payload_size(int(declared))})
+    chunks, size = [], 0
+    async for chunk in request.stream():
+        size += len(chunk)
+        if size > limit:
+            raise HTTPException(400, {"message": "Dữ liệu gửi lên quá lớn.", "errors": cargo.check_payload_size(size)})
+        chunks.append(chunk)
+    return b"".join(chunks)
+
+
+class _BoundedBodyRoute(APIRoute):
+    """Stores the bounded body on the request so FastAPI's own request.body() read reuses it instead of parsing unbounded input."""
+    def get_route_handler(self):
+        handler = super().get_route_handler()
+
+        async def bounded(request: Request):
+            request._body = await _cargo_body(request)
+            return await handler(request)
+        return bounded
+
+
 @router.get("/cargo-revisions", response_model=RevisionList, responses={400: {"model": RevisionRejected}})
 def list_cargo_revisions():
     try:
@@ -313,7 +340,6 @@ def list_cargo_revisions():
         raise _plain_error(exc)
 
 
-@router.post("/cargo-revisions/preview", response_model=RevisionPreview, responses=_REJECTED)
 async def preview_cargo_revision(draft: RevisionDraft, request: Request):
     await _check_size(request)
     try:
@@ -322,8 +348,10 @@ async def preview_cargo_revision(draft: RevisionDraft, request: Request):
         raise _plain_error(exc)
 
 
-@router.post("/cargo-revisions", response_model=RevisionSummary,
-             responses={**_REJECTED, 409: {"model": ParentConflict, "description": "Revision cha không còn là mới nhất; chưa ghi gì."}})
+router.add_api_route("/cargo-revisions/preview", preview_cargo_revision, methods=["POST"], response_model=RevisionPreview,
+                     responses=_REJECTED, route_class_override=_BoundedBodyRoute)
+
+
 async def create_cargo_revision(draft: RevisionDraft, request: Request):
     await _check_size(request)
     try:
@@ -335,6 +363,11 @@ async def create_cargo_revision(draft: RevisionDraft, request: Request):
         raise HTTPException(400, {"message": "Lô cập nhật không hợp lệ; chưa ghi gì.", "errors": exc.errors})
     except PlanBindingError as exc:
         raise _plain_error(exc)
+
+
+router.add_api_route("/cargo-revisions", create_cargo_revision, methods=["POST"], response_model=RevisionSummary,
+                     responses={**_REJECTED, 409: {"model": ParentConflict, "description": "Revision cha không còn là mới nhất; chưa ghi gì."}},
+                     route_class_override=_BoundedBodyRoute)
 
 
 @router.get("/cargo-revisions/{revision_id}", response_model=RevisionDetail,
