@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { comparePlans, openSnapshot, type CompareResult, type SavedSummary } from "../api/client";
 import { fmt, formatKg, formatCm, tonnes, type Plan } from "./model";
 
@@ -6,6 +6,8 @@ type Props = {
   plan: Plan; stale: boolean; busy: boolean; lock: {current:boolean}; revision: {current:number};
   setBusy: (value:boolean)=>void; saved: SavedSummary[]; select: (id:string)=>void;
   restore: (plan:Plan,label:string)=>Promise<void>;
+  // Externally supplied baseline A and comparison (rebase candidate vs. the old saved plan); applied once per token.
+  external?: {token:number; plan:Plan; label:string; comparison:CompareResult} | null;
 };
 type Baseline = {plan:Plan; label:string};
 type Change = CompareResult["rows"][number]["changes"][number];
@@ -50,7 +52,7 @@ function Detail({changes}:{changes:Change[]}) {
   return <dl>{changes.map(c=><div key={c.field}><dt>{labels[c.field] ?? c.field}</dt><dd>Gốc A: {valueText(c.before,c.field)} → Hiện tại B: {valueText(c.after,c.field)}{smallDifference(c) && <span> · {smallDifference(c)}</span>}</dd></div>)}</dl>;
 }
 
-export default function ComparisonPanel({plan,stale,busy,lock,revision,setBusy,saved,select,restore}:Props) {
+export default function ComparisonPanel({plan,stale,busy,lock,revision,setBusy,saved,select,restore,external}:Props) {
   const [baseline,setBaseline]=useState<Baseline|null>(null);
   const [savedId,setSavedId]=useState("");
   const [comparison,setComparison]=useState<CompareResult|null>(null);
@@ -61,6 +63,12 @@ export default function ComparisonPanel({plan,stale,busy,lock,revision,setBusy,s
   const [error,setError]=useState("");
   const key=(a:Plan,b:Plan)=>JSON.stringify({a,b,revision:revision.current});
   const ready=comparison && baseline && !stale && comparisonKey===key(baseline.plan,plan) ? comparison : null;
+  useEffect(()=>{
+    if(!external)return;
+    setBaseline({plan:structuredClone(external.plan),label:external.label});setComparison(external.comparison);setComparisonKey(key(external.plan,plan));
+    setStatus("CHANGES");setQuery("");setPage(0);setError("");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[external?.token]);
   const rows=ready?.rows.filter(r=>(status==="ALL" || (status==="CHANGES" ? r.status!=="UNCHANGED" : r.status===status)) && r.unit_id.toLowerCase().includes(query.toLowerCase())) ?? [];
   const pages=Math.max(1,Math.ceil(rows.length/50));const safePage=Math.min(page,pages-1);
   const pin=()=>{if(stale||lock.current){setError("Hãy áp dụng bản nháp trước khi giữ bản gốc.");return;}setBaseline({plan:structuredClone(plan),label:"Bản hiện tại trong tab (chưa tự lưu)"});setComparison(null);setError("");};
