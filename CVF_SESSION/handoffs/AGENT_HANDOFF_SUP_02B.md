@@ -1,6 +1,6 @@
 # SCST — SUP-02B generic vessel profile and verified transform
 
-Status: ACTIVE
+Status: SUPERSEDED
 
 ## Current State
 

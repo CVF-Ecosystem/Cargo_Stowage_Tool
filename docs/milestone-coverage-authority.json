@@ -60,6 +60,10 @@
     "SCST-SUP-03": {
       "path": "docs/specs/SCST_SUP_03.md",
       "heading": "## SUP-03 acceptance"
+    },
+    "SCST-M2D": {
+      "path": "docs/specs/SCST_M2D.md",
+      "heading": "## M2d acceptance"
     }
   }
 }

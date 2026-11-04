@@ -1,10 +1,12 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "SUP_01_02A_02B_03_VERIFIED_MERGED_INTEGRATION_CHECK_NEXT_BUSINESS_ACCEPTANCE_PENDING",
-  "currentPhase": "FREEZE",
+  "overallStatus": "M2D_DISPATCHED_TO_CLOUD_WORKER_SUP_01_02A_02B_03_VERIFIED_BUSINESS_ACCEPTANCE_PENDING",
+  "currentPhase": "BUILD",
   "completedCapabilities": [],
-  "activeWorkOrders": [],
+  "activeWorkOrders": [
+    "docs/work_orders/SCST_M2D.md"
+  ],
   "knownLimitations": [
     "PIPE-LIST actual31group/1076bundle source integration technically verified; source mass/dimensions calculated/provisional.16bundles need envelope verification; measuredhold/business/operational acceptance pending.",
     "Raw drafts/history/baseline/comparison remain in browser tab until explicit immutable SQLite Plan snapshot save. Baseline/comparison do not persist through reload; select saved A again. Latest100 snapshots, no overwrite/delete/backup/restore UI.",
@@ -78,7 +80,10 @@
     "docs/reviews/SCST_SUP_02B_EVIDENCE/worker-return.md",
     "docs/reviews/SCST_SUP_02B_REVIEW.md",
     "docs/reviews/SCST_SUP_03_EVIDENCE/worker-return.md",
-    "docs/reviews/SCST_SUP_03_REVIEW.md"
+    "docs/reviews/SCST_SUP_03_REVIEW.md",
+    "docs/reviews/SCST_INTEGRATION_CHECK_PRE_M2D.md",
+    "docs/specs/SCST_M2D.md",
+    "docs/work_orders/SCST_M2D.md"
   ],
   "updatedAt": "2026-11-05",
   "x_verifiedMilestones": [
@@ -165,7 +170,7 @@
         "implementationStatus": "VERIFIED"
       }
     ],
-    "nextSpecification": "Integration check before M2d (roadmap); M2d needs its own SPEC",
+    "nextSpecification": "Integration check passed; M2d admitted (docs/specs/SCST_M2D.md)",
     "buildAuthorized": false
   },
   "x_cvfDevelopmentAdoption": {
@@ -191,5 +196,5 @@
     "nextSpecification": "CVF-DEV for evidenced gaps",
     "continuationReview": "docs/reviews/SCST_CVF_DEV_APPLICATION_RECONCILIATION.md"
   },
-  "activeTranche": "SUP-02B"
+  "activeTranche": "M2D"
 }

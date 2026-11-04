@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "FREEZE",
-  "activePhase": "FREEZE",
+  "currentMode": "BUILD",
+  "activePhase": "BUILD",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -13,11 +13,11 @@
     "REVIEW",
     "FREEZE"
   ],
-  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_SUP_02B.md",
-  "nextAllowedMove": "SUP-02B and SUP-03 technical handoff; root runs the roadmap integration check before M2d. M2d, M3, measured hold/packing and a second real vessel profile each need owner selection and a bounded SPEC/WORK_ORDER. Business acceptance separate.",
-  "parkedOperatorCheckpoint": "M2d/M3/M4, SUP-02A observations O2-O5, SUP-02B O6-O7, SUP-03 O8-O9, OD-only recheck policy, hook/hosted-CI adoption, live-provider governance proof, measured hold and 16 source envelopes and business acceptance remain owned future work.",
-  "activeRole": "SESSION_SYNC_STEWARD",
+  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_M2D.md",
+  "nextAllowedMove": "Claude Cloud implements M2d on a non-main branch and opens a pull request; Claude local independently reviews before any merge, which the owner decides. M3 needs owner hold measurements and real cases.",
+  "parkedOperatorCheckpoint": "M3/M4/M5, observations O2-O9, OD-only recheck policy, hook/hosted-CI adoption, live-provider governance proof, measured hold and 16 source envelopes, business acceptance and merge decision remain owned future work.",
+  "activeRole": "ORCHESTRATOR",
   "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",
   "updatedAt": "2026-11-05",
-  "activeTranche": "SUP-02B"
+  "activeTranche": "M2D"
 }
