@@ -106,6 +106,92 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/vessel-profiles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Vessel Profiles */
+        get: operations["list_vessel_profiles_api_vessel_profiles_get"];
+        put?: never;
+        /** Create Vessel Profile */
+        post: operations["create_vessel_profile_api_vessel_profiles_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/vessel-profiles/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Preview Vessel Profile */
+        post: operations["preview_vessel_profile_api_vessel_profiles_preview_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/vessel-profiles/{profile_id}/{version}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Vessel Profile Detail */
+        get: operations["vessel_profile_detail_api_vessel_profiles__profile_id___version__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/vessel-profiles/{profile_id}/{version}/model": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Vessel Profile Model */
+        get: operations["vessel_profile_model_api_vessel_profiles__profile_id___version__model_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/vessel-profiles/{profile_id}/{version}/cases/{case_id}/plan": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Vessel Profile Case Plan */
+        get: operations["vessel_profile_case_plan_api_vessel_profiles__profile_id___version__cases__case_id__plan_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/import/csv/preview": {
         parameters: {
             query?: never;
@@ -325,6 +411,23 @@ export interface components {
             /** Message */
             message: string;
         };
+        /** BoundsCheck */
+        BoundsCheck: {
+            /** Glb Min M */
+            glb_min_m: number[];
+            /** Glb Max M */
+            glb_max_m: number[];
+            /** Scene Min M */
+            scene_min_m: number[];
+            /** Scene Max M */
+            scene_max_m: number[];
+            /** Hold Min M */
+            hold_min_m: number[];
+            /** Hold Max M */
+            hold_max_m: number[];
+            /** Contains Hold */
+            contains_hold: boolean;
+        };
         /** BundleOverrideInfo */
         BundleOverrideInfo: {
             /** Bundle Id */
@@ -511,6 +614,13 @@ export interface components {
             /** Depth */
             depth: number;
         };
+        /** DraftMarker */
+        DraftMarker: {
+            /** Case Id */
+            case_id: string;
+            /** Center M */
+            center_m: number[];
+        };
         /** DroppedPlacement */
         DroppedPlacement: {
             /** Unit Id */
@@ -599,6 +709,21 @@ export interface components {
             unit_ids: string[];
             /** Message */
             message: string;
+        };
+        /** LandmarkCheck */
+        LandmarkCheck: {
+            /** Name */
+            name: string;
+            /** Glb M */
+            glb_m: number[];
+            /** Expected Hold Mm */
+            expected_hold_mm: number[];
+            /** Actual Hold Mm */
+            actual_hold_mm: number[];
+            /** Error Mm */
+            error_mm: number[];
+            /** Pass */
+            pass: boolean;
         };
         /** Limits */
         Limits: {
@@ -810,6 +935,117 @@ export interface components {
             evaluation: components["schemas"]["Evaluation"];
             /** Unplaced */
             unplaced: components["schemas"]["UnplacedReason"][];
+        };
+        /** ProfileDetail */
+        ProfileDetail: {
+            /** Id */
+            id: string;
+            /** Version */
+            version: number;
+            /** Builtin */
+            builtin: boolean;
+            /**
+             * Status
+             * @constant
+             */
+            status: "AVAILABLE";
+            /** Profile */
+            profile: {
+                [key: string]: unknown;
+            };
+            /** Profile Sha256 */
+            profile_sha256: string;
+            /** Glb Sha256 */
+            glb_sha256: string;
+            /** Asset Url */
+            asset_url: string;
+            verification: components["schemas"]["Verification"];
+            viewer: components["schemas"]["ViewerBlock"];
+            /** Created Utc */
+            created_utc: string | null;
+        };
+        /** ProfileError */
+        ProfileError: {
+            /** Field */
+            field: string;
+            /** Message */
+            message: string;
+        };
+        /** ProfileFieldStatus */
+        ProfileFieldStatus: {
+            /** Dimensions M */
+            dimensions_m: string;
+            /** Hold */
+            hold: string;
+            /** Cases */
+            cases: string;
+        };
+        /** ProfileListItem */
+        ProfileListItem: {
+            /** Id */
+            id: string;
+            /** Version */
+            version: number;
+            /** Name */
+            name: string;
+            /** Registration */
+            registration: string | null;
+            /** Builtin */
+            builtin: boolean;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "AVAILABLE" | "UNAVAILABLE";
+            /** Integrity Error */
+            integrity_error: string | null;
+            /** Verification */
+            verification: ("PASS" | "FAIL") | null;
+            field_status: components["schemas"]["ProfileFieldStatus"] | null;
+            /** Source Documents */
+            source_documents: components["schemas"]["ProfileSourceDocument"][];
+            /** Profile Sha256 */
+            profile_sha256: string | null;
+            /** Created Utc */
+            created_utc: string | null;
+        };
+        /** ProfilePreview */
+        ProfilePreview: {
+            /** Valid */
+            valid: boolean;
+            /** Errors */
+            errors: components["schemas"]["ProfileError"][];
+            verification: components["schemas"]["Verification"] | null;
+            /** Profile Sha256 */
+            profile_sha256: string | null;
+            /** Glb Sha256 */
+            glb_sha256: string | null;
+            /** Glb Bytes */
+            glb_bytes: number | null;
+            /** Id */
+            id: string | null;
+            /** Version */
+            version: number | null;
+            /** Latest Version */
+            latest_version: number | null;
+            /** Version Ok */
+            version_ok: boolean;
+            /** Builtin Conflict */
+            builtin_conflict: boolean;
+        };
+        /** ProfileSourceDocument */
+        ProfileSourceDocument: {
+            /** Title */
+            title: string;
+            /** Sha256 */
+            sha256?: string | null;
+        };
+        /** ProfileVersionConflict */
+        ProfileVersionConflict: {
+            /** Message */
+            message: string;
+            /** Latest Version */
+            latest_version?: number | null;
         };
         /** Provenance */
         Provenance: {
@@ -1152,6 +1388,19 @@ export interface components {
             /** Context */
             ctx?: Record<string, never>;
         };
+        /** Verification */
+        Verification: {
+            /**
+             * Result
+             * @enum {string}
+             */
+            result: "PASS" | "FAIL";
+            /** Tolerance Mm */
+            tolerance_mm: number;
+            /** Landmarks */
+            landmarks: components["schemas"]["LandmarkCheck"][];
+            bounds: components["schemas"]["BoundsCheck"];
+        };
         /** VesselProfile */
         VesselProfile: {
             /**
@@ -1184,16 +1433,27 @@ export interface components {
         };
         /** VesselReference */
         VesselReference: {
-            /**
-             * Vessel Id
-             * @constant
-             */
-            vessel_id: "VINAFCO268";
-            /**
-             * Case Id
-             * @enum {string}
-             */
-            case_id: "VR-SI" | "VR-SII";
+            /** Vessel Id */
+            vessel_id: string;
+            /** Case Id */
+            case_id: string;
+            /** Profile Version */
+            profile_version?: number | null;
+            /** Profile Sha256 */
+            profile_sha256?: string | null;
+        };
+        /** ViewerBlock */
+        ViewerBlock: {
+            /** Translation M */
+            translation_m: number[];
+            /** Yaw Deg */
+            yaw_deg: number;
+            /** Hull Box M */
+            hull_box_m: number[];
+            /** Draft Markers */
+            draft_markers: components["schemas"]["DraftMarker"][];
+            /** Hull Mesh Names */
+            hull_mesh_names: string[];
         };
     };
     responses: never;
@@ -1336,6 +1596,268 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["Evaluation"];
                 };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_vessel_profiles_api_vessel_profiles_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProfileListItem"][];
+                };
+            };
+        };
+    };
+    create_vessel_profile_api_vessel_profiles_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** Profile */
+                    profile: {
+                        [key: string]: unknown;
+                    };
+                    /** Glb Base64 */
+                    glb_base64: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProfileListItem"];
+                };
+            };
+            /** @description Hồ sơ hoặc GLB không hợp lệ hay kiểm landmark FAIL; chưa ghi gì. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProfilePreview"];
+                };
+            };
+            /** @description Trùng built-in, sai version kế tiếp hoặc đầy kho; chưa ghi gì. */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProfileVersionConflict"];
+                };
+            };
+            /** @description Thân yêu cầu vượt 28 MiB. */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    preview_vessel_profile_api_vessel_profiles_preview_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** Profile */
+                    profile: {
+                        [key: string]: unknown;
+                    };
+                    /** Glb Base64 */
+                    glb_base64: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProfilePreview"];
+                };
+            };
+            /** @description Hồ sơ hoặc GLB không hợp lệ hay kiểm landmark FAIL; chưa ghi gì. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProfilePreview"];
+                };
+            };
+            /** @description Thân yêu cầu vượt 28 MiB. */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    vessel_profile_detail_api_vessel_profiles__profile_id___version__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                profile_id: string;
+                version: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProfileDetail"];
+                };
+            };
+            /** @description Hồ sơ không qua kiểm toàn vẹn. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Không tìm thấy hồ sơ tàu. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    vessel_profile_model_api_vessel_profiles__profile_id___version__model_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                profile_id: string;
+                version: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "model/gltf-binary": unknown;
+                };
+            };
+            /** @description Hồ sơ không qua kiểm toàn vẹn. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Không tìm thấy hồ sơ tàu. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    vessel_profile_case_plan_api_vessel_profiles__profile_id___version__cases__case_id__plan_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                profile_id: string;
+                version: number;
+                case_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Evaluation"];
+                };
+            };
+            /** @description Hồ sơ không qua kiểm toàn vẹn. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Không tìm thấy hồ sơ hoặc trường hợp tải. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
             /** @description Validation Error */
             422: {
