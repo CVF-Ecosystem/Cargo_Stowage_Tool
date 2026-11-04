@@ -60,3 +60,7 @@ Root then becomes REVIEWER and:
 - reports to the owner, who decides the merge.
 
 No business acceptance, SUP-03 or M2d is implied.
+
+## Stacked SUP-03 dispatch
+
+Owner on 04-11-2026 asked for a longer-horizon spec so the cloud continues overnight, with owner review on 05-11 before any merge. Root admitted SUP-03 (docs/specs/SCST_SUP_03.md, docs/work_orders/SCST_SUP_03.md, coverage SCST-SUP-03) as a stacked tranche: the cloud worker branches from the SUP-02B branch head and returns a pull request against it. This handoff stays the single ACTIVE handoff for both; merge order is SUP-02B then SUP-03, each after independent root review. Integration check before M2d follows SUP-03.
