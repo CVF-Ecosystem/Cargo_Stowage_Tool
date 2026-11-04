@@ -1,15 +1,44 @@
-import { mkdirSync } from "node:fs";
+import { spawn, type ChildProcess } from "node:child_process";
+import { mkdirSync, mkdtempSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import { expect, test } from "../../apps/frontend/node_modules/@playwright/test";
 import type { APIRequestContext, Locator, Page } from "../../apps/frontend/node_modules/@playwright/test";
 import { evidenceDir as baseEvidenceDir } from "./evidence";
 
 // HARDEN-01 H-01 (labels from H-02): the rebase panel pages its dropped placements (50 per page) and filters
-// them by reason, at desktop and 390px. The suite shares ONE server/DB across spec files, so every revision id,
-// group and bundle id is derived from the live latest revision. Each test builds its own fixture:
+// them by reason, at desktop and 390px. The fixture removes 60 bundles and changes a group's mass, which would break
+// later spec files that expect the full 1076-bundle list on the suite's shared DB. So this file starts its OWN backend
+// (same app, port 8767, its own temporary SCST_DATA_DIR) and leaves the shared server untouched. Revision, group and
+// bundle ids are still derived from the live latest revision. Each test builds its own fixture:
 // one saved v2 plan with 140 placements (70 CHANGED, 60 REMOVED, 10 kept) and one new revision that causes both reasons.
 
 const evidenceDir = baseEvidenceDir();
+
+const ISOLATED_PORT = 8767;
+let server: ChildProcess | undefined;
+test.use({ baseURL: `http://127.0.0.1:${ISOLATED_PORT}` });
+
+test.beforeAll(async ({}, testInfo) => {
+  const root = resolve(testInfo.project.testDir, "../..");
+  // Same interpreter choice as the committed playwright.config.ts on Windows; SCST_PYTHON or "python" elsewhere.
+  const python = process.env.SCST_PYTHON ?? (process.platform === "win32" ? resolve(root, ".venv/Scripts/python.exe") : "python");
+  const dataDir = mkdtempSync(resolve(tmpdir(), "scst-harden01-"));
+  server = spawn(python, ["-m", "uvicorn", "app.main:app", "--app-dir", resolve(root, "services/backend"), "--host", "127.0.0.1",
+    "--port", String(ISOLATED_PORT)], { env: { ...process.env, SCST_DATA_DIR: dataDir }, stdio: "ignore" });
+  const deadline = Date.now() + 30000;
+  for (;;) {
+    try {
+      if ((await fetch(`http://127.0.0.1:${ISOLATED_PORT}/api/health`)).ok) break;
+    } catch { /* not up yet */ }
+    if (Date.now() > deadline || server.exitCode !== null) throw new Error("HARDEN-01 isolated backend did not start");
+    await new Promise((r) => setTimeout(r, 250));
+  }
+});
+
+test.afterAll(async () => {
+  server?.kill();
+});
 const PAGE_SIZE = 50;
 const CHANGED_PLACED = 70; // placed bundles of a group whose mass_g changes -> CHANGED
 const REMOVED_PLACED = 60; // trailing placed bundles of a group whose bundle_count shrinks -> REMOVED
