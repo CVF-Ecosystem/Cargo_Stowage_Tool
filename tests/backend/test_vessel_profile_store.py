@@ -250,6 +250,17 @@ def test_temp_dirs_and_junk_ignored(data):
     assert store.versions('TAU-A') == [1, 2]
 
 
+def test_non_empty_leftover_version_dir_is_conflict_and_untouched(data):
+    put(version=1)
+    leftover = data / 'vessels' / 'TAU-A' / 'v2'
+    leftover.mkdir()
+    (leftover / 'keep.bin').write_bytes(b'x')
+    with pytest.raises(store.VersionConflict):
+        put(version=2)
+    assert (leftover / 'keep.bin').read_bytes() == b'x'
+    assert store.versions('TAU-A') == [1]
+
+
 def test_concurrent_same_version_exactly_one_wins(data):
     results = []
     barrier = threading.Barrier(8)
