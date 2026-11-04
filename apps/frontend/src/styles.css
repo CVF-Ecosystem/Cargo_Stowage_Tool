@@ -1610,6 +1610,18 @@ td.packing-warn { border-left: 4px solid #d9822b; }
   }
   .report-units {
     min-width: 0;
+    font-size: 7pt;
+  }
+  .report-units th,
+  .report-units td {
+    padding: 2px 3px;
+    word-break: normal;
+    overflow-wrap: normal;
+    hyphens: none;
+  }
+  .report-units td:first-child,
+  .report-units td:nth-child(3) {
+    white-space: nowrap;
   }
   .report-plan-svg {
     max-height: none;
