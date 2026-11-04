@@ -75,6 +75,9 @@ def context(plan):
     # Both absent and present vessel objects have predictable leaf names.
     vessel=data.pop('vessel')
     data['vessel']={'vessel_id':vessel['vessel_id'] if vessel else None,'case_id':vessel['case_id'] if vessel else None}
+    if vessel:
+        for key in ('profile_version','profile_sha256'):
+            if vessel.get(key) is not None: data['vessel'][key]=vessel[key]
     return flatten(data)
 
 

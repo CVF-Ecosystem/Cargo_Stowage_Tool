@@ -169,7 +169,7 @@ def _append_locked(base: Path, profile_id: str, version: int, profile_bytes: byt
 
 
 def read(profile_id: str, version: int) -> dict:
-    """Return {manifest, profile_bytes, glb_path} after verifying both files against the manifest. Never repairs."""
+    """Return {manifest, profile_bytes, glb_path, glb_bytes} (the exact verified bytes) after verifying both files against the manifest. Never repairs."""
     try:
         _check(profile_id, version)
     except StoreError:
@@ -204,4 +204,4 @@ def read(profile_id: str, version: int) -> dict:
         raise bad('thiếu hoặc không đọc được model.glb.') from None
     if _sha(glb_bytes) != manifest['glb_sha256'] or len(glb_bytes) != manifest['glb_bytes']:
         raise bad('model.glb không khớp sha256 trong manifest.')
-    return {'manifest': manifest, 'profile_bytes': profile_bytes, 'glb_path': glb_path}
+    return {'manifest': manifest, 'profile_bytes': profile_bytes, 'glb_path': glb_path, 'glb_bytes': glb_bytes}

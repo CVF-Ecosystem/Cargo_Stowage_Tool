@@ -189,7 +189,10 @@ def _ref_dict(v):
 
 
 def bind(plan):
-    """Return `plan` unchanged when it is consistent with its pinned revision; legacy plans never touch the DB."""
+    """Return `plan` unchanged when it is consistent with its stored vessel profile and pinned revision.
+    Legacy plans without a user vessel profile never touch the DB or the profile store."""
+    from . import vessel_profile_service  # lazy: the service imports this module
+    vessel_profile_service.check_reference(plan)
     if plan.contract_version != V2:
         return plan
     ref = plan.cargo_revision

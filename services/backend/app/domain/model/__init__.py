@@ -95,8 +95,20 @@ class Limits(Model):
 
 
 class VesselReference(Model):
-    vessel_id: Literal["VINAFCO268"]
-    case_id: Literal["VR-SI", "VR-SII"]
+    vessel_id: str = Field(pattern=r"^[A-Z0-9][A-Z0-9-]{1,31}$")
+    case_id: str = Field(pattern=r"^[A-Z0-9][A-Z0-9-]{0,31}$")
+    profile_version: Annotated[StrictInt, Field(ge=1)] | None = None
+    profile_sha256: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
+
+    @model_serializer(mode="wrap")
+    def omit_absent_profile(self, handler):
+        # Built-in VINAFCO268 plans carry neither profile field; omit them so their JSON stays byte-identical.
+        data = handler(self)
+        if isinstance(data, dict):
+            for key in ("profile_version", "profile_sha256"):
+                if data.get(key) is None:
+                    data.pop(key, None)
+        return data
 
 
 class Plan(Model):
@@ -158,11 +170,18 @@ class Plan(Model):
         else:
             if self.vessel is None:
                 raise ValueError("Reference vessel and case required")
-            hold = PROFILE["hold"]
-            expected = (hold["id"], hold["name"], hold["length_mm"], hold["width_mm"], hold["height_mm"], "BOX")
-            actual = (self.hold.id, self.hold.name, self.hold.length_mm, self.hold.width_mm, self.hold.height_mm, self.hold.shape)
-            if actual != expected or self.limits.certificate_cargo_limit_g != CASES[self.vessel.case_id]["cargo_mass_g"]:
-                raise ValueError("Reference hold or cargo limit does not match profile")
+            ref = self.vessel
+            if ref.profile_version is None and ref.profile_sha256 is None:
+                if ref.vessel_id != PROFILE["id"] or ref.case_id not in CASES:
+                    raise ValueError("Reference vessel must be VINAFCO268 with a known operating case")
+                hold = PROFILE["hold"]
+                expected = (hold["id"], hold["name"], hold["length_mm"], hold["width_mm"], hold["height_mm"], "BOX")
+                actual = (self.hold.id, self.hold.name, self.hold.length_mm, self.hold.width_mm, self.hold.height_mm, self.hold.shape)
+                if actual != expected or self.limits.certificate_cargo_limit_g != CASES[ref.case_id]["cargo_mass_g"]:
+                    raise ValueError("Reference hold or cargo limit does not match profile")
+            elif ref.profile_version is None or ref.profile_sha256 is None or ref.vessel_id == PROFILE["id"]:
+                # User profiles: structural only; adapters.plan_binding checks the stored profile at every entry point.
+                raise ValueError("A user vessel profile needs both profile_version and profile_sha256 and cannot be VINAFCO268")
         units = {u.id: u for u in self.units}
         if len(units) != len(self.units):
             raise ValueError("Unit IDs must be unique")
