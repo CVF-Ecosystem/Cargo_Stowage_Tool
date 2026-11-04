@@ -288,8 +288,9 @@ def compare_plans(payload: CompareRequest):
 
 from ..adapters import revision_store
 from ..domain import cargo_revisions as cargo
-from .cargo_models import (ParentConflict, RebaseResult, RevisionDetail, RevisionDraft, RevisionList, RevisionPreview,
-                           RevisionRejected, RevisionSummary)
+from ..domain import packing as cargo_packing
+from .cargo_models import (ParentConflict, RebaseResult, RevisionDetail, RevisionDraft, RevisionList, RevisionPacking,
+                           RevisionPreview, RevisionRejected, RevisionSummary)
 
 _REJECTED = {400: {"model": RevisionRejected, "description": "Lô cập nhật không hợp lệ hoặc revision không qua kiểm toàn vẹn."}}
 
@@ -341,6 +342,18 @@ async def create_cargo_revision(draft: RevisionDraft, request: Request):
 def get_cargo_revision(revision_id: str):
     try:
         return plan_binding.detail(plan_binding.view(revision_id))
+    except LookupError as exc:
+        raise HTTPException(404, str(exc))
+    except PlanBindingError as exc:
+        raise _plain_error(exc)
+
+
+@router.get("/cargo-revisions/{revision_id}/packing", response_model=RevisionPacking,
+            responses={**_REJECTED, 404: {"description": "Không tìm thấy revision."}})
+def get_cargo_revision_packing(revision_id: str):
+    """SUP-03 D3: derived (not measured) packing of every group of one revision; read-only, never stored."""
+    try:
+        return cargo_packing.pack_revision(plan_binding.view(revision_id))
     except LookupError as exc:
         raise HTTPException(404, str(exc))
     except PlanBindingError as exc:
