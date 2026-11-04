@@ -238,12 +238,27 @@ class _Cache:
         return self.units[revision_id]
 
 
+def _drop_reason(target_unit, pinned_unit):
+    """Why rebase drops a placement of this unit (None = kept). The single rule shared by rebase and recheck (H2)."""
+    if target_unit is None:
+        return 'REMOVED'
+    if (pinned_unit is None or target_unit['dimensions_um'] != pinned_unit['dimensions_um']
+            or target_unit['mass_g'] != pinned_unit['mass_g']):
+        return 'CHANGED'
+    return None
+
+
+def _dropped_count(pinned, target_units, placed_ids):
+    pinned_by, target_by = {u['id']: u for u in pinned}, {u['id']: u for u in target_units}
+    return sum(1 for uid in placed_ids if _drop_reason(target_by.get(uid), pinned_by.get(uid)))
+
+
 def _recheck(contract_version, pinned_id, pinned_sha, placed_ids, latest_units, cache):
     if contract_version not in (V1, V2):
         return {'cargo_revision_id': None, 'status': 'NOT_APPLICABLE', 'added': 0, 'removed': 0, 'changed': 0,
-                'placed_affected': 0}
+                'placed_affected': 0, 'placed_dropped_on_rebase': 0}
     out = {'cargo_revision_id': pinned_id, 'status': 'REVISION_UNAVAILABLE', 'added': 0, 'removed': 0, 'changed': 0,
-           'placed_affected': 0}
+           'placed_affected': 0, 'placed_dropped_on_rebase': 0}
     if latest_units is None:
         return out
     try:
@@ -256,7 +271,8 @@ def _recheck(contract_version, pinned_id, pinned_sha, placed_ids, latest_units, 
     affected = set(diff['removed']) | set(diff['changed'])
     out.update(status='NEEDS_RECHECK' if any(diff.values()) else 'CURRENT', added=len(diff['added']),
                removed=len(diff['removed']), changed=len(diff['changed']),
-               placed_affected=len(affected & set(placed_ids)))
+               placed_affected=len(affected & set(placed_ids)),
+               placed_dropped_on_rebase=_dropped_count(pinned, latest_units, placed_ids))
     return out
 
 
@@ -297,7 +313,8 @@ def annotate_listing(rows):
         status = _recheck(cv, pinned_id, sha, placed, latest_units() if cv in (V1, V2) else None, cache)
         out.append({**item, 'cargo_revision_id': status['cargo_revision_id'], 'recheck_status': status['status'],
                     'added_count': status['added'], 'removed_count': status['removed'],
-                    'changed_count': status['changed'], 'placed_affected_count': status['placed_affected']})
+                    'changed_count': status['changed'], 'placed_affected_count': status['placed_affected'],
+                    'placed_dropped_on_rebase_count': status['placed_dropped_on_rebase']})
     return out
 
 
@@ -328,8 +345,7 @@ def rebase(plan, target_view):
     kept, dropped = [], []
     for p in plan.placements:
         t, o = target_by.get(p.unit_id), pinned_by.get(p.unit_id)
-        reason = ('REMOVED' if t is None else
-                  'CHANGED' if o is None or t['dimensions_um'] != o['dimensions_um'] or t['mass_g'] != o['mass_g'] else None)
+        reason = _drop_reason(t, o)
         if reason:
             dropped.append({'unit_id': p.unit_id, 'reason': reason, 'x_mm': p.x_mm, 'y_mm': p.y_mm, 'yaw_deg': p.yaw_deg})
         else:
