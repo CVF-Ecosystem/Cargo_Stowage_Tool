@@ -101,6 +101,13 @@ def _fsync_dir(path: Path):
         os.close(fd)
 
 
+def _is_empty_dir(path: Path) -> bool:
+    try:
+        return path.is_dir() and not path.is_symlink() and next(path.iterdir(), None) is None
+    except OSError:
+        return False
+
+
 def _write(path: Path, data: bytes):
     with open(path, 'xb') as handle:
         handle.write(data)
@@ -153,9 +160,18 @@ def _append_locked(base: Path, profile_id: str, version: int, profile_bytes: byt
         try:
             os.rename(temp, target)
         except OSError:
-            if target.exists():
+            # POSIX rename replaces an empty directory; Windows refuses. Give both platforms the same
+            # behaviour: an empty leftover v<n> (no files, so not a version) is removed once and the
+            # rename retried. A non-empty target is never touched and stays a conflict.
+            if not _is_empty_dir(target):
+                if target.exists():
+                    raise VersionConflict(latest_version(profile_id)) from None
+                raise
+            try:
+                target.rmdir()
+                os.rename(temp, target)
+            except OSError:
                 raise VersionConflict(latest_version(profile_id)) from None
-            raise
         _fsync_dir(folder)
     except BaseException:
         shutil.rmtree(temp, ignore_errors=True)
