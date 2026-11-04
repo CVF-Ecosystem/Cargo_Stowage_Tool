@@ -117,7 +117,8 @@ def listing():
         return items
 
 
-def open_snapshot(identifier):
+def fetch_plan(identifier):
+    """Load and structurally validate a saved plan without evaluating it (no revision binding)."""
     try:
         if str(UUID(identifier)) != identifier: raise ValueError()
     except (ValueError, AttributeError):
@@ -126,4 +127,21 @@ def open_snapshot(identifier):
         row=db.execute('SELECT schema_version,plan_json FROM snapshots WHERE id=?',(identifier,)).fetchone()
     if row is None: raise LookupError('Không tìm thấy phương án đã lưu.')
     if row[0]!='scst.saved-plan.v1': raise ValueError('Phiên bản phương án đã lưu không được hỗ trợ.')
-    return evaluate(Plan.model_validate(json.loads(row[1])))
+    return Plan.model_validate(json.loads(row[1]))
+
+
+def open_snapshot(identifier):
+    return evaluate(fetch_plan(identifier))
+
+
+def listing_rows():
+    """Same rows, order and checks as listing(), but with the stored plan JSON (read-only)."""
+    with connection() as db:
+        rows = db.execute('SELECT id,name,created_utc,schema_version,plan_json FROM snapshots ORDER BY created_utc DESC,id DESC LIMIT 100').fetchall()
+    items = []
+    for row in rows:
+        timestamp = datetime.fromisoformat(row[2])
+        if timestamp.tzinfo is None or timestamp.utcoffset() != timezone.utc.utcoffset(timestamp):
+            raise ValueError('Thời gian phương án không hợp lệ.')
+        items.append((SavedSummary(id=row[0],name=row[1],created_utc=row[2],schema_version=row[3]), row[4]))
+    return items

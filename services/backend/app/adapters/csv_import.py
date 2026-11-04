@@ -81,6 +81,7 @@ def preview(payload: CsvRequest) -> CsvPreview:
         if errors:
             return CsvPreview(valid=False,errors=errors,count=0,total_mass_g=0,candidate=None)
         candidate = payload.plan.model_dump()
+        candidate.pop('cargo_revision', None)
         candidate.update(contract_version='scst.m2a.v1', cargo_source='USER_ENTERED', cargo_dataset=None, units=[u.model_dump() for u in units], placements=[])
         return CsvPreview(valid=True,errors=[],count=len(units),total_mass_g=sum(u.mass_g for u in units),candidate=Plan.model_validate(candidate))
     except (csv.Error, UnicodeError, OverflowError, ValueError):

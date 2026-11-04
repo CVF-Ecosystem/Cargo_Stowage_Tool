@@ -226,10 +226,130 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/cargo-revisions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Cargo Revisions */
+        get: operations["list_cargo_revisions_api_cargo_revisions_get"];
+        put?: never;
+        /** Create Cargo Revision */
+        post: operations["create_cargo_revision_api_cargo_revisions_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/cargo-revisions/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Preview Cargo Revision */
+        post: operations["preview_cargo_revision_api_cargo_revisions_preview_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/cargo-revisions/{revision_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Cargo Revision */
+        get: operations["get_cargo_revision_api_cargo_revisions__revision_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/cargo-revisions/{revision_id}/plan-preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Cargo Revision Plan Preview */
+        post: operations["cargo_revision_plan_preview_api_cargo_revisions__revision_id__plan_preview_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/snapshots/{snapshot_id}/rebase": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Rebase Snapshot */
+        post: operations["rebase_snapshot_api_snapshots__snapshot_id__rebase_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** BatchError */
+        BatchError: {
+            /** Index */
+            index: number | null;
+            /** Field */
+            field: string;
+            /** Message */
+            message: string;
+        };
+        /** BundleOverrideInfo */
+        BundleOverrideInfo: {
+            /** Bundle Id */
+            bundle_id: string;
+            /** Mass G */
+            mass_g: number | null;
+            /** Dimensions Um */
+            dimensions_um: number[] | null;
+            /** Provenance */
+            provenance: {
+                [key: string]: components["schemas"]["ProvenanceStamp"];
+            };
+        };
+        /** CargoRevisionRef */
+        CargoRevisionRef: {
+            /**
+             * Dataset Id
+             * @constant
+             */
+            dataset_id: "BALTIMORE-PIPE-V1-1";
+            /** Revision Id */
+            revision_id: string;
+            /** Content Sha256 */
+            content_sha256: string;
+        };
         /** CargoUnit */
         CargoUnit: {
             /** Id */
@@ -260,7 +380,19 @@ export interface components {
                 number,
                 number
             ] | null;
-            source_ref?: components["schemas"]["PipeSourceRef"] | null;
+            /** Source Ref */
+            source_ref?: components["schemas"]["PipeSourceRef"] | components["schemas"]["PipeSourceRefV2"] | null;
+        };
+        /** ChangeSummary */
+        ChangeSummary: {
+            /** Index */
+            index: number;
+            /** Type */
+            type: string;
+            /** Target */
+            target: string;
+            /** Text */
+            text: string;
         };
         /** CompareDelta */
         CompareDelta: {
@@ -379,6 +511,22 @@ export interface components {
             /** Depth */
             depth: number;
         };
+        /** DroppedPlacement */
+        DroppedPlacement: {
+            /** Unit Id */
+            unit_id: string;
+            /**
+             * Reason
+             * @enum {string}
+             */
+            reason: "REMOVED" | "CHANGED";
+            /** X Mm */
+            x_mm: number;
+            /** Y Mm */
+            y_mm: number;
+            /** Yaw Deg */
+            yaw_deg: number;
+        };
         /** Evaluation */
         Evaluation: {
             plan: components["schemas"]["Plan"];
@@ -480,6 +628,16 @@ export interface components {
             /** Freeboard Mm */
             freeboard_mm: number;
         };
+        /**
+         * ParentConflict
+         * @description HTTP 409 detail: the draft's parent is no longer the latest revision (nothing was written).
+         */
+        ParentConflict: {
+            /** Message */
+            message: string;
+            /** Latest Revision Id */
+            latest_revision_id: string;
+        };
         /** PipeGroup */
         PipeGroup: {
             /** Group Id */
@@ -558,6 +716,39 @@ export interface components {
             /** Dimension Warning */
             dimension_warning: boolean;
         };
+        /**
+         * PipeSourceRefV2
+         * @description Revision-derived bundle identity (scst.pipe-list.v2). Kept separate from
+         *     PipeSourceRef so legacy v1 units serialize byte-identically.
+         */
+        PipeSourceRefV2: {
+            /**
+             * Dataset Id
+             * @constant
+             */
+            dataset_id: "BALTIMORE-PIPE-V1-1";
+            /** Workbook Sha256 */
+            workbook_sha256: string;
+            /** Sheet */
+            sheet: string;
+            /** Group Id */
+            group_id: string;
+            /** Source Row */
+            source_row: number | null;
+            /** Bundle Index */
+            bundle_index: number;
+            /** Pieces */
+            pieces: number;
+            /** Dimension Warning */
+            dimension_warning: boolean;
+            /** Revision Id */
+            revision_id: string;
+            /**
+             * Confirmation
+             * @enum {string}
+             */
+            confirmation: "WORKBOOK" | "UNVERIFIED" | "CONFIRMED";
+        };
         /** Placement */
         Placement: {
             /** Unit Id */
@@ -588,7 +779,7 @@ export interface components {
              * @default scst.m1.v1
              * @enum {string}
              */
-            contract_version: "scst.m1.v1" | "scst.m2a.v1" | "scst.pipe-list.v1";
+            contract_version: "scst.m1.v1" | "scst.m2a.v1" | "scst.pipe-list.v1" | "scst.pipe-list.v2";
             /**
              * Source
              * @default SYNTHETIC
@@ -600,6 +791,7 @@ export interface components {
             vessel?: components["schemas"]["VesselReference"] | null;
             /** Cargo Dataset */
             cargo_dataset?: "BALTIMORE-PIPE-V1-1" | null;
+            cargo_revision?: components["schemas"]["CargoRevisionRef"] | null;
             hold: components["schemas"]["Hold"];
             limits: components["schemas"]["Limits"];
             /** Units */
@@ -631,6 +823,36 @@ export interface components {
             source_pages: number[];
             /** Freeboard Note */
             freeboard_note: string;
+        };
+        /** ProvenanceStamp */
+        ProvenanceStamp: {
+            /** Revision Id */
+            revision_id: string;
+            source: components["schemas"]["RevisionSource"] | null;
+            /**
+             * Confirmation
+             * @enum {string}
+             */
+            confirmation: "WORKBOOK" | "UNVERIFIED" | "CONFIRMED";
+        };
+        /** RebaseResult */
+        RebaseResult: {
+            /** Source Revision Id */
+            source_revision_id: string;
+            /** Target Revision Id */
+            target_revision_id: string;
+            candidate: components["schemas"]["Evaluation"];
+            /** Kept Placement Count */
+            kept_placement_count: number;
+            /** Dropped Placements */
+            dropped_placements: components["schemas"]["DroppedPlacement"][];
+            /** Added Unit Ids */
+            added_unit_ids: string[];
+            /** Removed Unit Ids */
+            removed_unit_ids: string[];
+            /** Changed Unit Ids */
+            changed_unit_ids: string[];
+            comparison: components["schemas"]["CompareResult"];
         };
         /** ReferenceGeometry */
         ReferenceGeometry: {
@@ -673,6 +895,180 @@ export interface components {
              */
             status: "ESTIMATED";
         };
+        /** RevisionDetail */
+        RevisionDetail: {
+            /** Revision Id */
+            revision_id: string;
+            /** Parent Revision Id */
+            parent_revision_id: string | null;
+            /** Created Utc */
+            created_utc: string | null;
+            source: components["schemas"]["RevisionSource"] | null;
+            /** Change Count */
+            change_count: number;
+            /** Content Sha256 */
+            content_sha256: string;
+            /** Group Count */
+            group_count: number | null;
+            /** Bundle Count */
+            bundle_count: number | null;
+            /** Total Mass G */
+            total_mass_g: number | null;
+            /**
+             * Available
+             * @default true
+             */
+            available: boolean;
+            /** Integrity Error */
+            integrity_error?: string | null;
+            /** Groups */
+            groups: components["schemas"]["RevisionGroup"][];
+            /** Changes */
+            changes: {
+                [key: string]: unknown;
+            }[];
+        };
+        /** RevisionDraft */
+        RevisionDraft: {
+            /** Parent Revision Id */
+            parent_revision_id: string;
+            /** Source */
+            source: {
+                [key: string]: unknown;
+            };
+            /** Changes */
+            changes: {
+                [key: string]: unknown;
+            }[];
+        };
+        /** RevisionGroup */
+        RevisionGroup: {
+            /** Group Id */
+            group_id: string;
+            /** Source Row */
+            source_row: number | null;
+            /**
+             * Origin
+             * @enum {string}
+             */
+            origin: "WORKBOOK" | "ADDED";
+            /** Bundle Count */
+            bundle_count: number;
+            /** Pieces Per Bundle */
+            pieces_per_bundle: number;
+            /** Dimensions Um */
+            dimensions_um: number[];
+            /** Mass G */
+            mass_g: number;
+            /** Outside Diameter Mm */
+            outside_diameter_mm: string;
+            /** Wall Thickness Mm */
+            wall_thickness_mm: string;
+            /** Dimension Warning */
+            dimension_warning: boolean;
+            /** Source Line T */
+            source_line_t: string | null;
+            /** Source Cbm M3 */
+            source_cbm_m3: string | null;
+            /** Envelope Cbm M3 */
+            envelope_cbm_m3: string | null;
+            /** Issue Codes */
+            issue_codes: string[];
+            /** Bundle Ids */
+            bundle_ids: string[];
+            /** Next Bundle Index */
+            next_bundle_index: number;
+            /** Provenance */
+            provenance: {
+                [key: string]: components["schemas"]["ProvenanceStamp"];
+            };
+            /** Overrides */
+            overrides: components["schemas"]["BundleOverrideInfo"][];
+        };
+        /** RevisionList */
+        RevisionList: {
+            /** Dataset Id */
+            dataset_id: string;
+            /** Latest Revision Id */
+            latest_revision_id: string;
+            /** Revisions */
+            revisions: components["schemas"]["RevisionSummary"][];
+        };
+        /** RevisionPreview */
+        RevisionPreview: {
+            /** Valid */
+            valid: boolean;
+            /** Errors */
+            errors: components["schemas"]["BatchError"][];
+            /** Latest Revision Id */
+            latest_revision_id: string;
+            /** Parent Is Latest */
+            parent_is_latest: boolean;
+            /** Content Sha256 */
+            content_sha256: string | null;
+            /** Added Bundle Ids */
+            added_bundle_ids: string[];
+            /** Removed Bundle Ids */
+            removed_bundle_ids: string[];
+            /** Changed Bundle Ids */
+            changed_bundle_ids: string[];
+            /** Change Summaries */
+            change_summaries: components["schemas"]["ChangeSummary"][];
+            /** Group Count */
+            group_count: number | null;
+            /** Bundle Count */
+            bundle_count: number | null;
+            /** Total Mass G */
+            total_mass_g: number | null;
+        };
+        /**
+         * RevisionRejected
+         * @description HTTP 400 detail for a draft that cannot be stored.
+         */
+        RevisionRejected: {
+            /** Message */
+            message: string;
+            /** Errors */
+            errors: components["schemas"]["BatchError"][];
+        };
+        /** RevisionSource */
+        RevisionSource: {
+            /** Kind */
+            kind: string;
+            /** Reference */
+            reference: string;
+            /** Received Date */
+            received_date: string;
+            /** Note */
+            note: string;
+        };
+        /** RevisionSummary */
+        RevisionSummary: {
+            /** Revision Id */
+            revision_id: string;
+            /** Parent Revision Id */
+            parent_revision_id: string | null;
+            /** Created Utc */
+            created_utc: string | null;
+            source: components["schemas"]["RevisionSource"] | null;
+            /** Change Count */
+            change_count: number;
+            /** Content Sha256 */
+            content_sha256: string;
+            /** Group Count */
+            group_count: number | null;
+            /** Bundle Count */
+            bundle_count: number | null;
+            /** Total Mass G */
+            total_mass_g: number | null;
+            /**
+             * Available
+             * @default true
+             */
+            available: boolean;
+            /** Integrity Error */
+            integrity_error?: string | null;
+        };
         /** SaveRequest */
         SaveRequest: {
             /** Name */
@@ -689,6 +1085,32 @@ export interface components {
             created_utc: string;
             /** Schema Version */
             schema_version: string;
+        };
+        /** SnapshotListItem */
+        SnapshotListItem: {
+            /** Id */
+            id: string;
+            /** Name */
+            name: string;
+            /** Created Utc */
+            created_utc: string;
+            /** Schema Version */
+            schema_version: string;
+            /** Cargo Revision Id */
+            cargo_revision_id: string | null;
+            /**
+             * Recheck Status
+             * @enum {string}
+             */
+            recheck_status: "CURRENT" | "NEEDS_RECHECK" | "NOT_APPLICABLE" | "REVISION_UNAVAILABLE";
+            /** Added Count */
+            added_count: number;
+            /** Removed Count */
+            removed_count: number;
+            /** Changed Count */
+            changed_count: number;
+            /** Placed Affected Count */
+            placed_affected_count: number;
         };
         /** Summary */
         Summary: {
@@ -974,7 +1396,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["SavedSummary"][];
+                    "application/json": components["schemas"]["SnapshotListItem"][];
                 };
             };
         };
@@ -1150,6 +1572,269 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["CompareResult"];
                 };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_cargo_revisions_api_cargo_revisions_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RevisionList"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RevisionRejected"];
+                };
+            };
+        };
+    };
+    create_cargo_revision_api_cargo_revisions_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RevisionDraft"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RevisionSummary"];
+                };
+            };
+            /** @description Lô cập nhật không hợp lệ hoặc revision không qua kiểm toàn vẹn. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RevisionRejected"];
+                };
+            };
+            /** @description Revision cha không còn là mới nhất; chưa ghi gì. */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ParentConflict"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    preview_cargo_revision_api_cargo_revisions_preview_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RevisionDraft"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RevisionPreview"];
+                };
+            };
+            /** @description Lô cập nhật không hợp lệ hoặc revision không qua kiểm toàn vẹn. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RevisionRejected"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_cargo_revision_api_cargo_revisions__revision_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                revision_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RevisionDetail"];
+                };
+            };
+            /** @description Lô cập nhật không hợp lệ hoặc revision không qua kiểm toàn vẹn. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RevisionRejected"];
+                };
+            };
+            /** @description Không tìm thấy revision. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    cargo_revision_plan_preview_api_cargo_revisions__revision_id__plan_preview_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                revision_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["Plan"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Evaluation"];
+                };
+            };
+            /** @description Lô cập nhật không hợp lệ hoặc revision không qua kiểm toàn vẹn. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RevisionRejected"];
+                };
+            };
+            /** @description Không tìm thấy revision. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Plan không hợp lệ. */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    rebase_snapshot_api_snapshots__snapshot_id__rebase_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                snapshot_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RebaseResult"];
+                };
+            };
+            /** @description Phương án không dùng list ống, dữ liệu lỗi hoặc revision không phục vụ được. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Không tìm thấy phương án. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
             /** @description Validation Error */
             422: {
