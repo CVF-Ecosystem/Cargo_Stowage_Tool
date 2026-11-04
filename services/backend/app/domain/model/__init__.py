@@ -1,7 +1,7 @@
 """M1 synthetic contract. Integer mm/g; no operational approval semantics."""
 from typing import Annotated, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, model_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, model_serializer, model_validator
 
 from ...vessel import PROFILE, CASES
 from ...adapters.pipe_registry import DATASET, EXPECTED
@@ -36,6 +36,27 @@ class PipeSourceRef(Model):
     dimension_warning: bool
 
 
+class PipeSourceRefV2(Model):
+    """Revision-derived bundle identity (scst.pipe-list.v2). Kept separate from
+    PipeSourceRef so legacy v1 units serialize byte-identically."""
+    dataset_id: Literal["BALTIMORE-PIPE-V1-1"]
+    workbook_sha256: str
+    sheet: str
+    group_id: str
+    source_row: StrictInt | None
+    bundle_index: StrictInt
+    pieces: StrictInt
+    dimension_warning: bool
+    revision_id: str = Field(pattern=r"^BALTIMORE-PIPE-V1-1@R[0-9]{4}$")
+    confirmation: Literal["WORKBOOK", "UNVERIFIED", "CONFIRMED"]
+
+
+class CargoRevisionRef(Model):
+    dataset_id: Literal["BALTIMORE-PIPE-V1-1"]
+    revision_id: str = Field(pattern=r"^BALTIMORE-PIPE-V1-1@R[0-9]{4}$")
+    content_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+
+
 class CargoUnit(Model):
     id: Identifier
     name: str = Field(min_length=1, max_length=100)
@@ -46,7 +67,7 @@ class CargoUnit(Model):
     height_mm: Dimension
     mass_g: Mass
     dimensions_um: tuple[StrictInt, StrictInt, StrictInt] | None = None
-    source_ref: PipeSourceRef | None = None
+    source_ref: PipeSourceRef | PipeSourceRefV2 | None = None
 
 
 class Placement(Model):
@@ -79,20 +100,41 @@ class VesselReference(Model):
 
 
 class Plan(Model):
-    contract_version: Literal["scst.m1.v1", "scst.m2a.v1", "scst.pipe-list.v1"] = "scst.m1.v1"
+    contract_version: Literal["scst.m1.v1", "scst.m2a.v1", "scst.pipe-list.v1", "scst.pipe-list.v2"] = "scst.m1.v1"
     source: Literal["SYNTHETIC", "MIXED_REFERENCE", "USER_ENTERED"] = "SYNTHETIC"
     cargo_source: Literal["SYNTHETIC", "USER_ENTERED", "DOCUMENT_CALCULATED"] | None = None
     vessel: VesselReference | None = None
     cargo_dataset: Literal["BALTIMORE-PIPE-V1-1"] | None = None
+    cargo_revision: CargoRevisionRef | None = None
     hold: Hold
     limits: Limits
-    units: list[CargoUnit] = Field(max_length=1076)
-    placements: list[Placement] = Field(max_length=1076)
+    units: list[CargoUnit] = Field(max_length=2000)
+    placements: list[Placement] = Field(max_length=2000)
+
+    @model_serializer(mode="wrap")
+    def omit_absent_revision(self, handler):
+        # Legacy contracts never carried cargo_revision; omit it when absent so
+        # their JSON (responses and newly saved snapshots) stays byte-identical.
+        data = handler(self)
+        if isinstance(data, dict) and data.get("cargo_revision") is None:
+            data.pop("cargo_revision", None)
+        return data
 
     @model_validator(mode="after")
     def identities(self):
         pipe = self.contract_version == "scst.pipe-list.v1"
-        if pipe:
+        if self.contract_version != "scst.pipe-list.v2" and self.cargo_revision is not None:
+            raise ValueError("Only scst.pipe-list.v2 carries a cargo revision")
+        if self.contract_version == "scst.pipe-list.v2":
+            # Structural checks only; exact revision binding needs the revision
+            # store and is enforced by adapters.plan_binding at every entry point.
+            if self.cargo_dataset != DATASET or self.cargo_source != "DOCUMENT_CALCULATED" or self.cargo_revision is None:
+                raise ValueError("Pipe revision plan requires dataset, document source and cargo revision")
+            if self.cargo_revision.dataset_id != self.cargo_dataset:
+                raise ValueError("Cargo revision dataset does not match plan dataset")
+            if any(not isinstance(u.source_ref, PipeSourceRefV2) or u.kind != "PIPE_BUNDLE" or u.dimensions_um is None for u in self.units):
+                raise ValueError("Pipe revision units require revision source references")
+        elif pipe:
             if self.cargo_dataset != DATASET or self.cargo_source != "DOCUMENT_CALCULATED" or len(self.units) != len(EXPECTED):
                 raise ValueError("Pipe dataset and complete manifest required")
             for unit in self.units:
