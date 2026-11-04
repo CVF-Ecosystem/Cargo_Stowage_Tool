@@ -10,13 +10,19 @@ import re
 import shutil
 import tempfile
 import threading
+import time
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 
 try:
     import fcntl
-except ImportError:  # pragma: no cover - Windows: the rename-not-overwrite rule alone keeps a race safe
+except ImportError:  # pragma: no cover - Windows: msvcrt.locking on <vessels>/.lock is the cross-process lock
     fcntl = None
+try:
+    import msvcrt
+except ImportError:  # pragma: no cover - POSIX
+    msvcrt = None
 
 ROOT = Path(__file__).resolve().parents[4]
 MAX_IDS = 50
@@ -26,6 +32,7 @@ VERSION_DIR = re.compile(r'^v([1-9][0-9]{0,8})$')
 MANIFEST_SCHEMA = 'scst.vessel-profile-manifest.v1'
 MANIFEST_KEYS = {'schema', 'id', 'version', 'created_utc', 'profile_sha256', 'glb_sha256', 'glb_bytes', 'verification'}
 _LOCK = threading.Lock()
+LOCK_WAIT_SECONDS = 60  # Windows: msvcrt.LK_LOCK itself gives up after ~10 s, so it is retried up to this bound
 
 
 class StoreError(ValueError):
@@ -115,6 +122,41 @@ def _write(path: Path, data: bytes):
         os.fsync(handle.fileno())
 
 
+@contextmanager
+def _process_lock(base: Path):
+    """Exclusive cross-process lock: flock on the vessels directory (POSIX) or msvcrt.locking on <vessels>/.lock (Windows)."""
+    if fcntl is not None:
+        fd = os.open(base, os.O_RDONLY)
+        try:
+            fcntl.flock(fd, fcntl.LOCK_EX)
+            yield
+        finally:
+            os.close(fd)
+    elif msvcrt is not None:
+        fd = os.open(base / '.lock', os.O_RDWR | os.O_CREAT)
+        locked = False
+        try:
+            deadline = time.monotonic() + LOCK_WAIT_SECONDS
+            while not locked:
+                os.lseek(fd, 0, os.SEEK_SET)
+                try:
+                    msvcrt.locking(fd, msvcrt.LK_LOCK, 1)
+                    locked = True
+                except OSError:
+                    if time.monotonic() >= deadline:
+                        raise StoreError('Kho hồ sơ tàu đang bận; hãy thử lại.') from None
+            yield
+        finally:
+            try:
+                if locked:
+                    os.lseek(fd, 0, os.SEEK_SET)
+                    msvcrt.locking(fd, msvcrt.LK_UNLCK, 1)
+            finally:
+                os.close(fd)
+    else:  # pragma: no cover - no locking primitive: the rename-not-overwrite rule alone keeps a race safe
+        yield
+
+
 def append(profile_id: str, version: int, profile_bytes: bytes, glb_bytes: bytes, verification: dict) -> dict:
     """Add exactly version latest+1 of a profile; returns the manifest. Nothing is written on any error."""
     _check(profile_id, version)
@@ -125,14 +167,8 @@ def append(profile_id: str, version: int, profile_bytes: bytes, glb_bytes: bytes
         raise VersionConflict(0)
     with _LOCK:
         base.mkdir(parents=True, exist_ok=True)
-        lock_fd = os.open(base, os.O_RDONLY) if fcntl else None
-        try:
-            if lock_fd is not None:
-                fcntl.flock(lock_fd, fcntl.LOCK_EX)
+        with _process_lock(base):
             return _append_locked(base, profile_id, version, profile_bytes, glb_bytes, verification)
-        finally:
-            if lock_fd is not None:
-                os.close(lock_fd)
 
 
 def _append_locked(base: Path, profile_id: str, version: int, profile_bytes: bytes, glb_bytes: bytes, verification: dict) -> dict:
