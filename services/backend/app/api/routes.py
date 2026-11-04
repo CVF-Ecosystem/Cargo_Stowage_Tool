@@ -384,3 +384,52 @@ def rebase_snapshot(snapshot_id: str):
     except (PlanBindingError, sqlite3.Error, OSError, ValueError, TypeError, OverflowError) as exc:
         raise HTTPException(400, str(exc) if isinstance(exc, PlanBindingError)
                             else "Không thể tạo bản theo dữ liệu mới; ID, dữ liệu hoặc phiên bản không hợp lệ.")
+
+
+import re
+import unicodedata
+from urllib.parse import quote
+from ..adapters import report_service
+from ..domain.report import ReportReconciliationError, xlsx as report_xlsx
+from .report_models import PlanReport
+
+XLSX_MIME = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+_REPORT_ERRORS = {400: {"description": "ID, dữ liệu, phiên bản hoặc revision ghim/profile tàu không qua kiểm toàn vẹn."},
+                  404: {"description": "Không tìm thấy phương án đã lưu."},
+                  500: {"description": "Báo cáo không khớp đối soát nội bộ; không xuất báo cáo."}}
+
+
+def _report(snapshot_id: str) -> dict:
+    """Read-only report model of a saved snapshot, with the same refusals as the other snapshot entry points."""
+    try:
+        return report_service.snapshot_report(snapshot_id)
+    except ReportReconciliationError as exc:
+        raise HTTPException(500, f"Báo cáo không khớp đối soát nội bộ: {exc.what}; không xuất báo cáo.")
+    except LookupError as exc:
+        raise HTTPException(404, str(exc))
+    except (PlanBindingError, report_service.SnapshotError) as exc:
+        raise HTTPException(400, str(exc))
+    except (sqlite3.Error, OSError, ValueError, TypeError, OverflowError):
+        raise HTTPException(400, "Không thể tạo báo cáo; ID, dữ liệu hoặc phiên bản không hợp lệ.")
+
+
+def _slug(name: str) -> str:
+    text = unicodedata.normalize("NFKD", name.replace("đ", "d").replace("Đ", "D")).encode("ascii", "ignore").decode()
+    return re.sub(r"[^A-Za-z0-9_-]+", "-", text).strip("-")[:60].strip("-") or "phuong-an"
+
+
+def _download_names(name: str, snapshot_id: str) -> tuple[str, str]:
+    return f"SCST-bao-cao-{_slug(name)}-{snapshot_id[:8]}.xlsx", f"SCST báo cáo {name} {snapshot_id[:8]}.xlsx"
+
+
+@router.get("/snapshots/{snapshot_id}/report", response_model=PlanReport, responses=_REPORT_ERRORS)
+def snapshot_report(snapshot_id: str):
+    return _report(snapshot_id)
+
+
+@router.get("/snapshots/{snapshot_id}/report.xlsx", response_class=Response, responses={**_REPORT_ERRORS, 200: {"content": {XLSX_MIME: {}}}})
+def snapshot_report_xlsx(snapshot_id: str):
+    report = _report(snapshot_id)
+    ascii_name, real_name = _download_names(report["header"]["plan_name"], snapshot_id)
+    return Response(report_xlsx.write_xlsx(report), media_type=XLSX_MIME,
+                    headers={"Content-Disposition": f"attachment; filename=\"{ascii_name}\"; filename*=UTF-8''{quote(real_name, safe='')}"})
