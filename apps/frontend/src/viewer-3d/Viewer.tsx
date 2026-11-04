@@ -45,6 +45,9 @@ type Props = {
   onSelect: (id: string) => void;
   issueIds: Set<string>;
   packing?: PackingIndex | null;
+  captureSerial?: number;
+  onCapture?: (dataUrl: string) => void;
+  onWebglUnavailable?: () => void;
 };
 
 export default function Viewer(props: Props) {
@@ -69,6 +72,7 @@ export default function Viewer(props: Props) {
   const failureRef = useRef(() => {
     setFailed(true);
     setView("2d");
+    props.onWebglUnavailable?.();
   });
   const { plan, selected, onSelect, issueIds } = props;
   const packing = props.packing ?? null;

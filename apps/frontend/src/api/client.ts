@@ -211,6 +211,23 @@ export type SnapshotListItem = components["schemas"]["SnapshotListItem"];
 export const listSnapshots = () => jsonRequest<SnapshotListItem[]>("/api/snapshots");
 export const openSnapshot = (id: string) => jsonRequest<Evaluation>(`/api/snapshots/${encodeURIComponent(id)}`);
 
+// Printable plan report (M2d). Read-only model derived from a saved snapshot; errors carry the server's Vietnamese detail.
+export type PlanReport = components["schemas"]["PlanReport"];
+export async function getPlanReport(id: string): Promise<PlanReport> {
+  let response: Response;
+  try {
+    response = await fetch(`/api/snapshots/${encodeURIComponent(id)}/report`, { signal: AbortSignal.timeout(15000) });
+  } catch {
+    throw new Error(NETWORK_ERROR);
+  }
+  if (!response.ok) {
+    const detail = await readDetail(response);
+    const message = detail && typeof detail === "object" ? (detail as { message?: unknown }).message : detail;
+    throw new Error(typeof message === "string" && message ? message : `Không đọc được báo cáo phương án (HTTP ${response.status}).`);
+  }
+  return (await response.json()) as PlanReport;
+}
+
 export type PipeLibrary = components["schemas"]["PipeLibrary"];
 export const getPipeLibrary = () => jsonRequest<PipeLibrary>("/api/pipe-list");
 export const previewPipeList = (plan: Plan) => jsonRequest<Evaluation>("/api/pipe-list/preview",plan);
