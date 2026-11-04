@@ -4,6 +4,8 @@ import {
   type ProvenanceStamp, type RevisionDetail, type RevisionDraft, type RevisionGroup,
   type RevisionList, type RevisionPreview,
 } from "../api/client";
+import { getRevisionPacking, type GroupPacking, type RevisionPacking } from "./packing";
+import { packingCell, slackText } from "./PackingInfo";
 import { displayTime, fmt, isPipePlan, kgInput, parseCmToUm, parseKg, tonnes, umToCm, type Plan } from "./model";
 
 const BASE_SUFFIX = "@R0000";
@@ -105,20 +107,21 @@ function buildChanges(rows: Row[], groups: RevisionGroup[]): {changes: Record<st
   return {changes, problems};
 }
 
-function ProvenanceList({detail, allGroups}: {detail: RevisionDetail; allGroups: boolean}) {
+function ProvenanceList({detail, allGroups, focusId, packing}: {detail: RevisionDetail; allGroups: boolean; focusId: string; packing: Map<string, GroupPacking> | null}) {
   const shown = detail.groups.map(g => {
     const fields = Object.entries(g.provenance).filter(([, p]) => allGroups || !isBase(p.revision_id));
     return {g, fields: allGroups ? Object.entries(g.provenance) : fields, hasOverrides: g.overrides.length > 0};
-  }).filter(x => allGroups || x.fields.length > 0 || x.hasOverrides);
+  }).filter(x => allGroups || x.fields.length > 0 || x.hasOverrides || x.g.group_id === focusId);
   if (!shown.length) return <p>Revision này không có nhóm nào thay đổi so với workbook gốc.</p>;
-  return <ul className="revision-groups">{shown.map(({g, fields}) => <li key={g.group_id} data-testid={`revision-group-${g.group_id}`}>
+  return <ul className="revision-groups">{shown.map(({g, fields}) => <li key={g.group_id} data-testid={`revision-group-${g.group_id}`} className={g.group_id === focusId ? "revision-group-focus" : undefined} aria-current={g.group_id === focusId ? "true" : undefined}>
     <strong>{g.group_id}</strong> · {g.origin === "ADDED" ? "nhóm thêm" : "nhóm workbook"} · {g.bundle_count} bó × {g.pieces_per_bundle} ống · {valueText("mass_g", g)} · {valueText("dimensions_um", g)}
+    {packing?.get(g.group_id) && (() => { const pk = packing.get(g.group_id)!; return <p className={pk.status === "ENVELOPE_ONLY" ? "packing-warn" : undefined} data-testid={`revision-packing-${g.group_id}`}>Cách xếp dẫn xuất (không phải số đo): {packingCell(pk)}{pk.slack_um ? ` · dư ${slackText(pk)}` : ""}{pk.reasons.length ? ` · ${pk.reasons.map(r => r.code).join(", ")}` : ""}{pk.status === "ENVELOPE_ONLY" && pk.reasons[0] ? ` — ${pk.reasons[0].message}` : ""}</p>; })()}
     <ul>{fields.map(([field, p]) => <li key={field}>{fieldLabels[field] ?? field}: <strong>{valueText(field, g)}</strong> — {stampText(p)}</li>)}
       {g.overrides.map(o => <li key={o.bundle_id}>Bó {o.bundle_id} ghi đè: {o.mass_g !== null && `${kgInput(o.mass_g)} kg `}{o.dimensions_um && `${o.dimensions_um.map(umToCm).join(" × ")} cm `}— {Object.values(o.provenance).map(stampText).filter((v, i, a) => a.indexOf(v) === i).join("; ")}</li>)}
     </ul></li>)}</ul>;
 }
 
-export default function CargoRevisionPanel({plan, onCreated}: {plan: Plan; onCreated?: () => void}) {
+export default function CargoRevisionPanel({plan, onCreated, focusGroup}: {plan: Plan; onCreated?: () => void; focusGroup?: {groupId: string; serial: number} | null}) {
   const [revisions, setRevisions] = useState<RevisionList | null>(null);
   const [loadError, setLoadError] = useState("");
   const [details, setDetails] = useState<Record<string, RevisionDetail>>({});
@@ -133,6 +136,8 @@ export default function CargoRevisionPanel({plan, onCreated}: {plan: Plan; onCre
   const [actionError, setActionError] = useState("");
   const [busy, setBusy] = useState(false);
   const lock = useRef(false);
+  const [focusId, setFocusId] = useState("");
+  const [revisionPacking, setRevisionPacking] = useState<RevisionPacking | null>(null);
 
   const latestId = revisions?.latest_revision_id ?? "";
   const inUse = isPipePlan(plan) ? (plan.cargo_revision?.revision_id ?? `${plan.cargo_dataset ?? "BALTIMORE-PIPE-V1-1"}${BASE_SUFFIX}`) : "";
@@ -203,6 +208,26 @@ export default function CargoRevisionPanel({plan, onCreated}: {plan: Plan; onCre
   };
   const openDetail = async (id: string) => { setSelectedId(id); setDetailError(""); if (!details[id]) await loadDetail(id); };
   const selectedDetail = selectedId ? details[selectedId] : undefined;
+  // SUP-03 D5.2: a packing reason opens its group here, on the revision the open plan is pinned to.
+  useEffect(() => {
+    if (!focusGroup || !focusGroup.groupId) return;
+    setFocusId(focusGroup.groupId);
+    if (inUse) void openDetail(inUse);
+    setRows(rs => rs.length === 1 && rs[0].type === "UPDATE_GROUP" && !rs[0].group_id ? [{...rs[0], group_id: focusGroup.groupId}] : rs);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [focusGroup?.serial]);
+  useEffect(() => {
+    if (!focusId || !selectedDetail) return;
+    document.querySelector(`[data-testid="revision-group-${focusId}"]`)?.scrollIntoView({block: "center"});
+  }, [focusId, selectedDetail]);
+  const packingRevisionId = selectedDetail?.revision_id ?? "";
+  useEffect(() => {
+    if (!packingRevisionId) return;
+    let live = true;
+    getRevisionPacking(packingRevisionId).then(p => { if (live) setRevisionPacking(p); }).catch(() => { if (live) setRevisionPacking(null); });
+    return () => { live = false; };
+  }, [packingRevisionId]);
+  const packingMap = useMemo(() => revisionPacking && revisionPacking.revision_id === packingRevisionId ? new Map(revisionPacking.groups.map(g => [g.group_id, g])) : null, [revisionPacking, packingRevisionId]);
 
   const problemLine = (p: Problem) => `${p.index === null ? "Lô cập nhật" : `Thay đổi ${p.index + 1}`} · ${p.field}: ${p.message}`;
   const pv = previewCurrent;
@@ -228,7 +253,7 @@ export default function CargoRevisionPanel({plan, onCreated}: {plan: Plan; onCre
       <p>{selectedDetail.change_count} thay đổi · {selectedDetail.group_count ?? "—"} nhóm · {selectedDetail.bundle_count ?? "—"} bó · {totalText(selectedDetail.total_mass_g)} · SHA-256 {selectedDetail.content_sha256.slice(0, 12)}…</p>
       <label className="check-row"><input type="checkbox" aria-label="Hiện tất cả nhóm" checked={allGroups} onChange={e => setAllGroups(e.target.checked)} />Hiện tất cả nhóm (mặc định chỉ nhóm có trường đổi)</label>
       {isBase(selectedDetail.revision_id) && !allGroups && <p>Revision gốc: mọi trường đều từ workbook (Workbook).</p>}
-      <ProvenanceList detail={selectedDetail} allGroups={allGroups} /></div>}
+      <ProvenanceList detail={selectedDetail} allGroups={allGroups} focusId={focusId} packing={packingMap} /></div>}
     {detailError && <p role="alert">{detailError}</p>}
 
     <h3>Tạo lô cập nhật</h3>
