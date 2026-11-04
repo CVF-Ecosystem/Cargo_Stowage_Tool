@@ -364,6 +364,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/cargo-revisions/{revision_id}/packing": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Cargo Revision Packing
+         * @description SUP-03 D3: derived (not measured) packing of every group of one revision; read-only, never stored.
+         */
+        get: operations["get_cargo_revision_packing_api_cargo_revisions__revision_id__packing_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/cargo-revisions/{revision_id}/plan-preview": {
         parameters: {
             query?: never;
@@ -440,6 +460,48 @@ export interface components {
             provenance: {
                 [key: string]: components["schemas"]["ProvenanceStamp"];
             };
+        };
+        /** BundlePacking */
+        BundlePacking: {
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "DETAILED" | "ENVELOPE_ONLY";
+            /**
+             * Basis
+             * @constant
+             */
+            basis: "DERIVED";
+            /** Layout */
+            layout: ("RECT" | "HEX") | null;
+            /** Columns */
+            columns: number;
+            /** Rows */
+            rows: number;
+            /** Od Um */
+            od_um: number | null;
+            /** Wall Thickness Um */
+            wall_thickness_um: number | null;
+            /** Length Um */
+            length_um: number;
+            /** Section Um */
+            section_um: number[];
+            /** Pieces Source */
+            pieces_source: number;
+            /** Pieces Placed */
+            pieces_placed: number;
+            /** Max Fit */
+            max_fit: number;
+            /** Pipe Centres Um */
+            pipe_centres_um: number[][];
+            /** Slack Um */
+            slack_um: number[] | null;
+            checks: components["schemas"]["PackingChecks"];
+            /** Reasons */
+            reasons: components["schemas"]["PackingReason"][];
+            /** Bundle Id */
+            bundle_id: string;
         };
         /** CargoRevisionRef */
         CargoRevisionRef: {
@@ -674,6 +736,52 @@ export interface components {
             /** After */
             after: unknown;
         };
+        /** GroupPacking */
+        GroupPacking: {
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "DETAILED" | "ENVELOPE_ONLY";
+            /**
+             * Basis
+             * @constant
+             */
+            basis: "DERIVED";
+            /** Layout */
+            layout: ("RECT" | "HEX") | null;
+            /** Columns */
+            columns: number;
+            /** Rows */
+            rows: number;
+            /** Od Um */
+            od_um: number | null;
+            /** Wall Thickness Um */
+            wall_thickness_um: number | null;
+            /** Length Um */
+            length_um: number;
+            /** Section Um */
+            section_um: number[];
+            /** Pieces Source */
+            pieces_source: number;
+            /** Pieces Placed */
+            pieces_placed: number;
+            /** Max Fit */
+            max_fit: number;
+            /** Pipe Centres Um */
+            pipe_centres_um: number[][];
+            /** Slack Um */
+            slack_um: number[] | null;
+            checks: components["schemas"]["PackingChecks"];
+            /** Reasons */
+            reasons: components["schemas"]["PackingReason"][];
+            /** Group Id */
+            group_id: string;
+            /** Bundle Count */
+            bundle_count: number;
+            /** Bundle Packings */
+            bundle_packings: components["schemas"]["BundlePacking"][];
+        };
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
@@ -752,6 +860,47 @@ export interface components {
             draft_m: number;
             /** Freeboard Mm */
             freeboard_mm: number;
+        };
+        /** PackingChecks */
+        PackingChecks: {
+            /** Count */
+            count: boolean;
+            /** Od Fit */
+            od_fit: boolean;
+            /** Envelope Fit */
+            envelope_fit: boolean;
+            /** Slack Loose */
+            slack_loose: boolean;
+        };
+        /** PackingReason */
+        PackingReason: {
+            /**
+             * Code
+             * @enum {string}
+             */
+            code: "OD_MISSING" | "OD_EXCEEDS_SECTION" | "PIECES_DO_NOT_FIT" | "INPUT_INVALID" | "ENVELOPE_LOOSE" | "SOURCE_WARNING";
+            /** Message */
+            message: string;
+        };
+        /** PackingStats */
+        PackingStats: {
+            /** Group Count */
+            group_count: number;
+            groups_by_status: components["schemas"]["PackingStatusCounts"];
+            /** Bundle Count */
+            bundle_count: number;
+            bundles_by_status: components["schemas"]["PackingStatusCounts"];
+            /** Derived Pieces */
+            derived_pieces: number;
+            /** Source Pieces */
+            source_pieces: number;
+        };
+        /** PackingStatusCounts */
+        PackingStatusCounts: {
+            /** Detailed */
+            DETAILED: number;
+            /** Envelope Only */
+            ENVELOPE_ONLY: number;
         };
         /**
          * ParentConflict
@@ -1229,6 +1378,23 @@ export interface components {
             latest_revision_id: string;
             /** Revisions */
             revisions: components["schemas"]["RevisionSummary"][];
+        };
+        /** RevisionPacking */
+        RevisionPacking: {
+            /** Dataset Id */
+            dataset_id: string;
+            /** Revision Id */
+            revision_id: string;
+            /** Content Sha256 */
+            content_sha256: string;
+            /**
+             * Basis
+             * @constant
+             */
+            basis: "DERIVED";
+            /** Groups */
+            groups: components["schemas"]["GroupPacking"][];
+            stats: components["schemas"]["PackingStats"];
         };
         /** RevisionPreview */
         RevisionPreview: {
@@ -2246,6 +2412,53 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["RevisionDetail"];
+                };
+            };
+            /** @description Lô cập nhật không hợp lệ hoặc revision không qua kiểm toàn vẹn. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RevisionRejected"];
+                };
+            };
+            /** @description Không tìm thấy revision. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_cargo_revision_packing_api_cargo_revisions__revision_id__packing_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                revision_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RevisionPacking"];
                 };
             };
             /** @description Lô cập nhật không hợp lệ hoặc revision không qua kiểm toàn vẹn. */

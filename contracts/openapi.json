@@ -916,6 +916,59 @@
         }
       }
     },
+    "/api/cargo-revisions/{revision_id}/packing": {
+      "get": {
+        "summary": "Get Cargo Revision Packing",
+        "description": "SUP-03 D3: derived (not measured) packing of every group of one revision; read-only, never stored.",
+        "operationId": "get_cargo_revision_packing_api_cargo_revisions__revision_id__packing_get",
+        "parameters": [
+          {
+            "name": "revision_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Revision Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevisionPacking"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Lô cập nhật không hợp lệ hoặc revision không qua kiểm toàn vẹn.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevisionRejected"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Không tìm thấy revision."
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/cargo-revisions/{revision_id}/plan-preview": {
       "post": {
         "summary": "Cargo Revision Plan Preview",
@@ -1157,6 +1210,150 @@
           "provenance"
         ],
         "title": "BundleOverrideInfo"
+      },
+      "BundlePacking": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "DETAILED",
+              "ENVELOPE_ONLY"
+            ],
+            "title": "Status"
+          },
+          "basis": {
+            "type": "string",
+            "const": "DERIVED",
+            "title": "Basis"
+          },
+          "layout": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "RECT",
+                  "HEX"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Layout"
+          },
+          "columns": {
+            "type": "integer",
+            "title": "Columns"
+          },
+          "rows": {
+            "type": "integer",
+            "title": "Rows"
+          },
+          "od_um": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Od Um"
+          },
+          "wall_thickness_um": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Wall Thickness Um"
+          },
+          "length_um": {
+            "type": "integer",
+            "title": "Length Um"
+          },
+          "section_um": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "title": "Section Um"
+          },
+          "pieces_source": {
+            "type": "integer",
+            "title": "Pieces Source"
+          },
+          "pieces_placed": {
+            "type": "integer",
+            "title": "Pieces Placed"
+          },
+          "max_fit": {
+            "type": "integer",
+            "title": "Max Fit"
+          },
+          "pipe_centres_um": {
+            "items": {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array"
+            },
+            "type": "array",
+            "title": "Pipe Centres Um"
+          },
+          "slack_um": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Slack Um"
+          },
+          "checks": {
+            "$ref": "#/components/schemas/PackingChecks"
+          },
+          "reasons": {
+            "items": {
+              "$ref": "#/components/schemas/PackingReason"
+            },
+            "type": "array",
+            "title": "Reasons"
+          },
+          "bundle_id": {
+            "type": "string",
+            "title": "Bundle Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "basis",
+          "layout",
+          "columns",
+          "rows",
+          "od_um",
+          "wall_thickness_um",
+          "length_um",
+          "section_um",
+          "pieces_source",
+          "pieces_placed",
+          "max_fit",
+          "pipe_centres_um",
+          "slack_um",
+          "checks",
+          "reasons",
+          "bundle_id"
+        ],
+        "title": "BundlePacking"
       },
       "CargoRevisionRef": {
         "properties": {
@@ -1807,6 +2004,163 @@
         ],
         "title": "FieldChange"
       },
+      "GroupPacking": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "DETAILED",
+              "ENVELOPE_ONLY"
+            ],
+            "title": "Status"
+          },
+          "basis": {
+            "type": "string",
+            "const": "DERIVED",
+            "title": "Basis"
+          },
+          "layout": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "RECT",
+                  "HEX"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Layout"
+          },
+          "columns": {
+            "type": "integer",
+            "title": "Columns"
+          },
+          "rows": {
+            "type": "integer",
+            "title": "Rows"
+          },
+          "od_um": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Od Um"
+          },
+          "wall_thickness_um": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Wall Thickness Um"
+          },
+          "length_um": {
+            "type": "integer",
+            "title": "Length Um"
+          },
+          "section_um": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "title": "Section Um"
+          },
+          "pieces_source": {
+            "type": "integer",
+            "title": "Pieces Source"
+          },
+          "pieces_placed": {
+            "type": "integer",
+            "title": "Pieces Placed"
+          },
+          "max_fit": {
+            "type": "integer",
+            "title": "Max Fit"
+          },
+          "pipe_centres_um": {
+            "items": {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array"
+            },
+            "type": "array",
+            "title": "Pipe Centres Um"
+          },
+          "slack_um": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Slack Um"
+          },
+          "checks": {
+            "$ref": "#/components/schemas/PackingChecks"
+          },
+          "reasons": {
+            "items": {
+              "$ref": "#/components/schemas/PackingReason"
+            },
+            "type": "array",
+            "title": "Reasons"
+          },
+          "group_id": {
+            "type": "string",
+            "title": "Group Id"
+          },
+          "bundle_count": {
+            "type": "integer",
+            "title": "Bundle Count"
+          },
+          "bundle_packings": {
+            "items": {
+              "$ref": "#/components/schemas/BundlePacking"
+            },
+            "type": "array",
+            "title": "Bundle Packings"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "basis",
+          "layout",
+          "columns",
+          "rows",
+          "od_um",
+          "wall_thickness_um",
+          "length_um",
+          "section_um",
+          "pieces_source",
+          "pieces_placed",
+          "max_fit",
+          "pipe_centres_um",
+          "slack_um",
+          "checks",
+          "reasons",
+          "group_id",
+          "bundle_count",
+          "bundle_packings"
+        ],
+        "title": "GroupPacking"
+      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -2020,6 +2374,114 @@
           "freeboard_mm"
         ],
         "title": "OperatingCase"
+      },
+      "PackingChecks": {
+        "properties": {
+          "count": {
+            "type": "boolean",
+            "title": "Count"
+          },
+          "od_fit": {
+            "type": "boolean",
+            "title": "Od Fit"
+          },
+          "envelope_fit": {
+            "type": "boolean",
+            "title": "Envelope Fit"
+          },
+          "slack_loose": {
+            "type": "boolean",
+            "title": "Slack Loose"
+          }
+        },
+        "type": "object",
+        "required": [
+          "count",
+          "od_fit",
+          "envelope_fit",
+          "slack_loose"
+        ],
+        "title": "PackingChecks"
+      },
+      "PackingReason": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "enum": [
+              "OD_MISSING",
+              "OD_EXCEEDS_SECTION",
+              "PIECES_DO_NOT_FIT",
+              "INPUT_INVALID",
+              "ENVELOPE_LOOSE",
+              "SOURCE_WARNING"
+            ],
+            "title": "Code"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "PackingReason"
+      },
+      "PackingStats": {
+        "properties": {
+          "group_count": {
+            "type": "integer",
+            "title": "Group Count"
+          },
+          "groups_by_status": {
+            "$ref": "#/components/schemas/PackingStatusCounts"
+          },
+          "bundle_count": {
+            "type": "integer",
+            "title": "Bundle Count"
+          },
+          "bundles_by_status": {
+            "$ref": "#/components/schemas/PackingStatusCounts"
+          },
+          "derived_pieces": {
+            "type": "integer",
+            "title": "Derived Pieces"
+          },
+          "source_pieces": {
+            "type": "integer",
+            "title": "Source Pieces"
+          }
+        },
+        "type": "object",
+        "required": [
+          "group_count",
+          "groups_by_status",
+          "bundle_count",
+          "bundles_by_status",
+          "derived_pieces",
+          "source_pieces"
+        ],
+        "title": "PackingStats"
+      },
+      "PackingStatusCounts": {
+        "properties": {
+          "DETAILED": {
+            "type": "integer",
+            "title": "Detailed"
+          },
+          "ENVELOPE_ONLY": {
+            "type": "integer",
+            "title": "Envelope Only"
+          }
+        },
+        "type": "object",
+        "required": [
+          "DETAILED",
+          "ENVELOPE_ONLY"
+        ],
+        "title": "PackingStatusCounts"
       },
       "ParentConflict": {
         "properties": {
@@ -3454,6 +3916,47 @@
           "revisions"
         ],
         "title": "RevisionList"
+      },
+      "RevisionPacking": {
+        "properties": {
+          "dataset_id": {
+            "type": "string",
+            "title": "Dataset Id"
+          },
+          "revision_id": {
+            "type": "string",
+            "title": "Revision Id"
+          },
+          "content_sha256": {
+            "type": "string",
+            "title": "Content Sha256"
+          },
+          "basis": {
+            "type": "string",
+            "const": "DERIVED",
+            "title": "Basis"
+          },
+          "groups": {
+            "items": {
+              "$ref": "#/components/schemas/GroupPacking"
+            },
+            "type": "array",
+            "title": "Groups"
+          },
+          "stats": {
+            "$ref": "#/components/schemas/PackingStats"
+          }
+        },
+        "type": "object",
+        "required": [
+          "dataset_id",
+          "revision_id",
+          "content_sha256",
+          "basis",
+          "groups",
+          "stats"
+        ],
+        "title": "RevisionPacking"
       },
       "RevisionPreview": {
         "properties": {
