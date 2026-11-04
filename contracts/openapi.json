@@ -152,6 +152,319 @@
         }
       }
     },
+    "/api/vessel-profiles": {
+      "get": {
+        "summary": "List Vessel Profiles",
+        "operationId": "list_vessel_profiles_api_vessel_profiles_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ProfileListItem"
+                  },
+                  "type": "array",
+                  "title": "Response List Vessel Profiles Api Vessel Profiles Get"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Vessel Profile",
+        "operationId": "create_vessel_profile_api_vessel_profiles_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "profile": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "title": "Profile"
+                  },
+                  "glb_base64": {
+                    "type": "string",
+                    "title": "Glb Base64"
+                  }
+                },
+                "type": "object",
+                "required": [
+                  "profile",
+                  "glb_base64"
+                ],
+                "title": "VesselProfileUpload",
+                "description": "Body of POST /api/vessel-profiles[/preview]: the profile object and the GLB as strict base64."
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileListItem"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Hồ sơ hoặc GLB không hợp lệ hay kiểm landmark FAIL; chưa ghi gì.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfilePreview"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Thân yêu cầu vượt 28 MiB."
+          },
+          "409": {
+            "description": "Trùng built-in, sai version kế tiếp hoặc đầy kho; chưa ghi gì.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileVersionConflict"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/vessel-profiles/preview": {
+      "post": {
+        "summary": "Preview Vessel Profile",
+        "operationId": "preview_vessel_profile_api_vessel_profiles_preview_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "profile": {
+                    "additionalProperties": true,
+                    "type": "object",
+                    "title": "Profile"
+                  },
+                  "glb_base64": {
+                    "type": "string",
+                    "title": "Glb Base64"
+                  }
+                },
+                "type": "object",
+                "required": [
+                  "profile",
+                  "glb_base64"
+                ],
+                "title": "VesselProfileUpload",
+                "description": "Body of POST /api/vessel-profiles[/preview]: the profile object and the GLB as strict base64."
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfilePreview"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Hồ sơ hoặc GLB không hợp lệ hay kiểm landmark FAIL; chưa ghi gì.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfilePreview"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Thân yêu cầu vượt 28 MiB."
+          }
+        }
+      }
+    },
+    "/api/vessel-profiles/{profile_id}/{version}": {
+      "get": {
+        "summary": "Vessel Profile Detail",
+        "operationId": "vessel_profile_detail_api_vessel_profiles__profile_id___version__get",
+        "parameters": [
+          {
+            "name": "profile_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Profile Id"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Version"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileDetail"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Hồ sơ không qua kiểm toàn vẹn."
+          },
+          "404": {
+            "description": "Không tìm thấy hồ sơ tàu."
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/vessel-profiles/{profile_id}/{version}/model": {
+      "get": {
+        "summary": "Vessel Profile Model",
+        "operationId": "vessel_profile_model_api_vessel_profiles__profile_id___version__model_get",
+        "parameters": [
+          {
+            "name": "profile_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Profile Id"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Version"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "model/gltf-binary": {}
+            }
+          },
+          "400": {
+            "description": "Hồ sơ không qua kiểm toàn vẹn."
+          },
+          "404": {
+            "description": "Không tìm thấy hồ sơ tàu."
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/vessel-profiles/{profile_id}/{version}/cases/{case_id}/plan": {
+      "get": {
+        "summary": "Vessel Profile Case Plan",
+        "operationId": "vessel_profile_case_plan_api_vessel_profiles__profile_id___version__cases__case_id__plan_get",
+        "parameters": [
+          {
+            "name": "profile_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Profile Id"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Version"
+            }
+          },
+          {
+            "name": "case_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Case Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Evaluation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Hồ sơ không qua kiểm toàn vẹn."
+          },
+          "404": {
+            "description": "Không tìm thấy hồ sơ hoặc trường hợp tải."
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/import/csv/preview": {
       "post": {
         "summary": "Csv Preview",
@@ -736,6 +1049,67 @@
         ],
         "title": "BatchError"
       },
+      "BoundsCheck": {
+        "properties": {
+          "glb_min_m": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Glb Min M"
+          },
+          "glb_max_m": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Glb Max M"
+          },
+          "scene_min_m": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Scene Min M"
+          },
+          "scene_max_m": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Scene Max M"
+          },
+          "hold_min_m": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Hold Min M"
+          },
+          "hold_max_m": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Hold Max M"
+          },
+          "contains_hold": {
+            "type": "boolean",
+            "title": "Contains Hold"
+          }
+        },
+        "type": "object",
+        "required": [
+          "glb_min_m",
+          "glb_max_m",
+          "scene_min_m",
+          "scene_max_m",
+          "hold_min_m",
+          "hold_max_m",
+          "contains_hold"
+        ],
+        "title": "BoundsCheck"
+      },
       "BundleOverrideInfo": {
         "properties": {
           "bundle_id": {
@@ -1264,6 +1638,27 @@
         ],
         "title": "Dimensions"
       },
+      "DraftMarker": {
+        "properties": {
+          "case_id": {
+            "type": "string",
+            "title": "Case Id"
+          },
+          "center_m": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Center M"
+          }
+        },
+        "type": "object",
+        "required": [
+          "case_id",
+          "center_m"
+        ],
+        "title": "DraftMarker"
+      },
       "DroppedPlacement": {
         "properties": {
           "unit_id": {
@@ -1508,6 +1903,56 @@
           "message"
         ],
         "title": "Issue"
+      },
+      "LandmarkCheck": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "glb_m": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Glb M"
+          },
+          "expected_hold_mm": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "title": "Expected Hold Mm"
+          },
+          "actual_hold_mm": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Actual Hold Mm"
+          },
+          "error_mm": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Error Mm"
+          },
+          "pass": {
+            "type": "boolean",
+            "title": "Pass"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "glb_m",
+          "expected_hold_mm",
+          "actual_hold_mm",
+          "error_mm",
+          "pass"
+        ],
+        "title": "LandmarkCheck"
       },
       "Limits": {
         "properties": {
@@ -2057,6 +2502,399 @@
           "unplaced"
         ],
         "title": "PlannerPreview"
+      },
+      "ProfileDetail": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "builtin": {
+            "type": "boolean",
+            "title": "Builtin"
+          },
+          "status": {
+            "type": "string",
+            "const": "AVAILABLE",
+            "title": "Status"
+          },
+          "profile": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Profile"
+          },
+          "profile_sha256": {
+            "type": "string",
+            "title": "Profile Sha256"
+          },
+          "glb_sha256": {
+            "type": "string",
+            "title": "Glb Sha256"
+          },
+          "asset_url": {
+            "type": "string",
+            "title": "Asset Url"
+          },
+          "verification": {
+            "$ref": "#/components/schemas/Verification"
+          },
+          "viewer": {
+            "$ref": "#/components/schemas/ViewerBlock"
+          },
+          "created_utc": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created Utc"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "version",
+          "builtin",
+          "status",
+          "profile",
+          "profile_sha256",
+          "glb_sha256",
+          "asset_url",
+          "verification",
+          "viewer",
+          "created_utc"
+        ],
+        "title": "ProfileDetail"
+      },
+      "ProfileError": {
+        "properties": {
+          "field": {
+            "type": "string",
+            "title": "Field"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "field",
+          "message"
+        ],
+        "title": "ProfileError"
+      },
+      "ProfileFieldStatus": {
+        "properties": {
+          "dimensions_m": {
+            "type": "string",
+            "title": "Dimensions M"
+          },
+          "hold": {
+            "type": "string",
+            "title": "Hold"
+          },
+          "cases": {
+            "type": "string",
+            "title": "Cases"
+          }
+        },
+        "type": "object",
+        "required": [
+          "dimensions_m",
+          "hold",
+          "cases"
+        ],
+        "title": "ProfileFieldStatus"
+      },
+      "ProfileListItem": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "version": {
+            "type": "integer",
+            "title": "Version"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "registration": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Registration"
+          },
+          "builtin": {
+            "type": "boolean",
+            "title": "Builtin"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "AVAILABLE",
+              "UNAVAILABLE"
+            ],
+            "title": "Status"
+          },
+          "integrity_error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Integrity Error"
+          },
+          "verification": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "PASS",
+                  "FAIL"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Verification"
+          },
+          "field_status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProfileFieldStatus"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source_documents": {
+            "items": {
+              "$ref": "#/components/schemas/ProfileSourceDocument"
+            },
+            "type": "array",
+            "title": "Source Documents"
+          },
+          "profile_sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile Sha256"
+          },
+          "created_utc": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created Utc"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "version",
+          "name",
+          "registration",
+          "builtin",
+          "status",
+          "integrity_error",
+          "verification",
+          "field_status",
+          "source_documents",
+          "profile_sha256",
+          "created_utc"
+        ],
+        "title": "ProfileListItem"
+      },
+      "ProfilePreview": {
+        "properties": {
+          "valid": {
+            "type": "boolean",
+            "title": "Valid"
+          },
+          "errors": {
+            "items": {
+              "$ref": "#/components/schemas/ProfileError"
+            },
+            "type": "array",
+            "title": "Errors"
+          },
+          "verification": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Verification"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "profile_sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile Sha256"
+          },
+          "glb_sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Glb Sha256"
+          },
+          "glb_bytes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Glb Bytes"
+          },
+          "id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Id"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          },
+          "latest_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Version"
+          },
+          "version_ok": {
+            "type": "boolean",
+            "title": "Version Ok"
+          },
+          "builtin_conflict": {
+            "type": "boolean",
+            "title": "Builtin Conflict"
+          }
+        },
+        "type": "object",
+        "required": [
+          "valid",
+          "errors",
+          "verification",
+          "profile_sha256",
+          "glb_sha256",
+          "glb_bytes",
+          "id",
+          "version",
+          "latest_version",
+          "version_ok",
+          "builtin_conflict"
+        ],
+        "title": "ProfilePreview"
+      },
+      "ProfileSourceDocument": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sha256"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title"
+        ],
+        "title": "ProfileSourceDocument"
+      },
+      "ProfileVersionConflict": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "latest_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Version"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "title": "ProfileVersionConflict"
       },
       "Provenance": {
         "properties": {
@@ -3121,6 +3959,40 @@
         ],
         "title": "ValidationError"
       },
+      "Verification": {
+        "properties": {
+          "result": {
+            "type": "string",
+            "enum": [
+              "PASS",
+              "FAIL"
+            ],
+            "title": "Result"
+          },
+          "tolerance_mm": {
+            "type": "integer",
+            "title": "Tolerance Mm"
+          },
+          "landmarks": {
+            "items": {
+              "$ref": "#/components/schemas/LandmarkCheck"
+            },
+            "type": "array",
+            "title": "Landmarks"
+          },
+          "bounds": {
+            "$ref": "#/components/schemas/BoundsCheck"
+          }
+        },
+        "type": "object",
+        "required": [
+          "result",
+          "tolerance_mm",
+          "landmarks",
+          "bounds"
+        ],
+        "title": "Verification"
+      },
       "VesselProfile": {
         "properties": {
           "id": {
@@ -3217,16 +4089,37 @@
         "properties": {
           "vessel_id": {
             "type": "string",
-            "const": "VINAFCO268",
+            "pattern": "^[A-Z0-9][A-Z0-9-]{1,31}$",
             "title": "Vessel Id"
           },
           "case_id": {
             "type": "string",
-            "enum": [
-              "VR-SI",
-              "VR-SII"
-            ],
+            "pattern": "^[A-Z0-9][A-Z0-9-]{0,31}$",
             "title": "Case Id"
+          },
+          "profile_version": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile Version"
+          },
+          "profile_sha256": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile Sha256"
           }
         },
         "additionalProperties": false,
@@ -3236,6 +4129,51 @@
           "case_id"
         ],
         "title": "VesselReference"
+      },
+      "ViewerBlock": {
+        "properties": {
+          "translation_m": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Translation M"
+          },
+          "yaw_deg": {
+            "type": "integer",
+            "title": "Yaw Deg"
+          },
+          "hull_box_m": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "title": "Hull Box M"
+          },
+          "draft_markers": {
+            "items": {
+              "$ref": "#/components/schemas/DraftMarker"
+            },
+            "type": "array",
+            "title": "Draft Markers"
+          },
+          "hull_mesh_names": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Hull Mesh Names"
+          }
+        },
+        "type": "object",
+        "required": [
+          "translation_m",
+          "yaw_deg",
+          "hull_box_m",
+          "draft_markers",
+          "hull_mesh_names"
+        ],
+        "title": "ViewerBlock"
       }
     }
   }

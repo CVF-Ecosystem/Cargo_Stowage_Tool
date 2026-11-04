@@ -2,12 +2,13 @@ import { mkdirSync } from "node:fs";
 import { resolve } from "node:path";
 import { expect, test } from "../../apps/frontend/node_modules/@playwright/test";
 import type { APIRequestContext, Locator, Page } from "../../apps/frontend/node_modules/@playwright/test";
+import { evidenceDir as baseEvidenceDir } from "./evidence";
 
 // SUP-02A S2-06: revision panel flow (desktop + 390px) on the shared suite database.
 // The suite shares one server/DB across spec files, so every revision id is derived from the live latest id.
 
 const DATASET = "BALTIMORE-PIPE-V1-1";
-const evidenceDir = resolve(__dirname, "../../docs/reviews/SCST_SUP_02A_EVIDENCE/browser");
+const evidenceDir = baseEvidenceDir();
 const shotPage = async (page: Page, name: string) => {
   mkdirSync(evidenceDir, { recursive: true });
   await page.screenshot({ path: resolve(evidenceDir, name), fullPage: true });

@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Request
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, Response
 from pydantic import BaseModel
 from typing import Literal
 
@@ -10,6 +10,10 @@ from ..domain.model import Evaluation, Plan
 from ..domain.rules import evaluate
 from ..adapters import plan_binding
 from ..adapters.plan_binding import PlanBindingError
+from ..adapters import vessel_profile_service as profiles
+from ..adapters.vessel_profile_store import ProfileUnavailable
+from .vessel_profile_models import (ProfileDetail, ProfileListItem, ProfilePreview, ProfileVersionConflict,
+                                    VesselProfileUpload)
 
 router = APIRouter(prefix="/api")
 
@@ -112,13 +116,82 @@ def vessel_model():
 def vessel_plan(case_id: str):
     if case_id not in CASES:
         raise HTTPException(404, "Unknown operating case")
-    payload = demo_plan().model_dump()
-    hold = PROFILE['hold']
-    payload.update(source='MIXED_REFERENCE', vessel={'vessel_id': PROFILE['id'], 'case_id': case_id},
-                   hold={k: hold[k] for k in ('id', 'name', 'length_mm', 'width_mm', 'height_mm')})
-    payload['limits']['certificate_cargo_limit_g'] = CASES[case_id]['cargo_mass_g']
-    payload['limits']['voyage_cargo_limit_g'] = CASES[case_id]['cargo_mass_g']
-    return evaluate(Plan.model_validate(payload))
+    return profiles.case_plan(PROFILE['id'], 1, case_id)
+
+
+_UPLOAD_BODY = {"required": True, "content": {"application/json": {"schema": VesselProfileUpload.model_json_schema()}}}
+_REJECTED_UPLOAD = {400: {"model": ProfilePreview, "description": "Hồ sơ hoặc GLB không hợp lệ hay kiểm landmark FAIL; chưa ghi gì."},
+                    413: {"description": "Thân yêu cầu vượt 28 MiB."}}
+
+
+def _profile_error(exc: Exception) -> HTTPException:
+    if isinstance(exc, ProfileUnavailable):
+        return HTTPException(400, {"message": str(exc)})
+    if isinstance(exc, profiles.ServiceError):
+        return HTTPException(exc.status, exc.detail)
+    return HTTPException(404, str(exc))
+
+
+async def _upload_body(request: Request) -> bytes:
+    """Read the body for the upload endpoints, refusing more than 28 MiB before (and while) reading it."""
+    declared = request.headers.get("content-length", "")
+    if declared.isdigit() and int(declared) > profiles.MAX_BODY_BYTES:
+        raise HTTPException(413, {"message": "Thân yêu cầu quá lớn.", "errors": profiles.body_size_errors(int(declared))})
+    chunks, size = [], 0
+    async for chunk in request.stream():
+        size += len(chunk)
+        if size > profiles.MAX_BODY_BYTES:
+            raise HTTPException(413, {"message": "Thân yêu cầu quá lớn.", "errors": profiles.body_size_errors(size)})
+        chunks.append(chunk)
+    return b"".join(chunks)
+
+
+@router.get("/vessel-profiles", response_model=list[ProfileListItem])
+def list_vessel_profiles():
+    return profiles.list_profiles()
+
+
+@router.post("/vessel-profiles/preview", response_model=ProfilePreview, openapi_extra={"requestBody": _UPLOAD_BODY},
+             responses=_REJECTED_UPLOAD)
+async def preview_vessel_profile(request: Request):
+    return profiles.preview(await _upload_body(request))
+
+
+@router.post("/vessel-profiles", response_model=ProfileListItem, openapi_extra={"requestBody": _UPLOAD_BODY},
+             responses={**_REJECTED_UPLOAD, 409: {"model": ProfileVersionConflict, "description": "Trùng built-in, sai version kế tiếp hoặc đầy kho; chưa ghi gì."}})
+async def create_vessel_profile(request: Request):
+    try:
+        return profiles.create(await _upload_body(request))
+    except profiles.ServiceError as exc:
+        raise _profile_error(exc)
+
+
+@router.get("/vessel-profiles/{profile_id}/{version}", response_model=ProfileDetail,
+            responses={400: {"description": "Hồ sơ không qua kiểm toàn vẹn."}, 404: {"description": "Không tìm thấy hồ sơ tàu."}})
+def vessel_profile_detail(profile_id: str, version: int):
+    try:
+        return profiles.detail(profile_id, version)
+    except (LookupError, ProfileUnavailable) as exc:
+        raise _profile_error(exc)
+
+
+@router.get("/vessel-profiles/{profile_id}/{version}/model", response_class=Response,
+            responses={200: {"content": {"model/gltf-binary": {}}}, 400: {"description": "Hồ sơ không qua kiểm toàn vẹn."},
+                       404: {"description": "Không tìm thấy hồ sơ tàu."}})
+def vessel_profile_model(profile_id: str, version: int):
+    try:
+        return Response(profiles.model_bytes(profile_id, version), media_type="model/gltf-binary")
+    except (LookupError, ProfileUnavailable) as exc:
+        raise _profile_error(exc)
+
+
+@router.get("/vessel-profiles/{profile_id}/{version}/cases/{case_id}/plan", response_model=Evaluation,
+            responses={400: {"description": "Hồ sơ không qua kiểm toàn vẹn."}, 404: {"description": "Không tìm thấy hồ sơ hoặc trường hợp tải."}})
+def vessel_profile_case_plan(profile_id: str, version: int, case_id: str):
+    try:
+        return profiles.case_plan(profile_id, version, case_id)
+    except (LookupError, ProfileUnavailable, PlanBindingError) as exc:
+        raise _profile_error(exc)
 
 
 from ..adapters.csv_import import CsvRequest, CsvPreview, preview
