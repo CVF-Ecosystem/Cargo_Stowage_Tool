@@ -65,13 +65,13 @@ Script: 20 `ADD_GROUP` revisions through the API, 5 saved v2 plans pinned to R00
 |---|---|
 | `python -m pip install -r requirements-dev.txt` | ok |
 | `python -m pytest -q` (baseline) | 650 passed |
-| `python -m pytest -q` (final) | BACKEND_FINAL |
+| `python -m pytest -q` (final) | 679 passed (650 baseline unchanged + 29 new) |
 | `python tooling/export_contract.py`; `npm ci`; `npm run contract`; `npm run build` | ok; contract diff = the one added field; build ok (pre-existing chunk-size warning) |
 | `npx playwright test -c playwright.local.config.ts harden01` | 2 passed |
-| `npx playwright test -c playwright.local.config.ts` (full suite) | BROWSER_FULL |
-| `git status` after browser runs | GIT_STATUS |
+| `npx playwright test -c playwright.local.config.ts` (full suite) | first run 9 failed / 43 passed (cause: the first `harden01` spec mutated the shared suite DB, see Failed attempts); after isolation, without UTF-8 locale 51 passed / 1 failed (`m2d.spec.ts:157` download name "download" — the known Linux-locale issue recorded in the M2d worker return); with `LANG=C.UTF-8` **52 passed** (50 existing + 2 new) |
+| `git status` after browser runs | clean; no file under `docs/reviews/` changed |
 | `python tooling/integration_check_pre_m2d.py .` | 29/29 PASS |
-| `PYTHONDONTWRITEBYTECODE=1 python scripts/cvf_gates/cvf_downstream_gate_runner.py run --phase worker-return` | GATE_RESULT |
+| `PYTHONDONTWRITEBYTECODE=1 python scripts/cvf_gates/cvf_downstream_gate_runner.py run --phase worker-return` | `RESULT: PASS phase=worker-return mandatoryControls=7 failed=0` (run on a clean tree at 9c47068; ROLE/APPL NOT_APPLICABLE_WITH_REASON: no candidate in worktree scope) |
 
 Browser runs used an untracked, `.git/info/exclude`d `apps/frontend/playwright.local.config.ts` that imports the committed config and overrides only the webServer command (Linux `python -m uvicorn`), a temp `SCST_DATA_DIR`, and the chromium `executablePath` `/opt/pw-browsers/chromium`. Screenshots go to the temp evidence dir (`tests/browser/evidence.ts`), never `docs/reviews/`.
 
@@ -86,7 +86,7 @@ Browser runs used an untracked, `.git/info/exclude`d `apps/frontend/playwright.l
 | H1/H2 frontend | subagent | Haiku, high | default model |
 | Browser spec | subagent | Haiku, high | default model |
 
-Lead review changes to subagent output: renamed the rebase pager buttons to avoid duplicate accessible names with the cargo table pager; replaced a failing page-growth assertion in the browser spec (a criterion the lead's brief had invented, not in the SPEC) by a recorded measurement (see Limitations).
+Lead review changes to subagent output: renamed the rebase pager buttons to avoid duplicate accessible names with the cargo table pager; moved the browser spec onto its own isolated backend; replaced a failing page-growth assertion in the browser spec (a criterion the lead's brief had invented, not in the SPEC) by a recorded measurement (see Limitations).
 
 ## Failed attempts
 
@@ -94,6 +94,7 @@ Lead review changes to subagent output: renamed the rebase pager buttons to avoi
 - Frontend subagent first stopped at INTAKE because the CVF core is absent; resumed after the lead pointed at the work order's instruction to note it and continue.
 - Browser spec first required whole-page growth < 1500 px after rebase; measured 6545 px (see Limitations), so it became a measurement.
 - H3 first version deep-copied all views on every hit (slow, see timing).
+- The first `harden01.spec.ts` created its revisions on the shared suite server; because it sorts before `m2b`/`m2c`/`m2d`/`pipe-list`/`sup01`, the removed bundles made 9 of their tests fail (they expect the full 1076-bundle list). Fix: the spec now starts its own backend (same app, port 8767, own temporary `SCST_DATA_DIR`; on Windows it uses `.venv/Scripts/python.exe` like the committed config, elsewhere `SCST_PYTHON` or `python`). Root should confirm this on Windows.
 
 ## DA01–DA05 application
 
@@ -108,6 +109,8 @@ Lead review changes to subagent output: renamed the rebase pager buttons to avoi
 - **Windows branch of H5 is only simulated here** (fake `msvcrt`); the real two-process test on Windows is for root to run on the Windows machine (`python -m pytest tests/backend/test_harden01_profile_lock.py`).
 - **Whole-page height after rebase** still grows ~6545 px at desktop with 130 drops: the dropped panel itself is 412 px, but the rebase opens the comparison section (+~4467 px, 50 tall rows) and the cargo table switches to the candidate (+~1942 px, 50 rows/page). Those sections are outside H1 (H6 "Thay đổi giao diện khác"); root may open a follow-up if wanted. The old dropped `<ul>` already had a 14rem scroll box, so H1 mainly adds paging/filter/totals rather than height savings.
 - The rebase panel shows revision-level bundle counts («Bó thêm 0, bỏ 60, đổi 160») next to placement counts («bỏ 130 vị trí») in one line — unchanged pre-existing text, noted for DA03 review.
+- `harden01.spec.ts` spawns its own uvicorn on port 8767; that port must be free.
+- Linux browser runs need a UTF-8 locale for the pre-existing M2d download-name check.
 - CVF core not present in the cloud; no doctor/core gates run beyond the project runner.
 - No CVF-governance claim; no provider calls.
 
