@@ -5,11 +5,11 @@ Status: ACTIVE
 ## Current State
 
 - Project: Cargo_Stowage_Tool
-- Current mode: BUILD
-- Active phase: BUILD
-- Active role: ORCHESTRATOR
-- Next allowed move: Claude Cloud implements M2d on a non-main branch and opens a pull request; Claude local independently reviews before any merge, which the owner decides. M3 needs owner hold measurements and real cases.
-- Parked operator checkpoint: M3/M4/M5, observations O2-O9, OD-only recheck policy, hook/hosted-CI adoption, live-provider governance proof, measured hold and 16 source envelopes, business acceptance and merge decision remain owned future work.
+- Current mode: FREEZE
+- Active phase: FREEZE
+- Active role: SESSION_SYNC_STEWARD
+- Next allowed move: M2d technical handoff; root dispatches HARDEN-01 (data-independent hardening of observations) under owner-delegated authority. M3 needs owner hold measurements and real cases. Owner: open the sample XLSX in Excel.
+- Parked operator checkpoint: M3/M4/M5, observations O3/O7-O11, OD-only recheck policy, real-Excel check of the M2d XLSX, hook/hosted-CI adoption, live-provider governance proof, measured hold and 16 source envelopes and business acceptance remain owned future work.
 - Active tranche: M2D
 
 ## Intake, design and authority acknowledgment
@@ -51,3 +51,7 @@ Root then becomes REVIEWER and:
 - reports to the owner, who decides the merge.
 
 No business acceptance or M3 is implied.
+
+## Review and closure
+
+On 05-11 (~02:50 +7) the owner delegated merge authority to root as orchestrator and asked it to coordinate the next session. Claude Cloud returned PR #4 (head fb23c7d). Root REVIEWER reran on Windows in a separate worktree: backend 650/650, browser 50/50 including page.pdf(), integration check 29/29, gates PASS, strict XLSX structural check 0 issues; real Excel could not be driven through COM in this session, recorded as an owner action. Review docs/reviews/SCST_M2D_REVIEW.md accepts M2D-01..05; root merged PR #4 as 690fcc7, closed the work order and synced state, status and memory.

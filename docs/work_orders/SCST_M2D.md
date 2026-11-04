@@ -1,6 +1,6 @@
 # SCST — M2d plan report export work order
 
-Status: ACTIVE
+Status: CLOSED
 dispatchKind: INITIAL
 Owner: project-orchestrator
 Risk: R2
@@ -67,9 +67,9 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "decision": "Accept scoped technical flow, repair within authority or return to worker; M3 needs owner data and its own SPEC"
     }
   },
-  "phase": "DISPATCH",
+  "phase": "REVIEW",
   "action": {
-    "kind": "IMPLEMENT",
+    "kind": "REVIEW",
     "selected": [
       "M2D-01",
       "M2D-02",
@@ -77,8 +77,8 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "M2D-04",
       "M2D-05"
     ],
-    "owner": "Claude Cloud implementation worker on a branch; root independent review and commit steward",
-    "output": "M2d source, tests, regenerated contract and docs/reviews/SCST_M2D_EVIDENCE/worker-return.md in a pull request",
+    "owner": "Root independent implementation reviewer",
+    "output": "docs/reviews/SCST_M2D_REVIEW.md",
     "budgetMinutes": 240,
     "stop": "Five criteria evidenced or budget/scope boundary without reset",
     "next": "Root independent review; M3 requires owner hold measurements, real cases and its own SPEC/WORK_ORDER"
@@ -86,50 +86,80 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
   "rows": [
     {
       "id": "M2D-01",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for M2D-01",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; real-Excel open and business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_M2D_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2D_REVIEW.md",
+          "sha256": "380dd80120d1f88102d105a726bcf7d72c9fafa4ff291993ba9a01990585f530"
+        }
+      ]
     },
     {
       "id": "M2D-02",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for M2D-02",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; real-Excel open and business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_M2D_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2D_REVIEW.md",
+          "sha256": "380dd80120d1f88102d105a726bcf7d72c9fafa4ff291993ba9a01990585f530"
+        }
+      ]
     },
     {
       "id": "M2D-03",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for M2D-03",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; real-Excel open and business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_M2D_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2D_REVIEW.md",
+          "sha256": "380dd80120d1f88102d105a726bcf7d72c9fafa4ff291993ba9a01990585f530"
+        }
+      ]
     },
     {
       "id": "M2D-04",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for M2D-04",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; real-Excel open and business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_M2D_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2D_REVIEW.md",
+          "sha256": "380dd80120d1f88102d105a726bcf7d72c9fafa4ff291993ba9a01990585f530"
+        }
+      ]
     },
     {
       "id": "M2D-05",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for M2D-05",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; real-Excel open and business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_M2D_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M2D_REVIEW.md",
+          "sha256": "380dd80120d1f88102d105a726bcf7d72c9fafa4ff291993ba9a01990585f530"
+        }
+      ]
     }
   ],
   "supportingWork": [],
   "conclusions": {
-    "tranche": "PENDING",
-    "trancheSummary": "Five M2d criteria admitted for bounded implementation only",
-    "trancheEvidence": [],
+    "tranche": "COMPLETE",
+    "trancheSummary": "M2d five technical criteria and usable local flow reviewed; merged as 690fcc7 under owner-delegated merge authority",
+    "trancheEvidence": [
+      {
+        "path": "docs/reviews/SCST_M2D_REVIEW.md",
+        "sha256": "380dd80120d1f88102d105a726bcf7d72c9fafa4ff291993ba9a01990585f530"
+      }
+    ],
     "product": "PENDING",
     "productSummary": "M3 multi-layer and real cases, measured hold/packing, live governance proof and business acceptance remain separate owned work",
     "acceptance": [],
@@ -137,3 +167,7 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
   }
 }
 ```
+
+## Technical disposition
+
+Root independent implementation review accepts M2D-01..05 on PR #4 (head fb23c7d), merged to main as 690fcc7 under the owner-delegated merge authority of 05-11. Local Windows rerun: backend 650/650, contract identical, build OK, full browser 50/50 including page.pdf(), clean git status, integration check 29/29, worker-return and reviewer-fast PASS, strict XLSX structural check 0 issues. Not opened in real Excel (COM unusable in the non-interactive session); owner action recorded. No business acceptance or M3.

@@ -5,11 +5,13 @@ Memory class: POINTER_RECORD
 ## Current Truth
 
 - Contract: cvf.downstreamContinuityContract@1.0.0
-- Current mode: BUILD
-- Active phase: BUILD
+- Current mode: FREEZE
+- Active phase: FREEZE
 - Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_M2D.md
 
 ## Current operator boundary
+
+M2d closed 05-11-2026: root reviewed PR #4 (docs/reviews/SCST_M2D_REVIEW.md) and merged it as 690fcc7 under owner-delegated authority. M2 flow complete technically. Next: M2d technical handoff; root dispatches HARDEN-01 (data-independent hardening of observations) under owner-delegated authority. M3 needs owner hold measurements and real cases. Owner: open the sample XLSX in Excel.
 
 M2d dispatched 05-11-2026 after the pre-M2d integration check passed 29/29 (docs/reviews/SCST_INTEGRATION_CHECK_PRE_M2D.md): shared report model, stdlib XLSX and printable A4 page. SPEC docs/specs/SCST_M2D.md, order docs/work_orders/SCST_M2D.md, handoff CVF_SESSION/handoffs/AGENT_HANDOFF_M2D.md. Claude Cloud implements on a branch; root reviews; owner decides the merge.
 

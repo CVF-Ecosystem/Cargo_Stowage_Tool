@@ -1,12 +1,10 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "M2D_DISPATCHED_TO_CLOUD_WORKER_SUP_01_02A_02B_03_VERIFIED_BUSINESS_ACCEPTANCE_PENDING",
-  "currentPhase": "BUILD",
+  "overallStatus": "M2_COMPLETE_TECHNICAL_M2D_VERIFIED_MERGED_BUSINESS_ACCEPTANCE_PENDING",
+  "currentPhase": "FREEZE",
   "completedCapabilities": [],
-  "activeWorkOrders": [
-    "docs/work_orders/SCST_M2D.md"
-  ],
+  "activeWorkOrders": [],
   "knownLimitations": [
     "PIPE-LIST actual31group/1076bundle source integration technically verified; source mass/dimensions calculated/provisional.16bundles need envelope verification; measuredhold/business/operational acceptance pending.",
     "Raw drafts/history/baseline/comparison remain in browser tab until explicit immutable SQLite Plan snapshot save. Baseline/comparison do not persist through reload; select saved A again. Latest100 snapshots, no overwrite/delete/backup/restore UI.",
@@ -16,7 +14,8 @@
     "TestClient/httpx deprecation and Three.js chunk warning remain; separate parent-container maintenance condition unchanged.",
     "UI rounds detail to kg/cm and totals to tonnes2decimals; only explicitly edited fields change underlying exact data. Display rounding is not a geometry/mass tolerance. CSV exchange keeps header mm/kg.",
     "SUP-01, SUP-02A, SUP-02B and SUP-03 verified technically (merges 569c7ee, de2aeea, 164dce5): cargo revisions and recheck, generic vessel profiles with landmark/GLB-bounds verified transform and append-only user profiles, derived RECT/HEX packing with envelope fallback and three cargo views. Packing is DERIVED, not measured; OD-only revisions do not mark plans for recheck. Only one real vessel (VINAFCO268, hold ESTIMATED). Integration check before M2d is next; observations O2-O9 are owned follow-up.",
-    "CVF development adoption is being prioritized at DESIGN: kit/local document receipts exist, automatic local pre-commit hook absent in current inspection; hosted CI and live agent-governance proof not established by this task. No full adoption claim."
+    "CVF development adoption is being prioritized at DESIGN: kit/local document receipts exist, automatic local pre-commit hook absent in current inspection; hosted CI and live agent-governance proof not established by this task. No full adoption claim.",
+    "M2d report export verified technically (merge 690fcc7): shared report model, stdlib XLSX and printable A4 page (PDF via browser print). The XLSX passed strict structural checks but was not yet opened in real Excel."
   ],
   "evidence": [
     "docs/project/PROJECT_STATUS.md",
@@ -83,7 +82,9 @@
     "docs/reviews/SCST_SUP_03_REVIEW.md",
     "docs/reviews/SCST_INTEGRATION_CHECK_PRE_M2D.md",
     "docs/specs/SCST_M2D.md",
-    "docs/work_orders/SCST_M2D.md"
+    "docs/work_orders/SCST_M2D.md",
+    "docs/reviews/SCST_M2D_EVIDENCE/worker-return.md",
+    "docs/reviews/SCST_M2D_REVIEW.md"
   ],
   "updatedAt": "2026-11-05",
   "x_verifiedMilestones": [
@@ -152,6 +153,12 @@
       "technicalStatus": "VERIFIED",
       "businessAcceptance": "PENDING",
       "evidence": "docs/reviews/SCST_SUP_03_REVIEW.md"
+    },
+    {
+      "id": "M2d",
+      "technicalStatus": "VERIFIED",
+      "businessAcceptance": "PENDING",
+      "evidence": "docs/reviews/SCST_M2D_REVIEW.md"
     }
   ],
   "x_plannedSupplement": {
