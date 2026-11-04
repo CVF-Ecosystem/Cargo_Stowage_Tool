@@ -1,0 +1,31 @@
+PASS 1.1 pipe list in VINAFCO hold keeps vessel/case and 1076 units — units=1076 vessel={'vessel_id': 'VINAFCO268', 'case_id': 'VR-SII'}
+PASS 1.2 planner places bundles; unplaced reasons cover the rest — placed=167 unplaced=909 placed_mass_kg=217741.190
+PASS 1.3 planner respects the VR-SII certificate limit — limit_kg=3517500
+PASS 1.4 save/reopen A: same units, placements, vessel
+PASS 2.1 preview and create agree (hash, bundle count, mass) — BALTIMORE-PIPE-V1-1@R0001 bundles=1075 mass_kg=1124640.864
+PASS 2.2 preview lists exactly the removed and overridden bundle — removed=['PIPE-R002-B0160'] changed=1
+PASS 3.1 A is NEEDS_RECHECK pinned to R0000 — {"added_count": 0, "removed_count": 1, "changed_count": 1, "placed_affected_count": 1}
+PASS 3.2 removed=1, changed=1 (override only; OD restatement changes no unit), placed_affected = placed AND {override, removed} — placed_affected=1 expected=1
+PASS 4.1 packing stats bundle_count = plan units = revision bundles — 1075
+PASS 4.2 packing source_pieces = sum of unit pieces — 21184
+PASS 4.3 every unit pieces equals its group packing pieces_source — mismatch=0
+PASS 4.4 ENVELOPE_ONLY groups are exactly the source dimension-warning groups — ['Sheet1-R022', 'Sheet1-R031', 'Sheet1-R032']
+PASS 4.5 v2 plan in VINAFCO hold keeps vessel and pins R1
+PASS 5.1 rebase drops exactly the removed/mass-changed placed bundles, keeps the rest — dropped={'PIPE-R013-B0001': 'CHANGED'} kept=166
+PASS 5.2 candidate keeps vessel/case and limits, pins R1
+PASS 5.3 candidate validates through the shared binding
+PASS 5.4 compare A vs candidate reports the mass delta of the dropped placements — {"manifest_mass_g": -910166, "placed_mass_g": -694800, "remaining_capacity_g": 694800, "placed_count": -1, "unplaced_count": 0, "excluded_count": 0, "issue_count": 0}
+PASS 5.5 B is CURRENT at R1; A still NEEDS_RECHECK
+PASS 5.6 snapshot A bytes unchanged after revision, recheck and rebase
+PASS 5.7 reopen B equals saved candidate
+PASS 6.1 user profile preview PASS then created
+PASS 6.2 revision plan-preview keeps the user vessel reference
+PASS 6.3 planner respects the user-case limit — placed=15 mass_kg=14941.370
+PASS 6.4 user-ship plan reopens unchanged and is CURRENT
+PASS 6.5 tampered vessel sha refused at validate and save
+PASS 7.1 after R2 both B and U are NEEDS_RECHECK with 1 placed bundle affected in U — U=1
+PASS 7.2 rebase of U keeps the user vessel and drops only the resized bundle
+PASS 7.3 resized bundle gets its own packing entry in R2 — own=1
+PASS 8.1 source data unchanged byte-for-byte
+
+RESULT: 29/29 PASS
