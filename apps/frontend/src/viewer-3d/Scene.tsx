@@ -34,6 +34,8 @@ type Props = {
   cargoView?: CargoView;
   packing?: PackingIndex | null;
   onPackingInfo?: (info: PackingInfo) => void;
+  captureSerial?: number;
+  onCapture?: (dataUrl: string) => void;
 };
 type Item = { mesh: T.Mesh; signature: string };
 type State = {
@@ -777,5 +779,13 @@ export default function Scene(props: Props) {
       s.fit(props.cameraCommand.kind);
     }
   }, [props.cameraCommand]);
+  useEffect(() => {
+    const s = state.current;
+    const serial = props.captureSerial ?? 0;
+    if (!s || serial <= 0) return;
+    // Render and read in the same task: the drawing buffer is not preserved between frames.
+    s.render();
+    props.onCapture?.(s.renderer.domElement.toDataURL("image/png"));
+  }, [props.captureSerial]);
   return <div ref={host} className="scene" />;
 }

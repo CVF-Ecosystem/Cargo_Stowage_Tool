@@ -418,6 +418,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/snapshots/{snapshot_id}/report": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Snapshot Report */
+        get: operations["snapshot_report_api_snapshots__snapshot_id__report_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/snapshots/{snapshot_id}/report.xlsx": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Snapshot Report Xlsx */
+        get: operations["snapshot_report_xlsx_api_snapshots__snapshot_id__report_xlsx_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -1073,6 +1107,29 @@ export interface components {
             /** Placements */
             placements: components["schemas"]["Placement"][];
         };
+        /** PlanReport */
+        PlanReport: {
+            /**
+             * Schema Version
+             * @constant
+             */
+            schema_version: "scst.plan-report.v1";
+            /** Report Sha256 */
+            report_sha256: string;
+            header: components["schemas"]["ReportHeader"];
+            vessel: components["schemas"]["ReportVessel"] | null;
+            hold: components["schemas"]["ReportHold"];
+            limits: components["schemas"]["ReportLimits"];
+            cargo: components["schemas"]["ReportCargo"];
+            totals: components["schemas"]["ReportTotals"];
+            /** Units */
+            units: components["schemas"]["ReportUnit"][];
+            /** Unplaced */
+            unplaced: components["schemas"]["ReportUnplaced"][];
+            issues: components["schemas"]["ReportIssues"];
+            /** Notices */
+            notices: components["schemas"]["ReportNotice"][];
+        };
         /** PlannerPreview */
         PlannerPreview: {
             /**
@@ -1279,6 +1336,295 @@ export interface components {
              * @constant
              */
             status: "ESTIMATED";
+        };
+        /** ReportCargo */
+        ReportCargo: {
+            /** Plan Source */
+            plan_source: string;
+            /** Cargo Source */
+            cargo_source: string | null;
+            /** Dataset Id */
+            dataset_id: string | null;
+            /** Revision Id */
+            revision_id: string | null;
+            /** Content Sha256 */
+            content_sha256: string | null;
+            recheck: components["schemas"]["ReportRecheck"];
+        };
+        /** ReportFieldStatus */
+        ReportFieldStatus: {
+            /**
+             * Dimensions M
+             * @enum {string}
+             */
+            dimensions_m: "ESTIMATED" | "SOURCED" | "MEASURED";
+            /**
+             * Hold
+             * @enum {string}
+             */
+            hold: "ESTIMATED" | "SOURCED" | "MEASURED";
+            /**
+             * Cases
+             * @enum {string}
+             */
+            cases: "ESTIMATED" | "SOURCED" | "MEASURED";
+        };
+        /** ReportHeader */
+        ReportHeader: {
+            /** Plan Name */
+            plan_name: string;
+            /** Snapshot Id */
+            snapshot_id: string;
+            /** Saved Utc */
+            saved_utc: string;
+            /**
+             * Schema Version
+             * @constant
+             */
+            schema_version: "scst.saved-plan.v1";
+            /** Contract Version */
+            contract_version: string;
+            /** Plan Sha256 */
+            plan_sha256: string;
+            /** Generated Utc */
+            generated_utc: string;
+        };
+        /** ReportHold */
+        ReportHold: {
+            /** Id */
+            id: string;
+            /** Name */
+            name: string;
+            /** Length Mm */
+            length_mm: number;
+            /** Width Mm */
+            width_mm: number;
+            /** Height Mm */
+            height_mm: number;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "ESTIMATED" | "SOURCED" | "MEASURED" | "UNCONFIRMED";
+        };
+        /** ReportIssue */
+        ReportIssue: {
+            /** Code */
+            code: string;
+            /** Unit Ids */
+            unit_ids: string[];
+            /** Message */
+            message: string;
+        };
+        /** ReportIssues */
+        ReportIssues: {
+            /** Status */
+            status: string;
+            /** Basic Checks Passed */
+            basic_checks_passed: boolean;
+            /** Total Issues */
+            total_issues: number;
+            /** Issues Truncated */
+            issues_truncated: boolean;
+            /** Items */
+            items: components["schemas"]["ReportIssue"][];
+            /** Unchecked */
+            unchecked: string[];
+            /**
+             * Operational Eligible
+             * @constant
+             */
+            operational_eligible: false;
+        };
+        /** ReportLimits */
+        ReportLimits: {
+            /** Certificate Cargo Limit G */
+            certificate_cargo_limit_g: number;
+            /** Voyage Cargo Limit G */
+            voyage_cargo_limit_g: number;
+            /** Cargo Onboard G */
+            cargo_onboard_g: number;
+            /** Available Capacity G */
+            available_capacity_g: number;
+        };
+        /** ReportNotice */
+        ReportNotice: {
+            /** Code */
+            code: string;
+            /** Message */
+            message: string;
+        };
+        /** ReportPacking */
+        ReportPacking: {
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "DETAILED" | "ENVELOPE_ONLY";
+            /** Layout */
+            layout: ("RECT" | "HEX") | null;
+            /** Columns */
+            columns: number;
+            /** Rows */
+            rows: number;
+            /** Pieces Placed */
+            pieces_placed: number;
+            /** Pieces Source */
+            pieces_source: number;
+            /** Reason Codes */
+            reason_codes: string[];
+        };
+        /** ReportPlacement */
+        ReportPlacement: {
+            /** X Mm */
+            x_mm: number;
+            /** Y Mm */
+            y_mm: number;
+            /** Z Mm */
+            z_mm: number;
+            /** Layer */
+            layer: number;
+            /** Yaw Deg */
+            yaw_deg: number;
+        };
+        /** ReportRecheck */
+        ReportRecheck: {
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "CURRENT" | "NEEDS_RECHECK" | "NOT_APPLICABLE" | "REVISION_UNAVAILABLE";
+            /** Latest Revision Id */
+            latest_revision_id: string | null;
+            /** Added */
+            added: number;
+            /** Removed */
+            removed: number;
+            /** Changed */
+            changed: number;
+            /** Placed Affected */
+            placed_affected: number;
+        };
+        /** ReportTotals */
+        ReportTotals: {
+            /** Unit Count */
+            unit_count: number;
+            /** Placed Count */
+            placed_count: number;
+            /** Unplaced Count */
+            unplaced_count: number;
+            /** Excluded Count */
+            excluded_count: number;
+            /** Manifest Mass G */
+            manifest_mass_g: number;
+            /** Placed Mass G */
+            placed_mass_g: number;
+            /** Remaining Capacity G */
+            remaining_capacity_g: number;
+            /** Manifest Envelope Volume Mm3 */
+            manifest_envelope_volume_mm3: number | null;
+            /** Placed Envelope Volume Mm3 */
+            placed_envelope_volume_mm3: number | null;
+            /** Manifest Envelope Volume Mm3 Text */
+            manifest_envelope_volume_mm3_text: string;
+            /** Placed Envelope Volume Mm3 Text */
+            placed_envelope_volume_mm3_text: string;
+        };
+        /** ReportUnit */
+        ReportUnit: {
+            /** Id */
+            id: string;
+            /** Name */
+            name: string;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "BAR_BUNDLE" | "PIPE_BUNDLE";
+            /**
+             * Requirement
+             * @enum {string}
+             */
+            requirement: "required" | "optional" | "excluded";
+            /** Group Id */
+            group_id: string | null;
+            /** Source Row */
+            source_row: number | null;
+            /** Revision Id */
+            revision_id: string | null;
+            /** Confirmation */
+            confirmation: string | null;
+            /** Dimension Warning */
+            dimension_warning: boolean;
+            /** Length Mm */
+            length_mm: number;
+            /** Width Mm */
+            width_mm: number;
+            /** Height Mm */
+            height_mm: number;
+            /** Dimensions Um */
+            dimensions_um: [
+                number,
+                number,
+                number
+            ];
+            /** Mass G */
+            mass_g: number;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "PLACED" | "UNPLACED" | "EXCLUDED";
+            placement: components["schemas"]["ReportPlacement"] | null;
+            packing: components["schemas"]["ReportPacking"] | null;
+        };
+        /** ReportUnplaced */
+        ReportUnplaced: {
+            /** Id */
+            id: string;
+            /** Name */
+            name: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "UNPLACED" | "EXCLUDED";
+            /**
+             * Requirement
+             * @enum {string}
+             */
+            requirement: "required" | "optional" | "excluded";
+            /** Mass G */
+            mass_g: number;
+            /** Dimensions Um */
+            dimensions_um: [
+                number,
+                number,
+                number
+            ];
+            /**
+             * Reason Code
+             * @enum {string}
+             */
+            reason_code: "EXCLUDED" | "REQUIRED_UNPLACED" | "OPTIONAL_UNPLACED";
+            /** Reason */
+            reason: string;
+        };
+        /** ReportVessel */
+        ReportVessel: {
+            /** Vessel Id */
+            vessel_id: string;
+            /** Name */
+            name: string;
+            /** Case Id */
+            case_id: string;
+            /** Builtin */
+            builtin: boolean;
+            /** Profile Version */
+            profile_version: number | null;
+            /** Profile Sha256 */
+            profile_sha256: string | null;
+            field_status: components["schemas"]["ReportFieldStatus"];
         };
         /** RevisionDetail */
         RevisionDetail: {
@@ -2579,6 +2925,110 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
                 };
+            };
+        };
+    };
+    snapshot_report_api_snapshots__snapshot_id__report_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                snapshot_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlanReport"];
+                };
+            };
+            /** @description ID, dữ liệu, phiên bản hoặc revision ghim/profile tàu không qua kiểm toàn vẹn. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Không tìm thấy phương án đã lưu. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+            /** @description Báo cáo không khớp đối soát nội bộ; không xuất báo cáo. */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    snapshot_report_xlsx_api_snapshots__snapshot_id__report_xlsx_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                snapshot_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": unknown;
+                };
+            };
+            /** @description ID, dữ liệu, phiên bản hoặc revision ghim/profile tàu không qua kiểm toàn vẹn. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Không tìm thấy phương án đã lưu. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+            /** @description Báo cáo không khớp đối soát nội bộ; không xuất báo cáo. */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
         };
     };

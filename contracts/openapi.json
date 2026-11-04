@@ -1068,6 +1068,98 @@
           }
         }
       }
+    },
+    "/api/snapshots/{snapshot_id}/report": {
+      "get": {
+        "summary": "Snapshot Report",
+        "operationId": "snapshot_report_api_snapshots__snapshot_id__report_get",
+        "parameters": [
+          {
+            "name": "snapshot_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Snapshot Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanReport"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "ID, dữ liệu, phiên bản hoặc revision ghim/profile tàu không qua kiểm toàn vẹn."
+          },
+          "404": {
+            "description": "Không tìm thấy phương án đã lưu."
+          },
+          "500": {
+            "description": "Báo cáo không khớp đối soát nội bộ; không xuất báo cáo."
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/snapshots/{snapshot_id}/report.xlsx": {
+      "get": {
+        "summary": "Snapshot Report Xlsx",
+        "operationId": "snapshot_report_xlsx_api_snapshots__snapshot_id__report_xlsx_get",
+        "parameters": [
+          {
+            "name": "snapshot_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Snapshot Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {}
+            }
+          },
+          "400": {
+            "description": "ID, dữ liệu, phiên bản hoặc revision ghim/profile tàu không qua kiểm toàn vẹn."
+          },
+          "404": {
+            "description": "Không tìm thấy phương án đã lưu."
+          },
+          "500": {
+            "description": "Báo cáo không khớp đối soát nội bộ; không xuất báo cáo."
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -2939,6 +3031,85 @@
         ],
         "title": "Plan"
       },
+      "PlanReport": {
+        "properties": {
+          "schema_version": {
+            "type": "string",
+            "const": "scst.plan-report.v1",
+            "title": "Schema Version"
+          },
+          "report_sha256": {
+            "type": "string",
+            "title": "Report Sha256"
+          },
+          "header": {
+            "$ref": "#/components/schemas/ReportHeader"
+          },
+          "vessel": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ReportVessel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "hold": {
+            "$ref": "#/components/schemas/ReportHold"
+          },
+          "limits": {
+            "$ref": "#/components/schemas/ReportLimits"
+          },
+          "cargo": {
+            "$ref": "#/components/schemas/ReportCargo"
+          },
+          "totals": {
+            "$ref": "#/components/schemas/ReportTotals"
+          },
+          "units": {
+            "items": {
+              "$ref": "#/components/schemas/ReportUnit"
+            },
+            "type": "array",
+            "title": "Units"
+          },
+          "unplaced": {
+            "items": {
+              "$ref": "#/components/schemas/ReportUnplaced"
+            },
+            "type": "array",
+            "title": "Unplaced"
+          },
+          "issues": {
+            "$ref": "#/components/schemas/ReportIssues"
+          },
+          "notices": {
+            "items": {
+              "$ref": "#/components/schemas/ReportNotice"
+            },
+            "type": "array",
+            "title": "Notices"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "schema_version",
+          "report_sha256",
+          "header",
+          "vessel",
+          "hold",
+          "limits",
+          "cargo",
+          "totals",
+          "units",
+          "unplaced",
+          "issues",
+          "notices"
+        ],
+        "title": "PlanReport"
+      },
       "PlannerPreview": {
         "properties": {
           "algorithm": {
@@ -3590,6 +3761,847 @@
           "status"
         ],
         "title": "ReferenceHold"
+      },
+      "ReportCargo": {
+        "properties": {
+          "plan_source": {
+            "type": "string",
+            "title": "Plan Source"
+          },
+          "cargo_source": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cargo Source"
+          },
+          "dataset_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dataset Id"
+          },
+          "revision_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revision Id"
+          },
+          "content_sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Content Sha256"
+          },
+          "recheck": {
+            "$ref": "#/components/schemas/ReportRecheck"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "plan_source",
+          "cargo_source",
+          "dataset_id",
+          "revision_id",
+          "content_sha256",
+          "recheck"
+        ],
+        "title": "ReportCargo"
+      },
+      "ReportFieldStatus": {
+        "properties": {
+          "dimensions_m": {
+            "type": "string",
+            "enum": [
+              "ESTIMATED",
+              "SOURCED",
+              "MEASURED"
+            ],
+            "title": "Dimensions M"
+          },
+          "hold": {
+            "type": "string",
+            "enum": [
+              "ESTIMATED",
+              "SOURCED",
+              "MEASURED"
+            ],
+            "title": "Hold"
+          },
+          "cases": {
+            "type": "string",
+            "enum": [
+              "ESTIMATED",
+              "SOURCED",
+              "MEASURED"
+            ],
+            "title": "Cases"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "dimensions_m",
+          "hold",
+          "cases"
+        ],
+        "title": "ReportFieldStatus"
+      },
+      "ReportHeader": {
+        "properties": {
+          "plan_name": {
+            "type": "string",
+            "title": "Plan Name"
+          },
+          "snapshot_id": {
+            "type": "string",
+            "title": "Snapshot Id"
+          },
+          "saved_utc": {
+            "type": "string",
+            "title": "Saved Utc"
+          },
+          "schema_version": {
+            "type": "string",
+            "const": "scst.saved-plan.v1",
+            "title": "Schema Version"
+          },
+          "contract_version": {
+            "type": "string",
+            "title": "Contract Version"
+          },
+          "plan_sha256": {
+            "type": "string",
+            "title": "Plan Sha256"
+          },
+          "generated_utc": {
+            "type": "string",
+            "title": "Generated Utc"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "plan_name",
+          "snapshot_id",
+          "saved_utc",
+          "schema_version",
+          "contract_version",
+          "plan_sha256",
+          "generated_utc"
+        ],
+        "title": "ReportHeader"
+      },
+      "ReportHold": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "length_mm": {
+            "type": "integer",
+            "title": "Length Mm"
+          },
+          "width_mm": {
+            "type": "integer",
+            "title": "Width Mm"
+          },
+          "height_mm": {
+            "type": "integer",
+            "title": "Height Mm"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ESTIMATED",
+              "SOURCED",
+              "MEASURED",
+              "UNCONFIRMED"
+            ],
+            "title": "Status"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "length_mm",
+          "width_mm",
+          "height_mm",
+          "status"
+        ],
+        "title": "ReportHold"
+      },
+      "ReportIssue": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "unit_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Unit Ids"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "unit_ids",
+          "message"
+        ],
+        "title": "ReportIssue"
+      },
+      "ReportIssues": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "basic_checks_passed": {
+            "type": "boolean",
+            "title": "Basic Checks Passed"
+          },
+          "total_issues": {
+            "type": "integer",
+            "title": "Total Issues"
+          },
+          "issues_truncated": {
+            "type": "boolean",
+            "title": "Issues Truncated"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ReportIssue"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "unchecked": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Unchecked"
+          },
+          "operational_eligible": {
+            "type": "boolean",
+            "const": false,
+            "title": "Operational Eligible"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "basic_checks_passed",
+          "total_issues",
+          "issues_truncated",
+          "items",
+          "unchecked",
+          "operational_eligible"
+        ],
+        "title": "ReportIssues"
+      },
+      "ReportLimits": {
+        "properties": {
+          "certificate_cargo_limit_g": {
+            "type": "integer",
+            "title": "Certificate Cargo Limit G"
+          },
+          "voyage_cargo_limit_g": {
+            "type": "integer",
+            "title": "Voyage Cargo Limit G"
+          },
+          "cargo_onboard_g": {
+            "type": "integer",
+            "title": "Cargo Onboard G"
+          },
+          "available_capacity_g": {
+            "type": "integer",
+            "title": "Available Capacity G"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "certificate_cargo_limit_g",
+          "voyage_cargo_limit_g",
+          "cargo_onboard_g",
+          "available_capacity_g"
+        ],
+        "title": "ReportLimits"
+      },
+      "ReportNotice": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "ReportNotice"
+      },
+      "ReportPacking": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "DETAILED",
+              "ENVELOPE_ONLY"
+            ],
+            "title": "Status"
+          },
+          "layout": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "RECT",
+                  "HEX"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Layout"
+          },
+          "columns": {
+            "type": "integer",
+            "title": "Columns"
+          },
+          "rows": {
+            "type": "integer",
+            "title": "Rows"
+          },
+          "pieces_placed": {
+            "type": "integer",
+            "title": "Pieces Placed"
+          },
+          "pieces_source": {
+            "type": "integer",
+            "title": "Pieces Source"
+          },
+          "reason_codes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Reason Codes"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "layout",
+          "columns",
+          "rows",
+          "pieces_placed",
+          "pieces_source",
+          "reason_codes"
+        ],
+        "title": "ReportPacking"
+      },
+      "ReportPlacement": {
+        "properties": {
+          "x_mm": {
+            "type": "integer",
+            "title": "X Mm"
+          },
+          "y_mm": {
+            "type": "integer",
+            "title": "Y Mm"
+          },
+          "z_mm": {
+            "type": "integer",
+            "title": "Z Mm"
+          },
+          "layer": {
+            "type": "integer",
+            "title": "Layer"
+          },
+          "yaw_deg": {
+            "type": "integer",
+            "title": "Yaw Deg"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "x_mm",
+          "y_mm",
+          "z_mm",
+          "layer",
+          "yaw_deg"
+        ],
+        "title": "ReportPlacement"
+      },
+      "ReportRecheck": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "CURRENT",
+              "NEEDS_RECHECK",
+              "NOT_APPLICABLE",
+              "REVISION_UNAVAILABLE"
+            ],
+            "title": "Status"
+          },
+          "latest_revision_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest Revision Id"
+          },
+          "added": {
+            "type": "integer",
+            "title": "Added"
+          },
+          "removed": {
+            "type": "integer",
+            "title": "Removed"
+          },
+          "changed": {
+            "type": "integer",
+            "title": "Changed"
+          },
+          "placed_affected": {
+            "type": "integer",
+            "title": "Placed Affected"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "latest_revision_id",
+          "added",
+          "removed",
+          "changed",
+          "placed_affected"
+        ],
+        "title": "ReportRecheck"
+      },
+      "ReportTotals": {
+        "properties": {
+          "unit_count": {
+            "type": "integer",
+            "title": "Unit Count"
+          },
+          "placed_count": {
+            "type": "integer",
+            "title": "Placed Count"
+          },
+          "unplaced_count": {
+            "type": "integer",
+            "title": "Unplaced Count"
+          },
+          "excluded_count": {
+            "type": "integer",
+            "title": "Excluded Count"
+          },
+          "manifest_mass_g": {
+            "type": "integer",
+            "title": "Manifest Mass G"
+          },
+          "placed_mass_g": {
+            "type": "integer",
+            "title": "Placed Mass G"
+          },
+          "remaining_capacity_g": {
+            "type": "integer",
+            "title": "Remaining Capacity G"
+          },
+          "manifest_envelope_volume_mm3": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Manifest Envelope Volume Mm3"
+          },
+          "placed_envelope_volume_mm3": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Placed Envelope Volume Mm3"
+          },
+          "manifest_envelope_volume_mm3_text": {
+            "type": "string",
+            "title": "Manifest Envelope Volume Mm3 Text"
+          },
+          "placed_envelope_volume_mm3_text": {
+            "type": "string",
+            "title": "Placed Envelope Volume Mm3 Text"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "unit_count",
+          "placed_count",
+          "unplaced_count",
+          "excluded_count",
+          "manifest_mass_g",
+          "placed_mass_g",
+          "remaining_capacity_g",
+          "manifest_envelope_volume_mm3",
+          "placed_envelope_volume_mm3",
+          "manifest_envelope_volume_mm3_text",
+          "placed_envelope_volume_mm3_text"
+        ],
+        "title": "ReportTotals"
+      },
+      "ReportUnit": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "BAR_BUNDLE",
+              "PIPE_BUNDLE"
+            ],
+            "title": "Kind"
+          },
+          "requirement": {
+            "type": "string",
+            "enum": [
+              "required",
+              "optional",
+              "excluded"
+            ],
+            "title": "Requirement"
+          },
+          "group_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Group Id"
+          },
+          "source_row": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Row"
+          },
+          "revision_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revision Id"
+          },
+          "confirmation": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Confirmation"
+          },
+          "dimension_warning": {
+            "type": "boolean",
+            "title": "Dimension Warning"
+          },
+          "length_mm": {
+            "type": "integer",
+            "title": "Length Mm"
+          },
+          "width_mm": {
+            "type": "integer",
+            "title": "Width Mm"
+          },
+          "height_mm": {
+            "type": "integer",
+            "title": "Height Mm"
+          },
+          "dimensions_um": {
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "type": "array",
+            "maxItems": 3,
+            "minItems": 3,
+            "title": "Dimensions Um"
+          },
+          "mass_g": {
+            "type": "integer",
+            "title": "Mass G"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PLACED",
+              "UNPLACED",
+              "EXCLUDED"
+            ],
+            "title": "Status"
+          },
+          "placement": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ReportPlacement"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "packing": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ReportPacking"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "kind",
+          "requirement",
+          "group_id",
+          "source_row",
+          "revision_id",
+          "confirmation",
+          "dimension_warning",
+          "length_mm",
+          "width_mm",
+          "height_mm",
+          "dimensions_um",
+          "mass_g",
+          "status",
+          "placement",
+          "packing"
+        ],
+        "title": "ReportUnit"
+      },
+      "ReportUnplaced": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "UNPLACED",
+              "EXCLUDED"
+            ],
+            "title": "Status"
+          },
+          "requirement": {
+            "type": "string",
+            "enum": [
+              "required",
+              "optional",
+              "excluded"
+            ],
+            "title": "Requirement"
+          },
+          "mass_g": {
+            "type": "integer",
+            "title": "Mass G"
+          },
+          "dimensions_um": {
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "type": "array",
+            "maxItems": 3,
+            "minItems": 3,
+            "title": "Dimensions Um"
+          },
+          "reason_code": {
+            "type": "string",
+            "enum": [
+              "EXCLUDED",
+              "REQUIRED_UNPLACED",
+              "OPTIONAL_UNPLACED"
+            ],
+            "title": "Reason Code"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "status",
+          "requirement",
+          "mass_g",
+          "dimensions_um",
+          "reason_code",
+          "reason"
+        ],
+        "title": "ReportUnplaced"
+      },
+      "ReportVessel": {
+        "properties": {
+          "vessel_id": {
+            "type": "string",
+            "title": "Vessel Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "case_id": {
+            "type": "string",
+            "title": "Case Id"
+          },
+          "builtin": {
+            "type": "boolean",
+            "title": "Builtin"
+          },
+          "profile_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile Version"
+          },
+          "profile_sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile Sha256"
+          },
+          "field_status": {
+            "$ref": "#/components/schemas/ReportFieldStatus"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "vessel_id",
+          "name",
+          "case_id",
+          "builtin",
+          "profile_version",
+          "profile_sha256",
+          "field_status"
+        ],
+        "title": "ReportVessel"
       },
       "RevisionDetail": {
         "properties": {
