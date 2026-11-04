@@ -1254,3 +1254,20 @@ tbody tr:hover {
 .comparison-panel { overflow-wrap: anywhere; }
 
 .viewer-controls { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.65rem; }
+
+/* SUP-02A: cargo revisions panel and saved-plan recheck status */
+.cargo-revision-panel { overflow-wrap: anywhere; }
+.cargo-revision-panel h3 { margin: 18px 0 6px; font-size: 14px; }
+.revision-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: 0 12px; }
+.revision-change { border: 1px solid #dfe6d8; border-radius: 6px; margin: 12px 0 0; padding: 4px 12px 12px; min-width: 0; }
+.revision-change legend { font-size: 12px; font-weight: 600; padding: 0 6px; color: #56674f; }
+.revision-history, .revision-groups, .saved-status { margin: 8px 0; padding-left: 18px; }
+.revision-history { max-height: 18rem; overflow-y: auto; }
+.revision-history li, .saved-status li { margin: 8px 0; }
+.revision-history li[aria-current="true"], .saved-status li[aria-current="true"] { border-left: 3px solid #56674f; padding-left: 8px; margin-left: -11px; }
+.revision-groups { max-height: 24rem; overflow-y: auto; }
+.cargo-revision-panel .check-row, .m2a-card .check-row { display: flex; align-items: center; gap: 8px; }
+.cargo-revision-panel .check-row input { display: inline-block; width: auto; margin: 0; }
+.recheck-needs_recheck { font-weight: 600; color: #8a4b00; }
+.rebase-dropped { margin-top: 12px; padding: 10px 12px; border: 1px solid #dfe6d8; border-radius: 6px; overflow-wrap: anywhere; }
+.rebase-dropped ul { margin: 6px 0 0; padding-left: 18px; max-height: 14rem; overflow-y: auto; }

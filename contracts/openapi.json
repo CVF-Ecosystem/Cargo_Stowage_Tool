@@ -201,7 +201,7 @@
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/SavedSummary"
+                    "$ref": "#/components/schemas/SnapshotListItem"
                   },
                   "type": "array",
                   "title": "Response List Snapshots Api Snapshots Get"
@@ -418,10 +418,399 @@
           }
         }
       }
+    },
+    "/api/cargo-revisions": {
+      "get": {
+        "summary": "List Cargo Revisions",
+        "operationId": "list_cargo_revisions_api_cargo_revisions_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevisionList"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevisionRejected"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Cargo Revision",
+        "operationId": "create_cargo_revision_api_cargo_revisions_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RevisionDraft"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevisionSummary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Lô cập nhật không hợp lệ hoặc revision không qua kiểm toàn vẹn.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevisionRejected"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Revision cha không còn là mới nhất; chưa ghi gì.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParentConflict"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cargo-revisions/preview": {
+      "post": {
+        "summary": "Preview Cargo Revision",
+        "operationId": "preview_cargo_revision_api_cargo_revisions_preview_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RevisionDraft"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevisionPreview"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Lô cập nhật không hợp lệ hoặc revision không qua kiểm toàn vẹn.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevisionRejected"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cargo-revisions/{revision_id}": {
+      "get": {
+        "summary": "Get Cargo Revision",
+        "operationId": "get_cargo_revision_api_cargo_revisions__revision_id__get",
+        "parameters": [
+          {
+            "name": "revision_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Revision Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevisionDetail"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Lô cập nhật không hợp lệ hoặc revision không qua kiểm toàn vẹn.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevisionRejected"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Không tìm thấy revision."
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cargo-revisions/{revision_id}/plan-preview": {
+      "post": {
+        "summary": "Cargo Revision Plan Preview",
+        "operationId": "cargo_revision_plan_preview_api_cargo_revisions__revision_id__plan_preview_post",
+        "parameters": [
+          {
+            "name": "revision_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Revision Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Plan"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Evaluation"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Lô cập nhật không hợp lệ hoặc revision không qua kiểm toàn vẹn.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevisionRejected"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Không tìm thấy revision."
+          },
+          "422": {
+            "description": "Plan không hợp lệ."
+          }
+        }
+      }
+    },
+    "/api/snapshots/{snapshot_id}/rebase": {
+      "post": {
+        "summary": "Rebase Snapshot",
+        "operationId": "rebase_snapshot_api_snapshots__snapshot_id__rebase_post",
+        "parameters": [
+          {
+            "name": "snapshot_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Snapshot Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RebaseResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Phương án không dùng list ống, dữ liệu lỗi hoặc revision không phục vụ được."
+          },
+          "404": {
+            "description": "Không tìm thấy phương án."
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "BatchError": {
+        "properties": {
+          "index": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Index"
+          },
+          "field": {
+            "type": "string",
+            "title": "Field"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "index",
+          "field",
+          "message"
+        ],
+        "title": "BatchError"
+      },
+      "BundleOverrideInfo": {
+        "properties": {
+          "bundle_id": {
+            "type": "string",
+            "title": "Bundle Id"
+          },
+          "mass_g": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mass G"
+          },
+          "dimensions_um": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "integer"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dimensions Um"
+          },
+          "provenance": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ProvenanceStamp"
+            },
+            "type": "object",
+            "title": "Provenance"
+          }
+        },
+        "type": "object",
+        "required": [
+          "bundle_id",
+          "mass_g",
+          "dimensions_um",
+          "provenance"
+        ],
+        "title": "BundleOverrideInfo"
+      },
+      "CargoRevisionRef": {
+        "properties": {
+          "dataset_id": {
+            "type": "string",
+            "const": "BALTIMORE-PIPE-V1-1",
+            "title": "Dataset Id"
+          },
+          "revision_id": {
+            "type": "string",
+            "pattern": "^BALTIMORE-PIPE-V1-1@R[0-9]{4}$",
+            "title": "Revision Id"
+          },
+          "content_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Content Sha256"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "dataset_id",
+          "revision_id",
+          "content_sha256"
+        ],
+        "title": "CargoRevisionRef"
+      },
       "CargoUnit": {
         "properties": {
           "id": {
@@ -506,9 +895,13 @@
                 "$ref": "#/components/schemas/PipeSourceRef"
               },
               {
+                "$ref": "#/components/schemas/PipeSourceRefV2"
+              },
+              {
                 "type": "null"
               }
-            ]
+            ],
+            "title": "Source Ref"
           }
         },
         "additionalProperties": false,
@@ -524,6 +917,34 @@
           "mass_g"
         ],
         "title": "CargoUnit"
+      },
+      "ChangeSummary": {
+        "properties": {
+          "index": {
+            "type": "integer",
+            "title": "Index"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "target": {
+            "type": "string",
+            "title": "Target"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text"
+          }
+        },
+        "type": "object",
+        "required": [
+          "index",
+          "type",
+          "target",
+          "text"
+        ],
+        "title": "ChangeSummary"
       },
       "CompareDelta": {
         "properties": {
@@ -843,6 +1264,43 @@
         ],
         "title": "Dimensions"
       },
+      "DroppedPlacement": {
+        "properties": {
+          "unit_id": {
+            "type": "string",
+            "title": "Unit Id"
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "REMOVED",
+              "CHANGED"
+            ],
+            "title": "Reason"
+          },
+          "x_mm": {
+            "type": "integer",
+            "title": "X Mm"
+          },
+          "y_mm": {
+            "type": "integer",
+            "title": "Y Mm"
+          },
+          "yaw_deg": {
+            "type": "integer",
+            "title": "Yaw Deg"
+          }
+        },
+        "type": "object",
+        "required": [
+          "unit_id",
+          "reason",
+          "x_mm",
+          "y_mm",
+          "yaw_deg"
+        ],
+        "title": "DroppedPlacement"
+      },
       "Evaluation": {
         "properties": {
           "plan": {
@@ -1118,6 +1576,25 @@
         ],
         "title": "OperatingCase"
       },
+      "ParentConflict": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "latest_revision_id": {
+            "type": "string",
+            "title": "Latest Revision Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message",
+          "latest_revision_id"
+        ],
+        "title": "ParentConflict",
+        "description": "HTTP 409 detail: the draft's parent is no longer the latest revision (nothing was written)."
+      },
       "PipeGroup": {
         "properties": {
           "group_id": {
@@ -1318,6 +1795,80 @@
         ],
         "title": "PipeSourceRef"
       },
+      "PipeSourceRefV2": {
+        "properties": {
+          "dataset_id": {
+            "type": "string",
+            "const": "BALTIMORE-PIPE-V1-1",
+            "title": "Dataset Id"
+          },
+          "workbook_sha256": {
+            "type": "string",
+            "title": "Workbook Sha256"
+          },
+          "sheet": {
+            "type": "string",
+            "title": "Sheet"
+          },
+          "group_id": {
+            "type": "string",
+            "title": "Group Id"
+          },
+          "source_row": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Row"
+          },
+          "bundle_index": {
+            "type": "integer",
+            "title": "Bundle Index"
+          },
+          "pieces": {
+            "type": "integer",
+            "title": "Pieces"
+          },
+          "dimension_warning": {
+            "type": "boolean",
+            "title": "Dimension Warning"
+          },
+          "revision_id": {
+            "type": "string",
+            "pattern": "^BALTIMORE-PIPE-V1-1@R[0-9]{4}$",
+            "title": "Revision Id"
+          },
+          "confirmation": {
+            "type": "string",
+            "enum": [
+              "WORKBOOK",
+              "UNVERIFIED",
+              "CONFIRMED"
+            ],
+            "title": "Confirmation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "dataset_id",
+          "workbook_sha256",
+          "sheet",
+          "group_id",
+          "source_row",
+          "bundle_index",
+          "pieces",
+          "dimension_warning",
+          "revision_id",
+          "confirmation"
+        ],
+        "title": "PipeSourceRefV2",
+        "description": "Revision-derived bundle identity (scst.pipe-list.v2). Kept separate from\nPipeSourceRef so legacy v1 units serialize byte-identically."
+      },
       "Placement": {
         "properties": {
           "unit_id": {
@@ -1384,7 +1935,8 @@
             "enum": [
               "scst.m1.v1",
               "scst.m2a.v1",
-              "scst.pipe-list.v1"
+              "scst.pipe-list.v1",
+              "scst.pipe-list.v2"
             ],
             "title": "Contract Version",
             "default": "scst.m1.v1"
@@ -1437,6 +1989,16 @@
             ],
             "title": "Cargo Dataset"
           },
+          "cargo_revision": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CargoRevisionRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "hold": {
             "$ref": "#/components/schemas/Hold"
           },
@@ -1448,7 +2010,7 @@
               "$ref": "#/components/schemas/CargoUnit"
             },
             "type": "array",
-            "maxItems": 1076,
+            "maxItems": 2000,
             "title": "Units"
           },
           "placements": {
@@ -1456,7 +2018,7 @@
               "$ref": "#/components/schemas/Placement"
             },
             "type": "array",
-            "maxItems": 1076,
+            "maxItems": 2000,
             "title": "Placements"
           }
         },
@@ -1531,6 +2093,103 @@
           "freeboard_note"
         ],
         "title": "Provenance"
+      },
+      "ProvenanceStamp": {
+        "properties": {
+          "revision_id": {
+            "type": "string",
+            "title": "Revision Id"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RevisionSource"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "confirmation": {
+            "type": "string",
+            "enum": [
+              "WORKBOOK",
+              "UNVERIFIED",
+              "CONFIRMED"
+            ],
+            "title": "Confirmation"
+          }
+        },
+        "type": "object",
+        "required": [
+          "revision_id",
+          "source",
+          "confirmation"
+        ],
+        "title": "ProvenanceStamp"
+      },
+      "RebaseResult": {
+        "properties": {
+          "source_revision_id": {
+            "type": "string",
+            "title": "Source Revision Id"
+          },
+          "target_revision_id": {
+            "type": "string",
+            "title": "Target Revision Id"
+          },
+          "candidate": {
+            "$ref": "#/components/schemas/Evaluation"
+          },
+          "kept_placement_count": {
+            "type": "integer",
+            "title": "Kept Placement Count"
+          },
+          "dropped_placements": {
+            "items": {
+              "$ref": "#/components/schemas/DroppedPlacement"
+            },
+            "type": "array",
+            "title": "Dropped Placements"
+          },
+          "added_unit_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Added Unit Ids"
+          },
+          "removed_unit_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Removed Unit Ids"
+          },
+          "changed_unit_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Changed Unit Ids"
+          },
+          "comparison": {
+            "$ref": "#/components/schemas/CompareResult"
+          }
+        },
+        "type": "object",
+        "required": [
+          "source_revision_id",
+          "target_revision_id",
+          "candidate",
+          "kept_placement_count",
+          "dropped_placements",
+          "added_unit_ids",
+          "removed_unit_ids",
+          "changed_unit_ids",
+          "comparison"
+        ],
+        "title": "RebaseResult"
       },
       "ReferenceGeometry": {
         "properties": {
@@ -1632,6 +2291,603 @@
         ],
         "title": "ReferenceHold"
       },
+      "RevisionDetail": {
+        "properties": {
+          "revision_id": {
+            "type": "string",
+            "title": "Revision Id"
+          },
+          "parent_revision_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Revision Id"
+          },
+          "created_utc": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created Utc"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RevisionSource"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "change_count": {
+            "type": "integer",
+            "title": "Change Count"
+          },
+          "content_sha256": {
+            "type": "string",
+            "title": "Content Sha256"
+          },
+          "group_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Group Count"
+          },
+          "bundle_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bundle Count"
+          },
+          "total_mass_g": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Mass G"
+          },
+          "available": {
+            "type": "boolean",
+            "title": "Available",
+            "default": true
+          },
+          "integrity_error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Integrity Error"
+          },
+          "groups": {
+            "items": {
+              "$ref": "#/components/schemas/RevisionGroup"
+            },
+            "type": "array",
+            "title": "Groups"
+          },
+          "changes": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Changes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "revision_id",
+          "parent_revision_id",
+          "created_utc",
+          "source",
+          "change_count",
+          "content_sha256",
+          "group_count",
+          "bundle_count",
+          "total_mass_g",
+          "groups",
+          "changes"
+        ],
+        "title": "RevisionDetail"
+      },
+      "RevisionDraft": {
+        "properties": {
+          "parent_revision_id": {
+            "type": "string",
+            "title": "Parent Revision Id"
+          },
+          "source": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Source"
+          },
+          "changes": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Changes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "parent_revision_id",
+          "source",
+          "changes"
+        ],
+        "title": "RevisionDraft"
+      },
+      "RevisionGroup": {
+        "properties": {
+          "group_id": {
+            "type": "string",
+            "title": "Group Id"
+          },
+          "source_row": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Row"
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "WORKBOOK",
+              "ADDED"
+            ],
+            "title": "Origin"
+          },
+          "bundle_count": {
+            "type": "integer",
+            "title": "Bundle Count"
+          },
+          "pieces_per_bundle": {
+            "type": "integer",
+            "title": "Pieces Per Bundle"
+          },
+          "dimensions_um": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "title": "Dimensions Um"
+          },
+          "mass_g": {
+            "type": "integer",
+            "title": "Mass G"
+          },
+          "outside_diameter_mm": {
+            "type": "string",
+            "title": "Outside Diameter Mm"
+          },
+          "wall_thickness_mm": {
+            "type": "string",
+            "title": "Wall Thickness Mm"
+          },
+          "dimension_warning": {
+            "type": "boolean",
+            "title": "Dimension Warning"
+          },
+          "source_line_t": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Line T"
+          },
+          "source_cbm_m3": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Cbm M3"
+          },
+          "envelope_cbm_m3": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Envelope Cbm M3"
+          },
+          "issue_codes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Issue Codes"
+          },
+          "bundle_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Bundle Ids"
+          },
+          "next_bundle_index": {
+            "type": "integer",
+            "title": "Next Bundle Index"
+          },
+          "provenance": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ProvenanceStamp"
+            },
+            "type": "object",
+            "title": "Provenance"
+          },
+          "overrides": {
+            "items": {
+              "$ref": "#/components/schemas/BundleOverrideInfo"
+            },
+            "type": "array",
+            "title": "Overrides"
+          }
+        },
+        "type": "object",
+        "required": [
+          "group_id",
+          "source_row",
+          "origin",
+          "bundle_count",
+          "pieces_per_bundle",
+          "dimensions_um",
+          "mass_g",
+          "outside_diameter_mm",
+          "wall_thickness_mm",
+          "dimension_warning",
+          "source_line_t",
+          "source_cbm_m3",
+          "envelope_cbm_m3",
+          "issue_codes",
+          "bundle_ids",
+          "next_bundle_index",
+          "provenance",
+          "overrides"
+        ],
+        "title": "RevisionGroup"
+      },
+      "RevisionList": {
+        "properties": {
+          "dataset_id": {
+            "type": "string",
+            "title": "Dataset Id"
+          },
+          "latest_revision_id": {
+            "type": "string",
+            "title": "Latest Revision Id"
+          },
+          "revisions": {
+            "items": {
+              "$ref": "#/components/schemas/RevisionSummary"
+            },
+            "type": "array",
+            "title": "Revisions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "dataset_id",
+          "latest_revision_id",
+          "revisions"
+        ],
+        "title": "RevisionList"
+      },
+      "RevisionPreview": {
+        "properties": {
+          "valid": {
+            "type": "boolean",
+            "title": "Valid"
+          },
+          "errors": {
+            "items": {
+              "$ref": "#/components/schemas/BatchError"
+            },
+            "type": "array",
+            "title": "Errors"
+          },
+          "latest_revision_id": {
+            "type": "string",
+            "title": "Latest Revision Id"
+          },
+          "parent_is_latest": {
+            "type": "boolean",
+            "title": "Parent Is Latest"
+          },
+          "content_sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Content Sha256"
+          },
+          "added_bundle_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Added Bundle Ids"
+          },
+          "removed_bundle_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Removed Bundle Ids"
+          },
+          "changed_bundle_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Changed Bundle Ids"
+          },
+          "change_summaries": {
+            "items": {
+              "$ref": "#/components/schemas/ChangeSummary"
+            },
+            "type": "array",
+            "title": "Change Summaries"
+          },
+          "group_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Group Count"
+          },
+          "bundle_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bundle Count"
+          },
+          "total_mass_g": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Mass G"
+          }
+        },
+        "type": "object",
+        "required": [
+          "valid",
+          "errors",
+          "latest_revision_id",
+          "parent_is_latest",
+          "content_sha256",
+          "added_bundle_ids",
+          "removed_bundle_ids",
+          "changed_bundle_ids",
+          "change_summaries",
+          "group_count",
+          "bundle_count",
+          "total_mass_g"
+        ],
+        "title": "RevisionPreview"
+      },
+      "RevisionRejected": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "errors": {
+            "items": {
+              "$ref": "#/components/schemas/BatchError"
+            },
+            "type": "array",
+            "title": "Errors"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message",
+          "errors"
+        ],
+        "title": "RevisionRejected",
+        "description": "HTTP 400 detail for a draft that cannot be stored."
+      },
+      "RevisionSource": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "title": "Kind"
+          },
+          "reference": {
+            "type": "string",
+            "title": "Reference"
+          },
+          "received_date": {
+            "type": "string",
+            "title": "Received Date"
+          },
+          "note": {
+            "type": "string",
+            "title": "Note"
+          }
+        },
+        "type": "object",
+        "required": [
+          "kind",
+          "reference",
+          "received_date",
+          "note"
+        ],
+        "title": "RevisionSource"
+      },
+      "RevisionSummary": {
+        "properties": {
+          "revision_id": {
+            "type": "string",
+            "title": "Revision Id"
+          },
+          "parent_revision_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Revision Id"
+          },
+          "created_utc": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created Utc"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RevisionSource"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "change_count": {
+            "type": "integer",
+            "title": "Change Count"
+          },
+          "content_sha256": {
+            "type": "string",
+            "title": "Content Sha256"
+          },
+          "group_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Group Count"
+          },
+          "bundle_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bundle Count"
+          },
+          "total_mass_g": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Mass G"
+          },
+          "available": {
+            "type": "boolean",
+            "title": "Available",
+            "default": true
+          },
+          "integrity_error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Integrity Error"
+          }
+        },
+        "type": "object",
+        "required": [
+          "revision_id",
+          "parent_revision_id",
+          "created_utc",
+          "source",
+          "change_count",
+          "content_sha256",
+          "group_count",
+          "bundle_count",
+          "total_mass_g"
+        ],
+        "title": "RevisionSummary"
+      },
       "SaveRequest": {
         "properties": {
           "name": {
@@ -1678,6 +2934,77 @@
           "schema_version"
         ],
         "title": "SavedSummary"
+      },
+      "SnapshotListItem": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "created_utc": {
+            "type": "string",
+            "title": "Created Utc"
+          },
+          "schema_version": {
+            "type": "string",
+            "title": "Schema Version"
+          },
+          "cargo_revision_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cargo Revision Id"
+          },
+          "recheck_status": {
+            "type": "string",
+            "enum": [
+              "CURRENT",
+              "NEEDS_RECHECK",
+              "NOT_APPLICABLE",
+              "REVISION_UNAVAILABLE"
+            ],
+            "title": "Recheck Status"
+          },
+          "added_count": {
+            "type": "integer",
+            "title": "Added Count"
+          },
+          "removed_count": {
+            "type": "integer",
+            "title": "Removed Count"
+          },
+          "changed_count": {
+            "type": "integer",
+            "title": "Changed Count"
+          },
+          "placed_affected_count": {
+            "type": "integer",
+            "title": "Placed Affected Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "created_utc",
+          "schema_version",
+          "cargo_revision_id",
+          "recheck_status",
+          "added_count",
+          "removed_count",
+          "changed_count",
+          "placed_affected_count"
+        ],
+        "title": "SnapshotListItem"
       },
       "Summary": {
         "properties": {

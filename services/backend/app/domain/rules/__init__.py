@@ -9,7 +9,7 @@ def evaluate(plan: Plan) -> Evaluation:
     placed_ids = {p.unit_id for p in plan.placements}
     mass = sum(units[p.unit_id].mass_g for p in plan.placements)
     issues: list[Issue] = []
-    pipe = plan.contract_version == "scst.pipe-list.v1"
+    pipe = plan.contract_version in ("scst.pipe-list.v1", "scst.pipe-list.v2")
     total = 0
     affected = set()
     has_geometry = False

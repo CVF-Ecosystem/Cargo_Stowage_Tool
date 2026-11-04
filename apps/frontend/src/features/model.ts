@@ -64,3 +64,30 @@ export function parseMm(text: string): number {
     throw new Error("Tọa độ ngoài phạm vi ±1.000.000 mm.");
   return value;
 }
+
+// Pipe-list plans: v1 is pinned to R0000 implicitly, v2 carries an explicit cargo_revision.
+export const isPipePlan = (plan: Pick<Plan, "contract_version">) =>
+  plan.contract_version === "scst.pipe-list.v1" || plan.contract_version === "scst.pipe-list.v2";
+
+// Exact centimetre text (up to 4 decimals) -> integer micrometres, via string parsing only (no float drift).
+export function parseCmToUm(text: string): number {
+  const value = text.trim().replace(",", ".");
+  if (!/^\d+(\.\d{1,4})?$/.test(value)) throw new Error("Kích thước cần số dương theo cm, tối đa 4 chữ số thập phân.");
+  const [whole, fraction = ""] = value.split(".");
+  const um = BigInt(whole) * 10000n + BigInt(fraction.padEnd(4, "0"));
+  if (um <= 0n || um > 1_000_000_000n) throw new Error("Kích thước phải lớn hơn 0 và không quá 100.000 cm.");
+  return Number(um);
+}
+// Exact display of micrometres as centimetres (trailing zeros trimmed).
+export const umToCm = (um: number) => {
+  const whole = Math.floor(um / 10000), frac = um % 10000;
+  return frac ? `${whole}.${String(frac).padStart(4, "0").replace(/0+$/, "")}` : String(whole);
+};
+export function displayTime(value: string | null | undefined): string {
+  if (!value) return "—";
+  const d = new Date(value);
+  if (!Number.isFinite(d.getTime())) return "Thời gian không hợp lệ";
+  const p = new Intl.DateTimeFormat("vi-VN", {day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts(d);
+  const get = (name: string) => p.find(x => x.type === name)?.value ?? "";
+  return `${get("day")}-${get("month")}-${get("year")} ${get("hour")}:${get("minute")}`;
+}
