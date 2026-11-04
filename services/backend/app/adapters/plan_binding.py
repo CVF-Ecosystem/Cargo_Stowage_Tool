@@ -4,8 +4,12 @@ Every entry point that receives a Plan calls bind(); legacy contracts never open
 and derivation rules live in domain.cargo_revisions; the append-only rows in adapters.revision_store.
 Nothing in this module writes to snapshots; the only write is revision creation through revision_store.append.
 """
+import copy
+import hashlib
 import json
 import sqlite3
+import threading
+from collections import OrderedDict
 from datetime import datetime, timezone
 
 from ..domain import cargo_revisions as cr
@@ -33,9 +37,55 @@ class RevisionUnavailable(PlanBindingError):
 
 
 # ------------------------------------------------------------------ reading revisions
+# H3 replay cache: in-process LRU of replay results keyed by SHA-256 of the raw DB rows of the replayed prefix. Every
+# request still reads the rows; replay is skipped only on an exact match, so any edit (also a manual one) misses and
+# is replayed and integrity-checked as before. The key covers ALL selected columns, not only revision_id/source/
+# changes/content_sha256: created_utc and parent_revision_id also reach the served view and must not be masked.
+_CACHE_MAX = 8
+_REPLAY_CACHE = OrderedDict()  # key -> ('ok', views) | ('err', revision_id, message); the cached views are never handed out
+_CACHE_LOCK = threading.Lock()
+
+
+def clear_replay_cache():
+    with _CACHE_LOCK:
+        _REPLAY_CACHE.clear()
+
+
+def _replay(rows, records, pick=None, share=False):
+    """cr.replay(REGISTRY, records) memoised on `rows` (the raw rows `records` were decoded from, same order).
+    Returns a private deep copy (callers may mutate) of all views, or only of views[pick]; share=True returns the cached
+    list itself for strictly read-only callers. Re-raises a cached RevisionIntegrityError."""
+    key = hashlib.sha256(json.dumps(rows, ensure_ascii=False, separators=(',', ':'), default=repr).encode()).hexdigest()
+    with _CACHE_LOCK:
+        hit = _REPLAY_CACHE.get(key)
+        if hit is not None:
+            _REPLAY_CACHE.move_to_end(key)
+    if hit is None:
+        try:
+            hit = ('ok', cr.replay(REGISTRY, records))
+        except cr.RevisionIntegrityError as exc:
+            hit = ('err', exc.revision_id, exc.message)
+        with _CACHE_LOCK:
+            _REPLAY_CACHE[key] = hit
+            _REPLAY_CACHE.move_to_end(key)
+            while len(_REPLAY_CACHE) > _CACHE_MAX:
+                _REPLAY_CACHE.popitem(last=False)
+    if hit[0] == 'err':
+        raise cr.RevisionIntegrityError(hit[1], hit[2])
+    return hit[1] if share else copy.deepcopy(hit[1] if pick is None else hit[1][pick])
+
+
+class _Records(list):
+    """Decoded records plus the raw rows they came from (`rows[:n]` is the cache key material of `self[:n]`)."""
+    rows = ()
+
+
 def _records():
     try:
-        return revision_store.read_records(DATASET)
+        rows = revision_store.read_rows(DATASET)
+        records = _Records(revision_store.decode_rows(rows))
+        records.rows = rows
+        return records
     except (sqlite3.Error, OSError, ValueError, TypeError) as exc:
         raise RevisionUnavailable(None, f'Không đọc được dữ liệu revision hàng: {exc}') from exc
 
@@ -47,11 +97,11 @@ def latest_id(records):
 def _view_from(records, seq):
     """View of revision `seq` replaying only records[:seq] (a broken later record does not block it)."""
     if seq == 0:
-        return cr.replay(REGISTRY, [])[0]
+        return _replay([], [], 0)
     if seq > len(records):
         raise LookupError(f'Không tìm thấy revision {cr.revision_id(seq)}.')
     try:
-        return cr.replay(REGISTRY, records[:seq])[seq]
+        return _replay(records.rows[:seq], records[:seq], seq)
     except cr.RevisionIntegrityError as exc:
         raise RevisionUnavailable(cr.revision_id(seq), exc.message) from exc
 
@@ -70,12 +120,13 @@ def latest():
     return _view_from(records, len(records))
 
 
-def servable_views():
-    """-> (records, views): views[k] is the view of Rk for every revision whose replay is intact (longest valid prefix)."""
+def servable_views(share=False):
+    """-> (records, views): views[k] is the view of Rk for every revision whose replay is intact (longest valid prefix).
+    share=True hands out the cached views themselves: read-only use only."""
     records = _records()
     for n in range(len(records), -1, -1):
         try:
-            return records, cr.replay(REGISTRY, records[:n])
+            return records, _replay(records.rows[:n], records[:n], share=share)
         except cr.RevisionIntegrityError:
             continue
     raise AssertionError('unreachable: R0000 always replays')
@@ -106,7 +157,7 @@ def summary_of_record(rec, message):
 
 def list_revisions():
     """-> {dataset_id, latest_revision_id, revisions newest first incl. R0000}; unservable records are flagged."""
-    records, views = servable_views()
+    records, views = servable_views(share=True)  # summary_of_view only reads
     items = [summary_of_view(v) for v in views]
     for rec in records[len(views) - 1:]:
         items.append(summary_of_record(rec, 'Revision này hoặc một revision trước đó không qua được kiểm phát lại; không phục vụ.'))

@@ -28,9 +28,18 @@ def _latest(records):
     return records[-1]['revision_id'] if records else BASE_REVISION_ID
 
 
-def read_records(dataset: str) -> list[dict]:
+def read_rows(dataset: str) -> list[tuple]:
+    """Raw selected columns of every revision row in sequence order (source_json/changes_json undecoded)."""
     with storage.connection() as db:
-        return _decode(db.execute(_SELECT, (dataset,)).fetchall())
+        return [tuple(r) for r in db.execute(_SELECT, (dataset,)).fetchall()]
+
+
+def decode_rows(rows) -> list[dict]:
+    return _decode(rows)
+
+
+def read_records(dataset: str) -> list[dict]:
+    return _decode(read_rows(dataset))
 
 
 def latest_revision_id(dataset: str) -> str:
