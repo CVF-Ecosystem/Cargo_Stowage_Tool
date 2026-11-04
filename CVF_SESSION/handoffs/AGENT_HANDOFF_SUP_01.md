@@ -1,6 +1,6 @@
 # SCST — SUP-01 viewer lifecycle and usability
 
-Status: ACTIVE
+Status: SUPERSEDED
 
 ## Current State
 

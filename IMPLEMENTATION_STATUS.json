@@ -1,10 +1,12 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "SUP_01_TECHNICALLY_VERIFIED_BUSINESS_ACCEPTANCE_PENDING",
-  "currentPhase": "FREEZE",
+  "overallStatus": "SUP_02A_DISPATCHED_TO_CLOUD_WORKER_SUP_01_VERIFIED_BUSINESS_ACCEPTANCE_PENDING",
+  "currentPhase": "BUILD",
   "completedCapabilities": [],
-  "activeWorkOrders": [],
+  "activeWorkOrders": [
+    "docs/work_orders/SCST_SUP_02A.md"
+  ],
   "knownLimitations": [
     "PIPE-LIST actual31group/1076bundle source integration technically verified; source mass/dimensions calculated/provisional.16bundles need envelope verification; measuredhold/business/operational acceptance pending.",
     "Raw drafts/history/baseline/comparison remain in browser tab until explicit immutable SQLite Plan snapshot save. Baseline/comparison do not persist through reload; select saved A again. Latest100 snapshots, no overwrite/delete/backup/restore UI.",
@@ -68,7 +70,7 @@
     "docs/reviews/SCST_CVF_DEV_APPLICATION_RECONCILIATION.md",
     "docs/reviews/SCST_SUP_01_REVIEW.md"
   ],
-  "updatedAt": "2026-11-01",
+  "updatedAt": "2026-11-04",
   "x_verifiedMilestones": [
     {
       "id": "M1",
@@ -128,14 +130,14 @@
       },
       {
         "id": "SUP-02",
-        "implementationStatus": "NOT_STARTED"
+        "implementationStatus": "SUP_02A_DISPATCHED_SUP_02B_NOT_STARTED"
       },
       {
         "id": "SUP-03",
         "implementationStatus": "NOT_STARTED"
       }
     ],
-    "nextSpecification": "SUP-02 when selected",
+    "nextSpecification": "SUP-02A admitted (docs/specs/SCST_SUP_02A.md); SUP-02B vessel/profile contract needs its own SPEC",
     "buildAuthorized": false
   },
   "x_cvfDevelopmentAdoption": {
@@ -160,5 +162,6 @@
     "buildAuthorized": false,
     "nextSpecification": "CVF-DEV for evidenced gaps",
     "continuationReview": "docs/reviews/SCST_CVF_DEV_APPLICATION_RECONCILIATION.md"
-  }
+  },
+  "activeTranche": "SUP-02A"
 }

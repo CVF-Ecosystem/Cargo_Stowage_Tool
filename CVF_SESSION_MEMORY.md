@@ -5,11 +5,13 @@ Memory class: POINTER_RECORD
 ## Current Truth
 
 - Contract: cvf.downstreamContinuityContract@1.0.0
-- Current mode: FREEZE
-- Active phase: FREEZE
-- Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_SUP_01.md
+- Current mode: BUILD
+- Active phase: BUILD
+- Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_SUP_02A.md
 
 ## Current operator boundary
+
+SUP-02A dispatched 04-11-2026: owner made the repository private, local main 573d7fb pushed, implementation assigned to Claude Cloud on a branch with pull-request return; Claude local reviews independently and the owner decides the merge. SPEC docs/specs/SCST_SUP_02A.md, order docs/work_orders/SCST_SUP_02A.md, handoff CVF_SESSION/handoffs/AGENT_HANDOFF_SUP_02A.md. SUP-02B/SUP-03/M2d closed. Earlier SUP-01 text below is history.
 
 Current FREEZE / SESSION_SYNC_STEWARD. Next: SUP-01 technical handoff only; next SUP-02 needs bounded SPEC/WORK_ORDER when selected. Business acceptance and live CVF governance proof remain separate. Parked: SUP-02/03, M2d/M3/M4, hook/hosted-CI adoption and live-provider governance proof remain owned future work; measured hold and16source envelopes/business acceptance stay pending.
 
