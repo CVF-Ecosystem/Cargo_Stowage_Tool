@@ -1,12 +1,10 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "SUP_02A_DISPATCHED_TO_CLOUD_WORKER_SUP_01_VERIFIED_BUSINESS_ACCEPTANCE_PENDING",
-  "currentPhase": "BUILD",
+  "overallStatus": "SUP_02A_VERIFIED_MERGED_SUP_01_VERIFIED_BUSINESS_ACCEPTANCE_PENDING",
+  "currentPhase": "FREEZE",
   "completedCapabilities": [],
-  "activeWorkOrders": [
-    "docs/work_orders/SCST_SUP_02A.md"
-  ],
+  "activeWorkOrders": [],
   "knownLimitations": [
     "PIPE-LIST actual31group/1076bundle source integration technically verified; source mass/dimensions calculated/provisional.16bundles need envelope verification; measuredhold/business/operational acceptance pending.",
     "Raw drafts/history/baseline/comparison remain in browser tab until explicit immutable SQLite Plan snapshot save. Baseline/comparison do not persist through reload; select saved A again. Latest100 snapshots, no overwrite/delete/backup/restore UI.",
@@ -15,7 +13,7 @@
     "Malformed stored timestamps make list unavailable until repaired; app reports error, never silently skips/resets DB. Good records remain accessible by ID.",
     "TestClient/httpx deprecation and Three.js chunk warning remain; separate parent-container maintenance condition unchanged.",
     "UI rounds detail to kg/cm and totals to tonnes2decimals; only explicitly edited fields change underlying exact data. Display rounding is not a geometry/mass tolerance. CSV exchange keeps header mm/kg.",
-    "SUP-01 viewer verified technically; SUP-02 evolving cargo/profile revisions and SUP-03 detailed packing remain NOT_STARTED. Current fixed PIPE-LIST source is unchanged until a bounded new contract is implemented.",
+    "SUP-01 and SUP-02A verified technically: cargo revisions with provenance, revision-pinned scst.pipe-list.v2 plans and NEEDS_RECHECK/rebase (merge 569c7ee). Baltimore source stays byte-identical as R0000. SUP-02B vessel/profile contract and SUP-03 detailed packing remain NOT_STARTED; review observations O1-O5 (SUP-01 evidence overwrite by full browser run, long dropped-placement list, provenance outside hash, replay per request, size check after parse) are owned follow-up.",
     "CVF development adoption is being prioritized at DESIGN: kit/local document receipts exist, automatic local pre-commit hook absent in current inspection; hosted CI and live agent-governance proof not established by this task. No full adoption claim."
   ],
   "evidence": [
@@ -68,7 +66,11 @@
     "docs/specs/SCST_SUP_01.md",
     "docs/work_orders/SCST_SUP_01.md",
     "docs/reviews/SCST_CVF_DEV_APPLICATION_RECONCILIATION.md",
-    "docs/reviews/SCST_SUP_01_REVIEW.md"
+    "docs/reviews/SCST_SUP_01_REVIEW.md",
+    "docs/specs/SCST_SUP_02A.md",
+    "docs/work_orders/SCST_SUP_02A.md",
+    "docs/reviews/SCST_SUP_02A_EVIDENCE/worker-return.md",
+    "docs/reviews/SCST_SUP_02A_REVIEW.md"
   ],
   "updatedAt": "2026-11-04",
   "x_verifiedMilestones": [
@@ -119,6 +121,12 @@
       "technicalStatus": "VERIFIED",
       "businessAcceptance": "PENDING",
       "evidence": "docs/reviews/SCST_SUP_01_REVIEW.md"
+    },
+    {
+      "id": "SUP-02A",
+      "technicalStatus": "VERIFIED",
+      "businessAcceptance": "PENDING",
+      "evidence": "docs/reviews/SCST_SUP_02A_REVIEW.md"
     }
   ],
   "x_plannedSupplement": {
@@ -130,14 +138,14 @@
       },
       {
         "id": "SUP-02",
-        "implementationStatus": "SUP_02A_DISPATCHED_SUP_02B_NOT_STARTED"
+        "implementationStatus": "SUP_02A_VERIFIED_SUP_02B_NOT_STARTED"
       },
       {
         "id": "SUP-03",
         "implementationStatus": "NOT_STARTED"
       }
     ],
-    "nextSpecification": "SUP-02A admitted (docs/specs/SCST_SUP_02A.md); SUP-02B vessel/profile contract needs its own SPEC",
+    "nextSpecification": "SUP-02B vessel/profile contract needs its own SPEC when selected",
     "buildAuthorized": false
   },
   "x_cvfDevelopmentAdoption": {

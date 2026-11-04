@@ -1,6 +1,6 @@
 # SCST — SUP-02A cargo revision work order
 
-Status: ACTIVE
+Status: CLOSED
 dispatchKind: INITIAL
 Owner: project-orchestrator
 Risk: R2
@@ -67,9 +67,9 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "decision": "Accept scoped technical flow, repair within authority or return to worker; no automatic SUP-02B/SUP-03/M2d"
     }
   },
-  "phase": "DISPATCH",
+  "phase": "REVIEW",
   "action": {
-    "kind": "IMPLEMENT",
+    "kind": "REVIEW",
     "selected": [
       "S2-01",
       "S2-02",
@@ -78,67 +78,102 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "S2-05",
       "S2-06"
     ],
-    "owner": "Claude Cloud implementation worker on a branch; root independent review and commit steward",
-    "output": "SUP-02A source, tests, regenerated contract and docs/reviews/SCST_SUP_02A_EVIDENCE/worker-return.md in a pull request",
+    "owner": "Root independent implementation reviewer",
+    "output": "docs/reviews/SCST_SUP_02A_REVIEW.md",
     "budgetMinutes": 240,
     "stop": "Six criteria evidenced or budget/scope boundary without reset",
-    "next": "Root independent review of the pull request and usable local flow; SUP-02B requires its own SPEC/WORK_ORDER"
+    "next": "SUP-02A technical handoff; SUP-02B requires its own SPEC/WORK_ORDER; business acceptance separate"
   },
   "rows": [
     {
       "id": "S2-01",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for S2-01",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business/domain acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_SUP_02A_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_SUP_02A_REVIEW.md",
+          "sha256": "b263150554cda7ba933086f81627d0565dfefee933c5a3bbe6b8a4b299a4a468"
+        }
+      ]
     },
     {
       "id": "S2-02",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for S2-02",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business/domain acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_SUP_02A_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_SUP_02A_REVIEW.md",
+          "sha256": "b263150554cda7ba933086f81627d0565dfefee933c5a3bbe6b8a4b299a4a468"
+        }
+      ]
     },
     {
       "id": "S2-03",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for S2-03",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business/domain acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_SUP_02A_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_SUP_02A_REVIEW.md",
+          "sha256": "b263150554cda7ba933086f81627d0565dfefee933c5a3bbe6b8a4b299a4a468"
+        }
+      ]
     },
     {
       "id": "S2-04",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for S2-04",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business/domain acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_SUP_02A_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_SUP_02A_REVIEW.md",
+          "sha256": "b263150554cda7ba933086f81627d0565dfefee933c5a3bbe6b8a4b299a4a468"
+        }
+      ]
     },
     {
       "id": "S2-05",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for S2-05",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business/domain acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_SUP_02A_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_SUP_02A_REVIEW.md",
+          "sha256": "b263150554cda7ba933086f81627d0565dfefee933c5a3bbe6b8a4b299a4a468"
+        }
+      ]
     },
     {
       "id": "S2-06",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for S2-06",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business/domain acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_SUP_02A_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_SUP_02A_REVIEW.md",
+          "sha256": "b263150554cda7ba933086f81627d0565dfefee933c5a3bbe6b8a4b299a4a468"
+        }
+      ]
     }
   ],
   "supportingWork": [],
   "conclusions": {
-    "tranche": "PENDING",
-    "trancheSummary": "Six SUP-02A criteria admitted for bounded implementation only",
-    "trancheEvidence": [],
+    "tranche": "COMPLETE",
+    "trancheSummary": "SUP-02A six technical criteria and usable local flow reviewed; merged as 569c7ee by owner decision",
+    "trancheEvidence": [
+      {
+        "path": "docs/reviews/SCST_SUP_02A_REVIEW.md",
+        "sha256": "b263150554cda7ba933086f81627d0565dfefee933c5a3bbe6b8a4b299a4a468"
+      }
+    ],
     "product": "PENDING",
     "productSummary": "SUP-02B, SUP-03, M2d/M3, live governance proof and business acceptance remain separate owned work",
     "acceptance": [],
@@ -146,3 +181,7 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
   }
 }
 ```
+
+## Technical disposition
+
+Root independent implementation review accepts S2-01..06 on PR #1 head 4f91202, merged to main as 569c7ee by owner decision. Local rerun: backend 222/222, contract regeneration identical, build OK, full browser 39/39 on isolated port 8766, worker-return 7/7 and reviewer-fast 8/8 PASS. No blocking finding and no root repair. REVISION_UNAVAILABLE, conservative placed_affected and created provenance stamp accepted; observations O1-O5 recorded in the review as owned follow-up. No business acceptance, SUP-02B, SUP-03 or M2d.

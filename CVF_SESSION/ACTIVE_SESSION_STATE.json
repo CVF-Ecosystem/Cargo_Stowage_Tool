@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "BUILD",
-  "activePhase": "BUILD",
+  "currentMode": "FREEZE",
+  "activePhase": "FREEZE",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -14,9 +14,9 @@
     "FREEZE"
   ],
   "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_SUP_02A.md",
-  "nextAllowedMove": "Claude Cloud implements SUP-02A on a non-main branch and opens a pull request; Claude local independently reviews before any merge. SUP-02B, SUP-03 and M2d stay closed.",
-  "parkedOperatorCheckpoint": "SUP-02B vessel/profile contract, SUP-03, M2d/M3/M4, hook/hosted-CI adoption, live-provider governance proof, measured hold and 16 source envelopes, business acceptance and merge decision remain owned future work.",
-  "activeRole": "ORCHESTRATOR",
+  "nextAllowedMove": "SUP-02A technical handoff only; SUP-02B vessel/profile contract, SUP-03 or follow-up of review observations O1-O5 each need owner selection and a bounded SPEC/WORK_ORDER. Business acceptance separate.",
+  "parkedOperatorCheckpoint": "SUP-02B vessel/profile contract, SUP-03, M2d/M3/M4, SUP-02A review observations O1-O5, hook/hosted-CI adoption, live-provider governance proof, measured hold and 16 source envelopes and business acceptance remain owned future work.",
+  "activeRole": "SESSION_SYNC_STEWARD",
   "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",
   "updatedAt": "2026-11-04",
   "activeTranche": "SUP-02A"

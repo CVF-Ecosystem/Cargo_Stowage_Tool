@@ -5,11 +5,11 @@ Status: ACTIVE
 ## Current State
 
 - Project: Cargo_Stowage_Tool
-- Current mode: BUILD
-- Active phase: BUILD
-- Active role: ORCHESTRATOR
-- Next allowed move: Claude Cloud implements SUP-02A on a non-main branch and opens a pull request; Claude local independently reviews before any merge. SUP-02B, SUP-03 and M2d stay closed.
-- Parked operator checkpoint: SUP-02B vessel/profile contract, SUP-03, M2d/M3/M4, hook/hosted-CI adoption, live-provider governance proof, measured hold and 16 source envelopes, business acceptance and merge decision remain owned future work.
+- Current mode: FREEZE
+- Active phase: FREEZE
+- Active role: SESSION_SYNC_STEWARD
+- Next allowed move: SUP-02A technical handoff only; SUP-02B vessel/profile contract, SUP-03 or follow-up of review observations O1-O5 each need owner selection and a bounded SPEC/WORK_ORDER. Business acceptance separate.
+- Parked operator checkpoint: SUP-02B vessel/profile contract, SUP-03, M2d/M3/M4, SUP-02A review observations O1-O5, hook/hosted-CI adoption, live-provider governance proof, measured hold and 16 source envelopes and business acceptance remain owned future work.
 - Active tranche: SUP-02A
 
 ## Intake, design and authority acknowledgment
@@ -25,3 +25,7 @@ Baseline 573d7fb: backend 104/104 PASS locally; browser 36 cases per SUP-01 revi
 ## Remainder and return
 
 Expected return: one pull request from Claude Cloud with source, tests, regenerated contract/types and docs/reviews/SCST_SUP_02A_EVIDENCE/worker-return.md. Root then becomes REVIEWER: re-runs backend, build, full browser suite on an isolated database at port 8766 and worker-return/reviewer-fast gates locally, reviews the diff against D1-D8 and ownership, walks the S2-06 flow, writes docs/reviews/SCST_SUP_02A_REVIEW.md and reports to the owner, who decides the merge. No business acceptance, SUP-02B, SUP-03 or M2d is implied.
+
+## Review and closure
+
+Claude Cloud returned PR #1 (head 4f91202) with worker return docs/reviews/SCST_SUP_02A_EVIDENCE/worker-return.md. Root REVIEWER reran locally in a separate worktree: backend 222/222, contract regeneration identical, build OK, full browser 39/39 on isolated port 8766, worker-return and reviewer-fast gates PASS; diff checked against D1-D8 and ownership. Review docs/reviews/SCST_SUP_02A_REVIEW.md accepts S2-01..06 with no blocking finding and records O1-O5. Owner decided the merge; root merged PR #1 as 569c7ee. Root CLOSER/COMMIT_STEWARD closed the work order; SESSION_SYNC_STEWARD synced state, status and memory. Raw VINAFCO folder and gate receipts stay untracked.
