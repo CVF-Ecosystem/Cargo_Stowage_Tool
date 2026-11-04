@@ -5,11 +5,13 @@ Memory class: POINTER_RECORD
 ## Current Truth
 
 - Contract: cvf.downstreamContinuityContract@1.0.0
-- Current mode: FREEZE
-- Active phase: FREEZE
-- Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_SUP_02A.md
+- Current mode: BUILD
+- Active phase: BUILD
+- Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_SUP_02B.md
 
 ## Current operator boundary
+
+SUP-02B dispatched 04-11-2026 on owner instruction to continue without waiting: generic vessel profile, verified GLB-to-hold transform, append-only user profiles, vessel-pinned plans and supporting fix O1. SPEC docs/specs/SCST_SUP_02B.md, order docs/work_orders/SCST_SUP_02B.md, handoff CVF_SESSION/handoffs/AGENT_HANDOFF_SUP_02B.md. Claude Cloud implements on a branch with pull-request return; Claude local reviews independently; owner decides the merge. SUP-03/M2d closed.
 
 SUP-02A closed 04-11-2026: Claude Cloud implemented on a branch, root reviewed independently (docs/reviews/SCST_SUP_02A_REVIEW.md, S2-01..06 VERIFIED technically), owner decided the merge and root merged PR #1 as 569c7ee. Current FREEZE / SESSION_SYNC_STEWARD. Next: SUP-02A technical handoff only; SUP-02B vessel/profile contract, SUP-03 or follow-up of review observations O1-O5 each need owner selection and a bounded SPEC/WORK_ORDER. Business acceptance separate. Earlier SUP-01 text below is history.
 

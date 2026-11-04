@@ -1,6 +1,6 @@
 # SCST — SUP-02A cargo revisions, pinning and recheck
 
-Status: ACTIVE
+Status: SUPERSEDED
 
 ## Current State
 
