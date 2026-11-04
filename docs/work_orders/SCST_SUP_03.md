@@ -1,6 +1,6 @@
 # SCST — SUP-03 derived bundle and pipe views work order
 
-Status: ACTIVE
+Status: CLOSED
 dispatchKind: INITIAL
 Owner: project-orchestrator
 Risk: R2
@@ -67,9 +67,9 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "decision": "Accept scoped technical flow, repair within authority or return to worker; then integration check before M2d"
     }
   },
-  "phase": "DISPATCH",
+  "phase": "REVIEW",
   "action": {
-    "kind": "IMPLEMENT",
+    "kind": "REVIEW",
     "selected": [
       "S3-01",
       "S3-02",
@@ -77,8 +77,8 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "S3-04",
       "S3-05"
     ],
-    "owner": "Claude Cloud implementation worker on a branch stacked on SUP-02B; root independent review and commit steward",
-    "output": "SUP-03 source, tests, regenerated contract and docs/reviews/SCST_SUP_03_EVIDENCE/worker-return.md in a pull request",
+    "owner": "Root independent implementation reviewer",
+    "output": "docs/reviews/SCST_SUP_03_REVIEW.md",
     "budgetMinutes": 240,
     "stop": "Five criteria evidenced or budget/scope boundary without reset",
     "next": "Root independent review, then integration check before M2d; M2d requires its own SPEC/WORK_ORDER"
@@ -86,50 +86,80 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
   "rows": [
     {
       "id": "S3-01",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for S3-01",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business/domain acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_SUP_03_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_SUP_03_REVIEW.md",
+          "sha256": "3d47c00630bebcd774e933b5e45c674db990c9feb36705fbe75ec6ee416cd8f1"
+        }
+      ]
     },
     {
       "id": "S3-02",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for S3-02",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business/domain acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_SUP_03_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_SUP_03_REVIEW.md",
+          "sha256": "3d47c00630bebcd774e933b5e45c674db990c9feb36705fbe75ec6ee416cd8f1"
+        }
+      ]
     },
     {
       "id": "S3-03",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for S3-03",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business/domain acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_SUP_03_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_SUP_03_REVIEW.md",
+          "sha256": "3d47c00630bebcd774e933b5e45c674db990c9feb36705fbe75ec6ee416cd8f1"
+        }
+      ]
     },
     {
       "id": "S3-04",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for S3-04",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business/domain acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_SUP_03_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_SUP_03_REVIEW.md",
+          "sha256": "3d47c00630bebcd774e933b5e45c674db990c9feb36705fbe75ec6ee416cd8f1"
+        }
+      ]
     },
     {
       "id": "S3-05",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for S3-05",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business/domain acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_SUP_03_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_SUP_03_REVIEW.md",
+          "sha256": "3d47c00630bebcd774e933b5e45c674db990c9feb36705fbe75ec6ee416cd8f1"
+        }
+      ]
     }
   ],
   "supportingWork": [],
   "conclusions": {
-    "tranche": "PENDING",
-    "trancheSummary": "Five SUP-03 criteria admitted for bounded implementation only",
-    "trancheEvidence": [],
+    "tranche": "COMPLETE",
+    "trancheSummary": "SUP-03 five technical criteria and usable local flow reviewed; merged as 164dce5 by owner decision",
+    "trancheEvidence": [
+      {
+        "path": "docs/reviews/SCST_SUP_03_REVIEW.md",
+        "sha256": "3d47c00630bebcd774e933b5e45c674db990c9feb36705fbe75ec6ee416cd8f1"
+      }
+    ],
     "product": "PENDING",
     "productSummary": "M2d/M3, measured packing and hold, live governance proof and business acceptance remain separate owned work",
     "acceptance": [],
@@ -137,3 +167,7 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
   }
 }
 ```
+
+## Technical disposition
+
+Root independent implementation review accepts S3-01..05 on PR #3 (head 0d8bdff, stacked on SUP-02B, retargeted to main with merged tree equal to the tested tree e66c2cc), merged to main as 164dce5 by owner decision on 05-11. Local Windows rerun: backend 597/597, contract identical, build OK, full browser 46/46 on isolated port 8766 with clean git status, worker-return and reviewer-fast PASS. R0000: 28/31 groups DETAILED, 3 groups (16 bundles) ENVELOPE_ONLY exactly matching the source-flagged envelope conflicts. OD-only revisions not triggering recheck accepted as SPEC interpretation; O8-O9 recorded. No business acceptance, measured packing or M2d.

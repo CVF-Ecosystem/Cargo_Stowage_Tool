@@ -5,11 +5,11 @@ Status: ACTIVE
 ## Current State
 
 - Project: Cargo_Stowage_Tool
-- Current mode: BUILD
-- Active phase: BUILD
-- Active role: ORCHESTRATOR
-- Next allowed move: Claude Cloud implements SUP-02B on a non-main branch and opens a pull request; Claude local independently reviews before any merge. SUP-03 and M2d stay closed.
-- Parked operator checkpoint: SUP-03, M2d/M3/M4, SUP-02A observations O2-O5, hook/hosted-CI adoption, live-provider governance proof, measured hold and 16 source envelopes, business acceptance and merge decision remain owned future work.
+- Current mode: FREEZE
+- Active phase: FREEZE
+- Active role: SESSION_SYNC_STEWARD
+- Next allowed move: SUP-02B and SUP-03 technical handoff; root runs the roadmap integration check before M2d. M2d, M3, measured hold/packing and a second real vessel profile each need owner selection and a bounded SPEC/WORK_ORDER. Business acceptance separate.
+- Parked operator checkpoint: M2d/M3/M4, SUP-02A observations O2-O5, SUP-02B O6-O7, SUP-03 O8-O9, OD-only recheck policy, hook/hosted-CI adoption, live-provider governance proof, measured hold and 16 source envelopes and business acceptance remain owned future work.
 - Active tranche: SUP-02B
 
 ## Intake, design and authority acknowledgment
@@ -64,3 +64,7 @@ No business acceptance, SUP-03 or M2d is implied.
 ## Stacked SUP-03 dispatch
 
 Owner on 04-11-2026 asked for a longer-horizon spec so the cloud continues overnight, with owner review on 05-11 before any merge. Root admitted SUP-03 (docs/specs/SCST_SUP_03.md, docs/work_orders/SCST_SUP_03.md, coverage SCST-SUP-03) as a stacked tranche: the cloud worker branches from the SUP-02B branch head and returns a pull request against it. This handoff stays the single ACTIVE handoff for both; merge order is SUP-02B then SUP-03, each after independent root review. Integration check before M2d follows SUP-03.
+
+## Review and closure
+
+Claude Cloud returned PR #2 (SUP-02B, head 94cb628) and, after one usage-limit stop and a root-launched resume, PR #3 (SUP-03, head 0d8bdff, stacked). Root REVIEWER reran each locally on Windows in separate worktrees: SUP-02B backend 503/503 after root repair 9f8969e (Windows empty leftover rename), browser 42/42; SUP-03 backend 597/597, browser 46/46; contract regeneration identical, gates PASS, no change under docs/reviews after browser runs. Reviews docs/reviews/SCST_SUP_02B_REVIEW.md and docs/reviews/SCST_SUP_03_REVIEW.md accept S2B-01..06 and S3-01..05. The owner reviewed on 05-11 and decided the merges; root merged PR #2 as de2aeea, retargeted PR #3 to main after confirming the merged tree equals the tested tree, and merged it as 164dce5. Root closed both work orders and synced state, status and memory. Raw VINAFCO folder and gate receipts stay untracked.

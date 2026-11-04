@@ -5,11 +5,13 @@ Memory class: POINTER_RECORD
 ## Current Truth
 
 - Contract: cvf.downstreamContinuityContract@1.0.0
-- Current mode: BUILD
-- Active phase: BUILD
+- Current mode: FREEZE
+- Active phase: FREEZE
 - Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_SUP_02B.md
 
 ## Current operator boundary
+
+SUP-02B and SUP-03 closed 05-11-2026: root reviewed both PRs independently (docs/reviews/SCST_SUP_02B_REVIEW.md with root Windows repair 9f8969e; docs/reviews/SCST_SUP_03_REVIEW.md), owner decided the merges, root merged as de2aeea and 164dce5. Current FREEZE / SESSION_SYNC_STEWARD. Next: SUP-02B and SUP-03 technical handoff; root runs the roadmap integration check before M2d. M2d, M3, measured hold/packing and a second real vessel profile each need owner selection and a bounded SPEC/WORK_ORDER. Business acceptance separate. Earlier text below is history.
 
 SUP-03 dispatched 04-11-2026 stacked on SUP-02B (owner: long-horizon overnight run, review 05-11 before merge): derived packing, three cargo views, envelope fallback. SPEC docs/specs/SCST_SUP_03.md, order docs/work_orders/SCST_SUP_03.md; same active handoff.
 
