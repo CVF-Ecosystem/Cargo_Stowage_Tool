@@ -56,6 +56,10 @@
     "SCST-SUP-02B": {
       "path": "docs/specs/SCST_SUP_02B.md",
       "heading": "## SUP-02B acceptance"
+    },
+    "SCST-SUP-03": {
+      "path": "docs/specs/SCST_SUP_03.md",
+      "heading": "## SUP-03 acceptance"
     }
   }
 }

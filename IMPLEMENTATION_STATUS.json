@@ -1,11 +1,12 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "SUP_02B_DISPATCHED_TO_CLOUD_WORKER_SUP_02A_VERIFIED_BUSINESS_ACCEPTANCE_PENDING",
+  "overallStatus": "SUP_02B_AND_STACKED_SUP_03_DISPATCHED_TO_CLOUD_SUP_02A_VERIFIED_BUSINESS_ACCEPTANCE_PENDING",
   "currentPhase": "BUILD",
   "completedCapabilities": [],
   "activeWorkOrders": [
-    "docs/work_orders/SCST_SUP_02B.md"
+    "docs/work_orders/SCST_SUP_02B.md",
+    "docs/work_orders/SCST_SUP_03.md"
   ],
   "knownLimitations": [
     "PIPE-LIST actual31group/1076bundle source integration technically verified; source mass/dimensions calculated/provisional.16bundles need envelope verification; measuredhold/business/operational acceptance pending.",
@@ -74,7 +75,9 @@
     "docs/reviews/SCST_SUP_02A_EVIDENCE/worker-return.md",
     "docs/reviews/SCST_SUP_02A_REVIEW.md",
     "docs/specs/SCST_SUP_02B.md",
-    "docs/work_orders/SCST_SUP_02B.md"
+    "docs/work_orders/SCST_SUP_02B.md",
+    "docs/specs/SCST_SUP_03.md",
+    "docs/work_orders/SCST_SUP_03.md"
   ],
   "updatedAt": "2026-11-04",
   "x_verifiedMilestones": [
@@ -146,10 +149,10 @@
       },
       {
         "id": "SUP-03",
-        "implementationStatus": "NOT_STARTED"
+        "implementationStatus": "DISPATCHED_STACKED_ON_SUP_02B"
       }
     ],
-    "nextSpecification": "SUP-02B admitted (docs/specs/SCST_SUP_02B.md); SUP-03 needs its own SPEC",
+    "nextSpecification": "SUP-03 admitted (docs/specs/SCST_SUP_03.md); integration check before M2d follows",
     "buildAuthorized": false
   },
   "x_cvfDevelopmentAdoption": {
