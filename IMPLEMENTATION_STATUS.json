@@ -1,10 +1,12 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "M2_COMPLETE_TECHNICAL_M2D_VERIFIED_MERGED_BUSINESS_ACCEPTANCE_PENDING",
-  "currentPhase": "FREEZE",
+  "overallStatus": "HARDEN_01_DISPATCHED_M2_COMPLETE_TECHNICAL_BUSINESS_ACCEPTANCE_PENDING",
+  "currentPhase": "BUILD",
   "completedCapabilities": [],
-  "activeWorkOrders": [],
+  "activeWorkOrders": [
+    "docs/work_orders/SCST_HARDEN_01.md"
+  ],
   "knownLimitations": [
     "PIPE-LIST actual31group/1076bundle source integration technically verified; source mass/dimensions calculated/provisional.16bundles need envelope verification; measuredhold/business/operational acceptance pending.",
     "Raw drafts/history/baseline/comparison remain in browser tab until explicit immutable SQLite Plan snapshot save. Baseline/comparison do not persist through reload; select saved A again. Latest100 snapshots, no overwrite/delete/backup/restore UI.",
@@ -84,7 +86,9 @@
     "docs/specs/SCST_M2D.md",
     "docs/work_orders/SCST_M2D.md",
     "docs/reviews/SCST_M2D_EVIDENCE/worker-return.md",
-    "docs/reviews/SCST_M2D_REVIEW.md"
+    "docs/reviews/SCST_M2D_REVIEW.md",
+    "docs/specs/SCST_HARDEN_01.md",
+    "docs/work_orders/SCST_HARDEN_01.md"
   ],
   "updatedAt": "2026-11-05",
   "x_verifiedMilestones": [
@@ -203,5 +207,5 @@
     "nextSpecification": "CVF-DEV for evidenced gaps",
     "continuationReview": "docs/reviews/SCST_CVF_DEV_APPLICATION_RECONCILIATION.md"
   },
-  "activeTranche": "M2D"
+  "activeTranche": "HARDEN-01"
 }

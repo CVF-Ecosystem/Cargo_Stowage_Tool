@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "FREEZE",
-  "activePhase": "FREEZE",
+  "currentMode": "BUILD",
+  "activePhase": "BUILD",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -13,11 +13,11 @@
     "REVIEW",
     "FREEZE"
   ],
-  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_M2D.md",
-  "nextAllowedMove": "M2d technical handoff; root dispatches HARDEN-01 (data-independent hardening of observations) under owner-delegated authority. M3 needs owner hold measurements and real cases. Owner: open the sample XLSX in Excel.",
+  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_HARDEN_01.md",
+  "nextAllowedMove": "Claude Cloud implements HARDEN-01 on a non-main branch and opens a pull request; root reviews independently and merges under owner-delegated authority. M3 needs owner hold measurements and real cases.",
   "parkedOperatorCheckpoint": "M3/M4/M5, observations O3/O7-O11, OD-only recheck policy, real-Excel check of the M2d XLSX, hook/hosted-CI adoption, live-provider governance proof, measured hold and 16 source envelopes and business acceptance remain owned future work.",
-  "activeRole": "SESSION_SYNC_STEWARD",
+  "activeRole": "ORCHESTRATOR",
   "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",
   "updatedAt": "2026-11-05",
-  "activeTranche": "M2D"
+  "activeTranche": "HARDEN-01"
 }

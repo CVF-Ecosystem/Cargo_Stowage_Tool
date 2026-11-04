@@ -1,6 +1,6 @@
 # SCST — M2d plan report export
 
-Status: ACTIVE
+Status: SUPERSEDED
 
 ## Current State
 

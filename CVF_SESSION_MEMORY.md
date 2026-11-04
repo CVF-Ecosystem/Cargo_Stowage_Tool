@@ -5,11 +5,13 @@ Memory class: POINTER_RECORD
 ## Current Truth
 
 - Contract: cvf.downstreamContinuityContract@1.0.0
-- Current mode: FREEZE
-- Active phase: FREEZE
-- Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_M2D.md
+- Current mode: BUILD
+- Active phase: BUILD
+- Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_HARDEN_01.md
 
 ## Current operator boundary
+
+HARDEN-01 dispatched 05-11-2026 under owner-delegated authority: data-independent hardening (paged rebase drops, drop-on-rebase count, replay cache, pre-parse limits, Windows profile lock). SPEC docs/specs/SCST_HARDEN_01.md, order docs/work_orders/SCST_HARDEN_01.md, handoff CVF_SESSION/handoffs/AGENT_HANDOFF_HARDEN_01.md.
 
 M2d closed 05-11-2026: root reviewed PR #4 (docs/reviews/SCST_M2D_REVIEW.md) and merged it as 690fcc7 under owner-delegated authority. M2 flow complete technically. Next: M2d technical handoff; root dispatches HARDEN-01 (data-independent hardening of observations) under owner-delegated authority. M3 needs owner hold measurements and real cases. Owner: open the sample XLSX in Excel.
 

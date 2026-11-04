@@ -64,6 +64,10 @@
     "SCST-M2D": {
       "path": "docs/specs/SCST_M2D.md",
       "heading": "## M2d acceptance"
+    },
+    "SCST-HARDEN-01": {
+      "path": "docs/specs/SCST_HARDEN_01.md",
+      "heading": "## HARDEN-01 acceptance"
     }
   }
 }
