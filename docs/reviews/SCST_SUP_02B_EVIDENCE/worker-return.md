@@ -2,6 +2,8 @@
 
 Status: RETURNED_FOR_REVIEW
 Risk: R2
+Worker: Claude Cloud implementation worker
+Reviewer: root-independent-implementation-reviewer (Claude local; review pending, not performed by this worker)
 Branch: `claude/sup-02b-vessel-profile` (base `ab0ae69`)
 Role: IMPLEMENTATION_WORKER (cloud lead session as advisor/independent in-run reviewer, subagents as implementers)
 
@@ -151,6 +153,7 @@ All are asserted in `tests/backend/test_sup02b_api.py`. A legacy snapshot row is
 | Playwright, full suite final, including `sup02b.spec.ts` | 42 passed (39 old + 3 new) |
 | `git status --short` after the final full run | only `?? tests/browser/sup02b.spec.ts` before commit; nothing under `docs/reviews` changed (S2B-06) |
 | `PYTHONDONTWRITEBYTECODE=1 python scripts/cvf_gates/cvf_downstream_gate_runner.py run --phase worker-return` | PASS, 7 mandatory controls, 0 failed |
+| `… run --phase pr-ci --base ab0ae69 --head HEAD` with the three workflow pins | First CI run FAILED `CVF-DG-ROLE-01`: this R2 file lacked `Worker:`/`Reviewer:` lines. After adding them, PASS, 8 controls, 0 failed |
 
 Browser override: an untracked file, `apps/frontend/playwright.local.config.ts`, excluded through `.git/info/exclude`. It changes only three things:
 - the webServer command (`python -m uvicorn …`);
