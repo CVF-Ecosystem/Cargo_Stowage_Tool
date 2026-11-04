@@ -2,11 +2,11 @@ import { useEffect, useRef } from "react";
 import * as T from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import type { VesselProfile } from "../api/client";
+import { profileBody, type ProfileDetail } from "../api/client";
 import { dimensions, footprint, type Plan } from "../features/model";
 type Props = {
   plan: Plan;
-  profile: VesselProfile | null;
+  profile: ProfileDetail | null;
   selected: string;
   onSelect: (id: string) => void;
   issueIds: Set<string>;
@@ -41,13 +41,6 @@ type State = {
   ghost: (on: boolean) => void;
   dispose: (o: T.Object3D) => void;
 };
-const hull = new Set([
-  "Than_tau_duoi_duong_nuoc",
-  "Than_tau_tren_duong_nuoc",
-  "Day_ngoai_than_tau",
-  "Vach_trong_ham_hang_uoc_tinh",
-  "Thanh_quay_ham_uoc_tinh",
-]);
 const diagnostic = () =>
   new URLSearchParams(window.location.search).get("viewerDiagnostics") === "1";
 export default function Scene(props: Props) {
@@ -487,7 +480,8 @@ export default function Scene(props: Props) {
       key = profile
         ? JSON.stringify([
             profile.asset_url,
-            profile.geometry.glb_to_hold_translation_m,
+            profile.viewer.translation_m,
+            profile.viewer.yaw_deg,
           ])
         : "";
     if (key === s.assetKey) return;
@@ -520,16 +514,13 @@ export default function Scene(props: Props) {
         }
         s.ship = gltf.scene;
         s.assetIdentity++;
-        gltf.scene.position.fromArray(
-          profile.geometry.glb_to_hold_translation_m,
-        );
+        // The server's transform is applied as given: no centring, scaling or extra rotation here.
+        gltf.scene.position.fromArray(profile.viewer.translation_m);
+        gltf.scene.rotation.y = (profile.viewer.yaw_deg * Math.PI) / 180;
         gltf.scene.visible = latest.current.shipVisible;
+        const hullNames = new Set(profile.viewer.hull_mesh_names);
         gltf.scene.traverse((o) => {
-          if (
-            profile.asset_url === "/api/vessels/vinafco268/model" &&
-            o instanceof T.Mesh &&
-            hull.has(o.name)
-          )
+          if (o instanceof T.Mesh && hullNames.has(o.name))
             s.originals.set(o, o.material);
         });
         s.ghost(latest.current.ghost);
@@ -564,17 +555,20 @@ export default function Scene(props: Props) {
     delete s.renderer.domElement.dataset.draftMarker;
     const profile =
         props.plan.source === "MIXED_REFERENCE" ? props.profile : null,
-      c = profile?.cases.find((x) => x.id === props.plan.vessel?.case_id);
-    if (profile && c) {
+      caseId = props.plan.vessel?.case_id,
+      c = profile
+        ? profileBody(profile).cases.find((x) => x.id === caseId)
+        : undefined,
+      draftMarker = profile?.viewer.draft_markers.find(
+        (m) => m.case_id === caseId,
+      );
+    if (profile && c && draftMarker) {
+      const [sx, sy, sz] = profile.viewer.hull_box_m;
       const marker = new T.LineSegments(
-        new T.EdgesGeometry(new T.BoxGeometry(77.8, 0.01, 13.24)),
+        new T.EdgesGeometry(new T.BoxGeometry(sx, sy, sz)),
         new T.LineBasicMaterial({ color: 0x067ca0 }),
       );
-      marker.position.set(
-        profile.geometry.glb_to_hold_translation_m[0],
-        c.draft_m - profile.geometry.source_floor_z_m,
-        0,
-      );
+      marker.position.fromArray(draftMarker.center_m);
       s.marker.add(marker);
       if (diagnostic())
         s.renderer.domElement.dataset.draftMarker = JSON.stringify({

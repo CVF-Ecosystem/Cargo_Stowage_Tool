@@ -1,11 +1,11 @@
 import { useRef, useState } from "react";
-import type { VesselProfile } from "../api/client";
+import type { ProfileDetail } from "../api/client";
 import { footprint, formatMetres, type Plan } from "../features/model";
 import Scene from "./Scene";
 
 type Props = {
   plan: Plan;
-  profile: VesselProfile | null;
+  profile: ProfileDetail | null;
   selected: string;
   onSelect: (id: string) => void;
   issueIds: Set<string>;

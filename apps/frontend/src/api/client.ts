@@ -2,6 +2,163 @@ import type { Evaluation, Plan } from "../features/model";
 import type { components } from "./generated/api";
 export type VesselProfile = components["schemas"]["VesselProfile"];
 
+// Vessel profiles (SUP-02B). Types come from the generated contract; the profile body is a loose object there,
+// so VesselProfileV1 mirrors the backend's scst.vessel-profile.v1 shape and ProfileDetail.profile is cast to it.
+export type ProfileDetail = components["schemas"]["ProfileDetail"];
+export type ProfileListItem = components["schemas"]["ProfileListItem"];
+export type ProfilePreview = components["schemas"]["ProfilePreview"];
+export type ProfileVersionConflict = components["schemas"]["ProfileVersionConflict"];
+export type ProfileError = components["schemas"]["ProfileError"];
+export type Verification = components["schemas"]["Verification"];
+export type LandmarkCheck = components["schemas"]["LandmarkCheck"];
+export type BoundsCheck = components["schemas"]["BoundsCheck"];
+export type ViewerBlock = components["schemas"]["ViewerBlock"];
+export type FieldStatus = "ESTIMATED" | "SOURCED" | "MEASURED";
+export type VesselProfileV1 = {
+  contract_version: "scst.vessel-profile.v1";
+  id: string;
+  version: number;
+  name: string;
+  registration: string;
+  dimensions_m: { length: number; beam: number; depth: number };
+  hold: { id: string; name: string; length_mm: number; width_mm: number; height_mm: number; status: FieldStatus };
+  cases: { id: string; cargo_mass_g: number; draft_m: number; deadweight_t?: number | null; freeboard_mm?: number | null }[];
+  notes: string[];
+  provenance: {
+    source_documents: { title: string; sha256?: string | null }[];
+    field_status: { dimensions_m: FieldStatus; hold: FieldStatus; cases: FieldStatus };
+  };
+  transform: { translation_m: number[]; yaw_deg: number };
+  landmarks: { name: string; glb_m: number[]; hold_mm: number[] }[];
+  hull_mesh_names?: string[];
+};
+export type ProfileUpload = { profile: Record<string, unknown>; glb_base64: string };
+// The contract types the profile body as a loose object; this is the single place that narrows it.
+export const profileBody = (detail: ProfileDetail) => detail.profile as unknown as VesselProfileV1;
+
+const NETWORK_ERROR = "Không kết nối được backend. Thử lại khi backend sẵn sàng.";
+const UPLOAD_TIMEOUT_MS = 60000;
+
+// Server-side Vietnamese failures: 409 {message, latest_version}, 413 {message, errors}, 400 {message} or a preview payload.
+export class ProfileApiError extends Error {
+  status: number;
+  errors: ProfileError[];
+  latestVersion: number | null;
+  constructor(message: string, status: number, errors: ProfileError[] = [], latestVersion: number | null = null) {
+    super(message);
+    this.name = "ProfileApiError";
+    this.status = status;
+    this.errors = errors;
+    this.latestVersion = latestVersion;
+  }
+}
+
+async function readDetail(response: Response): Promise<unknown> {
+  try {
+    return ((await response.json()) as { detail?: unknown }).detail;
+  } catch {
+    return undefined;
+  }
+}
+
+function errorFrom(detail: unknown, status: number, fallback: string): ProfileApiError {
+  if (typeof detail === "string" && detail) return new ProfileApiError(detail, status);
+  if (detail && typeof detail === "object") {
+    const d = detail as { message?: unknown; errors?: unknown; latest_version?: unknown };
+    const errors = Array.isArray(d.errors) ? (d.errors as ProfileError[]) : [];
+    const latest = typeof d.latest_version === "number" ? d.latest_version : null;
+    if (typeof d.message === "string" && d.message) return new ProfileApiError(d.message, status, errors, latest);
+    if (errors.length) return new ProfileApiError(fallback, status, errors, latest);
+  }
+  return new ProfileApiError(`${fallback} (HTTP ${status})`, status);
+}
+
+async function profileGet<T>(path: string, fallback: string): Promise<T> {
+  let response: Response;
+  try {
+    response = await fetch(path, { signal: AbortSignal.timeout(15000) });
+  } catch {
+    throw new ProfileApiError(NETWORK_ERROR, 0);
+  }
+  if (!response.ok) throw errorFrom(await readDetail(response), response.status, fallback);
+  return (await response.json()) as T;
+}
+
+export const listVesselProfiles = () => profileGet<ProfileListItem[]>("/api/vessel-profiles", "Không đọc được danh sách tàu.");
+export const getVesselProfile = (id: string, version: number) =>
+  profileGet<ProfileDetail>(`/api/vessel-profiles/${encodeURIComponent(id)}/${version}`, `Không đọc được hồ sơ tàu ${id} phiên bản ${version}.`);
+
+// VINAFCO268 keeps its legacy route (byte-identical responses); other profiles use the profile route.
+export async function requestProfileCasePlan(profile: { id: string; version: number }, caseId: string): Promise<Evaluation> {
+  if (profile.id === "VINAFCO268") return requestVesselPlan(caseId);
+  const path = `/api/vessel-profiles/${encodeURIComponent(profile.id)}/${profile.version}/cases/${encodeURIComponent(caseId)}/plan`;
+  let response: Response;
+  try {
+    response = await fetch(path, { signal: AbortSignal.timeout(15000) });
+  } catch {
+    throw new Error("Không tải được trạng thái phương tiện.");
+  }
+  if (!response.ok) {
+    const detail = await readDetail(response);
+    const message = detail && typeof detail === "object" ? (detail as { message?: unknown }).message : detail;
+    throw new Error(typeof message === "string" && message ? message : "Không tải được trạng thái phương tiện.");
+  }
+  return (await response.json()) as Evaluation;
+}
+
+// Preview never writes. A 400 answer carries the whole preview payload in `detail`, so it is returned, not thrown.
+export async function previewVesselProfile(body: ProfileUpload): Promise<ProfilePreview> {
+  let response: Response;
+  try {
+    response = await fetch("/api/vessel-profiles/preview", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      signal: AbortSignal.timeout(UPLOAD_TIMEOUT_MS),
+    });
+  } catch {
+    throw new ProfileApiError(NETWORK_ERROR, 0);
+  }
+  if (response.ok) {
+    try {
+      return (await response.json()) as ProfilePreview;
+    } catch {
+      throw new ProfileApiError("Phản hồi kiểm profile không đọc được.", response.status);
+    }
+  }
+  const detail = await readDetail(response);
+  if (response.status === 400 && detail && typeof detail === "object" && typeof (detail as Partial<ProfilePreview>).valid === "boolean")
+    return detail as ProfilePreview;
+  throw errorFrom(detail, response.status, "Không xem trước được profile tàu.");
+}
+
+export async function createVesselProfile(body: ProfileUpload): Promise<ProfileListItem> {
+  let response: Response;
+  try {
+    response = await fetch("/api/vessel-profiles", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      signal: AbortSignal.timeout(UPLOAD_TIMEOUT_MS),
+    });
+  } catch {
+    throw new ProfileApiError(NETWORK_ERROR, 0);
+  }
+  if (response.ok) return (await response.json()) as ProfileListItem;
+  const detail = await readDetail(response);
+  if (response.status === 400 && detail && typeof detail === "object" && Array.isArray((detail as ProfilePreview).errors)) {
+    const errors = (detail as ProfilePreview).errors;
+    const verification = (detail as ProfilePreview).verification;
+    const message = errors.length
+      ? "Hồ sơ hoặc GLB chưa hợp lệ; chưa ghi gì."
+      : verification?.result === "FAIL"
+        ? "Kiểm landmark hoặc hộp bao GLB không đạt; chưa ghi gì."
+        : "Không tạo được profile tàu; chưa ghi gì.";
+    throw new ProfileApiError(message, 400, errors, null);
+  }
+  throw errorFrom(detail, response.status, "Không tạo được profile tàu; chưa ghi gì.");
+}
+
 export async function requestEvaluation(plan?: Plan): Promise<Evaluation> {
   const response = await fetch(plan ? "/api/validate" : "/api/demo", {
     method: plan ? "POST" : "GET",

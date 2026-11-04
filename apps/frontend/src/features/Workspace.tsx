@@ -2,7 +2,8 @@ import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent } fro
 import Viewer from "../viewer-3d/Viewer";
 import ComparisonPanel from "./ComparisonPanel";
 import CargoRevisionPanel from "./CargoRevisionPanel";
-import { requestEvaluation, requestVesselPlan, requestVesselProfile, getPipeLibrary, previewPipeList, previewPlanner, previewCsv, saveSnapshot, listSnapshots, openSnapshot, listCargoRevisions, previewRevisionPlan, rebaseSnapshot, type CsvPreview, type SnapshotListItem, type RebaseResult, type CompareResult, type VesselProfile, type PipeLibrary, type PlannerPreview } from "../api/client";
+import { requestEvaluation, getVesselProfile, requestProfileCasePlan, profileBody, getPipeLibrary, previewPipeList, previewPlanner, previewCsv, saveSnapshot, listSnapshots, openSnapshot, listCargoRevisions, previewRevisionPlan, rebaseSnapshot, type CsvPreview, type SnapshotListItem, type RebaseResult, type CompareResult, type ProfileDetail, type PipeLibrary, type PlannerPreview } from "../api/client";
+import VesselProfilePanel, { fieldStatusLabel, type OpenCurrent } from "./VesselProfilePanel";
 import { dimensions, fmt, displayKg, displayCm, formatCm, formatKg, formatMetres, massLabel, parseKg, parseCm, tonnes, isPipePlan, type Evaluation, type Plan } from "./model";
 
 function savedTime(value: string): string {
@@ -98,11 +99,35 @@ export function rebaseDraft(current: Draft, submitted: Draft, original: Plan, ch
   return fresh;
 }
 
+// The profile a MIXED_REFERENCE plan names (built-in VINAFCO268 is version 1); reused when already loaded.
+async function profileFor(plan: Plan, current: ProfileDetail | null): Promise<ProfileDetail | null> {
+  if (plan.source !== "MIXED_REFERENCE" || !plan.vessel) return current;
+  const id = plan.vessel.vessel_id, version = plan.vessel.profile_version ?? 1;
+  if (current && current.id === id && current.version === version) return current;
+  return getVesselProfile(id, version);
+}
+
+// Summary of a profile other than VINAFCO268: each number with its provenance status and its source documents (DA03).
+function ProfileSummary({ detail, caseId }: { detail: ProfileDetail; caseId: string }) {
+  const body = profileBody(detail);
+  const d = body.dimensions_m, h = body.hold, fs = body.provenance.field_status;
+  return <section className="scope-note" aria-label={`Thông số ${body.name}`}>
+    <strong>{body.name}{body.registration ? ` · ${body.registration}` : ""}</strong>
+    <p>Thân {formatMetres(d.length * 1000)} × {formatMetres(d.beam * 1000)} × {formatMetres(d.depth * 1000)} m.</p>
+    <p>Hầm {formatMetres(h.length_mm)} × {formatMetres(h.width_mm)} × {formatMetres(h.height_mm)} m ({fieldStatusLabel(h.status)}); {h.name}.</p>
+    <p>Trạng thái số liệu: thân {fieldStatusLabel(fs.dimensions_m)} · hầm {fieldStatusLabel(fs.hold)} · trường hợp tải {fieldStatusLabel(fs.cases)}.</p>
+    <ul aria-label="Trường hợp tải của tàu">{body.cases.map(c => <li key={c.id}>{c.id}{c.id === caseId ? " (đang mở)" : ""}: hàng {tonnes(c.cargo_mass_g)} tấn · mớn {fmt(c.draft_m)} m</li>)}</ul>
+    <p>Nguồn: {body.provenance.source_documents.map(s => s.title).join("; ") || "chưa ghi"}.</p>
+    <p>Kiểm tọa độ: {detail.verification.result}; hộp bao GLB {detail.verification.bounds.contains_hold ? "chứa" : "không chứa"} hầm.</p>
+    <p>Không xác nhận an toàn hoặc điều kiện vận hành.</p>
+  </section>;
+}
+
 export default function Workspace() {
   const [result, setResult] = useState<Evaluation | null>(null);
   const [draft, setDraft] = useState<Draft | null>(null);
   const draftRef = useRef<Draft | null>(null);
-  const [profile, setProfile] = useState<VesselProfile | null>(null);
+  const [profile, setProfile] = useState<ProfileDetail | null>(null);
   const [notice, setNotice] = useState("");
   const [planner, setPlanner] = useState<PlannerPreview | null>(null);
   const [plannerKey, setPlannerKey] = useState("");
@@ -165,13 +190,14 @@ export default function Workspace() {
       setError(`${e instanceof Error ? e.message : "Không kết nối được backend."} Bản nháp chưa được kiểm; bản trước vẫn được giữ.`);
     } finally { lock.current = false; setBusy(false); }
   };
-  const switchCase = async (caseId: "VR-SI" | "VR-SII") => {
+  // Opens a vessel profile (built-in or stored) at one of its cases; the loaded profile is reused when id and version match.
+  const switchVessel = async (id: string, version: number, caseId: string) => {
     if (lock.current || !result || !draftRef.current) return;
     if (stale) { setError("Hãy áp dụng bản nháp trước khi đổi phương tiện hoặc cấp tham chiếu; dữ liệu đang nhập được giữ nguyên."); return; }
     lock.current = true; setBusy(true); setError(""); setNotice("");
     const captured = JSON.stringify(draftRef.current); const capturedRevision=revision.current;
     try {
-      const [p, template] = await Promise.all([requestVesselProfile(), requestVesselPlan(caseId)]);
+      const [p, template] = await Promise.all([profile && profile.id === id && profile.version === version ? profile : getVesselProfile(id, version), requestProfileCasePlan({ id, version }, caseId)]);
       const old = result.plan; const next = template.plan;
       const limit = next.limits.certificate_cargo_limit_g;
       if ((old.limits.cargo_onboard_g ?? 0) > limit) throw new Error("Hàng đã có vượt mức hàng tham chiếu của cấp được chọn; giảm số này trước khi chuyển.");
@@ -191,6 +217,12 @@ export default function Workspace() {
   const issues = useMemo(() => new Set([...(result?.issues.flatMap((i) => i.unit_ids) ?? []),...(result?.affected_unit_ids ?? [])]), [result]);
   if (!result || !draft) return <main className="loading-panel"><h1>SCST · SYNTHETIC</h1><p role="status">{error || "Đang mở phương án mẫu…"}</p>{error && <button onClick={() => location.reload()}>Thử lại</button>}</main>;
   const plan = result.plan;
+  const vessel = plan.vessel;
+  // The loaded profile is the one the plan names; only then do its cases, numbers and viewer data apply.
+  const profileOpen = !!profile && plan.source === "MIXED_REFERENCE" && !!vessel && profile.id === vessel.vessel_id && profile.version === (vessel.profile_version ?? 1);
+  const body = profileOpen && profile ? profileBody(profile) : null;
+  const current: OpenCurrent = plan.source === "MIXED_REFERENCE" && vessel ? { id: vessel.vessel_id, version: vessel.profile_version ?? 1, caseId: vessel.case_id } : null;
+  const caseOptions = body ? body.cases.map(c => c.id) : vessel ? [vessel.case_id] : [];
   const unit = plan.units.find((u) => u.id === selected);
   const placement = plan.placements.find((p) => p.unit_id === selected);
   const ud = draft.units[selected];
@@ -213,8 +245,7 @@ export default function Workspace() {
     const before=revision.current; lock.current=true; setBusy(true); setError("");
     try {
       const next=await requestEvaluation(candidate);
-      let newProfile=profile;
-      if (next.plan.source === "MIXED_REFERENCE" && !newProfile) newProfile=await requestVesselProfile();
+      const newProfile = await profileFor(next.plan, profile);
       if (revision.current !== before) { setError("Dữ liệu đã đổi trong lúc chờ; phương án trước được giữ."); return; }
       setHistory(h=>[...h.slice(-19),structuredClone(result.plan)]); setResult(next); setProfile(newProfile); changeDraft(draftFrom(next.plan));
       select(next.plan.units.some(u=>u.id===selectedRef.current) ? selectedRef.current : next.plan.units[0]?.id ?? ""); setPreview(null); setRebaseInfo(null); setNotice(label);
@@ -252,7 +283,7 @@ export default function Workspace() {
   const doOpen = async () => {
     if(stale || lock.current || !savedId) {setError("Chọn phương án và áp dụng bản nháp trước khi mở.");return;}
     const before=revision.current;lock.current=true;setBusy(true);setError("");
-    try { const next=await openSnapshot(savedId); let p=profile; if(next.plan.source==="MIXED_REFERENCE" && !p) p=await requestVesselProfile(); if(before!==revision.current) {setError("Dữ liệu đổi trong lúc mở; phương án trước được giữ.");return;} setHistory(h=>[...h.slice(-19),structuredClone(plan)]);setProfile(p);setResult(next);changeDraft(draftFrom(next.plan));select(next.plan.units[0]?.id ?? "");setPreview(null);setRebaseInfo(null);setNotice("Đã mở và kiểm lại phương án đã lưu."); } catch(e) {setError(e instanceof Error?e.message:"Không mở được.");} finally {lock.current=false;setBusy(false);}
+    try { const next=await openSnapshot(savedId); const p=await profileFor(next.plan, profile); if(before!==revision.current) {setError("Dữ liệu đổi trong lúc mở; phương án trước được giữ.");return;} setHistory(h=>[...h.slice(-19),structuredClone(plan)]);setProfile(p);setResult(next);changeDraft(draftFrom(next.plan));select(next.plan.units[0]?.id ?? "");setPreview(null);setRebaseInfo(null);setNotice("Đã mở và kiểm lại phương án đã lưu."); } catch(e) {setError(e instanceof Error?e.message:"Không mở được.");} finally {lock.current=false;setBusy(false);}
   };
   const refreshSaved = () => { listSnapshots().then(items=>setSaved(items)).catch(()=>setError("Không thể đọc danh sách phương án local.")); };
   const doRebase = async () => {
@@ -261,7 +292,7 @@ export default function Workspace() {
     const before=revision.current;lock.current=true;setBusy(true);setError("");
     try {
       const [rebased,old]=await Promise.all([rebaseSnapshot(savedId),openSnapshot(savedId)]);
-      let p=profile; if(rebased.candidate.plan.source==="MIXED_REFERENCE" && !p) p=await requestVesselProfile();
+      const p=await profileFor(rebased.candidate.plan, profile);
       if(before!==revision.current) {setError("Dữ liệu đổi trong lúc tạo bản theo dữ liệu mới; phương án trước được giữ.");return;}
       setHistory(h=>[...h.slice(-19),structuredClone(plan)]);setProfile(p);setResult(rebased.candidate);changeDraft(draftFrom(rebased.candidate.plan));
       select(rebased.candidate.plan.units[0]?.id ?? "");setPreview(null);
@@ -307,9 +338,11 @@ export default function Workspace() {
   const submit = (e: FormEvent) => { e.preventDefault(); void run("draft"); };
   return <div className="app-shell"><div className="main-shell"><header className="topbar"><div className="brand"><strong>SCST</strong><span>Steel Cargo Stowage Tool</span></div><span>{contextLabel} · Local</span></header><main id="workspace">
     <div className="page-heading"><div><h1>Lập phương án chất xếp <span className="demo-badge">{contextLabel}</span></h1><p>Hầm mục tiêu trống · Dữ liệu chưa xác minh, không dùng cho phương án thực.</p></div><div className="heading-actions"><button className="button secondary" disabled={busy || !history.length} onClick={() => void run("undo")}>↶ Bản trước</button><button className="button dark" disabled={busy || stale} onClick={() => void run("demo")}>↻ Khôi phục mẫu</button></div></div>
-    <div className="vessel-controls"><button className="button secondary" disabled={busy} onClick={newPlan}>Phương án mới</button><button className="button secondary" disabled={busy || (plan.contract_version === "scst.m2a.v1" && plan.source === "USER_ENTERED")} onClick={detach}>Dùng hầm tự nhập</button><button className="button secondary" disabled={busy || plan.source === "MIXED_REFERENCE"} onClick={() => void switchCase("VR-SII")}>Xem VINAFCO 268</button>{plan.source === "MIXED_REFERENCE" && <label>Cấp tham chiếu <select aria-label="Cấp tham chiếu" value={plan.vessel?.case_id} disabled={busy} onChange={e => void switchCase(e.target.value as "VR-SI" | "VR-SII")}><option value="VR-SI">VR-SI</option><option value="VR-SII">VR-SII</option></select></label>}</div>
+    <div className="vessel-controls"><button className="button secondary" disabled={busy} onClick={newPlan}>Phương án mới</button><button className="button secondary" disabled={busy || (plan.contract_version === "scst.m2a.v1" && plan.source === "USER_ENTERED")} onClick={detach}>Dùng hầm tự nhập</button><button className="button secondary" disabled={busy || (plan.source === "MIXED_REFERENCE" && vessel?.vessel_id === "VINAFCO268")} onClick={() => void switchVessel("VINAFCO268", 1, "VR-SII")}>Xem VINAFCO 268</button>{plan.source === "MIXED_REFERENCE" && vessel && <label>Cấp tham chiếu <select aria-label="Cấp tham chiếu" value={vessel.case_id} disabled={busy} onChange={e => void switchVessel(vessel.vessel_id, vessel.profile_version ?? 1, e.target.value)}>{caseOptions.map(id => <option key={id} value={id}>{id}</option>)}</select></label>}</div>
     {notice && <p role="status">{notice}</p>}
-    {plan.source === "MIXED_REFERENCE" && profile && <section className="scope-note" aria-label="Thông số VINAFCO 268"><strong>VINAFCO 268 · HN-2642 — thân theo hồ sơ, hầm ước tính, hàng {cargoLabel}</strong><p>Thân {formatMetres(profile.dimensions_m.length*1000)} × {formatMetres(profile.dimensions_m.beam*1000)} × {formatMetres(profile.dimensions_m.depth*1000)} m. Hầm ước tính khoảng 56,41 × 10,34 × 5,41 m; kích thước chưa đo thực.</p><p>{(() => { const c=profile.cases.find(c => c.id === plan.vessel?.case_id)!; return `Mức hàng tham chiếu ${tonnes(c.cargo_mass_g)} tấn · TTTP ${fmt(c.deadweight_t)} tấn · mớn ${fmt(c.draft_m)} m · mạn khô hồ sơ khoảng ${formatMetres(c.freeboard_mm)} m`; })()}</p><p>{profile.capacity_note} {profile.container_note} Mạn khô hồ sơ và khoảng cách hình học có chênh lệch nhỏ, chưa đủ dữ liệu giải thích.</p><p>Khối lượng tàu không và tải sàn cho phép: chưa có dữ liệu. Không xác nhận an toàn hoặc điều kiện vận hành.</p></section>}
+    <VesselProfilePanel busy={busy} current={current} onOpen={(id, version, caseId) => void switchVessel(id, version, caseId)} />
+    {body && vessel?.vessel_id !== "VINAFCO268" && profile && <ProfileSummary detail={profile} caseId={vessel?.case_id ?? ""} />}
+    {body && vessel?.vessel_id === "VINAFCO268" && <section className="scope-note" aria-label="Thông số VINAFCO 268"><strong>VINAFCO 268 · HN-2642 — thân theo hồ sơ, hầm ước tính, hàng {cargoLabel}</strong><p>Thân {formatMetres(body.dimensions_m.length*1000)} × {formatMetres(body.dimensions_m.beam*1000)} × {formatMetres(body.dimensions_m.depth*1000)} m. Hầm ước tính khoảng 56,41 × 10,34 × 5,41 m; kích thước chưa đo thực.</p><p>{(() => { const c=body.cases.find(c => c.id === vessel?.case_id)!; return `Mức hàng tham chiếu ${tonnes(c.cargo_mass_g)} tấn · TTTP ${fmt(c.deadweight_t ?? 0)} tấn · mớn ${fmt(c.draft_m)} m · mạn khô hồ sơ khoảng ${formatMetres(c.freeboard_mm ?? 0)} m`; })()}</p><p>{body.notes[0]} {body.notes[1]} Mạn khô hồ sơ và khoảng cách hình học có chênh lệch nhỏ, chưa đủ dữ liệu giải thích.</p><p>Khối lượng tàu không và tải sàn cho phép: chưa có dữ liệu. Không xác nhận an toàn hoặc điều kiện vận hành.</p></section>}
     <section className="editor-card m2a-card" aria-label="Thư viện list ống"><h2>List ống Baltimore</h2><p>Nguồn chưa gán phương tiện. Khối lượng mỗi bó tính K × L, chưa cân; kích thước khối bao chưa đo.</p><p>31 nhóm · 1.076 bó · 21.226 ống. Tổng tính 1.125,55 t; tổng nguồn làm tròn 1.125,52 t; chênh lệch 31,03 kg. CBM nguồn 1.130,97 m³; khối bao tính lại 1.157,54 m³; chênh lệch 26,57 m³.</p><p>16 bó ở dòng 22, 31, 32 có kích thước khối bao cần xác minh; không khẳng định an toàn hoặc vừa hầm.</p><button className="button secondary" disabled={busy} onClick={()=>void checkPipeList()}>Xem trước list ống</button>{pipeCandidate && <div role="status">Xem trước: {pipeCandidate.plan.units.length} bó chưa xếp; nạp sẽ thay danh sách và xóa vị trí hiện tại. <button className="button secondary" disabled={busy} onClick={applyPipeList}>Nạp list vào phương án hiện tại</button></div>}{pipeLibrary && <details><summary>31 nhóm nguồn và cảnh báo</summary><ul>{pipeLibrary.groups.map(g=><li key={g.group_id}>{g.group_id} · {g.bundle_count} bó × {g.pieces_per_bundle} ống · {g.issue_codes.length ? `Cần đối chiếu: ${g.issue_codes.map(code=>sourceWarnings[code] ?? "Dữ liệu nguồn cần đối chiếu").join("; ")}` : "Không có cảnh báo nguồn"}</li>)}</ul></details>}</section>
     <CargoRevisionPanel plan={plan} onCreated={refreshSaved} />
     <p>Bản nháp chỉ giữ trong tab; lưu ảnh chụp đã kiểm để mở lại sau khi tải lại hoặc khởi động lại.</p>
