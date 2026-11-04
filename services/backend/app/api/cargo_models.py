@@ -150,3 +150,73 @@ class RebaseResult(BaseModel):
     removed_unit_ids: list[str]
     changed_unit_ids: list[str]
     comparison: CompareResult
+
+
+# ------------------------------------------------------------------ SUP-03 derived packing (read-only view)
+PackingStatus = Literal['DETAILED', 'ENVELOPE_ONLY']
+PackingReasonCode = Literal['OD_MISSING', 'OD_EXCEEDS_SECTION', 'PIECES_DO_NOT_FIT', 'INPUT_INVALID',
+                            'ENVELOPE_LOOSE', 'SOURCE_WARNING']
+
+
+class PackingReason(BaseModel):
+    code: PackingReasonCode
+    message: str
+
+
+class PackingChecks(BaseModel):
+    count: bool
+    od_fit: bool
+    envelope_fit: bool
+    slack_loose: bool
+
+
+class PackingCore(BaseModel):
+    status: PackingStatus
+    basis: Literal['DERIVED']
+    layout: Literal['RECT', 'HEX'] | None
+    columns: int
+    rows: int
+    od_um: int | None
+    wall_thickness_um: int | None
+    length_um: int
+    section_um: list[int]
+    pieces_source: int
+    pieces_placed: int
+    max_fit: int
+    pipe_centres_um: list[list[int]]
+    slack_um: list[int] | None
+    checks: PackingChecks
+    reasons: list[PackingReason]
+
+
+class BundlePacking(PackingCore):
+    bundle_id: str
+
+
+class GroupPacking(PackingCore):
+    group_id: str
+    bundle_count: int
+    bundle_packings: list[BundlePacking]
+
+
+class PackingStatusCounts(BaseModel):
+    DETAILED: int
+    ENVELOPE_ONLY: int
+
+
+class PackingStats(BaseModel):
+    group_count: int
+    groups_by_status: PackingStatusCounts
+    bundle_count: int
+    bundles_by_status: PackingStatusCounts
+    derived_pieces: int
+    source_pieces: int
+
+
+class RevisionPacking(BaseModel):
+    dataset_id: str
+    revision_id: str
+    content_sha256: str
+    basis: Literal['DERIVED']
+    groups: list[GroupPacking]
+    stats: PackingStats

@@ -1,0 +1,16 @@
+{
+  "planUnits": 1079,
+  "placedUnits": 1079,
+  "bundles": 1060,
+  "totalBundles": 1079,
+  "detailedBundles": 1060,
+  "buildMs": 36.1,
+  "pipeInstances": 21146,
+  "ringInstances": 42292,
+  "simplifiedBuildMs": 55,
+  "capped": false,
+  "budget": 60000,
+  "expectedDetailedPipes": 21146,
+  "sourcePiecesPlaced": 21256,
+  "cargoRevision": "BALTIMORE-PIPE-V1-1@R0004"
+}
