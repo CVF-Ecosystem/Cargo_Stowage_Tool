@@ -471,6 +471,7 @@ def snapshot_report_xlsx(snapshot_id: str):
 # ------------------------------------------------------------------ M5a local backup and restore
 from ..adapters import backup_check, backup_export
 from .backup_models import BackupPreview, BackupRejectedDetail, RestoreResult
+from starlette.concurrency import run_in_threadpool
 
 _BACKUP_BODY = {"required": True, "content": {"application/octet-stream": {"schema": {"type": "string", "format": "binary"}}}}
 _BACKUP_REJECTED = {400: {"model": BackupRejectedDetail, "description": "Tệp sao lưu không hợp lệ; dữ liệu hiện tại giữ nguyên."},
@@ -519,7 +520,7 @@ def export_backup():
 async def preview_backup_restore(request: Request):
     body = await _backup_body(request)
     try:
-        return backup_check.preview(body)
+        return await run_in_threadpool(backup_check.preview, body)
     except backup_check.BackupRejected as exc:
         raise _backup_rejected(exc)
 
@@ -530,7 +531,7 @@ async def apply_backup_restore(request: Request, confirm: str):
     from ..adapters import backup_restore
     body = await _backup_body(request)
     try:
-        return backup_restore.apply(body, confirm)
+        return await run_in_threadpool(backup_restore.apply, body, confirm)
     except backup_restore.ConfirmMismatch as exc:
         raise HTTPException(409, {"message": exc.message, "errors": exc.errors})
     except backup_check.BackupRejected as exc:
