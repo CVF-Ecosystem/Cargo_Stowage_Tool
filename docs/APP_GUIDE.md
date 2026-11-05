@@ -14,13 +14,13 @@ Chọn bó trong bảng, 3D hoặc mặt bằng. Sửa khối lượng, X/Y, gó
 
 Giới hạn chứng nhận và chuyến phải dương; hàng đã có trên tàu có thể bằng 0. Giới hạn chuyến không vượt chứng nhận, hàng đã có không vượt giới hạn chuyến. Lượng xếp thêm bằng giới hạn chuyến trừ hàng đã có. Giao diện dùng kg và cm, hiển thị làm tròn để dễ thao tác; tổng khối lượng dùng tấn tối đa hai số lẻ. Mặc định hiển thị tròn đến kg/cm. Vẫn có thể nhập kg tối đa 3 số lẻ, cm tối đa 1 số lẻ khi cần giữ dữ liệu cũ chính xác. Ô chưa sửa giữ nguyên số gốc; số làm tròn chỉ được áp vào trường bạn thực sự nhập lại.
 
-`DRAFT` có lỗi hình học; `GEOMETRY_FEASIBLE` còn lỗi quy tắc; `RULES_CHECKED` chỉ nói các kiểm trong M1 đã chạy đạt. Danh sách chưa kiểm luôn có, bao gồm kê/chèn/chằng, nhiều tầng, ổn định, tải cục bộ và hàng cũ trong hầm. 3D hỗ trợ kéo xoay, cuộn zoom, chọn và đặt lại; khi WebGL không khả dụng giao diện chuyển sang 2D và bảng.
+`DRAFT` có lỗi hình học; `GEOMETRY_FEASIBLE` còn lỗi quy tắc; `RULES_CHECKED` chỉ nói các kiểm hiện có đã chạy đạt. Danh sách chưa kiểm luôn có, bao gồm kê/chèn/chằng, tải chồng (phương án nhiều tầng) hoặc nhiều tầng (phương án một tầng), ổn định, tải cục bộ và hàng cũ trong hầm. 3D hỗ trợ kéo xoay, cuộn zoom, chọn và đặt lại; khi WebGL không khả dụng giao diện chuyển sang 2D và bảng.
 
 ## Chế độ tham chiếu VINAFCO 268
 
 Chọn **Xem VINAFCO 268**. Thân dùng kích thước theo hồ sơ 77,8 × 13,24 × 5,2m; hầm/cabin/tuyến hình ước tính, hàng synthetic. Chọn VR-SI/VR-SII để xem mức hàng 3282,5/3517,5t và mớn tham chiếu4,60/4,85m; TTTP3301/3536t hiển thị riêng. Chưa tính mớn theo tổng hàng. Màu thân GLB cố định tại4,85m; khung xanh là marker theo cấp đang chọn.
 
-Giới hạn chuyến cũ được giữ hoặc hạ theo mức mới, không tự nâng từ32t của mẫu lên mức hàng tham chiếu. Có thể chỉnh giới hạn chuyến bằng kg; mức hàng theo hồ sơ chỉ đọc. Khi có STALE, áp dụng và kiểm lại trước khi đổi cấp, khôi phục mẫu hoặc undo. Hàng đã có vẫn được tính ngoài hầm mục tiêu; nếu vượt mức cấp mới thì không chuyển cấp và giữ dữ liệu.
+Từ M3a, khi chọn VINAFCO 268 hoặc đổi cấp, giới hạn chuyến lấy theo mức hàng tham chiếu của cấp đó (VR-SII: 3.517,5t), kèm thông báo; không còn giữ 32t của mẫu. Có thể chỉnh lại giới hạn chuyến bằng kg; mức hàng theo hồ sơ chỉ đọc. Khi có STALE, áp dụng và kiểm lại trước khi đổi cấp, khôi phục mẫu hoặc undo. Hàng đã có vẫn được tính ngoài hầm mục tiêu; nếu vượt mức cấp mới thì không chuyển cấp và giữ dữ liệu.
 
 Hầm nguồn rộng10,34375m; kiểm integer-mm dùng10,343m và lùi0,375mm mỗi mạn. Đây là chuyển đơn vị bảo thủ trên hầm ước tính. Mạn khô nguồn612/362mm giữ riêng D−d600/350mm; chênh lệch12mm chưa giải thích. Tải sàn và khối lượng tàu không chưa có dữ liệu. Chưa hỗ trợ container (giấy có điều kiện mớn riêng4,17m) hoặc ổn định/sức bền. M2a đã hỗ trợ manifest rỗng. Lỗi tải GLB vẫn dùng được bảng/hầm/kiểm; WebGL lỗi chuyển2D.
 
@@ -40,13 +40,13 @@ Loại `BAR_BUNDLE`/`PIPE_BUNDLE`; yêu cầu `required`/`optional`/`excluded`. 
 
 **Lưu/mở:** áp dụng nháp trước, đặt tên1–100ký tự rồi **Lưu phương án**. Có thể lưu cả phương án DRAFT đã được backend đánh giá; việc lưu không đổi kết quả thành đạt. Mỗi lần lưu tạo UUID/bản mới, không ghi đè. Reload hoặc khởi động lại app → chọn bản ở **Phương án đã lưu** → **Mở phương án**, backend kiểm lại theo rules/profile hiện tại. Danh sách100bản mới nhất, không tự lưu nháp, không có xóa/ghi đè/so sánh phiên bản đầy đủ trong M2a.
 
-SQLite mặc định: `runtime-data/scst.sqlite3`, ngoài Git. Giữ thư mục này nếu muốn giữ các bản lưu; không xóa để xử lý lỗi. `SCST_DATA_DIR` dành cho cấu hình server và test cô lập, không nhận qua API. File/record/phiên bản/timestamp lỗi được báo, không reset DB; bản đang mở giữ nguyên. Nếu một record timestamp hỏng, danh sách chưa dùng được cho tới khi sửa dữ liệu; record tốt vẫn còn, không bị bỏ hoặc sửa ngầm. Backup/restore tự động thuộc M5.
+SQLite mặc định: `runtime-data/scst.sqlite3`, ngoài Git. Giữ thư mục này nếu muốn giữ các bản lưu; không xóa để xử lý lỗi. `SCST_DATA_DIR` dành cho cấu hình server và test cô lập, không nhận qua API. File/record/phiên bản/timestamp lỗi được báo, không reset DB; bản đang mở giữ nguyên. Nếu một record timestamp hỏng, danh sách chưa dùng được cho tới khi sửa dữ liệu; record tốt vẫn còn, không bị bỏ hoặc sửa ngầm. Sao lưu/khôi phục thủ công có từ M5a (xem mục M5a bên dưới); sao lưu tự động theo lịch chưa có.
 
 Ở lượt M2a, owner chưa có manifest/số đo hầm thực và chọn mẫu có nhãn. Sau đó owner cung cấp list ống V1.1 bên dưới; số đo hầm vẫn chưa có. Hàng/hầm tự nhập là dữ liệu khai báo chưa xác minh; GLB VINAFCO và các giới hạn sử dụng ở trên vẫn áp dụng. Xem [SPEC](specs/SCST_M2A.md) và [review](reviews/SCST_M2A_REVIEW.md).
 
 ## Nguồn list ống V1.1
 
-1. Chọn hầm/phương án muốn dùng. **Xem VINAFCO 268** mở hầm tham chiếu ước tính; nạp list không tự đổi phương tiện hoặc nâng giới hạn chuyến. Mặc định giới hạn chuyến 32t từ mẫu vẫn được giữ, bạn khai báo giới hạn phù hợp rồi kiểm lại.
+1. Chọn hầm/phương án muốn dùng. **Xem VINAFCO 268** mở hầm tham chiếu ước tính, giới hạn chuyến theo mức hàng tham chiếu của cấp. Nạp list không tự đổi phương tiện hoặc giới hạn chuyến.
 2. **Xem trước list ống** để xem nguồn: 31 nhóm, 1.076 bó, 21.226 ống. **Nạp list vào phương án hiện tại** thay manifest và xóa các placement cũ; có thể quay về **Bản trước**. Mọi bó ban đầu chưa xếp, yêu cầu mặc định **Tùy chọn**, vì nguồn chưa xác nhận toàn bộ list bắt buộc cho một chuyến.
 3. Trong **Danh sách hàng**, lọc **Nhóm nguồn** theo dòng Excel (`Sheet1-R002` là dòng 2) và dùng **Trang trước/Trang sau**, tối đa 50 bó/trang. ID `PIPE-R002-B0001` là bó thứ nhất ở dòng 2, không dùng STT nguồn làm khóa.
 4. Chọn bó → **Đặt bó** tại gốc hầm, sửa X/Y/góc → **Áp dụng & kiểm lại**. Đặt tiếp tại cùng gốc sẽ báo giao nhau; nút Đặt bó không tự tìm vị trí; dùng M2b bên dưới để xếp thử. **Bỏ vị trí** đưa bó về chưa xếp. Số bó/ống/khối lượng đã xếp và còn lại có cho toàn list lẫn nhóm đang lọc. Bó **Loại trừ** vẫn thuộc tồn hàng nguồn nhưng không được đặt; số liệu còn lại bao gồm các bó này.
@@ -65,9 +65,67 @@ Khối lượng bó = K (kg/ống) × L (ống/bó), lưu gram nguyên. Tổng t
 4. Phần lý do phân trang50bó, lọc theo loại. `Loại trừ`: requirement không cho đặt; `Vượt chiều cao`: bó cao hơn hầm; `Khối bao quá lớn`: cả2hướng không vừa hầm; `Giới hạn khối lượng`: không đủ tải còn lại; `Chưa tìm được chỗ`: heuristic chưa có vị trí, có thể có cách xếp khác. Hàng bắt buộc chưa đặt vẫn được rule báo, không tự đổi thành tùy chọn.
 5. Lưu/mở giữ placements và nguồn chính xác; lý do heuristic không lưu trong snapshot. Sau chỉnh hoặc mở phương án, chạy lại xếp thử để tính lý do mới. Lỗi mạng/preview đến muộn không ghi đè edit mới.
 
-Giới hạn đang có được giữ nguyên: chọn tàu từ mẫu có thể vẫn là **32t**; cần thay **Giới hạn chuyến (kg)** theo mức bạn khai báo rồi kiểm lại. App không tự tăng tải. Với list nguồn1076bó trên hầm tham chiếu và mức VR-SII đầy đủ, thuật toán hiện đặt167bó (217,74t), còn909bó; giới hạn32t cho22bó. Không khẳng định tối ưu hoặc cảlist vừa hầm. Chỉ một lớp, chưa tính kê/chèn/chằng, nhiều tầng, tải sàn, ổn định/sức bền. Bó cần xác minh và hầm ước tính vẫn giữ nhãn.
+Xếp thử không tự tăng giới hạn chuyến đang khai báo. Với list nguồn 1076 bó trên hầm tham chiếu ở mức VR-SII, cách **Một tầng** đặt 167 bó (217,74t), còn 909 bó vì hết diện tích sàn. Cách nhiều tầng ở mục M3a dưới đây đặt đủ 1076 bó. Không khẳng định tối ưu; chưa tính kê/chèn/chằng, tải chồng, tải sàn, ổn định/sức bền. Bó cần xác minh và hầm ước tính vẫn giữ nhãn.
 
 Khối lượng ở bảng/thống kê hiển thị tối đa2số lẻ tấn: **1.125,55tấn** thay cho1.125,55103; số nhỏ khác0 hiện **<0,01tấn**. Tính/lưu bằng gram, ô nhập kg không làm tròn. Hai CBM hiển thị gọn1.130,97/1.157,54m³, số đầy đủ vẫn ở [đánh giá nguồn](reviews/SCST_PIPE_LIST_ASSESSMENT.md). Heuristic dùng lưới mm làm tròn lên để dự trữ khối bao, geometry kiểm/vẽ vẫn chính xác µm; khe lưới chưa phải khoảng kê/chèn nghiệp vụ.
+
+## M3a — Xếp nhiều tầng theo cột
+
+1. Ô **Cách xếp thử** cạnh nút **Xếp thử tự động** có hai lựa chọn:
+   - **Nhiều tầng theo cột (thử nghiệm)**: mặc định khi phương án là list ống.
+   - **Một tầng (như cũ)**: mặc định cho phương án khác.
+
+   Lựa chọn bạn đổi được giữ trong tab.
+2. Nhiều tầng: các bó **cùng kích thước** chồng thành cột thẳng đứng trên một vị trí sàn. Cột dừng khi tầng kế tiếp vượt chiều cao hầm hoặc hết khối lượng cho phép.
+   - Xem trước ghi "Nhiều tầng: N cột · tối đa M tầng · đã xếp … bó · chưa xếp … bó".
+   - Lý do chưa xếp có thêm **Hết chiều cao cột**.
+3. Sau **Áp dụng xếp thử**:
+   - bảng hàng có cột **Tầng**;
+   - chi tiết bó ghi "Tầng N · Z … cm · Bó đỡ: …";
+   - mặt bằng 2D ghi "×N" cho cột nhiều tầng;
+   - 3D đặt từng bó đúng cao độ.
+4. App kiểm đỡ cho mọi bó ở trên đáy hầm:
+   - có bó đỡ;
+   - mặt trên bó đỡ khớp cao độ;
+   - phủ ≥ 90% diện tích đáy;
+   - tâm đáy nằm trên bó đỡ;
+   - đúng chỉ số tầng.
+
+   Nếu bạn chỉnh tay X/Y một bó tầng trên mà làm mất đỡ, kiểm lại sẽ báo lỗi có tên bó và bó đỡ.
+5. Khi dữ liệu hàng có revision mới và bạn tạo bản theo dữ liệu mới: bó bị bỏ hoặc đổi kéo theo các bó nằm trên nó, được ghi **Mất đỡ** trong danh sách vị trí bị bỏ.
+6. Báo cáo của phương án nhiều tầng có cột tầng/bó đỡ, tổng số tầng và cảnh báo "Phương án nhiều tầng: chưa kiểm tải chồng, tải sàn, chằng buộc và ổn định".
+
+Giới hạn:
+- Chưa xếp lẫn kích thước trong một cột, chưa có gỗ kê.
+- Khe giữa các tầng dưới 1 mm do làm tròn lưới, chưa phải khoảng kê.
+- Chưa có dữ liệu tải chồng cho phép.
+
+Xem [SPEC](specs/SCST_M3A.md) và [review](reviews/SCST_M3A_REVIEW.md).
+
+## M5a — Sao lưu và khôi phục
+
+1. Mục **Sao lưu và khôi phục** nằm trong khu lưu/mở phương án.
+2. **Tải bản sao lưu** tải tệp `scst-backup-YYYYMMDD-HHMMSS.scstbak`:
+   - gồm mọi phương án đã lưu, revision dữ liệu hàng và hồ sơ tàu đã nhập;
+   - kèm `manifest.json` có sha256 từng tệp;
+   - không chứa đường dẫn trên máy.
+
+   Cất tệp ra ngoài máy.
+3. **Khôi phục từ bản sao lưu** → chọn tệp. App kiểm toàn bộ trước khi làm gì:
+   - cấu trúc ZIP an toàn;
+   - mã sha256;
+   - cơ sở dữ liệu;
+   - từng phương án;
+   - chuỗi revision;
+   - từng hồ sơ tàu.
+
+   Sau đó app hiện số liệu trong tệp so với dữ liệu hiện tại. Tệp lỗi được báo bằng tiếng Việt và không thay đổi gì.
+4. Bấm **Khôi phục** để **thay toàn bộ** dữ liệu.
+   - Trước khi thay, app tự tạo `runtime-data/backups/pre-restore-<thời điểm>.scstbak` từ dữ liệu hiện tại.
+   - Nếu lỗi giữa chừng, ví dụ tệp đang bị chương trình khác mở, dữ liệu cũ được giữ nguyên từng byte.
+   - Bản nháp chưa lưu trong tab vẫn còn, nhưng không thuộc dữ liệu vừa khôi phục.
+
+Chưa có: sao lưu tự động theo lịch, mã hóa, khôi phục gộp hoặc chọn từng phần. Xem [SPEC](specs/SCST_M5A.md) và [review](reviews/SCST_M5A_REVIEW.md).
 
 ## M2c — Giữ bản gốc và so sánh
 
@@ -108,4 +166,14 @@ npm.cmd --prefix apps/frontend run test:e2e
 
 Cây thực: `services/backend/app/domain/{model,geometry,rules,planner,comparison}` chứa contract và kiểm; `services/backend/app/api` phục vụ API; `apps/frontend/src/{api,features,viewer-3d}` là giao diện; `contracts/openapi.json` và `apps/frontend/src/api/generated/api.ts` được sinh; `tests/backend`, `tests/browser` chứa kiểm; `tooling/` và `Start-SCST.cmd` khởi chạy.
 
-Ngoài phạm vi hiện tại: xếp tối ưu/nhiều tầng, import XLSX/PDF tổng quát, xuất báo cáo, nhiều tầng, xác minh manifest/hầm đo thực và AI. M2a có nhập tay/CSV và lưu/mở local; VINAFCO 268 bổ sung thông số thân và trạng thái tham chiếu theo hồ sơ.
+Đã có: nhập tay/CSV, lưu/mở local, revision dữ liệu hàng, hồ sơ tàu, xếp thử một tầng và nhiều tầng theo cột, xuất báo cáo XLSX/trang in, sao lưu/khôi phục.
+
+Ngoài phạm vi hiện tại:
+- xếp tối ưu, xếp lẫn kích thước trong cột;
+- tải chồng, tải sàn, chằng buộc, ổn định;
+- import XLSX/PDF tổng quát;
+- xác minh manifest/hầm đo thực (M3b);
+- bộ cài, sao lưu tự động;
+- AI.
+
+Bắt đầu dùng thử từ [trang bàn giao MVP](SCST_MVP_HANDOFF.md).

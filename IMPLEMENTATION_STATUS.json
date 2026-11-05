@@ -7,15 +7,15 @@
   "activeWorkOrders": [],
   "knownLimitations": [
     "PIPE-LIST actual31group/1076bundle source integration technically verified; source mass/dimensions calculated/provisional.16bundles need envelope verification; measuredhold/business/operational acceptance pending.",
-    "Raw drafts/history/baseline/comparison remain in browser tab until explicit immutable SQLite Plan snapshot save. Baseline/comparison do not persist through reload; select saved A again. Latest100 snapshots, no overwrite/delete/backup/restore UI.",
-    "GenericCSV max200units/1MiB; PIPE-LIST1076. M2b deterministic one-layer trial is heuristic, notoptimal; reasons session-only, savedPlan retainsplacements. No generalXLSX/PDF import, export/multilayer/AI.",
-    "BOX/single-layer; VINAFCO hull dimensions sourced, hold/cabin/lines estimated. Onboard cargo outside target hold. No stability/strength/floor-load verification.",
+    "Raw drafts/history/baseline/comparison remain in browser tab until explicit immutable SQLite Plan snapshot save. Baseline/comparison do not persist through reload; select saved A again. Latest100 snapshots listed, no overwrite/delete. M5a manual backup export and replace-all restore (verified, pre-restore backup, rollback); no scheduled backup, encryption or merge restore.",
+    "GenericCSV max200units/1MiB; PIPE-LIST1076. Planners are deterministic heuristics, not optimal: one-layer (167/1076 on VINAFCO) and M3a columns-v1 multi-layer (1076/1076, same-size vertical columns only, default for pipe lists); reasons session-only, savedPlan retains placements. No general XLSX/PDF import, no AI.",
+    "BOX holds only; VINAFCO hull dimensions sourced, hold/cabin/lines estimated. Multi-layer support checks are geometric only (>=90% cover, centre, level, layer index): stack load, tanktop load, dunnage/lashing, stability and strength are not verified. Sub-mm layer gaps are grid rounding, not dunnage. Onboard cargo outside target hold.",
     "Malformed stored timestamps make list unavailable until repaired; app reports error, never silently skips/resets DB. Good records remain accessible by ID.",
     "TestClient/httpx deprecation and Three.js chunk warning remain; separate parent-container maintenance condition unchanged.",
     "UI rounds detail to kg/cm and totals to tonnes2decimals; only explicitly edited fields change underlying exact data. Display rounding is not a geometry/mass tolerance. CSV exchange keeps header mm/kg.",
     "SUP-01, SUP-02A, SUP-02B and SUP-03 verified technically (merges 569c7ee, de2aeea, 164dce5): cargo revisions and recheck, generic vessel profiles with landmark/GLB-bounds verified transform and append-only user profiles, derived RECT/HEX packing with envelope fallback and three cargo views. Packing is DERIVED, not measured; OD-only revisions do not mark plans for recheck. Only one real vessel (VINAFCO268, hold ESTIMATED). Integration check before M2d is next; observations O2-O9 are owned follow-up.",
     "CVF development adoption is being prioritized at DESIGN: kit/local document receipts exist, automatic local pre-commit hook absent in current inspection; hosted CI and live agent-governance proof not established by this task. No full adoption claim.",
-    "M2d report export verified technically (merge 690fcc7): shared report model, stdlib XLSX and printable A4 page (PDF via browser print). The XLSX passed strict structural checks but was not yet opened in real Excel."
+    "M2d report export verified technically (merge 690fcc7): shared report model, stdlib XLSX and printable A4 page (PDF via browser print); owner confirmed the sample XLSX opens in Excel (05-11). Multi-layer reports add layer/support columns and the MULTI_LAYER notice."
   ],
   "evidence": [
     "docs/project/PROJECT_STATUS.md",

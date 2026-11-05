@@ -2,7 +2,15 @@
 
 Công cụ hỗ trợ lập phương án xếp hàng thép trong hầm tàu, chạy local với giao diện tiếng Việt. SCST hướng tới luồng **nhập hàng và hầm → đề xuất xếp → xem 3D → chỉnh và kiểm lại → lưu, so sánh, xuất báo cáo**.
 
-**Hiện tại: có xếp thử tự động một lớp, giữ bản gốc và so sánh phương án M2c, cùng nhập liệu, CSV, lưu/mở local và nguồn list ống V1.1 (31 nhóm, 1.076 bó)**, bên cạnh mẫu M1 và chế độ tham chiếu VINAFCO 268. Hầm vẫn dạng hộp (BOX), hàng một lớp; dữ liệu tự nhập chưa được xác minh. Bộ xếp thử là heuristic sơ bộ; xuất báo cáo thuộc phần M2d tiếp theo.
+**Hiện tại là MVP để dùng thử**, gồm:
+
+- xếp thử tự động **một tầng hoặc nhiều tầng theo cột**: list 1.076 bó xếp vừa hầm VINAFCO ước tính;
+- revision dữ liệu hàng và hồ sơ tàu;
+- xuất báo cáo XLSX và trang in;
+- **sao lưu/khôi phục dữ liệu local**;
+- nhập liệu, CSV, lưu/mở, giữ gốc và so sánh phương án.
+
+Hầm vẫn dạng hộp (BOX) và là ước tính. Tải chồng, tải sàn, chằng buộc và ổn định chưa được kiểm. **Bắt đầu từ [trang bàn giao MVP](docs/SCST_MVP_HANDOFF.md).**
 
 ## Bản hiện tại làm được gì?
 
@@ -16,8 +24,13 @@ Công cụ hỗ trợ lập phương án xếp hàng thép trong hầm tàu, ch�
 - Import CSV UTF-8 có xem trước số bó, tổng khối lượng và lỗi theo dòng/trường; áp dụng toàn bộ khi hợp lệ.
 - Lưu các bản phương án riêng bằng SQLite local và mở lại sau tải trang hoặc khởi động lại server.
 - Giữ bản gốc A, chỉnh bản B, so sánh từng bó/vị trí/giới hạn và khôi phục A; các bản đã lưu không bị ghi đè.
+- Xếp thử nhiều tầng theo cột, có kiểm đỡ: phủ ≥ 90% đáy, tâm đáy nằm trên bó đỡ, đúng cao độ và chỉ số tầng.
+- Ghi revision dữ liệu hàng; báo phương án nào cần kiểm lại và tạo bản theo dữ liệu mới.
+- Nhập hồ sơ tàu kèm mô hình GLB.
+- Xuất báo cáo XLSX và trang in.
+- Tải bản sao lưu toàn bộ dữ liệu local và khôi phục có kiểm.
 
-> Nhấn **Lưu phương án** để giữ bản đã kiểm; nháp chưa lưu mất khi tải lại/đóng tab. Kết quả kiểm chưa bao gồm nhiều tầng, kê/chèn/chằng, ổn định tàu hoặc tải cục bộ. Dữ liệu mẫu và hình học chưa xác minh chưa dùng cho phương án thực.
+> Nhấn **Lưu phương án** để giữ bản đã kiểm; nháp chưa lưu mất khi tải lại/đóng tab. Kết quả kiểm chưa bao gồm tải chồng, tải sàn, kê/chèn/chằng hoặc ổn định tàu. Dữ liệu mẫu và hình học chưa xác minh chưa dùng cho phương án thực.
 
 ## Chạy trên Windows
 
@@ -64,7 +77,7 @@ Xem cách thao tác, đơn vị nhập liệu và ý nghĩa trạng thái trong 
 
 Trong app, chọn **Xem VINAFCO 268** để mở mô hình thân tàu, hầm và hàng. Có thể xoay, phóng to, ẩn/hiện hình tàu mờ và chọn cấp tham chiếu **VR-SI / VR-SII**. Kích thước thân theo hồ sơ: **77,8 × 13,24 × 5,2 m**; hầm, cabin và tuyến hình vẫn là ước tính có nhãn. Marker mớn theo cấp, không tính từ lượng hàng đang xếp.
 
-Giới hạn chuyến đang có được giữ khi chuyển từ mẫu M1 (mặc định 32 tấn); có thể chỉnh đến mức hàng tham chiếu của cấp đã chọn. Mức hàng này tách riêng với trọng tải toàn phần. Hãy áp dụng bản nháp trước khi đổi cấp hoặc quay lại bản trước.
+Khi chọn VINAFCO 268 hoặc đổi cấp, giới hạn chuyến lấy theo mức hàng tham chiếu của cấp đó (VR-SII: 3.517,5 tấn), kèm thông báo. Có thể chỉnh lại trong **Giới hạn chuyến (kg)**. Mức hàng này tách riêng với trọng tải toàn phần. Hãy áp dụng bản nháp trước khi đổi cấp hoặc quay lại bản trước.
 
 Xem [đánh giá nguồn](docs/reviews/SCST_VINAFCO268_ASSESSMENT.md) và [review tích hợp](docs/reviews/SCST_VINAFCO268_REVIEW.md). PDF đăng kiểm gốc được giữ local, không nằm trong source app hoặc API.
 
@@ -89,7 +102,17 @@ Xem [kiểm cách tính và quyết định tích hợp](docs/reviews/SCST_PIPE_
 
 Sau khi nạp hàng/chọn hầm, bấm **Xếp thử tự động** → xem số bó/khối lượng và lý do chưa xếp → **Áp dụng xếp thử**. Các bó được bố trí sẽ hiện trong hầm 3D/2D, có thể chọn/chỉnh tay và lưu/mở. Xem trước chưa đổi vị trí cũ; áp dụng giữ **Bản trước** để quay lại. Khi chưa có placement, viewer chỉ dẫn luồng này.
 
-Bộ xếp thử làm **một lớp**, xét xoay0/90°, ưu tiên hàng bắt buộc, tuân theo giới hạn chuyến trừ hàng đã có. Nó giữ giới hạn đang khai báo (mẫu mặc định32t), không tự nâng theo tàu. Với list1076bó và hầm VINAFCO, thuật toán hiện gợi ý167bó ở mức tải VR-SII đầy đủ, còn909bó; ở giới hạn32t gợi ý22bó. Đây là kết quả heuristic, không phải số lượng tối ưu hoặc chứng minh toàn bộlist xếp vừa. Lý do từng bó còn lại có lọc/phân trang; dữ liệu hầm và16khối bao vẫn chưa xác minh.
+Ô **Cách xếp thử** có hai lựa chọn:
+
+- **Nhiều tầng theo cột (thử nghiệm)**: mặc định cho list ống. Các bó cùng kích thước chồng thành cột thẳng đứng, có kiểm đỡ.
+- **Một tầng (như cũ)**: mặc định cho phương án khác.
+
+Cả hai xét xoay 0/90°, ưu tiên hàng bắt buộc và tuân theo giới hạn chuyến trừ hàng đã có. Với list 1.076 bó trên hầm VINAFCO ước tính ở mức VR-SII:
+
+- nhiều tầng đặt **1.076/1.076 bó**, 98 cột, cao tối đa 18 tầng, trong khoảng 0,05 giây;
+- một tầng chỉ đặt 167 bó, vì giới hạn nằm ở diện tích sàn.
+
+Mặt bằng 2D ghi "×N" cho số tầng của mỗi cột; bảng hàng có cột **Tầng**; chi tiết bó ghi cao độ và bó đỡ. Đây là kết quả heuristic, không phải tối ưu. Kết quả chỉ chứng minh khối bao vừa hầm ước tính về hình học, chưa xét tải chồng, tải sàn, chằng buộc hay ổn định. Xem [review M3a](docs/reviews/SCST_M3A_REVIEW.md).
 
 Khối lượng **hiển thị tối đa2số lẻ**, ví dụ **1.125,55 tấn**; tính/lưu và ô nhập kg vẫn giữ chính xác. Lý do xếp thử chỉ ở lượt phân tích trong tab, sau mở/chỉnh phương án chạy lại để có lý do mới. [SPEC M2b](docs/specs/SCST_M2B.md) và [hướng dẫn](docs/APP_GUIDE.md).
 
@@ -98,6 +121,16 @@ Khối lượng **hiển thị tối đa2số lẻ**, ví dụ **1.125,55 tấn*
 Bấm **Giữ bản hiện tại làm gốc**, hoặc chọn **Bản lưu làm gốc → Dùng bản lưu làm gốc**. Việc chọn A giữ nguyên phương án B đang mở. Chỉnh B và **Áp dụng & kiểm lại**, rồi **So sánh với bản gốc** để xem bó thêm/bỏ/đổi/không đổi, khối lượng, số bó, số lỗi và điều kiện thay đổi. Có lọc, tìm ID, phân trang 50 bó và chi tiết trường; chênh lệch khối lượng dùng kg, kích thước/vị trí dùng cm/m; tổng A/B vẫn gọn hai số lẻ tấn. Chênh dưới mức hiển thị có nhãn, dữ liệu gốc không bị làm tròn.
 
 **Khôi phục bản gốc** kiểm lại A rồi đưa vào workspace; B vẫn còn trong **Bản trước**. Mỗi lần lưu tạo bản mới. Baseline chỉ giữ trong tab và không tự lưu; muốn dùng sau reload, lưu phương án rồi chọn lại bản đã lưu. Chênh lệch giữa hai bản không tự chứng minh bản nào tốt hơn hoặc đủ điều kiện vận hành. Xem [SPEC M2c](docs/specs/SCST_M2C.md) và [review](docs/reviews/SCST_M2C_REVIEW.md).
+
+## Báo cáo, sao lưu và khôi phục
+
+**Xuất báo cáo** mở trang in A4 và cho tải tệp XLSX của phương án đã lưu. Phương án nhiều tầng có thêm cột tầng/bó đỡ, tổng số tầng và cảnh báo các phần chưa kiểm.
+
+Mục **Sao lưu và khôi phục**:
+
+- **Tải bản sao lưu** tạo một tệp `.scstbak`, gồm toàn bộ phương án đã lưu, revision dữ liệu hàng và hồ sơ tàu đã nhập, kèm mã kiểm sha256.
+- **Khôi phục từ bản sao lưu** kiểm toàn bộ tệp trước, cho xem số liệu, rồi **thay toàn bộ** dữ liệu hiện có. Trước khi thay, app tự lưu dữ liệu hiện tại vào `runtime-data/backups/`. Nếu lỗi giữa chừng, dữ liệu cũ được giữ nguyên.
+- Chưa có sao lưu tự động theo lịch, mã hóa hay khôi phục gộp. Xem [review M5a](docs/reviews/SCST_M5A_REVIEW.md).
 
 Số liệu trên mô hình/bảng dùng **kg, cm hoặc m**, làm tròn phù hợp thao tác thực tế. Dữ liệu chưa sửa giữ nguyên; làm tròn hiển thị không tạo dung sai vượt biên hoặc quá tải. Ô nhập dùng kg/cm; CSV vẫn theo đơn vị ghi trong header. Xem [quy ước](docs/APP_GUIDE.md).
 
@@ -119,9 +152,9 @@ Cargo_Stowage_Tool/
 │   │   ├── model/                  # Mô hình dữ liệu và đơn vị tính
 │   │   ├── geometry/               # Biên hầm, tọa độ và giao nhau
 │   │   ├── rules/                  # Kiểm quy tắc nghiệp vụ
-│   │   ├── planner/                # Heuristic xếp thử một lớp, lý do chưa xếp
+│   │   ├── planner/                # Heuristic xếp thử một tầng và nhiều tầng theo cột, lý do chưa xếp
 │   │   └── comparison/             # So sánh chính xác, kiểm riêng hai phương án
-│   └── adapters/                   # Import CSV và lưu snapshot SQLite
+│   └── adapters/                   # Import CSV, snapshot SQLite, revision, hồ sơ tàu, sao lưu/khôi phục
 ├── contracts/                      # OpenAPI contract
 ├── tests/                          # Backend, browser và kiểm khởi chạy
 ├── tooling/                        # Cài đặt, build, chạy local, sinh contract
@@ -129,24 +162,24 @@ Cargo_Stowage_Tool/
 └── archive/                        # Tài liệu lịch sử và bản thử cũ
 ```
 
-Frontend hiển thị kết quả từ backend; chỉnh sửa cần được kiểm lại. Backend dùng SQLite cho snapshot local, có heuristic xếp thử một lớp, chưa tích hợp AI. Cây kiến trúc tương lai nằm trong [roadmap tổng thể](docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md).
+Frontend hiển thị kết quả từ backend; chỉnh sửa cần được kiểm lại. Backend dùng SQLite cho snapshot local, có heuristic xếp thử một tầng và nhiều tầng, chưa tích hợp AI. Cây kiến trúc tương lai nằm trong [roadmap tổng thể](docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md).
 
 ## Lộ trình phát triển
 
 Đã đối chiếu [CVF-DEV — áp dụng CVF tại project](docs/project/SCST_CVF_DEVELOPMENT_ADOPTION.md) và dùng mapping trong SPEC/WORK_ORDER, kiểm và review SUP-01. Full adoption và bằng chứng hành vi agent chưa được nghiệm thu.
 
-Hướng bổ sung vừa chốt: **SUP-01 viewer 3D → SUP-02 dữ liệu hàng/profile theo phiên bản → SUP-03 packing chi tiết → M2d xuất báo cáo**. Xem [roadmap bổ sung](docs/roadmaps/SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md); **SUP-01 đã giao kỹ thuật**, SUP-02/03 chưa mở. [Review SUP-01](docs/reviews/SCST_SUP_01_REVIEW.md): build và36/36 browser, camera/scene giữ trạng thái, góc nhìn/focus và ghost chọn lọc.
+Roadmap bổ sung **SUP-01 viewer 3D → SUP-02A/B dữ liệu hàng và hồ sơ tàu theo phiên bản → SUP-03 packing → M2d xuất báo cáo** đã giao kỹ thuật. Tiếp theo là HARDEN-01, **M3a xếp nhiều tầng** và **M5a sao lưu/khôi phục**, tất cả đã có review độc lập trong `docs/reviews/`. Xem [roadmap bổ sung](docs/roadmaps/SCST_ROADMAP_BO_SUNG_3D_VA_DU_LIEU.md) và [trang bàn giao MVP](docs/SCST_MVP_HANDOFF.md).
 
 | Mốc | Kết quả hướng tới | Trạng thái |
 |---|---|---|
 | M0 — Thống nhất hướng | Phạm vi, thứ tự phát triển và kiến trúc tổng thể | Đã thống nhất |
 | M1 — Demo chạy được | Hầm BOX, hàng giả lập, bảng/3D, sửa và kiểm cơ bản | Đạt kiểm kỹ thuật; chờ phản hồi nghiệp vụ |
-| M2 — Tool trọn luồng | Nhập/import, lưu/mở, xếp sơ bộ, chỉnh/so sánh, xuất PDF/XLSX; hình tàu minh họa ở M2c | M2a, nguồn list ống, M2b và M2c đạt kiểm kỹ thuật; viewer VINAFCO 268 đã có. M2d chưa triển khai |
-| M3 — Case thực | Hình học phù hợp dữ liệu thực, nhiều tầng, profile kê/chồng; hiệu chỉnh hình tàu | Chưa triển khai |
+| M2 — Tool trọn luồng | Nhập/import, lưu/mở, xếp sơ bộ, chỉnh/so sánh, xuất PDF/XLSX; hình tàu minh họa ở M2c | Đạt kiểm kỹ thuật (M2a–M2d); chờ nghiệm thu nghiệp vụ |
+| M3 — Case thực | Hình học phù hợp dữ liệu thực, nhiều tầng, profile kê/chồng; hiệu chỉnh hình tàu | **M3a** (nhiều tầng theo cột trên hầm ước tính) đạt kiểm kỹ thuật; **M3b** (case thực, hầm đo, tải chồng) chờ dữ liệu owner |
 | M4 — AI hỗ trợ | Hỗ trợ tác vụ có nhu cầu rõ; core vẫn chạy khi tắt AI | Nhánh tùy chọn |
-| M5 — Sử dụng ổn định | Đóng gói, lưu trữ bền, backup/restore và hiệu năng | Chưa triển khai |
+| M5 — Sử dụng ổn định | Đóng gói, lưu trữ bền, backup/restore và hiệu năng | **M5a** (sao lưu/khôi phục) đạt kiểm kỹ thuật; bộ cài và sao lưu tự động chưa làm |
 
-Theo yêu cầu bổ sung của owner, lớp hình tàu VINAFCO 268 được tích hợp sớm thành một phần riêng của viewer; M2 tổng thể chưa hoàn thành; M2d còn lại. Các mốc xa giữ ở mức tổng thể; chỉ chi tiết hóa phần sắp làm khi được chọn. Xem [phạm vi, đầu ra và phụ thuộc từng mốc](docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md).
+Theo yêu cầu bổ sung của owner, lớp hình tàu VINAFCO 268 được tích hợp sớm thành một phần riêng của viewer. MVP đang được giao owner dùng thử; nghiệm thu nghiệp vụ và M3b cần owner. Các mốc xa giữ ở mức tổng thể; chỉ chi tiết hóa phần sắp làm khi được chọn. Xem [phạm vi, đầu ra và phụ thuộc từng mốc](docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md).
 
 ## Phát triển và kiểm thử
 
@@ -181,10 +214,13 @@ Bản M2c đạt **104 backend test, 28 browser test và 902 đối chiếu đ�
 
 Lượt chỉnh đơn vị hiển thị đã đạt **31 browser test**; dữ liệu tính và các phương án chưa sửa được giữ nguyên. Xem [review đơn vị hiển thị](docs/reviews/SCST_DISPLAY_UNITS_REVIEW.md).
 
+Sau M5a (05-11-2026), bộ kiểm đạt **878 backend test, 57 browser test và kiểm tích hợp 29/29** khi chạy lại trên Windows. Xem [review M3a](docs/reviews/SCST_M3A_REVIEW.md) và [review M5a](docs/reviews/SCST_M5A_REVIEW.md).
+
 ## Tài liệu
 
 | Tài liệu | Nội dung |
 |---|---|
+| [Bàn giao MVP](docs/SCST_MVP_HANDOFF.md) | Bắt đầu tại đây: thử luồng chính, sao lưu, giới hạn, góp ý cần owner |
 | [Hướng dẫn sử dụng](docs/APP_GUIDE.md) | Khởi chạy, thao tác và giới hạn demo |
 | [Trạng thái project](docs/project/PROJECT_STATUS.md) | Phần đã làm và bước tiếp theo |
 | [Roadmap tổng thể v0.3](docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md) | Phạm vi, đầu ra từng mốc và kiến trúc dự kiến |

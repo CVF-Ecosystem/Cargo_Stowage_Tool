@@ -1,6 +1,31 @@
 # Trạng thái project
 
-Cập nhật: **01-11-2026**.
+Cập nhật: **05-11-2026**.
+
+## MVP bàn giao để dùng thử (05-11-2026)
+
+Bắt đầu từ [trang bàn giao MVP](../SCST_MVP_HANDOFF.md).
+
+| Tranche | Kết quả | Review |
+|---|---|---|
+| SUP-02A/02B/03 | Revision dữ liệu hàng, hồ sơ tàu tổng quát, packing và ba cách nhìn | `docs/reviews/SCST_SUP_0*_REVIEW.md` |
+| M2d | Báo cáo XLSX và trang in; owner đã mở được XLSX mẫu | [review](../reviews/SCST_M2D_REVIEW.md) |
+| HARDEN-01 | Phân trang khi rebase, cache phát lại, giới hạn body, khóa Windows | [review](../reviews/SCST_HARDEN_01_REVIEW.md) |
+| M3a | Xếp nhiều tầng theo cột: 1076/1076 bó trên hầm VINAFCO ước tính, 0,05 s | [review](../reviews/SCST_M3A_REVIEW.md) |
+| M5a | Sao lưu/khôi phục local có kiểm, tự sao lưu trước khi khôi phục, hoàn tác khi lỗi | [review](../reviews/SCST_M5A_REVIEW.md) |
+
+- **Kiểm trên Windows:** 878 backend, 57 browser, kiểm tích hợp 29/29.
+- **Chạy thử launcher:** `start-local.ps1` đã chạy trên một bản chép dữ liệu của owner; dữ liệu gốc không đổi.
+
+**Chờ owner:**
+- dùng thử MVP và góp ý;
+- nghiệm thu nghiệp vụ;
+- số đo hầm thực, case thực và tải chồng (M3b);
+- xác minh 16 khối bao.
+
+**Tùy chọn về sau:** bộ cài (M5b), sao lưu tự động, AI (M4).
+
+Các mục bên dưới là lịch sử trước ngày 05-11.
 
 ## SUP-01 đã giao kỹ thuật
 
