@@ -68,6 +68,10 @@
     "SCST-HARDEN-01": {
       "path": "docs/specs/SCST_HARDEN_01.md",
       "heading": "## HARDEN-01 acceptance"
+    },
+    "SCST-M3A": {
+      "path": "docs/specs/SCST_M3A.md",
+      "heading": "## M3a acceptance"
     }
   }
 }

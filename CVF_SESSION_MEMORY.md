@@ -5,11 +5,13 @@ Memory class: POINTER_RECORD
 ## Current Truth
 
 - Contract: cvf.downstreamContinuityContract@1.0.0
-- Current mode: FREEZE
-- Active phase: FREEZE
-- Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_HARDEN_01.md
+- Current mode: BUILD
+- Active phase: BUILD
+- Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_M3A.md
 
 ## Current operator boundary
+
+M3a dispatched 05-11-2026 (owner: deliver MVP before feedback; M2d XLSX opens fine): multi-layer column stacking with support checks on the estimated hold. SPEC docs/specs/SCST_M3A.md, order docs/work_orders/SCST_M3A.md, handoff CVF_SESSION/handoffs/AGENT_HANDOFF_M3A.md. Root decided OD-only revisions stay CURRENT and provenance stays outside the hash.
 
 HARDEN-01 closed 05-11-2026: root reviewed PR #5 (docs/reviews/SCST_HARDEN_01_REVIEW.md) and merged it as c8b9c1c under owner-delegated authority. Next: WAIT_OWNER: M2 and the supplemental roadmap are technically complete and hardened. Next needs owner input: business review of the tool and the M2d report (open the sample XLSX in Excel), decisions on OD-only recheck and provenance-in-hash, and hold measurements plus real cases for M3. Root dispatches no further cloud tranche without that input.
 

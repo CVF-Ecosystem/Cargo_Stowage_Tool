@@ -1,6 +1,6 @@
 # SCST — HARDEN-01 hardening after SUP-02/03
 
-Status: ACTIVE
+Status: SUPERSEDED
 
 ## Current State
 

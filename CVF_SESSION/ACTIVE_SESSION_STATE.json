@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "FREEZE",
-  "activePhase": "FREEZE",
+  "currentMode": "BUILD",
+  "activePhase": "BUILD",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -13,11 +13,11 @@
     "REVIEW",
     "FREEZE"
   ],
-  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_HARDEN_01.md",
-  "nextAllowedMove": "WAIT_OWNER: M2 and the supplemental roadmap are technically complete and hardened. Next needs owner input: business review of the tool and the M2d report (open the sample XLSX in Excel), decisions on OD-only recheck and provenance-in-hash, and hold measurements plus real cases for M3. Root dispatches no further cloud tranche without that input.",
-  "parkedOperatorCheckpoint": "M3/M4/M5, observation O3 (provenance outside hash), OD-only recheck policy, real-Excel check of the M2d XLSX, O7-O11, hook/hosted-CI adoption, live-provider governance proof, measured hold and 16 source envelopes and business acceptance remain owned future work.",
-  "activeRole": "SESSION_SYNC_STEWARD",
+  "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_M3A.md",
+  "nextAllowedMove": "Claude Cloud implements M3a on a non-main branch and opens a pull request; root reviews independently and merges under owner-delegated authority, then hands the MVP to the owner for feedback. M3b needs owner hold measurements and real cases.",
+  "parkedOperatorCheckpoint": "M3b real cases and measured hold, stack and tanktop load, M4/M5, observations O7-O11, hook/hosted-CI adoption, live-provider governance proof, 16 source envelopes and business acceptance remain owned future work.",
+  "activeRole": "ORCHESTRATOR",
   "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",
   "updatedAt": "2026-11-05",
-  "activeTranche": "HARDEN-01"
+  "activeTranche": "M3A"
 }
