@@ -187,7 +187,7 @@ The browser override `apps/frontend/playwright.local.config.ts` is untracked and
 ## Limitations and remaining owned work
 
 - **Concurrent SQLite writers during a restore are not fenced.**
-  - The apply endpoint is `async` and runs synchronously on the event loop, so other async handlers wait. Sync handlers in the threadpool, or another process, could still hold a connection.
+  - Since repair R2, apply runs in the threadpool, so other requests (including sync handlers that write SQLite) and other processes can run during a restore and could hold a connection.
   - On Windows, an open handle makes `os.replace` fail, and the restore rolls back.
   - On POSIX, a write by a connection opened before the swap would land in the moved-aside file and be lost with the work dir.
   - Root may want a DB-level fence (for example a `BEGIN EXCLUSIVE` held until just before the swap) in a later tranche.
@@ -197,3 +197,26 @@ The browser override `apps/frontend/playwright.local.config.ts` is untracked and
 - A store-listed vessel version with a missing file blocks export entirely. There is no partial export.
 - Backup files are deliberately unencrypted.
 - Out of scope and owned: scheduled backup, encryption/password, merge or partial restore, cloud sync, M5b installer, deletion, and business acceptance by the owner.
+
+## Repair round 1 (root review round 0: RETURN_FOR_REPAIR)
+
+Implemented by a subagent (Haiku, high effort, as root asked); the lead reviewed the diff and reran everything.
+
+| Item | Change | Commit | Test |
+|---|---|---|---|
+| R1 (D1.2) | `GET /api/backup/export` failure returns the fixed message "Không tạo được bản sao lưu từ dữ liệu local." (400, same shape); the exception is no longer echoed | `a6ac567` | `tests/backend/test_m5a_repair.py::test_export_failure_message_is_fixed_and_path_free` (OSError, sqlite3.OperationalError, ValueError carrying paths: none appear in the response) |
+| R2 | `preview_backup_restore` and `apply_backup_restore` read the body asynchronously as before, then call `backup_check.preview` / `backup_restore.apply` through `starlette.concurrency.run_in_threadpool`; except clauses, status codes, models and contract unchanged | `c669bf8` | `test_preview_does_not_block_health`, `test_apply_does_not_block_health` (httpx `ASGITransport`, one event loop: `/api/health` answers while a gated check is running). The subagent confirmed that both fail when the blocking calls are restored |
+
+Consequence recorded above: with R2 the event loop no longer serializes other requests during a restore, so the unfenced-writer limitation now covers same-process requests too. The Windows probe by root (open connection → 400 and rollback) still holds, because `os.replace` refuses there.
+
+Results on the repaired head:
+
+| Command | Result |
+|---|---|
+| `python -m pytest` | **872 passed** (867 + 5) |
+| `python tooling/export_contract.py`; `git diff contracts` | no diff |
+| `npm run build` | OK |
+| Browser, full suite + m5a | **57 passed** |
+| `git status` after browser run | clean (no change under `docs/reviews/`) |
+| `python tooling/integration_check_pre_m2d.py .` | 29/29 PASS |
+| worker-return gate | `RESULT: PASS phase=worker-return mandatoryControls=7 failed=0` (with `--base 3396555`) |
