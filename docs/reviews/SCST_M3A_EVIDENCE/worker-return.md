@@ -146,3 +146,44 @@ All of these were run by the lead on the final branch state:
 - The 1 mm grid gap between layers is not modelled as dunnage.
 - Owner-held M3b: mixed sizes in a column, dunnage, stack/tanktop load, CoG/stability, multiple holds, non-BOX holds, 3D per-layer drag, real cases and the measured hold.
 - Root review on Windows: rerun everything, plan Baltimore by hand and inspect 3D. Then write docs/reviews/SCST_M3A_REVIEW.md, decide on D2.1 rounding and the D4.1 default, and sync CVF_SESSION, memory and status (root-owned files, not touched here).
+
+## Repair round 1 (root RETURN_FOR_REPAIR on PR #6, same budget)
+
+Root accepted the D2.1 level rule and the SUPPORT_LOST rebase cascade, and returned R1–R3. Repairs were made by subagents and reviewed by the lead (Opus 5.5 / medium), who re-read each diff and re-ran the checks.
+
+| Item | Done by | Model / effort | Commit |
+|---|---|---|---|
+| R1 pipe-list default multi-layer | Subagent | haiku / high | see below |
+| R2 voyage limit on case switch | Subagent | haiku / high | see below |
+| R3 overlap-pass performance | Subagent | sonnet / high | af29e67, reverted in 50292e0, restored in 8d6021f |
+
+**R1.**
+- `Workspace.tsx` now keeps `plannerChoice` (null means automatic). The effective planner is the user's choice, otherwise `columns-v1` for a pipe-list plan and `guillotine-single-layer-v1` for other plans. An explicit choice sticks.
+- **Root-authorized edits to existing specs** (exactly one added line each, no assertion changed or removed; `git diff --numstat` shows only additions): `await page.getByLabel("Cách xếp thử").selectOption("guillotine-single-layer-v1");` at
+  - tests/browser/display-units.spec.ts:123
+  - tests/browser/m2b.spec.ts:87
+  - tests/browser/m2b.spec.ts:193
+  - tests/browser/m2d.spec.ts:170
+  - tests/browser/sup01.spec.ts:146
+- Demo-plan planner uses (m2b.spec.ts:57, 152, 166, 176) keep the single-layer default and were not edited.
+- The m3a.spec "default" case now asserts that a pipe list defaults to columns-v1 without touching the select, and that the demo plan stays single-layer.
+
+**R3.**
+- **Profile:** about 97% of the columns-v1 preview was `evaluate()`'s all-pairs OVERLAP loop (578 350 `overlaps` calls). Pydantic validation and serialization each took ≤ 0.02 s.
+- **Change:** `_overlap_pairs` runs an x-sweep with strict `<` on y and z, skips empty volumes and re-sorts the pairs to the old (i, j) order. The `add()` order, the 200-issue cap and the messages are unchanged.
+- **Proof:** `tests/backend/test_m3a_perf.py` (8 tests) compares `evaluate().model_dump_json()` against a frozen copy of the original loop on these cases:
+  - the Baltimore single-layer and columns-v1 candidates;
+  - a pipe plan with more than 200 overlaps (truncation order);
+  - scattered and yawed plans, touching faces, identical boxes;
+  - 300 random box sets.
+- **Lead review:** a pair overlapping in x always has one box with x0 ≤ the other's x0, so it is found while the earlier box is active. Ties are included. The strict comparisons match `geometry.overlaps`.
+- **Timings (container, 3 runs, seconds):**
+
+| Measure | Before | After |
+|---|---|---|
+| `preview` columns-v1 | 0.508 / 0.512 / 0.539 | 0.053 / 0.054 / 0.084 |
+| `evaluate` alone (columns candidate) | 0.594 / 0.651 / 0.583 | 0.021 / 0.020 / 0.022 |
+| HTTP POST columns-v1 | 0.733 / 0.660 / 0.664 | 0.150 / 0.107 / 0.173 |
+| `preview` default | 0.063 / 0.082 / 0.049 | 0.053 / 0.079 / 0.037 |
+
+- **History:** root's "R3 cancelled" comment arrived after `af29e67` was pushed, so the lead reverted it (`50292e0`, a byte-identical return to 8d205ef). Root's next comment said to keep R3, so it was restored (`8d6021f`, identical to af29e67). No history was rewritten.
