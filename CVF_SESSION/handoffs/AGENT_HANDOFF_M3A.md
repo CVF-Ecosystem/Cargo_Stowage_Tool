@@ -1,6 +1,6 @@
 # SCST — M3a multi-layer column stacking MVP
 
-Status: ACTIVE
+Status: SUPERSEDED
 
 ## Current State
 

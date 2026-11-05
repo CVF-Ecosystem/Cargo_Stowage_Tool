@@ -5,11 +5,13 @@ Memory class: POINTER_RECORD
 ## Current Truth
 
 - Contract: cvf.downstreamContinuityContract@1.0.0
-- Current mode: FREEZE
-- Active phase: FREEZE
-- Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_M3A.md
+- Current mode: BUILD
+- Active phase: BUILD
+- Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_M5A.md
 
 ## Current operator boundary
+
+M5a dispatched 05-11-2026 under owner-delegated authority (M3a MVP handed to the owner for trial): verified local backup export and replace-all restore with pre-restore backup and atomic rollback. SPEC docs/specs/SCST_M5A.md, order docs/work_orders/SCST_M5A.md, handoff CVF_SESSION/handoffs/AGENT_HANDOFF_M5A.md.
 
 M3a closed 05-11-2026: root reviewed PR #6 with one repair round (docs/reviews/SCST_M3A_REVIEW.md) and merged it as 9a98cb8 under owner-delegated authority. Next: M3a closed technically: the MVP (multi-layer column stacking, 1076/1076 Baltimore bundles on the estimated VINAFCO hold) is handed to the owner for trial and feedback. Root may admit a data-independent tranche (local backup/restore, M5 slice) under owner-delegated authority. M3b needs owner hold measurements, real cases and stack-load data.
 
