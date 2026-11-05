@@ -5342,6 +5342,10 @@
           "placed_affected_count": {
             "type": "integer",
             "title": "Placed Affected Count"
+          },
+          "placed_dropped_on_rebase_count": {
+            "type": "integer",
+            "title": "Placed Dropped On Rebase Count"
           }
         },
         "type": "object",
@@ -5355,7 +5359,8 @@
           "added_count",
           "removed_count",
           "changed_count",
-          "placed_affected_count"
+          "placed_affected_count",
+          "placed_dropped_on_rebase_count"
         ],
         "title": "SnapshotListItem"
       },

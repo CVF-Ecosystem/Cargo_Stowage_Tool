@@ -1859,6 +1859,8 @@ export interface components {
             changed_count: number;
             /** Placed Affected Count */
             placed_affected_count: number;
+            /** Placed Dropped On Rebase Count */
+            placed_dropped_on_rebase_count: number;
         };
         /** Summary */
         Summary: {

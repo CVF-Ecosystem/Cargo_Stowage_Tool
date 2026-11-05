@@ -130,6 +130,7 @@ class SnapshotListItem(SavedSummary):
     removed_count: int
     changed_count: int
     placed_affected_count: int
+    placed_dropped_on_rebase_count: int
 
 
 class DroppedPlacement(BaseModel):

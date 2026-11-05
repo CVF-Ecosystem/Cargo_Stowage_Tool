@@ -1271,6 +1271,11 @@ tbody tr:hover {
 .recheck-needs_recheck { font-weight: 600; color: #8a4b00; }
 .rebase-dropped { margin-top: 12px; padding: 10px 12px; border: 1px solid #dfe6d8; border-radius: 6px; overflow-wrap: anywhere; }
 .rebase-dropped ul { margin: 6px 0 0; padding-left: 18px; max-height: 14rem; overflow-y: auto; }
+.rebase-dropped-filter { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 8px 0 0; font-size: 12px; max-width: 100%; min-width: 0; }
+.rebase-dropped-filter select { max-width: 100%; min-width: 0; }
+.rebase-dropped-page { margin: 6px 0 0; font-size: 12px; overflow-wrap: anywhere; }
+.rebase-dropped-pager { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.rebase-dropped-pager button { margin: 0; }
 
 /* SUP-02B: vessel and hold panel (profile choice, import preview) and profile summary. Wraps at 390px; the table scrolls inside itself. */
 .scope-note ul { font-size: 10px; line-height: 1.9; margin: 6px 0; padding-left: 18px; }
