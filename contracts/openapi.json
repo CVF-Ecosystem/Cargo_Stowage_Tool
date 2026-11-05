@@ -1176,10 +1176,256 @@
           }
         }
       }
+    },
+    "/api/backup/export": {
+      "get": {
+        "summary": "Export Backup",
+        "operationId": "export_backup_api_backup_export_get",
+        "responses": {
+          "200": {
+            "description": "Tệp sao lưu scst.backup.v1 (.scstbak).",
+            "content": {
+              "application/octet-stream": {}
+            }
+          },
+          "400": {
+            "description": "Không đọc được dữ liệu local để sao lưu.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BackupRejectedDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/backup/restore/preview": {
+      "post": {
+        "summary": "Preview Backup Restore",
+        "operationId": "preview_backup_restore_api_backup_restore_preview_post",
+        "requestBody": {
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BackupPreview"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Tệp sao lưu không hợp lệ; dữ liệu hiện tại giữ nguyên.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BackupRejectedDetail"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Tệp sao lưu vượt 256 MiB; chưa đọc hết, chưa ghi gì.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BackupRejectedDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/backup/restore/apply": {
+      "post": {
+        "summary": "Apply Backup Restore",
+        "operationId": "apply_backup_restore_api_backup_restore_apply_post",
+        "parameters": [
+          {
+            "name": "confirm",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Confirm"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RestoreResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Tệp sao lưu không hợp lệ; dữ liệu hiện tại giữ nguyên.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BackupRejectedDetail"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Tệp sao lưu vượt 256 MiB; chưa đọc hết, chưa ghi gì.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BackupRejectedDetail"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Mã xác nhận không khớp tệp gửi lên; chưa ghi gì.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BackupRejectedDetail"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "BackupCounts": {
+        "properties": {
+          "plans": {
+            "type": "integer",
+            "title": "Plans"
+          },
+          "revisions": {
+            "type": "integer",
+            "title": "Revisions"
+          },
+          "vessel_profile_versions": {
+            "type": "integer",
+            "title": "Vessel Profile Versions"
+          }
+        },
+        "type": "object",
+        "required": [
+          "plans",
+          "revisions",
+          "vessel_profile_versions"
+        ],
+        "title": "BackupCounts"
+      },
+      "BackupFieldError": {
+        "properties": {
+          "field": {
+            "type": "string",
+            "title": "Field"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "field",
+          "message"
+        ],
+        "title": "BackupFieldError"
+      },
+      "BackupPreview": {
+        "properties": {
+          "format": {
+            "type": "string",
+            "title": "Format"
+          },
+          "created_utc": {
+            "type": "string",
+            "title": "Created Utc"
+          },
+          "backup_sha256": {
+            "type": "string",
+            "title": "Backup Sha256"
+          },
+          "counts": {
+            "$ref": "#/components/schemas/BackupCounts"
+          },
+          "current": {
+            "$ref": "#/components/schemas/BackupCounts"
+          }
+        },
+        "type": "object",
+        "required": [
+          "format",
+          "created_utc",
+          "backup_sha256",
+          "counts",
+          "current"
+        ],
+        "title": "BackupPreview"
+      },
+      "BackupRejectedDetail": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "errors": {
+            "items": {
+              "$ref": "#/components/schemas/BackupFieldError"
+            },
+            "type": "array",
+            "title": "Errors"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message",
+          "errors"
+        ],
+        "title": "BackupRejectedDetail"
+      },
       "BatchError": {
         "properties": {
           "index": {
@@ -4690,6 +4936,23 @@
           "field_status"
         ],
         "title": "ReportVessel"
+      },
+      "RestoreResult": {
+        "properties": {
+          "counts": {
+            "$ref": "#/components/schemas/BackupCounts"
+          },
+          "pre_restore_backup": {
+            "type": "string",
+            "title": "Pre Restore Backup"
+          }
+        },
+        "type": "object",
+        "required": [
+          "counts",
+          "pre_restore_backup"
+        ],
+        "title": "RestoreResult"
       },
       "RevisionDetail": {
         "properties": {
