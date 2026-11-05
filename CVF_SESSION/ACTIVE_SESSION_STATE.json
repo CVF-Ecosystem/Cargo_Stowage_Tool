@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "BUILD",
-  "activePhase": "BUILD",
+  "currentMode": "FREEZE",
+  "activePhase": "FREEZE",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -14,9 +14,9 @@
     "FREEZE"
   ],
   "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_M3A.md",
-  "nextAllowedMove": "Claude Cloud implements M3a on a non-main branch and opens a pull request; root reviews independently and merges under owner-delegated authority, then hands the MVP to the owner for feedback. M3b needs owner hold measurements and real cases.",
-  "parkedOperatorCheckpoint": "M3b real cases and measured hold, stack and tanktop load, M4/M5, observations O7-O11, hook/hosted-CI adoption, live-provider governance proof, 16 source envelopes and business acceptance remain owned future work.",
-  "activeRole": "ORCHESTRATOR",
+  "nextAllowedMove": "M3a closed technically: the MVP (multi-layer column stacking, 1076/1076 Baltimore bundles on the estimated VINAFCO hold) is handed to the owner for trial and feedback. Root may admit a data-independent tranche (local backup/restore, M5 slice) under owner-delegated authority. M3b needs owner hold measurements, real cases and stack-load data.",
+  "parkedOperatorCheckpoint": "M3b real cases and measured hold, stack and tanktop load, lashing and stability, M4/M5, observations O7-O11 and O-M3A-2/3, hook/hosted-CI adoption, live-provider governance proof, 16 source envelopes and business acceptance remain owned future work.",
+  "activeRole": "SESSION_SYNC_STEWARD",
   "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",
   "updatedAt": "2026-11-05",
   "activeTranche": "M3A"

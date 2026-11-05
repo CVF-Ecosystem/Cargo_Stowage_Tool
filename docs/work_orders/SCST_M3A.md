@@ -1,6 +1,6 @@
 # SCST — M3a multi-layer column stacking work order
 
-Status: ACTIVE
+Status: CLOSED
 dispatchKind: INITIAL
 Owner: project-orchestrator
 Risk: R2
@@ -67,9 +67,9 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "decision": "Accept, repair within authority or return to worker; M3b real cases and measured hold stay with the owner"
     }
   },
-  "phase": "DISPATCH",
+  "phase": "REVIEW",
   "action": {
-    "kind": "IMPLEMENT",
+    "kind": "REVIEW",
     "selected": [
       "M3A-01",
       "M3A-02",
@@ -77,8 +77,8 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "M3A-04",
       "M3A-05"
     ],
-    "owner": "Claude Cloud implementation worker on a branch; root independent review and commit steward",
-    "output": "M3a source, tests, regenerated contract and docs/reviews/SCST_M3A_EVIDENCE/worker-return.md in a pull request",
+    "owner": "Root independent implementation reviewer",
+    "output": "docs/reviews/SCST_M3A_REVIEW.md",
     "budgetMinutes": 240,
     "stop": "Five criteria evidenced or budget/scope boundary without reset",
     "next": "Root independent review; owner MVP feedback; M3b needs owner data"
@@ -86,50 +86,80 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
   "rows": [
     {
       "id": "M3A-01",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for M3A-01",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_M3A_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M3A_REVIEW.md",
+          "sha256": "d8eb606af502679cf90b3c937dd8bee2fadd14107345a68b9a9e5b77eed6c33e"
+        }
+      ]
     },
     {
       "id": "M3A-02",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for M3A-02",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_M3A_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M3A_REVIEW.md",
+          "sha256": "d8eb606af502679cf90b3c937dd8bee2fadd14107345a68b9a9e5b77eed6c33e"
+        }
+      ]
     },
     {
       "id": "M3A-03",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for M3A-03",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_M3A_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M3A_REVIEW.md",
+          "sha256": "d8eb606af502679cf90b3c937dd8bee2fadd14107345a68b9a9e5b77eed6c33e"
+        }
+      ]
     },
     {
       "id": "M3A-04",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for M3A-04",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_M3A_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M3A_REVIEW.md",
+          "sha256": "d8eb606af502679cf90b3c937dd8bee2fadd14107345a68b9a9e5b77eed6c33e"
+        }
+      ]
     },
     {
       "id": "M3A-05",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for M3A-05",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_M3A_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M3A_REVIEW.md",
+          "sha256": "d8eb606af502679cf90b3c937dd8bee2fadd14107345a68b9a9e5b77eed6c33e"
+        }
+      ]
     }
   ],
   "supportingWork": [],
   "conclusions": {
-    "tranche": "PENDING",
-    "trancheSummary": "Five M3a criteria admitted for bounded implementation only",
-    "trancheEvidence": [],
+    "tranche": "COMPLETE",
+    "trancheSummary": "M3a five technical criteria reviewed after one repair round; merged as 9a98cb8 under owner-delegated merge authority",
+    "trancheEvidence": [
+      {
+        "path": "docs/reviews/SCST_M3A_REVIEW.md",
+        "sha256": "d8eb606af502679cf90b3c937dd8bee2fadd14107345a68b9a9e5b77eed6c33e"
+      }
+    ],
     "product": "PENDING",
     "productSummary": "M3b real cases, measured hold, stack and tanktop load, lashing, stability and business acceptance remain owned work",
     "acceptance": [],
@@ -137,3 +167,7 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
   }
 }
 ```
+
+## Technical disposition
+
+Root independent implementation review accepts M3A-01..05 on PR #6 (round 0 head 8d205ef, repair round 1 head 1f8c26e: R1 pipe-list multi-layer default with five root-authorized one-line selects in existing specs, R2 case voyage limit on switch, R3 x-sweep overlap pass kept after review), merged to main as 9a98cb8 under the owner-delegated merge authority. Local Windows rerun at 1f8c26e: backend 734/734, contract additive only, build OK, full browser 55/55, clean git status, integration check 29/29, worker-return and reviewer-fast gates PASS. Baltimore/VINAFCO VR-SII columns-v1 places 1076/1076 (98 columns, 18 layers, 0 issues, 0.05 s). Root decisions: D2.1 level rule rounds the support top up to the mm grid; rebase cascades SUPPORT_LOST. Stack/tanktop load, lashing, stability, M3b and business acceptance remain owned work.

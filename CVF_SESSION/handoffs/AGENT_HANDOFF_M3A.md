@@ -5,11 +5,11 @@ Status: ACTIVE
 ## Current State
 
 - Project: Cargo_Stowage_Tool
-- Current mode: BUILD
-- Active phase: BUILD
-- Active role: ORCHESTRATOR
-- Next allowed move: Claude Cloud implements M3a on a non-main branch and opens a pull request; root reviews independently and merges under owner-delegated authority, then hands the MVP to the owner for feedback. M3b needs owner hold measurements and real cases.
-- Parked operator checkpoint: M3b real cases and measured hold, stack and tanktop load, M4/M5, observations O7-O11, hook/hosted-CI adoption, live-provider governance proof, 16 source envelopes and business acceptance remain owned future work.
+- Current mode: FREEZE
+- Active phase: FREEZE
+- Active role: SESSION_SYNC_STEWARD
+- Next allowed move: M3a closed technically: the MVP (multi-layer column stacking, 1076/1076 Baltimore bundles on the estimated VINAFCO hold) is handed to the owner for trial and feedback. Root may admit a data-independent tranche (local backup/restore, M5 slice) under owner-delegated authority. M3b needs owner hold measurements, real cases and stack-load data.
+- Parked operator checkpoint: M3b real cases and measured hold, stack and tanktop load, lashing and stability, M4/M5, observations O7-O11 and O-M3A-2/3, hook/hosted-CI adoption, live-provider governance proof, 16 source envelopes and business acceptance remain owned future work.
 - Active tranche: M3A
 
 ## Intake, design and authority acknowledgment
@@ -53,3 +53,7 @@ Root then becomes REVIEWER and:
 - writes docs/reviews/SCST_M3A_REVIEW.md;
 - merges under delegated authority if it passes;
 - hands the MVP to the owner.
+
+## Review and closure
+
+Claude Cloud returned PR #6 (head 8d205ef). Root REVIEWER reran on Windows and returned one repair round through PR comments: R1 pipe-list multi-layer default, R2 case voyage limit on switch, R3 x-sweep overlap pass (kept after review). At head 1f8c26e: backend 734/734, browser 55/55, integration check 29/29, gates PASS; columns-v1 places 1076/1076 Baltimore bundles in 0.05 s with 0 issues. Review docs/reviews/SCST_M3A_REVIEW.md accepts M3A-01..05; root merged PR #6 as 9a98cb8 under owner-delegated authority, closed the work order and synced continuity. The MVP goes to the owner for trial.
