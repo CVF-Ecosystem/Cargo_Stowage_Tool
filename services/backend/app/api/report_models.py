@@ -1,7 +1,7 @@
 """Response models of scst.plan-report.v1 (M2d D1/D2); they only document and validate what domain.report builds."""
-from typing import Literal
+from typing import ClassVar, Literal
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, model_serializer
 
 Status = Literal["ESTIMATED", "SOURCED", "MEASURED"]
 Dims = tuple[int, int, int]
@@ -9,6 +9,20 @@ Dims = tuple[int, int, int]
 
 class _M(BaseModel):
     model_config = ConfigDict(extra="forbid")
+
+
+class _Optional(_M):
+    """M3a: fields in _OMIT are present only for multi-layer (COLUMNS_V1) reports; omitted when None so legacy JSON is byte-identical."""
+    _OMIT: ClassVar[tuple] = ()
+
+    @model_serializer(mode="wrap")
+    def _omit_absent(self, handler):
+        data = handler(self)
+        if isinstance(data, dict):
+            for key in self._OMIT:
+                if data.get(key) is None:
+                    data.pop(key, None)
+        return data
 
 
 class ReportHeader(_M):
@@ -71,7 +85,8 @@ class ReportCargo(_M):
     recheck: ReportRecheck
 
 
-class ReportTotals(_M):
+class ReportTotals(_Optional):
+    _OMIT: ClassVar[tuple] = ("layer_count", "column_count")
     unit_count: int
     placed_count: int
     unplaced_count: int
@@ -83,14 +98,18 @@ class ReportTotals(_M):
     placed_envelope_volume_mm3: int | None
     manifest_envelope_volume_mm3_text: str
     placed_envelope_volume_mm3_text: str
+    layer_count: int | None = None
+    column_count: int | None = None
 
 
-class ReportPlacement(_M):
+class ReportPlacement(_Optional):
+    _OMIT: ClassVar[tuple] = ("supported_by",)
     x_mm: int
     y_mm: int
     z_mm: int
     layer: int
     yaw_deg: int
+    supported_by: list[str] | None = None
 
 
 class ReportPacking(_M):
@@ -155,7 +174,8 @@ class ReportNotice(_M):
     message: str
 
 
-class PlanReport(_M):
+class PlanReport(_Optional):
+    _OMIT: ClassVar[tuple] = ("stacking",)
     schema_version: Literal["scst.plan-report.v1"]
     report_sha256: str
     header: ReportHeader
@@ -168,3 +188,4 @@ class PlanReport(_M):
     unplaced: list[ReportUnplaced]
     issues: ReportIssues
     notices: list[ReportNotice]
+    stacking: Literal["COLUMNS_V1"] | None = None

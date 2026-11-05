@@ -118,6 +118,8 @@ class Plan(Model):
     vessel: VesselReference | None = None
     cargo_dataset: Literal["BALTIMORE-PIPE-V1-1"] | None = None
     cargo_revision: CargoRevisionRef | None = None
+    # M3a D1: absent/None/SINGLE_LAYER keep today's single-layer rules; omitted from JSON when None.
+    stacking: Literal["SINGLE_LAYER", "COLUMNS_V1"] | None = None
     hold: Hold
     limits: Limits
     units: list[CargoUnit] = Field(max_length=2000)
@@ -128,8 +130,10 @@ class Plan(Model):
         # Legacy contracts never carried cargo_revision; omit it when absent so
         # their JSON (responses and newly saved snapshots) stays byte-identical.
         data = handler(self)
-        if isinstance(data, dict) and data.get("cargo_revision") is None:
-            data.pop("cargo_revision", None)
+        if isinstance(data, dict):
+            for key in ("cargo_revision", "stacking"):
+                if data.get(key) is None:
+                    data.pop(key, None)
         return data
 
     @model_validator(mode="after")
@@ -196,7 +200,9 @@ class Plan(Model):
 
 
 class Issue(Model):
-    code: Literal["OVERWEIGHT", "OUT_OF_BOUNDS", "OVERLAP", "LAYER_UNSUPPORTED", "REQUIRED_UNPLACED", "EMPTY_MANIFEST"]
+    code: Literal["OVERWEIGHT", "OUT_OF_BOUNDS", "OVERLAP", "LAYER_UNSUPPORTED", "REQUIRED_UNPLACED", "EMPTY_MANIFEST",
+                  "SUPPORT_MISSING", "SUPPORT_LEVEL_MISMATCH", "SUPPORT_AREA_LOW", "SUPPORT_CENTRE_UNSUPPORTED",
+                  "LAYER_INDEX_INVALID"]
     unit_ids: list[str]
     message: str
 

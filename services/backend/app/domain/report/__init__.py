@@ -69,11 +69,17 @@ def _vessel(plan, profile):
             'field_status': {k: profile['profile']['provenance']['field_status'][k] for k in ('dimensions_m', 'hold', 'cases')}}
 
 
-def _notices(hold_status, recheck, units, unchecked):
+MULTI_LAYER_NOTICE = 'Phương án nhiều tầng: chưa kiểm tải chồng, tải sàn, chằng buộc và ổn định.'
+
+
+def _notices(hold_status, recheck, units, unchecked, multi_layer=False):
     out = []
     if hold_status != 'MEASURED':
         out.append(('GEOMETRY_UNVERIFIED', f'Chưa xác minh hình học: kích thước hầm là {STATUS_LABEL[hold_status]} (chưa đo thực tế).'))
-    out.append(('SINGLE_LAYER', 'Phương án một tầng (xếp sơ bộ, chưa tối ưu).'))
+    if multi_layer:  # M3a D4.4: replaces the single-layer notice for COLUMNS_V1 plans
+        out.append(('MULTI_LAYER', MULTI_LAYER_NOTICE))
+    else:
+        out.append(('SINGLE_LAYER', 'Phương án một tầng (xếp sơ bộ, chưa tối ưu).'))
     if any(u['group_id'] is not None for u in units):  # pipe list only (synthetic PIPE_BUNDLE units carry no packing)
         out.append(('PACKING_DERIVED', 'Packing là dẫn xuất, không phải số đo thực.'))
     if recheck['status'] == 'NEEDS_RECHECK':
@@ -98,6 +104,8 @@ def build_report(*, snapshot_id, name, saved_utc, plan_json, plan, evaluation, p
     revision: {'revision_id', 'content_sha256'} of the pinned revision or None.
     """
     placed = {p.unit_id: p for p in plan.placements}
+    # M3a: multi-layer keys are added only for COLUMNS_V1 plans so legacy report bytes and report_sha256 stay unchanged.
+    multi = plan.stacking == 'COLUMNS_V1'
     groups, bundles = _packing_index(packing)
     units, unplaced, mass = [], [], [0, 0]
     volume = {'manifest': 0, 'placed': 0}
@@ -119,6 +127,8 @@ def build_report(*, snapshot_id, name, saved_utc, plan_json, plan, evaluation, p
             'mass_g': u.mass_g, 'status': status,
             'placement': None if p is None else {'x_mm': p.x_mm, 'y_mm': p.y_mm, 'z_mm': p.z_mm, 'layer': p.layer, 'yaw_deg': p.yaw_deg},
             'packing': _packing(u, ref, groups, bundles)})
+        if multi and p is not None:
+            units[-1]['placement']['supported_by'] = list(p.supported_by)
         mass[0] += u.mass_g
         if p is not None:
             mass[1] += u.mass_g
@@ -162,7 +172,11 @@ def build_report(*, snapshot_id, name, saved_utc, plan_json, plan, evaluation, p
                    'unchecked': list(evaluation.unchecked), 'operational_eligible': False},
         'notices': None,
     }
-    report['notices'] = _notices(field, report['cargo']['recheck'], units, evaluation.unchecked)
+    if multi:
+        report['stacking'] = 'COLUMNS_V1'
+        report['totals']['layer_count'] = max((p.layer for p in plan.placements), default=-1) + 1
+        report['totals']['column_count'] = sum(1 for p in plan.placements if p.z_mm == 0)
+    report['notices'] = _notices(field, report['cargo']['recheck'], units, evaluation.unchecked, multi)
     report['report_sha256'] = report_hash(report)
     return report
 
@@ -202,5 +216,9 @@ def reconcile(report: dict, evaluation) -> None:
     for key, want in expected.items():
         if report['issues'][key] != want:
             fail(f'mục kiểm "{key}" khác kết quả kiểm')
+    if report.get('stacking') == 'COLUMNS_V1':
+        layers = [u['placement']['layer'] for u in units if u['placement'] is not None]
+        if t['layer_count'] != max(layers, default=-1) + 1:
+            fail(f'tổng số tầng {t["layer_count"]} khác tầng cao nhất của các bó đã xếp')
     if report['report_sha256'] != report_hash(report):
         fail('report_sha256 không khớp nội dung báo cáo')

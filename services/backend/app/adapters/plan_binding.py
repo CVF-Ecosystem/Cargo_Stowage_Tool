@@ -299,12 +299,33 @@ def _drop_reason(target_unit, pinned_unit):
     return None
 
 
-def _dropped_count(pinned, target_units, placed_ids):
+def _support_lost(placements, dropped):
+    """M3a: ids that lose support transitively when `dropped` placements leave the plan.
+
+    placements: [(unit_id, supported_by)] in plan order. A placement resting on a dropped placement is dropped too
+    (reason SUPPORT_LOST) rather than kept floating, so the rebase candidate keeps valid support geometry.
+    Single-layer plans have no supported_by, so nothing cascades and their rebase output is unchanged.
+    """
+    lost, gone, grew = [], set(dropped), True
+    while grew:
+        grew = False
+        for uid, supported_by in placements:
+            if uid not in gone and any(s in gone for s in supported_by):
+                gone.add(uid)
+                lost.append(uid)
+                grew = True
+    return set(lost)
+
+
+def _dropped_count(pinned, target_units, placements):
     pinned_by, target_by = {u['id']: u for u in pinned}, {u['id']: u for u in target_units}
-    return sum(1 for uid in placed_ids if _drop_reason(target_by.get(uid), pinned_by.get(uid)))
+    direct = {uid for uid, _ in placements if _drop_reason(target_by.get(uid), pinned_by.get(uid))}
+    return len(direct) + len(_support_lost(placements, direct))
 
 
-def _recheck(contract_version, pinned_id, pinned_sha, placed_ids, latest_units, cache):
+def _recheck(contract_version, pinned_id, pinned_sha, placements, latest_units, cache):
+    """placements: [(unit_id, supported_by)] of the plan."""
+    placed_ids = [uid for uid, _ in placements]
     if contract_version not in (V1, V2):
         return {'cargo_revision_id': None, 'status': 'NOT_APPLICABLE', 'added': 0, 'removed': 0, 'changed': 0,
                 'placed_affected': 0, 'placed_dropped_on_rebase': 0}
@@ -323,7 +344,7 @@ def _recheck(contract_version, pinned_id, pinned_sha, placed_ids, latest_units, 
     out.update(status='NEEDS_RECHECK' if any(diff.values()) else 'CURRENT', added=len(diff['added']),
                removed=len(diff['removed']), changed=len(diff['changed']),
                placed_affected=len(affected & set(placed_ids)),
-               placed_dropped_on_rebase=_dropped_count(pinned, latest_units, placed_ids))
+               placed_dropped_on_rebase=_dropped_count(pinned, latest_units, placements))
     return out
 
 
@@ -331,7 +352,7 @@ def recheck(plan, latest_view):
     """Status of a Plan against `latest_view` (counts only; v1 is pinned to R0000)."""
     v2 = plan.contract_version == V2
     return _recheck(plan.contract_version, plan.cargo_revision.revision_id if v2 else BASE,
-                    plan.cargo_revision.content_sha256 if v2 else None, [p.unit_id for p in plan.placements],
+                    plan.cargo_revision.content_sha256 if v2 else None, [(p.unit_id, p.supported_by) for p in plan.placements],
                     cr.derive_units(latest_view), _Cache())
 
 
@@ -353,7 +374,7 @@ def annotate_listing(rows):
         try:
             data = json.loads(plan_json)
             cv = data.get('contract_version')
-            placed = [p['unit_id'] for p in data.get('placements', [])]
+            placed = [(p['unit_id'], p.get('supported_by') or []) for p in data.get('placements', [])]
             if cv == V2:
                 ref = data['cargo_revision']
                 pinned_id, sha = ref['revision_id'], ref['content_sha256']
@@ -394,9 +415,11 @@ def rebase(plan, target_view):
     target_units = cr.derive_units(target_view)
     target_by = {u['id']: u for u in target_units}
     kept, dropped = [], []
+    reasons = {p.unit_id: _drop_reason(target_by.get(p.unit_id), pinned_by.get(p.unit_id)) for p in plan.placements}
+    for uid in _support_lost([(p.unit_id, p.supported_by) for p in plan.placements], {u for u, r in reasons.items() if r}):
+        reasons[uid] = 'SUPPORT_LOST'
     for p in plan.placements:
-        t, o = target_by.get(p.unit_id), pinned_by.get(p.unit_id)
-        reason = _drop_reason(t, o)
+        reason = reasons[p.unit_id]
         if reason:
             dropped.append({'unit_id': p.unit_id, 'reason': reason, 'x_mm': p.x_mm, 'y_mm': p.y_mm, 'yaw_deg': p.yaw_deg})
         else:
