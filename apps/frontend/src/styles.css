@@ -1646,3 +1646,22 @@ td.packing-warn { border-left: 4px solid #d9822b; }
     color: #333333;
   }
 }
+
+/* M5a D4: backup and restore card. Wraps at 390px; the preview table scrolls inside its own wrapper. */
+.backup-panel { overflow-wrap: anywhere; max-width: 100%; }
+.backup-row { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: flex-end; max-width: 100%; margin: 8px 0; }
+.backup-row > .button { max-width: 100%; white-space: normal; }
+.backup-file { flex: 1 1 14rem; min-width: 0; max-width: 100%; }
+.backup-file input[type="file"] { height: auto; padding: 6px 0; max-width: 100%; }
+.backup-limits { font-size: 12px; color: var(--muted); }
+.backup-error { margin: 8px 0; padding: 10px 12px; background: #fff0e8; border: 1px solid #efd5c4; border-radius: 6px; max-width: 100%; }
+.backup-error ul { margin: 6px 0; padding-left: 18px; }
+.backup-preview { margin-top: 12px; padding: 10px 12px; border: 1px solid #dfe6d8; border-radius: 6px; max-width: 100%; }
+.backup-table-wrap { max-width: 100%; overflow-x: auto; margin: 8px 0; }
+.backup-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.backup-table th, .backup-table td { text-align: left; padding: 4px 8px; border-bottom: 1px solid #e6ece2; vertical-align: top; }
+.backup-table td { text-align: right; white-space: nowrap; }
+.backup-warning { margin: 10px 0; padding: 8px 10px; border-left: 4px solid #d9822b; background: #fff4e8; }
+@media (max-width: 520px) {
+  .backup-row > .button { width: 100%; }
+}
