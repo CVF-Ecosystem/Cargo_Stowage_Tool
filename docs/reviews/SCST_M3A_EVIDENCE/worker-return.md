@@ -83,7 +83,7 @@ The highest placement base is z = 5 032 mm, below the hold height of 5 408 mm. T
 | Rebase cascade, report/XLSX backend, report models, test_m3a_flow.py | Lead | Opus 5.5 / medium | — |
 | D4a Workspace select/summary/Tầng/panel, client.ts, RebaseDropped | Subagent | haiku / high | Diff re-read; build re-run |
 | D4b Viewer 2D labels, ReportPage, styles | Subagent | haiku / high | Diff re-read; build re-run |
-| Browser spec tests/browser/m3a.spec.ts | Subagent | haiku / high | Re-run by lead with full suite |
+| Browser spec tests/browser/m3a.spec.ts | Subagent | haiku / high | Re-run by lead with full suite; lead repaired the Mất đỡ option visibility (RebaseDropped.tsx) after the harden01 regression |
 | Contract regeneration, verification, worker return, PR | Lead | Opus 5.5 / medium | — |
 
 Why sonnet: D2 needs exact µm/µm² union-area, centre and level arithmetic, where an error silently admits unsupported stacks. D3 must keep the default planner byte-identical while sharing its guillotine code. The owner reserved sonnet for exactly these two parts. All other delegated parts used haiku.
@@ -96,7 +96,35 @@ Why sonnet: D2 needs exact µm/µm² union-area, centre and level arithmetic, wh
 
 ## Commands and results
 
-BROWSER_RESULTS_PLACEHOLDER
+All of these were run by the lead on the final branch state:
+
+| Command | Result |
+|---|---|
+| `python -m pip install -r requirements-dev.txt` | OK |
+| `python -m pytest` (baseline on main) | 679 passed |
+| `python -m pytest` (final) | **726 passed** (+47 new: model 5, rules 33, planner 7, flow 2) |
+| `python tooling/export_contract.py`, then `npm ci`, `npm run contract` | Regenerated. The final re-run gives no diff. The openapi changes are additions only: the `algorithm` query parameter, `Plan.stacking`, five Issue codes, `SUPPORT_LOST`, `STACK_HEIGHT`, `columns-v1` and the optional report fields. |
+| `npm run build` | PASS (only the existing chunk-size warning) |
+| Browser, full suite incl. m3a.spec.ts (`LANG=C.UTF-8 npx playwright test --config playwright.cloud.config.ts`) | **55 passed** (52 existing + 3 new) in 4.2 min |
+| `git status` after the browser run | Clean except work in progress; **no committed file under docs/reviews changed** |
+| `python tooling/integration_check_pre_m2d.py .` | **29/29 PASS** |
+| `PYTHONDONTWRITEBYTECODE=1 python scripts/cvf_gates/cvf_downstream_gate_runner.py run --phase worker-return` | PASS, 7 mandatory controls, 0 failed (INVOKED; see the final run in the PR) |
+
+**Browser failure and repair.** The first full run gave 54 passed and 1 failed: `harden01.spec.ts:212` asserts that the rebase filter options are exactly [Tất cả, Bỏ, Đổi]. The new "Mất đỡ (0)" option broke it. Fix: that option renders only when SUPPORT_LOST rows exist, so the legacy UI is unchanged. The existing spec was not edited. After the fix the full suite gives 55/55.
+
+**m3a.spec.ts:**
+- **Desktop M3A-05 flow:** runs on a private backend on port 8769 with a temp data dir, the same pattern as m2d. It covers:
+  - multi-layer preview, apply, the Tầng cell and the support detail;
+  - 3D meshes equal to placements, with a stacked mesh at the right z;
+  - 2D ×N labels;
+  - save, reload and reopen;
+  - the report notices (MULTI_LAYER, no SINGLE_LAYER), labels and totals;
+  - the XLSX download;
+  - a revision, NEEDS_RECHECK, and a rebase where the "Mất đỡ" rows match the server and the candidate has no geometry issues.
+- **390px:** multi-layer preview and apply, no page overflow, and the Tầng column reached by the table's horizontal scroll.
+- **Default:** stays single-layer.
+
+**Observation O-M3A-1 (existing behaviour, not changed):** switching to VINAFCO 268 in the UI keeps the open plan's voyage limit (`switchVessel` takes `min(old, case)`; on a fresh page that is the 32 t demo limit). columns-v1 in the UI then places only 22/1076, with MASS_LIMIT on the rest, until the user sets "Giới hạn chuyến (kg)" to 3 517 500, exactly as display-units.spec already does for the single-layer planner. The backend VR-SII case plan places 1076/1076. Root or owner should decide whether a case switch should adopt the case voyage limit.
 
 ## DA01–DA05 application
 
@@ -113,6 +141,7 @@ BROWSER_RESULTS_PLACEHOLDER
 ## Limitations and remaining owned work
 
 - Default planner choice stays single-layer; see the D4 deviation. This is a root decision.
+- O-M3A-1: a VINAFCO case switch in the UI keeps the earlier voyage limit (existing behaviour); a multi-layer plan in the UI needs the voyage limit set first.
 - In 2D, lower bundles of a column are hidden under the top rect; the "×N" label shows the count.
 - The 1 mm grid gap between layers is not modelled as dunnage.
 - Owner-held M3b: mixed sizes in a column, dunnage, stack/tanktop load, CoG/stability, multiple holds, non-BOX holds, 3D per-layer drag, real cases and the measured hold.

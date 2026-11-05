@@ -33,7 +33,7 @@ export default function RebaseDropped({ result, name }: { result: RebaseResult; 
           <option value="ALL">{`Tất cả (${total})`}</option>
           <option value="REMOVED">{`Bỏ (${removedCount})`}</option>
           <option value="CHANGED">{`Đổi (${changedCount})`}</option>
-          <option value="SUPPORT_LOST">{`Mất đỡ (${supportLostCount})`}</option>
+          {supportLostCount > 0 && <option value="SUPPORT_LOST">{`Mất đỡ (${supportLostCount})`}</option>}
         </select>
       </label>
       {count === 0 ? <p>Không có vị trí nào theo bộ lọc.</p> : <>
