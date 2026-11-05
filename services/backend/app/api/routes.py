@@ -536,3 +536,39 @@ async def apply_backup_restore(request: Request, confirm: str):
         raise HTTPException(409, {"message": exc.message, "errors": exc.errors})
     except backup_check.BackupRejected as exc:
         raise _backup_rejected(exc)
+
+
+# ------------------------------------------------------------------ M5b automatic local backups (D2)
+from ..adapters import backup_auto
+from .backup_models import AutoBackupFile, AutoBackupStatus
+
+
+@router.get("/backup/auto", response_model=AutoBackupStatus)
+def auto_backup_status():
+    return AutoBackupStatus(enabled=backup_auto.enabled(), interval_hours=backup_auto.INTERVAL_HOURS,
+                            keep=backup_auto.KEEP, files=backup_auto.list_files(), last_error=backup_auto.last_error())
+
+
+@router.post("/backup/auto/run", response_model=AutoBackupFile,
+             responses={409: {"model": BackupRejectedDetail, "description": "Chưa có dữ liệu để sao lưu; chưa tạo gì."},
+                        500: {"model": BackupRejectedDetail, "description": "Sao lưu tự động thất bại; dữ liệu hiện tại không đổi."}})
+async def auto_backup_run():
+    try:
+        return await run_in_threadpool(backup_auto.run_now)
+    except backup_auto.NoData as exc:
+        raise HTTPException(409, {"message": exc.message, "errors": [{"field": "body", "message": exc.message}]})
+    except backup_auto.AutoBackupFailed as exc:
+        raise HTTPException(500, {"message": exc.message, "errors": [{"field": "body", "message": exc.message}]})
+
+
+@router.get("/backup/auto/{name:path}", response_class=FileResponse,
+            responses={200: {"content": {"application/octet-stream": {}}, "description": "Một bản sao lưu tự động (.scstbak)."},
+                       404: {"description": "Không có bản sao lưu tự động với tên này."}})
+def download_auto_backup(name: str):
+    not_found = HTTPException(404, "Không tìm thấy bản sao lưu tự động này.")
+    if not backup_auto.NAME_PATTERN.fullmatch(name):
+        raise not_found
+    path = backup_auto.auto_dir() / name
+    if not path.is_file():
+        raise not_found
+    return FileResponse(path, media_type="application/octet-stream", filename=name)

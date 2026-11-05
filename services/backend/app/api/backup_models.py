@@ -1,4 +1,6 @@
 """Response models of the local backup/restore API (M5a). Additions only; no existing contract field changes."""
+from typing import Optional
+
 from pydantic import BaseModel
 
 
@@ -29,3 +31,17 @@ class BackupFieldError(BaseModel):
 class BackupRejectedDetail(BaseModel):
     message: str
     errors: list[BackupFieldError]
+
+
+class AutoBackupFile(BaseModel):
+    name: str
+    created_utc: str
+    size_bytes: int
+
+
+class AutoBackupStatus(BaseModel):
+    enabled: bool
+    interval_hours: int
+    keep: int
+    files: list[AutoBackupFile]
+    last_error: Optional[str]

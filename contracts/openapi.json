@@ -1329,10 +1329,170 @@
           }
         }
       }
+    },
+    "/api/backup/auto": {
+      "get": {
+        "summary": "Auto Backup Status",
+        "operationId": "auto_backup_status_api_backup_auto_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutoBackupStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/backup/auto/run": {
+      "post": {
+        "summary": "Auto Backup Run",
+        "operationId": "auto_backup_run_api_backup_auto_run_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutoBackupFile"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Chưa có dữ liệu để sao lưu; chưa tạo gì.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BackupRejectedDetail"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Sao lưu tự động thất bại; dữ liệu hiện tại không đổi.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BackupRejectedDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/backup/auto/{name}": {
+      "get": {
+        "summary": "Download Auto Backup",
+        "operationId": "download_auto_backup_api_backup_auto__name__get",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Name"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Một bản sao lưu tự động (.scstbak).",
+            "content": {
+              "application/octet-stream": {}
+            }
+          },
+          "404": {
+            "description": "Không có bản sao lưu tự động với tên này."
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "AutoBackupFile": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "created_utc": {
+            "type": "string",
+            "title": "Created Utc"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "title": "Size Bytes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "created_utc",
+          "size_bytes"
+        ],
+        "title": "AutoBackupFile"
+      },
+      "AutoBackupStatus": {
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "title": "Enabled"
+          },
+          "interval_hours": {
+            "type": "integer",
+            "title": "Interval Hours"
+          },
+          "keep": {
+            "type": "integer",
+            "title": "Keep"
+          },
+          "files": {
+            "items": {
+              "$ref": "#/components/schemas/AutoBackupFile"
+            },
+            "type": "array",
+            "title": "Files"
+          },
+          "last_error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Error"
+          }
+        },
+        "type": "object",
+        "required": [
+          "enabled",
+          "interval_hours",
+          "keep",
+          "files",
+          "last_error"
+        ],
+        "title": "AutoBackupStatus"
+      },
       "BackupCounts": {
         "properties": {
           "plans": {

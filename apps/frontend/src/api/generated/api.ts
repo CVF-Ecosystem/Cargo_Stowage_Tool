@@ -503,10 +503,83 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/backup/auto": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Auto Backup Status */
+        get: operations["auto_backup_status_api_backup_auto_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/backup/auto/run": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Auto Backup Run */
+        post: operations["auto_backup_run_api_backup_auto_run_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/backup/auto/{name}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Download Auto Backup */
+        get: operations["download_auto_backup_api_backup_auto__name__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** AutoBackupFile */
+        AutoBackupFile: {
+            /** Name */
+            name: string;
+            /** Created Utc */
+            created_utc: string;
+            /** Size Bytes */
+            size_bytes: number;
+        };
+        /** AutoBackupStatus */
+        AutoBackupStatus: {
+            /** Enabled */
+            enabled: boolean;
+            /** Interval Hours */
+            interval_hours: number;
+            /** Keep */
+            keep: number;
+            /** Files */
+            files: components["schemas"]["AutoBackupFile"][];
+            /** Last Error */
+            last_error: string | null;
+        };
         /** BackupCounts */
         BackupCounts: {
             /** Plans */
@@ -3258,6 +3331,102 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["BackupRejectedDetail"];
                 };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    auto_backup_status_api_backup_auto_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AutoBackupStatus"];
+                };
+            };
+        };
+    };
+    auto_backup_run_api_backup_auto_run_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AutoBackupFile"];
+                };
+            };
+            /** @description Chưa có dữ liệu để sao lưu; chưa tạo gì. */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BackupRejectedDetail"];
+                };
+            };
+            /** @description Sao lưu tự động thất bại; dữ liệu hiện tại không đổi. */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BackupRejectedDetail"];
+                };
+            };
+        };
+    };
+    download_auto_backup_api_backup_auto__name__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                name: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Một bản sao lưu tự động (.scstbak). */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/octet-stream": unknown;
+                };
+            };
+            /** @description Không có bản sao lưu tự động với tên này. */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
             /** @description Validation Error */
             422: {
