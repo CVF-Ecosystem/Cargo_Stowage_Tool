@@ -5,11 +5,13 @@ Memory class: POINTER_RECORD
 ## Current Truth
 
 - Contract: cvf.downstreamContinuityContract@1.0.0
-- Current mode: BUILD
-- Active phase: BUILD
+- Current mode: FREEZE
+- Active phase: FREEZE
 - Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_HARDEN_01.md
 
 ## Current operator boundary
+
+HARDEN-01 closed 05-11-2026: root reviewed PR #5 (docs/reviews/SCST_HARDEN_01_REVIEW.md) and merged it as c8b9c1c under owner-delegated authority. Next: WAIT_OWNER: M2 and the supplemental roadmap are technically complete and hardened. Next needs owner input: business review of the tool and the M2d report (open the sample XLSX in Excel), decisions on OD-only recheck and provenance-in-hash, and hold measurements plus real cases for M3. Root dispatches no further cloud tranche without that input.
 
 HARDEN-01 dispatched 05-11-2026 under owner-delegated authority: data-independent hardening (paged rebase drops, drop-on-rebase count, replay cache, pre-parse limits, Windows profile lock). SPEC docs/specs/SCST_HARDEN_01.md, order docs/work_orders/SCST_HARDEN_01.md, handoff CVF_SESSION/handoffs/AGENT_HANDOFF_HARDEN_01.md.
 

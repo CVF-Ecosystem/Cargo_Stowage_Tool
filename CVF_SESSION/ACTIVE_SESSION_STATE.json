@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "BUILD",
-  "activePhase": "BUILD",
+  "currentMode": "FREEZE",
+  "activePhase": "FREEZE",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -14,9 +14,9 @@
     "FREEZE"
   ],
   "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_HARDEN_01.md",
-  "nextAllowedMove": "Claude Cloud implements HARDEN-01 on a non-main branch and opens a pull request; root reviews independently and merges under owner-delegated authority. M3 needs owner hold measurements and real cases.",
-  "parkedOperatorCheckpoint": "M3/M4/M5, observations O3/O7-O11, OD-only recheck policy, real-Excel check of the M2d XLSX, hook/hosted-CI adoption, live-provider governance proof, measured hold and 16 source envelopes and business acceptance remain owned future work.",
-  "activeRole": "ORCHESTRATOR",
+  "nextAllowedMove": "WAIT_OWNER: M2 and the supplemental roadmap are technically complete and hardened. Next needs owner input: business review of the tool and the M2d report (open the sample XLSX in Excel), decisions on OD-only recheck and provenance-in-hash, and hold measurements plus real cases for M3. Root dispatches no further cloud tranche without that input.",
+  "parkedOperatorCheckpoint": "M3/M4/M5, observation O3 (provenance outside hash), OD-only recheck policy, real-Excel check of the M2d XLSX, O7-O11, hook/hosted-CI adoption, live-provider governance proof, measured hold and 16 source envelopes and business acceptance remain owned future work.",
+  "activeRole": "SESSION_SYNC_STEWARD",
   "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",
   "updatedAt": "2026-11-05",
   "activeTranche": "HARDEN-01"

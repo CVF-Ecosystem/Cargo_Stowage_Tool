@@ -1,12 +1,10 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "HARDEN_01_DISPATCHED_M2_COMPLETE_TECHNICAL_BUSINESS_ACCEPTANCE_PENDING",
-  "currentPhase": "BUILD",
+  "overallStatus": "M2_AND_SUPPLEMENT_COMPLETE_TECHNICAL_HARDENED_WAITING_OWNER_BUSINESS_REVIEW_AND_M3_DATA",
+  "currentPhase": "FREEZE",
   "completedCapabilities": [],
-  "activeWorkOrders": [
-    "docs/work_orders/SCST_HARDEN_01.md"
-  ],
+  "activeWorkOrders": [],
   "knownLimitations": [
     "PIPE-LIST actual31group/1076bundle source integration technically verified; source mass/dimensions calculated/provisional.16bundles need envelope verification; measuredhold/business/operational acceptance pending.",
     "Raw drafts/history/baseline/comparison remain in browser tab until explicit immutable SQLite Plan snapshot save. Baseline/comparison do not persist through reload; select saved A again. Latest100 snapshots, no overwrite/delete/backup/restore UI.",
@@ -88,7 +86,9 @@
     "docs/reviews/SCST_M2D_EVIDENCE/worker-return.md",
     "docs/reviews/SCST_M2D_REVIEW.md",
     "docs/specs/SCST_HARDEN_01.md",
-    "docs/work_orders/SCST_HARDEN_01.md"
+    "docs/work_orders/SCST_HARDEN_01.md",
+    "docs/reviews/SCST_HARDEN_01_EVIDENCE/worker-return.md",
+    "docs/reviews/SCST_HARDEN_01_REVIEW.md"
   ],
   "updatedAt": "2026-11-05",
   "x_verifiedMilestones": [
@@ -163,6 +163,12 @@
       "technicalStatus": "VERIFIED",
       "businessAcceptance": "PENDING",
       "evidence": "docs/reviews/SCST_M2D_REVIEW.md"
+    },
+    {
+      "id": "HARDEN-01",
+      "technicalStatus": "VERIFIED",
+      "businessAcceptance": "NOT_APPLICABLE",
+      "evidence": "docs/reviews/SCST_HARDEN_01_REVIEW.md"
     }
   ],
   "x_plannedSupplement": {

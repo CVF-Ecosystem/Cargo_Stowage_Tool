@@ -1,6 +1,6 @@
 # SCST — HARDEN-01 hardening work order
 
-Status: ACTIVE
+Status: CLOSED
 dispatchKind: INITIAL
 Owner: project-orchestrator
 Risk: R2
@@ -67,9 +67,9 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "decision": "Accept, repair within authority or return to worker; M3 needs owner data"
     }
   },
-  "phase": "DISPATCH",
+  "phase": "REVIEW",
   "action": {
-    "kind": "IMPLEMENT",
+    "kind": "REVIEW",
     "selected": [
       "H-01",
       "H-02",
@@ -77,8 +77,8 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "H-04",
       "H-05"
     ],
-    "owner": "Claude Cloud implementation worker on a branch; root independent review and commit steward",
-    "output": "HARDEN-01 source, tests, regenerated contract and docs/reviews/SCST_HARDEN_01_EVIDENCE/worker-return.md in a pull request",
+    "owner": "Root independent implementation reviewer",
+    "output": "docs/reviews/SCST_HARDEN_01_REVIEW.md",
     "budgetMinutes": 180,
     "stop": "Five criteria evidenced or budget/scope boundary without reset",
     "next": "Root independent review; M3 requires owner hold measurements, real cases and its own SPEC/WORK_ORDER"
@@ -86,50 +86,80 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
   "rows": [
     {
       "id": "H-01",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for H-01",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_HARDEN_01_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_HARDEN_01_REVIEW.md",
+          "sha256": "5959704b57b21aab70843ecf2cc12286908f4f1a9a42ffbbb15f4628074a4c07"
+        }
+      ]
     },
     {
       "id": "H-02",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for H-02",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_HARDEN_01_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_HARDEN_01_REVIEW.md",
+          "sha256": "5959704b57b21aab70843ecf2cc12286908f4f1a9a42ffbbb15f4628074a4c07"
+        }
+      ]
     },
     {
       "id": "H-03",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for H-03",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_HARDEN_01_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_HARDEN_01_REVIEW.md",
+          "sha256": "5959704b57b21aab70843ecf2cc12286908f4f1a9a42ffbbb15f4628074a4c07"
+        }
+      ]
     },
     {
       "id": "H-04",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for H-04",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_HARDEN_01_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_HARDEN_01_REVIEW.md",
+          "sha256": "5959704b57b21aab70843ecf2cc12286908f4f1a9a42ffbbb15f4628074a4c07"
+        }
+      ]
     },
     {
       "id": "H-05",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for H-05",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_HARDEN_01_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_HARDEN_01_REVIEW.md",
+          "sha256": "5959704b57b21aab70843ecf2cc12286908f4f1a9a42ffbbb15f4628074a4c07"
+        }
+      ]
     }
   ],
   "supportingWork": [],
   "conclusions": {
-    "tranche": "PENDING",
-    "trancheSummary": "Five HARDEN-01 criteria admitted for bounded implementation only",
-    "trancheEvidence": [],
+    "tranche": "COMPLETE",
+    "trancheSummary": "HARDEN-01 five technical criteria reviewed; merged as c8b9c1c under owner-delegated merge authority",
+    "trancheEvidence": [
+      {
+        "path": "docs/reviews/SCST_HARDEN_01_REVIEW.md",
+        "sha256": "5959704b57b21aab70843ecf2cc12286908f4f1a9a42ffbbb15f4628074a4c07"
+      }
+    ],
     "product": "PENDING",
     "productSummary": "M3 multi-layer and real cases, measured hold/packing and business acceptance remain separate owned work",
     "acceptance": [],
@@ -137,3 +167,7 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
   }
 }
 ```
+
+## Technical disposition
+
+Root independent implementation review accepts H-01..05 on PR #5 (head 88c4fb6), merged to main as c8b9c1c under the owner-delegated merge authority. Local Windows rerun: backend 679/679 incl. real two-process msvcrt lock tests, contract additive only, build OK, full browser 52/52, clean git status, integration check 29/29, gates PASS. Replay cache: listing 260->77 ms, bind 128->43 ms. No business acceptance or M3.
