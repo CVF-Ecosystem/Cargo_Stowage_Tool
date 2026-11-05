@@ -39,9 +39,9 @@ function statusLine(item: ProfileListItem): string {
 type Previewed = { jsonText: string; glbBase64: string; result: ProfilePreview };
 type Issue = { message: string; errors: ProfileError[] };
 export type OpenCurrent = { id: string; version: number; caseId: string } | null;
-type Props = { busy: boolean; current: OpenCurrent; onOpen: (id: string, version: number, caseId: string) => void };
+type Props = { busy: boolean; current: OpenCurrent; onOpen: (id: string, version: number, caseId: string) => void; reloadToken?: number };
 
-export default function VesselProfilePanel({ busy, current, onOpen }: Props) {
+export default function VesselProfilePanel({ busy, current, onOpen, reloadToken = 0 }: Props) {
   const [items, setItems] = useState<ProfileListItem[] | null>(null);
   const [listError, setListError] = useState("");
   const [selectedKey, setSelectedKey] = useState("");
@@ -80,6 +80,22 @@ export default function VesselProfilePanel({ busy, current, onOpen }: Props) {
       .catch((e) => { if (live) setListError(messageOf(e, "Không đọc được danh sách tàu.")); });
     return () => { live = false; };
   }, []);
+
+  // Reload when the parent bumps reloadToken (after a backup restore). Keeps the current selection only if it still exists.
+  useEffect(() => {
+    if (!reloadToken) return;
+    let live = true;
+    listVesselProfiles()
+      .then((list) => {
+        if (!live) return;
+        setItems(list);
+        setListError("");
+        const first = list.find((i) => i.status === "AVAILABLE");
+        setSelectedKey((prev) => (list.some((i) => keyOf(i) === prev) ? prev : (first ? keyOf(first) : "")));
+      })
+      .catch((e) => { if (live) setListError(messageOf(e, "Không đọc được danh sách tàu.")); });
+    return () => { live = false; };
+  }, [reloadToken]);
 
   // Follow the open plan's profile when it changes elsewhere (switch, reopen, rebase).
   useEffect(() => {

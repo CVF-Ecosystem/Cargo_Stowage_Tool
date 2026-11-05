@@ -293,3 +293,88 @@ export const previewCargoRevision = (draft: RevisionDraft) => revisionRequest<Re
 export const createCargoRevision = (draft: RevisionDraft) => revisionRequest<RevisionSummary>("/api/cargo-revisions", draft, "Không tạo được revision dữ liệu hàng.");
 export const previewRevisionPlan = (revisionId: string, plan: Plan) => revisionRequest<Evaluation>(`/api/cargo-revisions/${encodeURIComponent(revisionId)}/plan-preview`, plan, "Không xem được list ống theo revision.");
 export const rebaseSnapshot = (id: string) => revisionRequest<RebaseResult>(`/api/snapshots/${encodeURIComponent(id)}/rebase`, undefined, "Không tạo được bản theo dữ liệu mới.", true);
+
+// Backup and restore (M5a D4). Types come from the generated contract; errors carry the server's Vietnamese message
+// (400/409/413 as {detail:{message, errors}}), and a network failure uses the same NETWORK_ERROR text as the other calls.
+export type BackupCounts = components["schemas"]["BackupCounts"];
+export type BackupPreview = components["schemas"]["BackupPreview"];
+export type BackupRestoreResult = components["schemas"]["RestoreResult"];
+export type BackupError = components["schemas"]["BackupFieldError"];
+export class BackupApiError extends Error {
+  status: number;
+  errors: BackupError[];
+  constructor(message: string, status: number, errors: BackupError[] = []) {
+    super(message);
+    this.name = "BackupApiError";
+    this.status = status;
+    this.errors = errors;
+  }
+}
+
+const BACKUP_TIMEOUT_MS = 180000;
+const BACKUP_FILENAME = "scst-backup.scstbak";
+
+// Server file name from Content-Disposition; any directory part is dropped before it is used for the download.
+function backupFilenameFrom(disposition: string | null): string {
+  const encoded = disposition?.match(/filename\*=UTF-8''([^;]+)/i);
+  let name = "";
+  if (encoded) {
+    try { name = decodeURIComponent(encoded[1].trim()); } catch { name = ""; }
+  }
+  if (!name) name = disposition?.match(/filename="?([^";]+)"?/i)?.[1]?.trim() ?? "";
+  return name.split(/[\\/]/).pop() || BACKUP_FILENAME;
+}
+
+function backupErrorFrom(detail: unknown, status: number, fallback: string): BackupApiError {
+  if (typeof detail === "string" && detail) return new BackupApiError(detail, status);
+  if (detail && typeof detail === "object") {
+    const d = detail as { message?: unknown; errors?: unknown };
+    const errors = Array.isArray(d.errors) ? (d.errors as BackupError[]) : [];
+    if (typeof d.message === "string" && d.message) return new BackupApiError(d.message, status, errors);
+  }
+  return new BackupApiError(`${fallback} (HTTP ${status})`, status);
+}
+
+async function backupFetch(path: string, init: RequestInit, fallback: string): Promise<Response> {
+  let response: Response;
+  try {
+    response = await fetch(path, { ...init, signal: AbortSignal.timeout(BACKUP_TIMEOUT_MS) });
+  } catch {
+    throw new BackupApiError(NETWORK_ERROR, 0);
+  }
+  if (!response.ok) throw backupErrorFrom(await readDetail(response), response.status, fallback);
+  return response;
+}
+
+export async function exportBackup(): Promise<{ blob: Blob; filename: string }> {
+  const response = await backupFetch("/api/backup/export", { method: "GET" }, "Không tạo được bản sao lưu.");
+  let blob: Blob;
+  try {
+    blob = await response.blob();
+  } catch {
+    throw new BackupApiError("Không tải được bản sao lưu; chưa ghi gì.", response.status);
+  }
+  return { blob, filename: backupFilenameFrom(response.headers.get("Content-Disposition")) };
+}
+
+const BACKUP_BODY_HEADERS = { "Content-Type": "application/octet-stream" };
+
+// Preview never writes: the server checks the archive and reports its counts next to the current data.
+export async function previewBackup(file: File): Promise<BackupPreview> {
+  const response = await backupFetch("/api/backup/restore/preview", { method: "POST", headers: BACKUP_BODY_HEADERS, body: file }, "Không kiểm được bản sao lưu; chưa thay đổi gì.");
+  try {
+    return (await response.json()) as BackupPreview;
+  } catch {
+    throw new BackupApiError("Phản hồi kiểm bản sao lưu không đọc được; chưa thay đổi gì.", response.status);
+  }
+}
+
+// Apply replaces all local data; `confirm` must be the backup_sha256 that the preview of this same file returned.
+export async function applyBackup(file: File, confirm: string): Promise<BackupRestoreResult> {
+  const response = await backupFetch(`/api/backup/restore/apply?confirm=${encodeURIComponent(confirm)}`, { method: "POST", headers: BACKUP_BODY_HEADERS, body: file }, "Không khôi phục được bản sao lưu.");
+  try {
+    return (await response.json()) as BackupRestoreResult;
+  } catch {
+    throw new BackupApiError("Phản hồi khôi phục không đọc được; kiểm lại dữ liệu trước khi tiếp tục.", response.status);
+  }
+}

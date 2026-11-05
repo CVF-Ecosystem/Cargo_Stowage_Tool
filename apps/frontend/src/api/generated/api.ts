@@ -452,10 +452,95 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/backup/export": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Export Backup */
+        get: operations["export_backup_api_backup_export_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/backup/restore/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Preview Backup Restore */
+        post: operations["preview_backup_restore_api_backup_restore_preview_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/backup/restore/apply": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Apply Backup Restore */
+        post: operations["apply_backup_restore_api_backup_restore_apply_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** BackupCounts */
+        BackupCounts: {
+            /** Plans */
+            plans: number;
+            /** Revisions */
+            revisions: number;
+            /** Vessel Profile Versions */
+            vessel_profile_versions: number;
+        };
+        /** BackupFieldError */
+        BackupFieldError: {
+            /** Field */
+            field: string;
+            /** Message */
+            message: string;
+        };
+        /** BackupPreview */
+        BackupPreview: {
+            /** Format */
+            format: string;
+            /** Created Utc */
+            created_utc: string;
+            /** Backup Sha256 */
+            backup_sha256: string;
+            counts: components["schemas"]["BackupCounts"];
+            current: components["schemas"]["BackupCounts"];
+        };
+        /** BackupRejectedDetail */
+        BackupRejectedDetail: {
+            /** Message */
+            message: string;
+            /** Errors */
+            errors: components["schemas"]["BackupFieldError"][];
+        };
         /** BatchError */
         BatchError: {
             /** Index */
@@ -1635,6 +1720,12 @@ export interface components {
             /** Profile Sha256 */
             profile_sha256: string | null;
             field_status: components["schemas"]["ReportFieldStatus"];
+        };
+        /** RestoreResult */
+        RestoreResult: {
+            counts: components["schemas"]["BackupCounts"];
+            /** Pre Restore Backup */
+            pre_restore_backup: string;
         };
         /** RevisionDetail */
         RevisionDetail: {
@@ -3043,6 +3134,139 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    export_backup_api_backup_export_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Tệp sao lưu scst.backup.v1 (.scstbak). */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/octet-stream": unknown;
+                };
+            };
+            /** @description Không đọc được dữ liệu local để sao lưu. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BackupRejectedDetail"];
+                };
+            };
+        };
+    };
+    preview_backup_restore_api_backup_restore_preview_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/octet-stream": string;
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BackupPreview"];
+                };
+            };
+            /** @description Tệp sao lưu không hợp lệ; dữ liệu hiện tại giữ nguyên. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BackupRejectedDetail"];
+                };
+            };
+            /** @description Tệp sao lưu vượt 256 MiB; chưa đọc hết, chưa ghi gì. */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BackupRejectedDetail"];
+                };
+            };
+        };
+    };
+    apply_backup_restore_api_backup_restore_apply_post: {
+        parameters: {
+            query: {
+                confirm: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/octet-stream": string;
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RestoreResult"];
+                };
+            };
+            /** @description Tệp sao lưu không hợp lệ; dữ liệu hiện tại giữ nguyên. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BackupRejectedDetail"];
+                };
+            };
+            /** @description Mã xác nhận không khớp tệp gửi lên; chưa ghi gì. */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BackupRejectedDetail"];
+                };
+            };
+            /** @description Tệp sao lưu vượt 256 MiB; chưa đọc hết, chưa ghi gì. */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BackupRejectedDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
             };
         };
     };
