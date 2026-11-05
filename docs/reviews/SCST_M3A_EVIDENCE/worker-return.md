@@ -140,8 +140,8 @@ All of these were run by the lead on the final branch state:
 
 ## Limitations and remaining owned work
 
-- Default planner choice stays single-layer; see the D4 deviation. This is a root decision.
-- O-M3A-1: a VINAFCO case switch in the UI keeps the earlier voyage limit (existing behaviour); a multi-layer plan in the UI needs the voyage limit set first.
+- (Resolved in repair round 1, R1) Default planner choice: pipe lists now default to multi-layer.
+- (Resolved in repair round 1, R2) O-M3A-1: a case switch now adopts the case voyage limit.
 - In 2D, lower bundles of a column are hidden under the top rect; the "×N" label shows the count.
 - The 1 mm grid gap between layers is not modelled as dunnage.
 - Owner-held M3b: mixed sizes in a column, dunnage, stack/tanktop load, CoG/stability, multiple holds, non-BOX holds, 3D per-layer drag, real cases and the measured hold.
@@ -153,8 +153,8 @@ Root accepted the D2.1 level rule and the SUPPORT_LOST rebase cascade, and retur
 
 | Item | Done by | Model / effort | Commit |
 |---|---|---|---|
-| R1 pipe-list default multi-layer | Subagent | haiku / high | see below |
-| R2 voyage limit on case switch | Subagent | haiku / high | see below |
+| R1 pipe-list default multi-layer | Subagent | haiku / high | 15c2474 |
+| R2 voyage limit on case switch | Subagent | haiku / high | 1c88dc8 |
 | R3 overlap-pass performance | Subagent | sonnet / high | af29e67, reverted in 50292e0, restored in 8d6021f |
 
 **R1.**
@@ -187,3 +187,25 @@ Root accepted the D2.1 level rule and the SUPPORT_LOST rebase cascade, and retur
 | `preview` default | 0.063 / 0.082 / 0.049 | 0.053 / 0.079 / 0.037 |
 
 - **History:** root's "R3 cancelled" comment arrived after `af29e67` was pushed, so the lead reverted it (`50292e0`, a byte-identical return to 8d205ef). Root's next comment said to keep R3, so it was restored (`8d6021f`, identical to af29e67). No history was rewritten.
+
+**R2.**
+- `switchVessel` no longer overwrites the template's `voyage_cargo_limit_g`, so the new case or vessel plan keeps its own voyage limit.
+- The guard throws the same error when `cargo_onboard_g` exceeds the new certificate ceiling or the new voyage limit.
+- The two old voyage notices are replaced by one: `Giới hạn chuyến theo cấp VR-SII: 3.517,5 tấn; vẫn có thể chỉnh trong "Giới hạn chuyến (kg)".`
+- A grep of all specs found no existing spec asserting the old notices or a carried-over voyage limit, so no stop was needed. No existing spec was edited for R2.
+- m3a.spec: the `setCaseVoyageLimit` workaround is removed from the M3A-05 and M3A-04 flows. A fresh page now reaches ≥ 900 placed (1076) without typing a voyage limit.
+- **Deviation:** the notice is asserted right after "Xem VINAFCO 268" and before the pipe list is loaded. Loading the list sets its own existing notice ("Đã nạp list ống…"). After the load, the spec asserts that the plan's voyage limit is 3 517 500 000 g.
+
+**Final verification after repair round 1 (lead, cloud container, head 1c88dc8):**
+
+| Command | Result |
+|---|---|
+| `python -m pytest` | **734 passed** (726 + 8 R3 identity/perf tests) |
+| `python tooling/export_contract.py`, then `npm run contract` | No diff |
+| `npm run build` | PASS |
+| Full browser suite (`LANG=C.UTF-8 npx playwright test --config playwright.cloud.config.ts`) | **55 passed** (4.3 min) |
+| `git status` after the browser run | Clean; no committed file under docs/reviews changed |
+| `python tooling/integration_check_pre_m2d.py .` | **29/29 PASS** |
+| `cvf_downstream_gate_runner.py run --phase worker-return` | PASS, 7 controls, 0 failed |
+
+Each subagent also reported its own runs: R1 full suite 55 passed, R2 full suite 55 passed, R3 backend 734 passed. The lead re-ran all of them above.
