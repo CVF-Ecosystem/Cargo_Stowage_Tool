@@ -1,8 +1,10 @@
-import { useRef, useState } from "react";
-import { BackupApiError, applyBackup, exportBackup, previewBackup, type BackupPreview, type BackupRestoreResult } from "../api/client";
+import { useEffect, useRef, useState } from "react";
+import { BackupApiError, applyBackup, autoBackupStatus, downloadAutoBackup, exportBackup, previewBackup, runAutoBackup, type AutoBackupStatus, type BackupPreview, type BackupRestoreResult } from "../api/client";
 
 const WARNING = "Toàn bộ dữ liệu hiện có sẽ được thay bằng bản sao lưu; một bản sao lưu dữ liệu hiện tại sẽ được tạo tự động trước khi thay.";
 const LIMITS = "Chưa có sao lưu tự động theo lịch, mã hóa hay khôi phục gộp; khôi phục luôn thay toàn bộ.";
+const AUTO_NOTE = "Bản tự động nằm cùng máy với dữ liệu. Hãy tải một bản và cất ra ngoài máy (USB, ổ mạng). Chưa có sao lưu theo lịch khi app đang đóng, chưa mã hóa.";
+const AUTO_LIST_MAX = 10;
 
 type Props = {
   busy: boolean;
@@ -26,6 +28,10 @@ function failureOf(e: unknown, fallback: string): Failure {
   return { message: e instanceof Error && e.message ? e.message : fallback, errors: [] };
 }
 
+function sizeText(bytes: number): string {
+  return `${Math.max(1, Math.round(bytes / 1024)).toLocaleString("vi-VN")} KB`;
+}
+
 export default function BackupPanel({ busy, lock, setBusy, onRestored }: Props) {
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<BackupPreview | null>(null);
@@ -34,6 +40,10 @@ export default function BackupPanel({ busy, lock, setBusy, onRestored }: Props) 
   const [working, setWorking] = useState<"" | "export" | "check" | "restore">("");
   const input = useRef<HTMLInputElement>(null);
   const token = useRef(0);
+  const [auto, setAuto] = useState<AutoBackupStatus | null>(null);
+  const [autoRunning, setAutoRunning] = useState(false);
+  const [autoFailure, setAutoFailure] = useState("");
+  const [autoResult, setAutoResult] = useState("");
 
   const clearChoice = () => {
     setFile(null);
@@ -96,6 +106,57 @@ export default function BackupPanel({ busy, lock, setBusy, onRestored }: Props) 
     }
   };
 
+  const loadAuto = async () => {
+    try {
+      setAuto(await autoBackupStatus());
+    } catch (e) {
+      setAutoFailure(failureOf(e, "Không đọc được trạng thái sao lưu tự động.").message);
+    }
+  };
+
+  useEffect(() => { void loadAuto(); }, []);
+
+  // Writes a new automatic backup on the server (same lock as export and restore), then refreshes the list.
+  const runAuto = async () => {
+    if (lock.current) return;
+    lock.current = true; setBusy(true); setAutoRunning(true); setAutoFailure(""); setAutoResult("");
+    try {
+      const entry = await runAutoBackup();
+      setAutoResult(`Đã sao lưu ngay: ${timeText(entry.created_utc)} (${entry.name}).`);
+    } catch (e) {
+      setAutoFailure(failureOf(e, "Không sao lưu được ngay.").message);
+    } finally {
+      lock.current = false; setBusy(false); setAutoRunning(false);
+      await loadAuto();
+    }
+  };
+
+  // Downloads one automatic backup as a file; restoring from it uses the existing file picker above.
+  const fetchAuto = async (name: string) => {
+    setAutoFailure(""); setAutoResult("");
+    try {
+      const blob = await downloadAutoBackup(name);
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = name;
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      setAutoResult(`Đã tải ${name}.`);
+    } catch (e) {
+      setAutoFailure(failureOf(e, "Không tải được bản sao lưu tự động.").message);
+    }
+  };
+
+  const newest = auto?.files[0];
+  const statusLine = !auto
+    ? (autoFailure ? "Chưa đọc được trạng thái sao lưu tự động." : "Đang đọc trạng thái sao lưu tự động…")
+    : !auto.enabled ? "Sao lưu tự động đang tắt trên máy này."
+    : newest ? `Bản gần nhất: ${timeText(newest.created_utc)} · đang giữ ${auto.files.length}/${auto.keep} bản.`
+    : "Chưa có bản tự động nào.";
+
   return <section className="editor-card m2a-card backup-panel" aria-label="Sao lưu và khôi phục" data-testid="backup-panel">
     <h2>Sao lưu và khôi phục</h2>
     <p>Tải toàn bộ dữ liệu local (phương án đã lưu, revision dữ liệu hàng, hồ sơ tàu nhập) thành một tệp .scstbak. Khôi phục đọc tệp đó và thay toàn bộ dữ liệu hiện có.</p>
@@ -127,5 +188,22 @@ export default function BackupPanel({ busy, lock, setBusy, onRestored }: Props) 
       <button type="button" className="button primary" disabled={busy} onClick={() => void restore()}>Khôi phục</button>
     </section>}
     {result && <p role="status" data-testid="backup-result">{result}</p>}
+    <section className="backup-auto" aria-label="Sao lưu tự động" data-testid="backup-auto">
+      <h3>Sao lưu tự động</h3>
+      <p data-testid="backup-auto-status">{statusLine}</p>
+      {auto?.last_error && <p className="backup-error" role="alert" data-testid="backup-auto-last-error">Lần sao lưu gần nhất lỗi: {auto.last_error}</p>}
+      <p className="backup-limits">{AUTO_NOTE}</p>
+      <div className="backup-row">
+        <button type="button" className="button secondary" disabled={busy || autoRunning} onClick={() => void runAuto()}>Sao lưu ngay</button>
+      </div>
+      {auto && auto.files.length > 0 && <ul aria-label="Các bản sao lưu tự động" style={{ listStyle: "none", padding: 0, margin: "8px 0" }}>
+        {auto.files.slice(0, AUTO_LIST_MAX).map((f) => <li key={f.name} data-testid={`auto-backup-${f.name}`} className="backup-row" style={{ alignItems: "center", margin: "4px 0" }}>
+          <span style={{ flex: "1 1 14rem", minWidth: 0, overflowWrap: "anywhere" }}>{timeText(f.created_utc)} · {sizeText(f.size_bytes)} · {f.name}</span>
+          <button type="button" className="button secondary" disabled={busy || autoRunning} onClick={() => void fetchAuto(f.name)}>Tải</button>
+        </li>)}
+      </ul>}
+      {autoResult && <p role="status" data-testid="backup-auto-result">{autoResult}</p>}
+      {autoFailure && <p className="backup-error" role="alert" data-testid="backup-auto-error">{autoFailure}</p>}
+    </section>
   </section>;
 }
