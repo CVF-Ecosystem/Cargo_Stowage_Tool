@@ -220,3 +220,39 @@ Results on the repaired head:
 | `git status` after browser run | clean (no change under `docs/reviews/`) |
 | `python tooling/integration_check_pre_m2d.py .` | 29/29 PASS |
 | worker-return gate | `RESULT: PASS phase=worker-return mandatoryControls=7 failed=0` (with `--base 3396555`) |
+
+### Repair R3 (root Windows run: 3 failed, 67 errors, all in M5a tests): commit `fa9b675`
+
+Implemented by a subagent (Haiku, high, as root asked); the lead reviewed and reran.
+
+**Root cause.** The cause is Windows-only, so the Linux container could not show it. On Windows the profile store lock is `msvcrt.locking` on the file `vessels/.lock`, so that empty file exists on disk. On Linux the lock is a `flock` on the directory and no file exists.
+
+**R3a, tests.** The M5a tests now exclude exactly `vessels/.lock` when listing on-disk files:
+- the `test_m5a_preview.py` fixture and its tree hash;
+- `test_m5a_export.py::test_vessel_files_byte_identical`;
+- the `test_m5a_restore.py` fingerprint.
+
+No other assertion was loosened.
+
+**R3b, product.** In `backup_restore.apply()`, `_remove_created_base()` runs only when the call created `vessels/` itself. It runs after the process lock is released and the lock fd is closed, on both the failure path and the success path. It unlinks `.lock` only when that is the sole entry and an empty regular file, then removes the directory. A `vessels/` that existed before the call, and its `.lock`, are never touched.
+
+**New tests.** Four new tests in `test_m5a_restore.py` simulate the Windows layout on Linux, by patching `_process_lock` to also create `vessels/.lock`:
+- failed restore with no prior `vessels/`;
+- failed restore with no prior `vessels/` and no DB;
+- successful restore of a backup with no vessels;
+- pre-existing `vessels/.lock` kept after a failed restore.
+
+The first three fail on the previous head and pass with the fix. The subagent also ran an ad hoc check, not committed: with the Windows-style patch applied to the whole M5a suite, all 142 M5a tests pass. The unfixed test files fail exactly on `vessels/.lock`.
+
+**Results on the repaired head:**
+
+| Check | Result |
+|---|---|
+| pytest | **876 passed** |
+| contract export | no diff |
+| `npm run build` | OK |
+| browser full suite | **57 passed**, `git status` clean |
+| integration check | 29/29 |
+| worker-return gate (`--base 3396555`) | PASS 7/7 |
+
+Real NTFS rerun: owned by root.
