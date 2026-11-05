@@ -466,3 +466,72 @@ def snapshot_report_xlsx(snapshot_id: str):
     ascii_name, real_name = _download_names(report["header"]["plan_name"], snapshot_id)
     return Response(report_xlsx.write_xlsx(report), media_type=XLSX_MIME,
                     headers={"Content-Disposition": f"attachment; filename=\"{ascii_name}\"; filename*=UTF-8''{quote(real_name, safe='')}"})
+
+
+# ------------------------------------------------------------------ M5a local backup and restore
+from ..adapters import backup_check, backup_export
+from .backup_models import BackupPreview, BackupRejectedDetail, RestoreResult
+
+_BACKUP_BODY = {"required": True, "content": {"application/octet-stream": {"schema": {"type": "string", "format": "binary"}}}}
+_BACKUP_REJECTED = {400: {"model": BackupRejectedDetail, "description": "Tệp sao lưu không hợp lệ; dữ liệu hiện tại giữ nguyên."},
+                    413: {"model": BackupRejectedDetail, "description": "Tệp sao lưu vượt 256 MiB; chưa đọc hết, chưa ghi gì."}}
+
+
+def _backup_too_large(size: int) -> HTTPException:
+    limit = backup_check.MAX_BODY_BYTES
+    return HTTPException(413, {"message": "Tệp sao lưu quá lớn.",
+                               "errors": [{"field": "body", "message": f"Tệp dài {size} byte, vượt giới hạn 256 MiB ({limit} byte)."}]})
+
+
+async def _backup_body(request: Request) -> bytes:
+    """Read a .scstbak body, refusing more than backup_check.MAX_BODY_BYTES before (and while) reading it."""
+    limit = backup_check.MAX_BODY_BYTES
+    declared = request.headers.get("content-length", "")
+    if declared.isdigit() and int(declared) > limit:
+        raise _backup_too_large(int(declared))
+    chunks, size = [], 0
+    async for chunk in request.stream():
+        size += len(chunk)
+        if size > limit:
+            raise _backup_too_large(size)
+        chunks.append(chunk)
+    return b"".join(chunks)
+
+
+def _backup_rejected(exc: "backup_check.BackupRejected") -> HTTPException:
+    return HTTPException(400, {"message": exc.message, "errors": exc.errors})
+
+
+@router.get("/backup/export", response_class=Response,
+            responses={200: {"content": {"application/octet-stream": {}}, "description": "Tệp sao lưu scst.backup.v1 (.scstbak)."},
+                       400: {"model": BackupRejectedDetail, "description": "Không đọc được dữ liệu local để sao lưu."}})
+def export_backup():
+    try:
+        data, filename = backup_export.export_bytes()
+    except (sqlite3.Error, OSError, ValueError) as exc:
+        raise HTTPException(400, {"message": f"Không tạo được bản sao lưu: {exc}", "errors": []})
+    return Response(data, media_type="application/octet-stream",
+                    headers={"Content-Disposition": f"attachment; filename=\"{filename}\""})
+
+
+@router.post("/backup/restore/preview", response_model=BackupPreview, openapi_extra={"requestBody": _BACKUP_BODY},
+             responses=_BACKUP_REJECTED)
+async def preview_backup_restore(request: Request):
+    body = await _backup_body(request)
+    try:
+        return backup_check.preview(body)
+    except backup_check.BackupRejected as exc:
+        raise _backup_rejected(exc)
+
+
+@router.post("/backup/restore/apply", response_model=RestoreResult, openapi_extra={"requestBody": _BACKUP_BODY},
+             responses={**_BACKUP_REJECTED, 409: {"model": BackupRejectedDetail, "description": "Mã xác nhận không khớp tệp gửi lên; chưa ghi gì."}})
+async def apply_backup_restore(request: Request, confirm: str):
+    from ..adapters import backup_restore
+    body = await _backup_body(request)
+    try:
+        return backup_restore.apply(body, confirm)
+    except backup_restore.ConfirmMismatch as exc:
+        raise HTTPException(409, {"message": exc.message, "errors": exc.errors})
+    except backup_check.BackupRejected as exc:
+        raise _backup_rejected(exc)

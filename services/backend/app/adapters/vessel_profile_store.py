@@ -220,13 +220,14 @@ def _append_locked(base: Path, profile_id: str, version: int, profile_bytes: byt
     return manifest
 
 
-def read(profile_id: str, version: int) -> dict:
-    """Return {manifest, profile_bytes, glb_path, glb_bytes} (the exact verified bytes) after verifying both files against the manifest. Never repairs."""
+def read(profile_id: str, version: int, *, base: Path | None = None) -> dict:
+    """Return {manifest, profile_bytes, glb_path, glb_bytes} (the exact verified bytes) after verifying both files against the manifest. Never repairs.
+    `base` (default data_dir()) is a vessels directory to check instead, e.g. an extracted backup tree."""
     try:
         _check(profile_id, version)
     except StoreError:
         raise LookupError('Không tìm thấy hồ sơ tàu.') from None
-    folder = data_dir() / profile_id / f'v{version}'
+    folder = (data_dir() if base is None else base) / profile_id / f'v{version}'
     if not folder.is_dir():
         raise LookupError(f'Không tìm thấy hồ sơ tàu {profile_id} phiên bản {version}.')
 
