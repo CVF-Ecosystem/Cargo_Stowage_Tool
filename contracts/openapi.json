@@ -660,15 +660,31 @@
       "post": {
         "summary": "Suggest Placement",
         "operationId": "suggest_placement_api_planner_preview_post",
+        "parameters": [
+          {
+            "name": "algorithm",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "guillotine-single-layer-v1",
+                "columns-v1"
+              ],
+              "type": "string",
+              "default": "guillotine-single-layer-v1",
+              "title": "Algorithm"
+            }
+          }
+        ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Plan"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -1958,7 +1974,8 @@
             "type": "string",
             "enum": [
               "REMOVED",
-              "CHANGED"
+              "CHANGED",
+              "SUPPORT_LOST"
             ],
             "title": "Reason"
           },
@@ -2325,7 +2342,12 @@
               "OVERLAP",
               "LAYER_UNSUPPORTED",
               "REQUIRED_UNPLACED",
-              "EMPTY_MANIFEST"
+              "EMPTY_MANIFEST",
+              "SUPPORT_MISSING",
+              "SUPPORT_LEVEL_MISMATCH",
+              "SUPPORT_AREA_LOW",
+              "SUPPORT_CENTRE_UNSUPPORTED",
+              "LAYER_INDEX_INVALID"
             ],
             "title": "Code"
           },
@@ -2998,6 +3020,21 @@
               }
             ]
           },
+          "stacking": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "SINGLE_LAYER",
+                  "COLUMNS_V1"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Stacking"
+          },
           "hold": {
             "$ref": "#/components/schemas/Hold"
           },
@@ -3090,6 +3127,18 @@
             },
             "type": "array",
             "title": "Notices"
+          },
+          "stacking": {
+            "anyOf": [
+              {
+                "type": "string",
+                "const": "COLUMNS_V1"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Stacking"
           }
         },
         "additionalProperties": false,
@@ -3114,7 +3163,10 @@
         "properties": {
           "algorithm": {
             "type": "string",
-            "const": "guillotine-single-layer-v1",
+            "enum": [
+              "guillotine-single-layer-v1",
+              "columns-v1"
+            ],
             "title": "Algorithm",
             "default": "guillotine-single-layer-v1"
           },
@@ -4166,6 +4218,20 @@
           "yaw_deg": {
             "type": "integer",
             "title": "Yaw Deg"
+          },
+          "supported_by": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Supported By"
           }
         },
         "additionalProperties": false,
@@ -4290,6 +4356,28 @@
           "placed_envelope_volume_mm3_text": {
             "type": "string",
             "title": "Placed Envelope Volume Mm3 Text"
+          },
+          "layer_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Layer Count"
+          },
+          "column_count": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Column Count"
           }
         },
         "additionalProperties": false,
@@ -5422,7 +5510,8 @@
               "TOO_HIGH",
               "FOOTPRINT_TOO_LARGE",
               "MASS_LIMIT",
-              "HEURISTIC_NO_SPACE"
+              "HEURISTIC_NO_SPACE",
+              "STACK_HEIGHT"
             ],
             "title": "Code"
           },

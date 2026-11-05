@@ -725,7 +725,7 @@ export interface components {
              * Reason
              * @enum {string}
              */
-            reason: "REMOVED" | "CHANGED";
+            reason: "REMOVED" | "CHANGED" | "SUPPORT_LOST";
             /** X Mm */
             x_mm: number;
             /** Y Mm */
@@ -846,7 +846,7 @@ export interface components {
              * Code
              * @enum {string}
              */
-            code: "OVERWEIGHT" | "OUT_OF_BOUNDS" | "OVERLAP" | "LAYER_UNSUPPORTED" | "REQUIRED_UNPLACED" | "EMPTY_MANIFEST";
+            code: "OVERWEIGHT" | "OUT_OF_BOUNDS" | "OVERLAP" | "LAYER_UNSUPPORTED" | "REQUIRED_UNPLACED" | "EMPTY_MANIFEST" | "SUPPORT_MISSING" | "SUPPORT_LEVEL_MISMATCH" | "SUPPORT_AREA_LOW" | "SUPPORT_CENTRE_UNSUPPORTED" | "LAYER_INDEX_INVALID";
             /** Unit Ids */
             unit_ids: string[];
             /** Message */
@@ -1100,6 +1100,8 @@ export interface components {
             /** Cargo Dataset */
             cargo_dataset?: "BALTIMORE-PIPE-V1-1" | null;
             cargo_revision?: components["schemas"]["CargoRevisionRef"] | null;
+            /** Stacking */
+            stacking?: ("SINGLE_LAYER" | "COLUMNS_V1") | null;
             hold: components["schemas"]["Hold"];
             limits: components["schemas"]["Limits"];
             /** Units */
@@ -1129,15 +1131,17 @@ export interface components {
             issues: components["schemas"]["ReportIssues"];
             /** Notices */
             notices: components["schemas"]["ReportNotice"][];
+            /** Stacking */
+            stacking?: "COLUMNS_V1" | null;
         };
         /** PlannerPreview */
         PlannerPreview: {
             /**
              * Algorithm
              * @default guillotine-single-layer-v1
-             * @constant
+             * @enum {string}
              */
-            algorithm: "guillotine-single-layer-v1";
+            algorithm: "guillotine-single-layer-v1" | "columns-v1";
             evaluation: components["schemas"]["Evaluation"];
             /** Unplaced */
             unplaced: components["schemas"]["UnplacedReason"][];
@@ -1486,6 +1490,8 @@ export interface components {
             layer: number;
             /** Yaw Deg */
             yaw_deg: number;
+            /** Supported By */
+            supported_by?: string[] | null;
         };
         /** ReportRecheck */
         ReportRecheck: {
@@ -1529,6 +1535,10 @@ export interface components {
             manifest_envelope_volume_mm3_text: string;
             /** Placed Envelope Volume Mm3 Text */
             placed_envelope_volume_mm3_text: string;
+            /** Layer Count */
+            layer_count?: number | null;
+            /** Column Count */
+            column_count?: number | null;
         };
         /** ReportUnit */
         ReportUnit: {
@@ -1885,7 +1895,7 @@ export interface components {
              * Code
              * @enum {string}
              */
-            code: "EXCLUDED" | "TOO_HIGH" | "FOOTPRINT_TOO_LARGE" | "MASS_LIMIT" | "HEURISTIC_NO_SPACE";
+            code: "EXCLUDED" | "TOO_HIGH" | "FOOTPRINT_TOO_LARGE" | "MASS_LIMIT" | "HEURISTIC_NO_SPACE" | "STACK_HEIGHT";
             /** Message */
             message: string;
         };
@@ -2556,7 +2566,9 @@ export interface operations {
     };
     suggest_placement_api_planner_preview_post: {
         parameters: {
-            query?: never;
+            query?: {
+                algorithm?: "guillotine-single-layer-v1" | "columns-v1";
+            };
             header?: never;
             path?: never;
             cookie?: never;

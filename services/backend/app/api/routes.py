@@ -276,8 +276,8 @@ def pipe_list_preview(plan: Plan):
 from ..domain.planner import PlannerPreview, preview as planner_preview
 
 @router.post("/planner/preview", response_model=PlannerPreview)
-def suggest_placement(plan: Plan):
-    return planner_preview(_bound(plan))
+def suggest_placement(plan: Plan, algorithm: Literal['guillotine-single-layer-v1','columns-v1']='guillotine-single-layer-v1'):
+    return planner_preview(_bound(plan),algorithm)
 
 
 from ..domain.comparison import CompareRequest, CompareResult, compare
