@@ -149,6 +149,17 @@ def tree_hash(root: Path):
             if p.is_file() and p.relative_to(root).as_posix() != 'vessels/.lock'}  # Windows lock file, not content
 
 
+def outside_work_snapshot(tmp_path: Path):
+    """Every path under tmp_path except the work directory (file contents hashed), to prove nothing escaped it."""
+    snap = {}
+    for p in sorted(tmp_path.rglob('*')):
+        rel = p.relative_to(tmp_path)
+        if rel.parts[0] == 'work':
+            continue
+        snap[rel.as_posix()] = sha(p.read_bytes()) if p.is_file() else None
+    return snap
+
+
 # ------------------------------------------------------------------ accepting case
 def test_valid_archive_accepted_and_preview_writes_nothing(parts, data, tmp_path):
     body = build(parts)
@@ -245,7 +256,24 @@ def test_zip_slip_absolute_path(parts, tmp_path, data):
 
 
 def test_backslash_path(parts, tmp_path, data):
-    reject(build(parts, extra=[(zipfile.ZipInfo('vessels\\TESTSHIP\\v2\\profile.json'), b'x')]), tmp_path, 'gạch ngược')
+    body = build(parts, extra=[(zipfile.ZipInfo('vessels\\TESTSHIP\\v2\\profile.json'), b'x')])
+    before = outside_work_snapshot(tmp_path)
+    if os.sep == '/':
+        reject(body, tmp_path, 'gạch ngược')
+    else:
+        # Windows CPython zipfile rewrites '\\' to '/' on read, so the backslash check is never reached;
+        # the entry is still rejected (manifest mismatch), which is what this test guards.
+        reject(body, tmp_path)
+    assert outside_work_snapshot(tmp_path) == before
+
+
+@pytest.mark.parametrize('name', ['..\\..\\evil', 'C:\\evil'])
+def test_backslash_escape_entries_rejected_on_every_platform(parts, tmp_path, data, name):
+    body = build(parts, extra=[(zipfile.ZipInfo(name), b'x')])
+    before = outside_work_snapshot(tmp_path)
+    reject(body, tmp_path)
+    assert outside_work_snapshot(tmp_path) == before
+    assert not any('evil' in p.name for p in tmp_path.rglob('*'))
 
 
 def test_drive_letter_path(parts, tmp_path, data):
