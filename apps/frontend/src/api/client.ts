@@ -378,3 +378,35 @@ export async function applyBackup(file: File, confirm: string): Promise<BackupRe
     throw new BackupApiError("Phản hồi khôi phục không đọc được; kiểm lại dữ liệu trước khi tiếp tục.", response.status);
   }
 }
+
+// Automatic local backups (M5b D2/D3). The server returns file names only, never a filesystem path.
+export type AutoBackupFile = components["schemas"]["AutoBackupFile"];
+export type AutoBackupStatus = components["schemas"]["AutoBackupStatus"];
+
+export async function autoBackupStatus(): Promise<AutoBackupStatus> {
+  const response = await backupFetch("/api/backup/auto", { method: "GET" }, "Không đọc được trạng thái sao lưu tự động.");
+  try {
+    return (await response.json()) as AutoBackupStatus;
+  } catch {
+    throw new BackupApiError("Phản hồi trạng thái sao lưu tự động không đọc được.", response.status);
+  }
+}
+
+// Runs one backup now. 409 means there is no local data yet; nothing was created.
+export async function runAutoBackup(): Promise<AutoBackupFile> {
+  const response = await backupFetch("/api/backup/auto/run", { method: "POST" }, "Không sao lưu được ngay.");
+  try {
+    return (await response.json()) as AutoBackupFile;
+  } catch {
+    throw new BackupApiError("Phản hồi sao lưu tự động không đọc được.", response.status);
+  }
+}
+
+export async function downloadAutoBackup(name: string): Promise<Blob> {
+  const response = await backupFetch(`/api/backup/auto/${encodeURIComponent(name)}`, { method: "GET" }, "Không tải được bản sao lưu tự động.");
+  try {
+    return await response.blob();
+  } catch {
+    throw new BackupApiError("Không tải được bản sao lưu tự động; chưa ghi gì.", response.status);
+  }
+}
