@@ -144,7 +144,7 @@ At most two subagents edited at once (D1 with D2, then D2 with D4, then D3 with 
 | Browser, full suite + m5a (local override, temp `SCST_DATA_DIR`, chromium `/opt/pw-browsers/chromium`, `LANG=C.UTF-8`) | **57 passed** (55 existing + 2 `m5a.spec.ts`), 3.1 min |
 | `git status` after browser run | no change under `docs/reviews/` (evidence goes to a temp dir) |
 | `python tooling/integration_check_pre_m2d.py .` | 29/29 PASS |
-| `PYTHONDONTWRITEBYTECODE=1 python scripts/cvf_gates/cvf_downstream_gate_runner.py run --phase worker-return` | GATE_RESULT |
+| `PYTHONDONTWRITEBYTECODE=1 python scripts/cvf_gates/cvf_downstream_gate_runner.py run --phase worker-return` | `RESULT: PASS phase=worker-return mandatoryControls=7 failed=0` (worktree scope; also with `--base 3396555`, where CVF-DG-ROLE-01 and CLAIM-01 PASS) |
 
 The browser override `apps/frontend/playwright.local.config.ts` is untracked and listed in `.git/info/exclude`. It changes only the webServer command, the temporary `SCST_DATA_DIR` and the chromium `executablePath`.
 
