@@ -140,6 +140,7 @@ test("M5A-05 desktop: save two plans and a revision, export, save a third, resto
   expect(beforeRestore).toContain(planC.id);
 
   // 4. choose the backup: preview with counts and the exact warning; no apply yet
+  await expect(page.getByLabel("Khôi phục từ bản sao lưu")).toBeEnabled(); // a save may still be refreshing the list
   const [previewResponse] = await Promise.all([
     page.waitForResponse((r) => new URL(r.url()).pathname === "/api/backup/restore/preview" && r.request().method() === "POST"),
     page.getByLabel("Khôi phục từ bản sao lưu").setInputFiles(backupPath),
@@ -197,6 +198,7 @@ test("M5A-05 desktop: save two plans and a revision, export, save a third, resto
 
   // 9. a non-backup file: Vietnamese error, no apply button, nothing changes
   const before = await savedIds(request);
+  await expect(page.getByLabel("Khôi phục từ bản sao lưu")).toBeEnabled(); // a save may still be refreshing the list
   await page.getByLabel("Khôi phục từ bản sao lưu").setInputFiles(notBackup());
   const error = page.getByTestId("backup-error");
   await expect(error).toBeVisible();
@@ -219,6 +221,7 @@ test("M5A-04 mobile 390x844: backup panel fits, invalid file shows an error, rou
   expect(await docScrollWidth(page)).toBeLessThanOrEqual(VIEWPORT_LIMIT);
 
   // invalid file at 390px: error, no apply button, page still fits
+  await expect(page.getByLabel("Khôi phục từ bản sao lưu")).toBeEnabled(); // a save may still be refreshing the list
   await page.getByLabel("Khôi phục từ bản sao lưu").setInputFiles(notBackup());
   await expect(page.getByTestId("backup-error")).toBeVisible();
   await expect(page.getByRole("button", { name: "Khôi phục", exact: true })).toHaveCount(0);
@@ -229,6 +232,7 @@ test("M5A-04 mobile 390x844: backup panel fits, invalid file shows an error, rou
   const backupPath = evidencePath("m5a-390-backup.scstbak");
   await download.saveAs(backupPath);
   const exported = await savedIds(request);
+  await expect(page.getByLabel("Khôi phục từ bản sao lưu")).toBeEnabled(); // a save may still be refreshing the list
   await page.getByLabel("Khôi phục từ bản sao lưu").setInputFiles(backupPath);
   await expect(page.getByTestId("backup-preview")).toBeVisible();
   await expect(page.getByTestId("backup-preview")).toContainText(WARNING);
