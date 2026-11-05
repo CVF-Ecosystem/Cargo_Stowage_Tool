@@ -1,6 +1,6 @@
 # SCST — M5a local backup and restore work order
 
-Status: ACTIVE
+Status: CLOSED
 dispatchKind: INITIAL
 Owner: project-orchestrator
 Risk: R2
@@ -104,9 +104,9 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "decision": "Accept, repair within authority or return to worker; installer and scheduled backup stay separate"
     }
   },
-  "phase": "DISPATCH",
+  "phase": "REVIEW",
   "action": {
-    "kind": "IMPLEMENT",
+    "kind": "REVIEW",
     "selected": [
       "M5A-01",
       "M5A-02",
@@ -114,8 +114,8 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "M5A-04",
       "M5A-05"
     ],
-    "owner": "Claude Cloud implementation worker on a branch; root independent review and commit steward",
-    "output": "M5a source, tests, regenerated contract and docs/reviews/SCST_M5A_EVIDENCE/worker-return.md in a pull request",
+    "owner": "Root independent implementation reviewer",
+    "output": "docs/reviews/SCST_M5A_REVIEW.md",
     "budgetMinutes": 150,
     "stop": "Five criteria evidenced or budget/scope boundary without reset",
     "next": "Root independent review; owner MVP trial and feedback; installer M5b separate"
@@ -123,50 +123,80 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
   "rows": [
     {
       "id": "M5A-01",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for M5A-01",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_M5A_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M5A_REVIEW.md",
+          "sha256": "4bc545d375728697ba1245f3263dbbf0fcc96731afe0fa0b09609d0a2e39b5a8"
+        }
+      ]
     },
     {
       "id": "M5A-02",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for M5A-02",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_M5A_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M5A_REVIEW.md",
+          "sha256": "4bc545d375728697ba1245f3263dbbf0fcc96731afe0fa0b09609d0a2e39b5a8"
+        }
+      ]
     },
     {
       "id": "M5A-03",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for M5A-03",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_M5A_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M5A_REVIEW.md",
+          "sha256": "4bc545d375728697ba1245f3263dbbf0fcc96731afe0fa0b09609d0a2e39b5a8"
+        }
+      ]
     },
     {
       "id": "M5A-04",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for M5A-04",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_M5A_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M5A_REVIEW.md",
+          "sha256": "4bc545d375728697ba1245f3263dbbf0fcc96731afe0fa0b09609d0a2e39b5a8"
+        }
+      ]
     },
     {
       "id": "M5A-05",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for M5A-05",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_M5A_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M5A_REVIEW.md",
+          "sha256": "4bc545d375728697ba1245f3263dbbf0fcc96731afe0fa0b09609d0a2e39b5a8"
+        }
+      ]
     }
   ],
   "supportingWork": [],
   "conclusions": {
-    "tranche": "PENDING",
-    "trancheSummary": "Five M5a criteria admitted for bounded implementation only",
-    "trancheEvidence": [],
+    "tranche": "COMPLETE",
+    "trancheSummary": "M5a five technical criteria reviewed after one repair round; merged as 9c9cdb5 under owner-delegated merge authority",
+    "trancheEvidence": [
+      {
+        "path": "docs/reviews/SCST_M5A_REVIEW.md",
+        "sha256": "4bc545d375728697ba1245f3263dbbf0fcc96731afe0fa0b09609d0a2e39b5a8"
+      }
+    ],
     "product": "PENDING",
     "productSummary": "Installer, scheduled backup, encryption, merge restore and business acceptance remain owned work",
     "acceptance": [],
@@ -174,3 +204,7 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
   }
 }
 ```
+
+## Technical disposition
+
+Root independent implementation review accepts M5A-01..05 on PR #7 (round 0 head 7475718; repair heads 2883456 and 9d34d3a: R1 path-free export error, R2 preview/apply in the threadpool, R3 Windows vessels/.lock in tests and cleanup of a created vessels dir, R4 platform-correct backslash test), merged to main as 9c9cdb5 under the owner-delegated merge authority. Local Windows rerun at 9d34d3a: backend 878/878, contract additive only, build OK, full browser 57/57, clean git status, integration check 29/29, worker-return and reviewer-fast gates PASS. Root NTFS probe in a data dir with spaces and Vietnamese characters: export, preview, refused restore with an open SQLite connection (rollback byte-identical), wrong confirm 409, real restore, multi-layer plan reopens with 1076 placements, pre-restore backup previews with all prior plans, no work directories left. Installer, scheduled backup, encryption, merge restore and business acceptance remain owned work.

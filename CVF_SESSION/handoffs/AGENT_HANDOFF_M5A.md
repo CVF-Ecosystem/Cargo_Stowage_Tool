@@ -5,11 +5,11 @@ Status: ACTIVE
 ## Current State
 
 - Project: Cargo_Stowage_Tool
-- Current mode: BUILD
-- Active phase: BUILD
-- Active role: ORCHESTRATOR
-- Next allowed move: Claude Cloud implements M5a on a non-main branch and opens a pull request; root reviews independently and merges under owner-delegated authority. In parallel the owner trials the M3a MVP. M3b needs owner hold measurements, real cases and stack-load data.
-- Parked operator checkpoint: M3b real cases and measured hold, stack and tanktop load, lashing and stability, M5b installer, scheduled backup, M4, observations O7-O11 and O-M3A-2/3, hook/hosted-CI adoption, live-provider governance proof, 16 source envelopes and business acceptance remain owned future work.
+- Current mode: FREEZE
+- Active phase: FREEZE
+- Active role: SESSION_SYNC_STEWARD
+- Next allowed move: M5a closed technically: verified local backup export and replace-all restore are available. The MVP (multi-layer stacking plus backup/restore) is with the owner for trial and feedback. M3b needs owner hold measurements, real cases and stack-load data; installer (M5b) and scheduled backup are separate owned work.
+- Parked operator checkpoint: M3b real cases and measured hold, stack and tanktop load, lashing and stability, M5b installer, scheduled backup, M4, observations O7-O11, O-M3A-2/3 and O-M5A-1/2, hook/hosted-CI adoption, live-provider governance proof, 16 source envelopes and business acceptance remain owned future work.
 - Active tranche: M5A
 
 ## Intake, design and authority acknowledgment
@@ -47,3 +47,7 @@ Root then becomes REVIEWER and:
 - writes docs/reviews/SCST_M5A_REVIEW.md;
 - merges under delegated authority if it passes;
 - reports to the owner.
+
+## Review and closure
+
+Claude Cloud returned PR #7 (head 7475718). Root REVIEWER reran on Windows: the M5a backend tests failed only because the Windows msvcrt lock file vessels/.lock exists on NTFS (Linux uses flock on the directory). Root returned one repair round (R1 path-free export error, R2 threadpool, R3 .lock in tests and cleanup of a created vessels dir, R4 platform-correct backslash test because Windows zipfile rewrites backslashes on read). At head 9d34d3a every check passes on Windows (backend 878, browser 57, integration 29/29, gates PASS), including a real NTFS restore probe. Review docs/reviews/SCST_M5A_REVIEW.md accepts M5A-01..05; root merged PR #7 as 9c9cdb5 under owner-delegated authority, closed the work order and synced continuity.

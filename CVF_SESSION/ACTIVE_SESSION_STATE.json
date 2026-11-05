@@ -2,8 +2,8 @@
   "schemaVersion": "1.0",
   "continuityContract": "cvf.downstreamContinuityContract@1.0.0",
   "projectName": "Cargo_Stowage_Tool",
-  "currentMode": "BUILD",
-  "activePhase": "BUILD",
+  "currentMode": "FREEZE",
+  "activePhase": "FREEZE",
   "phaseModel": [
     "INTAKE",
     "DESIGN",
@@ -14,9 +14,9 @@
     "FREEZE"
   ],
   "activeHandoff": "CVF_SESSION/handoffs/AGENT_HANDOFF_M5A.md",
-  "nextAllowedMove": "Claude Cloud implements M5a on a non-main branch and opens a pull request; root reviews independently and merges under owner-delegated authority. In parallel the owner trials the M3a MVP. M3b needs owner hold measurements, real cases and stack-load data.",
-  "parkedOperatorCheckpoint": "M3b real cases and measured hold, stack and tanktop load, lashing and stability, M5b installer, scheduled backup, M4, observations O7-O11 and O-M3A-2/3, hook/hosted-CI adoption, live-provider governance proof, 16 source envelopes and business acceptance remain owned future work.",
-  "activeRole": "ORCHESTRATOR",
+  "nextAllowedMove": "M5a closed technically: verified local backup export and replace-all restore are available. The MVP (multi-layer stacking plus backup/restore) is with the owner for trial and feedback. M3b needs owner hold measurements, real cases and stack-load data; installer (M5b) and scheduled backup are separate owned work.",
+  "parkedOperatorCheckpoint": "M3b real cases and measured hold, stack and tanktop load, lashing and stability, M5b installer, scheduled backup, M4, observations O7-O11, O-M3A-2/3 and O-M5A-1/2, hook/hosted-CI adoption, live-provider governance proof, 16 source envelopes and business acceptance remain owned future work.",
+  "activeRole": "SESSION_SYNC_STEWARD",
   "roleRoute": "ORCHESTRATOR_WORKER_INDEPENDENT_REVIEW",
   "updatedAt": "2026-11-05",
   "activeTranche": "M5A"

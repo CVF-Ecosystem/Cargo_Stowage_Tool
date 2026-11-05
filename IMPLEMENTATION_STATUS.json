@@ -1,12 +1,10 @@
 {
   "schemaVersion": "1.0",
   "projectName": "Cargo_Stowage_Tool",
-  "overallStatus": "M5A_DISPATCHED_M3A_MVP_COMPLETE_TECHNICAL_OWNER_TRIAL_AND_BUSINESS_ACCEPTANCE_PENDING",
-  "currentPhase": "BUILD",
+  "overallStatus": "M3A_AND_M5A_MVP_COMPLETE_TECHNICAL_OWNER_TRIAL_AND_BUSINESS_ACCEPTANCE_PENDING",
+  "currentPhase": "FREEZE",
   "completedCapabilities": [],
-  "activeWorkOrders": [
-    "docs/work_orders/SCST_M5A.md"
-  ],
+  "activeWorkOrders": [],
   "knownLimitations": [
     "PIPE-LIST actual31group/1076bundle source integration technically verified; source mass/dimensions calculated/provisional.16bundles need envelope verification; measuredhold/business/operational acceptance pending.",
     "Raw drafts/history/baseline/comparison remain in browser tab until explicit immutable SQLite Plan snapshot save. Baseline/comparison do not persist through reload; select saved A again. Latest100 snapshots, no overwrite/delete/backup/restore UI.",
@@ -96,7 +94,9 @@
     "docs/reviews/SCST_M3A_EVIDENCE/worker-return.md",
     "docs/reviews/SCST_M3A_REVIEW.md",
     "docs/specs/SCST_M5A.md",
-    "docs/work_orders/SCST_M5A.md"
+    "docs/work_orders/SCST_M5A.md",
+    "docs/reviews/SCST_M5A_EVIDENCE/worker-return.md",
+    "docs/reviews/SCST_M5A_REVIEW.md"
   ],
   "updatedAt": "2026-11-05",
   "x_verifiedMilestones": [
@@ -183,6 +183,12 @@
       "technicalStatus": "VERIFIED",
       "businessAcceptance": "PENDING",
       "evidence": "docs/reviews/SCST_M3A_REVIEW.md"
+    },
+    {
+      "id": "M5A",
+      "technicalStatus": "VERIFIED",
+      "businessAcceptance": "NOT_APPLICABLE",
+      "evidence": "docs/reviews/SCST_M5A_REVIEW.md"
     }
   ],
   "x_plannedSupplement": {
