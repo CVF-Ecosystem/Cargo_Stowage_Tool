@@ -256,3 +256,9 @@ The first three fail on the previous head and pass with the fix. The subagent al
 | worker-return gate (`--base 3396555`) | PASS 7/7 |
 
 Real NTFS rerun: owned by root.
+
+### Repair R4 (root Windows run: `test_backslash_path` failed): commit `823d273`
+
+- **Cause:** on Windows, CPython `zipfile` turns `\` into `/` when it reads entry names, so the backslash check is never reached.
+- **Change (test only, no product code):** `test_backslash_path` asserts the backslash message only when `os.sep == "/"` and asserts nothing is written outside the work directory. A new test checks on every platform that entries named `..\..\evil` and `C:\evil` are rejected and leave nothing outside the work directory.
+- **Results:** pytest **878 passed**; worker-return gate `RESULT: PASS phase=worker-return mandatoryControls=7 failed=0`.
