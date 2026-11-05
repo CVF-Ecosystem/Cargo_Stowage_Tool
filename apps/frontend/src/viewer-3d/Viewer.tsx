@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import type { ProfileDetail } from "../api/client";
-import { footprint, formatMetres, type Plan } from "../features/model";
+import { footprint, formatMetres, type Plan, type Placement } from "../features/model";
 import type { PackingIndex } from "../features/packing";
 import Scene from "./Scene";
 import {
@@ -82,6 +82,27 @@ export default function Viewer(props: Props) {
   );
   const margin = 1100;
   const unitMap = new Map(plan.units.map((u) => [u.id, u]));
+  // Placements with the same x, y and yaw form one column (multi-layer stacking). The overlay label shows its count.
+  const columns = new Map<string, Placement[]>();
+  for (const p of plan.placements) {
+    const k = `${p.x_mm}|${p.y_mm}|${p.yaw_deg}`;
+    columns.set(k, [...(columns.get(k) ?? []), p]);
+  }
+  // Lower layers are drawn first so the top placement of a column is painted over them (stable for single-layer plans).
+  const drawOrder = [...plan.placements].sort((a, b) => a.z_mm - b.z_mm);
+  const stackLabels = [...columns.entries()]
+    .filter(([, items]) => items.length > 1)
+    .map(([key, items]) => {
+      const bottom = items.reduce((a, b) => (b.z_mm < a.z_mm ? b : a));
+      const [w, h] = footprint(unitMap.get(bottom.unit_id)!, bottom);
+      return {
+        key,
+        n: items.length,
+        x: bottom.x_mm + w / 2,
+        y: bottom.y_mm + h / 2 - 130,
+        selectedHere: items.some((p) => p.unit_id === selected),
+      };
+    });
   return (
     <section className="viewer-card" aria-label="Mô hình chất xếp">
       <div className="panel-heading">
@@ -112,7 +133,7 @@ export default function Viewer(props: Props) {
       <div className="viewport">
         <div className="viewport-label">
           <span className="dot" />
-          BOX · MỘT LỚP <span className="muted">/</span> {plan.hold.name}
+          BOX · {plan.stacking === "COLUMNS_V1" ? "NHIỀU TẦNG" : "MỘT LỚP"} <span className="muted">/</span> {plan.hold.name}
         </div>
         {view === "3d" ? (
           <Scene
@@ -155,7 +176,7 @@ export default function Viewer(props: Props) {
               stroke="#7f9a8a"
               strokeWidth="50"
             />
-            {plan.placements.map((p) => {
+            {drawOrder.map((p) => {
               const u = unitMap.get(p.unit_id)!;
               const [w, h] = footprint(u, p);
               return (
@@ -211,6 +232,20 @@ export default function Viewer(props: Props) {
                 </g>
               );
             })}
+            {stackLabels.map((s) => (
+              <text
+                key={s.key}
+                data-testid="plan2d-stack-label"
+                x={s.x}
+                y={s.y}
+                textAnchor="middle"
+                fontSize="200"
+                fill={s.selectedHere ? "#173e31" : "#fff"}
+                pointerEvents="none"
+              >
+                {`×${s.n}`}
+              </text>
+            ))}
             <text
               x={plan.hold.length_mm / 2}
               y={plan.hold.width_mm + 650}
