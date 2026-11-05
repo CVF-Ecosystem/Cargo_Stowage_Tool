@@ -76,6 +76,10 @@
     "SCST-M5A": {
       "path": "docs/specs/SCST_M5A.md",
       "heading": "## M5a acceptance"
+    },
+    "SCST-M5B": {
+      "path": "docs/specs/SCST_M5B.md",
+      "heading": "## M5b acceptance"
     }
   }
 }

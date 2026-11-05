@@ -1,6 +1,6 @@
 # SCST — M5a local backup and restore
 
-Status: ACTIVE
+Status: SUPERSEDED
 
 ## Current State
 
