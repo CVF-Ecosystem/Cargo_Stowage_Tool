@@ -5,11 +5,13 @@ Memory class: POINTER_RECORD
 ## Current Truth
 
 - Contract: cvf.downstreamContinuityContract@1.0.0
-- Current mode: BUILD
-- Active phase: BUILD
+- Current mode: FREEZE
+- Active phase: FREEZE
 - Active handoff: CVF_SESSION/handoffs/AGENT_HANDOFF_M5B.md
 
 ## Current operator boundary
+
+M5b closed 05-11-2026: root reviewed PR #8 with no repair round (docs/reviews/SCST_M5B_REVIEW.md) and merged it as 23a9395 under owner-delegated authority. Next: M5b closed technically: automatic local backup at startup and on demand is available. The MVP (multi-layer stacking plus manual and automatic backup/restore) is with the owner for trial and feedback. M3b needs owner hold measurements, real cases and stack-load data; the M5c installer is separate local work; M4 AI needs an owner decision (docs/SCST_M4_PROPOSAL.md).
 
 M5b dispatched 05-11-2026 under owner-delegated authority (MVP handoff docs at f4c02fa): automatic local backup at startup and on demand with retention. SPEC docs/specs/SCST_M5B.md, order docs/work_orders/SCST_M5B.md, handoff CVF_SESSION/handoffs/AGENT_HANDOFF_M5B.md. The installer is a separate M5c.
 

@@ -1,6 +1,6 @@
 # SCST — M5b automatic local backup work order
 
-Status: ACTIVE
+Status: CLOSED
 dispatchKind: INITIAL
 Owner: project-orchestrator
 Risk: R2
@@ -100,17 +100,17 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
       "decision": "Accept, repair within authority or return to worker; installer M5c stays separate"
     }
   },
-  "phase": "DISPATCH",
+  "phase": "REVIEW",
   "action": {
-    "kind": "IMPLEMENT",
+    "kind": "REVIEW",
     "selected": [
       "M5B-01",
       "M5B-02",
       "M5B-03",
       "M5B-04"
     ],
-    "owner": "Claude Cloud implementation worker on a branch; root independent review and commit steward",
-    "output": "M5b source, tests, regenerated contract and docs/reviews/SCST_M5B_EVIDENCE/worker-return.md in a pull request",
+    "owner": "Root independent implementation reviewer",
+    "output": "docs/reviews/SCST_M5B_REVIEW.md",
     "budgetMinutes": 70,
     "stop": "Four criteria evidenced or budget/scope boundary without reset",
     "next": "Root independent review; owner MVP trial and feedback; installer M5c separate"
@@ -118,42 +118,67 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
   "rows": [
     {
       "id": "M5B-01",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for M5B-01",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_M5B_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M5B_REVIEW.md",
+          "sha256": "019ccd1a9ffbeebd00ca3af7febeced1d682518c3a71ce1b3ecb94cd81de081e"
+        }
+      ]
     },
     {
       "id": "M5B-02",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for M5B-02",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_M5B_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M5B_REVIEW.md",
+          "sha256": "019ccd1a9ffbeebd00ca3af7febeced1d682518c3a71ce1b3ecb94cd81de081e"
+        }
+      ]
     },
     {
       "id": "M5B-03",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for M5B-03",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_M5B_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M5B_REVIEW.md",
+          "sha256": "019ccd1a9ffbeebd00ca3af7febeced1d682518c3a71ce1b3ecb94cd81de081e"
+        }
+      ]
     },
     {
       "id": "M5B-04",
-      "state": "NOT_STARTED",
-      "gap": "Implementation and exact-version product flow evidence required for M5B-04",
-      "owner": "Claude Cloud implementation worker and root independent reviewer",
+      "state": "VERIFIED",
+      "gap": "Technical criterion and internally exercised flow verified; business acceptance separate",
+      "owner": "Root independent implementation reviewer",
       "destination": "docs/reviews/SCST_M5B_REVIEW.md",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "docs/reviews/SCST_M5B_REVIEW.md",
+          "sha256": "019ccd1a9ffbeebd00ca3af7febeced1d682518c3a71ce1b3ecb94cd81de081e"
+        }
+      ]
     }
   ],
   "supportingWork": [],
   "conclusions": {
-    "tranche": "PENDING",
-    "trancheSummary": "Four M5b criteria admitted for bounded implementation only",
-    "trancheEvidence": [],
+    "tranche": "COMPLETE",
+    "trancheSummary": "M5b four technical criteria reviewed with no repair round; merged as 23a9395 under owner-delegated merge authority",
+    "trancheEvidence": [
+      {
+        "path": "docs/reviews/SCST_M5B_REVIEW.md",
+        "sha256": "019ccd1a9ffbeebd00ca3af7febeced1d682518c3a71ce1b3ecb94cd81de081e"
+      }
+    ],
     "product": "PENDING",
     "productSummary": "Installer, background schedule while the app is closed, encryption, off-machine copy and business acceptance remain owned work",
     "acceptance": [],
@@ -161,3 +186,7 @@ foreseeableFileSplitDisposition: COVERED_BY_BOUNDED_PATH_FAMILY
   }
 }
 ```
+
+## Technical disposition
+
+Root independent implementation review accepts M5B-01..04 on PR #8 (head debafa6, no repair round), merged to main as 23a9395 under the owner-delegated merge authority. Local Windows rerun: backend 909/909, contract additive only, build OK, full browser 59/59, clean git status, integration check 29/29, worker-return and reviewer-fast gates PASS. Root NTFS probe in a data dir with spaces and Vietnamese characters: no files created at startup without data, run-now 409 without data, valid colon-free auto files that pass the M5a preview, six traversal or wrong-pattern names return 404, retention keeps exactly 10 and never deletes pre-restore or foreign files, restore from an auto file works, startup hook creates one file and none on the second start, SCST_AUTO_BACKUP=0 disables it. Installer, background schedule while the app is closed, encryption, off-machine copy and business acceptance remain owned work.

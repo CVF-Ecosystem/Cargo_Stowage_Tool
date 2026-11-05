@@ -5,11 +5,11 @@ Status: ACTIVE
 ## Current State
 
 - Project: Cargo_Stowage_Tool
-- Current mode: BUILD
-- Active phase: BUILD
-- Active role: ORCHESTRATOR
-- Next allowed move: Claude Cloud implements M5b on a non-main branch and opens a pull request; root reviews independently and merges under owner-delegated authority. The owner trials the MVP in parallel. M3b needs owner hold measurements, real cases and stack-load data. The installer is a separate M5c.
-- Parked operator checkpoint: M3b real cases and measured hold, stack and tanktop load, lashing and stability, M5c installer, background schedule while the app is closed, encryption, off-machine backup copy, M4, observations O7-O11, O-M3A-2/3 and O-M5A-1/2, hook/hosted-CI adoption, live-provider governance proof, 16 source envelopes and business acceptance remain owned future work.
+- Current mode: FREEZE
+- Active phase: FREEZE
+- Active role: SESSION_SYNC_STEWARD
+- Next allowed move: M5b closed technically: automatic local backup at startup and on demand is available. The MVP (multi-layer stacking plus manual and automatic backup/restore) is with the owner for trial and feedback. M3b needs owner hold measurements, real cases and stack-load data; the M5c installer is separate local work; M4 AI needs an owner decision (docs/SCST_M4_PROPOSAL.md).
+- Parked operator checkpoint: M3b real cases and measured hold, stack and tanktop load, lashing and stability, M5c installer, background schedule while the app is closed, encryption, off-machine backup copy, M4 AI (owner decision), observations O7-O11, O-M3A-2/3, O-M5A-1/2 and O-M5B-1/2, hook/hosted-CI adoption, live-provider governance proof, 16 source envelopes and business acceptance remain owned future work.
 - Active tranche: M5B
 
 ## Intake, design and authority acknowledgment
@@ -48,3 +48,7 @@ Root then becomes REVIEWER and:
 - writes docs/reviews/SCST_M5B_REVIEW.md;
 - merges under delegated authority if it passes;
 - reports to the owner.
+
+## Review and closure
+
+Claude Cloud returned PR #8 (head debafa6) 30 minutes after dispatch. Root REVIEWER reran on Windows: backend 909, browser 59, integration check 29/29, gates PASS, plus an NTFS probe in a data directory with spaces and Vietnamese characters (startup without data creates nothing; retention keeps exactly 10; traversal names 404; restore from an auto file; startup hook creates one file). No repair round was needed. Review docs/reviews/SCST_M5B_REVIEW.md accepts M5B-01..04; root merged PR #8 as 23a9395 under owner-delegated authority, closed the work order and synced continuity.
