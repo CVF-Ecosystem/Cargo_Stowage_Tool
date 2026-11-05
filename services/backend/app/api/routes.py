@@ -508,8 +508,8 @@ def _backup_rejected(exc: "backup_check.BackupRejected") -> HTTPException:
 def export_backup():
     try:
         data, filename = backup_export.export_bytes()
-    except (sqlite3.Error, OSError, ValueError) as exc:
-        raise HTTPException(400, {"message": f"Không tạo được bản sao lưu: {exc}", "errors": []})
+    except (sqlite3.Error, OSError, ValueError):  # D1.2: never echo the exception, it may carry a filesystem path
+        raise HTTPException(400, {"message": "Không tạo được bản sao lưu từ dữ liệu local.", "errors": []})
     return Response(data, media_type="application/octet-stream",
                     headers={"Content-Disposition": f"attachment; filename=\"{filename}\""})
 
