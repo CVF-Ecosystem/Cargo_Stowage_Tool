@@ -1509,6 +1509,12 @@ td.packing-warn { border-left: 4px solid #d9822b; }
   font-family: inherit;
   pointer-events: none;
 }
+.report-stack-label {
+  fill: #ffffff;
+  font-family: inherit;
+  font-weight: 700;
+  pointer-events: none;
+}
 .report-svg-label {
   fill: #587064;
   font-family: inherit;

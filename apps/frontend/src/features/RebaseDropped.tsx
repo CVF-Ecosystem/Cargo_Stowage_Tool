@@ -3,7 +3,7 @@ import type { RebaseResult } from "../api/client";
 import { formatCm } from "./model";
 
 const PAGE_SIZE = 50;
-type DropFilter = "ALL" | "REMOVED" | "CHANGED";
+type DropFilter = "ALL" | "REMOVED" | "CHANGED" | "SUPPORT_LOST";
 
 export default function RebaseDropped({ result, name }: { result: RebaseResult; name: string }) {
   const [filter, setFilter] = useState<DropFilter>("ALL");
@@ -14,6 +14,7 @@ export default function RebaseDropped({ result, name }: { result: RebaseResult; 
   const total = dropped.length;
   const removedCount = dropped.filter(d => d.reason === "REMOVED").length;
   const changedCount = dropped.filter(d => d.reason === "CHANGED").length;
+  const supportLostCount = dropped.filter(d => d.reason === "SUPPORT_LOST").length;
   const rows = filter === "ALL" ? dropped : dropped.filter(d => d.reason === filter);
   const count = rows.length;
   const pages = Math.max(1, Math.ceil(count / PAGE_SIZE));
@@ -32,11 +33,12 @@ export default function RebaseDropped({ result, name }: { result: RebaseResult; 
           <option value="ALL">{`Tất cả (${total})`}</option>
           <option value="REMOVED">{`Bỏ (${removedCount})`}</option>
           <option value="CHANGED">{`Đổi (${changedCount})`}</option>
+          {supportLostCount > 0 && <option value="SUPPORT_LOST">{`Mất đỡ (${supportLostCount})`}</option>}
         </select>
       </label>
       {count === 0 ? <p>Không có vị trí nào theo bộ lọc.</p> : <>
         <ul data-testid="rebase-dropped-list">
-          {visible.map((d, i) => <li key={`${d.unit_id}-${start + i}`} data-testid="rebase-dropped-item"><strong>{d.unit_id}</strong> · {d.reason === "REMOVED" ? "Bỏ" : "Đổi"} · vị trí cũ {formatCm(d.x_mm)}, {formatCm(d.y_mm)} cm · {d.yaw_deg}°</li>)}
+          {visible.map((d, i) => <li key={`${d.unit_id}-${start + i}`} data-testid="rebase-dropped-item"><strong>{d.unit_id}</strong> · {d.reason === "REMOVED" ? "Bỏ" : d.reason === "SUPPORT_LOST" ? "Mất đỡ" : "Đổi"} · vị trí cũ {formatCm(d.x_mm)}, {formatCm(d.y_mm)} cm · {d.yaw_deg}°</li>)}
         </ul>
         <p className="rebase-dropped-page" data-testid="rebase-dropped-page">{`Trang ${current + 1}/${pages} · dòng ${start + 1}–${end} trên tổng ${count}`}</p>
         {count > PAGE_SIZE && <div className="rebase-dropped-pager">

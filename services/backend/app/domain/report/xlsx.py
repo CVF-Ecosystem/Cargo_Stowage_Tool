@@ -228,6 +228,10 @@ def _overview_rows(r: dict) -> list:
     add(["Tổng số bó", _int(t.get("unit_count"))])
     add(["Số bó đã xếp", _int(t.get("placed_count"))])
     add(["Số bó chưa xếp", _int(t.get("unplaced_count"))])
+    if r.get("stacking") == "COLUMNS_V1":
+        add(["Cách xếp", "Nhiều tầng theo cột (COLUMNS_V1)"])
+        add(["Tổng số tầng", _int(t.get("layer_count"))])
+        add(["Số cột", _int(t.get("column_count"))])
     add(["Số bó loại trừ", _int(t.get("excluded_count"))])
     for label, key in (
         ("Khối lượng bảng kê", "manifest_mass_g"),
@@ -293,6 +297,8 @@ def _units_rows(r: dict) -> list:
             _int(pl["y_mm"]) if pl else None,
             _int(pl["z_mm"]) if pl else None,
         ]
+        if r.get("stacking") == "COLUMNS_V1":  # M3a: extra columns only for multi-layer reports
+            row += [_int(pl["layer"]) if pl else None, _s(", ".join(pl.get("supported_by") or [])) if pl else None]
         rows.append(row)
     return rows
 
@@ -471,7 +477,9 @@ def write_xlsx(report: dict) -> bytes:
     import io
 
     overview = _sheet_xml(["Mục", "Giá trị", "Chính xác"], _overview_rows(report), [44, 60, 20])
-    units = _sheet_xml(_UNITS_HEADER, _units_rows(report), _UNITS_WIDTHS)
+    multi = report.get("stacking") == "COLUMNS_V1"
+    units = _sheet_xml(_UNITS_HEADER + (["Tầng", "Bó đỡ"] if multi else []), _units_rows(report),
+                       _UNITS_WIDTHS + ([8, 24] if multi else []))
     unplaced = _sheet_xml(
         ["ID", "Tên", "Trạng thái", "Yêu cầu", "Khối lượng (kg)", "Khối lượng (g)", "Lý do", "Mã lý do"],
         _unplaced_rows(report),

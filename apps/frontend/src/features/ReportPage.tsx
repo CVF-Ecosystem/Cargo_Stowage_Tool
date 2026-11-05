@@ -118,6 +118,23 @@ function PlanSvg({ report }: { report: Report }) {
   const margin = Math.max(400, Math.round(Math.max(length, width) * 0.03));
   const labelSize = Math.round(margin * 0.5);
   const placed = report.units.filter((u) => u.status === "PLACED" && u.placement);
+  // Lower layers first so the top unit of a column is painted over them; stable for single-layer reports.
+  const drawn = [...placed].sort((a, b) => a.placement!.z_mm - b.placement!.z_mm);
+  const stacked = report.stacking === "COLUMNS_V1";
+  const columns = new Map<string, { n: number; x: number; y: number; w: number; h: number }>();
+  if (stacked) {
+    for (const u of placed) {
+      const p = u.placement!;
+      const [dx, dy] = u.dimensions_um.map((v) => v / 1000);
+      const w = yawSwaps(p.yaw_deg) ? dy : dx;
+      const h = yawSwaps(p.yaw_deg) ? dx : dy;
+      const key = `${p.x_mm}|${p.y_mm}|${p.yaw_deg}`;
+      const col = columns.get(key);
+      if (col) col.n += 1;
+      else columns.set(key, { n: 1, x: p.x_mm, y: p.y_mm, w, h });
+    }
+  }
+  const stackFont = labelSize * 0.7;
   return (
     <svg
       className="report-plan-svg"
@@ -127,7 +144,7 @@ function PlanSvg({ report }: { report: Report }) {
       viewBox={`${-margin} ${-margin} ${length + 2 * margin} ${width + 2 * margin}`}
     >
       <rect className="report-hold-outline" x={0} y={0} width={length} height={width} strokeWidth={margin / 8} />
-      {placed.map((u) => {
+      {drawn.map((u) => {
         const p = u.placement!;
         const [dx, dy] = u.dimensions_um.map((v) => v / 1000);
         const w = yawSwaps(p.yaw_deg) ? dy : dx;
@@ -146,6 +163,22 @@ function PlanSvg({ report }: { report: Report }) {
           </g>
         );
       })}
+      {[...columns.entries()]
+        .filter(([, col]) => col.n > 1)
+        .map(([key, col]) => (
+          <text
+            key={`stack-${key}`}
+            className="report-stack-label"
+            data-testid="report-stack-label"
+            x={col.x + col.w / 2}
+            y={col.y + col.h / 2 - stackFont}
+            fontSize={stackFont}
+            textAnchor="middle"
+            dominantBaseline="middle"
+          >
+            {`×${col.n}`}
+          </text>
+        ))}
       <text className="report-svg-label" x={0} y={-margin / 2} fontSize={labelSize}>
         Gốc (0, 0) · đơn vị mm · dài {mText(length)} m × rộng {mText(width)} m
       </text>
@@ -429,6 +462,22 @@ export default function ReportPage({ id }: { id: string }) {
                 <th scope="row">Thể tích khối bao đã xếp</th>
                 <td>{totals.placed_envelope_volume_mm3_text} mm³</td>
               </tr>
+              {report.stacking === "COLUMNS_V1" && (
+                <>
+                  <tr data-testid="report-total-stacking">
+                    <th scope="row">Cách xếp</th>
+                    <td>Nhiều tầng theo cột (thử nghiệm)</td>
+                  </tr>
+                  <tr data-testid="report-total-layer_count">
+                    <th scope="row">Tổng số tầng</th>
+                    <td>{totals.layer_count ?? "—"}</td>
+                  </tr>
+                  <tr data-testid="report-total-column_count">
+                    <th scope="row">Số cột</th>
+                    <td>{totals.column_count ?? "—"}</td>
+                  </tr>
+                </>
+              )}
             </tbody>
           </table>
         </div>
@@ -505,6 +554,8 @@ export default function ReportPage({ id }: { id: string }) {
                 <th scope="col">Góc</th>
                 <th scope="col">Packing</th>
                 <th scope="col">Chính xác (g · µm)</th>
+                {report.stacking === "COLUMNS_V1" && <th scope="col">Tầng</th>}
+                {report.stacking === "COLUMNS_V1" && <th scope="col">Bó đỡ</th>}
               </tr>
             </thead>
             <tbody>
@@ -552,6 +603,14 @@ export default function ReportPage({ id }: { id: string }) {
                       </>
                     )}
                   </td>
+                  {report.stacking === "COLUMNS_V1" && (
+                    <>
+                      <td>{u.placement ? u.placement.layer + 1 : "—"}</td>
+                      <td>
+                        {u.placement ? (u.placement.supported_by?.length ? u.placement.supported_by.join(", ") : "đáy hầm") : "—"}
+                      </td>
+                    </>
+                  )}
                 </tr>
               ))}
             </tbody>

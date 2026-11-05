@@ -84,6 +84,7 @@ test("VINAFCO source list planner puts actual bundles in the hold, reconciles al
   await page.getByTestId("unit-PIPE-R002-B0001").getByRole("button").click();
   await expect(page.getByLabel("Khối lượng bó (kg)")).toHaveValue("911");
   await expect(page.getByLabel("Khối lượng bó (kg)")).toHaveJSProperty("readOnly", true);
+  await page.getByLabel("Cách xếp thử").selectOption("guillotine-single-layer-v1");
   const preview = await postResult<Preview>(page, "/api/planner/preview", () => page.getByRole("button", { name: "Xếp thử tự động" }).click());
   checkAccounting(preview, loaded.plan);
   expect(preview.evaluation.plan.placements.length).toBeGreaterThan(0);
@@ -189,6 +190,7 @@ test("mobile WebGL fallback shows applied source cargo and paged reasons without
   });
   await page.goto("/");
   await loadPipeList(page);
+  await page.getByLabel("Cách xếp thử").selectOption("guillotine-single-layer-v1");
   const preview = await postResult<Preview>(page, "/api/planner/preview", () => page.getByRole("button", { name: "Xếp thử tự động" }).click());
   expect(preview.unplaced.length).toBeGreaterThan(50);
   await expect(page.getByTestId("planner-page")).toContainText("Trang 1/");

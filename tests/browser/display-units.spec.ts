@@ -120,6 +120,7 @@ test("source cargo uses practical labels while all 1076 precise units and actual
   await page.getByLabel("Giới hạn chuyến (kg)").fill("3517500");
   const capacity = await postResult<Evaluation>(page, "/api/validate", () => page.getByRole("button", { name: "Áp dụng & kiểm lại" }).click());
   expect(capacity.plan.units).toEqual(loaded.plan.units);
+  await page.getByLabel("Cách xếp thử").selectOption("guillotine-single-layer-v1");
   const preview = await postResult<{ evaluation: Evaluation }>(page, "/api/planner/preview", () => page.getByRole("button", { name: "Xếp thử tự động" }).click());
   const applied = await postResult<Evaluation>(page, "/api/validate", () => page.getByRole("button", { name: "Áp dụng xếp thử" }).click());
   expect(applied.plan.units).toEqual(loaded.plan.units);

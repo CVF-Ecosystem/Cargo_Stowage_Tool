@@ -143,6 +143,7 @@ test("VINAFCO material, visibility and case changes preserve one GLB and scene w
   expect(afterCase.assetIdentity).toBe(initialStats.assetIdentity);
   await postJson(page, "/api/pipe-list/preview", () => page.getByRole("button", { name: "Xem trước list ống" }).click());
   await postJson(page, "/api/validate", () => page.getByRole("button", { name: "Nạp list vào phương án hiện tại" }).click());
+  await page.getByLabel("Cách xếp thử").selectOption("guillotine-single-layer-v1");
   const preview = await postJson<{ evaluation: { plan: { placements: { unit_id: string }[] } } }>(page, "/api/planner/preview", () => page.getByRole("button", { name: "Xếp thử tự động" }).click());
   expect(preview.evaluation.plan.placements.length).toBeGreaterThan(0);
   await postJson(page, "/api/validate", () => page.getByRole("button", { name: "Áp dụng xếp thử" }).click());

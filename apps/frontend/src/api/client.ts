@@ -233,7 +233,10 @@ export const getPipeLibrary = () => jsonRequest<PipeLibrary>("/api/pipe-list");
 export const previewPipeList = (plan: Plan) => jsonRequest<Evaluation>("/api/pipe-list/preview",plan);
 
 export type PlannerPreview = components["schemas"]["PlannerPreview"];
-export const previewPlanner = (plan: Plan) => jsonRequest<PlannerPreview>("/api/planner/preview",plan);
+export type PlannerAlgorithm = PlannerPreview["algorithm"];
+export const DEFAULT_PLANNER_ALGORITHM: PlannerAlgorithm = "guillotine-single-layer-v1";
+// The default algorithm keeps the request URL unchanged; only a non-default choice adds the query parameter.
+export const previewPlanner = (plan: Plan, algorithm?: PlannerAlgorithm) => jsonRequest<PlannerPreview>(algorithm && algorithm !== DEFAULT_PLANNER_ALGORITHM ? `/api/planner/preview?algorithm=${algorithm}` : "/api/planner/preview", plan);
 
 export type CompareResult = components["schemas"]["CompareResult"];
 export const comparePlans = (before: Plan, after: Plan) => jsonRequest<CompareResult>("/api/plans/compare",{before,after});

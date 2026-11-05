@@ -135,7 +135,7 @@ class SnapshotListItem(SavedSummary):
 
 class DroppedPlacement(BaseModel):
     unit_id: str
-    reason: Literal['REMOVED', 'CHANGED']
+    reason: Literal['REMOVED', 'CHANGED', 'SUPPORT_LOST']
     x_mm: int
     y_mm: int
     yaw_deg: int
