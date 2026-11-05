@@ -1,6 +1,6 @@
 """Deterministic axis-aligned checks; face touching is allowed, no epsilon."""
 from ..model import Evaluation, Issue, Plan, Summary
-from ..geometry import bounds_um, contained_um, overlaps
+from ..geometry import bounds_um, contained_um
 
 
 GEOMETRY_CODES = {"OUT_OF_BOUNDS", "OVERLAP", "LAYER_UNSUPPORTED", "EMPTY_MANIFEST", "SUPPORT_MISSING",
@@ -92,6 +92,28 @@ def _check_columns(plan, boxes, add):
             add("LAYER_INDEX_INVALID", [pid, *p.supported_by], f"{pid}: khai báo tầng {p.layer}, cần tầng {expected} theo bó đỡ {', '.join(p.supported_by)}.")
 
 
+def _overlap_pairs(boxes):
+    """Index pairs (i, j), i < j, of boxes whose volumes overlap (strict, face touching allowed).
+
+    Same result and order as the all-pairs loop `for i: for j > i: if overlaps(...)`, but an x sweep:
+    only boxes whose x interval overlaps the current one are compared on y and z."""
+    order = sorted(range(len(boxes)), key=lambda k: boxes[k][1][0])
+    active = []  # (index, x1, y0, y1, z0, z1) of boxes seen earlier (x0 <= current x0)
+    pairs = []
+    for k in order:
+        _, (x0, y0, z0), (x1, y1, z1) = boxes[k]
+        if x1 <= x0 or y1 <= y0 or z1 <= z0:
+            continue  # empty volume never overlaps (strict comparisons)
+        live = [a for a in active if a[1] > x0]  # drop boxes ending at or before this x0
+        for idx, _ax1, ay0, ay1, az0, az1 in live:
+            if ay0 < y1 and y0 < ay1 and az0 < z1 and z0 < az1:
+                pairs.append((idx, k) if idx < k else (k, idx))
+        live.append((k, x1, y0, y1, z0, z1))
+        active = live
+    pairs.sort()
+    return pairs
+
+
 def evaluate(plan: Plan) -> Evaluation:
     units = {u.id: u for u in plan.units}
     placed_ids = {p.unit_id for p in plan.placements}
@@ -123,10 +145,9 @@ def evaluate(plan: Plan) -> Evaluation:
         if not columns and (p.z_mm != 0 or p.layer != 0 or p.supported_by):
             add("LAYER_UNSUPPORTED", [p.unit_id], f"{p.unit_id}: M1 chỉ kiểm bố trí một lớp trên đáy hầm (Z = 0).")
         boxes.append((p.unit_id, low, high))
-    for i, (aid, alo, ahi) in enumerate(boxes):
-        for bid, blo, bhi in boxes[i + 1:]:
-            if overlaps(alo, ahi, blo, bhi):
-                add("OVERLAP", [aid, bid], f"{aid} giao nhau với {bid}.")
+    for i, j in _overlap_pairs(boxes):
+        aid, bid = boxes[i][0], boxes[j][0]
+        add("OVERLAP", [aid, bid], f"{aid} giao nhau với {bid}.")
     if columns:
         _check_columns(plan, boxes, add)
     unplaced = [u.id for u in plan.units if u.id not in placed_ids and u.requirement != "excluded"]
