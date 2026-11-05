@@ -29,7 +29,8 @@ Nếu cổng 8765 bận, xem mục khởi chạy trong [README](../README.md).
 
 - **Tải bản sao lưu**: tải một tệp `.scstbak` chứa mọi phương án đã lưu, revision dữ liệu hàng và hồ sơ tàu đã nhập. Cất tệp ở nơi khác máy (USB, ổ mạng).
 - **Khôi phục từ bản sao lưu**: chọn tệp → app kiểm toàn bộ tệp và cho xem số liệu trước → bấm **Khôi phục**. Khôi phục **thay toàn bộ** dữ liệu hiện có. Trước khi thay, app tự tạo một bản sao lưu dữ liệu hiện tại trong `runtime-data/backups/`. Nếu có lỗi giữa chừng, dữ liệu cũ được giữ nguyên.
-- Chưa có sao lưu tự động theo lịch. Hãy tự tải bản sao lưu sau mỗi buổi làm việc quan trọng.
+- **Sao lưu tự động:** khi bạn mở app, nếu đã có dữ liệu và bản tự động gần nhất cũ hơn 20 giờ thì app tự tạo một bản trong `runtime-data/backups/auto/` (giữ tối đa 10 bản). Có nút **Sao lưu ngay** và nút **Tải** cho từng bản.
+- Bản tự động **nằm cùng máy** với dữ liệu, nên không cứu được khi hỏng ổ hay mất máy. Hãy tải một bản và cất ra ngoài máy sau mỗi buổi làm việc quan trọng. Chưa có sao lưu theo lịch khi app đóng, chưa mã hóa.
 
 ## 4. Giới hạn cần biết
 
@@ -72,7 +73,7 @@ Sau khi dùng thử, ghi lại (một dòng mỗi ý là đủ):
   - [HARDEN-01](reviews/SCST_HARDEN_01_REVIEW.md).
 - Ngày 05-11 đã chạy thử `tooling/start-local.ps1` trên một **bản chép** dữ liệu của owner: app khởi động, nâng cấp cơ sở dữ liệu cũ, xếp nhiều tầng và sao lưu đều chạy. Dữ liệu gốc không bị chạm.
 - Chưa làm, là các tranche tùy chọn về sau:
-  - bộ cài đặt (M5b);
-  - sao lưu tự động;
+  - bộ cài đặt (M5c);
+  - sao lưu theo lịch khi app đóng;
   - xếp lẫn kích thước trong một cột;
   - AI hỗ trợ (M4).

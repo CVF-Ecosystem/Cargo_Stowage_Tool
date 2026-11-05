@@ -130,7 +130,8 @@ Mục **Sao lưu và khôi phục**:
 
 - **Tải bản sao lưu** tạo một tệp `.scstbak`, gồm toàn bộ phương án đã lưu, revision dữ liệu hàng và hồ sơ tàu đã nhập, kèm mã kiểm sha256.
 - **Khôi phục từ bản sao lưu** kiểm toàn bộ tệp trước, cho xem số liệu, rồi **thay toàn bộ** dữ liệu hiện có. Trước khi thay, app tự lưu dữ liệu hiện tại vào `runtime-data/backups/`. Nếu lỗi giữa chừng, dữ liệu cũ được giữ nguyên.
-- Chưa có sao lưu tự động theo lịch, mã hóa hay khôi phục gộp. Xem [review M5a](docs/reviews/SCST_M5A_REVIEW.md).
+- **Sao lưu tự động (M5b):** khi mở app, nếu đã có dữ liệu và bản tự động gần nhất cũ hơn 20 giờ thì app tự tạo một bản trong `runtime-data/backups/auto/`, giữ tối đa 10 bản. Có nút **Sao lưu ngay** và nút **Tải** cho từng bản. Bản tự động nằm cùng máy, nên vẫn cần cất một bản ra ngoài máy. Đặt biến môi trường `SCST_AUTO_BACKUP=0` để tắt việc tự sao lưu khi mở app.
+- Chưa có sao lưu theo lịch khi app đang đóng, mã hóa hay khôi phục gộp. Xem [review M5a](docs/reviews/SCST_M5A_REVIEW.md) và [review M5b](docs/reviews/SCST_M5B_REVIEW.md).
 
 Số liệu trên mô hình/bảng dùng **kg, cm hoặc m**, làm tròn phù hợp thao tác thực tế. Dữ liệu chưa sửa giữ nguyên; làm tròn hiển thị không tạo dung sai vượt biên hoặc quá tải. Ô nhập dùng kg/cm; CSV vẫn theo đơn vị ghi trong header. Xem [quy ước](docs/APP_GUIDE.md).
 
@@ -177,7 +178,7 @@ Roadmap bổ sung **SUP-01 viewer 3D → SUP-02A/B dữ liệu hàng và hồ s�
 | M2 — Tool trọn luồng | Nhập/import, lưu/mở, xếp sơ bộ, chỉnh/so sánh, xuất PDF/XLSX; hình tàu minh họa ở M2c | Đạt kiểm kỹ thuật (M2a–M2d); chờ nghiệm thu nghiệp vụ |
 | M3 — Case thực | Hình học phù hợp dữ liệu thực, nhiều tầng, profile kê/chồng; hiệu chỉnh hình tàu | **M3a** (nhiều tầng theo cột trên hầm ước tính) đạt kiểm kỹ thuật; **M3b** (case thực, hầm đo, tải chồng) chờ dữ liệu owner |
 | M4 — AI hỗ trợ | Hỗ trợ tác vụ có nhu cầu rõ; core vẫn chạy khi tắt AI | Nhánh tùy chọn |
-| M5 — Sử dụng ổn định | Đóng gói, lưu trữ bền, backup/restore và hiệu năng | **M5a** (sao lưu/khôi phục) đạt kiểm kỹ thuật; bộ cài và sao lưu tự động chưa làm |
+| M5 — Sử dụng ổn định | Đóng gói, lưu trữ bền, backup/restore và hiệu năng | **M5a** (sao lưu/khôi phục) và **M5b** (sao lưu tự động khi mở app) đạt kiểm kỹ thuật; bộ cài (M5c) chưa làm |
 
 Theo yêu cầu bổ sung của owner, lớp hình tàu VINAFCO 268 được tích hợp sớm thành một phần riêng của viewer. MVP đang được giao owner dùng thử; nghiệm thu nghiệp vụ và M3b cần owner. Các mốc xa giữ ở mức tổng thể; chỉ chi tiết hóa phần sắp làm khi được chọn. Xem [phạm vi, đầu ra và phụ thuộc từng mốc](docs/roadmaps/SCST_ROADMAP_TONG_THE_DE_XUAT.md).
 

@@ -40,7 +40,7 @@ Loại `BAR_BUNDLE`/`PIPE_BUNDLE`; yêu cầu `required`/`optional`/`excluded`. 
 
 **Lưu/mở:** áp dụng nháp trước, đặt tên1–100ký tự rồi **Lưu phương án**. Có thể lưu cả phương án DRAFT đã được backend đánh giá; việc lưu không đổi kết quả thành đạt. Mỗi lần lưu tạo UUID/bản mới, không ghi đè. Reload hoặc khởi động lại app → chọn bản ở **Phương án đã lưu** → **Mở phương án**, backend kiểm lại theo rules/profile hiện tại. Danh sách100bản mới nhất, không tự lưu nháp, không có xóa/ghi đè/so sánh phiên bản đầy đủ trong M2a.
 
-SQLite mặc định: `runtime-data/scst.sqlite3`, ngoài Git. Giữ thư mục này nếu muốn giữ các bản lưu; không xóa để xử lý lỗi. `SCST_DATA_DIR` dành cho cấu hình server và test cô lập, không nhận qua API. File/record/phiên bản/timestamp lỗi được báo, không reset DB; bản đang mở giữ nguyên. Nếu một record timestamp hỏng, danh sách chưa dùng được cho tới khi sửa dữ liệu; record tốt vẫn còn, không bị bỏ hoặc sửa ngầm. Sao lưu/khôi phục thủ công có từ M5a (xem mục M5a bên dưới); sao lưu tự động theo lịch chưa có.
+SQLite mặc định: `runtime-data/scst.sqlite3`, ngoài Git. Giữ thư mục này nếu muốn giữ các bản lưu; không xóa để xử lý lỗi. `SCST_DATA_DIR` dành cho cấu hình server và test cô lập, không nhận qua API. File/record/phiên bản/timestamp lỗi được báo, không reset DB; bản đang mở giữ nguyên. Nếu một record timestamp hỏng, danh sách chưa dùng được cho tới khi sửa dữ liệu; record tốt vẫn còn, không bị bỏ hoặc sửa ngầm. Sao lưu/khôi phục có từ M5a và sao lưu tự động khi mở app có từ M5b (xem hai mục bên dưới); sao lưu theo lịch khi app đóng chưa có.
 
 Ở lượt M2a, owner chưa có manifest/số đo hầm thực và chọn mẫu có nhãn. Sau đó owner cung cấp list ống V1.1 bên dưới; số đo hầm vẫn chưa có. Hàng/hầm tự nhập là dữ liệu khai báo chưa xác minh; GLB VINAFCO và các giới hạn sử dụng ở trên vẫn áp dụng. Xem [SPEC](specs/SCST_M2A.md) và [review](reviews/SCST_M2A_REVIEW.md).
 
@@ -125,7 +125,17 @@ Xem [SPEC](specs/SCST_M3A.md) và [review](reviews/SCST_M3A_REVIEW.md).
    - Nếu lỗi giữa chừng, ví dụ tệp đang bị chương trình khác mở, dữ liệu cũ được giữ nguyên từng byte.
    - Bản nháp chưa lưu trong tab vẫn còn, nhưng không thuộc dữ liệu vừa khôi phục.
 
-Chưa có: sao lưu tự động theo lịch, mã hóa, khôi phục gộp hoặc chọn từng phần. Xem [SPEC](specs/SCST_M5A.md) và [review](reviews/SCST_M5A_REVIEW.md).
+Chưa có: mã hóa, khôi phục gộp hoặc chọn từng phần. Xem [SPEC](specs/SCST_M5A.md) và [review](reviews/SCST_M5A_REVIEW.md).
+
+## M5b — Sao lưu tự động
+
+1. Khi mở app, nếu đã có dữ liệu (phương án, revision hoặc hồ sơ tàu) và bản tự động gần nhất cũ hơn **20 giờ** hoặc chưa có bản nào, app tự tạo một bản sao lưu trong nền. Việc này không làm chậm hay làm hỏng việc khởi động. Nếu chưa có dữ liệu thì không tạo gì.
+2. Bản tự động nằm ở `runtime-data/backups/auto/auto-<thời điểm UTC>.scstbak`, cùng định dạng với bản tải thủ công, nên khôi phục bằng đúng mục M5a: bấm **Tải** ở bản cần dùng, rồi **Khôi phục từ bản sao lưu**.
+3. App giữ tối đa **10** bản tự động và xóa bản cũ nhất khi có bản thứ 11. App không bao giờ xóa các bản `pre-restore-*` hay tệp bạn tự đặt vào đó.
+4. Mục **Sao lưu tự động** hiện bản gần nhất, danh sách các bản, nút **Tải** và nút **Sao lưu ngay**. Nếu lần tự sao lưu lỗi, mục này hiện thông báo; dữ liệu hiện tại không bị đổi.
+5. Đặt biến môi trường `SCST_AUTO_BACKUP=0` trước khi chạy để tắt việc tự sao lưu khi mở app. Nút **Sao lưu ngay** vẫn dùng được.
+
+Bản tự động nằm cùng ổ với dữ liệu, nên không bảo vệ khi hỏng ổ hay mất máy: hãy tải một bản và cất ra ngoài máy. Chưa có sao lưu theo lịch khi app đóng và chưa mã hóa. Xem [SPEC](specs/SCST_M5B.md) và [review](reviews/SCST_M5B_REVIEW.md).
 
 ## M2c — Giữ bản gốc và so sánh
 
@@ -173,7 +183,7 @@ Ngoài phạm vi hiện tại:
 - tải chồng, tải sàn, chằng buộc, ổn định;
 - import XLSX/PDF tổng quát;
 - xác minh manifest/hầm đo thực (M3b);
-- bộ cài, sao lưu tự động;
+- bộ cài (M5c), sao lưu theo lịch khi app đóng;
 - AI.
 
 Bắt đầu dùng thử từ [trang bàn giao MVP](SCST_MVP_HANDOFF.md).
