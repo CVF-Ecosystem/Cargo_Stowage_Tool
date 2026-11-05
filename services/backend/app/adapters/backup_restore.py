@@ -129,6 +129,23 @@ def _swap_vessels(base: Path, new_vessels: Path, old_dir: Path, journal: _Journa
     _step('vessels_replaced')
 
 
+def _remove_created_base(base: Path) -> None:
+    """Remove the vessels dir that apply() created, once it holds nothing but the Windows lock file (an empty regular .lock).
+    Call only after the process lock is released; a directory with any other content is left as it is."""
+    try:
+        names = [p.name for p in base.iterdir()]
+    except OSError:
+        return
+    try:
+        if names == ['.lock']:
+            lock = base / '.lock'
+            if lock.is_file() and not lock.is_symlink() and lock.stat().st_size == 0:
+                lock.unlink()
+        base.rmdir()
+    except OSError:
+        pass
+
+
 def apply(body: bytes, confirm: str) -> dict:
     """Replace all local data with the backup `body`. Returns {"counts", "pre_restore_backup"} (a file name, never a path)."""
     if not isinstance(confirm, str) or confirm != hashlib.sha256(body).hexdigest():
@@ -162,18 +179,12 @@ def apply(body: bytes, confirm: str) -> dict:
                 plan_binding.clear_replay_cache()
             shutil.rmtree(workdir, ignore_errors=True)
             if not committed and base_created:
-                try:
-                    base.rmdir()  # only if empty: it is removed again solely when this call created it
-                except OSError:
-                    pass
+                _remove_created_base(base)  # outside the process lock; only when this call created it
             if isinstance(exc, BackupRejected) or not isinstance(exc, Exception):
                 raise  # a rejected archive keeps its own message; KeyboardInterrupt/SystemExit stay what they are
             raise BackupRejected(_FAILED, 'restore') from exc
         # Committed: a cleanup problem must not undo the restore.
         shutil.rmtree(workdir, ignore_errors=True)
-        if base_created and vstore._is_empty_dir(base):
-            try:
-                base.rmdir()
-            except OSError:
-                pass
+        if base_created:
+            _remove_created_base(base)  # outside the process lock; only when this call created it
     return {'counts': result['counts'], 'pre_restore_backup': pre_restore}

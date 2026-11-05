@@ -68,7 +68,7 @@ def good_parts(tmp_path_factory):
         patch.undo()
     parts = {bc.DATABASE: (source / bc.DATABASE).read_bytes()}
     for path in sorted((source / 'vessels').rglob('*')):
-        if path.is_file():
+        if path.is_file() and path.relative_to(source).as_posix() != 'vessels/.lock':  # Windows lock file, not content
             parts[path.relative_to(source).as_posix()] = path.read_bytes()
     assert sorted(parts) == [bc.DATABASE, f'vessels/{PROFILE_ID}/v1/manifest.json', f'vessels/{PROFILE_ID}/v1/model.glb',
                              f'vessels/{PROFILE_ID}/v1/profile.json']
@@ -145,7 +145,8 @@ def with_db(parts, mutate):
 
 
 def tree_hash(root: Path):
-    return {p.relative_to(root).as_posix(): sha(p.read_bytes()) for p in sorted(root.rglob('*')) if p.is_file()}
+    return {p.relative_to(root).as_posix(): sha(p.read_bytes()) for p in sorted(root.rglob('*'))
+            if p.is_file() and p.relative_to(root).as_posix() != 'vessels/.lock'}  # Windows lock file, not content
 
 
 # ------------------------------------------------------------------ accepting case

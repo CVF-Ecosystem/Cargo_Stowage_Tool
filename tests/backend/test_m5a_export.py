@@ -147,7 +147,7 @@ def test_vessel_files_byte_identical(data):
     raw, _ = archive()
     base = data / 'vessels'
     on_disk = {f'vessels/{p.relative_to(base).as_posix()}': p.read_bytes()
-               for p in base.rglob('*') if p.is_file()}
+               for p in base.rglob('*') if p.is_file() and p.relative_to(base).as_posix() != '.lock'}  # Windows lock file
     in_archive = {name: content for name, content in members(raw).items() if name.startswith('vessels/')}
     assert len(on_disk) == 9
     assert in_archive == on_disk

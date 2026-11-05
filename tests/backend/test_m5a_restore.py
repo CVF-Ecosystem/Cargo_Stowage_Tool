@@ -1,5 +1,6 @@
 """M5a D3: replace-all restore. Data is built through the API; faults are injected at every step of the swap."""
 import base64
+import contextlib
 import hashlib
 import io
 import os
@@ -44,6 +45,8 @@ def fingerprint(root: Path):
     for path in sorted(root.rglob('*')):
         relative = path.relative_to(root).as_posix()
         if relative == 'backups' or relative.startswith('backups/'):
+            continue
+        if relative == 'vessels/.lock':  # Windows lock file, not content
             continue
         result[relative] = sha(path.read_bytes()) if path.is_file() else 'DIR'
     return result
@@ -542,4 +545,69 @@ def test_pre_restore_backup_name_format(data):
 def test_workdir_removed_on_success(data):
     populate()
     assert restore(export()).status_code == 200
+    no_workdir(data)
+
+
+# ------------------------------------------------------------------ 4. Windows lock file <vessels>/.lock (simulated on Linux)
+@pytest.fixture
+def windows_lock(monkeypatch):
+    """Linux stand-in for the Windows store lock: the lock also leaves an empty <vessels>/.lock file behind, as on Windows."""
+    original = vstore._process_lock
+
+    @contextlib.contextmanager
+    def lock(base: Path):
+        if base.is_dir() and not (base / '.lock').exists():
+            (base / '.lock').write_bytes(b'')
+        with original(base):
+            yield
+
+    monkeypatch.setattr(vstore, '_process_lock', lock)
+    return lock
+
+
+def test_win_lock_failed_restore_removes_vessels_it_created(data, monkeypatch, windows_lock):
+    save_plan('Nguồn')
+    body = export()  # no vessels in the archive; the live data dir has no vessels/ at all
+    assert not (data / 'vessels').exists()
+    fault(monkeypatch, 'checked')
+    assert restore(body).status_code == 400
+    assert not (data / 'vessels').exists()
+    no_workdir(data)
+
+
+def test_win_lock_failed_restore_without_live_db_removes_vessels_it_created(data, monkeypatch, windows_lock):
+    save_plan('Nguồn')
+    body = export()
+    (data / 'scst.sqlite3').unlink()
+    assert not (data / 'vessels').exists()
+    fault(monkeypatch, 'checked')
+    assert restore(body).status_code == 400
+    assert not (data / 'vessels').exists()
+    assert not (data / 'scst.sqlite3').exists()
+    no_workdir(data)
+
+
+def test_win_lock_successful_restore_without_vessels_removes_vessels_it_created(data, windows_lock):
+    save_plan('Một')
+    body = export()  # no vessels in the archive
+    assert not (data / 'vessels').exists()
+    r = restore(body)
+    assert r.status_code == 200, r.text
+    assert not (data / 'vessels').exists()
+    assert len(client.get('/api/snapshots').json()) == 1
+    no_workdir(data)
+
+
+def test_win_lock_failed_restore_keeps_preexisting_vessels_and_lock(data, monkeypatch, windows_lock):
+    populate()  # the store writes profile versions, so <vessels>/.lock now exists as on Windows
+    body = export()
+    save_plan('Thêm')
+    add_profile(version=2)
+    assert (data / 'vessels' / '.lock').is_file()
+    before = fingerprint(data)  # .lock is excluded from fingerprints by design
+    fault(monkeypatch, 'vessels_replaced')
+    assert restore(body).status_code == 400
+    assert (data / 'vessels' / '.lock').is_file()
+    assert vstore.versions(PROFILE_ID) == [1, 2]
+    assert fingerprint(data) == before
     no_workdir(data)
