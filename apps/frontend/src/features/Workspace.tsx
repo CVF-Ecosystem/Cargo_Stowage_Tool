@@ -229,18 +229,16 @@ export default function Workspace() {
     try {
       const [p, template] = await Promise.all([profile && profile.id === id && profile.version === version ? profile : getVesselProfile(id, version), requestProfileCasePlan({ id, version }, caseId)]);
       const old = result.plan; const next = template.plan;
-      const limit = next.limits.certificate_cargo_limit_g;
-      if ((old.limits.cargo_onboard_g ?? 0) > limit) throw new Error("Hàng đã có vượt mức hàng tham chiếu của cấp được chọn; giảm số này trước khi chuyển.");
+      const onboard = old.limits.cargo_onboard_g ?? 0;
+      if (onboard > next.limits.certificate_cargo_limit_g || onboard > next.limits.voyage_cargo_limit_g) throw new Error("Hàng đã có vượt mức hàng tham chiếu của cấp được chọn; giảm số này trước khi chuyển.");
       next.units = structuredClone(old.units); next.placements = structuredClone(old.placements);
       if (old.contract_version !== "scst.m1.v1") { next.contract_version=old.contract_version; next.cargo_source=old.cargo_source; next.cargo_dataset=old.cargo_dataset; if(old.cargo_revision) next.cargo_revision=structuredClone(old.cargo_revision); }
       next.limits.cargo_onboard_g = old.limits.cargo_onboard_g;
-      // Preserve the voyage limit unless the new reference ceiling is lower.
-      next.limits.voyage_cargo_limit_g = Math.min(old.limits.voyage_cargo_limit_g, limit);
+      // The new case or vessel plan keeps its own voyage limit from the template (no carry-over from the old plan).
       const evaluated = await requestEvaluation(next);
       if (JSON.stringify(draftRef.current) !== captured || revision.current !== capturedRevision) { setError("Bản nháp đã thay đổi trong lúc chuyển; vẫn giữ bản nháp và trạng thái trước."); return; }
       setProfile(p); setHistory(h => [...h.slice(-19), structuredClone(old)]); setResult(evaluated); changeDraft(draftFrom(evaluated.plan));
-      if (old.limits.voyage_cargo_limit_g > limit) setNotice("Giới hạn chuyến đã giảm về mức hàng tham chiếu của cấp mới.");
-      else if (old.source === "SYNTHETIC") setNotice("Giới hạn chuyến đang giữ từ mẫu trước; có thể chỉnh đến mức hàng tham chiếu.");
+      setNotice(`Giới hạn chuyến theo cấp ${caseId}: ${tonnes(evaluated.plan.limits.voyage_cargo_limit_g)} tấn; vẫn có thể chỉnh trong "Giới hạn chuyến (kg)".`);
     } catch (e) { setError(e instanceof Error ? e.message : "Không đổi được trạng thái."); }
     finally { lock.current = false; setBusy(false); }
   };

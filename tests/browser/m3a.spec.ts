@@ -68,17 +68,6 @@ async function loadPipeList(page: Page): Promise<Evaluation> {
   return postResult<Evaluation>(page, "/api/validate", () => page.getByRole("button", { name: "Nạp list vào phương án hiện tại" }).click());
 }
 
-// Switching to VINAFCO 268 keeps the voyage limit of the plan already open (min with the case ceiling, by design), so a
-// fresh page would keep the 32 t demo limit and plan only ~22 bundles. The owner sets the VR-SII case ceiling (3 517 500 kg,
-// the case's own voyage limit) in the UI, then applies it, before the planner runs. Returns the checked plan with that limit.
-async function setCaseVoyageLimit(page: Page): Promise<Evaluation> {
-  await page.getByLabel("Giới hạn chuyến (kg)").fill("3517500");
-  const checked = await postResult<Evaluation>(page, "/api/validate", () => page.getByRole("button", { name: "Áp dụng & kiểm lại" }).click());
-  expect(checked.plan.limits.voyage_cargo_limit_g).toBe(3_517_500_000);
-  expect(checked.plan.units).toHaveLength(1076);
-  return checked;
-}
-
 async function rebaseFromUi(page: Page, savedId: string): Promise<RebaseResult> {
   const pending = page.waitForResponse((r) => r.url().endsWith(`/api/snapshots/${savedId}/rebase`) && r.request().method() === "POST");
   await page.getByRole("button", { name: "Tạo bản theo dữ liệu mới" }).click();
@@ -176,13 +165,16 @@ test("M3A-05 desktop: columns-v1 preview, apply, layer cells, 3D, 2D, save, reop
     // 1. list in VINAFCO 268, multi-layer preview
     await page.goto(`${PRIVATE_BASE}/?viewerDiagnostics=1`);
     await page.getByRole("button", { name: "Xem VINAFCO 268" }).click();
+    // Fresh page, no voyage typed: the switch notice names the VR-SII case voyage limit (3 517,5 t). Loading the pipe list
+    // then replaces this notice with its own transition label, so the notice is asserted before the list is loaded.
+    await expect(page.getByRole("status").filter({ hasText: "Giới hạn chuyến theo cấp VR-SII: 3.517,5 tấn" })).toBeVisible();
     const loaded = await loadPipeList(page);
     expect(loaded.plan.units).toHaveLength(1076);
-    const ready = await setCaseVoyageLimit(page);
+    expect(loaded.plan.limits.voyage_cargo_limit_g).toBe(3_517_500_000);
     await page.getByRole("combobox", { name: "Cách xếp thử" }).selectOption("columns-v1");
     const preview = await postResult<Preview>(page, "/api/planner/preview", () => page.getByRole("button", { name: "Xếp thử tự động" }).click());
     expect(preview.algorithm).toBe("columns-v1");
-    checkStackedPreview(preview, ready.plan);
+    checkStackedPreview(preview, loaded.plan);
     const candidate = preview.evaluation.plan;
     expect(candidate.placements.length).toBeGreaterThanOrEqual(900);
     expect(candidate.placements.length).toBe(preview.evaluation.summary.placed_count);
@@ -355,7 +347,6 @@ test("M3A-04 390px: multi-layer preview and apply, the Tầng column is reached 
   await page.goto("/");
   await page.getByRole("button", { name: "Xem VINAFCO 268" }).click();
   await loadPipeList(page);
-  await setCaseVoyageLimit(page);
 
   const select = page.getByRole("combobox", { name: "Cách xếp thử" });
   await expect(select).toBeVisible();
