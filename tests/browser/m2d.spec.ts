@@ -167,6 +167,7 @@ test("M2D-05 flow: save, report, XLSX, print, PDF, then a new revision flags NEE
   await page.goto(`${PRIVATE_BASE}/`);
   await page.getByRole("button", { name: "Xem VINAFCO 268" }).click();
   await loadPipeList(page);
+  await page.getByLabel("Cách xếp thử").selectOption("guillotine-single-layer-v1");
   const preview = await postResult<Preview>(page, "/api/planner/preview", () => page.getByRole("button", { name: "Xếp thử tự động" }).click());
   expect(preview.evaluation.plan.placements.length).toBeGreaterThan(0);
   await postResult<Evaluation>(page, "/api/validate", () => page.getByRole("button", { name: "Áp dụng xếp thử" }).click());

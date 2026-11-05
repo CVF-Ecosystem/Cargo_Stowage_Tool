@@ -384,25 +384,40 @@ test("M3A-04 390px: multi-layer preview and apply, the Tầng column is reached 
   await page.screenshot({ path: testInfo.outputPath("m3a-390-planned.png"), fullPage: true });
 });
 
-test("default planner stays one-layer: no multi-layer choice is made, the preview is single-layer with no stack summary", async ({ page }) => {
+test("default planner follows the plan: a pipe list defaults to columns-v1 without touching the select, a demo plan stays one-layer", async ({ page }) => {
   test.setTimeout(120_000);
+  const previewOnce = async () => {
+    const pending = page.waitForResponse((r) => new URL(r.url()).pathname === "/api/planner/preview" && r.request().method() === "POST");
+    await page.getByRole("button", { name: "Xếp thử tự động" }).click();
+    const response = await pending;
+    expect(response.ok()).toBe(true);
+    return response;
+  };
+
+  // (b) Demo plan on the fresh page: the default stays the single-layer planner with no stack summary.
+  await page.goto("/");
+  await expect(page.getByRole("combobox", { name: "Cách xếp thử" })).toHaveValue("guillotine-single-layer-v1");
+  const demoResponse = await previewOnce();
+  expect(new URL(demoResponse.url()).searchParams.get("algorithm") ?? "guillotine-single-layer-v1").toBe("guillotine-single-layer-v1");
+  const demo = (await demoResponse.json()) as Preview;
+  expect(demo.algorithm).toBe("guillotine-single-layer-v1");
+  expect(demo.evaluation.plan.stacking).toBeUndefined();
+  expect(demo.evaluation.plan.placements.length).toBeGreaterThan(0);
+  expect(demo.evaluation.plan.placements.every((p) => p.z_mm === 0 && p.layer === 0 && p.supported_by.length === 0)).toBe(true);
+  await expect(page.getByTestId("planner-preview")).toBeVisible();
+  await expect(page.getByTestId("planner-stack-summary")).toHaveCount(0);
+
+  // (a) Pipe list, select never touched: the default is columns-v1 and the preview request says so.
   await page.goto("/");
   await page.getByRole("button", { name: "Xem VINAFCO 268" }).click();
   const loaded = await loadPipeList(page);
   expect(loaded.plan.units).toHaveLength(1076);
-  await expect(page.getByRole("combobox", { name: "Cách xếp thử" })).toHaveValue("guillotine-single-layer-v1");
-
-  const pending = page.waitForResponse((r) => new URL(r.url()).pathname === "/api/planner/preview" && r.request().method() === "POST");
-  await page.getByRole("button", { name: "Xếp thử tự động" }).click();
-  const response = await pending;
-  expect(response.ok()).toBe(true);
-  expect(new URL(response.url()).searchParams.get("algorithm") ?? "guillotine-single-layer-v1").toBe("guillotine-single-layer-v1");
-
-  const preview = (await response.json()) as Preview;
-  expect(preview.algorithm).toBe("guillotine-single-layer-v1");
-  expect(preview.evaluation.plan.stacking).toBeUndefined();
-  expect(preview.evaluation.plan.placements.length).toBeGreaterThan(0);
-  expect(preview.evaluation.plan.placements.every((p) => p.z_mm === 0 && p.layer === 0 && p.supported_by.length === 0)).toBe(true);
+  await expect(page.getByRole("combobox", { name: "Cách xếp thử" })).toHaveValue("columns-v1");
+  const pipeResponse = await previewOnce();
+  expect(new URL(pipeResponse.url()).searchParams.get("algorithm")).toBe("columns-v1");
+  const pipe = (await pipeResponse.json()) as Preview;
+  expect(pipe.algorithm).toBe("columns-v1");
+  expect(pipe.evaluation.plan.placements.length).toBeGreaterThan(0);
   await expect(page.getByTestId("planner-preview")).toBeVisible();
-  await expect(page.getByTestId("planner-stack-summary")).toHaveCount(0);
+  await expect(page.getByTestId("planner-stack-summary")).toBeVisible();
 });
